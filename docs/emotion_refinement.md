@@ -1,5 +1,9 @@
 # Subtile Verfeinerung der Emotionsrezepte 1.1
 
+[Dokumentationsindex](README.md) · [Aktuelle Unteraugen-Morphs](under_eye.md)
+
+Dieser Bericht dokumentiert den historischen Schritt zu Rezept 1.1. Der aktuelle EmoNet-Katalog verwendet Rezept 1.2 und ergänzt den gemeinsamen kontinuierlichen Unteraugenübergang. Die folgenden Vorher-/Nachher-Werte beziehen sich auf den damaligen Stilvergleich.
+
 Die bestehende Figur bleibt die Basis. Die neue Version macht die Kurven weicher und den Blick etwas wärmer, während Wut, Furcht und Traurigkeit ihre charakteristischen Hinweise behalten. Das Ziel ist ein sympathischer, leicht komödiantischer Ausdruck mit emotionaler Verletzlichkeit. Diese Wirkung ist eine Gestaltungsentscheidung und visuelle Agentenbeobachtung, kein gemessener psychologischer Score.
 
 ## Tatsächliche Änderungen

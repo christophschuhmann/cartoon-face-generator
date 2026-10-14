@@ -1,5 +1,7 @@
 # Topologie cartoon_face_v1
 
+[Dokumentationsindex](README.md) · [Repository-Startseite](../README.md)
+
 101 stabile Landmark-IDs. Links = linke Seite der Figur = rechte Bildhälfte. Rechts = rechte Seite der Figur = linke Bildhälfte.
 
 Die Reihenfolge dieses Registers ist die Tensor-Reihenfolge. Die JSON-Objektreihenfolge ist nicht verbindlich; `id` bleibt verbindlich. Alle Punkte verwenden [u,v] in [0,1] mit Ursprung links oben. Anker der Brauen laufen außen→innen; Ober-/Unterlider und Wangenbänder innen→außen (Wangenband weiter durch die Spirale). Mundoberkante und Unterkante rechts→links aus Sicht der Figur. Die drei Untermundpunkte werden durch die beiden Obermundwinkel ergänzt.

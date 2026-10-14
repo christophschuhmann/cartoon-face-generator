@@ -1,5 +1,7 @@
 # Synthetischer Datensatz und korrekte Augmentationen
 
+[Dokumentationsindex](README.md) · [Repository-Startseite](../README.md)
+
 Der finale Datensatz `cartoon_landmarks_105k_v2` enthält **105.000** vollständig aufgelöste SVG-/Pose-Paare: jeweils 1.000 Varianten der 40 EmoNet- und 60 sozialen Kategorien sowie 5.000 extreme, nicht mit Emotionen gelabelte Verformungen. Alle benutzen `cartoon_face_v1` und dieselben 101 festen IDs. Seed: 42. Generatorquellen, Topologie, Rezepte und gefittete Identitätsposen sind durch einen SHA-256-Fingerprint festgehalten.
 
 Die 303 TAR.GZ-Shards enthalten **6.999.557.481 Bytes** komprimierte Daten. Die enthaltenen SVG-/JSON-Nutzdaten wären unkomprimiert **15.322.331.008 Bytes**, zuzüglich TAR-Verwaltung. Der lokale komprimierte Trainingscache benötigt ungefähr 834 MB. Die gespeicherte Datensatzmenge bleibt damit unter 10 GB. Die großen Archive gehören nicht in den Quellcode-Git-Download.

@@ -1,5 +1,7 @@
 # 60 zusätzliche soziale und clowneske Ausdrücke
 
+[Dokumentationsindex](README.md) · [Repository-Startseite](../README.md)
+
 Der eigenständige Katalog `cartoon_social_60_v1` ergänzt die 40 veröffentlichten EmoNet-Kategorien. Seine IDs 1–60 gehören ausschließlich zum Feld `expression`. Alle Gesichter verwenden dieselben 101 Landmark-IDs und denselben SVG-Renderer. Die Szenarien sind gestalterische Ziele; feine soziale Bedeutungen benötigen oft Kontext und sind nicht durch menschliche Erkennungsstudien validiert.
 
 ![Alle 60 Archetypen](../output/social/archetypes/contact_sheet.png)

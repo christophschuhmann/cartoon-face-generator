@@ -8,7 +8,7 @@ def prepare(destination):
     dest=Path(destination);dest.mkdir(parents=True,exist_ok=True);files=set()
     for folder in ('src','viewer','poses','docs','tests','tools','training','images','.github'):
         files.update(p for p in (ROOT/folder).rglob('*') if p.is_file() and '__pycache__' not in p.parts and '.pytest_cache' not in p.parts)
-    for name in ('README.md','AGENTS.md','LICENSE','pyproject.toml','uv.lock','.python-version','.gitignore'):
+    for name in ('README.md','CONTRIBUTING.md','AGENTS.md','LICENSE','pyproject.toml','uv.lock','.python-version','.gitignore'):
         p=ROOT/name
         if p.is_file():files.add(p)
     webcam=ROOT/'webcam_mapper'
@@ -18,7 +18,9 @@ def prepare(destination):
         files.update(p for p in (webcam/folder).rglob('*') if p.is_file() and p.suffix in ('.py','.html','.css','.js','.json','.md','.txt'))
     for folder in ('output/comparisons','output/reconstructions','output/references','output/under_eye','webcam_mapper/output/verification'):
         files.update(p for p in (ROOT/folder).rglob('*') if p.is_file() and p.suffix in ('.svg','.png','.json'))
-    for name in ('output/evaluation.json','output/test_results.txt','output/editor/browser_test.json'):
+    for name in ('output/README.md','output/evaluation.json','output/test_results.txt','output/editor/browser_test.json',
+                 'output/editor/editor.png','output/emotions/contact_sheet.png','output/synthetic_samples/contact_sheet.png',
+                 'output/refinement/report.json','output/emonet/visual_review.json'):
         p=ROOT/name
         if p.exists():files.add(p)
     for family in ('emonet','social'):
@@ -31,7 +33,10 @@ def prepare(destination):
             if directory.is_dir():files.update(p for p in directory.glob('0000_*') if p.is_file())
             elif directory.suffix=='.png':files.add(directory)
         for directory in (base/'mixtures').glob('*'):
-            if directory.is_dir():files.update(p for p in directory.glob('mixture.*') if p.is_file())
+            if directory.is_dir():
+                files.update(p for p in directory.glob('mixture.*') if p.is_file())
+                contact=directory/'contact_sheet.png'
+                if contact.is_file():files.add(contact)
             elif directory.suffix=='.png':files.add(directory)
     for folder in ('output/refinement/comparisons','output/dataset_previews'):
         files.update(p for p in (ROOT/folder).glob('*.png') if p.is_file())

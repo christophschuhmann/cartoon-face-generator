@@ -1,5 +1,9 @@
 # Phase-1-Ergebnisbericht
 
+[Dokumentationsindex](README.md) · [Aktueller Projektumfang](../README.md)
+
+Dieser Bericht dokumentiert den ursprünglichen Phase-1-Prüflauf. Die Rekonstruktionswerte bleiben gültig; die weiter unten genannten Testzahlen und damaligen nächsten Schritte sind historische Angaben. Inzwischen sind die [105.000-Pose-Daten](dataset.md), das [trainierte Landmark-Modell](detector_results.md) und der [separate MediaPipe-Mapper](../webcam_mapper/README.md) hinzugekommen.
+
 Implementiert und ausgeführt: gemeinsames parametrisches SVG-Rig, 101 feste semantische Landmarks, sechs automatisch optimierte Parametersätze, lokaler Editor, Interpolation und 100 zusätzliche synthetische Zustände. Die Ergebnisse wurden als tatsächliche SVGs gerendert und mehrfach visuell mit den Originalen verglichen. Alle Werte unten stammen aus `output/evaluation.json`.
 
 ## Rekonstruktion aller sechs Originale

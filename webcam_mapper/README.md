@@ -1,5 +1,9 @@
 # Local webcam → soft cartoon SVG
 
+[Full repository](https://github.com/christophschuhmann/cartoon-face-generator) · [Standalone ZIP download](https://github.com/christophschuhmann/cartoon-face-generator/releases/download/v1.0.0/cartoon_webcam_mapper.zip)
+
+This README works for both the full repository and the standalone ZIP. In either case, run commands from the folder containing `webcam_mapper/`, `src/` and `poses/`. The ordinary face editor uses port **8766**; this webcam app uses **8765**.
+
 This separate Python app maps a laptop camera to the project's existing cartoon avatar. It runs the official MediaPipe Face Landmarker on CPU, converts its 478 human landmarks and 52 blendshape scores into bounded semantic expression controls, then calls the same `cartoon_face.emotion_library.build_pose` and Python SVG renderer used by the editor. The avatar retains all 101 stable landmark IDs, its moustache, ink style and soft identity.
 
 It does not train a human-face model, classify EmoNet's forty categories, infer a person's internal emotion, or replace the shared cartoon renderer.
@@ -22,6 +26,17 @@ On Windows, create the environment with `py -3.12 -m venv .venv` and replace `.v
 The downloadable ZIP can include the verified model for offline startup. Dependencies still need installation once. When the model is already bundled, the download command simply checks its pinned checksum. No account, access token or cloud service is needed.
 
 ## Dataflow and mapping
+
+| File | Responsibility |
+| --- | --- |
+| [app.py](app.py) | local browser server, image and prerecorded video entry points |
+| [landmarker.py](landmarker.py) | official MediaPipe CPU runtime, detection and timing |
+| [mapping.py](mapping.py) | human signals, neutral calibration, smoothing and bounded cartoon controls |
+| [download_model.py](download_model.py) | model acquisition and pinned checksum verification |
+| [static/index.html](static/index.html) | camera controls and live SVG preview |
+| [verify.py](verify.py), [browser_smoke.py](browser_smoke.py) | actual CPU/image/video and simulated browser-camera checks |
+| [bundle.py](bundle.py) | allowlisted standalone ZIP with the shared renderer |
+| [THIRD_PARTY.md](THIRD_PARTY.md) | external dependencies, model and test-photo provenance |
 
 ```mermaid
 flowchart LR

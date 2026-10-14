@@ -1,0 +1,264 @@
+{
+  "reviewer": "coding_agent",
+  "method": "actual rendered contact sheets inspected during development",
+  "recognition_accuracy": null,
+  "human_or_expert_review": false,
+  "visual_scope": {
+    "archetypes": 40,
+    "representative_variations": 160,
+    "family_boards": 6,
+    "transition_contact_sheets": 12,
+    "sampled_frames_per_contact_sheet": 12
+  },
+  "iterations": [
+    "neutral brow shape separated from original smile; inner raising/contraction distinguished",
+    "rotated pupils clipped by stationary eye opening in common renderer",
+    "pupil placement and light glints adapted to visible opening",
+    "mixed under-eye wrinkle and hatching placed in separate segments",
+    "variation strengths enlarged with protected target cues",
+    "recipe 1.1: tangent-continuous band caps, oval O-mouths, whole glints fitted inside inked opening",
+    "recipe 1.1: subtle warmth, relaxed handle extremes and a single closed-lid lash flourish"
+  ],
+  "categories": [
+    {
+      "slug": "amusement",
+      "archetype_svg_sha256": "8d534ba1c9061616158cc9b3474bbe1b069e8165675ac47ef89ca39339164b2e",
+      "observation_de": "Offenes Lachen und enge Augen sind deutlich; die Grenze zu allgemeiner Freude bleibt fließend.",
+      "human_recognition": "unmeasured"
+    },
+    {
+      "slug": "elation",
+      "archetype_svg_sha256": "5514f1a898144f7593700b5a07db99aff9fe2f76dbe529540351f5c5a1ce0536",
+      "observation_de": "Weiter Blick und breites Lachen unterscheiden sich sichtbar von amusement.",
+      "human_recognition": "unmeasured"
+    },
+    {
+      "slug": "pleasure_ecstasy",
+      "archetype_svg_sha256": "7e5f8cc1165ebbc4b9dd48a932888fe1172aa2be36f9c347259b7b9707724f08",
+      "observation_de": "Geschlossene weiche Augen und kleines Lächeln wirken entspannt; Ekstase braucht mehr Kontext.",
+      "human_recognition": "unmeasured"
+    },
+    {
+      "slug": "contentment",
+      "archetype_svg_sha256": "bdd039434d71847de085f9cc2db6382416381852375284d4362e6202c422df74",
+      "observation_de": "Kleines geschlossenes Lächeln und ruhige enge Lider; Nähe zu Zuneigung und Stolz.",
+      "human_recognition": "unmeasured"
+    },
+    {
+      "slug": "gratitude",
+      "archetype_svg_sha256": "fef650e690c44117d1f22709954e66c42d1d716df49e7fce9f5669b55cdbbfe9",
+      "observation_de": "Weiche innere Brauen und warmes Lächeln; Dankbarkeit ist ohne Anlass nicht eindeutig.",
+      "human_recognition": "unmeasured"
+    },
+    {
+      "slug": "affection",
+      "archetype_svg_sha256": "f625912cc64d0c7c7211b1f4d264d9b804e7414c54e9b54734ea1e67c297c471",
+      "observation_de": "Größere Pupillen und breiteres weiches Lächeln; Nähe zu Dankbarkeit.",
+      "human_recognition": "unmeasured"
+    },
+    {
+      "slug": "infatuation",
+      "archetype_svg_sha256": "bb05d31b0c25bb68adbaec077221115228dd5705879aaa8caf64318a133a6d12",
+      "observation_de": "Herzreflexe erzeugen einen deutlichen stilisierten Liebeshinweis.",
+      "human_recognition": "unmeasured"
+    },
+    {
+      "slug": "hope",
+      "archetype_svg_sha256": "1326c8085a11b0a68c4f604dcb4c956986200c1a9306d00260947a6f6f0e210a",
+      "observation_de": "Aufwärtsblick und freundlicher Mund; ohne Kontext auch Interesse oder Stolz möglich.",
+      "human_recognition": "unmeasured"
+    },
+    {
+      "slug": "triumph",
+      "archetype_svg_sha256": "a8d46d6ac835dc1971415ddb03ec636f310cfd210a54507d77b9d034c29bd047",
+      "observation_de": "Breites weißes Siegergrinsen wirkt kräftiger als pride; Erfolg selbst braucht Kontext.",
+      "human_recognition": "unmeasured"
+    },
+    {
+      "slug": "pride",
+      "archetype_svg_sha256": "f2838ad95a0002fb89e06a367b76d420f36667ebe295bebdbd7ca8b6caf53f01",
+      "observation_de": "Kontrolliertes schiefes Lächeln; Stolz und Verachtung können benachbart erscheinen.",
+      "human_recognition": "unmeasured"
+    },
+    {
+      "slug": "interest",
+      "archetype_svg_sha256": "84f093827bd3446a4739499c1f26209d815f24da759cad89f3eb6fd4b915f78d",
+      "observation_de": "Wachere Augen und zurückhaltender Mund; Aufmerksamkeit ohne eindeutige Emotionsursache.",
+      "human_recognition": "unmeasured"
+    },
+    {
+      "slug": "awe",
+      "archetype_svg_sha256": "4d77c2ab9785dead5d86ae8d79da8a5a6f5f39f0d65538464e7f67e2b3d1f519",
+      "observation_de": "Große Pupillen und kleiner O-Mund; im Vergleich weicher als surprise.",
+      "human_recognition": "unmeasured"
+    },
+    {
+      "slug": "surprise",
+      "archetype_svg_sha256": "38179430e8056fff67f8b495092acba76cb1b0a1176570337f2a68fc9241b111",
+      "observation_de": "Kleine Pupillen, große Augen und großer O-Mund bilden eine klare Cartoon-Konstellation.",
+      "human_recognition": "unmeasured"
+    },
+    {
+      "slug": "concentration",
+      "archetype_svg_sha256": "126e0e5f5c5651100b17e2aee195f8015968fe938fd0c04bc98f255b11f513f0",
+      "observation_de": "Leichte Kontraktion und gepresster Mund; kann als ernster neutraler Zustand gelesen werden.",
+      "human_recognition": "unmeasured"
+    },
+    {
+      "slug": "contemplation",
+      "archetype_svg_sha256": "9d8509791cfbdc4c1f37409544d7e057d9ab05633508e7555859644e56912c1e",
+      "observation_de": "Seitlicher Aufwärtsblick, Brauenasymmetrie und gespitzter Mund; Nähe zu doubt.",
+      "human_recognition": "unmeasured"
+    },
+    {
+      "slug": "relief",
+      "archetype_svg_sha256": "4f493307a197761ae355f53088ac3ae01b6107108e9abeaabc6abaf9a7cbcfa1",
+      "observation_de": "Entspannte enge Lider und Ausatem-Mund; kann auch erschöpft wirken.",
+      "human_recognition": "unmeasured"
+    },
+    {
+      "slug": "longing",
+      "archetype_svg_sha256": "3e858c7044886f021b378181c6d3ac15190ef0532eb751b841fa94781a8f30dc",
+      "observation_de": "Seitlicher wehmütiger Blick; Sehnsucht bleibt ohne Gegenstand mehrdeutig.",
+      "human_recognition": "unmeasured"
+    },
+    {
+      "slug": "teasing",
+      "archetype_svg_sha256": "5198c209cc894d26896fec44fcdaea4648ebdce60b45dafba63b49afeb6a37a1",
+      "observation_de": "Zwinkern, schiefes Grinsen und Zunge bleiben auch in Varianten erhalten.",
+      "human_recognition": "unmeasured"
+    },
+    {
+      "slug": "impatience",
+      "archetype_svg_sha256": "5f80ce18e868c2a14fe0efb45dff2ca3630cb1f0cbdf702e6a1b5e4269f534cf",
+      "observation_de": "Gereizter Seitenblick; Ungeduld lässt sich statisch kaum von milder Wut trennen.",
+      "human_recognition": "unmeasured"
+    },
+    {
+      "slug": "lust",
+      "archetype_svg_sha256": "b5493c1077e19af1ba8d83bcfca63db0f2cb3bbdba1e9931a8a1b3f39583c990",
+      "observation_de": "Schwere Lider und offener kleiner Smile; Flirt/Begehren ist ohne Kontext nicht sicher.",
+      "human_recognition": "unmeasured"
+    },
+    {
+      "slug": "doubt",
+      "archetype_svg_sha256": "ae7c919cb0ef145578198e93b6a9854e933c52634a269963737fcfe8a31b4e70",
+      "observation_de": "Asymmetrische Brauen und unterschiedliches Zusammenkneifen geben einen skeptischen Eindruck.",
+      "human_recognition": "unmeasured"
+    },
+    {
+      "slug": "fear",
+      "archetype_svg_sha256": "c6c3795a0309282cb22a4849e53f24e001d4f878be3fe9429c9fc12789f5d2c3",
+      "observation_de": "Weite Augen und gespannter weißer Mund unterscheiden sich vom runden Überraschungsmund.",
+      "human_recognition": "unmeasured"
+    },
+    {
+      "slug": "distress",
+      "archetype_svg_sha256": "6c144c6d0f8b7529f40844e663576f3143acf824c55ee002448f0c60a0d556cf",
+      "observation_de": "Besorgte Brauen und kleine offene Abwärtsöffnung; Nähe zu Hilflosigkeit.",
+      "human_recognition": "unmeasured"
+    },
+    {
+      "slug": "confusion",
+      "archetype_svg_sha256": "4f7a7aec4cbc7ef0a02e8b0f64ca6c70c557cb2bf273f507b2f54a71a87659fb",
+      "observation_de": "Suchender weiter Blick und schiefer kleiner offener Mund; Nähe zu doubt.",
+      "human_recognition": "unmeasured"
+    },
+    {
+      "slug": "embarrassment",
+      "archetype_svg_sha256": "3ef81a10a19347a6a291c53328caafefc9d516e835220ff27706fb2d39660b8b",
+      "observation_de": "Seitlich ausweichender Blick und unsicheres Lächeln unterscheiden sich von shame.",
+      "human_recognition": "unmeasured"
+    },
+    {
+      "slug": "shame",
+      "archetype_svg_sha256": "a33578f603e6a739fbbd8bcb1bc3d03aa75cd4d19cd9dc28e52c09171bc90c06",
+      "observation_de": "Gesenkter enger Blick und kleiner trauriger Mund; Nähe zu Enttäuschung.",
+      "human_recognition": "unmeasured"
+    },
+    {
+      "slug": "disappointment",
+      "archetype_svg_sha256": "3517c86c8a34f55bbabe6a2cd242dcb98f988fb17e25d81de21b79eb0eb24ba1",
+      "observation_de": "Flacherer trauriger Mund und schwere Lider; Nähe zu Traurigkeit.",
+      "human_recognition": "unmeasured"
+    },
+    {
+      "slug": "sadness",
+      "archetype_svg_sha256": "e65020f87dce61d68e710b4c39341bc090499ba491dd5bfdd4b754a1039de3bf",
+      "observation_de": "Stark angehobene innere Brauen und klarer trauriger Mundbogen.",
+      "human_recognition": "unmeasured"
+    },
+    {
+      "slug": "bitterness",
+      "archetype_svg_sha256": "dbf497d2993bbdecfa40869dcab6a644f0f48766cd47d91478f6fb3d98c94f57",
+      "observation_de": "Schiefer missmutiger Mund; Verbitterung/Neid/Ungeduld bleiben nahe.",
+      "human_recognition": "unmeasured"
+    },
+    {
+      "slug": "contempt",
+      "archetype_svg_sha256": "9ed6aa7583393ab60d996652918349e837986187b34061cabc64bd93c364841f",
+      "observation_de": "Einseitig hochgezogener Mundwinkel sichtbar erhalten; Nähe zu Stolz.",
+      "human_recognition": "unmeasured"
+    },
+    {
+      "slug": "disgust",
+      "archetype_svg_sha256": "ca3ea91daf37d6cad7839123a5fab6f71d6fe4fe583246d82f3d37f9d42aa7d7",
+      "observation_de": "Zusammenkneifen, Nasenanhebung und schiefer weißer Mund; noch ein schwächerer Ekelhinweis als eine anatomische Nasenfalte.",
+      "human_recognition": "unmeasured"
+    },
+    {
+      "slug": "anger",
+      "archetype_svg_sha256": "09d9bbb7eb0511a01159b84c3f1bcc3edcd46b43e5b7208ee80daa37ce3e9607",
+      "observation_de": "Die neue innere Brauenabsenkung ergibt einen deutlich härteren Blick als der erste freundliche Basisbogen.",
+      "human_recognition": "unmeasured"
+    },
+    {
+      "slug": "malice",
+      "archetype_svg_sha256": "d770e8f8f9449f9cb40fd947e61489950418348e266707d0b7b3f6696f349c8b",
+      "observation_de": "Harter Blick plus Grinsen bildet einen stilisierten boshaften Eindruck; keine universelle Boshaftigkeitsmimik.",
+      "human_recognition": "unmeasured"
+    },
+    {
+      "slug": "sourness",
+      "archetype_svg_sha256": "67a21e183ed78bebec68b5a00dcaedd21941120e67e7eec9ebd7499dfec17ff6",
+      "observation_de": "Ein stark geschlossenes Auge und gepresste kleine Lippen; bewusst stilisierte Geschmacksreaktion.",
+      "human_recognition": "unmeasured"
+    },
+    {
+      "slug": "pain",
+      "archetype_svg_sha256": "7c04038a05402aca6aa33ea55c4cc1cc15ce192f21434d305632ffc9935bd1cd",
+      "observation_de": "Beidseitiger fester Lidschluss und größere offene Grimasse; Schmerz vs. Anstrengung bleibt kontextabhängig.",
+      "human_recognition": "unmeasured"
+    },
+    {
+      "slug": "helplessness",
+      "archetype_svg_sha256": "a7d57b955cca80967763a8aa6f6377bb27e50c1aedb3e5e2cd6cc550f7843413",
+      "observation_de": "Bittende innere Brauen und offener trauriger Mund; Nähe zu distress und sadness.",
+      "human_recognition": "unmeasured"
+    },
+    {
+      "slug": "fatigue",
+      "archetype_svg_sha256": "363ecbcfe15cfcac461c42d8ae728452ac91af66aae0479fb390774b817019d1",
+      "observation_de": "Schwere Lider und kleiner Gähn-Mund bleiben sichtbar; niedrige Aktivierung erkennbar.",
+      "human_recognition": "unmeasured"
+    },
+    {
+      "slug": "numbness",
+      "archetype_svg_sha256": "02782a6999112d51dcd078f6723174d82d0014602eb3e6797c79260d8236004a",
+      "observation_de": "Flachere Brauen und waagerechter Mund; emotionale Leere kann ebenso neutral wirken.",
+      "human_recognition": "unmeasured"
+    },
+    {
+      "slug": "intoxication",
+      "archetype_svg_sha256": "14ba6674b5471dc8450cf43fc18202192f6b415b7c25a26812605f201f7a144b",
+      "observation_de": "Ungleiche schwere Lider und lockerer schiefer Mund; Benommenheit nicht sicher von Müdigkeit/Verwirrung zu trennen.",
+      "human_recognition": "unmeasured"
+    },
+    {
+      "slug": "envy",
+      "archetype_svg_sha256": "ed227b10790cc27056d2aba902eabaf394aef4f72545836ccbbf0a30ac67effa",
+      "observation_de": "Gespannter harter Seitenblick; Neid braucht ein soziales Bezugsobjekt.",
+      "human_recognition": "unmeasured"
+    }
+  ]
+}

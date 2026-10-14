@@ -1,5 +1,7 @@
 # Datenformat und Rendering verstehen
 
+[Dokumentationsindex](README.md) · [Repository-Startseite](../README.md)
+
 Dieses Dokument erklärt den gespeicherten Zustand unabhängig von den Implementierungsdetails. Der vollständige ID-Katalog steht in [topology.md](topology.md); die Entwicklungsübersicht in [README.md](../README.md).
 
 Die aktuellen Erweiterungen verändern die 101 IDs nicht: `expression` ist der separate 60-dimensionalige Sozialkatalog; `geometry.under_eye_transition` und `rig.*_hatching.foldness/slot_weights` steuern die [kontinuierlichen Unteraugen-Morphs](under_eye.md). Das Feld `emotion` behält ausschließlich die 40 offiziellen EmoNet-Gewichte. Ein [augmentiertes Rasterlabel](dataset.md) ist eine eigene Beobachtung mit tatsächlich transformierten Koordinaten und Rand-/Verdeckungsmasken, keine Ersatz-Pose-JSON.

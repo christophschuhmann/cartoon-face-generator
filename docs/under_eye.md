@@ -1,5 +1,7 @@
 # Ein gemeinsamer Unteraugen-Übergang
 
+[Dokumentationsindex](README.md) · [Repository-Startseite](../README.md)
+
 Alle neu erzeugten EmoNet- und sozialen Posen verwenden `geometry.under_eye_transition = "stroke_bank_v1"`. Eine lange Unteraugenkurve und acht dauerhaft benannte interne Strichplätze bilden ein gemeinsames System. `rig.<side>_hatching.foldness` ist ein kontinuierlicher Wert von 0 bis 1: Die Striche liegen zunächst auf kleinen Abschnitten der Kurve und bewegen sich allmählich in kurze parallele Falten. Gleichzeitig wird die lange Kurve weich ausgeblendet. Es gibt keinen Austausch von Pfaden an der Mitte einer Interpolation.
 
 ![Tatsächlich gerenderter Übergang](../output/under_eye/transition.png)

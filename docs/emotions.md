@@ -1,5 +1,7 @@
 # 40 EmoNet-Face-Kategorien prozedural erzeugen
 
+[Dokumentationsindex](README.md) · [Repository-Startseite](../README.md)
+
 Die Emotionsschicht erzeugt vollständige Posen für das bestehende **101-Punkte-Rig**. Sie enthält einen Archetyp und einen korrelierten Variationsraum für jede der 40 Kategorien. Alle Ausgaben verwenden denselben SVG-Renderer wie Referenzrekonstruktion und Editor. Es gibt keine 40 separaten SVG-Vorlagen und keine neuen Landmark-IDs.
 
 ## Quelle und Aussagegrenze

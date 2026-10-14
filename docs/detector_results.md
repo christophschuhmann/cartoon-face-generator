@@ -1,5 +1,7 @@
 # Tatsächlich trainierter 101-Punkt-Detector
 
+[Dokumentationsindex](README.md) · [Repository-Startseite](../README.md)
+
 Das Modell wurde auf 84.000 getrennten Trainingsposen für 15 Epochen trainiert, mit einer neuen milden Augmentation pro Bild und Epoche. Ein NVIDIA A100 und PyTorch 2.6.0/CUDA 12.4 wurden verwendet. Das Netzwerk hat 1.011.228 Parameter; der gewählte Checkpoint stammt aus Epoche 15. Der Lauf dauerte 16.17 Minuten.
 
 ## Unabhängige synthetische Testbilder

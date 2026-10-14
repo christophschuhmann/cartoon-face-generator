@@ -1,5 +1,22 @@
 # Train the 101-point cartoon detector
 
+[Repository overview](../README.md) · [Documentation index](../docs/README.md) · [Measured results](../docs/detector_results.md)
+
+## Use the trained checkpoint first
+
+Download [cartoon_landmarks_best.pt](https://github.com/christophschuhmann/cartoon-face-generator/releases/download/v1.0.0/cartoon_landmarks_best.pt) and save it as `output/detector/best.pt`. The weights are a separate release asset; a source-code ZIP does not contain them. CPU installation and a complete first-prediction example are in [getting started](../docs/getting_started.md).
+
+| File | Responsibility |
+|---|---|
+| [model.py](model.py) | compact 101-heatmap network and visibility head |
+| [prepare.py](prepare.py) | raster cache, disjoint source splits, clean/augmented holdouts |
+| [train.py](train.py) | on-the-fly augmentations, training, checkpoint selection and test evaluation |
+| [predict.py](predict.py) | CPU/GPU inference and original-image coordinates |
+| [visualize.py](visualize.py) | Ground Truth versus predicted landmark comparison boards |
+| [evaluate_references.py](evaluate_references.py) | separate evaluation of the six original illustration crops |
+
+The following sections describe the model and how to reproduce training. Dataset preparation is not required just to run inference.
+
 This is the small supervised **cartoon-image** model. The separate [MediaPipe application](../webcam_mapper/README.md) maps a human webcam to the SVG avatar; it does not use this model.
 
 `LandmarkNet` has 1,011,228 parameters. A compact convolutional encoder/decoder produces 101 heatmaps at one quarter of the input dimensions and 101 three-state visibility predictions. No human-face pretrained weights or expression classifier are required. Training uses spatial Gaussian distribution loss, an auxiliary coordinate loss and visibility classification. Visible landmarks have weight 1, occluded landmarks 0.35, absent/out-of-frame landmarks 0. Extreme OOD examples have additional weight 0.25.

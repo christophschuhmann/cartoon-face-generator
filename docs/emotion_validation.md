@@ -1,10 +1,14 @@
 # Emotionsschicht: Ergebnisse und verbleibende Grenzen
 
+[Dokumentationsindex](README.md) · [Aktuelle Unteraugen-Morphs](under_eye.md)
+
+Dieser Bericht beschreibt den dokumentierten Emotions-/Stil-Prüflauf für Rezept 1.1. Die aktuellen EmoNet-Rezepte verwenden 1.2 und zusätzlich `stroke_bank_v1`; alle aktuellen Galerieposen wurden neu erzeugt und validiert. Die unten genannten 114 Tests sind die damalige Suite, nicht die Größe der heutigen Testsuite. Menschliche Erkennungsgenauigkeit wurde weiterhin nicht gemessen.
+
 ## Implementierter Umfang
 
 40 Kategorien aus der festgehaltenen offiziellen EmoNet-Face-Taxonomie, jeweils ein Archetyp und ein eigener prozeduraler Variationsraum. Alle verwenden das bestehende `cartoon_face_v1` mit 101 unveränderten IDs und denselben Python/SVG-Renderer. Eine Pose wird als vollständiges JSON mit Geometrie, Rig, Sichtbarkeit, beabsichtigtem Label, 40 Steuergewichten und Rezept gespeichert. Der Editor unterstützt Archetypen, Seeds, Mischungen und manuelle Nachbearbeitung; die Galerie unterstützt separate menschliche Bewertungen.
 
-Aktuelle Rezeptversion: **1.1**. Die subtile Überarbeitung der Strichenden, Mundrundung und Charakterwärme ist mit echten Vorher/Nachher-Renderings in [emotion_refinement.md](emotion_refinement.md) dokumentiert. Archivierte Rezept-1.0-Posen behalten ihre ursprüngliche SVG-Geometrie.
+Rezeptversion dieses Stilberichts: **1.1**. Die subtile Überarbeitung der Strichenden, Mundrundung und Charakterwärme ist mit echten Vorher/Nachher-Renderings in [emotion_refinement.md](emotion_refinement.md) dokumentiert. Archivierte Rezept-1.0-Posen behalten ihre ursprüngliche SVG-Geometrie. Die neueren Unteraugen-Übergänge sind separat in [under_eye.md](under_eye.md) beschrieben.
 
 ## Tatsächlich ausgeführte Prüfungen
 
