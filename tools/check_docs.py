@@ -27,6 +27,7 @@ def check(root, tracked_only=False):
         for folder in folders:
             files.update(p for p in (root / folder).rglob("*.md")
                          if not any(part.startswith(".venv") for part in p.parts))
+        files.update((root / "video_experiments").glob("*.md"))
     markdown = sorted(path for path in files if path.suffix == ".md")
     broken, count = [], 0
     for path in markdown:

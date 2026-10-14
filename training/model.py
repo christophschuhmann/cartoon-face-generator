@@ -31,7 +31,7 @@ def decode(heatmaps):
     return torch.stack([(prob.sum(-2)*x).sum(-1),(prob.sum(-1)*y).sum(-1)],-1)
 
 
-def landmark_loss(heatmaps,presence,coordinates,visibility,ood):
+def landmark_loss(heatmaps,presence,coordinates,visibility,ood,ood_weight=.25):
     _,_,h,w=heatmaps.shape;device=heatmaps.device
     x=(torch.arange(w,device=device,dtype=torch.float32)+.5)/w
     y=(torch.arange(h,device=device,dtype=torch.float32)+.5)/h
@@ -40,7 +40,7 @@ def landmark_loss(heatmaps,presence,coordinates,visibility,ood):
     target=torch.exp(-(dx**2+dy**2)/(2*1.15**2)).flatten(2)
     target=target/(target.sum(-1,keepdim=True)+1e-12)
     weights=(visibility==2).float()+.35*(visibility==1).float()
-    weights*=torch.where(ood[:,None],.25,1.)
+    weights*=torch.where(ood[:,None],float(ood_weight),1.)
     spatial=-(target*heatmaps.float().flatten(2).log_softmax(-1)).sum(-1)
     regression=F.smooth_l1_loss(decode(heatmaps),coordinates,reduction='none').sum(-1)
     spatial_loss=(spatial*weights).sum()/weights.sum().clamp_min(1)

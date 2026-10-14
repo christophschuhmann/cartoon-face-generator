@@ -1,6 +1,6 @@
-"""Additional external check on the six original reference crops, never trained."""
+"""Check original rasters; synthetic variants of their rig families may be trained."""
 from pathlib import Path
-import json,time
+import argparse,json,time
 import numpy as np
 from PIL import Image
 import torch,cv2
@@ -10,8 +10,9 @@ from .model import LandmarkNet,decode
 from .visualize import visualize_predictions
 
 
-def main():
-    torch.set_num_threads(4);out=ROOT/'output/detector';state=torch.load(out/'best.pt',map_location='cpu',weights_only=False)
+def evaluate_references(checkpoint,out):
+    torch.set_num_threads(4);out=Path(out);out.mkdir(parents=True,exist_ok=True)
+    state=torch.load(checkpoint,map_location='cpu',weights_only=False)
     model=LandmarkNet();model.load_state_dict(state['model']);model.eval();rows=[];images=[];coords=[];pred=[];vis=[];timings=[]
     for name in NAMES:
         source=Image.open(ROOT/f'output/references/{name}.png').convert('RGB');sw,sh=source.size;w,h=320,192;scale=min(w/sw,h/sh)
@@ -36,8 +37,16 @@ def main():
       'canvas':[320,192],'checkpoint_epoch':state['epoch'],'per_reference':rows,
       'mean_error_px_mean_of_references':float(np.mean([r['mean_error_px_320x192'] for r in rows])),
       'cpu_inference_median_ms':float(np.median(timings)),'cpu_threads':4,
-      'scope':'Six original drawings of the same identity; not arbitrary cartoons or real video. MediaPipe is evaluated separately.'}
-    (out/'external_references.json').write_text(json.dumps(report,indent=2)+'\n');print(json.dumps(report,indent=2))
+      'original_rasters_used_for_training':False,
+      'synthetic_reference_pose_families_in_training':state['config'].get('augmentation')=='training_raster_aug_v3',
+      'scope':'Six original drawings of the same identity; rig-fitted labels, not independent human annotations. Synthetic pose families may be trained. Not arbitrary cartoons or real video; MediaPipe is separate.'}
+    (out/'external_references.json').write_text(json.dumps(report,indent=2)+'\n');return report
+
+
+def main():
+    parser=argparse.ArgumentParser();parser.add_argument('--checkpoint',type=Path,default=ROOT/'output/detector/best.pt')
+    parser.add_argument('--output',type=Path,default=ROOT/'output/detector')
+    args=parser.parse_args();print(json.dumps(evaluate_references(args.checkpoint,args.output),indent=2))
 
 
 if __name__=='__main__':main()

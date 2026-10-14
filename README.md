@@ -17,6 +17,7 @@ Vorhanden sind **40 EmoNet-Face-Ausdrücke**, **60 zusätzliche soziale und vers
 | mit meiner Webcam den Avatar steuern | [Laptop-Anleitung](webcam_mapper/README.md) |
 | eigene Trainingsdaten erzeugen | [Datensatz und Augmentationen](docs/dataset.md) |
 | das Keypoint-Modell benutzen oder trainieren | [Training und Inferenz](training/README.md), [gemessene Ergebnisse](docs/detector_results.md) |
+| sprechende Cartoon-Videos mit LTX 2.5 erzeugen | [Videotests, Skripte und Zeitmessungen](video_experiments/README.md) |
 | die Implementierung erweitern | [Architektur](docs/architecture.md) und [Entwicklungsanleitung](CONTRIBUTING.md) |
 
 Alle Anleitungen sind über den [Dokumentationsindex](docs/README.md) erreichbar. Englischer Kurzüberblick: [English overview](docs/overview_en.md).
@@ -100,7 +101,9 @@ Eine echte vollständige Beispielpose: [poses/smile.json](poses/smile.json). Ver
 | ein Beispiel je Ausdruck plus Kontaktbögen und Qualitätsberichte | [output](output); [Inhaltsverzeichnis](output/README.md) |
 | alle 100 Archetypen **und 560 weitere Vorschauvarianten** | [expression_previews.zip](https://github.com/christophschuhmann/cartoon-face-generator/releases/download/v1.0.0/expression_previews.zip), etwa 90 MB |
 | eigenständige Webcam-Demo einschließlich geprüftem MediaPipe-Modell | [cartoon_webcam_mapper.zip](https://github.com/christophschuhmann/cartoon-face-generator/releases/download/v1.0.0/cartoon_webcam_mapper.zip), etwa 3,4 MB |
-| trainierter Cartoon-Detector | [cartoon_landmarks_best.pt](https://github.com/christophschuhmann/cartoon-face-generator/releases/download/v1.0.0/cartoon_landmarks_best.pt), etwa 4,1 MB |
+| neuer robuster / normalpräziser Cartoon-Detector | [robust](https://github.com/christophschuhmann/cartoon-face-generator/releases/download/v1.1.0/cartoon_landmarks_robust.pt) / [normalpräzise](https://github.com/christophschuhmann/cartoon-face-generator/releases/download/v1.1.0/cartoon_landmarks_precise.pt), jeweils etwa 4,1 MB |
+| historische Detector-Baseline | [cartoon_landmarks_best.pt](https://github.com/christophschuhmann/cartoon-face-generator/releases/download/v1.0.0/cartoon_landmarks_best.pt) |
+| LTX-2.5-Videos mit Sprache, Eingaben und Zeitmessungen | [ltx25_examples.zip](https://github.com/christophschuhmann/cartoon-face-generator/releases/download/v1.1.0/ltx25_examples.zip), etwa 48 MB; [Galerie](https://owner-curves-cosmetics-taught.trycloudflare.com/refinement-assets/ltx25/index.html) |
 | großer Datensatz mit 105.000 SVG-/JSON-Paaren und Trainingscache | separat erzeugen; **nicht im Git-Checkout und nicht im Vorschau-ZIP** |
 
 Der vollständige Datensatz umfasst komprimiert **7,00 GB**, der Trainingscache weitere **0,834 GB**. Er enthält 1.000 Posen pro Ausdruck und 5.000 extreme Verformungen. [Befehle, Splits und Audit](docs/dataset.md) sind dokumentiert; [Manifeste](docs/artifacts/README.md) liegen im Repository.
@@ -109,7 +112,7 @@ Der vollständige Datensatz umfasst komprimiert **7,00 GB**, der Trainingscache 
 
 Die sechs Originalreferenzen wurden mit demselben Rig rekonstruiert. Der Mittelwert beträgt **IoU 0,910 / Dice 0,953**; [Vergleichsbilder](output/comparisons/all_references.png), [regionale Messwerte](output/evaluation.json) und [Rekonstruktionsbericht](docs/phase1_report.md) zeigen die Abweichungen.
 
-Der trainierte Detector erreicht auf 1.000 zurückgehaltenen normalen synthetischen Testansichten im Mittel **0,231 Pixel Fehler bei 320 × 192**. Auf 200 extrem deformierten OOD-Ansichten sind es **15,620 Pixel**; dort bleibt die Erkennung deutlich schwächer. Auf den sechs Originalreferenzen liegt der Fehler bei **4,379 Pixeln**. Diese Zahlen betreffen Landmark-Positionen innerhalb dieser Cartoon-Identität, keine Emotionserkennung. [Vollständige Ergebnisse und Einschränkungen](docs/detector_results.md).
+Nach vier längeren Trainings erreicht der robuste Detector auf dem **unveränderten Testset** **0,330 Pixel normal / 10,291 Pixel bei extremen OOD-Verformungen**, jeweils bei 320 × 192. Die normalpräzise Variante erreicht **0,209 / 11,901 Pixel**. Die alte Baseline lag bei **0,231 / 15,620 Pixel**. Der robuste Checkpoint verbessert den Fehler auf den sechs Originalzeichnungen von **4,379 auf 1,700 Pixel**; synthetische Varianten dieser Rig-Pose-Familien sind nun im Training vertreten. Diese Zahlen betreffen Landmark-Positionen innerhalb dieser Cartoon-Identität, keine Emotionserkennung. [Vollständige Ergebnisse und Einschränkungen](docs/detector_results.md).
 
 Die MediaPipe-Pipeline wurde auf CPU mit einem realen Human-Foto, einem daraus erstellten Testvideo und einer simulierten Browser-Kamera geprüft. Eine echte Laptop-Webcam stand hier nicht zur Verfügung. [Nachweise und praktische Grenzen](webcam_mapper/README.md).
 
@@ -122,4 +125,4 @@ Die MediaPipe-Pipeline wurde auf CPU mit einem realen Human-Foto, einem daraus e
 
 Torch-Tests, Browserprüfung und Änderungen am Rig sind in [CONTRIBUTING.md](CONTRIBUTING.md) beschrieben. Ein GitHub-Actions-Workflow liegt als optionales [Template](tools/github_ci_template.yml) bei; automatische Actions sind derzeit nicht aktiviert.
 
-Der Projektcode steht unter [MIT](LICENSE). Die Kernbibliotheken sind Open Source. Angaben zum externen MediaPipe-Modell und zum verwendeten Testfoto stehen in [webcam_mapper/THIRD_PARTY.md](webcam_mapper/THIRD_PARTY.md). Ein generatives Motion-Modell ist nicht Teil dieser Implementierung.
+Der Projektcode steht unter [MIT](LICENSE). Die Kernbibliotheken sind Open Source. Angaben zum externen MediaPipe-Modell und zum verwendeten Testfoto stehen in [webcam_mapper/THIRD_PARTY.md](webcam_mapper/THIRD_PARTY.md). Die separaten [LTX-Videotests](video_experiments/README.md) verwenden externen Code und Gewichte unter der LTX-Community-Lizenz. Ein eigenes generatives Motion-Modell ist nicht implementiert.

@@ -1,0 +1,9 @@
+{
+  "coordinate_system": "normalized",
+  "scale": 0.8,
+  "translate": [
+    0.1,
+    0.1
+  ],
+  "meaning": "conditioning_xy = pose_xy * scale + translate; pose JSON remains in canonical rig space"
+}

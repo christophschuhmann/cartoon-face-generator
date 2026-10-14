@@ -1,0 +1,55 @@
+{
+  "evaluation_sha256": {
+    "validation_heldout.npz": "67ef3cab8ce2039163c80d5c721372b9a963ecb57f6348aaf5d5b53de85f5e35",
+    "test_heldout.npz": "4c9cf5a892f9df634867f83f7abcd22325aabba179485961c4711fbc6a72dd10",
+    "validation_heldout_annotations.jsonl": "7122d3b4f8531cd3b0f21212faa88b1eabd68f418f3c311a5d7e83f5ce045b29",
+    "test_heldout_annotations.jsonl": "79c5d22bbd1314828249d3c3cce50453934fa1cc010ce25966717353aa80c4e2"
+  },
+  "initial_checkpoint": "output/detector/best.pt",
+  "selection": "validation only: 25% clean NME, 25% mild-augmented NME, 50% extreme OOD NME; normal mean error <= 0.5 pixels",
+  "baseline_is_eligible": true,
+  "test_used_for_selection": false,
+  "maximum_epochs_per_candidate": 40,
+  "minimum_epochs": 24,
+  "early_stopping_patience": 10,
+  "extra_sources": 32000,
+  "architecture": "LandmarkNet101-v1, 1,011,228 parameters",
+  "candidates": [
+    {
+      "name": "strong_mix",
+      "profile": "strong",
+      "lr": 0.0004,
+      "ood_weight": 0.5,
+      "ood_fraction": 0.2,
+      "seed": 101,
+      "device": "cuda:0"
+    },
+    {
+      "name": "robust_ood",
+      "profile": "robust",
+      "lr": 0.0003,
+      "ood_weight": 0.75,
+      "ood_fraction": 0.3,
+      "seed": 202,
+      "device": "cuda:1"
+    },
+    {
+      "name": "curriculum",
+      "profile": "curriculum",
+      "lr": 0.00035,
+      "ood_weight": 0.5,
+      "ood_fraction": 0.25,
+      "seed": 303,
+      "device": "cuda:2"
+    },
+    {
+      "name": "mild_long",
+      "profile": "mild",
+      "lr": 0.00025,
+      "ood_weight": 0.25,
+      "ood_fraction": 0.15,
+      "seed": 404,
+      "device": "cuda:3"
+    }
+  ]
+}

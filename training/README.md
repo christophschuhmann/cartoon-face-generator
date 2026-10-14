@@ -4,7 +4,9 @@
 
 ## Use the trained checkpoint first
 
-Download [cartoon_landmarks_best.pt](https://github.com/christophschuhmann/cartoon-face-generator/releases/download/v1.0.0/cartoon_landmarks_best.pt) and save it as `output/detector/best.pt`. The weights are a separate release asset; a source-code ZIP does not contain them. CPU installation and a complete first-prediction example are in [getting started](../docs/getting_started.md).
+Download [cartoon_landmarks_robust.pt](https://github.com/christophschuhmann/cartoon-face-generator/releases/download/v1.1.0/cartoon_landmarks_robust.pt) and save it as `output/detector_v3/best.pt`. Alternatively, save [cartoon_landmarks_precise.pt](https://github.com/christophschuhmann/cartoon-face-generator/releases/download/v1.1.0/cartoon_landmarks_precise.pt) as `output/detector_v3/best_normal.pt` for the lowest normal synthetic error. The weights are separate release assets; a source-code ZIP does not contain them. CPU installation and a complete first-prediction example are in [getting started](../docs/getting_started.md).
+
+The robust model reaches **0.330 px normal / 10.291 px extreme OOD**, the precise model **0.209 / 11.901 px**, on the unchanged 320×192 test set. The original [15-epoch baseline](https://github.com/christophschuhmann/cartoon-face-generator/releases/download/v1.0.0/cartoon_landmarks_best.pt) remains available. See the [measured comparison](../docs/detector_results.md) for tradeoffs and limits.
 
 | File | Responsibility |
 |---|---|
@@ -14,14 +16,18 @@ Download [cartoon_landmarks_best.pt](https://github.com/christophschuhmann/carto
 | [predict.py](predict.py) | CPU/GPU inference and original-image coordinates |
 | [visualize.py](visualize.py) | Ground Truth versus predicted landmark comparison boards |
 | [evaluate_references.py](evaluate_references.py) | separate evaluation of the six original illustration crops |
+| [extra_variants.py](extra_variants.py) | 32,000 extra training poses; immutable old holdouts |
+| [augmentation.py](augmentation.py) | stronger image/label transformations, training only |
+| [search.py](search.py) | four longer-training profiles, validation selection and complete histories |
+| [compare_search.py](compare_search.py) | lock selection before evaluating the unchanged test set |
 
 The following sections describe the model and how to reproduce training. Dataset preparation is not required just to run inference.
 
 This is the small supervised **cartoon-image** model. The separate [MediaPipe application](../webcam_mapper/README.md) maps a human webcam to the SVG avatar; it does not use this model.
 
-`LandmarkNet` has 1,011,228 parameters. A compact convolutional encoder/decoder produces 101 heatmaps at one quarter of the input dimensions and 101 three-state visibility predictions. No human-face pretrained weights or expression classifier are required. Training uses spatial Gaussian distribution loss, an auxiliary coordinate loss and visibility classification. Visible landmarks have weight 1, occluded landmarks 0.35, absent/out-of-frame landmarks 0. Extreme OOD examples have additional weight 0.25.
+`LandmarkNet` has 1,011,228 parameters. A compact convolutional encoder/decoder produces 101 heatmaps at one quarter of the input dimensions and 101 three-state visibility predictions. No human-face pretrained weights or expression classifier are required. Training uses spatial Gaussian distribution loss, an auxiliary coordinate loss and visibility classification. Visible landmarks have weight 1, occluded landmarks 0.35, absent/out-of-frame landmarks 0. Extreme OOD examples have weight 0.25 in the baseline; the extended search varies this weight explicitly.
 
-## Reproduce preparation and training
+## Reproduce the original baseline preparation and training
 
 From the project root, generate the final v2 SVG dataset first. Install the ordinary project dependencies, then a separate PyTorch environment. The tested configuration is Python 3.12, PyTorch 2.6.0 + CUDA 12.4 on one NVIDIA A100. The [official PyTorch installation matrix](https://pytorch.org/get-started/previous-versions/) also provides CPU wheels. Core SVG/webcam generation does not depend on PyTorch.
 
@@ -43,11 +49,15 @@ Use `--device cpu` and a smaller batch/worker count for CPU-only training; no la
 
 The cache is grayscale storage at 320 × 192; every training read creates exactly one new RGB augmented image. A letterbox preserves proportions and leaves varying lower margins. Mild affine transforms, invertible sine shears, bilateral flip permutation, pastel background palettes, contrast changes, noise, slight blur/downsampling/JPEG and occasional small occluders are applied together with the exact label transform. Original source SVGs remain available.
 
+## Extended search with more variants and stronger augmentation
+
+The [complete search protocol](../docs/detector_search.md) documents 116,000 training source poses, four profiles with 40 additional epochs each, seeds, learning rates, OOD mixing, all measured results and frozen evaluation hashes. Training images change every epoch; evaluation images do not. Optimizers are restarted while the original baseline weights initialize each candidate. The model architecture and landmark topology remain unchanged.
+
 ## Holdouts and evaluation
 
 Every expression reserves five unseen validation poses and five additional unseen test poses. Each has a clean and one fixed augmented image, giving 1,000 normal validation images and 1,000 normal test images. Each split also has 200 separately reported extreme OOD images. Training uses all 84,000 source poses from the train split. No held-out source ID, clean view or transformed view is used for training.
 
-Checkpoints are selected only by normal validation normalized mean error. The test set is evaluated after the chosen checkpoint is loaded. `output/detector/config.json`, `history.json`, `evaluation.json`, `test_predictions.npz` and `test_examples.png` record the real run. `best.pt` contains the selected weights; `last.pt` additionally retains optimizer/scheduler/scaler state.
+The original baseline selects checkpoints by normal validation normalized mean error. The new robust search uses a preregistered balanced normal/OOD validation score with a normal-error ceiling of 0.5 px; the precise alternative uses normal validation error. The test set is evaluated only after selection is locked. `output/detector/` retains the baseline and `output/detector_v3/` contains the new comparison. Training-run `last.pt` files additionally retain optimizer/scheduler/scaler state.
 
 NME divides Euclidean landmark error by the full image diagonal. PCK@1/2/5% thresholds use that same diagonal. Absent and outside landmarks are excluded; occluded landmarks are included. Reports separate clean, augmented and OOD conditions, and include every category. These are synthetic-cartoon landmark metrics, not human emotion recognition or evidence of generalization to arbitrary cartoons or videos.
 
@@ -55,7 +65,7 @@ NME divides Euclidean landmark error by the full image diagonal. PCK@1/2/5% thre
 
 ```bash
 .venv-training/bin/python -m training.predict \
-  --image path/to/cartoon.png --checkpoint output/detector/best.pt \
+  --image path/to/cartoon.png --checkpoint output/detector_v3/best.pt \
   --device cpu --output output/prediction.json
 ```
 

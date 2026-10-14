@@ -1,6 +1,9 @@
 .venv/
 .venv-training/
 datasets/
+video_experiments/.venv/
+video_experiments/models/
+video_experiments/vendor/
 __pycache__/
 .pytest_cache/
 *.egg-info/

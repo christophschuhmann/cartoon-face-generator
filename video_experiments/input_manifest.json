@@ -1,0 +1,47 @@
+{
+  "renderer": "shared cartoon_face Python SVG renderer",
+  "pairs": [
+    {
+      "slug": "happy_to_angry",
+      "from": "amusement",
+      "to": "anger",
+      "prompt": "A fixed close-up of exactly the same flat black-and-white cartoon face as the reference images, drawn in smooth black ink on a completely uniform pure white background. Two large expressive outlined eyes, black pupils with small white highlights, thick curved eyebrows, a tiny nose, two distinctive curled moustache-like cheek lines, and a small speaking mouth. The face stays at exactly the same size and position. The camera is locked and motionless for the entire single shot. Only eyelids, eyebrows, pupils and mouth move naturally. The background stays pure white, the artwork remains monochrome and minimal. No scene change, text, head outline or body. The cartoon speaks German with a friendly, gently comic male voice. First he smiles warmly and says, 'Das ist ja wunderbar!' Then his eyebrows lower and his eyes narrow as he becomes softly indignant, saying, 'Moment, das ist unfair!' He holds the final angry but endearing expression.",
+      "input_directory": "inputs/happy_to_angry"
+    },
+    {
+      "slug": "sad_to_hopeful",
+      "from": "sadness",
+      "to": "hope",
+      "prompt": "A fixed close-up of exactly the same flat black-and-white cartoon face as the reference images, drawn in smooth black ink on a completely uniform pure white background. Two large expressive outlined eyes, black pupils with small white highlights, thick curved eyebrows, a tiny nose, two distinctive curled moustache-like cheek lines, and a small speaking mouth. The face stays at exactly the same size and position. The camera is locked and motionless for the entire single shot. Only eyelids, eyebrows, pupils and mouth move naturally. The background stays pure white, the artwork remains monochrome and minimal. No scene change, text, head outline or body. The cartoon speaks German in a soft, expressive male voice. First he looks sad and says, 'Heute ist alles schwer.' His eyebrows and gaze gently lift, his mouth becomes an encouraging smile, and he says with renewed hope, 'Aber ich gebe nicht auf.'",
+      "input_directory": "inputs/sad_to_hopeful"
+    },
+    {
+      "slug": "doubt_to_laughter",
+      "from": "doubt",
+      "to": "amusement",
+      "prompt": "A fixed close-up of exactly the same flat black-and-white cartoon face as the reference images, drawn in smooth black ink on a completely uniform pure white background. Two large expressive outlined eyes, black pupils with small white highlights, thick curved eyebrows, a tiny nose, two distinctive curled moustache-like cheek lines, and a small speaking mouth. The face stays at exactly the same size and position. The camera is locked and motionless for the entire single shot. Only eyelids, eyebrows, pupils and mouth move naturally. The background stays pure white, the artwork remains monochrome and minimal. No scene change, text, head outline or body. The cartoon speaks German in a warm, gently comic male voice. First he raises one skeptical eyebrow and says, 'Meinst du das ernst?' Then his eyes smile and his mouth opens into amusement as he says, 'Na gut, ich muss lachen.' He finishes with a soft chuckle.",
+      "input_directory": "inputs/doubt_to_laughter"
+    },
+    {
+      "slug": "fear_to_relief",
+      "from": "fear",
+      "to": "relief",
+      "prompt": "A fixed close-up of exactly the same flat black-and-white cartoon face as the reference images, drawn in smooth black ink on a completely uniform pure white background. Two large expressive outlined eyes, black pupils with small white highlights, thick curved eyebrows, a tiny nose, two distinctive curled moustache-like cheek lines, and a small speaking mouth. The face stays at exactly the same size and position. The camera is locked and motionless for the entire single shot. Only eyelids, eyebrows, pupils and mouth move naturally. The background stays pure white, the artwork remains monochrome and minimal. No scene change, text, head outline or body. The cartoon speaks German in a gentle comic male voice. First his eyes widen with mild surprise and fear as he says, 'Oh, was war das?' Then he exhales, his eyebrows soften, his eyes relax, and he smiles with relief, saying, 'Puh, alles wieder gut.'",
+      "input_directory": "inputs/fear_to_relief"
+    },
+    {
+      "slug": "happy_to_angry_clear",
+      "from": "amusement",
+      "to": "anger",
+      "prompt": "A fixed close-up of exactly the same flat black-and-white cartoon face as the reference images, drawn in smooth black ink on a completely uniform pure white background. Two large expressive outlined eyes, black pupils with small white highlights, thick curved eyebrows, a tiny nose, two distinctive curled moustache-like cheek lines, and a small speaking mouth. The face stays at exactly the same size and position. The camera is locked and motionless for the entire single shot. Only eyelids, eyebrows, pupils and mouth move naturally. The background stays pure white, the artwork remains monochrome and minimal. No scene change, text, head outline or body. The cartoon speaks German with a friendly, gently comic male voice. First he smiles warmly and says, 'Das ist ja wunderbar!' Then his eyebrows lower and his eyes narrow as he becomes softly indignant, saying, 'Moment, das ist unfair!' He holds the final angry but endearing expression.",
+      "input_directory": "inputs/happy_to_angry_clear"
+    },
+    {
+      "slug": "fear_to_relief_margin",
+      "from": "fear",
+      "to": "relief",
+      "prompt": "A fixed close-up of exactly the same flat black-and-white cartoon face as the reference images, drawn in smooth black ink on a completely uniform pure white background. Two large expressive outlined eyes, black pupils with small white highlights, thick curved eyebrows, a tiny nose, two distinctive curled moustache-like cheek lines, and a small speaking mouth. The face stays at exactly the same size and position. The camera is locked and motionless for the entire single shot. Only eyelids, eyebrows, pupils and mouth move naturally. The background stays pure white, the artwork remains monochrome and minimal. No scene change, text, head outline or body. The cartoon speaks German in a gentle comic male voice. First his eyes widen with mild surprise and fear as he says, 'Oh, was war das?' Then he exhales, his eyebrows soften, his eyes relax, and he smiles with relief, saying, 'Puh, alles wieder gut.'",
+      "input_directory": "inputs/fear_to_relief_margin"
+    }
+  ]
+}

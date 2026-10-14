@@ -1,0 +1,16 @@
+{
+  "asr_model": "faster-whisper small, CPU int8",
+  "language": "de",
+  "text": "Heute ist alles schwer, aber ich gebe nicht auf.",
+  "expected_dialogue": "Heute ist alles schwer. Aber ich gebe nicht auf.",
+  "asr_word_error_rate": 0.0,
+  "seconds": 1.3747141971252859,
+  "segments": [
+    {
+      "start": 0.69,
+      "end": 5.01,
+      "text": " Heute ist alles schwer, aber ich gebe nicht auf."
+    }
+  ],
+  "scope": "ASR can misrecognize short synthetic speech. This is a check, not a certified transcription."
+}

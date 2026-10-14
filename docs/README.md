@@ -13,6 +13,7 @@ Wenn du das Projekt zum ersten Mal öffnest, lies zunächst den [Einstieg](getti
 | [CLI-Kochbuch](cli.md) | ausführbare Beispiele für Erzeugen, Mischen, Interpolation, Fitting und Datenexport |
 | [Webcam-Demo](../webcam_mapper/README.md) | CPU-MediaPipe, Laptop-Setup, Kalibrierung, Bilder und Videos |
 | [Training und Inferenz](../training/README.md) | Cartoon-Detector benutzen, Daten vorbereiten, Training reproduzieren |
+| [LTX-2.5-Videos](../video_experiments/README.md) | Emotionswechsel, deutsche Sprache, Start-/End-/Zwischenbilder und gemessene Geschwindigkeit |
 
 ## Verstehen und erweitern
 
@@ -38,6 +39,7 @@ Wenn du das Projekt zum ersten Mal öffnest, lies zunächst den [Einstieg](getti
 | [Emotionsvalidierung](emotion_validation.md) | geometrische und visuelle Prüfungen; keine behauptete menschliche Erkennungsrate |
 | [Stilverfeinerung](emotion_refinement.md) | historischer Schritt von Rezept 1.0 zu 1.1 |
 | [Detector-Ergebnisse](detector_results.md) | tatsächliche Testmessungen, Originalreferenzen und OOD-Schwächen |
+| [Erweiterte Detector-Suche](detector_search.md) | zusätzliche Varianten, stärkere Augmentationen und Auswahl auf unverändertem Holdout |
 | [Maschinenlesbare Manifeste](artifacts/README.md) | Datensatz-Fingerprint, vollständiger Audit und Trainingsaufteilung |
 
 Die aktuellen Rezepte sind **EmoNet 1.2** und **Social 1.1**, bei unveränderter Topologie `cartoon_face_v1`. Historische Berichte beschreiben ihre damaligen Prüfläufe. Vollständig gespeicherte Posen behalten ihren eigenen Geometriemodus und sind die verbindliche Grundlage für erneutes Rendern.

@@ -99,7 +99,7 @@ Das ist unabhängig vom Cartoon-Keypoint-Detector. Details zu Mapping, CPU-Prüf
 
 ## 6. Trainierten Cartoon-Detector ausprobieren
 
-Der Detector erkennt die 101 Punkte in einem **Cartoon-Rasterbild**. Lade [cartoon_landmarks_best.pt](https://github.com/christophschuhmann/cartoon-face-generator/releases/download/v1.0.0/cartoon_landmarks_best.pt) herunter und lege ihn zum Beispiel unter `output/detector/best.pt` ab.
+Der Detector erkennt die 101 Punkte in einem **Cartoon-Rasterbild**. Lade den neuen [robusten Checkpoint](https://github.com/christophschuhmann/cartoon-face-generator/releases/download/v1.1.0/cartoon_landmarks_robust.pt) herunter und lege ihn unter `output/detector_v3/best.pt` ab. Für höchste Präzision auf normalen Generatorbildern gibt es zusätzlich die [normalpräzise Variante](https://github.com/christophschuhmann/cartoon-face-generator/releases/download/v1.1.0/cartoon_landmarks_precise.pt). [Der Ergebnisvergleich](detector_results.md) erklärt den Unterschied.
 
 Für CPU-Inferenz eine eigene PyTorch-Umgebung im Repository-Hauptordner anlegen:
 
@@ -109,7 +109,7 @@ python3.12 -m venv .venv-training
 .venv-training/bin/python -m pip install torch==2.6.0 --index-url https://download.pytorch.org/whl/cpu
 
 .venv-training/bin/python -m training.predict \
-  --image output/my_face.png --checkpoint output/detector/best.pt \
+  --image output/my_face.png --checkpoint output/detector_v3/best.pt \
   --device cpu --output output/prediction.json
 ```
 

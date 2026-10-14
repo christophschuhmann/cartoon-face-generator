@@ -8,6 +8,9 @@ def prepare(destination):
     dest=Path(destination);dest.mkdir(parents=True,exist_ok=True);files=set()
     for folder in ('src','viewer','poses','docs','tests','tools','training','images','.github'):
         files.update(p for p in (ROOT/folder).rglob('*') if p.is_file() and '__pycache__' not in p.parts and '.pytest_cache' not in p.parts)
+    # Workflow activation needs a separate GitHub permission; retain the inert
+    # tools/github_ci_template.yml, rather than publishing active workflow files.
+    files={p for p in files if '.github/workflows' not in p.relative_to(ROOT).as_posix()}
     for name in ('README.md','CONTRIBUTING.md','AGENTS.md','LICENSE','pyproject.toml','uv.lock','.python-version','.gitignore'):
         p=ROOT/name
         if p.is_file():files.add(p)
@@ -44,6 +47,18 @@ def prepare(destination):
     for name in ('config.json','history.json','evaluation.json','test_examples.png','external_references.json','external_references.png'):
         p=detector/name
         if p.exists():files.add(p)
+    for folder in ('output/detector_v3','output/detector_search_v3'):
+        base=ROOT/folder
+        files.update(p for p in base.glob('*') if p.is_file() and p.suffix in ('.json','.png','.svg'))
+        if folder.endswith('search_v3'):
+            files.update(p for p in (base/'source').glob('*') if p.is_file() and p.suffix in ('.py','.json'))
+            for directory in base.glob('*'):
+                if directory.is_dir():files.update(p for p in directory.glob('*') if p.is_file() and p.name in ('config.json','history.json','candidate.json'))
+    videos=ROOT/'video_experiments'
+    files.update(p for p in videos.glob('*') if p.is_file() and p.suffix in ('.py','.sh','.txt','.md','.json'))
+    files.update(p for p in (videos/'inputs').rglob('*') if p.is_file() and p.suffix in ('.png','.svg','.json','.txt'))
+    # MP4s and the large collection of decoded frames belong in release ZIPs.
+    files.update(p for p in (videos/'output').rglob('*.json') if p.is_file())
     pattern=re.compile(rb'(?:ghp_|hf_)[A-Za-z0-9]{20,}|-----BEGIN (?:RSA |OPENSSH |EC )?PRIVATE KEY-----')
     total=0
     for file in sorted(files):

@@ -25,3 +25,26 @@ def test_holdout_returns_native_boolean_tensor_for_numpy_bool_scalars(tmp_path):
     path=tmp_path/'holdout.npz';np.savez(path,images=np.zeros((1,192,320,3),dtype=np.uint8),xy=np.full((1,101,2),.5,dtype=np.float32),
       visibility=np.full((1,101),2,dtype=np.uint8),ood=np.array([False]))
     sample=HoldoutDataset(path)[0];assert sample[3].dtype==torch.bool and sample[3].item() is False
+
+
+def test_ood_weight_can_increase_the_influence_of_difficult_training_examples():
+    axis=(torch.arange(8)+.5)/8
+    maps=torch.zeros(2,1,8,8)
+    maps[0,0]=-(((axis[:,None]-.5)*8)**2+((axis[None,:]-.5)*8)**2)/(2*1.15**2)
+    maps[1,0]=-(((axis[:,None]-.15)*8)**2+((axis[None,:]-.15)*8)**2)/(2*1.15**2)
+    presence=torch.zeros(2,1,3);coords=torch.full((2,1,2),.5)
+    visible=torch.full((2,1),2);ood=torch.tensor([False,True])
+    weak,_=landmark_loss(maps,presence,coords,visible,ood,ood_weight=.1)
+    strong,_=landmark_loss(maps,presence,coords,visible,ood,ood_weight=1.)
+    assert strong>weak
+
+
+def test_search_selection_balances_conditions_and_guards_normal_quality():
+    from training.search import validation_score
+    metrics={'normal':{'mean_error_px':.3},'clean':{'nme_diagonal':.001},
+        'augmented':{'nme_diagonal':.002},'ood':{'nme_diagonal':.04}}
+    score=validation_score(metrics)
+    improved={**metrics,'ood':{'nme_diagonal':.02}}
+    assert validation_score(improved)<score
+    regressed={**improved,'normal':{'mean_error_px':.51}}
+    assert np.isinf(validation_score(regressed))

@@ -1,0 +1,44 @@
+{
+  "name": "08_doubt_laughter",
+  "pair": "doubt_to_laughter",
+  "anchors": "ends",
+  "schedule": "8_3",
+  "width": 1024,
+  "height": 512,
+  "frames": 129,
+  "seed": 44,
+  "wall_seconds": 14.402950352057815,
+  "video_seconds": 5.375,
+  "wall_seconds_per_video_second": 2.679618670150291,
+  "phase_seconds": {
+    "prompt_encoder": 0.32386550726369023,
+    "image_conditioner": 0.6209035026840866,
+    "stage": 10.54955234657973,
+    "upsampler": 0.14669220987707376,
+    "video_decoder": 1.796893360093236,
+    "audio_decoder": 0.20325347827747464
+  },
+  "phase_calls": {
+    "prompt_encoder": 1,
+    "image_conditioner": 2,
+    "stage": 2,
+    "upsampler": 1,
+    "video_decoder": 1,
+    "audio_decoder": 1
+  },
+  "peak_allocated_gb": 77.549323776,
+  "peak_reserved_gb": 80.490790912,
+  "pipeline_setup_seconds": 0.17575950175523758,
+  "cache_mode": "warm",
+  "prompt_cache_hits": 5,
+  "model_kind": "distilled",
+  "torch": "2.9.1+cu128",
+  "cuda": "12.8",
+  "gpu": "NVIDIA A100-SXM4-80GB",
+  "vendor_commit": "be6d6d0a69d11a0a399c462ed92606692e5f8697",
+  "denoise_updates": {
+    "stage1": 8,
+    "stage2": 3
+  },
+  "first_run_in_process": false
+}

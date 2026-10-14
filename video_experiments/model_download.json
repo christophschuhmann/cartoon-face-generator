@@ -1,0 +1,29 @@
+{
+  "repository": "Lightricks/LTX-2.5",
+  "revision": "49b093a39c19169a8a81721dcc541e07e945232f",
+  "files": [
+    {
+      "file": "diffusion_models/ltx-2.5-22b-distilled-transformer-bf16.safetensors",
+      "bytes": 42018190584
+    },
+    {
+      "file": "text_encoders/gemma4-12b-with-proj-ltx-2.5-bf16.safetensors",
+      "bytes": 26263858182
+    },
+    {
+      "file": "vae/ltx-2.5-video-vae-conv-bf16.safetensors",
+      "bytes": 1452269922
+    },
+    {
+      "file": "vae/ltx-2.5-audio-vae-bf16.safetensors",
+      "bytes": 364866540
+    },
+    {
+      "file": "latent_upscale_models/ltx-2.5-latent-spatial-upscaler-x2-bf16-1.0.safetensors",
+      "bytes": 995778752
+    }
+  ],
+  "download_seconds": 68.79749698424712,
+  "total_bytes": 71094963980,
+  "credentials_saved": false
+}

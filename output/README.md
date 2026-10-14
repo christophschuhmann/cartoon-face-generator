@@ -17,6 +17,8 @@ Dieser Ordner zeigt tatsächliche Ausgaben des implementierten SVG-Generators un
 | [under_eye/](under_eye) | kontinuierliche Kurve-/Falten-Phasen als SVG/PNG |
 | [dataset_previews/](dataset_previews) | Bilder für moderate Augmentationen und extreme Landmark-Verformungen |
 | [detector/](detector) | echte Lernkurven, Testmetriken und Bilder mit Ground Truth/Vorhersagen |
+| [detector_v3/](detector_v3) | neue robuste und normalpräzise Modelle, Auswahlprotokoll, unverändertes Testset und OOD-Vergleiche |
+| [detector_search_v3/](detector_search_v3) | vier vollständige 40-Epochen-Verläufe, Konfigurationen und Audit der zusätzlichen Daten |
 | [editor/browser_test.json](editor/browser_test.json) | automatisierte Editor-Prüfung; keine menschliche Emotionsbewertung |
 
 Die **vollen 560 Vorschauvarianten** gibt es im [Vorschau-ZIP](../docs/previews.md). Die **105.000 Trainingsposen** werden separat in `datasets/` erzeugt und sind hier nicht enthalten. Neue lokale Aufrufe können weitere Ordner wie `interpolations/`, `synthetic_samples/` und `emotions/` anlegen; diese vollständigen Prüfläufe gehören nicht automatisch zum Git-Download.

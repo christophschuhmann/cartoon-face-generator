@@ -1,0 +1,7 @@
+{
+  "training/augmentation.py": "546adac1b4f7f5f2797eed86407b4455ab4ca0aab88f77cf86db559e7bf0d98b",
+  "training/search.py": "5bf5b7d89e9775f91e279fe35567022dbae20c7b71007d923729154890dbc071",
+  "training/extra_variants.py": "4cdb5a98eeb57eb916428632b89b2d1fb3af716223143aec1f2dd8e6a25bb248",
+  "training/model.py": "ddf254d75a80fe4680e93bc1506e418b6d20bf9af11e75cbb57241ae9c1f5859",
+  "training/train.py": "fd98ac44ab4f5626994d527fb68c17dc246523153b8b9fb4268b42f60d108179"
+}

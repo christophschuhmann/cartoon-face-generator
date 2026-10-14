@@ -48,4 +48,16 @@ Das Vorschau-ZIP ist **nicht der 105.000-Pose-Trainingsdatensatz**. Den großen 
 
 Das Webcam-ZIP entpacken und seine [Installationsschritte](../webcam_mapper/README.md) ausführen; Python-Abhängigkeiten müssen einmal installiert werden. Den Detector-Checkpoint beispielsweise unter `output/detector/best.pt` speichern und nach [Trainings-/Inferenzanleitung](../training/README.md) laden.
 
-Alle Downloads liegen im [Release v1.0.0](https://github.com/christophschuhmann/cartoon-face-generator/releases/tag/v1.0.0). Der Source-Code-Download von GitHub enthält diese Release-Assets nicht automatisch.
+Diese ursprünglichen Downloads liegen im [Release v1.0.0](https://github.com/christophschuhmann/cartoon-face-generator/releases/tag/v1.0.0). Der Source-Code-Download von GitHub enthält Release-Assets nicht automatisch.
+
+## Neue Detector-Modelle und LTX-Videos
+
+Im [Release v1.1.0](https://github.com/christophschuhmann/cartoon-face-generator/releases/tag/v1.1.0) liegen zusätzlich:
+
+| Datei | Zweck |
+|---|---|
+| [cartoon_landmarks_robust.pt](https://github.com/christophschuhmann/cartoon-face-generator/releases/download/v1.1.0/cartoon_landmarks_robust.pt) | robust ausgewählter 40-Epochen-Checkpoint; besonders bessere extreme Verformungen |
+| [cartoon_landmarks_precise.pt](https://github.com/christophschuhmann/cartoon-face-generator/releases/download/v1.1.0/cartoon_landmarks_precise.pt) | normalpräzisester Checkpoint; besonders normale prozedurale Gesichter |
+| [ltx25_examples.zip](https://github.com/christophschuhmann/cartoon-face-generator/releases/download/v1.1.0/ltx25_examples.zip) | 16 echte Videotestkonfigurationen und 16 Wiederholungen mit Sprache, Eingaben und Zeitmessungen; etwa 48 MB |
+
+[Detector-Ergebnisse](detector_results.md) erklären die beiden Modelle. [LTX-Anleitung und Grenzen](../video_experiments/README.md) erklären Videoparameter, Zeiten und Qualität. Die [abspielbare Galerie](https://owner-curves-cosmetics-taught.trycloudflare.com/refinement-assets/ltx25/index.html) ist über den bestehenden temporären Cloudflare-Tunnel erreichbar.

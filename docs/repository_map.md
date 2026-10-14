@@ -19,6 +19,7 @@ Die drei wichtigsten Orte sind **`src/cartoon_face/` für den Generator**, **`ou
 | [tests/](../tests) | automatisierte Vertrag-, Geometrie- und Pipeline-Tests | Änderungen prüfen |
 | [training/](../training) | kleiner Cartoon-Landmark-Detector | trainieren oder Cartoon-Bilder vorhersagen |
 | [webcam_mapper/](../webcam_mapper) | CPU-MediaPipe → Cartoon-Avatar | Human-Webcam, Foto oder Video auf das Rig abbilden |
+| [video_experiments/](../video_experiments/README.md) | separate LTX-2.5-Videotests | Emotionswechsel mit Dialog und Stützframes erzeugen und messen |
 | `datasets/` | lokal erzeugte große Shards und Rastercaches | Datensatzproduktion/Training; absichtlich nicht in Git |
 | [pyproject.toml](../pyproject.toml), [uv.lock](../uv.lock) | Python-Paket und aufgelöste Generator-Abhängigkeiten | Installation |
 | [AGENTS.md](../AGENTS.md) | Vorgaben für Coding-Agenten | automatisierte Beiträge |

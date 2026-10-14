@@ -1,0 +1,65 @@
+{
+  "kind": "additional external reference-domain evaluation, not used for checkpoint selection",
+  "source_images": 6,
+  "canvas": [
+    320,
+    192
+  ],
+  "checkpoint_epoch": 40,
+  "per_reference": [
+    {
+      "reference": "smile",
+      "annotated_points": 81,
+      "mean_error_px_320x192": 1.631778637116008,
+      "pck_1pct": 0.9135802469135802,
+      "pck_2pct": 0.9629629629629629,
+      "cpu_inference_median_ms": 8.256003959104419
+    },
+    {
+      "reference": "tense",
+      "annotated_points": 84,
+      "mean_error_px_320x192": 1.6605444729289731,
+      "pck_1pct": 0.9523809523809523,
+      "pck_2pct": 0.9880952380952381,
+      "cpu_inference_median_ms": 6.922965170815587
+    },
+    {
+      "reference": "love",
+      "annotated_points": 85,
+      "mean_error_px_320x192": 1.6805686086736327,
+      "pck_1pct": 0.9176470588235294,
+      "pck_2pct": 1.0,
+      "cpu_inference_median_ms": 6.980421952903271
+    },
+    {
+      "reference": "cheeky",
+      "annotated_points": 78,
+      "mean_error_px_320x192": 1.648764819829563,
+      "pck_1pct": 0.9358974358974359,
+      "pck_2pct": 0.9871794871794872,
+      "cpu_inference_median_ms": 9.1051384806633
+    },
+    {
+      "reference": "tongue",
+      "annotated_points": 89,
+      "mean_error_px_320x192": 1.7414144170068342,
+      "pck_1pct": 0.9438202247191011,
+      "pck_2pct": 1.0,
+      "cpu_inference_median_ms": 9.42474533803761
+    },
+    {
+      "reference": "skeptical",
+      "annotated_points": 85,
+      "mean_error_px_320x192": 1.8376131951780588,
+      "pck_1pct": 0.9529411764705882,
+      "pck_2pct": 1.0,
+      "cpu_inference_median_ms": 9.653311688452959
+    }
+  ],
+  "mean_error_px_mean_of_references": 1.700114025122178,
+  "cpu_inference_median_ms": 9.01342649012804,
+  "cpu_threads": 4,
+  "scope": "Six original drawings of the same identity; rig-fitted labels, not independent human annotations. Synthetic pose families may be trained. Not arbitrary cartoons or real video; MediaPipe is separate.",
+  "original_rasters_used_for_training": false,
+  "synthetic_reference_pose_families_in_training": true
+}

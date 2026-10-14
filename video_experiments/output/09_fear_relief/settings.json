@@ -1,0 +1,49 @@
+{
+  "name": "09_fear_relief",
+  "pair": "fear_to_relief",
+  "anchors": [
+    {
+      "path": "inputs/fear_to_relief/start.png",
+      "frame_idx": 0,
+      "strength": 1.0,
+      "crf": 0
+    },
+    {
+      "path": "inputs/fear_to_relief/middle.png",
+      "frame_idx": 64,
+      "strength": 0.85,
+      "crf": 0
+    },
+    {
+      "path": "inputs/fear_to_relief/end.png",
+      "frame_idx": 128,
+      "strength": 1.0,
+      "crf": 0
+    }
+  ],
+  "schedule": "8_3",
+  "width": 1024,
+  "height": 512,
+  "frames": 129,
+  "seed": 45,
+  "stage1_sigmas": [
+    1.0,
+    0.9937499761581421,
+    0.987500011920929,
+    0.981249988079071,
+    0.9750000238418579,
+    0.909375011920929,
+    0.7250000238418579,
+    0.421875,
+    0.0
+  ],
+  "stage2_sigmas": [
+    0.909375011920929,
+    0.7250000238418579,
+    0.421875,
+    0.0
+  ],
+  "model_kind": "distilled",
+  "lora_strength": null,
+  "model_revision": "49b093a39c19169a8a81721dcc541e07e945232f"
+}

@@ -1,0 +1,21 @@
+{
+  "asr_model": "faster-whisper small, CPU int8",
+  "language": "de",
+  "text": "Meinst du das ernst? Na gut, ich muss lachen.",
+  "expected_dialogue": "Meinst du das ernst? Na gut, ich muss lachen.",
+  "asr_word_error_rate": 0.0,
+  "seconds": 1.5270198518410325,
+  "segments": [
+    {
+      "start": 0.05,
+      "end": 2.05,
+      "text": " Meinst du das ernst?"
+    },
+    {
+      "start": 2.05,
+      "end": 5.05,
+      "text": " Na gut, ich muss lachen."
+    }
+  ],
+  "scope": "ASR can misrecognize short synthetic speech. This is a check, not a certified transcription."
+}

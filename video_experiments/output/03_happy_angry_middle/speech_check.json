@@ -1,0 +1,21 @@
+{
+  "asr_model": "faster-whisper small, CPU int8",
+  "language": "de",
+  "text": "Das ist ja wunderbar! Moment, das ist unfair!",
+  "expected_dialogue": "Das ist ja wunderbar! Moment, das ist unfair!",
+  "asr_word_error_rate": 0.0,
+  "seconds": 1.435903960838914,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 3.16,
+      "text": " Das ist ja wunderbar!"
+    },
+    {
+      "start": 3.16,
+      "end": 5.28,
+      "text": " Moment, das ist unfair!"
+    }
+  ],
+  "scope": "ASR can misrecognize short synthetic speech. This is a check, not a certified transcription."
+}

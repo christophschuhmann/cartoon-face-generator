@@ -1,0 +1,26 @@
+[
+  {
+    "path": "index.html",
+    "status": 200,
+    "bytes": 14359,
+    "sha256": "089b97b170a15f186c593aaac5d30436c69ffb7768cb9c2a20bcd94862f9737e"
+  },
+  {
+    "path": "results.json",
+    "status": 200,
+    "bytes": 484636,
+    "sha256": "294de2aab6cc85aa28880346ae4d5329db2dd8c7486b42a17ffc953a60722f07"
+  },
+  {
+    "path": "output/15_happy_angry_clear_fast/video.mp4",
+    "status": 200,
+    "bytes": 285234,
+    "sha256": "8fe374091f12e3ab66c7365e6bbd88f9667b9d9fecad747a21e0c0047297f2ef"
+  },
+  {
+    "path": "ltx25_examples.zip",
+    "status": 200,
+    "bytes": 47653364,
+    "sha256": "8cc5fb4058521a2a59ebc41fe0dd7f1350a21e12c76ab7bcba647fcd08c6c3ca"
+  }
+]

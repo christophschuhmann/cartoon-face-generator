@@ -1,0 +1,17 @@
+{
+  "repository": "Lightricks/LTX-2.5",
+  "revision": "49b093a39c19169a8a81721dcc541e07e945232f",
+  "files": [
+    {
+      "file": "diffusion_models/ltx-2.5-22b-dev-transformer-bf16.safetensors",
+      "bytes": 42018190584
+    },
+    {
+      "file": "loras/ltx-2.5-22b-distilled-lora-450-bf16.safetensors",
+      "bytes": 8899889568
+    }
+  ],
+  "download_seconds": 64.87735653202981,
+  "total_bytes": 50918080152,
+  "credentials_saved": false
+}

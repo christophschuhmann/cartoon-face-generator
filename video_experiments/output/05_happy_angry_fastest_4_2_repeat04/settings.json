@@ -1,0 +1,45 @@
+{
+  "name": "05_happy_angry_fastest_4_2_repeat04",
+  "pair": "happy_to_angry",
+  "anchors": [
+    {
+      "path": "inputs/happy_to_angry/start.png",
+      "frame_idx": 0,
+      "strength": 1.0,
+      "crf": 0
+    },
+    {
+      "path": "inputs/happy_to_angry/middle.png",
+      "frame_idx": 64,
+      "strength": 0.85,
+      "crf": 0
+    },
+    {
+      "path": "inputs/happy_to_angry/end.png",
+      "frame_idx": 128,
+      "strength": 1.0,
+      "crf": 0
+    }
+  ],
+  "schedule": "4_2",
+  "width": 1024,
+  "height": 512,
+  "frames": 129,
+  "seed": 42,
+  "repeat_index": 4,
+  "stage1_sigmas": [
+    1.0,
+    0.981249988079071,
+    0.909375011920929,
+    0.421875,
+    0.0
+  ],
+  "stage2_sigmas": [
+    0.909375011920929,
+    0.421875,
+    0.0
+  ],
+  "model_kind": "distilled",
+  "lora_strength": null,
+  "model_revision": "49b093a39c19169a8a81721dcc541e07e945232f"
+}

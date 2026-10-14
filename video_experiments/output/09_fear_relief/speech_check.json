@@ -1,0 +1,16 @@
+{
+  "asr_model": "faster-whisper small, CPU int8",
+  "language": "de",
+  "text": "Oh, was war das? Puh, alles wieder gut.",
+  "expected_dialogue": "Oh, was war das? Puh, alles wieder gut.",
+  "asr_word_error_rate": 0.0,
+  "seconds": 1.4097763961181045,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 5.36,
+      "text": " Oh, was war das? Puh, alles wieder gut."
+    }
+  ],
+  "scope": "ASR can misrecognize short synthetic speech. This is a check, not a certified transcription."
+}
