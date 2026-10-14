@@ -1,0 +1,13 @@
+{
+  "input": "Headless Chromium fake camera using repeated public-domain astronaut photograph; not a live webcam",
+  "start_track_stop": true,
+  "calibration_completed": true,
+  "save_pose_has_101_landmarks": true,
+  "camera_tracks_released": true,
+  "reset_calibration": true,
+  "javascript_errors": [],
+  "successful_frame_posts": 11,
+  "active_status": "Face tracked \u00b7 CPU 30.77 ms \u00b7 SVG 89.54 ms",
+  "calibrated_status": "Face tracked \u00b7 calibrated \u00b7 CPU 31.66 ms \u00b7 SVG 93.67 ms",
+  "screenshot": "/home/deployer/laion/face/webcam_mapper/output/verification/browser_active.png"
+}

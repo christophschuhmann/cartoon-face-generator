@@ -1,0 +1,27 @@
+{
+  "passed": true,
+  "errors": [],
+  "checks": [
+    "load",
+    "slider",
+    "drag",
+    "variant",
+    "overlay",
+    "JSON export",
+    "SVG export",
+    "PNG export",
+    "legacy emotion",
+    "reset",
+    "40-category archetype",
+    "seeded variation",
+    "mixture",
+    "40-card gallery",
+    "hidden-target review export",
+    "review sample switching",
+    "60-card social gallery",
+    "family and text filters",
+    "gallery-to-editor social load",
+    "social seeded variation",
+    "social mixture"
+  ]
+}

@@ -1,0 +1,1424 @@
+{
+  "catalog_id": "cartoon_social_60_v1",
+  "recipe_version": "1.1",
+  "category_count": 60,
+  "scope": "Authored social/performance expressions, independent of the published EmoNet taxonomy",
+  "profiles": [
+    {
+      "id": 1,
+      "slug": "knowing_wink",
+      "label": "Zwinkergruß",
+      "label_de": "Zwinkergruß",
+      "family": "playful",
+      "base_emotion": "pride",
+      "actions": {
+        "smile": 0.62,
+        "mouth_asym": 0.3,
+        "brow_asym": 0.3
+      },
+      "options": {},
+      "constraints": {
+        "closed_eyes": [
+          "left"
+        ]
+      },
+      "visual_cues_de": "Ein freundliches, wissendes Zwinkern als kurzer Gruß.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false
+    },
+    {
+      "id": 2,
+      "slug": "double_wink",
+      "label": "Lachender Augenschluss",
+      "label_de": "Lachender Augenschluss",
+      "family": "playful",
+      "base_emotion": "contentment",
+      "actions": {
+        "smile": 0.82,
+        "lid_curve": 0.95,
+        "mouth_width": 1.05
+      },
+      "options": {},
+      "constraints": {
+        "closed_eyes": [
+          "left",
+          "right"
+        ]
+      },
+      "visual_cues_de": "Beide Augen lächelnd schließen: ein stilles herzliches Lachen.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false
+    },
+    {
+      "id": 3,
+      "slug": "tongue_tease",
+      "label": "Frech die Zunge zeigen",
+      "label_de": "Frech die Zunge zeigen",
+      "family": "playful",
+      "base_emotion": "teasing",
+      "actions": {
+        "eye_open": 1.05,
+        "eye_asym": 0.12,
+        "mouth_asym": 0.38,
+        "smile": 0.82
+      },
+      "options": {
+        "tongue": "out"
+      },
+      "constraints": {},
+      "visual_cues_de": "Beide Augen bleiben offen; kleine freche Zunge und schiefes Grinsen.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false
+    },
+    {
+      "id": 4,
+      "slug": "raspberry",
+      "label": "Spielerisch prusten",
+      "label_de": "Spielerisch prusten",
+      "family": "playful",
+      "base_emotion": "sourness",
+      "actions": {
+        "eye_open": 0.8,
+        "eye_asym": 0.1,
+        "mouth_width": 0.56,
+        "mouth_open": 0.16,
+        "mouth_asym": 0.15,
+        "nose_lift": 0.1
+      },
+      "options": {
+        "mouth": "dark",
+        "tongue": "out",
+        "under_eye": "hatching"
+      },
+      "constraints": {},
+      "visual_cues_de": "Schmaler gespitzter Mund mit Zunge: ein sanftes, albernes Prusten.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false
+    },
+    {
+      "id": 5,
+      "slug": "mischievous_side_eye",
+      "label": "Neckischer Seitenblick",
+      "label_de": "Neckischer Seitenblick",
+      "family": "playful",
+      "base_emotion": "malice",
+      "actions": {
+        "frown": 0.38,
+        "brow_inner": 0.1,
+        "eye_open": 0.65,
+        "gaze_x": -0.85,
+        "smile": 0.64,
+        "mouth_width": 1.08,
+        "mouth_asym": 0.58
+      },
+      "options": {
+        "under_eye": "continuous"
+      },
+      "constraints": {
+        "gaze_x_max": -0.55
+      },
+      "visual_cues_de": "Schalkhafter Seitenblick, ein etwas höherer Mundwinkel.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false
+    },
+    {
+      "id": 6,
+      "slug": "mock_scolding",
+      "label": "Sanft spielerisch ausschimpfen",
+      "label_de": "Sanft spielerisch ausschimpfen",
+      "family": "playful",
+      "base_emotion": "anger",
+      "actions": {
+        "frown": 0.6,
+        "brow_inner": -0.12,
+        "brow_asym": 0.3,
+        "eye_open": 0.86,
+        "mouth_width": 0.92,
+        "smile": -0.24,
+        "mouth_asym": 0.42,
+        "mouth_open": 0.16
+      },
+      "options": {},
+      "constraints": {},
+      "visual_cues_de": "Gespielte Strenge mit wachem weichem Blick und kleiner Mundasymmetrie.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false
+    },
+    {
+      "id": 7,
+      "slug": "gentle_challenge",
+      "label": "Na, traust du dich?",
+      "label_de": "Na, traust du dich?",
+      "family": "playful",
+      "base_emotion": "doubt",
+      "actions": {
+        "brow_asym": 0.78,
+        "eye_asym": 0.22,
+        "gaze_x": 0.35,
+        "smile": 0.45,
+        "mouth_asym": 0.55,
+        "mouth_width": 0.9
+      },
+      "options": {},
+      "constraints": {},
+      "visual_cues_de": "Eine fragende Braue und ein ermutigend herausforderndes Lächeln.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false
+    },
+    {
+      "id": 8,
+      "slug": "playful_eye_roll",
+      "label": "Spielerisch die Augen verdrehen",
+      "label_de": "Spielerisch die Augen verdrehen",
+      "family": "playful",
+      "base_emotion": "impatience",
+      "actions": {
+        "frown": 0.15,
+        "brow_asym": 0.2,
+        "eye_open": 0.96,
+        "gaze_x": 0.1,
+        "gaze_y": -1.0,
+        "smile": 0.3,
+        "mouth_asym": 0.5
+      },
+      "options": {
+        "under_eye": "continuous"
+      },
+      "constraints": {
+        "gaze_y_max": -0.78
+      },
+      "visual_cues_de": "Augen nach oben, ein nachsichtiges schiefes Lächeln: ach, du wieder.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false
+    },
+    {
+      "id": 9,
+      "slug": "mock_monster",
+      "label": "Buh, ich bin ein nettes Monster",
+      "label_de": "Buh, ich bin ein nettes Monster",
+      "family": "playful",
+      "base_emotion": "malice",
+      "actions": {
+        "frown": 0.62,
+        "brow_inner": -0.2,
+        "brow_asym": 0.18,
+        "eye_open": 1.24,
+        "pupil_scale": 0.9,
+        "mouth_width": 1.18,
+        "smile": 0.7,
+        "mouth_open": 0.62,
+        "mouth_asym": 0.2
+      },
+      "options": {
+        "mouth": "dark",
+        "tongue": "inside"
+      },
+      "constraints": {},
+      "visual_cues_de": "Großer gespielter Monster-Mund und überzeichnete Brauen, freundlicher Blick.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false
+    },
+    {
+      "id": 10,
+      "slug": "innocent_after_mischief",
+      "label": "Ich war das ganz bestimmt nicht",
+      "label_de": "Ich war das ganz bestimmt nicht",
+      "family": "playful",
+      "base_emotion": "hope",
+      "actions": {
+        "brow_inner": 0.72,
+        "eye_open": 1.14,
+        "gaze_x": 0.62,
+        "gaze_y": -0.32,
+        "mouth_width": 0.58,
+        "smile": 0.2,
+        "mouth_asym": 0.24
+      },
+      "options": {},
+      "constraints": {},
+      "visual_cues_de": "Unschuldiger großer Blick nach oben und ein winziges verräterisches Lächeln.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false
+    },
+    {
+      "id": 11,
+      "slug": "warm_greeting",
+      "label": "Herzliche Begrüßung",
+      "label_de": "Herzliche Begrüßung",
+      "family": "welcoming",
+      "base_emotion": "affection",
+      "actions": {
+        "eye_open": 1.05,
+        "gaze_x": 0.0,
+        "pupil_scale": 1.06,
+        "smile": 0.88,
+        "mouth_width": 1.2,
+        "mouth_open": 0.2
+      },
+      "options": {
+        "mouth": "dark"
+      },
+      "constraints": {},
+      "visual_cues_de": "Offener direkter Blick und ein freudig geöffnetes Begrüßungslächeln.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false
+    },
+    {
+      "id": 12,
+      "slug": "encouraging",
+      "label": "Du schaffst das",
+      "label_de": "Du schaffst das",
+      "family": "welcoming",
+      "base_emotion": "hope",
+      "actions": {
+        "gaze_y": 0.0,
+        "eye_open": 0.98,
+        "brow_inner": 0.44,
+        "smile": 0.74,
+        "mouth_width": 1.12,
+        "mouth_asym": 0.12
+      },
+      "options": {},
+      "constraints": {},
+      "visual_cues_de": "Wacher direkter Blick und ein breites, zuversichtliches Lächeln.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false
+    },
+    {
+      "id": 13,
+      "slug": "reassuring",
+      "label": "Alles wird gut",
+      "label_de": "Alles wird gut",
+      "family": "welcoming",
+      "base_emotion": "gratitude",
+      "actions": {
+        "eye_open": 0.63,
+        "brow_inner": 0.8,
+        "smile": 0.52,
+        "mouth_width": 0.86,
+        "gaze_x": 0.0,
+        "gaze_y": 0.08
+      },
+      "options": {
+        "under_eye": "continuous"
+      },
+      "constraints": {},
+      "visual_cues_de": "Weiche innere Brauen und ein ruhiges beruhigendes Lächeln.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false
+    },
+    {
+      "id": 14,
+      "slug": "attentive_listening",
+      "label": "Aufmerksam zuhören",
+      "label_de": "Aufmerksam zuhören",
+      "family": "welcoming",
+      "base_emotion": "interest",
+      "actions": {
+        "eye_open": 1.08,
+        "brow_inner": 0.38,
+        "gaze_x": 0.35,
+        "smile": 0.08,
+        "mouth_width": 0.55,
+        "brow_asym": 0.14
+      },
+      "options": {},
+      "constraints": {},
+      "visual_cues_de": "Wache Augen mit leichtem Seitenblick, kleiner ruhiger Mund.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false
+    },
+    {
+      "id": 15,
+      "slug": "curious_question",
+      "label": "Ehrlich neugierig nachfragen",
+      "label_de": "Ehrlich neugierig nachfragen",
+      "family": "welcoming",
+      "base_emotion": "confusion",
+      "actions": {
+        "brow_asym": 0.6,
+        "eye_open": 1.08,
+        "eye_asym": 0.14,
+        "gaze_x": 0.2,
+        "mouth_width": 0.49,
+        "mouth_open": 0.16,
+        "mouth_asym": 0.18
+      },
+      "options": {
+        "mouth": "round"
+      },
+      "constraints": {},
+      "visual_cues_de": "Eine erhöhte Braue und ein kleines fragendes O.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false
+    },
+    {
+      "id": 16,
+      "slug": "pleased_agreement",
+      "label": "Freudig zustimmen",
+      "label_de": "Freudig zustimmen",
+      "family": "welcoming",
+      "base_emotion": "contentment",
+      "actions": {
+        "eye_open": 0.78,
+        "smile": 0.76,
+        "mouth_width": 1.05,
+        "brow_raise": 0.18,
+        "mouth_asym": 0.08
+      },
+      "options": {},
+      "constraints": {},
+      "visual_cues_de": "Ein klares freundliches Ja-Gesicht mit entspanntem Blick.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false
+    },
+    {
+      "id": 17,
+      "slug": "doubtful_agreement",
+      "label": "Na gut, wenn du meinst",
+      "label_de": "Na gut, wenn du meinst",
+      "family": "welcoming",
+      "base_emotion": "doubt",
+      "actions": {
+        "eye_open": 0.82,
+        "eye_asym": 0.3,
+        "smile": 0.16,
+        "mouth_asym": 0.48,
+        "gaze_x": -0.35,
+        "mouth_width": 0.87
+      },
+      "options": {},
+      "constraints": {},
+      "visual_cues_de": "Skeptische Braue, kleiner halber Smile und ein vorsichtiger Seitenblick.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false
+    },
+    {
+      "id": 18,
+      "slug": "polite_disagreement",
+      "label": "Freundlich widersprechen",
+      "label_de": "Freundlich widersprechen",
+      "family": "welcoming",
+      "base_emotion": "concentration",
+      "actions": {
+        "frown": 0.28,
+        "brow_inner": 0.22,
+        "eye_open": 0.96,
+        "smile": -0.18,
+        "mouth_width": 0.84,
+        "mouth_asym": 0.18
+      },
+      "options": {},
+      "constraints": {},
+      "visual_cues_de": "Klarer direkter Blick und eine sanft gespannte schmale Mundlinie.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false
+    },
+    {
+      "id": 19,
+      "slug": "not_impressed",
+      "label": "Charmant unbeeindruckt",
+      "label_de": "Charmant unbeeindruckt",
+      "family": "welcoming",
+      "base_emotion": "numbness",
+      "actions": {
+        "eye_open": 0.43,
+        "brow_asym": 0.22,
+        "smile": 0.07,
+        "mouth_asym": 0.4,
+        "mouth_width": 0.78,
+        "gaze_x": 0.25
+      },
+      "options": {
+        "under_eye": "continuous"
+      },
+      "constraints": {},
+      "visual_cues_de": "Schwere Lider und ein winziger schiefer Mundwinkel: aha, wirklich?",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false
+    },
+    {
+      "id": 20,
+      "slug": "skeptical_challenge",
+      "label": "Wirklich jetzt?",
+      "label_de": "Wirklich jetzt?",
+      "family": "welcoming",
+      "base_emotion": "doubt",
+      "actions": {
+        "brow_asym": 1.03,
+        "eye_asym": 0.48,
+        "gaze_x": 0.0,
+        "smile": -0.12,
+        "mouth_asym": 0.54,
+        "mouth_width": 0.7
+      },
+      "options": {},
+      "constraints": {},
+      "visual_cues_de": "Deutlich ungleiche Brauen, prüfender Blick und kleiner verzogener Mund.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false
+    },
+    {
+      "id": 21,
+      "slug": "sulking",
+      "label": "Sanft eingeschnappt",
+      "label_de": "Sanft eingeschnappt",
+      "family": "hurt",
+      "base_emotion": "disappointment",
+      "actions": {
+        "eye_open": 0.55,
+        "gaze_x": -0.66,
+        "brow_inner": 0.55,
+        "smile": -0.55,
+        "mouth_width": 0.6,
+        "mouth_asym": 0.12
+      },
+      "options": {
+        "under_eye": "continuous"
+      },
+      "constraints": {
+        "gaze_x_max": -0.4
+      },
+      "visual_cues_de": "Ausweichender Blick und kleines Schmollmäulchen, weich statt feindselig.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false
+    },
+    {
+      "id": 22,
+      "slug": "offended",
+      "label": "Ein bisschen beleidigt",
+      "label_de": "Ein bisschen beleidigt",
+      "family": "hurt",
+      "base_emotion": "bitterness",
+      "actions": {
+        "frown": 0.35,
+        "brow_inner": 0.45,
+        "eye_open": 0.76,
+        "gaze_x": 0.72,
+        "smile": -0.44,
+        "mouth_asym": -0.46,
+        "mouth_width": 0.78
+      },
+      "options": {
+        "under_eye": "continuous"
+      },
+      "constraints": {
+        "gaze_x_min": 0.45
+      },
+      "visual_cues_de": "Verletzter Seitenblick und ein angespannt schiefer abwärts gezogener Mund.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false
+    },
+    {
+      "id": 23,
+      "slug": "pouty_protest",
+      "label": "Schmollend protestieren",
+      "label_de": "Schmollend protestieren",
+      "family": "hurt",
+      "base_emotion": "sourness",
+      "actions": {
+        "eye_open": 0.94,
+        "eye_asym": 0.05,
+        "brow_inner": 0.65,
+        "frown": 0.18,
+        "nose_lift": 0.0,
+        "mouth_width": 0.55,
+        "mouth_open": 0.2,
+        "mouth_asym": 0.1
+      },
+      "options": {
+        "mouth": "pucker",
+        "under_eye": "continuous"
+      },
+      "constraints": {},
+      "visual_cues_de": "Große bittende Augen und überzeichnete kleine Schmoll-Lippen.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false
+    },
+    {
+      "id": 24,
+      "slug": "feeling_left_out",
+      "label": "Ich möchte auch dabei sein",
+      "label_de": "Ich möchte auch dabei sein",
+      "family": "hurt",
+      "base_emotion": "longing",
+      "actions": {
+        "eye_open": 0.94,
+        "gaze_x": -0.65,
+        "gaze_y": 0.18,
+        "brow_inner": 0.86,
+        "smile": -0.48,
+        "mouth_width": 0.65
+      },
+      "options": {},
+      "constraints": {},
+      "visual_cues_de": "Bittender seitlicher Blick und zurückhaltender trauriger Mund.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false
+    },
+    {
+      "id": 25,
+      "slug": "forgiving",
+      "label": "Schon gut, ich verzeihe dir",
+      "label_de": "Schon gut, ich verzeihe dir",
+      "family": "hurt",
+      "base_emotion": "relief",
+      "actions": {
+        "eye_open": 0.57,
+        "brow_inner": 0.54,
+        "smile": 0.57,
+        "mouth_width": 0.88,
+        "mouth_open": 0.0,
+        "gaze_x": 0.18
+      },
+      "options": {
+        "mouth": "closed"
+      },
+      "constraints": {},
+      "visual_cues_de": "Nachsichtige enge Augen und ein gelöstes kleines Lächeln.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false
+    },
+    {
+      "id": 26,
+      "slug": "apologetic_grimace",
+      "label": "Ups, das tut mir leid",
+      "label_de": "Ups, das tut mir leid",
+      "family": "hurt",
+      "base_emotion": "embarrassment",
+      "actions": {
+        "brow_inner": 0.82,
+        "eye_open": 0.88,
+        "gaze_x": -0.48,
+        "smile": -0.08,
+        "mouth_width": 0.94,
+        "mouth_open": 0.15,
+        "mouth_tension": 0.44,
+        "mouth_asym": 0.3
+      },
+      "options": {
+        "mouth": "teeth"
+      },
+      "constraints": {},
+      "visual_cues_de": "Besorgte Brauen, ausweichender Blick und kleines verlegenes Zähnezeigen.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false
+    },
+    {
+      "id": 27,
+      "slug": "embarrassed_cover_smile",
+      "label": "Peinlichkeit weglächeln",
+      "label_de": "Peinlichkeit weglächeln",
+      "family": "hurt",
+      "base_emotion": "embarrassment",
+      "actions": {
+        "brow_asym": 0.38,
+        "eye_open": 0.66,
+        "smile": 0.6,
+        "mouth_width": 1.09,
+        "mouth_asym": 0.55,
+        "gaze_x": 0.66
+      },
+      "options": {},
+      "constraints": {},
+      "visual_cues_de": "Ein zu großes schiefes Verlegenheitslächeln mit seitlichem Blick.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false
+    },
+    {
+      "id": 28,
+      "slug": "caught_in_act",
+      "label": "Beim Schabernack erwischt",
+      "label_de": "Beim Schabernack erwischt",
+      "family": "hurt",
+      "base_emotion": "fear",
+      "actions": {
+        "eye_open": 1.2,
+        "brow_asym": 0.34,
+        "gaze_x": -0.68,
+        "pupil_scale": 0.87,
+        "mouth_width": 0.83,
+        "mouth_open": 0.18,
+        "smile": 0.12,
+        "mouth_asym": 0.4
+      },
+      "options": {},
+      "constraints": {},
+      "visual_cues_de": "Große seitlich ausweichende Augen und ein kleines ertapptes Grinsen.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false
+    },
+    {
+      "id": 29,
+      "slug": "awkward_laugh",
+      "label": "Unsicher mitlachen",
+      "label_de": "Unsicher mitlachen",
+      "family": "hurt",
+      "base_emotion": "amusement",
+      "actions": {
+        "eye_open": 0.79,
+        "brow_inner": 0.68,
+        "brow_asym": 0.35,
+        "mouth_width": 1.0,
+        "mouth_open": 0.31,
+        "smile": 0.6,
+        "mouth_asym": 0.55,
+        "gaze_x": -0.35
+      },
+      "options": {
+        "tongue": "none",
+        "under_eye": "hatching"
+      },
+      "constraints": {},
+      "visual_cues_de": "Offenes asymmetrisches Lachen mit besorgten statt ausgelassenen Brauen.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false
+    },
+    {
+      "id": 30,
+      "slug": "reluctant_smile",
+      "label": "Widerwillig doch lächeln",
+      "label_de": "Widerwillig doch lächeln",
+      "family": "hurt",
+      "base_emotion": "bitterness",
+      "actions": {
+        "frown": 0.24,
+        "eye_open": 0.59,
+        "brow_asym": 0.25,
+        "smile": 0.39,
+        "mouth_width": 0.84,
+        "mouth_asym": 0.72,
+        "gaze_x": -0.28
+      },
+      "options": {
+        "under_eye": "continuous"
+      },
+      "constraints": {},
+      "visual_cues_de": "Ein einzelner steigender Mundwinkel trotz zurückhaltendem Blick.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false
+    },
+    {
+      "id": 31,
+      "slug": "comedic_shock",
+      "label": "Komödiantisch erschrocken",
+      "label_de": "Komödiantisch erschrocken",
+      "family": "theatrical",
+      "base_emotion": "surprise",
+      "actions": {
+        "eye_asym": 0.15,
+        "brow_asym": 0.38,
+        "mouth_width": 0.6,
+        "mouth_open": 0.76,
+        "mouth_asym": 0.34,
+        "pupil_scale": 0.79
+      },
+      "options": {},
+      "constraints": {},
+      "visual_cues_de": "Weite ungleiche Augen und ein kleines schiefes Schreck-O.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false
+    },
+    {
+      "id": 32,
+      "slug": "exaggerated_disbelief",
+      "label": "Das glaub ich jetzt nicht",
+      "label_de": "Das glaub ich jetzt nicht",
+      "family": "theatrical",
+      "base_emotion": "confusion",
+      "actions": {
+        "brow_asym": 0.85,
+        "eye_open": 1.3,
+        "eye_asym": 0.16,
+        "gaze_y": -0.25,
+        "mouth_width": 0.8,
+        "mouth_open": 0.4,
+        "mouth_asym": 0.42
+      },
+      "options": {
+        "mouth": "round"
+      },
+      "constraints": {},
+      "visual_cues_de": "Überzeichnete hohe Braue und offener ungläubiger Mund.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false
+    },
+    {
+      "id": 33,
+      "slug": "mock_outrage",
+      "label": "Gespielt empört",
+      "label_de": "Gespielt empört",
+      "family": "theatrical",
+      "base_emotion": "anger",
+      "actions": {
+        "frown": 0.58,
+        "brow_inner": 0.05,
+        "brow_asym": 0.38,
+        "eye_open": 1.12,
+        "mouth_width": 1.0,
+        "mouth_open": 0.45,
+        "smile": -0.24,
+        "mouth_asym": 0.34
+      },
+      "options": {
+        "mouth": "dark"
+      },
+      "constraints": {},
+      "visual_cues_de": "Wache empörte Augen und eine offen gespielte Beschwerde.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false
+    },
+    {
+      "id": 34,
+      "slug": "told_you_so",
+      "label": "Hab ich dir doch gesagt",
+      "label_de": "Hab ich dir doch gesagt",
+      "family": "theatrical",
+      "base_emotion": "pride",
+      "actions": {
+        "brow_asym": 0.58,
+        "eye_open": 0.63,
+        "gaze_x": 0.42,
+        "smile": 0.64,
+        "mouth_asym": 0.72,
+        "mouth_width": 1.18
+      },
+      "options": {},
+      "constraints": {},
+      "visual_cues_de": "Verschmitzter Seitenblick und deutlich einseitiges Siegerlächeln.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false
+    },
+    {
+      "id": 35,
+      "slug": "smug_but_soft",
+      "label": "Charmant selbstzufrieden",
+      "label_de": "Charmant selbstzufrieden",
+      "family": "theatrical",
+      "base_emotion": "contempt",
+      "actions": {
+        "frown": 0.0,
+        "brow_asym": 0.3,
+        "eye_open": 0.68,
+        "smile": 0.38,
+        "mouth_asym": 0.68,
+        "mouth_width": 1.0
+      },
+      "options": {},
+      "constraints": {},
+      "visual_cues_de": "Ein hochgezogener Mundwinkel mit weichem statt verächtlichem Blick.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false
+    },
+    {
+      "id": 36,
+      "slug": "sheepish_pride",
+      "label": "Ein bisschen stolz, ein bisschen verlegen",
+      "label_de": "Ein bisschen stolz, ein bisschen verlegen",
+      "family": "theatrical",
+      "base_emotion": "pride",
+      "actions": {
+        "brow_inner": 0.62,
+        "brow_asym": 0.18,
+        "gaze_x": -0.54,
+        "gaze_y": 0.27,
+        "smile": 0.53,
+        "mouth_width": 0.86,
+        "mouth_asym": 0.38
+      },
+      "options": {
+        "under_eye": "hatching"
+      },
+      "constraints": {},
+      "visual_cues_de": "Bescheiden ausweichender Blick und ein kleines stolzes Grinsen.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false
+    },
+    {
+      "id": 37,
+      "slug": "pretend_crying",
+      "label": "Theatralisch schmollen und heulen",
+      "label_de": "Theatralisch schmollen und heulen",
+      "family": "theatrical",
+      "base_emotion": "sadness",
+      "actions": {
+        "brow_inner": 1.05,
+        "lid_curve": -0.55,
+        "mouth_width": 0.89,
+        "mouth_open": 0.46,
+        "smile": -0.78,
+        "mouth_asym": 0.18
+      },
+      "options": {
+        "mouth": "dark",
+        "under_eye": "hatching"
+      },
+      "constraints": {
+        "closed_eyes": [
+          "left",
+          "right"
+        ]
+      },
+      "visual_cues_de": "Geschlossene Trauerlider und überzeichnete weiche Heulgrimasse ohne Tränen-Sondertopologie.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false
+    },
+    {
+      "id": 38,
+      "slug": "dramatic_sigh",
+      "label": "Ach, dieses Drama",
+      "label_de": "Ach, dieses Drama",
+      "family": "theatrical",
+      "base_emotion": "relief",
+      "actions": {
+        "brow_asym": 0.32,
+        "eye_open": 0.35,
+        "gaze_y": -0.25,
+        "mouth_width": 0.58,
+        "mouth_open": 0.28,
+        "mouth_asym": 0.2
+      },
+      "options": {},
+      "constraints": {},
+      "visual_cues_de": "Schwere nachsichtige Lider und ein leicht schiefer Ausatem-Mund.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false
+    },
+    {
+      "id": 39,
+      "slug": "startled_then_amused",
+      "label": "Erschrocken und schon am Lachen",
+      "label_de": "Erschrocken und schon am Lachen",
+      "family": "theatrical",
+      "base_emotion": "elation",
+      "actions": {
+        "brow_raise": 0.84,
+        "eye_open": 1.27,
+        "pupil_scale": 0.9,
+        "mouth_width": 1.14,
+        "mouth_open": 0.47,
+        "smile": 0.73,
+        "mouth_asym": 0.28
+      },
+      "options": {},
+      "constraints": {},
+      "visual_cues_de": "Weite Schreckaugen mit einem bereits entstehenden offenen Lachen.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false
+    },
+    {
+      "id": 40,
+      "slug": "expectant_pause",
+      "label": "Na, was kommt jetzt?",
+      "label_de": "Na, was kommt jetzt?",
+      "family": "theatrical",
+      "base_emotion": "interest",
+      "actions": {
+        "brow_asym": 0.36,
+        "eye_open": 1.02,
+        "gaze_y": -0.1,
+        "mouth_width": 0.48,
+        "smile": 0.13,
+        "mouth_open": 0.07
+      },
+      "options": {
+        "mouth": "pucker"
+      },
+      "constraints": {},
+      "visual_cues_de": "Abwartende hohe Braue und kleiner gespitzter Mund.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false
+    },
+    {
+      "id": 41,
+      "slug": "cross_eyed_goof",
+      "label": "Albern schielen",
+      "label_de": "Albern schielen",
+      "family": "goofy",
+      "base_emotion": "amusement",
+      "actions": {
+        "eye_open": 1.15,
+        "eye_asym": 0.16,
+        "pupil_scale": 0.93,
+        "mouth_width": 0.85,
+        "mouth_open": 0.35,
+        "smile": 0.72,
+        "gaze_x": 0.0,
+        "gaze_convergence": 0.68
+      },
+      "options": {
+        "tongue": "out"
+      },
+      "constraints": {},
+      "visual_cues_de": "Beide Pupillen einwärts, kleine Zunge und ausgelassenes Grinsen.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false
+    },
+    {
+      "id": 42,
+      "slug": "wandering_eyes",
+      "label": "Alberner auseinanderlaufender Blick",
+      "label_de": "Alberner auseinanderlaufender Blick",
+      "family": "goofy",
+      "base_emotion": "confusion",
+      "actions": {
+        "eye_open": 1.13,
+        "brow_asym": 0.54,
+        "mouth_width": 0.66,
+        "mouth_open": 0.22,
+        "smile": 0.25,
+        "gaze_convergence": -0.66
+      },
+      "options": {
+        "tongue": "inside"
+      },
+      "constraints": {},
+      "visual_cues_de": "Pupillen bewusst auseinander, freundliche verwirrte Mundöffnung.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false
+    },
+    {
+      "id": 43,
+      "slug": "lopsided_gasp",
+      "label": "Schiefer Cartoon-Japs",
+      "label_de": "Schiefer Cartoon-Japs",
+      "family": "goofy",
+      "base_emotion": "surprise",
+      "actions": {
+        "eye_open": 1.28,
+        "eye_asym": 0.46,
+        "brow_asym": 0.67,
+        "mouth_width": 0.67,
+        "mouth_open": 0.69,
+        "mouth_asym": 0.82
+      },
+      "options": {},
+      "constraints": {},
+      "visual_cues_de": "Unterschiedlich große Augen und schiefes O als überzeichneter Japs.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false
+    },
+    {
+      "id": 44,
+      "slug": "sleepy_wink",
+      "label": "Müde noch schnell zwinkern",
+      "label_de": "Müde noch schnell zwinkern",
+      "family": "goofy",
+      "base_emotion": "fatigue",
+      "actions": {
+        "eye_open": 0.38,
+        "mouth_width": 0.68,
+        "mouth_open": 0.0,
+        "smile": 0.41,
+        "lid_curve": 0.47,
+        "mouth_asym": 0.36
+      },
+      "options": {
+        "mouth": "closed"
+      },
+      "constraints": {
+        "closed_eyes": [
+          "left"
+        ]
+      },
+      "visual_cues_de": "Ein Auge geschlossen, das andere schläfrig und ein warmer kleiner Smile.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false
+    },
+    {
+      "id": 45,
+      "slug": "one_eye_squeeze",
+      "label": "Ein Auge lustig zukneifen",
+      "label_de": "Ein Auge lustig zukneifen",
+      "family": "goofy",
+      "base_emotion": "contentment",
+      "actions": {
+        "eye_open": 1.04,
+        "mouth_width": 0.87,
+        "mouth_open": 0.16,
+        "smile": 0.58,
+        "mouth_asym": -0.42,
+        "brow_asym": -0.22
+      },
+      "options": {
+        "mouth": "dark"
+      },
+      "constraints": {
+        "closed_eyes": [
+          "right"
+        ]
+      },
+      "visual_cues_de": "Rechtes Auge zu, linkes wach; die Asymmetrie läuft bewusst andersherum.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false
+    },
+    {
+      "id": 46,
+      "slug": "stretchy_grin",
+      "label": "Überbreit albern grinsen",
+      "label_de": "Überbreit albern grinsen",
+      "family": "goofy",
+      "base_emotion": "triumph",
+      "actions": {
+        "frown": 0.0,
+        "brow_inner": 0.1,
+        "eye_open": 0.8,
+        "mouth_width": 1.5,
+        "mouth_open": 0.36,
+        "smile": 0.97,
+        "mouth_asym": 0.38
+      },
+      "options": {
+        "tongue": "none"
+      },
+      "constraints": {},
+      "visual_cues_de": "Ein sehr breites weißes Grinsen mit weichen wachen Augen.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false
+    },
+    {
+      "id": 47,
+      "slug": "tiny_o_big_eyes",
+      "label": "Riesenaugen, winziges Oh",
+      "label_de": "Riesenaugen, winziges Oh",
+      "family": "goofy",
+      "base_emotion": "surprise",
+      "actions": {
+        "eye_open": 1.48,
+        "pupil_scale": 1.09,
+        "mouth_width": 0.35,
+        "mouth_open": 0.23,
+        "mouth_asym": 0.05
+      },
+      "options": {},
+      "constraints": {},
+      "visual_cues_de": "Große glänzende Augen und ein bewusst winziger runder Mund.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false
+    },
+    {
+      "id": 48,
+      "slug": "puzzled_pout",
+      "label": "Verwirrt die Lippen spitzen",
+      "label_de": "Verwirrt die Lippen spitzen",
+      "family": "goofy",
+      "base_emotion": "contemplation",
+      "actions": {
+        "eye_open": 1.02,
+        "eye_asym": 0.26,
+        "brow_asym": 0.82,
+        "gaze_x": 0.48,
+        "gaze_y": 0.2,
+        "mouth_width": 0.61,
+        "mouth_open": 0.2,
+        "mouth_asym": 0.28
+      },
+      "options": {},
+      "constraints": {},
+      "visual_cues_de": "Suchende ungleiche Augen und etwas überzeichnete Pucker-Lippen.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false
+    },
+    {
+      "id": 49,
+      "slug": "upside_gaze_grin",
+      "label": "Augen hoch und frech grinsen",
+      "label_de": "Augen hoch und frech grinsen",
+      "family": "goofy",
+      "base_emotion": "amusement",
+      "actions": {
+        "eye_open": 1.01,
+        "gaze_y": -1.0,
+        "mouth_width": 1.21,
+        "mouth_open": 0.28,
+        "smile": 0.88,
+        "mouth_asym": 0.4
+      },
+      "options": {
+        "tongue": "none"
+      },
+      "constraints": {
+        "gaze_y_max": -0.8
+      },
+      "visual_cues_de": "Aufwärts gerichtete Pupillen und ein offenes freches Grinsen.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false
+    },
+    {
+      "id": 50,
+      "slug": "theatrical_villain",
+      "label": "Der freundliche Cartoon-Bösewicht",
+      "label_de": "Der freundliche Cartoon-Bösewicht",
+      "family": "goofy",
+      "base_emotion": "malice",
+      "actions": {
+        "frown": 0.67,
+        "brow_inner": -0.17,
+        "eye_open": 0.78,
+        "pupil_scale": 1.03,
+        "mouth_width": 1.34,
+        "mouth_open": 0.34,
+        "smile": 0.86,
+        "mouth_asym": 0.46
+      },
+      "options": {
+        "mouth": "teeth",
+        "under_eye": "hatching"
+      },
+      "constraints": {},
+      "visual_cues_de": "Gespielt böse Brauen, breites Grinsen und warme große Pupillen.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false
+    },
+    {
+      "id": 51,
+      "slug": "secret_sharing",
+      "label": "Ein Geheimnis erzählen",
+      "label_de": "Ein Geheimnis erzählen",
+      "family": "subtle",
+      "base_emotion": "contemplation",
+      "actions": {
+        "brow_asym": 0.27,
+        "eye_open": 0.68,
+        "gaze_x": -0.76,
+        "gaze_y": -0.06,
+        "mouth_width": 0.51,
+        "mouth_open": 0.12,
+        "mouth_asym": 0.38,
+        "smile": 0.18
+      },
+      "options": {
+        "mouth": "dark"
+      },
+      "constraints": {
+        "gaze_x_max": -0.45
+      },
+      "visual_cues_de": "Kleiner seitlicher Flüstermund und aufmerksamer Blick zur Seite.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false
+    },
+    {
+      "id": 52,
+      "slug": "conspiratorial_grin",
+      "label": "Verschwörerisch grinsen",
+      "label_de": "Verschwörerisch grinsen",
+      "family": "subtle",
+      "base_emotion": "pride",
+      "actions": {
+        "brow_asym": 0.42,
+        "eye_open": 0.58,
+        "gaze_x": -0.68,
+        "smile": 0.75,
+        "mouth_width": 1.02,
+        "mouth_asym": 0.58
+      },
+      "options": {},
+      "constraints": {
+        "gaze_x_max": -0.4
+      },
+      "visual_cues_de": "Enge freundliche Augen und ein verschwörerisches schiefes Lächeln.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false
+    },
+    {
+      "id": 53,
+      "slug": "affectionate_tease",
+      "label": "Liebevoll necken",
+      "label_de": "Liebevoll necken",
+      "family": "subtle",
+      "base_emotion": "affection",
+      "actions": {
+        "brow_asym": 0.38,
+        "eye_open": 0.82,
+        "smile": 0.73,
+        "mouth_asym": 0.62,
+        "mouth_width": 1.01,
+        "gaze_x": 0.3
+      },
+      "options": {},
+      "constraints": {
+        "closed_eyes": [
+          "right"
+        ]
+      },
+      "visual_cues_de": "Großer warmer Blick, rechtes Zwinkern und liebevoll schiefer Smile.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false
+    },
+    {
+      "id": 54,
+      "slug": "supportive_concern",
+      "label": "Besorgt, aber bei dir",
+      "label_de": "Besorgt, aber bei dir",
+      "family": "subtle",
+      "base_emotion": "distress",
+      "actions": {
+        "frown": 0.25,
+        "brow_inner": 0.8,
+        "eye_open": 0.97,
+        "gaze_x": 0.0,
+        "smile": -0.34,
+        "mouth_open": 0.17,
+        "mouth_width": 0.81,
+        "mouth_asym": 0.1
+      },
+      "options": {
+        "under_eye": "continuous"
+      },
+      "constraints": {},
+      "visual_cues_de": "Besorgte innere Brauen, direkter weicher Blick und zurückhaltender Mund.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false
+    },
+    {
+      "id": 55,
+      "slug": "tender_pity",
+      "label": "Sanft mitfühlen",
+      "label_de": "Sanft mitfühlen",
+      "family": "subtle",
+      "base_emotion": "helplessness",
+      "actions": {
+        "brow_inner": 0.9,
+        "frown": 0.12,
+        "eye_open": 0.7,
+        "mouth_width": 0.6,
+        "mouth_open": 0.0,
+        "smile": -0.39,
+        "gaze_x": 0.15
+      },
+      "options": {
+        "mouth": "closed"
+      },
+      "constraints": {},
+      "visual_cues_de": "Ein weicher trauriger Blick ohne dramatische offene Grimasse.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false
+    },
+    {
+      "id": 56,
+      "slug": "friendly_boundary",
+      "label": "Freundlich eine Grenze setzen",
+      "label_de": "Freundlich eine Grenze setzen",
+      "family": "subtle",
+      "base_emotion": "concentration",
+      "actions": {
+        "frown": 0.34,
+        "brow_inner": 0.1,
+        "eye_open": 1.0,
+        "smile": -0.12,
+        "mouth_width": 0.97,
+        "mouth_asym": 0.08,
+        "gaze_x": 0.0
+      },
+      "options": {
+        "under_eye": "continuous"
+      },
+      "constraints": {},
+      "visual_cues_de": "Wacher klarer Blick und ruhige feste Mundlinie, ohne aggressiven Zug.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false
+    },
+    {
+      "id": 57,
+      "slug": "impatient_waiting",
+      "label": "Immer noch freundlich warten",
+      "label_de": "Immer noch freundlich warten",
+      "family": "subtle",
+      "base_emotion": "impatience",
+      "actions": {
+        "frown": 0.33,
+        "brow_asym": 0.46,
+        "eye_open": 0.63,
+        "gaze_x": 0.74,
+        "smile": -0.14,
+        "mouth_width": 0.74,
+        "mouth_asym": -0.42
+      },
+      "options": {
+        "under_eye": "continuous"
+      },
+      "constraints": {
+        "gaze_x_min": 0.45
+      },
+      "visual_cues_de": "Leicht gereizter Seitenblick und kleiner schiefer wartender Mund.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false
+    },
+    {
+      "id": 58,
+      "slug": "hesitant_request",
+      "label": "Vorsichtig um etwas bitten",
+      "label_de": "Vorsichtig um etwas bitten",
+      "family": "subtle",
+      "base_emotion": "longing",
+      "actions": {
+        "brow_inner": 0.82,
+        "eye_open": 1.02,
+        "gaze_x": 0.2,
+        "gaze_y": 0.1,
+        "mouth_width": 0.49,
+        "mouth_open": 0.13,
+        "smile": 0.16,
+        "mouth_asym": 0.16
+      },
+      "options": {
+        "mouth": "dark"
+      },
+      "constraints": {},
+      "visual_cues_de": "Bittende innere Brauen und kleiner vorsichtig geöffneter Mund.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false
+    },
+    {
+      "id": 59,
+      "slug": "incredulous_chuckle",
+      "label": "Ungläubig schmunzeln",
+      "label_de": "Ungläubig schmunzeln",
+      "family": "subtle",
+      "base_emotion": "amusement",
+      "actions": {
+        "brow_asym": 0.79,
+        "eye_open": 0.85,
+        "eye_asym": 0.35,
+        "mouth_width": 1.04,
+        "mouth_open": 0.25,
+        "smile": 0.64,
+        "mouth_asym": 0.53
+      },
+      "options": {
+        "tongue": "none"
+      },
+      "constraints": {},
+      "visual_cues_de": "Eine skeptische Braue und ein warmes beginnendes Lachen.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false
+    },
+    {
+      "id": 60,
+      "slug": "playful_reconciliation",
+      "label": "Versöhnlich wieder Scherze machen",
+      "label_de": "Versöhnlich wieder Scherze machen",
+      "family": "subtle",
+      "base_emotion": "gratitude",
+      "actions": {
+        "brow_inner": 0.6,
+        "eye_open": 0.83,
+        "mouth_width": 0.91,
+        "smile": 0.65,
+        "mouth_asym": 0.33,
+        "gaze_x": 0.12
+      },
+      "options": {
+        "under_eye": "continuous"
+      },
+      "constraints": {
+        "closed_eyes": [
+          "left"
+        ]
+      },
+      "visual_cues_de": "Weicher versöhnlicher Blick und ein kleines verbindendes Zwinkern.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false
+    }
+  ]
+}

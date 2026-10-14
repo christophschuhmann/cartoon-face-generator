@@ -1,0 +1,199 @@
+{
+  "schema_version": "1.0",
+  "crop": [
+    42,
+    56,
+    1492,
+    806
+  ],
+  "canvas": {
+    "width": 1450,
+    "height": 750
+  },
+  "operations": [
+    "crop"
+  ],
+  "denoising": false,
+  "references": [
+    {
+      "id": "smile",
+      "filename": "ChatGPT-Bild 13. Okt. 2026, 19_43_48.png",
+      "resolution": [
+        1536,
+        864
+      ],
+      "mode": "RGB",
+      "used": true,
+      "expression": "Freundliches asymmetrisches Lächeln; breite aufwärts geschwungene Brauen; runde Pupillen; je ein Lichtreflex; durchgehende kurze Unteraugenkurven.",
+      "source_sha256": "a14dcfa1edfc8b6816ddaaa2aaf7880dac02277f9c240dfc4311b383db155df5",
+      "prepared": "output/references/smile.png",
+      "affine_original_to_canvas": [
+        [
+          1,
+          0,
+          -42
+        ],
+        [
+          0,
+          1,
+          -56
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "tense",
+      "filename": "ChatGPT-Bild 13. Okt. 2026, 19_45_19.png",
+      "resolution": [
+        1536,
+        864
+      ],
+      "mode": "RGB",
+      "used": true,
+      "expression": "Unsicher/angespannt; links hochgezogene, rechts abgesenkte Braue; enger welliger offener Mund mit weißem Innenraum; Schraffuren und doppelte Lichtreflexe.",
+      "source_sha256": "d19e9e781574fbe5d7aaf14a149dfb8498c9f4179a68a1dc2b00e7de040670af",
+      "prepared": "output/references/tense.png",
+      "affine_original_to_canvas": [
+        [
+          1,
+          0,
+          -42
+        ],
+        [
+          0,
+          1,
+          -56
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "love",
+      "filename": "ChatGPT-Bild 13. Okt. 2026, 19_45_42.png",
+      "resolution": [
+        1536,
+        864
+      ],
+      "mode": "RGB",
+      "used": true,
+      "expression": "Verliebt/begeistert; weiße Herzreflexe in schwarzen Pupillen, zusätzlicher runder Reflex; schwarzer offener Mund mit weißer Innenzunge; Schraffuren.",
+      "source_sha256": "bde41a48f8fc10d75aa8211e39e15aac9a36be087977cc02a7da60f7fee90b1c",
+      "prepared": "output/references/love.png",
+      "affine_original_to_canvas": [
+        [
+          1,
+          0,
+          -42
+        ],
+        [
+          0,
+          1,
+          -56
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "cheeky",
+      "filename": "ChatGPT-Bild 13. Okt. 2026, 19_46_02.png",
+      "resolution": [
+        1536,
+        864
+      ],
+      "mode": "RGB",
+      "used": true,
+      "expression": "Schelmisches Lächeln; ähnlich tense/love in Augen und Brauen, geschlossenes aufwärts gerichtetes Lächeln; Schraffuren.",
+      "source_sha256": "18a51eec0ded3c3bb177052a13055277590817fa0b0b97ec7c67a82ce18459ea",
+      "prepared": "output/references/cheeky.png",
+      "affine_original_to_canvas": [
+        [
+          1,
+          0,
+          -42
+        ],
+        [
+          0,
+          1,
+          -56
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "tongue",
+      "filename": "ChatGPT-Bild 13. Okt. 2026, 19_46_23.png",
+      "resolution": [
+        1536,
+        864
+      ],
+      "mode": "RGB",
+      "used": true,
+      "expression": "Verspielt mit herausgestreckter Zunge; stark geöffnete Augen mit entgegengesetzter Blickrichtung; dünnere Brauen; lange weiße Zunge mit schwarzem Rand und Mittellinie; zusätzliche Augenwinkelstriche.",
+      "source_sha256": "f6899490d4e71a762c3e10b80270a98d38e8f44c6866a116ba39cbec46f21ace",
+      "prepared": "output/references/tongue.png",
+      "affine_original_to_canvas": [
+        [
+          1,
+          0,
+          -42
+        ],
+        [
+          0,
+          1,
+          -56
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "skeptical",
+      "filename": "ChatGPT-Bild 13. Okt. 2026, 19_46_42.png",
+      "resolution": [
+        1536,
+        864
+      ],
+      "mode": "RGB",
+      "used": true,
+      "expression": "Skeptisch/selbstbewusst; gegensinnig gekrümmte Brauen; schräge obere Lider; nach innen gerichteter Blick; breites flaches Lächeln und kleiner Unterlippenstrich; Schraffuren.",
+      "source_sha256": "7bc55137b15b7b6e5be7247c6d37122010c2edd703c0160dfaf1e53c791953b6",
+      "prepared": "output/references/skeptical.png",
+      "affine_original_to_canvas": [
+        [
+          1,
+          0,
+          -42
+        ],
+        [
+          0,
+          1,
+          -56
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ]
+    }
+  ]
+}

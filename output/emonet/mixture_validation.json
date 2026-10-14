@@ -1,0 +1,5558 @@
+{
+  "pair_count": 780,
+  "tested_weights": [
+    0.25,
+    0.5,
+    0.75
+  ],
+  "all_geometry_valid": true,
+  "rendered_sequences": {
+    "amusement_teasing": {
+      "frames": 32,
+      "max_landmark_step_normalized": 0.004030568555205616,
+      "landmark_count": 101,
+      "method": "linear landmarks, positive widths, smooth optional-shape fades; continuous hatch count",
+      "policy": "recommended"
+    },
+    "awe_surprise": {
+      "frames": 32,
+      "max_landmark_step_normalized": 0.0011281758053972401,
+      "landmark_count": 101,
+      "method": "linear landmarks, positive widths, smooth optional-shape fades; continuous hatch count",
+      "policy": "recommended"
+    },
+    "fear_distress": {
+      "frames": 32,
+      "max_landmark_step_normalized": 0.002278831184268193,
+      "landmark_count": 101,
+      "method": "linear landmarks, positive widths, smooth optional-shape fades; continuous hatch count",
+      "policy": "recommended"
+    },
+    "gratitude_affection": {
+      "frames": 32,
+      "max_landmark_step_normalized": 0.0007741935483871476,
+      "landmark_count": 101,
+      "method": "linear landmarks, positive widths, smooth optional-shape fades; continuous hatch count",
+      "policy": "recommended"
+    },
+    "triumph_pride": {
+      "frames": 32,
+      "max_landmark_step_normalized": 0.0021784946236560465,
+      "landmark_count": 101,
+      "method": "linear landmarks, positive widths, smooth optional-shape fades; continuous hatch count",
+      "policy": "recommended"
+    },
+    "embarrassment_shame": {
+      "frames": 32,
+      "max_landmark_step_normalized": 0.001735785058952762,
+      "landmark_count": 101,
+      "method": "linear landmarks, positive widths, smooth optional-shape fades; continuous hatch count",
+      "policy": "recommended"
+    },
+    "sadness_helplessness": {
+      "frames": 32,
+      "max_landmark_step_normalized": 0.0016838709677420294,
+      "landmark_count": 101,
+      "method": "linear landmarks, positive widths, smooth optional-shape fades; continuous hatch count",
+      "policy": "recommended"
+    },
+    "doubt_confusion": {
+      "frames": 32,
+      "max_landmark_step_normalized": 0.003166185830509205,
+      "landmark_count": 101,
+      "method": "linear landmarks, positive widths, smooth optional-shape fades; continuous hatch count",
+      "policy": "recommended"
+    },
+    "disgust_sourness": {
+      "frames": 32,
+      "max_landmark_step_normalized": 0.005924226151807044,
+      "landmark_count": 101,
+      "method": "linear landmarks, positive widths, smooth optional-shape fades; continuous hatch count",
+      "policy": "recommended"
+    },
+    "contentment_relief": {
+      "frames": 32,
+      "max_landmark_step_normalized": 0.0012497163086190853,
+      "landmark_count": 101,
+      "method": "linear landmarks, positive widths, smooth optional-shape fades; continuous hatch count",
+      "policy": "recommended"
+    },
+    "anger_elation": {
+      "frames": 32,
+      "max_landmark_step_normalized": 0.00421322071238957,
+      "landmark_count": 101,
+      "method": "linear landmarks, positive widths, smooth optional-shape fades; continuous hatch count",
+      "policy": "ambivalent"
+    },
+    "pain_pleasure_ecstasy": {
+      "frames": 32,
+      "max_landmark_step_normalized": 0.0016559749995441542,
+      "landmark_count": 101,
+      "method": "linear landmarks, positive widths, smooth optional-shape fades; continuous hatch count",
+      "policy": "ambivalent"
+    }
+  },
+  "semantic_compatibility": "explicit authoring policy; numerical validity does not prove emotional recognizability",
+  "pairs": [
+    {
+      "a": "amusement",
+      "b": "elation",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "amusement",
+      "b": "pleasure_ecstasy",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "amusement",
+      "b": "contentment",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "amusement",
+      "b": "gratitude",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "amusement",
+      "b": "affection",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "amusement",
+      "b": "infatuation",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "amusement",
+      "b": "hope",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "amusement",
+      "b": "triumph",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "amusement",
+      "b": "pride",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "amusement",
+      "b": "interest",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "amusement",
+      "b": "awe",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "amusement",
+      "b": "surprise",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "amusement",
+      "b": "concentration",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "amusement",
+      "b": "contemplation",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "amusement",
+      "b": "relief",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "amusement",
+      "b": "longing",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "amusement",
+      "b": "teasing",
+      "policy": "recommended",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "amusement",
+      "b": "impatience",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "amusement",
+      "b": "lust",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "amusement",
+      "b": "doubt",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "amusement",
+      "b": "fear",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "amusement",
+      "b": "distress",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "amusement",
+      "b": "confusion",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "amusement",
+      "b": "embarrassment",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "amusement",
+      "b": "shame",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "amusement",
+      "b": "disappointment",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "amusement",
+      "b": "sadness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "amusement",
+      "b": "bitterness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "amusement",
+      "b": "contempt",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "amusement",
+      "b": "disgust",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "amusement",
+      "b": "anger",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "amusement",
+      "b": "malice",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "amusement",
+      "b": "sourness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "amusement",
+      "b": "pain",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "amusement",
+      "b": "helplessness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "amusement",
+      "b": "fatigue",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "amusement",
+      "b": "numbness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "amusement",
+      "b": "intoxication",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "amusement",
+      "b": "envy",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "elation",
+      "b": "pleasure_ecstasy",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "elation",
+      "b": "contentment",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "elation",
+      "b": "gratitude",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "elation",
+      "b": "affection",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "elation",
+      "b": "infatuation",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "elation",
+      "b": "hope",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "elation",
+      "b": "triumph",
+      "policy": "recommended",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "elation",
+      "b": "pride",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "elation",
+      "b": "interest",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "elation",
+      "b": "awe",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "elation",
+      "b": "surprise",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "elation",
+      "b": "concentration",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "elation",
+      "b": "contemplation",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "elation",
+      "b": "relief",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "elation",
+      "b": "longing",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "elation",
+      "b": "teasing",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "elation",
+      "b": "impatience",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "elation",
+      "b": "lust",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "elation",
+      "b": "doubt",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "elation",
+      "b": "fear",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "elation",
+      "b": "distress",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "elation",
+      "b": "confusion",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "elation",
+      "b": "embarrassment",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "elation",
+      "b": "shame",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "elation",
+      "b": "disappointment",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "elation",
+      "b": "sadness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "elation",
+      "b": "bitterness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "elation",
+      "b": "contempt",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "elation",
+      "b": "disgust",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "elation",
+      "b": "anger",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "elation",
+      "b": "malice",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "elation",
+      "b": "sourness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "elation",
+      "b": "pain",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "elation",
+      "b": "helplessness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "elation",
+      "b": "fatigue",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "elation",
+      "b": "numbness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "elation",
+      "b": "intoxication",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "elation",
+      "b": "envy",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "pleasure_ecstasy",
+      "b": "contentment",
+      "policy": "recommended",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "pleasure_ecstasy",
+      "b": "gratitude",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "pleasure_ecstasy",
+      "b": "affection",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "pleasure_ecstasy",
+      "b": "infatuation",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "pleasure_ecstasy",
+      "b": "hope",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "pleasure_ecstasy",
+      "b": "triumph",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "pleasure_ecstasy",
+      "b": "pride",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "pleasure_ecstasy",
+      "b": "interest",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "pleasure_ecstasy",
+      "b": "awe",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "pleasure_ecstasy",
+      "b": "surprise",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "pleasure_ecstasy",
+      "b": "concentration",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "pleasure_ecstasy",
+      "b": "contemplation",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "pleasure_ecstasy",
+      "b": "relief",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "pleasure_ecstasy",
+      "b": "longing",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "pleasure_ecstasy",
+      "b": "teasing",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "pleasure_ecstasy",
+      "b": "impatience",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "pleasure_ecstasy",
+      "b": "lust",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "pleasure_ecstasy",
+      "b": "doubt",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "pleasure_ecstasy",
+      "b": "fear",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "pleasure_ecstasy",
+      "b": "distress",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "pleasure_ecstasy",
+      "b": "confusion",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "pleasure_ecstasy",
+      "b": "embarrassment",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "pleasure_ecstasy",
+      "b": "shame",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "pleasure_ecstasy",
+      "b": "disappointment",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "pleasure_ecstasy",
+      "b": "sadness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "pleasure_ecstasy",
+      "b": "bitterness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "pleasure_ecstasy",
+      "b": "contempt",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "pleasure_ecstasy",
+      "b": "disgust",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "pleasure_ecstasy",
+      "b": "anger",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "pleasure_ecstasy",
+      "b": "malice",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "pleasure_ecstasy",
+      "b": "sourness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "pleasure_ecstasy",
+      "b": "pain",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "pleasure_ecstasy",
+      "b": "helplessness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "pleasure_ecstasy",
+      "b": "fatigue",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "pleasure_ecstasy",
+      "b": "numbness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "pleasure_ecstasy",
+      "b": "intoxication",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "pleasure_ecstasy",
+      "b": "envy",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "contentment",
+      "b": "gratitude",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "contentment",
+      "b": "affection",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "contentment",
+      "b": "infatuation",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "contentment",
+      "b": "hope",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "contentment",
+      "b": "triumph",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "contentment",
+      "b": "pride",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "contentment",
+      "b": "interest",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "contentment",
+      "b": "awe",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "contentment",
+      "b": "surprise",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "contentment",
+      "b": "concentration",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "contentment",
+      "b": "contemplation",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "contentment",
+      "b": "relief",
+      "policy": "recommended",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "contentment",
+      "b": "longing",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "contentment",
+      "b": "teasing",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "contentment",
+      "b": "impatience",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "contentment",
+      "b": "lust",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "contentment",
+      "b": "doubt",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "contentment",
+      "b": "fear",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "contentment",
+      "b": "distress",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "contentment",
+      "b": "confusion",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "contentment",
+      "b": "embarrassment",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "contentment",
+      "b": "shame",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "contentment",
+      "b": "disappointment",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "contentment",
+      "b": "sadness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "contentment",
+      "b": "bitterness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "contentment",
+      "b": "contempt",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "contentment",
+      "b": "disgust",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "contentment",
+      "b": "anger",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "contentment",
+      "b": "malice",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "contentment",
+      "b": "sourness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "contentment",
+      "b": "pain",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "contentment",
+      "b": "helplessness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "contentment",
+      "b": "fatigue",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "contentment",
+      "b": "numbness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "contentment",
+      "b": "intoxication",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "contentment",
+      "b": "envy",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "gratitude",
+      "b": "affection",
+      "policy": "recommended",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "gratitude",
+      "b": "infatuation",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "gratitude",
+      "b": "hope",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "gratitude",
+      "b": "triumph",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "gratitude",
+      "b": "pride",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "gratitude",
+      "b": "interest",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "gratitude",
+      "b": "awe",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "gratitude",
+      "b": "surprise",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "gratitude",
+      "b": "concentration",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "gratitude",
+      "b": "contemplation",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "gratitude",
+      "b": "relief",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "gratitude",
+      "b": "longing",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "gratitude",
+      "b": "teasing",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "gratitude",
+      "b": "impatience",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "gratitude",
+      "b": "lust",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "gratitude",
+      "b": "doubt",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "gratitude",
+      "b": "fear",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "gratitude",
+      "b": "distress",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "gratitude",
+      "b": "confusion",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "gratitude",
+      "b": "embarrassment",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "gratitude",
+      "b": "shame",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "gratitude",
+      "b": "disappointment",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "gratitude",
+      "b": "sadness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "gratitude",
+      "b": "bitterness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "gratitude",
+      "b": "contempt",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "gratitude",
+      "b": "disgust",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "gratitude",
+      "b": "anger",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "gratitude",
+      "b": "malice",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "gratitude",
+      "b": "sourness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "gratitude",
+      "b": "pain",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "gratitude",
+      "b": "helplessness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "gratitude",
+      "b": "fatigue",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "gratitude",
+      "b": "numbness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "gratitude",
+      "b": "intoxication",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "gratitude",
+      "b": "envy",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "affection",
+      "b": "infatuation",
+      "policy": "recommended",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "affection",
+      "b": "hope",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "affection",
+      "b": "triumph",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "affection",
+      "b": "pride",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "affection",
+      "b": "interest",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "affection",
+      "b": "awe",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "affection",
+      "b": "surprise",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "affection",
+      "b": "concentration",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "affection",
+      "b": "contemplation",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "affection",
+      "b": "relief",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "affection",
+      "b": "longing",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "affection",
+      "b": "teasing",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "affection",
+      "b": "impatience",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "affection",
+      "b": "lust",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "affection",
+      "b": "doubt",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "affection",
+      "b": "fear",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "affection",
+      "b": "distress",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "affection",
+      "b": "confusion",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "affection",
+      "b": "embarrassment",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "affection",
+      "b": "shame",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "affection",
+      "b": "disappointment",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "affection",
+      "b": "sadness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "affection",
+      "b": "bitterness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "affection",
+      "b": "contempt",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "affection",
+      "b": "disgust",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "affection",
+      "b": "anger",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "affection",
+      "b": "malice",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "affection",
+      "b": "sourness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "affection",
+      "b": "pain",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "affection",
+      "b": "helplessness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "affection",
+      "b": "fatigue",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "affection",
+      "b": "numbness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "affection",
+      "b": "intoxication",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "affection",
+      "b": "envy",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "infatuation",
+      "b": "hope",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "infatuation",
+      "b": "triumph",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "infatuation",
+      "b": "pride",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "infatuation",
+      "b": "interest",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "infatuation",
+      "b": "awe",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "infatuation",
+      "b": "surprise",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "infatuation",
+      "b": "concentration",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "infatuation",
+      "b": "contemplation",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "infatuation",
+      "b": "relief",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "infatuation",
+      "b": "longing",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "infatuation",
+      "b": "teasing",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "infatuation",
+      "b": "impatience",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "infatuation",
+      "b": "lust",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "infatuation",
+      "b": "doubt",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "infatuation",
+      "b": "fear",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "infatuation",
+      "b": "distress",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "infatuation",
+      "b": "confusion",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "infatuation",
+      "b": "embarrassment",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "infatuation",
+      "b": "shame",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "infatuation",
+      "b": "disappointment",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "infatuation",
+      "b": "sadness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "infatuation",
+      "b": "bitterness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "infatuation",
+      "b": "contempt",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "infatuation",
+      "b": "disgust",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "infatuation",
+      "b": "anger",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "infatuation",
+      "b": "malice",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "infatuation",
+      "b": "sourness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "infatuation",
+      "b": "pain",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "infatuation",
+      "b": "helplessness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "infatuation",
+      "b": "fatigue",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "infatuation",
+      "b": "numbness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "infatuation",
+      "b": "intoxication",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "infatuation",
+      "b": "envy",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "hope",
+      "b": "triumph",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "hope",
+      "b": "pride",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "hope",
+      "b": "interest",
+      "policy": "recommended",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "hope",
+      "b": "awe",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "hope",
+      "b": "surprise",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "hope",
+      "b": "concentration",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "hope",
+      "b": "contemplation",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "hope",
+      "b": "relief",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "hope",
+      "b": "longing",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "hope",
+      "b": "teasing",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "hope",
+      "b": "impatience",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "hope",
+      "b": "lust",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "hope",
+      "b": "doubt",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "hope",
+      "b": "fear",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "hope",
+      "b": "distress",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "hope",
+      "b": "confusion",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "hope",
+      "b": "embarrassment",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "hope",
+      "b": "shame",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "hope",
+      "b": "disappointment",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "hope",
+      "b": "sadness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "hope",
+      "b": "bitterness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "hope",
+      "b": "contempt",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "hope",
+      "b": "disgust",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "hope",
+      "b": "anger",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "hope",
+      "b": "malice",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "hope",
+      "b": "sourness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "hope",
+      "b": "pain",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "hope",
+      "b": "helplessness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "hope",
+      "b": "fatigue",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "hope",
+      "b": "numbness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "hope",
+      "b": "intoxication",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "hope",
+      "b": "envy",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "triumph",
+      "b": "pride",
+      "policy": "recommended",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "triumph",
+      "b": "interest",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "triumph",
+      "b": "awe",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "triumph",
+      "b": "surprise",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "triumph",
+      "b": "concentration",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "triumph",
+      "b": "contemplation",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "triumph",
+      "b": "relief",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "triumph",
+      "b": "longing",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "triumph",
+      "b": "teasing",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "triumph",
+      "b": "impatience",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "triumph",
+      "b": "lust",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "triumph",
+      "b": "doubt",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "triumph",
+      "b": "fear",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "triumph",
+      "b": "distress",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "triumph",
+      "b": "confusion",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "triumph",
+      "b": "embarrassment",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "triumph",
+      "b": "shame",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "triumph",
+      "b": "disappointment",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "triumph",
+      "b": "sadness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "triumph",
+      "b": "bitterness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "triumph",
+      "b": "contempt",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "triumph",
+      "b": "disgust",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "triumph",
+      "b": "anger",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "triumph",
+      "b": "malice",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "triumph",
+      "b": "sourness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "triumph",
+      "b": "pain",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "triumph",
+      "b": "helplessness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "triumph",
+      "b": "fatigue",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "triumph",
+      "b": "numbness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "triumph",
+      "b": "intoxication",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "triumph",
+      "b": "envy",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "pride",
+      "b": "interest",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "pride",
+      "b": "awe",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "pride",
+      "b": "surprise",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "pride",
+      "b": "concentration",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "pride",
+      "b": "contemplation",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "pride",
+      "b": "relief",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "pride",
+      "b": "longing",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "pride",
+      "b": "teasing",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "pride",
+      "b": "impatience",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "pride",
+      "b": "lust",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "pride",
+      "b": "doubt",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "pride",
+      "b": "fear",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "pride",
+      "b": "distress",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "pride",
+      "b": "confusion",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "pride",
+      "b": "embarrassment",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "pride",
+      "b": "shame",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "pride",
+      "b": "disappointment",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "pride",
+      "b": "sadness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "pride",
+      "b": "bitterness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "pride",
+      "b": "contempt",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "pride",
+      "b": "disgust",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "pride",
+      "b": "anger",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "pride",
+      "b": "malice",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "pride",
+      "b": "sourness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "pride",
+      "b": "pain",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "pride",
+      "b": "helplessness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "pride",
+      "b": "fatigue",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "pride",
+      "b": "numbness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "pride",
+      "b": "intoxication",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "pride",
+      "b": "envy",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "interest",
+      "b": "awe",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "interest",
+      "b": "surprise",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "interest",
+      "b": "concentration",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "interest",
+      "b": "contemplation",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "interest",
+      "b": "relief",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "interest",
+      "b": "longing",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "interest",
+      "b": "teasing",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "interest",
+      "b": "impatience",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "interest",
+      "b": "lust",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "interest",
+      "b": "doubt",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "interest",
+      "b": "fear",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "interest",
+      "b": "distress",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "interest",
+      "b": "confusion",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "interest",
+      "b": "embarrassment",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "interest",
+      "b": "shame",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "interest",
+      "b": "disappointment",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "interest",
+      "b": "sadness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "interest",
+      "b": "bitterness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "interest",
+      "b": "contempt",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "interest",
+      "b": "disgust",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "interest",
+      "b": "anger",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "interest",
+      "b": "malice",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "interest",
+      "b": "sourness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "interest",
+      "b": "pain",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "interest",
+      "b": "helplessness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "interest",
+      "b": "fatigue",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "interest",
+      "b": "numbness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "interest",
+      "b": "intoxication",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "interest",
+      "b": "envy",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "awe",
+      "b": "surprise",
+      "policy": "recommended",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "awe",
+      "b": "concentration",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "awe",
+      "b": "contemplation",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "awe",
+      "b": "relief",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "awe",
+      "b": "longing",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "awe",
+      "b": "teasing",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "awe",
+      "b": "impatience",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "awe",
+      "b": "lust",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "awe",
+      "b": "doubt",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "awe",
+      "b": "fear",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "awe",
+      "b": "distress",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "awe",
+      "b": "confusion",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "awe",
+      "b": "embarrassment",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "awe",
+      "b": "shame",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "awe",
+      "b": "disappointment",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "awe",
+      "b": "sadness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "awe",
+      "b": "bitterness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "awe",
+      "b": "contempt",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "awe",
+      "b": "disgust",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "awe",
+      "b": "anger",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "awe",
+      "b": "malice",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "awe",
+      "b": "sourness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "awe",
+      "b": "pain",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "awe",
+      "b": "helplessness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "awe",
+      "b": "fatigue",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "awe",
+      "b": "numbness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "awe",
+      "b": "intoxication",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "awe",
+      "b": "envy",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "surprise",
+      "b": "concentration",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "surprise",
+      "b": "contemplation",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "surprise",
+      "b": "relief",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "surprise",
+      "b": "longing",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "surprise",
+      "b": "teasing",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "surprise",
+      "b": "impatience",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "surprise",
+      "b": "lust",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "surprise",
+      "b": "doubt",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "surprise",
+      "b": "fear",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "surprise",
+      "b": "distress",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "surprise",
+      "b": "confusion",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "surprise",
+      "b": "embarrassment",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "surprise",
+      "b": "shame",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "surprise",
+      "b": "disappointment",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "surprise",
+      "b": "sadness",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "surprise",
+      "b": "bitterness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "surprise",
+      "b": "contempt",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "surprise",
+      "b": "disgust",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "surprise",
+      "b": "anger",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "surprise",
+      "b": "malice",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "surprise",
+      "b": "sourness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "surprise",
+      "b": "pain",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "surprise",
+      "b": "helplessness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "surprise",
+      "b": "fatigue",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "surprise",
+      "b": "numbness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "surprise",
+      "b": "intoxication",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "surprise",
+      "b": "envy",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "concentration",
+      "b": "contemplation",
+      "policy": "recommended",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "concentration",
+      "b": "relief",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "concentration",
+      "b": "longing",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "concentration",
+      "b": "teasing",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "concentration",
+      "b": "impatience",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "concentration",
+      "b": "lust",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "concentration",
+      "b": "doubt",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "concentration",
+      "b": "fear",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "concentration",
+      "b": "distress",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "concentration",
+      "b": "confusion",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "concentration",
+      "b": "embarrassment",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "concentration",
+      "b": "shame",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "concentration",
+      "b": "disappointment",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "concentration",
+      "b": "sadness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "concentration",
+      "b": "bitterness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "concentration",
+      "b": "contempt",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "concentration",
+      "b": "disgust",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "concentration",
+      "b": "anger",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "concentration",
+      "b": "malice",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "concentration",
+      "b": "sourness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "concentration",
+      "b": "pain",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "concentration",
+      "b": "helplessness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "concentration",
+      "b": "fatigue",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "concentration",
+      "b": "numbness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "concentration",
+      "b": "intoxication",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "concentration",
+      "b": "envy",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "contemplation",
+      "b": "relief",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "contemplation",
+      "b": "longing",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "contemplation",
+      "b": "teasing",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "contemplation",
+      "b": "impatience",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "contemplation",
+      "b": "lust",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "contemplation",
+      "b": "doubt",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "contemplation",
+      "b": "fear",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "contemplation",
+      "b": "distress",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "contemplation",
+      "b": "confusion",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "contemplation",
+      "b": "embarrassment",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "contemplation",
+      "b": "shame",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "contemplation",
+      "b": "disappointment",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "contemplation",
+      "b": "sadness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "contemplation",
+      "b": "bitterness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "contemplation",
+      "b": "contempt",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "contemplation",
+      "b": "disgust",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "contemplation",
+      "b": "anger",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "contemplation",
+      "b": "malice",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "contemplation",
+      "b": "sourness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "contemplation",
+      "b": "pain",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "contemplation",
+      "b": "helplessness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "contemplation",
+      "b": "fatigue",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "contemplation",
+      "b": "numbness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "contemplation",
+      "b": "intoxication",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "contemplation",
+      "b": "envy",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "relief",
+      "b": "longing",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "relief",
+      "b": "teasing",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "relief",
+      "b": "impatience",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "relief",
+      "b": "lust",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "relief",
+      "b": "doubt",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "relief",
+      "b": "fear",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "relief",
+      "b": "distress",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "relief",
+      "b": "confusion",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "relief",
+      "b": "embarrassment",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "relief",
+      "b": "shame",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "relief",
+      "b": "disappointment",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "relief",
+      "b": "sadness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "relief",
+      "b": "bitterness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "relief",
+      "b": "contempt",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "relief",
+      "b": "disgust",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "relief",
+      "b": "anger",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "relief",
+      "b": "malice",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "relief",
+      "b": "sourness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "relief",
+      "b": "pain",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "relief",
+      "b": "helplessness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "relief",
+      "b": "fatigue",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "relief",
+      "b": "numbness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "relief",
+      "b": "intoxication",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "relief",
+      "b": "envy",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "longing",
+      "b": "teasing",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "longing",
+      "b": "impatience",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "longing",
+      "b": "lust",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "longing",
+      "b": "doubt",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "longing",
+      "b": "fear",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "longing",
+      "b": "distress",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "longing",
+      "b": "confusion",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "longing",
+      "b": "embarrassment",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "longing",
+      "b": "shame",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "longing",
+      "b": "disappointment",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "longing",
+      "b": "sadness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "longing",
+      "b": "bitterness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "longing",
+      "b": "contempt",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "longing",
+      "b": "disgust",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "longing",
+      "b": "anger",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "longing",
+      "b": "malice",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "longing",
+      "b": "sourness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "longing",
+      "b": "pain",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "longing",
+      "b": "helplessness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "longing",
+      "b": "fatigue",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "longing",
+      "b": "numbness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "longing",
+      "b": "intoxication",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "longing",
+      "b": "envy",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "teasing",
+      "b": "impatience",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "teasing",
+      "b": "lust",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "teasing",
+      "b": "doubt",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "teasing",
+      "b": "fear",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "teasing",
+      "b": "distress",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "teasing",
+      "b": "confusion",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "teasing",
+      "b": "embarrassment",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "teasing",
+      "b": "shame",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "teasing",
+      "b": "disappointment",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "teasing",
+      "b": "sadness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "teasing",
+      "b": "bitterness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "teasing",
+      "b": "contempt",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "teasing",
+      "b": "disgust",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "teasing",
+      "b": "anger",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "teasing",
+      "b": "malice",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "teasing",
+      "b": "sourness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "teasing",
+      "b": "pain",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "teasing",
+      "b": "helplessness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "teasing",
+      "b": "fatigue",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "teasing",
+      "b": "numbness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "teasing",
+      "b": "intoxication",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "teasing",
+      "b": "envy",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "impatience",
+      "b": "lust",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "impatience",
+      "b": "doubt",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "impatience",
+      "b": "fear",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "impatience",
+      "b": "distress",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "impatience",
+      "b": "confusion",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "impatience",
+      "b": "embarrassment",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "impatience",
+      "b": "shame",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "impatience",
+      "b": "disappointment",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "impatience",
+      "b": "sadness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "impatience",
+      "b": "bitterness",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "impatience",
+      "b": "contempt",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "impatience",
+      "b": "disgust",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "impatience",
+      "b": "anger",
+      "policy": "recommended",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "impatience",
+      "b": "malice",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "impatience",
+      "b": "sourness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "impatience",
+      "b": "pain",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "impatience",
+      "b": "helplessness",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "impatience",
+      "b": "fatigue",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "impatience",
+      "b": "numbness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "impatience",
+      "b": "intoxication",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "impatience",
+      "b": "envy",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "lust",
+      "b": "doubt",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "lust",
+      "b": "fear",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "lust",
+      "b": "distress",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "lust",
+      "b": "confusion",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "lust",
+      "b": "embarrassment",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "lust",
+      "b": "shame",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "lust",
+      "b": "disappointment",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "lust",
+      "b": "sadness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "lust",
+      "b": "bitterness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "lust",
+      "b": "contempt",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "lust",
+      "b": "disgust",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "lust",
+      "b": "anger",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "lust",
+      "b": "malice",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "lust",
+      "b": "sourness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "lust",
+      "b": "pain",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "lust",
+      "b": "helplessness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "lust",
+      "b": "fatigue",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "lust",
+      "b": "numbness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "lust",
+      "b": "intoxication",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "lust",
+      "b": "envy",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "doubt",
+      "b": "fear",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "doubt",
+      "b": "distress",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "doubt",
+      "b": "confusion",
+      "policy": "recommended",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "doubt",
+      "b": "embarrassment",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "doubt",
+      "b": "shame",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "doubt",
+      "b": "disappointment",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "doubt",
+      "b": "sadness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "doubt",
+      "b": "bitterness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "doubt",
+      "b": "contempt",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "doubt",
+      "b": "disgust",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "doubt",
+      "b": "anger",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "doubt",
+      "b": "malice",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "doubt",
+      "b": "sourness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "doubt",
+      "b": "pain",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "doubt",
+      "b": "helplessness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "doubt",
+      "b": "fatigue",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "doubt",
+      "b": "numbness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "doubt",
+      "b": "intoxication",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "doubt",
+      "b": "envy",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "fear",
+      "b": "distress",
+      "policy": "recommended",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "fear",
+      "b": "confusion",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "fear",
+      "b": "embarrassment",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "fear",
+      "b": "shame",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "fear",
+      "b": "disappointment",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "fear",
+      "b": "sadness",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "fear",
+      "b": "bitterness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "fear",
+      "b": "contempt",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "fear",
+      "b": "disgust",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "fear",
+      "b": "anger",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "fear",
+      "b": "malice",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "fear",
+      "b": "sourness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "fear",
+      "b": "pain",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "fear",
+      "b": "helplessness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "fear",
+      "b": "fatigue",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "fear",
+      "b": "numbness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "fear",
+      "b": "intoxication",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "fear",
+      "b": "envy",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "distress",
+      "b": "confusion",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "distress",
+      "b": "embarrassment",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "distress",
+      "b": "shame",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "distress",
+      "b": "disappointment",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "distress",
+      "b": "sadness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "distress",
+      "b": "bitterness",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "distress",
+      "b": "contempt",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "distress",
+      "b": "disgust",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "distress",
+      "b": "anger",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "distress",
+      "b": "malice",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "distress",
+      "b": "sourness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "distress",
+      "b": "pain",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "distress",
+      "b": "helplessness",
+      "policy": "recommended",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "distress",
+      "b": "fatigue",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "distress",
+      "b": "numbness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "distress",
+      "b": "intoxication",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "distress",
+      "b": "envy",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "confusion",
+      "b": "embarrassment",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "confusion",
+      "b": "shame",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "confusion",
+      "b": "disappointment",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "confusion",
+      "b": "sadness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "confusion",
+      "b": "bitterness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "confusion",
+      "b": "contempt",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "confusion",
+      "b": "disgust",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "confusion",
+      "b": "anger",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "confusion",
+      "b": "malice",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "confusion",
+      "b": "sourness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "confusion",
+      "b": "pain",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "confusion",
+      "b": "helplessness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "confusion",
+      "b": "fatigue",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "confusion",
+      "b": "numbness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "confusion",
+      "b": "intoxication",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "confusion",
+      "b": "envy",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "embarrassment",
+      "b": "shame",
+      "policy": "recommended",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "embarrassment",
+      "b": "disappointment",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "embarrassment",
+      "b": "sadness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "embarrassment",
+      "b": "bitterness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "embarrassment",
+      "b": "contempt",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "embarrassment",
+      "b": "disgust",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "embarrassment",
+      "b": "anger",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "embarrassment",
+      "b": "malice",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "embarrassment",
+      "b": "sourness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "embarrassment",
+      "b": "pain",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "embarrassment",
+      "b": "helplessness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "embarrassment",
+      "b": "fatigue",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "embarrassment",
+      "b": "numbness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "embarrassment",
+      "b": "intoxication",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "embarrassment",
+      "b": "envy",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "shame",
+      "b": "disappointment",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "shame",
+      "b": "sadness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "shame",
+      "b": "bitterness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "shame",
+      "b": "contempt",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "shame",
+      "b": "disgust",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "shame",
+      "b": "anger",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "shame",
+      "b": "malice",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "shame",
+      "b": "sourness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "shame",
+      "b": "pain",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "shame",
+      "b": "helplessness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "shame",
+      "b": "fatigue",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "shame",
+      "b": "numbness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "shame",
+      "b": "intoxication",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "shame",
+      "b": "envy",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "disappointment",
+      "b": "sadness",
+      "policy": "recommended",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "disappointment",
+      "b": "bitterness",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "disappointment",
+      "b": "contempt",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "disappointment",
+      "b": "disgust",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "disappointment",
+      "b": "anger",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "disappointment",
+      "b": "malice",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "disappointment",
+      "b": "sourness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "disappointment",
+      "b": "pain",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "disappointment",
+      "b": "helplessness",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "disappointment",
+      "b": "fatigue",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "disappointment",
+      "b": "numbness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "disappointment",
+      "b": "intoxication",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "disappointment",
+      "b": "envy",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "sadness",
+      "b": "bitterness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "sadness",
+      "b": "contempt",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "sadness",
+      "b": "disgust",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "sadness",
+      "b": "anger",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "sadness",
+      "b": "malice",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "sadness",
+      "b": "sourness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "sadness",
+      "b": "pain",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "sadness",
+      "b": "helplessness",
+      "policy": "recommended",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "sadness",
+      "b": "fatigue",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "sadness",
+      "b": "numbness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "sadness",
+      "b": "intoxication",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "sadness",
+      "b": "envy",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "bitterness",
+      "b": "contempt",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "bitterness",
+      "b": "disgust",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "bitterness",
+      "b": "anger",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "bitterness",
+      "b": "malice",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "bitterness",
+      "b": "sourness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "bitterness",
+      "b": "pain",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "bitterness",
+      "b": "helplessness",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "bitterness",
+      "b": "fatigue",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "bitterness",
+      "b": "numbness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "bitterness",
+      "b": "intoxication",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "bitterness",
+      "b": "envy",
+      "policy": "recommended",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "contempt",
+      "b": "disgust",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "contempt",
+      "b": "anger",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "contempt",
+      "b": "malice",
+      "policy": "recommended",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "contempt",
+      "b": "sourness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "contempt",
+      "b": "pain",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "contempt",
+      "b": "helplessness",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "contempt",
+      "b": "fatigue",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "contempt",
+      "b": "numbness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "contempt",
+      "b": "intoxication",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "contempt",
+      "b": "envy",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "disgust",
+      "b": "anger",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "disgust",
+      "b": "malice",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "disgust",
+      "b": "sourness",
+      "policy": "recommended",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "disgust",
+      "b": "pain",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "disgust",
+      "b": "helplessness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "disgust",
+      "b": "fatigue",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "disgust",
+      "b": "numbness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "disgust",
+      "b": "intoxication",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "disgust",
+      "b": "envy",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "anger",
+      "b": "malice",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "anger",
+      "b": "sourness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "anger",
+      "b": "pain",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "anger",
+      "b": "helplessness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "anger",
+      "b": "fatigue",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "anger",
+      "b": "numbness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "anger",
+      "b": "intoxication",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "anger",
+      "b": "envy",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "malice",
+      "b": "sourness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "malice",
+      "b": "pain",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "malice",
+      "b": "helplessness",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "malice",
+      "b": "fatigue",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "malice",
+      "b": "numbness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "malice",
+      "b": "intoxication",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "malice",
+      "b": "envy",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "sourness",
+      "b": "pain",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "sourness",
+      "b": "helplessness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "sourness",
+      "b": "fatigue",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "sourness",
+      "b": "numbness",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "sourness",
+      "b": "intoxication",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "sourness",
+      "b": "envy",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "pain",
+      "b": "helplessness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "pain",
+      "b": "fatigue",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "pain",
+      "b": "numbness",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "pain",
+      "b": "intoxication",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "pain",
+      "b": "envy",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "helplessness",
+      "b": "fatigue",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "helplessness",
+      "b": "numbness",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "helplessness",
+      "b": "intoxication",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "helplessness",
+      "b": "envy",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "fatigue",
+      "b": "numbness",
+      "policy": "recommended",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "fatigue",
+      "b": "intoxication",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "fatigue",
+      "b": "envy",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "numbness",
+      "b": "intoxication",
+      "policy": "related",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "numbness",
+      "b": "envy",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    },
+    {
+      "a": "intoxication",
+      "b": "envy",
+      "policy": "ambivalent",
+      "geometry_valid": true,
+      "perceptual_compatibility": "not measured"
+    }
+  ]
+}

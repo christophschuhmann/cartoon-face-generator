@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Cartoon face · local webcam</title>
+  <style>
+    :root{font-family:system-ui,sans-serif;color:#18272b;background:#eef2ef}*{box-sizing:border-box}[hidden]{display:none!important}
+    body{max-width:1260px;margin:auto;padding:32px}header{display:flex;align-items:start;justify-content:space-between;gap:24px}
+    h1{font-size:clamp(26px,4vw,40px);letter-spacing:-.04em;margin:0 0 8px}p{color:#566467;line-height:1.6;margin:8px 0}
+    .badge{background:#dce9df;color:#315b40;padding:8px 12px;border-radius:30px;white-space:nowrap;font-size:13px}
+    .layout{display:grid;grid-template-columns:2.3fr 1fr;gap:20px;margin:28px 0 18px}.card{background:#fff;border:1px solid #dce2dd;border-radius:20px;overflow:hidden;box-shadow:0 4px 22px #1b382308}
+    .label{font-size:13px;color:#596968;padding:16px 20px;border-bottom:1px solid #edf0ed;display:flex;justify-content:space-between}
+    #avatar{aspect-ratio:1450/750;display:grid;align-items:center}#avatar svg{width:100%;height:auto}
+    .preview{aspect-ratio:4/3;background:#e5eae6;position:relative}video{width:100%;height:100%;object-fit:contain;transform:scaleX(-1)}
+    .hint{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:24px;color:#61706a;pointer-events:none}
+    .controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center}button,a.button{font:inherit;font-size:14px;cursor:pointer;border:1px solid #ced8d0;background:white;color:#253c30;border-radius:10px;padding:11px 15px;text-decoration:none}
+    button.primary{background:#235c43;color:white;border-color:#235c43}button:disabled{opacity:.4;cursor:default}select{font:inherit;padding:9px;border:1px solid #ced8d0;border-radius:8px}
+    .status{min-height:28px;margin-top:16px;font-size:14px;color:#3d6150}.details{display:flex;gap:20px;flex-wrap:wrap;margin-top:20px;padding:20px;border-radius:16px;background:#e5ece5;font-size:13px;line-height:1.6}.details div{flex:1;min-width:200px}.details strong{display:block;color:#294735}
+    @media(max-width:760px){body{padding:20px}.layout{grid-template-columns:1fr}header{display:block}.badge{display:inline-block;margin-top:14px}.preview{max-height:220px}}
+  </style>
+</head>
+<body>
+  <header><div><h1>Your expression, in ink.</h1><p>A soft cartoon face follows your eyes, brows and mouth.</p></div><span class="badge">Local CPU processing</span></header>
+  <div class="layout">
+    <section class="card"><div class="label"><span>SVG avatar</span><span>101 stable landmarks</span></div><div id="avatar"></div></section>
+    <section class="card"><div class="label"><span>Camera preview</span><span>Mirrored preview</span></div><div class="preview"><video id="camera" playsinline muted></video><div class="hint" id="hint">Start the camera to animate your avatar.</div></div></section>
+  </div>
+  <div class="controls">
+    <button class="primary" id="start">Start camera</button><button id="stop" disabled>Stop</button>
+    <button id="calibrate" disabled>Calibrate neutral</button><button id="reset">Reset calibration</button>
+    <label>Updates <select id="fps"><option value="2">2 Hz</option><option value="5" selected>5 Hz</option><option value="10">10 Hz</option><option value="15">15 Hz</option></select></label>
+    <a class="button" href="/api/avatar.svg" download>Save SVG</a><a class="button" href="/api/pose" download>Save pose</a>
+  </div>
+  <div class="status" id="status" role="status">Camera is off.</div>
+  <div class="details"><div><strong>Make it your neutral</strong>Relax your face, look forward, then calibrate. Hold still for eight updates. Reset if you change person or camera position.</div><div><strong>Stays on this laptop</strong>Frames travel only to the Python process at this local address. The app keeps no camera recordings. Stop releases the camera.</div><div><strong>Expressive motion</strong>Smile, open your mouth, blink or raise a brow. This maps visible cues to artwork; it does not identify an emotion or reproduce your face shape.</div></div>
+  <canvas id="capture" hidden></canvas>
+  <script>
+    const $=id=>document.getElementById(id), video=$('camera'), canvas=$('capture');
+    let stream=null,running=false,timer=null,targetFps=5,serverMaxFps=5,lastRequest=null;
+    const show=message=>$('status').textContent=message;
+    async function post(url,body,headers){const response=await fetch(url,{method:'POST',body,headers});const data=await response.json();if(!response.ok)throw Error(data.error||response.statusText);return data;}
+    async function loop(){
+      if(!running)return; const started=performance.now();
+      try{
+        if(video.readyState>=2){
+          const scale=Math.min(1,640/Math.max(video.videoWidth,video.videoHeight));
+          canvas.width=Math.round(video.videoWidth*scale);canvas.height=Math.round(video.videoHeight*scale);
+          canvas.getContext('2d').drawImage(video,0,0,canvas.width,canvas.height); // Never mirror inference input.
+          const blob=await new Promise(resolve=>canvas.toBlob(resolve,'image/jpeg',.82));
+          if(!running)return;
+          lastRequest=post('/api/frame',blob,{'Content-Type':'image/jpeg'});
+          const data=await lastRequest; lastRequest=null;
+          if(!running)return;
+          $('avatar').innerHTML=data.svg;
+          serverMaxFps=data.suggested_fps;
+          const tracking=data.tracking?'Face tracked':'Face lost · returning to neutral';
+          const calibration=data.calibration_remaining?` · hold neutral (${data.calibration_remaining} left)`:data.calibrated?' · calibrated':'';
+          show(`${tracking}${calibration} · CPU ${data.inference_ms} ms · SVG ${data.mapping_render_ms} ms`);
+        }
+      }catch(error){lastRequest=null;show(error.message);}
+      if(running){const period=1000/Math.max(.5,Math.min(targetFps,serverMaxFps));timer=setTimeout(loop,Math.max(0,period-(performance.now()-started)));}
+    }
+    function stop(){running=false;clearTimeout(timer);if(stream)stream.getTracks().forEach(track=>track.stop());stream=null;video.srcObject=null;$('start').disabled=false;$('stop').disabled=true;$('calibrate').disabled=true;$('hint').hidden=false;show('Camera is off.');}
+    $('start').onclick=async()=>{
+      $('start').disabled=true;
+      try{if(lastRequest)await lastRequest;stream=await navigator.mediaDevices.getUserMedia({video:{width:{ideal:640},height:{ideal:480},facingMode:'user'},audio:false});video.srcObject=stream;await video.play();running=true;$('hint').hidden=true;$('stop').disabled=false;$('calibrate').disabled=false;loop();}
+      catch(error){stop();show(`Camera could not start: ${error.message}`);}
+    };
+    $('stop').onclick=stop;
+    $('calibrate').onclick=async()=>{try{await post('/api/calibrate');show('Relax your face and hold neutral for eight updates.');}catch(error){show(error.message);}};
+    $('reset').onclick=async()=>{try{const data=await post('/api/reset');$('avatar').innerHTML=data.svg;show('Calibration cleared.');}catch(error){show(error.message);}};
+    $('fps').onchange=()=>targetFps=Number($('fps').value);
+    window.addEventListener('beforeunload',stop);
+    fetch('/api/config').then(r=>r.json()).then(data=>{targetFps=data.target_fps;serverMaxFps=data.target_fps;$('avatar').innerHTML=data.svg;if(![2,5,10,15].includes(targetFps)){$('fps').add(new Option(`${targetFps} Hz`,targetFps));}$('fps').value=String(targetFps);}).catch(error=>show(error.message));
+  </script>
+</body>
+</html>

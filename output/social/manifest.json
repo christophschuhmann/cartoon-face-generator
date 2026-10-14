@@ -1,0 +1,5028 @@
+{
+  "catalog_id": "cartoon_social_60_v1",
+  "recipe_version": "1.1",
+  "category_count": 60,
+  "variation_count": 240,
+  "variations_per_category": 4,
+  "seed": 42,
+  "all_valid": true,
+  "semantic_recognition": "unmeasured; authored social performances, not extra EmoNet categories",
+  "categories": [
+    {
+      "id": 1,
+      "slug": "knowing_wink",
+      "label": "Zwinkergruß",
+      "label_de": "Zwinkergruß",
+      "family": "playful",
+      "base_emotion": "pride",
+      "actions": {
+        "smile": 0.62,
+        "mouth_asym": 0.3,
+        "brow_asym": 0.3
+      },
+      "options": {},
+      "constraints": {
+        "closed_eyes": [
+          "left"
+        ]
+      },
+      "visual_cues_de": "Ein freundliches, wissendes Zwinkern als kurzer Gruß.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false,
+      "archetype": "archetypes/01_knowing_wink",
+      "archetype_valid": true,
+      "samples": [
+        {
+          "seed": 100042,
+          "pose": "variations/knowing_wink/0000_seed100042.json",
+          "png": "variations/knowing_wink/0000_seed100042.png",
+          "svg": "variations/knowing_wink/0000_seed100042.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.07115310344827586,
+          "svg_sha256": "50c7a3e266f3394badf1bd2cb7fb2c3b88079337e5a3953a262f4539cff78307"
+        },
+        {
+          "seed": 100043,
+          "pose": "variations/knowing_wink/0001_seed100043.json",
+          "png": "variations/knowing_wink/0001_seed100043.png",
+          "svg": "variations/knowing_wink/0001_seed100043.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.07540321839080459,
+          "svg_sha256": "7714a359d419c15642195838f442ef1edc585ab80a500e302422cb5a8d5fdb96"
+        },
+        {
+          "seed": 100044,
+          "pose": "variations/knowing_wink/0002_seed100044.json",
+          "png": "variations/knowing_wink/0002_seed100044.png",
+          "svg": "variations/knowing_wink/0002_seed100044.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.06989793103448276,
+          "svg_sha256": "8eaf4626a42d6bb362341757b87a49a037fc86ed2d23701002d718ab2533104b"
+        },
+        {
+          "seed": 100045,
+          "pose": "variations/knowing_wink/0003_seed100045.json",
+          "png": "variations/knowing_wink/0003_seed100045.png",
+          "svg": "variations/knowing_wink/0003_seed100045.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.07161011494252874,
+          "svg_sha256": "eb21bc6b69004894f8ea5de919b5fb548b1feed545384d4a8bd77029a041ad9b"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "slug": "double_wink",
+      "label": "Lachender Augenschluss",
+      "label_de": "Lachender Augenschluss",
+      "family": "playful",
+      "base_emotion": "contentment",
+      "actions": {
+        "smile": 0.82,
+        "lid_curve": 0.95,
+        "mouth_width": 1.05
+      },
+      "options": {},
+      "constraints": {
+        "closed_eyes": [
+          "left",
+          "right"
+        ]
+      },
+      "visual_cues_de": "Beide Augen lächelnd schließen: ein stilles herzliches Lachen.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false,
+      "archetype": "archetypes/02_double_wink",
+      "archetype_valid": true,
+      "samples": [
+        {
+          "seed": 200042,
+          "pose": "variations/double_wink/0000_seed200042.json",
+          "png": "variations/double_wink/0000_seed200042.png",
+          "svg": "variations/double_wink/0000_seed200042.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.05816735632183908,
+          "svg_sha256": "9dcb3d3bdaf2c28752c3c91cc466d60007b4a2701707c7a67df229845e7e59f0"
+        },
+        {
+          "seed": 200043,
+          "pose": "variations/double_wink/0001_seed200043.json",
+          "png": "variations/double_wink/0001_seed200043.png",
+          "svg": "variations/double_wink/0001_seed200043.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.057958620689655176,
+          "svg_sha256": "cff05c4d83f3fae5029bcebe74f7ba8bd1ac3c4127ed43cb497325cc1767fc5d"
+        },
+        {
+          "seed": 200044,
+          "pose": "variations/double_wink/0002_seed200044.json",
+          "png": "variations/double_wink/0002_seed200044.png",
+          "svg": "variations/double_wink/0002_seed200044.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.058202298850574714,
+          "svg_sha256": "a303a8cc238b699639d8693517cf0b0b18c53a511608681bf255391b2de14718"
+        },
+        {
+          "seed": 200045,
+          "pose": "variations/double_wink/0003_seed200045.json",
+          "png": "variations/double_wink/0003_seed200045.png",
+          "svg": "variations/double_wink/0003_seed200045.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.05800367816091954,
+          "svg_sha256": "86d7cabfe17e1851f42c111679045a053ea3cd4d472a19c92c7b5fe37031014a"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "slug": "tongue_tease",
+      "label": "Frech die Zunge zeigen",
+      "label_de": "Frech die Zunge zeigen",
+      "family": "playful",
+      "base_emotion": "teasing",
+      "actions": {
+        "eye_open": 1.05,
+        "eye_asym": 0.12,
+        "mouth_asym": 0.38,
+        "smile": 0.82
+      },
+      "options": {
+        "tongue": "out"
+      },
+      "constraints": {},
+      "visual_cues_de": "Beide Augen bleiben offen; kleine freche Zunge und schiefes Grinsen.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false,
+      "archetype": "archetypes/03_tongue_tease",
+      "archetype_valid": true,
+      "samples": [
+        {
+          "seed": 300042,
+          "pose": "variations/tongue_tease/0000_seed300042.json",
+          "png": "variations/tongue_tease/0000_seed300042.png",
+          "svg": "variations/tongue_tease/0000_seed300042.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.10731310344827587,
+          "svg_sha256": "29b0391eb5b9c42e5619a68928a9e685348f25f525d0e7ddd7c4495c7e000160"
+        },
+        {
+          "seed": 300043,
+          "pose": "variations/tongue_tease/0001_seed300043.json",
+          "png": "variations/tongue_tease/0001_seed300043.png",
+          "svg": "variations/tongue_tease/0001_seed300043.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.10814988505747127,
+          "svg_sha256": "168be0971f794e8b7b191ad41f0af06f49c8dafbb3029c583716da99b5a80f70"
+        },
+        {
+          "seed": 300044,
+          "pose": "variations/tongue_tease/0002_seed300044.json",
+          "png": "variations/tongue_tease/0002_seed300044.png",
+          "svg": "variations/tongue_tease/0002_seed300044.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.1100616091954023,
+          "svg_sha256": "df5eb293b1f4fc5b25e20429705c19556f8a1790451a71b748a90030a219bbd2"
+        },
+        {
+          "seed": 300045,
+          "pose": "variations/tongue_tease/0003_seed300045.json",
+          "png": "variations/tongue_tease/0003_seed300045.png",
+          "svg": "variations/tongue_tease/0003_seed300045.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.10506850574712644,
+          "svg_sha256": "8b164d95c3cc9d38fcfadfb5f2de526afca63b52d410ecab67f913bd634fba01"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "slug": "raspberry",
+      "label": "Spielerisch prusten",
+      "label_de": "Spielerisch prusten",
+      "family": "playful",
+      "base_emotion": "sourness",
+      "actions": {
+        "eye_open": 0.8,
+        "eye_asym": 0.1,
+        "mouth_width": 0.56,
+        "mouth_open": 0.16,
+        "mouth_asym": 0.15,
+        "nose_lift": 0.1
+      },
+      "options": {
+        "mouth": "dark",
+        "tongue": "out",
+        "under_eye": "hatching"
+      },
+      "constraints": {},
+      "visual_cues_de": "Schmaler gespitzter Mund mit Zunge: ein sanftes, albernes Prusten.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false,
+      "archetype": "archetypes/04_raspberry",
+      "archetype_valid": true,
+      "samples": [
+        {
+          "seed": 400042,
+          "pose": "variations/raspberry/0000_seed400042.json",
+          "png": "variations/raspberry/0000_seed400042.png",
+          "svg": "variations/raspberry/0000_seed400042.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.09152183908045977,
+          "svg_sha256": "09e954a2657fb75038cca5d0ff3e1232d7bf602c0c0dbca4c26adf4a68a9bbd9"
+        },
+        {
+          "seed": 400043,
+          "pose": "variations/raspberry/0001_seed400043.json",
+          "png": "variations/raspberry/0001_seed400043.png",
+          "svg": "variations/raspberry/0001_seed400043.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.09074942528735633,
+          "svg_sha256": "685090799c3daaa024ac202f1cc1ad7b300a63c2ffc5a4452ba69fa9076e1637"
+        },
+        {
+          "seed": 400044,
+          "pose": "variations/raspberry/0002_seed400044.json",
+          "png": "variations/raspberry/0002_seed400044.png",
+          "svg": "variations/raspberry/0002_seed400044.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.10041931034482758,
+          "svg_sha256": "a5652e98fc89e458cb548348dbc95b30d0c7bde8192f937f8e88096a090b494f"
+        },
+        {
+          "seed": 400045,
+          "pose": "variations/raspberry/0003_seed400045.json",
+          "png": "variations/raspberry/0003_seed400045.png",
+          "svg": "variations/raspberry/0003_seed400045.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.08360091954022988,
+          "svg_sha256": "b206d5e204646b2e5ad34534498027d50dcaa3421499ff4a93bd6524296e7578"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "slug": "mischievous_side_eye",
+      "label": "Neckischer Seitenblick",
+      "label_de": "Neckischer Seitenblick",
+      "family": "playful",
+      "base_emotion": "malice",
+      "actions": {
+        "frown": 0.38,
+        "brow_inner": 0.1,
+        "eye_open": 0.65,
+        "gaze_x": -0.85,
+        "smile": 0.64,
+        "mouth_width": 1.08,
+        "mouth_asym": 0.58
+      },
+      "options": {
+        "under_eye": "continuous"
+      },
+      "constraints": {
+        "gaze_x_max": -0.55
+      },
+      "visual_cues_de": "Schalkhafter Seitenblick, ein etwas höherer Mundwinkel.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false,
+      "archetype": "archetypes/05_mischievous_side_eye",
+      "archetype_valid": true,
+      "samples": [
+        {
+          "seed": 500042,
+          "pose": "variations/mischievous_side_eye/0000_seed500042.json",
+          "png": "variations/mischievous_side_eye/0000_seed500042.png",
+          "svg": "variations/mischievous_side_eye/0000_seed500042.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.0874216091954023,
+          "svg_sha256": "48b2513a13292e5055815b035986559088affd6320dafe2c25403c3c2fd6ff60"
+        },
+        {
+          "seed": 500043,
+          "pose": "variations/mischievous_side_eye/0001_seed500043.json",
+          "png": "variations/mischievous_side_eye/0001_seed500043.png",
+          "svg": "variations/mischievous_side_eye/0001_seed500043.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.08377563218390804,
+          "svg_sha256": "7b5f88b3df54623b729a242ce371b585f1d6374314a98013635293a102af6387"
+        },
+        {
+          "seed": 500044,
+          "pose": "variations/mischievous_side_eye/0002_seed500044.json",
+          "png": "variations/mischievous_side_eye/0002_seed500044.png",
+          "svg": "variations/mischievous_side_eye/0002_seed500044.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.08397885057471265,
+          "svg_sha256": "fd42de02b885bb4960cc184a0cb0d2a33dc24e69da14394930e16de5c1c13c09"
+        },
+        {
+          "seed": 500045,
+          "pose": "variations/mischievous_side_eye/0003_seed500045.json",
+          "png": "variations/mischievous_side_eye/0003_seed500045.png",
+          "svg": "variations/mischievous_side_eye/0003_seed500045.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.08495724137931035,
+          "svg_sha256": "b74f1cffa16d836e064e18564bee89232c443be3b1029bbcf8ba373cacf12365"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "slug": "mock_scolding",
+      "label": "Sanft spielerisch ausschimpfen",
+      "label_de": "Sanft spielerisch ausschimpfen",
+      "family": "playful",
+      "base_emotion": "anger",
+      "actions": {
+        "frown": 0.6,
+        "brow_inner": -0.12,
+        "brow_asym": 0.3,
+        "eye_open": 0.86,
+        "mouth_width": 0.92,
+        "smile": -0.24,
+        "mouth_asym": 0.42,
+        "mouth_open": 0.16
+      },
+      "options": {},
+      "constraints": {},
+      "visual_cues_de": "Gespielte Strenge mit wachem weichem Blick und kleiner Mundasymmetrie.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false,
+      "archetype": "archetypes/06_mock_scolding",
+      "archetype_valid": true,
+      "samples": [
+        {
+          "seed": 600042,
+          "pose": "variations/mock_scolding/0000_seed600042.json",
+          "png": "variations/mock_scolding/0000_seed600042.png",
+          "svg": "variations/mock_scolding/0000_seed600042.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.09794022988505748,
+          "svg_sha256": "c147e78107556c6f6798b2dc097da419c9361406bd68d11960b0bcd27f6a8d93"
+        },
+        {
+          "seed": 600043,
+          "pose": "variations/mock_scolding/0001_seed600043.json",
+          "png": "variations/mock_scolding/0001_seed600043.png",
+          "svg": "variations/mock_scolding/0001_seed600043.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.09252781609195403,
+          "svg_sha256": "88eabee4ddced73b3b8fbd579006d11aa54cc2bc3daf76b451476eb57206153c"
+        },
+        {
+          "seed": 600044,
+          "pose": "variations/mock_scolding/0002_seed600044.json",
+          "png": "variations/mock_scolding/0002_seed600044.png",
+          "svg": "variations/mock_scolding/0002_seed600044.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.10140597701149426,
+          "svg_sha256": "d49338a6ef597ba1e89c5112cb793bd7340811a736c08a8f473f9134555c6122"
+        },
+        {
+          "seed": 600045,
+          "pose": "variations/mock_scolding/0003_seed600045.json",
+          "png": "variations/mock_scolding/0003_seed600045.png",
+          "svg": "variations/mock_scolding/0003_seed600045.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.0969416091954023,
+          "svg_sha256": "7553e78f1afac1d1c6c96f2b537ed1d685984f4dad96562903bbd14cf8a2a4a2"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "slug": "gentle_challenge",
+      "label": "Na, traust du dich?",
+      "label_de": "Na, traust du dich?",
+      "family": "playful",
+      "base_emotion": "doubt",
+      "actions": {
+        "brow_asym": 0.78,
+        "eye_asym": 0.22,
+        "gaze_x": 0.35,
+        "smile": 0.45,
+        "mouth_asym": 0.55,
+        "mouth_width": 0.9
+      },
+      "options": {},
+      "constraints": {},
+      "visual_cues_de": "Eine fragende Braue und ein ermutigend herausforderndes Lächeln.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false,
+      "archetype": "archetypes/07_gentle_challenge",
+      "archetype_valid": true,
+      "samples": [
+        {
+          "seed": 700042,
+          "pose": "variations/gentle_challenge/0000_seed700042.json",
+          "png": "variations/gentle_challenge/0000_seed700042.png",
+          "svg": "variations/gentle_challenge/0000_seed700042.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.0855816091954023,
+          "svg_sha256": "763f071cea814cfc605f4ce93f2f5e005bdcf4e0e7b8fcabb25afc99b4b93f47"
+        },
+        {
+          "seed": 700043,
+          "pose": "variations/gentle_challenge/0001_seed700043.json",
+          "png": "variations/gentle_challenge/0001_seed700043.png",
+          "svg": "variations/gentle_challenge/0001_seed700043.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.0903144827586207,
+          "svg_sha256": "f4590142d06555570072cf173b288b684027d0b6bf13be8499a41e27f61822f9"
+        },
+        {
+          "seed": 700044,
+          "pose": "variations/gentle_challenge/0002_seed700044.json",
+          "png": "variations/gentle_challenge/0002_seed700044.png",
+          "svg": "variations/gentle_challenge/0002_seed700044.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.09237333333333334,
+          "svg_sha256": "b11682f210299bf5e73ffee47e3ab685d4c7c8a463117a9e5a1b8f00f13735be"
+        },
+        {
+          "seed": 700045,
+          "pose": "variations/gentle_challenge/0003_seed700045.json",
+          "png": "variations/gentle_challenge/0003_seed700045.png",
+          "svg": "variations/gentle_challenge/0003_seed700045.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.08496275862068965,
+          "svg_sha256": "d6c3e84820af0477028999cc2f734826f08cbbe7700a756e85048501c55f8962"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "slug": "playful_eye_roll",
+      "label": "Spielerisch die Augen verdrehen",
+      "label_de": "Spielerisch die Augen verdrehen",
+      "family": "playful",
+      "base_emotion": "impatience",
+      "actions": {
+        "frown": 0.15,
+        "brow_asym": 0.2,
+        "eye_open": 0.96,
+        "gaze_x": 0.1,
+        "gaze_y": -1.0,
+        "smile": 0.3,
+        "mouth_asym": 0.5
+      },
+      "options": {
+        "under_eye": "continuous"
+      },
+      "constraints": {
+        "gaze_y_max": -0.78
+      },
+      "visual_cues_de": "Augen nach oben, ein nachsichtiges schiefes Lächeln: ach, du wieder.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false,
+      "archetype": "archetypes/08_playful_eye_roll",
+      "archetype_valid": true,
+      "samples": [
+        {
+          "seed": 800042,
+          "pose": "variations/playful_eye_roll/0000_seed800042.json",
+          "png": "variations/playful_eye_roll/0000_seed800042.png",
+          "svg": "variations/playful_eye_roll/0000_seed800042.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.0917416091954023,
+          "svg_sha256": "1e973d293a7027d6f4c496dc15ca359237d2ba5078cf19bce3348bbe4bf3e1fc"
+        },
+        {
+          "seed": 800043,
+          "pose": "variations/playful_eye_roll/0001_seed800043.json",
+          "png": "variations/playful_eye_roll/0001_seed800043.png",
+          "svg": "variations/playful_eye_roll/0001_seed800043.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.10335540229885057,
+          "svg_sha256": "c5b8da7cc347faa1f1e6b6c1c0ba158ef3f0b66bd7616809831de6d1d117755f"
+        },
+        {
+          "seed": 800044,
+          "pose": "variations/playful_eye_roll/0002_seed800044.json",
+          "png": "variations/playful_eye_roll/0002_seed800044.png",
+          "svg": "variations/playful_eye_roll/0002_seed800044.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.09195586206896551,
+          "svg_sha256": "7994957a283a50dc56eb6dc635a0827298cbfa0921350e0eba0d92f2f1cec435"
+        },
+        {
+          "seed": 800045,
+          "pose": "variations/playful_eye_roll/0003_seed800045.json",
+          "png": "variations/playful_eye_roll/0003_seed800045.png",
+          "svg": "variations/playful_eye_roll/0003_seed800045.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.09865379310344828,
+          "svg_sha256": "6b0dc66b4c5b51e0fd6ae78d750c2ab524bc199b9f3ed8508bd588c69a972528"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "slug": "mock_monster",
+      "label": "Buh, ich bin ein nettes Monster",
+      "label_de": "Buh, ich bin ein nettes Monster",
+      "family": "playful",
+      "base_emotion": "malice",
+      "actions": {
+        "frown": 0.62,
+        "brow_inner": -0.2,
+        "brow_asym": 0.18,
+        "eye_open": 1.24,
+        "pupil_scale": 0.9,
+        "mouth_width": 1.18,
+        "smile": 0.7,
+        "mouth_open": 0.62,
+        "mouth_asym": 0.2
+      },
+      "options": {
+        "mouth": "dark",
+        "tongue": "inside"
+      },
+      "constraints": {},
+      "visual_cues_de": "Großer gespielter Monster-Mund und überzeichnete Brauen, freundlicher Blick.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false,
+      "archetype": "archetypes/09_mock_monster",
+      "archetype_valid": true,
+      "samples": [
+        {
+          "seed": 900042,
+          "pose": "variations/mock_monster/0000_seed900042.json",
+          "png": "variations/mock_monster/0000_seed900042.png",
+          "svg": "variations/mock_monster/0000_seed900042.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.10867310344827587,
+          "svg_sha256": "2408b7a4246eff038f6dd1c72c489486fdc61cafbcea4381513c11e7757b88d1"
+        },
+        {
+          "seed": 900043,
+          "pose": "variations/mock_monster/0001_seed900043.json",
+          "png": "variations/mock_monster/0001_seed900043.png",
+          "svg": "variations/mock_monster/0001_seed900043.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.1157048275862069,
+          "svg_sha256": "0b931bc44248b0de87234f75b1c597699e422d77268cc966468ab7a282406316"
+        },
+        {
+          "seed": 900044,
+          "pose": "variations/mock_monster/0002_seed900044.json",
+          "png": "variations/mock_monster/0002_seed900044.png",
+          "svg": "variations/mock_monster/0002_seed900044.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.11414344827586206,
+          "svg_sha256": "ed37dcb559482e42ab833f74e29d220dbb2d6906612a1888872660f871f76e88"
+        },
+        {
+          "seed": 900045,
+          "pose": "variations/mock_monster/0003_seed900045.json",
+          "png": "variations/mock_monster/0003_seed900045.png",
+          "svg": "variations/mock_monster/0003_seed900045.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.1093222988505747,
+          "svg_sha256": "c9ac544ec73d08c94ec158db830dbfc18b405c4be7a5174a30c34614fd1f80fb"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "slug": "innocent_after_mischief",
+      "label": "Ich war das ganz bestimmt nicht",
+      "label_de": "Ich war das ganz bestimmt nicht",
+      "family": "playful",
+      "base_emotion": "hope",
+      "actions": {
+        "brow_inner": 0.72,
+        "eye_open": 1.14,
+        "gaze_x": 0.62,
+        "gaze_y": -0.32,
+        "mouth_width": 0.58,
+        "smile": 0.2,
+        "mouth_asym": 0.24
+      },
+      "options": {},
+      "constraints": {},
+      "visual_cues_de": "Unschuldiger großer Blick nach oben und ein winziges verräterisches Lächeln.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false,
+      "archetype": "archetypes/10_innocent_after_mischief",
+      "archetype_valid": true,
+      "samples": [
+        {
+          "seed": 1000042,
+          "pose": "variations/innocent_after_mischief/0000_seed1000042.json",
+          "png": "variations/innocent_after_mischief/0000_seed1000042.png",
+          "svg": "variations/innocent_after_mischief/0000_seed1000042.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.10423172413793104,
+          "svg_sha256": "e29347a513074088fbc7bd68dd74fc6d49505a53cd12f268eac65052a06c3620"
+        },
+        {
+          "seed": 1000043,
+          "pose": "variations/innocent_after_mischief/0001_seed1000043.json",
+          "png": "variations/innocent_after_mischief/0001_seed1000043.png",
+          "svg": "variations/innocent_after_mischief/0001_seed1000043.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.10466298850574712,
+          "svg_sha256": "8c817aa3f8342ea41033d8512d9e8d832ad7165a4f5804b48b3aa640335641ea"
+        },
+        {
+          "seed": 1000044,
+          "pose": "variations/innocent_after_mischief/0002_seed1000044.json",
+          "png": "variations/innocent_after_mischief/0002_seed1000044.png",
+          "svg": "variations/innocent_after_mischief/0002_seed1000044.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.11279816091954023,
+          "svg_sha256": "a524723adbae91c62cf8de96d2be8303ddfd22fe8f22d8b0e09ef8fa06ff0070"
+        },
+        {
+          "seed": 1000045,
+          "pose": "variations/innocent_after_mischief/0003_seed1000045.json",
+          "png": "variations/innocent_after_mischief/0003_seed1000045.png",
+          "svg": "variations/innocent_after_mischief/0003_seed1000045.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.11225931034482758,
+          "svg_sha256": "f14422267df2e62c9dac3b5295f8589e8effb77314694ba1e923b36fd0f6e3df"
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "slug": "warm_greeting",
+      "label": "Herzliche Begrüßung",
+      "label_de": "Herzliche Begrüßung",
+      "family": "welcoming",
+      "base_emotion": "affection",
+      "actions": {
+        "eye_open": 1.05,
+        "gaze_x": 0.0,
+        "pupil_scale": 1.06,
+        "smile": 0.88,
+        "mouth_width": 1.2,
+        "mouth_open": 0.2
+      },
+      "options": {
+        "mouth": "dark"
+      },
+      "constraints": {},
+      "visual_cues_de": "Offener direkter Blick und ein freudig geöffnetes Begrüßungslächeln.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false,
+      "archetype": "archetypes/11_warm_greeting",
+      "archetype_valid": true,
+      "samples": [
+        {
+          "seed": 1100042,
+          "pose": "variations/warm_greeting/0000_seed1100042.json",
+          "png": "variations/warm_greeting/0000_seed1100042.png",
+          "svg": "variations/warm_greeting/0000_seed1100042.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.11067770114942528,
+          "svg_sha256": "5a15e0289e8824dbf2e5ec5af5f644bb87aeae0254d886683fa286c3fc8dcfad"
+        },
+        {
+          "seed": 1100043,
+          "pose": "variations/warm_greeting/0001_seed1100043.json",
+          "png": "variations/warm_greeting/0001_seed1100043.png",
+          "svg": "variations/warm_greeting/0001_seed1100043.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.11468781609195403,
+          "svg_sha256": "2091b7bd256c0629eaa4595d76b7f19f502953eb769fad8c323c55b38168b306"
+        },
+        {
+          "seed": 1100044,
+          "pose": "variations/warm_greeting/0002_seed1100044.json",
+          "png": "variations/warm_greeting/0002_seed1100044.png",
+          "svg": "variations/warm_greeting/0002_seed1100044.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.11567264367816092,
+          "svg_sha256": "031db023102d2a491f2ac6a13c811c6741de1eabfdb3c0a62af524e3026c17e3"
+        },
+        {
+          "seed": 1100045,
+          "pose": "variations/warm_greeting/0003_seed1100045.json",
+          "png": "variations/warm_greeting/0003_seed1100045.png",
+          "svg": "variations/warm_greeting/0003_seed1100045.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.1090951724137931,
+          "svg_sha256": "ecded185601c92deea93f3f3806c32527c1f185b6a07c54730d23b56eb07bcd1"
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "slug": "encouraging",
+      "label": "Du schaffst das",
+      "label_de": "Du schaffst das",
+      "family": "welcoming",
+      "base_emotion": "hope",
+      "actions": {
+        "gaze_y": 0.0,
+        "eye_open": 0.98,
+        "brow_inner": 0.44,
+        "smile": 0.74,
+        "mouth_width": 1.12,
+        "mouth_asym": 0.12
+      },
+      "options": {},
+      "constraints": {},
+      "visual_cues_de": "Wacher direkter Blick und ein breites, zuversichtliches Lächeln.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false,
+      "archetype": "archetypes/12_encouraging",
+      "archetype_valid": true,
+      "samples": [
+        {
+          "seed": 1200042,
+          "pose": "variations/encouraging/0000_seed1200042.json",
+          "png": "variations/encouraging/0000_seed1200042.png",
+          "svg": "variations/encouraging/0000_seed1200042.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.10680183908045977,
+          "svg_sha256": "bb03b0dce6d02cfb4cccd08e4ab77d895c9d592828a85edd5fffa996f69c14ca"
+        },
+        {
+          "seed": 1200043,
+          "pose": "variations/encouraging/0001_seed1200043.json",
+          "png": "variations/encouraging/0001_seed1200043.png",
+          "svg": "variations/encouraging/0001_seed1200043.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.09475494252873563,
+          "svg_sha256": "4107831dcb8571c7015740a373ca2ac29fbecb1ef60accce524c79b84b248a6f"
+        },
+        {
+          "seed": 1200044,
+          "pose": "variations/encouraging/0002_seed1200044.json",
+          "png": "variations/encouraging/0002_seed1200044.png",
+          "svg": "variations/encouraging/0002_seed1200044.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.1100064367816092,
+          "svg_sha256": "99816f9644453eb25d5fdaa8d8be9faa923467bde217d691cc4ddaa142dcd057"
+        },
+        {
+          "seed": 1200045,
+          "pose": "variations/encouraging/0003_seed1200045.json",
+          "png": "variations/encouraging/0003_seed1200045.png",
+          "svg": "variations/encouraging/0003_seed1200045.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.10480275862068965,
+          "svg_sha256": "e567d3a6abde7afd5c998d461d5517ae4500f66c195d72c588d1a9e9f394dc96"
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "slug": "reassuring",
+      "label": "Alles wird gut",
+      "label_de": "Alles wird gut",
+      "family": "welcoming",
+      "base_emotion": "gratitude",
+      "actions": {
+        "eye_open": 0.63,
+        "brow_inner": 0.8,
+        "smile": 0.52,
+        "mouth_width": 0.86,
+        "gaze_x": 0.0,
+        "gaze_y": 0.08
+      },
+      "options": {
+        "under_eye": "continuous"
+      },
+      "constraints": {},
+      "visual_cues_de": "Weiche innere Brauen und ein ruhiges beruhigendes Lächeln.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false,
+      "archetype": "archetypes/13_reassuring",
+      "archetype_valid": true,
+      "samples": [
+        {
+          "seed": 1300042,
+          "pose": "variations/reassuring/0000_seed1300042.json",
+          "png": "variations/reassuring/0000_seed1300042.png",
+          "svg": "variations/reassuring/0000_seed1300042.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.08658666666666667,
+          "svg_sha256": "ec3c6190250dbe910ab1f207e5684b33be0fd24217415abac8993ab9467bd2e4"
+        },
+        {
+          "seed": 1300043,
+          "pose": "variations/reassuring/0001_seed1300043.json",
+          "png": "variations/reassuring/0001_seed1300043.png",
+          "svg": "variations/reassuring/0001_seed1300043.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.0830832183908046,
+          "svg_sha256": "49e0de7ddb183a4470479f24be1a091e7bb097d6cd29531bd15f99290ab0ea7f"
+        },
+        {
+          "seed": 1300044,
+          "pose": "variations/reassuring/0002_seed1300044.json",
+          "png": "variations/reassuring/0002_seed1300044.png",
+          "svg": "variations/reassuring/0002_seed1300044.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.07975540229885057,
+          "svg_sha256": "79973fd4fea9dce2c3228a4ab678145adc75d9e63acc10947234c2001a99fd65"
+        },
+        {
+          "seed": 1300045,
+          "pose": "variations/reassuring/0003_seed1300045.json",
+          "png": "variations/reassuring/0003_seed1300045.png",
+          "svg": "variations/reassuring/0003_seed1300045.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.07882666666666667,
+          "svg_sha256": "efd417b0a1458ed90067d0b1eeb9fe8c8d59d778646e468825bd6488b51f0a75"
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "slug": "attentive_listening",
+      "label": "Aufmerksam zuhören",
+      "label_de": "Aufmerksam zuhören",
+      "family": "welcoming",
+      "base_emotion": "interest",
+      "actions": {
+        "eye_open": 1.08,
+        "brow_inner": 0.38,
+        "gaze_x": 0.35,
+        "smile": 0.08,
+        "mouth_width": 0.55,
+        "brow_asym": 0.14
+      },
+      "options": {},
+      "constraints": {},
+      "visual_cues_de": "Wache Augen mit leichtem Seitenblick, kleiner ruhiger Mund.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false,
+      "archetype": "archetypes/14_attentive_listening",
+      "archetype_valid": true,
+      "samples": [
+        {
+          "seed": 1400042,
+          "pose": "variations/attentive_listening/0000_seed1400042.json",
+          "png": "variations/attentive_listening/0000_seed1400042.png",
+          "svg": "variations/attentive_listening/0000_seed1400042.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.11056551724137931,
+          "svg_sha256": "3dddae66d45bc05531b2a9fe8c953170385f0089fda27503b51f97d6cedc7e03"
+        },
+        {
+          "seed": 1400043,
+          "pose": "variations/attentive_listening/0001_seed1400043.json",
+          "png": "variations/attentive_listening/0001_seed1400043.png",
+          "svg": "variations/attentive_listening/0001_seed1400043.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.10837057471264368,
+          "svg_sha256": "39c192327dbd0e0daae699ed9427cb6dea4b48c5b6e80aaedad8203002b63c7f"
+        },
+        {
+          "seed": 1400044,
+          "pose": "variations/attentive_listening/0002_seed1400044.json",
+          "png": "variations/attentive_listening/0002_seed1400044.png",
+          "svg": "variations/attentive_listening/0002_seed1400044.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.11298942528735632,
+          "svg_sha256": "fe3a705c00db5f5d61bd8f654160896af89725aa1bbf04c3752f0597892aff02"
+        },
+        {
+          "seed": 1400045,
+          "pose": "variations/attentive_listening/0003_seed1400045.json",
+          "png": "variations/attentive_listening/0003_seed1400045.png",
+          "svg": "variations/attentive_listening/0003_seed1400045.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.09562574712643677,
+          "svg_sha256": "bd2cc66b73738915472463997a1632f34a27bc0933db42cc539de3d4ae0cb911"
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "slug": "curious_question",
+      "label": "Ehrlich neugierig nachfragen",
+      "label_de": "Ehrlich neugierig nachfragen",
+      "family": "welcoming",
+      "base_emotion": "confusion",
+      "actions": {
+        "brow_asym": 0.6,
+        "eye_open": 1.08,
+        "eye_asym": 0.14,
+        "gaze_x": 0.2,
+        "mouth_width": 0.49,
+        "mouth_open": 0.16,
+        "mouth_asym": 0.18
+      },
+      "options": {
+        "mouth": "round"
+      },
+      "constraints": {},
+      "visual_cues_de": "Eine erhöhte Braue und ein kleines fragendes O.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false,
+      "archetype": "archetypes/15_curious_question",
+      "archetype_valid": true,
+      "samples": [
+        {
+          "seed": 1500042,
+          "pose": "variations/curious_question/0000_seed1500042.json",
+          "png": "variations/curious_question/0000_seed1500042.png",
+          "svg": "variations/curious_question/0000_seed1500042.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.10296735632183908,
+          "svg_sha256": "927774950cebd2f592b552789e3a12b789ff7f501b77717036f7cbf95007547d"
+        },
+        {
+          "seed": 1500043,
+          "pose": "variations/curious_question/0001_seed1500043.json",
+          "png": "variations/curious_question/0001_seed1500043.png",
+          "svg": "variations/curious_question/0001_seed1500043.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.10625471264367817,
+          "svg_sha256": "c0a8d0d86e158d4ed20343a3f5f39ddc6b459bb0adf9cb71721d33bddc3c9620"
+        },
+        {
+          "seed": 1500044,
+          "pose": "variations/curious_question/0002_seed1500044.json",
+          "png": "variations/curious_question/0002_seed1500044.png",
+          "svg": "variations/curious_question/0002_seed1500044.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.10211402298850575,
+          "svg_sha256": "278983804a6d33396a2f239ed18ee28ba242f8ee22743e3dfdb8cba45b22b9c7"
+        },
+        {
+          "seed": 1500045,
+          "pose": "variations/curious_question/0003_seed1500045.json",
+          "png": "variations/curious_question/0003_seed1500045.png",
+          "svg": "variations/curious_question/0003_seed1500045.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.10296,
+          "svg_sha256": "db883864dbe70e404c670659ad322196fddb1a3431ad2ef758e8156ff709abe5"
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "slug": "pleased_agreement",
+      "label": "Freudig zustimmen",
+      "label_de": "Freudig zustimmen",
+      "family": "welcoming",
+      "base_emotion": "contentment",
+      "actions": {
+        "eye_open": 0.78,
+        "smile": 0.76,
+        "mouth_width": 1.05,
+        "brow_raise": 0.18,
+        "mouth_asym": 0.08
+      },
+      "options": {},
+      "constraints": {},
+      "visual_cues_de": "Ein klares freundliches Ja-Gesicht mit entspanntem Blick.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false,
+      "archetype": "archetypes/16_pleased_agreement",
+      "archetype_valid": true,
+      "samples": [
+        {
+          "seed": 1600042,
+          "pose": "variations/pleased_agreement/0000_seed1600042.json",
+          "png": "variations/pleased_agreement/0000_seed1600042.png",
+          "svg": "variations/pleased_agreement/0000_seed1600042.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.09544367816091955,
+          "svg_sha256": "579b84ed9dcc61a968b64b54deca8708f09d12df5b3123b71b57b40a8c964725"
+        },
+        {
+          "seed": 1600043,
+          "pose": "variations/pleased_agreement/0001_seed1600043.json",
+          "png": "variations/pleased_agreement/0001_seed1600043.png",
+          "svg": "variations/pleased_agreement/0001_seed1600043.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.09427586206896552,
+          "svg_sha256": "162f79978817f7dfd9e45e60ea4a12dcbc449719b92195c0714b0177f567d97c"
+        },
+        {
+          "seed": 1600044,
+          "pose": "variations/pleased_agreement/0002_seed1600044.json",
+          "png": "variations/pleased_agreement/0002_seed1600044.png",
+          "svg": "variations/pleased_agreement/0002_seed1600044.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.09252505747126437,
+          "svg_sha256": "28f840d24e1b1a9ac23f5ff243497c6b653dfde026e8114250704a91ac4fd696"
+        },
+        {
+          "seed": 1600045,
+          "pose": "variations/pleased_agreement/0003_seed1600045.json",
+          "png": "variations/pleased_agreement/0003_seed1600045.png",
+          "svg": "variations/pleased_agreement/0003_seed1600045.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.09533057471264368,
+          "svg_sha256": "aa58441c6c76964e6e1c5a1897d431c6494d7b98f552f7f790aba2f95a2e85a2"
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "slug": "doubtful_agreement",
+      "label": "Na gut, wenn du meinst",
+      "label_de": "Na gut, wenn du meinst",
+      "family": "welcoming",
+      "base_emotion": "doubt",
+      "actions": {
+        "eye_open": 0.82,
+        "eye_asym": 0.3,
+        "smile": 0.16,
+        "mouth_asym": 0.48,
+        "gaze_x": -0.35,
+        "mouth_width": 0.87
+      },
+      "options": {},
+      "constraints": {},
+      "visual_cues_de": "Skeptische Braue, kleiner halber Smile und ein vorsichtiger Seitenblick.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false,
+      "archetype": "archetypes/17_doubtful_agreement",
+      "archetype_valid": true,
+      "samples": [
+        {
+          "seed": 1700042,
+          "pose": "variations/doubtful_agreement/0000_seed1700042.json",
+          "png": "variations/doubtful_agreement/0000_seed1700042.png",
+          "svg": "variations/doubtful_agreement/0000_seed1700042.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.09255724137931035,
+          "svg_sha256": "f384b643e8bf11671e0f43f849493bebc532712cdda47f0c01810717f59d305f"
+        },
+        {
+          "seed": 1700043,
+          "pose": "variations/doubtful_agreement/0001_seed1700043.json",
+          "png": "variations/doubtful_agreement/0001_seed1700043.png",
+          "svg": "variations/doubtful_agreement/0001_seed1700043.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.09310068965517242,
+          "svg_sha256": "6be335d8de2c5527304c54def6f67788c29efdce57a4a5b224f3eab095cf637b"
+        },
+        {
+          "seed": 1700044,
+          "pose": "variations/doubtful_agreement/0002_seed1700044.json",
+          "png": "variations/doubtful_agreement/0002_seed1700044.png",
+          "svg": "variations/doubtful_agreement/0002_seed1700044.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.10378758620689656,
+          "svg_sha256": "32ca6c2a07948872fa9753b9dffc08292faebb823145903287a71a7ef5f09e07"
+        },
+        {
+          "seed": 1700045,
+          "pose": "variations/doubtful_agreement/0003_seed1700045.json",
+          "png": "variations/doubtful_agreement/0003_seed1700045.png",
+          "svg": "variations/doubtful_agreement/0003_seed1700045.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.09167540229885057,
+          "svg_sha256": "42f21815f43a1d260c16257c784b34e8ef4135db0ec0b4066bfc5369d6843cad"
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "slug": "polite_disagreement",
+      "label": "Freundlich widersprechen",
+      "label_de": "Freundlich widersprechen",
+      "family": "welcoming",
+      "base_emotion": "concentration",
+      "actions": {
+        "frown": 0.28,
+        "brow_inner": 0.22,
+        "eye_open": 0.96,
+        "smile": -0.18,
+        "mouth_width": 0.84,
+        "mouth_asym": 0.18
+      },
+      "options": {},
+      "constraints": {},
+      "visual_cues_de": "Klarer direkter Blick und eine sanft gespannte schmale Mundlinie.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false,
+      "archetype": "archetypes/18_polite_disagreement",
+      "archetype_valid": true,
+      "samples": [
+        {
+          "seed": 1800042,
+          "pose": "variations/polite_disagreement/0000_seed1800042.json",
+          "png": "variations/polite_disagreement/0000_seed1800042.png",
+          "svg": "variations/polite_disagreement/0000_seed1800042.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.09899586206896552,
+          "svg_sha256": "beffdc02f8d49ea72794003617aaf46154774a8e45c78e3e36a8a22b7464687f"
+        },
+        {
+          "seed": 1800043,
+          "pose": "variations/polite_disagreement/0001_seed1800043.json",
+          "png": "variations/polite_disagreement/0001_seed1800043.png",
+          "svg": "variations/polite_disagreement/0001_seed1800043.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.0956248275862069,
+          "svg_sha256": "f941659f691117a061517d51ecf64e23e709030104b9626ff603c18307cd1b40"
+        },
+        {
+          "seed": 1800044,
+          "pose": "variations/polite_disagreement/0002_seed1800044.json",
+          "png": "variations/polite_disagreement/0002_seed1800044.png",
+          "svg": "variations/polite_disagreement/0002_seed1800044.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.09487724137931035,
+          "svg_sha256": "624539cac47d7dfa7aa7d50262e36f2cf15594671ceed14e136baeeb5d5826f9"
+        },
+        {
+          "seed": 1800045,
+          "pose": "variations/polite_disagreement/0003_seed1800045.json",
+          "png": "variations/polite_disagreement/0003_seed1800045.png",
+          "svg": "variations/polite_disagreement/0003_seed1800045.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.09514022988505746,
+          "svg_sha256": "7d2023a1686915e95f3a733668c29cc1ee2203bed68dd0d419865039d7463833"
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "slug": "not_impressed",
+      "label": "Charmant unbeeindruckt",
+      "label_de": "Charmant unbeeindruckt",
+      "family": "welcoming",
+      "base_emotion": "numbness",
+      "actions": {
+        "eye_open": 0.43,
+        "brow_asym": 0.22,
+        "smile": 0.07,
+        "mouth_asym": 0.4,
+        "mouth_width": 0.78,
+        "gaze_x": 0.25
+      },
+      "options": {
+        "under_eye": "continuous"
+      },
+      "constraints": {},
+      "visual_cues_de": "Schwere Lider und ein winziger schiefer Mundwinkel: aha, wirklich?",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false,
+      "archetype": "archetypes/19_not_impressed",
+      "archetype_valid": true,
+      "samples": [
+        {
+          "seed": 1900042,
+          "pose": "variations/not_impressed/0000_seed1900042.json",
+          "png": "variations/not_impressed/0000_seed1900042.png",
+          "svg": "variations/not_impressed/0000_seed1900042.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.07654988505747126,
+          "svg_sha256": "dfd3c284a27aa7f495b1d1026529586936f17b7136ee59258535b75006e2209e"
+        },
+        {
+          "seed": 1900043,
+          "pose": "variations/not_impressed/0001_seed1900043.json",
+          "png": "variations/not_impressed/0001_seed1900043.png",
+          "svg": "variations/not_impressed/0001_seed1900043.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.07588597701149426,
+          "svg_sha256": "9900c77c67a3843d98debbc537b4f591242c9cd395da3f114f525a8ab777cdcd"
+        },
+        {
+          "seed": 1900044,
+          "pose": "variations/not_impressed/0002_seed1900044.json",
+          "png": "variations/not_impressed/0002_seed1900044.png",
+          "svg": "variations/not_impressed/0002_seed1900044.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.07984551724137931,
+          "svg_sha256": "2e80ded6aa7b493d83a5116deec6d8ed0a5a41514d62e70fa3ff16877f625649"
+        },
+        {
+          "seed": 1900045,
+          "pose": "variations/not_impressed/0003_seed1900045.json",
+          "png": "variations/not_impressed/0003_seed1900045.png",
+          "svg": "variations/not_impressed/0003_seed1900045.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.07871540229885057,
+          "svg_sha256": "c64f37566d87fd7dc0f5e9122de51b85aeb1f7f59ff0fb52b438803cb4e73dec"
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "slug": "skeptical_challenge",
+      "label": "Wirklich jetzt?",
+      "label_de": "Wirklich jetzt?",
+      "family": "welcoming",
+      "base_emotion": "doubt",
+      "actions": {
+        "brow_asym": 1.03,
+        "eye_asym": 0.48,
+        "gaze_x": 0.0,
+        "smile": -0.12,
+        "mouth_asym": 0.54,
+        "mouth_width": 0.7
+      },
+      "options": {},
+      "constraints": {},
+      "visual_cues_de": "Deutlich ungleiche Brauen, prüfender Blick und kleiner verzogener Mund.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false,
+      "archetype": "archetypes/20_skeptical_challenge",
+      "archetype_valid": true,
+      "samples": [
+        {
+          "seed": 2000042,
+          "pose": "variations/skeptical_challenge/0000_seed2000042.json",
+          "png": "variations/skeptical_challenge/0000_seed2000042.png",
+          "svg": "variations/skeptical_challenge/0000_seed2000042.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.08952919540229885,
+          "svg_sha256": "fe2e0c9230bed7bbcf836a87c48fa80725b9929a79a412ae24d58e8b8460c972"
+        },
+        {
+          "seed": 2000043,
+          "pose": "variations/skeptical_challenge/0001_seed2000043.json",
+          "png": "variations/skeptical_challenge/0001_seed2000043.png",
+          "svg": "variations/skeptical_challenge/0001_seed2000043.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.08761747126436782,
+          "svg_sha256": "7198e4908e13cf45e14e7a632c51c0bcf97d4449aba4422396caae66fc770675"
+        },
+        {
+          "seed": 2000044,
+          "pose": "variations/skeptical_challenge/0002_seed2000044.json",
+          "png": "variations/skeptical_challenge/0002_seed2000044.png",
+          "svg": "variations/skeptical_challenge/0002_seed2000044.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.09352,
+          "svg_sha256": "ae24e2f9da29ff0a8d5d8a3d9d92050a11976cadb7595dbbf494987f6c08a643"
+        },
+        {
+          "seed": 2000045,
+          "pose": "variations/skeptical_challenge/0003_seed2000045.json",
+          "png": "variations/skeptical_challenge/0003_seed2000045.png",
+          "svg": "variations/skeptical_challenge/0003_seed2000045.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.09697011494252873,
+          "svg_sha256": "81fcbb979071b88ed97e6aad6149e97d53a464d38d065216175382d8c676845b"
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "slug": "sulking",
+      "label": "Sanft eingeschnappt",
+      "label_de": "Sanft eingeschnappt",
+      "family": "hurt",
+      "base_emotion": "disappointment",
+      "actions": {
+        "eye_open": 0.55,
+        "gaze_x": -0.66,
+        "brow_inner": 0.55,
+        "smile": -0.55,
+        "mouth_width": 0.6,
+        "mouth_asym": 0.12
+      },
+      "options": {
+        "under_eye": "continuous"
+      },
+      "constraints": {
+        "gaze_x_max": -0.4
+      },
+      "visual_cues_de": "Ausweichender Blick und kleines Schmollmäulchen, weich statt feindselig.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false,
+      "archetype": "archetypes/21_sulking",
+      "archetype_valid": true,
+      "samples": [
+        {
+          "seed": 2100042,
+          "pose": "variations/sulking/0000_seed2100042.json",
+          "png": "variations/sulking/0000_seed2100042.png",
+          "svg": "variations/sulking/0000_seed2100042.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.07567816091954023,
+          "svg_sha256": "9aa629c0a08fc8a918b5be330c079133baeb9f40050fefde408b9da85f082158"
+        },
+        {
+          "seed": 2100043,
+          "pose": "variations/sulking/0001_seed2100043.json",
+          "png": "variations/sulking/0001_seed2100043.png",
+          "svg": "variations/sulking/0001_seed2100043.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.08054712643678161,
+          "svg_sha256": "d6db2a99aa5d4fe6d2ec86107f977415ec7e0a4eb101a4094b48ccf15b687cef"
+        },
+        {
+          "seed": 2100044,
+          "pose": "variations/sulking/0002_seed2100044.json",
+          "png": "variations/sulking/0002_seed2100044.png",
+          "svg": "variations/sulking/0002_seed2100044.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.07629609195402298,
+          "svg_sha256": "aeeeecd3f732901e2b14fd8b5faffc2c41be08a74f4fcdee79a1449473ea65c2"
+        },
+        {
+          "seed": 2100045,
+          "pose": "variations/sulking/0003_seed2100045.json",
+          "png": "variations/sulking/0003_seed2100045.png",
+          "svg": "variations/sulking/0003_seed2100045.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.08354574712643678,
+          "svg_sha256": "27ebbbf2bf78792be0277fc309ecf07815836aa0f9c06afac4bb955d5f09966d"
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "slug": "offended",
+      "label": "Ein bisschen beleidigt",
+      "label_de": "Ein bisschen beleidigt",
+      "family": "hurt",
+      "base_emotion": "bitterness",
+      "actions": {
+        "frown": 0.35,
+        "brow_inner": 0.45,
+        "eye_open": 0.76,
+        "gaze_x": 0.72,
+        "smile": -0.44,
+        "mouth_asym": -0.46,
+        "mouth_width": 0.78
+      },
+      "options": {
+        "under_eye": "continuous"
+      },
+      "constraints": {
+        "gaze_x_min": 0.45
+      },
+      "visual_cues_de": "Verletzter Seitenblick und ein angespannt schiefer abwärts gezogener Mund.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false,
+      "archetype": "archetypes/22_offended",
+      "archetype_valid": true,
+      "samples": [
+        {
+          "seed": 2200042,
+          "pose": "variations/offended/0000_seed2200042.json",
+          "png": "variations/offended/0000_seed2200042.png",
+          "svg": "variations/offended/0000_seed2200042.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.09173701149425287,
+          "svg_sha256": "23bc9cfe6488c8ee479a6b5103d4e23448ebb16f7972b973f941ea965dc4778d"
+        },
+        {
+          "seed": 2200043,
+          "pose": "variations/offended/0001_seed2200043.json",
+          "png": "variations/offended/0001_seed2200043.png",
+          "svg": "variations/offended/0001_seed2200043.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.08990068965517241,
+          "svg_sha256": "73e4d8064a80ef21a6a31b17f29358681fb1d31d452ac457cee850f8814551e0"
+        },
+        {
+          "seed": 2200044,
+          "pose": "variations/offended/0002_seed2200044.json",
+          "png": "variations/offended/0002_seed2200044.png",
+          "svg": "variations/offended/0002_seed2200044.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.08399816091954022,
+          "svg_sha256": "2b43c4e167fd2160668e6414452c1c173e4cedc73cfcde7091de0782071e8806"
+        },
+        {
+          "seed": 2200045,
+          "pose": "variations/offended/0003_seed2200045.json",
+          "png": "variations/offended/0003_seed2200045.png",
+          "svg": "variations/offended/0003_seed2200045.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.08941793103448276,
+          "svg_sha256": "8781ad8d7096ae3fde48ea9cf634ecb87fad1d9df8b3a2166aee880f7ac23be8"
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "slug": "pouty_protest",
+      "label": "Schmollend protestieren",
+      "label_de": "Schmollend protestieren",
+      "family": "hurt",
+      "base_emotion": "sourness",
+      "actions": {
+        "eye_open": 0.94,
+        "eye_asym": 0.05,
+        "brow_inner": 0.65,
+        "frown": 0.18,
+        "nose_lift": 0.0,
+        "mouth_width": 0.55,
+        "mouth_open": 0.2,
+        "mouth_asym": 0.1
+      },
+      "options": {
+        "mouth": "pucker",
+        "under_eye": "continuous"
+      },
+      "constraints": {},
+      "visual_cues_de": "Große bittende Augen und überzeichnete kleine Schmoll-Lippen.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false,
+      "archetype": "archetypes/23_pouty_protest",
+      "archetype_valid": true,
+      "samples": [
+        {
+          "seed": 2300042,
+          "pose": "variations/pouty_protest/0000_seed2300042.json",
+          "png": "variations/pouty_protest/0000_seed2300042.png",
+          "svg": "variations/pouty_protest/0000_seed2300042.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.09677977011494253,
+          "svg_sha256": "8fc41bfb88d1bee4bbd782170e96c7a95a6e3685d940ff548b3f7f19d141fcea"
+        },
+        {
+          "seed": 2300043,
+          "pose": "variations/pouty_protest/0001_seed2300043.json",
+          "png": "variations/pouty_protest/0001_seed2300043.png",
+          "svg": "variations/pouty_protest/0001_seed2300043.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.08878988505747126,
+          "svg_sha256": "c38a2b8e4f85f8ccff9548ef2727e91a3d5e15927c8833a2692af37d139f3731"
+        },
+        {
+          "seed": 2300044,
+          "pose": "variations/pouty_protest/0002_seed2300044.json",
+          "png": "variations/pouty_protest/0002_seed2300044.png",
+          "svg": "variations/pouty_protest/0002_seed2300044.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.10433655172413793,
+          "svg_sha256": "7e4b06e1618923f54b693093711a56a0870c465f6473b4dd7ce0012386ccb830"
+        },
+        {
+          "seed": 2300045,
+          "pose": "variations/pouty_protest/0003_seed2300045.json",
+          "png": "variations/pouty_protest/0003_seed2300045.png",
+          "svg": "variations/pouty_protest/0003_seed2300045.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.09244137931034482,
+          "svg_sha256": "084bd05685ac4aa512b4ca8f5dd5136a25172dccddf900d496d138826fe19d9e"
+        }
+      ]
+    },
+    {
+      "id": 24,
+      "slug": "feeling_left_out",
+      "label": "Ich möchte auch dabei sein",
+      "label_de": "Ich möchte auch dabei sein",
+      "family": "hurt",
+      "base_emotion": "longing",
+      "actions": {
+        "eye_open": 0.94,
+        "gaze_x": -0.65,
+        "gaze_y": 0.18,
+        "brow_inner": 0.86,
+        "smile": -0.48,
+        "mouth_width": 0.65
+      },
+      "options": {},
+      "constraints": {},
+      "visual_cues_de": "Bittender seitlicher Blick und zurückhaltender trauriger Mund.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false,
+      "archetype": "archetypes/24_feeling_left_out",
+      "archetype_valid": true,
+      "samples": [
+        {
+          "seed": 2400042,
+          "pose": "variations/feeling_left_out/0000_seed2400042.json",
+          "png": "variations/feeling_left_out/0000_seed2400042.png",
+          "svg": "variations/feeling_left_out/0000_seed2400042.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.10296919540229885,
+          "svg_sha256": "122a84f35c495c2325f64998d7807c39edd4f1512203d44eddb80020e5fa08fe"
+        },
+        {
+          "seed": 2400043,
+          "pose": "variations/feeling_left_out/0001_seed2400043.json",
+          "png": "variations/feeling_left_out/0001_seed2400043.png",
+          "svg": "variations/feeling_left_out/0001_seed2400043.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.10142344827586207,
+          "svg_sha256": "7aded9b1602448b5a9b9f4c6eff242d117b9cac1f2a1a7f4a7401de93a5e1806"
+        },
+        {
+          "seed": 2400044,
+          "pose": "variations/feeling_left_out/0002_seed2400044.json",
+          "png": "variations/feeling_left_out/0002_seed2400044.png",
+          "svg": "variations/feeling_left_out/0002_seed2400044.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.09875770114942528,
+          "svg_sha256": "bb114a8246cdfe815de7b622b96dd45a1eccf96a2b1c28841bfa7c9802a4ad78"
+        },
+        {
+          "seed": 2400045,
+          "pose": "variations/feeling_left_out/0003_seed2400045.json",
+          "png": "variations/feeling_left_out/0003_seed2400045.png",
+          "svg": "variations/feeling_left_out/0003_seed2400045.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.09642390804597702,
+          "svg_sha256": "3309e4a55f6e9a234075fff9a9714ec0cef62eca025a53ba0b91a9549e9a7eb7"
+        }
+      ]
+    },
+    {
+      "id": 25,
+      "slug": "forgiving",
+      "label": "Schon gut, ich verzeihe dir",
+      "label_de": "Schon gut, ich verzeihe dir",
+      "family": "hurt",
+      "base_emotion": "relief",
+      "actions": {
+        "eye_open": 0.57,
+        "brow_inner": 0.54,
+        "smile": 0.57,
+        "mouth_width": 0.88,
+        "mouth_open": 0.0,
+        "gaze_x": 0.18
+      },
+      "options": {
+        "mouth": "closed"
+      },
+      "constraints": {},
+      "visual_cues_de": "Nachsichtige enge Augen und ein gelöstes kleines Lächeln.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false,
+      "archetype": "archetypes/25_forgiving",
+      "archetype_valid": true,
+      "samples": [
+        {
+          "seed": 2500042,
+          "pose": "variations/forgiving/0000_seed2500042.json",
+          "png": "variations/forgiving/0000_seed2500042.png",
+          "svg": "variations/forgiving/0000_seed2500042.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.07709241379310344,
+          "svg_sha256": "ec2fb39d02ba949973ebf342b612c06230f0573ee4f4cc3a2f6aaabc42cc252b"
+        },
+        {
+          "seed": 2500043,
+          "pose": "variations/forgiving/0001_seed2500043.json",
+          "png": "variations/forgiving/0001_seed2500043.png",
+          "svg": "variations/forgiving/0001_seed2500043.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.08571494252873563,
+          "svg_sha256": "366389ab525e38816e230e279b7c180eb06c473b51549b5cf0176df1c6a6eb8d"
+        },
+        {
+          "seed": 2500044,
+          "pose": "variations/forgiving/0002_seed2500044.json",
+          "png": "variations/forgiving/0002_seed2500044.png",
+          "svg": "variations/forgiving/0002_seed2500044.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.09197149425287356,
+          "svg_sha256": "fc29ca30ba5207a174459c67a831e4d874f86d2f8c906211d47f3e0dd45d6919"
+        },
+        {
+          "seed": 2500045,
+          "pose": "variations/forgiving/0003_seed2500045.json",
+          "png": "variations/forgiving/0003_seed2500045.png",
+          "svg": "variations/forgiving/0003_seed2500045.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.08072367816091953,
+          "svg_sha256": "4089a22937146500f8b7e15206c38b7659860cdbf42853b792665acad18a2104"
+        }
+      ]
+    },
+    {
+      "id": 26,
+      "slug": "apologetic_grimace",
+      "label": "Ups, das tut mir leid",
+      "label_de": "Ups, das tut mir leid",
+      "family": "hurt",
+      "base_emotion": "embarrassment",
+      "actions": {
+        "brow_inner": 0.82,
+        "eye_open": 0.88,
+        "gaze_x": -0.48,
+        "smile": -0.08,
+        "mouth_width": 0.94,
+        "mouth_open": 0.15,
+        "mouth_tension": 0.44,
+        "mouth_asym": 0.3
+      },
+      "options": {
+        "mouth": "teeth"
+      },
+      "constraints": {},
+      "visual_cues_de": "Besorgte Brauen, ausweichender Blick und kleines verlegenes Zähnezeigen.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false,
+      "archetype": "archetypes/26_apologetic_grimace",
+      "archetype_valid": true,
+      "samples": [
+        {
+          "seed": 2600042,
+          "pose": "variations/apologetic_grimace/0000_seed2600042.json",
+          "png": "variations/apologetic_grimace/0000_seed2600042.png",
+          "svg": "variations/apologetic_grimace/0000_seed2600042.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.09810666666666666,
+          "svg_sha256": "7e1c6b8dd722b58bb665748f887e7ddd6a85c2f7e5ca674fc250efd5e7da276b"
+        },
+        {
+          "seed": 2600043,
+          "pose": "variations/apologetic_grimace/0001_seed2600043.json",
+          "png": "variations/apologetic_grimace/0001_seed2600043.png",
+          "svg": "variations/apologetic_grimace/0001_seed2600043.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.09534528735632183,
+          "svg_sha256": "4412fb4e111f68b32d772e2459cac105b8b32779c57a2f02ed2847fc0c7db0c0"
+        },
+        {
+          "seed": 2600044,
+          "pose": "variations/apologetic_grimace/0002_seed2600044.json",
+          "png": "variations/apologetic_grimace/0002_seed2600044.png",
+          "svg": "variations/apologetic_grimace/0002_seed2600044.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.09682022988505747,
+          "svg_sha256": "b4dd027f5ca86fe72e86c35112ce330e5301e390b648c72940e1146461f63930"
+        },
+        {
+          "seed": 2600045,
+          "pose": "variations/apologetic_grimace/0003_seed2600045.json",
+          "png": "variations/apologetic_grimace/0003_seed2600045.png",
+          "svg": "variations/apologetic_grimace/0003_seed2600045.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.09875034482758621,
+          "svg_sha256": "9c6b70bcc99c2328a2dcf861a912bcaac11826ab78c99a83c010bbf7842d0466"
+        }
+      ]
+    },
+    {
+      "id": 27,
+      "slug": "embarrassed_cover_smile",
+      "label": "Peinlichkeit weglächeln",
+      "label_de": "Peinlichkeit weglächeln",
+      "family": "hurt",
+      "base_emotion": "embarrassment",
+      "actions": {
+        "brow_asym": 0.38,
+        "eye_open": 0.66,
+        "smile": 0.6,
+        "mouth_width": 1.09,
+        "mouth_asym": 0.55,
+        "gaze_x": 0.66
+      },
+      "options": {},
+      "constraints": {},
+      "visual_cues_de": "Ein zu großes schiefes Verlegenheitslächeln mit seitlichem Blick.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false,
+      "archetype": "archetypes/27_embarrassed_cover_smile",
+      "archetype_valid": true,
+      "samples": [
+        {
+          "seed": 2700042,
+          "pose": "variations/embarrassed_cover_smile/0000_seed2700042.json",
+          "png": "variations/embarrassed_cover_smile/0000_seed2700042.png",
+          "svg": "variations/embarrassed_cover_smile/0000_seed2700042.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.09138850574712644,
+          "svg_sha256": "4104785161514ff2168819d84953f83ab2e2c3c7f09e92629d7deb5d10fa056c"
+        },
+        {
+          "seed": 2700043,
+          "pose": "variations/embarrassed_cover_smile/0001_seed2700043.json",
+          "png": "variations/embarrassed_cover_smile/0001_seed2700043.png",
+          "svg": "variations/embarrassed_cover_smile/0001_seed2700043.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.09286896551724137,
+          "svg_sha256": "0f34076044825a45f4d284635b3d2983f697718f59fb872a02b602f5639444dd"
+        },
+        {
+          "seed": 2700044,
+          "pose": "variations/embarrassed_cover_smile/0002_seed2700044.json",
+          "png": "variations/embarrassed_cover_smile/0002_seed2700044.png",
+          "svg": "variations/embarrassed_cover_smile/0002_seed2700044.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.08936367816091954,
+          "svg_sha256": "6246238c6261b4242c0e93c2c929cf64c3be26e00ce336b7e8556177471ba3a7"
+        },
+        {
+          "seed": 2700045,
+          "pose": "variations/embarrassed_cover_smile/0003_seed2700045.json",
+          "png": "variations/embarrassed_cover_smile/0003_seed2700045.png",
+          "svg": "variations/embarrassed_cover_smile/0003_seed2700045.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.0856616091954023,
+          "svg_sha256": "a60b40edc8ca73b6640459c0fd4039f74af8961a6ec428d3e8e6a77c50712e13"
+        }
+      ]
+    },
+    {
+      "id": 28,
+      "slug": "caught_in_act",
+      "label": "Beim Schabernack erwischt",
+      "label_de": "Beim Schabernack erwischt",
+      "family": "hurt",
+      "base_emotion": "fear",
+      "actions": {
+        "eye_open": 1.2,
+        "brow_asym": 0.34,
+        "gaze_x": -0.68,
+        "pupil_scale": 0.87,
+        "mouth_width": 0.83,
+        "mouth_open": 0.18,
+        "smile": 0.12,
+        "mouth_asym": 0.4
+      },
+      "options": {},
+      "constraints": {},
+      "visual_cues_de": "Große seitlich ausweichende Augen und ein kleines ertapptes Grinsen.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false,
+      "archetype": "archetypes/28_caught_in_act",
+      "archetype_valid": true,
+      "samples": [
+        {
+          "seed": 2800042,
+          "pose": "variations/caught_in_act/0000_seed2800042.json",
+          "png": "variations/caught_in_act/0000_seed2800042.png",
+          "svg": "variations/caught_in_act/0000_seed2800042.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.09645701149425287,
+          "svg_sha256": "1712f6619eefa8b8c7ffd64f37d3faacf6c42047af7b75f09d10c3313fdfb5d9"
+        },
+        {
+          "seed": 2800043,
+          "pose": "variations/caught_in_act/0001_seed2800043.json",
+          "png": "variations/caught_in_act/0001_seed2800043.png",
+          "svg": "variations/caught_in_act/0001_seed2800043.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.10250298850574713,
+          "svg_sha256": "d87d1aa2408908ce242f9602204247f1d2d5c9edb439e70e3ede89b58089f5df"
+        },
+        {
+          "seed": 2800044,
+          "pose": "variations/caught_in_act/0002_seed2800044.json",
+          "png": "variations/caught_in_act/0002_seed2800044.png",
+          "svg": "variations/caught_in_act/0002_seed2800044.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.1008183908045977,
+          "svg_sha256": "86339dc40f0d6f1a69c2f128d36ecb603273b21d0411fcb082f4bd8ab4967f19"
+        },
+        {
+          "seed": 2800045,
+          "pose": "variations/caught_in_act/0003_seed2800045.json",
+          "png": "variations/caught_in_act/0003_seed2800045.png",
+          "svg": "variations/caught_in_act/0003_seed2800045.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.10538114942528735,
+          "svg_sha256": "73152fe0c5f9c34a9ca48e080ffc9c405b892573b85992d80ff87abbabeba845"
+        }
+      ]
+    },
+    {
+      "id": 29,
+      "slug": "awkward_laugh",
+      "label": "Unsicher mitlachen",
+      "label_de": "Unsicher mitlachen",
+      "family": "hurt",
+      "base_emotion": "amusement",
+      "actions": {
+        "eye_open": 0.79,
+        "brow_inner": 0.68,
+        "brow_asym": 0.35,
+        "mouth_width": 1.0,
+        "mouth_open": 0.31,
+        "smile": 0.6,
+        "mouth_asym": 0.55,
+        "gaze_x": -0.35
+      },
+      "options": {
+        "tongue": "none",
+        "under_eye": "hatching"
+      },
+      "constraints": {},
+      "visual_cues_de": "Offenes asymmetrisches Lachen mit besorgten statt ausgelassenen Brauen.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false,
+      "archetype": "archetypes/29_awkward_laugh",
+      "archetype_valid": true,
+      "samples": [
+        {
+          "seed": 2900042,
+          "pose": "variations/awkward_laugh/0000_seed2900042.json",
+          "png": "variations/awkward_laugh/0000_seed2900042.png",
+          "svg": "variations/awkward_laugh/0000_seed2900042.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.09172321839080459,
+          "svg_sha256": "625473f206b4289d110324220f9e598270cde7ba9635af83136a96106db7005b"
+        },
+        {
+          "seed": 2900043,
+          "pose": "variations/awkward_laugh/0001_seed2900043.json",
+          "png": "variations/awkward_laugh/0001_seed2900043.png",
+          "svg": "variations/awkward_laugh/0001_seed2900043.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.09078436781609195,
+          "svg_sha256": "83aa520a7379f57b431cbbf17c820d5a05078d45984e1b4abb22c93c9d59a4b5"
+        },
+        {
+          "seed": 2900044,
+          "pose": "variations/awkward_laugh/0002_seed2900044.json",
+          "png": "variations/awkward_laugh/0002_seed2900044.png",
+          "svg": "variations/awkward_laugh/0002_seed2900044.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.08625103448275862,
+          "svg_sha256": "ed7f10af0385fca002ee782b8879ab3ebf23004999c1d806e602ef2100f1a1ec"
+        },
+        {
+          "seed": 2900045,
+          "pose": "variations/awkward_laugh/0003_seed2900045.json",
+          "png": "variations/awkward_laugh/0003_seed2900045.png",
+          "svg": "variations/awkward_laugh/0003_seed2900045.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.10045977011494253,
+          "svg_sha256": "931f87c3caae04f7ab314dc162f70e43619ebb339b0329a1c982d3859283e4f0"
+        }
+      ]
+    },
+    {
+      "id": 30,
+      "slug": "reluctant_smile",
+      "label": "Widerwillig doch lächeln",
+      "label_de": "Widerwillig doch lächeln",
+      "family": "hurt",
+      "base_emotion": "bitterness",
+      "actions": {
+        "frown": 0.24,
+        "eye_open": 0.59,
+        "brow_asym": 0.25,
+        "smile": 0.39,
+        "mouth_width": 0.84,
+        "mouth_asym": 0.72,
+        "gaze_x": -0.28
+      },
+      "options": {
+        "under_eye": "continuous"
+      },
+      "constraints": {},
+      "visual_cues_de": "Ein einzelner steigender Mundwinkel trotz zurückhaltendem Blick.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false,
+      "archetype": "archetypes/30_reluctant_smile",
+      "archetype_valid": true,
+      "samples": [
+        {
+          "seed": 3000042,
+          "pose": "variations/reluctant_smile/0000_seed3000042.json",
+          "png": "variations/reluctant_smile/0000_seed3000042.png",
+          "svg": "variations/reluctant_smile/0000_seed3000042.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.08337103448275862,
+          "svg_sha256": "b5123ac1739cf818155759b6e8a3847e03048f451f10cf92a12add568484a81e"
+        },
+        {
+          "seed": 3000043,
+          "pose": "variations/reluctant_smile/0001_seed3000043.json",
+          "png": "variations/reluctant_smile/0001_seed3000043.png",
+          "svg": "variations/reluctant_smile/0001_seed3000043.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.07858298850574713,
+          "svg_sha256": "f883f9c9c4d75648ca00d7241b927eea49e1d5e7f8c56d342c887a04d1c07bb4"
+        },
+        {
+          "seed": 3000044,
+          "pose": "variations/reluctant_smile/0002_seed3000044.json",
+          "png": "variations/reluctant_smile/0002_seed3000044.png",
+          "svg": "variations/reluctant_smile/0002_seed3000044.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.09098574712643678,
+          "svg_sha256": "0f987632a453512f0e496a0be639e507201fbb80fad0d2d7c52878f71d2bcd3a"
+        },
+        {
+          "seed": 3000045,
+          "pose": "variations/reluctant_smile/0003_seed3000045.json",
+          "png": "variations/reluctant_smile/0003_seed3000045.png",
+          "svg": "variations/reluctant_smile/0003_seed3000045.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.08041103448275862,
+          "svg_sha256": "6f7ca6f446e3a0f2d273a718abc852b60f4f22aaa9553e75a2aa456367a8923c"
+        }
+      ]
+    },
+    {
+      "id": 31,
+      "slug": "comedic_shock",
+      "label": "Komödiantisch erschrocken",
+      "label_de": "Komödiantisch erschrocken",
+      "family": "theatrical",
+      "base_emotion": "surprise",
+      "actions": {
+        "eye_asym": 0.15,
+        "brow_asym": 0.38,
+        "mouth_width": 0.6,
+        "mouth_open": 0.76,
+        "mouth_asym": 0.34,
+        "pupil_scale": 0.79
+      },
+      "options": {},
+      "constraints": {},
+      "visual_cues_de": "Weite ungleiche Augen und ein kleines schiefes Schreck-O.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false,
+      "archetype": "archetypes/31_comedic_shock",
+      "archetype_valid": true,
+      "samples": [
+        {
+          "seed": 3100042,
+          "pose": "variations/comedic_shock/0000_seed3100042.json",
+          "png": "variations/comedic_shock/0000_seed3100042.png",
+          "svg": "variations/comedic_shock/0000_seed3100042.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.10037057471264368,
+          "svg_sha256": "59706733e0e5ba344ee987369b86c6bd88024b341916317a85a4efda9baeb504"
+        },
+        {
+          "seed": 3100043,
+          "pose": "variations/comedic_shock/0001_seed3100043.json",
+          "png": "variations/comedic_shock/0001_seed3100043.png",
+          "svg": "variations/comedic_shock/0001_seed3100043.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.10924413793103448,
+          "svg_sha256": "3bdb4c2b64be84069eab40ac7cf23cb28c100844ee652863fede051d9d14bd2d"
+        },
+        {
+          "seed": 3100044,
+          "pose": "variations/comedic_shock/0002_seed3100044.json",
+          "png": "variations/comedic_shock/0002_seed3100044.png",
+          "svg": "variations/comedic_shock/0002_seed3100044.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.10317885057471264,
+          "svg_sha256": "343513725716f3961d81bffa907faed1e85f0863ccbf93b4c2235ab2e1fad490"
+        },
+        {
+          "seed": 3100045,
+          "pose": "variations/comedic_shock/0003_seed3100045.json",
+          "png": "variations/comedic_shock/0003_seed3100045.png",
+          "svg": "variations/comedic_shock/0003_seed3100045.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.1105351724137931,
+          "svg_sha256": "5009d54d5528bcc8c0cd807ec4ae1a3e8e27081e76f483d97d9048d5fbbe8e13"
+        }
+      ]
+    },
+    {
+      "id": 32,
+      "slug": "exaggerated_disbelief",
+      "label": "Das glaub ich jetzt nicht",
+      "label_de": "Das glaub ich jetzt nicht",
+      "family": "theatrical",
+      "base_emotion": "confusion",
+      "actions": {
+        "brow_asym": 0.85,
+        "eye_open": 1.3,
+        "eye_asym": 0.16,
+        "gaze_y": -0.25,
+        "mouth_width": 0.8,
+        "mouth_open": 0.4,
+        "mouth_asym": 0.42
+      },
+      "options": {
+        "mouth": "round"
+      },
+      "constraints": {},
+      "visual_cues_de": "Überzeichnete hohe Braue und offener ungläubiger Mund.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false,
+      "archetype": "archetypes/32_exaggerated_disbelief",
+      "archetype_valid": true,
+      "samples": [
+        {
+          "seed": 3200042,
+          "pose": "variations/exaggerated_disbelief/0000_seed3200042.json",
+          "png": "variations/exaggerated_disbelief/0000_seed3200042.png",
+          "svg": "variations/exaggerated_disbelief/0000_seed3200042.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.10978022988505746,
+          "svg_sha256": "116d3eb622db19681c225c22981e233bd1fc72a0c5fea92ce33fec819246847b"
+        },
+        {
+          "seed": 3200043,
+          "pose": "variations/exaggerated_disbelief/0001_seed3200043.json",
+          "png": "variations/exaggerated_disbelief/0001_seed3200043.png",
+          "svg": "variations/exaggerated_disbelief/0001_seed3200043.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.1143448275862069,
+          "svg_sha256": "50c878b6bf26073fbef5310f22d2aa7b45928b3b2b3ccfb1e4838d7acbf7ad14"
+        },
+        {
+          "seed": 3200044,
+          "pose": "variations/exaggerated_disbelief/0002_seed3200044.json",
+          "png": "variations/exaggerated_disbelief/0002_seed3200044.png",
+          "svg": "variations/exaggerated_disbelief/0002_seed3200044.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.11922298850574713,
+          "svg_sha256": "22fe1fd778583916cee8b5fbd8022fd98885b7d165d489adc5967c1a5848e5f7"
+        },
+        {
+          "seed": 3200045,
+          "pose": "variations/exaggerated_disbelief/0003_seed3200045.json",
+          "png": "variations/exaggerated_disbelief/0003_seed3200045.png",
+          "svg": "variations/exaggerated_disbelief/0003_seed3200045.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.11690390804597701,
+          "svg_sha256": "068ecd20311a036578563254bf6f8574ed7c6b9d4ee45301542cefa4e1f9e3e5"
+        }
+      ]
+    },
+    {
+      "id": 33,
+      "slug": "mock_outrage",
+      "label": "Gespielt empört",
+      "label_de": "Gespielt empört",
+      "family": "theatrical",
+      "base_emotion": "anger",
+      "actions": {
+        "frown": 0.58,
+        "brow_inner": 0.05,
+        "brow_asym": 0.38,
+        "eye_open": 1.12,
+        "mouth_width": 1.0,
+        "mouth_open": 0.45,
+        "smile": -0.24,
+        "mouth_asym": 0.34
+      },
+      "options": {
+        "mouth": "dark"
+      },
+      "constraints": {},
+      "visual_cues_de": "Wache empörte Augen und eine offen gespielte Beschwerde.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false,
+      "archetype": "archetypes/33_mock_outrage",
+      "archetype_valid": true,
+      "samples": [
+        {
+          "seed": 3300042,
+          "pose": "variations/mock_outrage/0000_seed3300042.json",
+          "png": "variations/mock_outrage/0000_seed3300042.png",
+          "svg": "variations/mock_outrage/0000_seed3300042.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.10944735632183908,
+          "svg_sha256": "e4cbb890d1e7147d08f0d2b5454fecbd5eb0ab9fe45a0448df0c9de832aaa4c8"
+        },
+        {
+          "seed": 3300043,
+          "pose": "variations/mock_outrage/0001_seed3300043.json",
+          "png": "variations/mock_outrage/0001_seed3300043.png",
+          "svg": "variations/mock_outrage/0001_seed3300043.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.10741425287356322,
+          "svg_sha256": "0a2b6a4f3e68db0160c762167f72deefbe98ee73d8c376bf37cda1ff51726153"
+        },
+        {
+          "seed": 3300044,
+          "pose": "variations/mock_outrage/0002_seed3300044.json",
+          "png": "variations/mock_outrage/0002_seed3300044.png",
+          "svg": "variations/mock_outrage/0002_seed3300044.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.11067954022988506,
+          "svg_sha256": "9c1f9ac579b3be87e7dfc435665789eeb4f479a2bc0fd8fcf58f9735f8e9a1c2"
+        },
+        {
+          "seed": 3300045,
+          "pose": "variations/mock_outrage/0003_seed3300045.json",
+          "png": "variations/mock_outrage/0003_seed3300045.png",
+          "svg": "variations/mock_outrage/0003_seed3300045.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.11205149425287356,
+          "svg_sha256": "6d700b72f423a180ed00095b3d87f090d0d920ee0339ccba9a3f23f9ef9172db"
+        }
+      ]
+    },
+    {
+      "id": 34,
+      "slug": "told_you_so",
+      "label": "Hab ich dir doch gesagt",
+      "label_de": "Hab ich dir doch gesagt",
+      "family": "theatrical",
+      "base_emotion": "pride",
+      "actions": {
+        "brow_asym": 0.58,
+        "eye_open": 0.63,
+        "gaze_x": 0.42,
+        "smile": 0.64,
+        "mouth_asym": 0.72,
+        "mouth_width": 1.18
+      },
+      "options": {},
+      "constraints": {},
+      "visual_cues_de": "Verschmitzter Seitenblick und deutlich einseitiges Siegerlächeln.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false,
+      "archetype": "archetypes/34_told_you_so",
+      "archetype_valid": true,
+      "samples": [
+        {
+          "seed": 3400042,
+          "pose": "variations/told_you_so/0000_seed3400042.json",
+          "png": "variations/told_you_so/0000_seed3400042.png",
+          "svg": "variations/told_you_so/0000_seed3400042.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.08568919540229886,
+          "svg_sha256": "5fe1d8aee4c27f388a0ef6b19eb6aa5d99029e3965d327b7883a3cfca6620289"
+        },
+        {
+          "seed": 3400043,
+          "pose": "variations/told_you_so/0001_seed3400043.json",
+          "png": "variations/told_you_so/0001_seed3400043.png",
+          "svg": "variations/told_you_so/0001_seed3400043.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.09347494252873563,
+          "svg_sha256": "3b9146c267adca0140b4af24ca14eee823ca286f917f6795121c3e8098f60ae7"
+        },
+        {
+          "seed": 3400044,
+          "pose": "variations/told_you_so/0002_seed3400044.json",
+          "png": "variations/told_you_so/0002_seed3400044.png",
+          "svg": "variations/told_you_so/0002_seed3400044.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.08864,
+          "svg_sha256": "9273388b687aa358065b59eddfb1922eb7044abacdbeec78e5f98713cad6f96a"
+        },
+        {
+          "seed": 3400045,
+          "pose": "variations/told_you_so/0003_seed3400045.json",
+          "png": "variations/told_you_so/0003_seed3400045.png",
+          "svg": "variations/told_you_so/0003_seed3400045.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.08486068965517242,
+          "svg_sha256": "19b842403e075003f5eb98bda3b1f8a7b16f7e5f04d1c4b9392779dec47f2c61"
+        }
+      ]
+    },
+    {
+      "id": 35,
+      "slug": "smug_but_soft",
+      "label": "Charmant selbstzufrieden",
+      "label_de": "Charmant selbstzufrieden",
+      "family": "theatrical",
+      "base_emotion": "contempt",
+      "actions": {
+        "frown": 0.0,
+        "brow_asym": 0.3,
+        "eye_open": 0.68,
+        "smile": 0.38,
+        "mouth_asym": 0.68,
+        "mouth_width": 1.0
+      },
+      "options": {},
+      "constraints": {},
+      "visual_cues_de": "Ein hochgezogener Mundwinkel mit weichem statt verächtlichem Blick.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false,
+      "archetype": "archetypes/35_smug_but_soft",
+      "archetype_valid": true,
+      "samples": [
+        {
+          "seed": 3500042,
+          "pose": "variations/smug_but_soft/0000_seed3500042.json",
+          "png": "variations/smug_but_soft/0000_seed3500042.png",
+          "svg": "variations/smug_but_soft/0000_seed3500042.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.08497747126436782,
+          "svg_sha256": "d8b5a7bd0a06a9a94f01ab4bf375b3ca9b7eeef72427f7ba55156b46241cdbb4"
+        },
+        {
+          "seed": 3500043,
+          "pose": "variations/smug_but_soft/0001_seed3500043.json",
+          "png": "variations/smug_but_soft/0001_seed3500043.png",
+          "svg": "variations/smug_but_soft/0001_seed3500043.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.08643402298850575,
+          "svg_sha256": "9f6a6b8b7b10bca54db10fc71d68ba83f28a822098c41c0ab20912ce3ed1f3a8"
+        },
+        {
+          "seed": 3500044,
+          "pose": "variations/smug_but_soft/0002_seed3500044.json",
+          "png": "variations/smug_but_soft/0002_seed3500044.png",
+          "svg": "variations/smug_but_soft/0002_seed3500044.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.08352,
+          "svg_sha256": "bf27dfdee4c14b84e6d0bdd91920f58c7af3136c0e405d1e24214b0c0a3bb041"
+        },
+        {
+          "seed": 3500045,
+          "pose": "variations/smug_but_soft/0003_seed3500045.json",
+          "png": "variations/smug_but_soft/0003_seed3500045.png",
+          "svg": "variations/smug_but_soft/0003_seed3500045.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.08430896551724137,
+          "svg_sha256": "d5eb1f72c2b47f8cfd4c73f462a1f4078d43b81b70ce1f488733ecab3f9a1a92"
+        }
+      ]
+    },
+    {
+      "id": 36,
+      "slug": "sheepish_pride",
+      "label": "Ein bisschen stolz, ein bisschen verlegen",
+      "label_de": "Ein bisschen stolz, ein bisschen verlegen",
+      "family": "theatrical",
+      "base_emotion": "pride",
+      "actions": {
+        "brow_inner": 0.62,
+        "brow_asym": 0.18,
+        "gaze_x": -0.54,
+        "gaze_y": 0.27,
+        "smile": 0.53,
+        "mouth_width": 0.86,
+        "mouth_asym": 0.38
+      },
+      "options": {
+        "under_eye": "hatching"
+      },
+      "constraints": {},
+      "visual_cues_de": "Bescheiden ausweichender Blick und ein kleines stolzes Grinsen.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false,
+      "archetype": "archetypes/36_sheepish_pride",
+      "archetype_valid": true,
+      "samples": [
+        {
+          "seed": 3600042,
+          "pose": "variations/sheepish_pride/0000_seed3600042.json",
+          "png": "variations/sheepish_pride/0000_seed3600042.png",
+          "svg": "variations/sheepish_pride/0000_seed3600042.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.09359080459770115,
+          "svg_sha256": "043db4c579b38ca1557ea33ae9a65e7b5cae64770a78d30fb5db1c54721aa28c"
+        },
+        {
+          "seed": 3600043,
+          "pose": "variations/sheepish_pride/0001_seed3600043.json",
+          "png": "variations/sheepish_pride/0001_seed3600043.png",
+          "svg": "variations/sheepish_pride/0001_seed3600043.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.09231264367816092,
+          "svg_sha256": "1d175676ee62eba10dcf090ddb8c215ed00f34973ecdd303ec61e9d8122ce63f"
+        },
+        {
+          "seed": 3600044,
+          "pose": "variations/sheepish_pride/0002_seed3600044.json",
+          "png": "variations/sheepish_pride/0002_seed3600044.png",
+          "svg": "variations/sheepish_pride/0002_seed3600044.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.09034206896551725,
+          "svg_sha256": "74243f213065258d39dade00c9d8d6bcfe3707f6290e37f035bb6e70f684d66c"
+        },
+        {
+          "seed": 3600045,
+          "pose": "variations/sheepish_pride/0003_seed3600045.json",
+          "png": "variations/sheepish_pride/0003_seed3600045.png",
+          "svg": "variations/sheepish_pride/0003_seed3600045.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.0942767816091954,
+          "svg_sha256": "22f80e4eb1dc363f9b879885f66b08bc551c467449571d43f4603ea62e4c4eb9"
+        }
+      ]
+    },
+    {
+      "id": 37,
+      "slug": "pretend_crying",
+      "label": "Theatralisch schmollen und heulen",
+      "label_de": "Theatralisch schmollen und heulen",
+      "family": "theatrical",
+      "base_emotion": "sadness",
+      "actions": {
+        "brow_inner": 1.05,
+        "lid_curve": -0.55,
+        "mouth_width": 0.89,
+        "mouth_open": 0.46,
+        "smile": -0.78,
+        "mouth_asym": 0.18
+      },
+      "options": {
+        "mouth": "dark",
+        "under_eye": "hatching"
+      },
+      "constraints": {
+        "closed_eyes": [
+          "left",
+          "right"
+        ]
+      },
+      "visual_cues_de": "Geschlossene Trauerlider und überzeichnete weiche Heulgrimasse ohne Tränen-Sondertopologie.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false,
+      "archetype": "archetypes/37_pretend_crying",
+      "archetype_valid": true,
+      "samples": [
+        {
+          "seed": 3700042,
+          "pose": "variations/pretend_crying/0000_seed3700042.json",
+          "png": "variations/pretend_crying/0000_seed3700042.png",
+          "svg": "variations/pretend_crying/0000_seed3700042.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.06261057471264368,
+          "svg_sha256": "89abff413dce54299e59ba4865dd5346bcd0b61726c78b635bd8859ea5e8fe13"
+        },
+        {
+          "seed": 3700043,
+          "pose": "variations/pretend_crying/0001_seed3700043.json",
+          "png": "variations/pretend_crying/0001_seed3700043.png",
+          "svg": "variations/pretend_crying/0001_seed3700043.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.06543724137931034,
+          "svg_sha256": "5e9cf8fb75c0554d82ae9df39fe3b791b27b7f2359312c9a2923a50b4ba323db"
+        },
+        {
+          "seed": 3700044,
+          "pose": "variations/pretend_crying/0002_seed3700044.json",
+          "png": "variations/pretend_crying/0002_seed3700044.png",
+          "svg": "variations/pretend_crying/0002_seed3700044.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.06311540229885057,
+          "svg_sha256": "4a8cc3e9e036cbbbd0681e933da3dd0f7a47045b9a27658841c861e0020e6247"
+        },
+        {
+          "seed": 3700045,
+          "pose": "variations/pretend_crying/0003_seed3700045.json",
+          "png": "variations/pretend_crying/0003_seed3700045.png",
+          "svg": "variations/pretend_crying/0003_seed3700045.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.06232551724137931,
+          "svg_sha256": "1762327515cfa6a107097caa988a77ceb847a42e02e2fb21025f79b3a62cce1a"
+        }
+      ]
+    },
+    {
+      "id": 38,
+      "slug": "dramatic_sigh",
+      "label": "Ach, dieses Drama",
+      "label_de": "Ach, dieses Drama",
+      "family": "theatrical",
+      "base_emotion": "relief",
+      "actions": {
+        "brow_asym": 0.32,
+        "eye_open": 0.35,
+        "gaze_y": -0.25,
+        "mouth_width": 0.58,
+        "mouth_open": 0.28,
+        "mouth_asym": 0.2
+      },
+      "options": {},
+      "constraints": {},
+      "visual_cues_de": "Schwere nachsichtige Lider und ein leicht schiefer Ausatem-Mund.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false,
+      "archetype": "archetypes/38_dramatic_sigh",
+      "archetype_valid": true,
+      "samples": [
+        {
+          "seed": 3800042,
+          "pose": "variations/dramatic_sigh/0000_seed3800042.json",
+          "png": "variations/dramatic_sigh/0000_seed3800042.png",
+          "svg": "variations/dramatic_sigh/0000_seed3800042.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.07864827586206896,
+          "svg_sha256": "c7406dc828c7e673b7bda72d523ac86ecb499c3ffee044ee9b89c74fe0d6fd7b"
+        },
+        {
+          "seed": 3800043,
+          "pose": "variations/dramatic_sigh/0001_seed3800043.json",
+          "png": "variations/dramatic_sigh/0001_seed3800043.png",
+          "svg": "variations/dramatic_sigh/0001_seed3800043.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.08588689655172414,
+          "svg_sha256": "f5731389236d99a5266be59e6defe2408f72aa837bd8ff51d244a3a11009684a"
+        },
+        {
+          "seed": 3800044,
+          "pose": "variations/dramatic_sigh/0002_seed3800044.json",
+          "png": "variations/dramatic_sigh/0002_seed3800044.png",
+          "svg": "variations/dramatic_sigh/0002_seed3800044.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.0822519540229885,
+          "svg_sha256": "9a70af4265038d3046930547f6a4fd8d5fe101562ebc1bfbf90204de6f1cdb6f"
+        },
+        {
+          "seed": 3800045,
+          "pose": "variations/dramatic_sigh/0003_seed3800045.json",
+          "png": "variations/dramatic_sigh/0003_seed3800045.png",
+          "svg": "variations/dramatic_sigh/0003_seed3800045.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.07898850574712643,
+          "svg_sha256": "428ac0a39df292bae0988a40614175d9af3247236b8317f8ddd72ffe6d5af2bf"
+        }
+      ]
+    },
+    {
+      "id": 39,
+      "slug": "startled_then_amused",
+      "label": "Erschrocken und schon am Lachen",
+      "label_de": "Erschrocken und schon am Lachen",
+      "family": "theatrical",
+      "base_emotion": "elation",
+      "actions": {
+        "brow_raise": 0.84,
+        "eye_open": 1.27,
+        "pupil_scale": 0.9,
+        "mouth_width": 1.14,
+        "mouth_open": 0.47,
+        "smile": 0.73,
+        "mouth_asym": 0.28
+      },
+      "options": {},
+      "constraints": {},
+      "visual_cues_de": "Weite Schreckaugen mit einem bereits entstehenden offenen Lachen.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false,
+      "archetype": "archetypes/39_startled_then_amused",
+      "archetype_valid": true,
+      "samples": [
+        {
+          "seed": 3900042,
+          "pose": "variations/startled_then_amused/0000_seed3900042.json",
+          "png": "variations/startled_then_amused/0000_seed3900042.png",
+          "svg": "variations/startled_then_amused/0000_seed3900042.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.10291402298850574,
+          "svg_sha256": "35a45042a98b4c2b94cd968d6c5a6e456052507b854fb752407b92d50b93b512"
+        },
+        {
+          "seed": 3900043,
+          "pose": "variations/startled_then_amused/0001_seed3900043.json",
+          "png": "variations/startled_then_amused/0001_seed3900043.png",
+          "svg": "variations/startled_then_amused/0001_seed3900043.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.1043503448275862,
+          "svg_sha256": "287d0a978fbbb50b8b43477b5bdb8ef0404b6639ba3b29b96ad08d7b4f00ea24"
+        },
+        {
+          "seed": 3900044,
+          "pose": "variations/startled_then_amused/0002_seed3900044.json",
+          "png": "variations/startled_then_amused/0002_seed3900044.png",
+          "svg": "variations/startled_then_amused/0002_seed3900044.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.11294896551724137,
+          "svg_sha256": "65c501bdfa1bdbce3381b07fec80ed0aa9e69a134bdb114ced5bfcc6ed600abc"
+        },
+        {
+          "seed": 3900045,
+          "pose": "variations/startled_then_amused/0003_seed3900045.json",
+          "png": "variations/startled_then_amused/0003_seed3900045.png",
+          "svg": "variations/startled_then_amused/0003_seed3900045.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.1047264367816092,
+          "svg_sha256": "6a5029a60b15d387cd02d52d8247c55e8ad4cd7628cf7715ee1ea8b46826ea16"
+        }
+      ]
+    },
+    {
+      "id": 40,
+      "slug": "expectant_pause",
+      "label": "Na, was kommt jetzt?",
+      "label_de": "Na, was kommt jetzt?",
+      "family": "theatrical",
+      "base_emotion": "interest",
+      "actions": {
+        "brow_asym": 0.36,
+        "eye_open": 1.02,
+        "gaze_y": -0.1,
+        "mouth_width": 0.48,
+        "smile": 0.13,
+        "mouth_open": 0.07
+      },
+      "options": {
+        "mouth": "pucker"
+      },
+      "constraints": {},
+      "visual_cues_de": "Abwartende hohe Braue und kleiner gespitzter Mund.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false,
+      "archetype": "archetypes/40_expectant_pause",
+      "archetype_valid": true,
+      "samples": [
+        {
+          "seed": 4000042,
+          "pose": "variations/expectant_pause/0000_seed4000042.json",
+          "png": "variations/expectant_pause/0000_seed4000042.png",
+          "svg": "variations/expectant_pause/0000_seed4000042.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.10973793103448276,
+          "svg_sha256": "74df4520a1d77ae4842d28f1596ca186d57f375adc10a0b37d627f4eba743bf5"
+        },
+        {
+          "seed": 4000043,
+          "pose": "variations/expectant_pause/0001_seed4000043.json",
+          "png": "variations/expectant_pause/0001_seed4000043.png",
+          "svg": "variations/expectant_pause/0001_seed4000043.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.10173425287356322,
+          "svg_sha256": "c115806c0abe56f131154e75dcb82e9e65b0e026c4ac0acaa9bc829a714ec3fd"
+        },
+        {
+          "seed": 4000044,
+          "pose": "variations/expectant_pause/0002_seed4000044.json",
+          "png": "variations/expectant_pause/0002_seed4000044.png",
+          "svg": "variations/expectant_pause/0002_seed4000044.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.1124432183908046,
+          "svg_sha256": "d6f78504b52718f3aba12fd47fb68db7de4da2716e26294106cbabfa1df507d4"
+        },
+        {
+          "seed": 4000045,
+          "pose": "variations/expectant_pause/0003_seed4000045.json",
+          "png": "variations/expectant_pause/0003_seed4000045.png",
+          "svg": "variations/expectant_pause/0003_seed4000045.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.11360275862068965,
+          "svg_sha256": "90cda17307103ad7503990e1655a9cc9e0c080c549073440064dc4cdb7338ce7"
+        }
+      ]
+    },
+    {
+      "id": 41,
+      "slug": "cross_eyed_goof",
+      "label": "Albern schielen",
+      "label_de": "Albern schielen",
+      "family": "goofy",
+      "base_emotion": "amusement",
+      "actions": {
+        "eye_open": 1.15,
+        "eye_asym": 0.16,
+        "pupil_scale": 0.93,
+        "mouth_width": 0.85,
+        "mouth_open": 0.35,
+        "smile": 0.72,
+        "gaze_x": 0.0,
+        "gaze_convergence": 0.68
+      },
+      "options": {
+        "tongue": "out"
+      },
+      "constraints": {},
+      "visual_cues_de": "Beide Pupillen einwärts, kleine Zunge und ausgelassenes Grinsen.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false,
+      "archetype": "archetypes/41_cross_eyed_goof",
+      "archetype_valid": true,
+      "samples": [
+        {
+          "seed": 4100042,
+          "pose": "variations/cross_eyed_goof/0000_seed4100042.json",
+          "png": "variations/cross_eyed_goof/0000_seed4100042.png",
+          "svg": "variations/cross_eyed_goof/0000_seed4100042.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.10216551724137932,
+          "svg_sha256": "47e7d24fe3c3c74a6093766133e1b8425166de85dd340067b7a3dbec46f45423"
+        },
+        {
+          "seed": 4100043,
+          "pose": "variations/cross_eyed_goof/0001_seed4100043.json",
+          "png": "variations/cross_eyed_goof/0001_seed4100043.png",
+          "svg": "variations/cross_eyed_goof/0001_seed4100043.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.10788689655172413,
+          "svg_sha256": "26e159c4b3038ab6437e28943827ec14808feeb05898430316f286ed39263b56"
+        },
+        {
+          "seed": 4100044,
+          "pose": "variations/cross_eyed_goof/0002_seed4100044.json",
+          "png": "variations/cross_eyed_goof/0002_seed4100044.png",
+          "svg": "variations/cross_eyed_goof/0002_seed4100044.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.10469977011494253,
+          "svg_sha256": "3ecbc939d11b4f7944a78e5ae2d7201bfa1dd07f12d9726cb9c296481bc915d9"
+        },
+        {
+          "seed": 4100045,
+          "pose": "variations/cross_eyed_goof/0003_seed4100045.json",
+          "png": "variations/cross_eyed_goof/0003_seed4100045.png",
+          "svg": "variations/cross_eyed_goof/0003_seed4100045.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.10066022988505748,
+          "svg_sha256": "17281ec21d7adc978c078ec9ed4d3b004d525208c9be7d561bcee4023b8ec12e"
+        }
+      ]
+    },
+    {
+      "id": 42,
+      "slug": "wandering_eyes",
+      "label": "Alberner auseinanderlaufender Blick",
+      "label_de": "Alberner auseinanderlaufender Blick",
+      "family": "goofy",
+      "base_emotion": "confusion",
+      "actions": {
+        "eye_open": 1.13,
+        "brow_asym": 0.54,
+        "mouth_width": 0.66,
+        "mouth_open": 0.22,
+        "smile": 0.25,
+        "gaze_convergence": -0.66
+      },
+      "options": {
+        "tongue": "inside"
+      },
+      "constraints": {},
+      "visual_cues_de": "Pupillen bewusst auseinander, freundliche verwirrte Mundöffnung.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false,
+      "archetype": "archetypes/42_wandering_eyes",
+      "archetype_valid": true,
+      "samples": [
+        {
+          "seed": 4200042,
+          "pose": "variations/wandering_eyes/0000_seed4200042.json",
+          "png": "variations/wandering_eyes/0000_seed4200042.png",
+          "svg": "variations/wandering_eyes/0000_seed4200042.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.10617103448275862,
+          "svg_sha256": "78bac754660f64a4df394c6703d46720e8887eeeb330a6b4a3a203ac8e7f70e4"
+        },
+        {
+          "seed": 4200043,
+          "pose": "variations/wandering_eyes/0001_seed4200043.json",
+          "png": "variations/wandering_eyes/0001_seed4200043.png",
+          "svg": "variations/wandering_eyes/0001_seed4200043.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.11320275862068965,
+          "svg_sha256": "be4afd59f6afb1ff479411dd3c75a51f4df0341fc57f5554b6d0f056eef6dca8"
+        },
+        {
+          "seed": 4200044,
+          "pose": "variations/wandering_eyes/0002_seed4200044.json",
+          "png": "variations/wandering_eyes/0002_seed4200044.png",
+          "svg": "variations/wandering_eyes/0002_seed4200044.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.1124919540229885,
+          "svg_sha256": "2cc6d8dbd84e6981cc611fdb92b7f91d71769aa812b5d681c52ea29b40a4ddce"
+        },
+        {
+          "seed": 4200045,
+          "pose": "variations/wandering_eyes/0003_seed4200045.json",
+          "png": "variations/wandering_eyes/0003_seed4200045.png",
+          "svg": "variations/wandering_eyes/0003_seed4200045.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.09599816091954023,
+          "svg_sha256": "588b2c863c2022cb78759d8d90f2b6ac888c9c5a298cc824f391aa266c90b81d"
+        }
+      ]
+    },
+    {
+      "id": 43,
+      "slug": "lopsided_gasp",
+      "label": "Schiefer Cartoon-Japs",
+      "label_de": "Schiefer Cartoon-Japs",
+      "family": "goofy",
+      "base_emotion": "surprise",
+      "actions": {
+        "eye_open": 1.28,
+        "eye_asym": 0.46,
+        "brow_asym": 0.67,
+        "mouth_width": 0.67,
+        "mouth_open": 0.69,
+        "mouth_asym": 0.82
+      },
+      "options": {},
+      "constraints": {},
+      "visual_cues_de": "Unterschiedlich große Augen und schiefes O als überzeichneter Japs.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false,
+      "archetype": "archetypes/43_lopsided_gasp",
+      "archetype_valid": true,
+      "samples": [
+        {
+          "seed": 4300042,
+          "pose": "variations/lopsided_gasp/0000_seed4300042.json",
+          "png": "variations/lopsided_gasp/0000_seed4300042.png",
+          "svg": "variations/lopsided_gasp/0000_seed4300042.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.09854620689655172,
+          "svg_sha256": "9a6175deba05c0a26fbdd416eacd831e4496227225c5e3f6e6448e0c9696c5f3"
+        },
+        {
+          "seed": 4300043,
+          "pose": "variations/lopsided_gasp/0001_seed4300043.json",
+          "png": "variations/lopsided_gasp/0001_seed4300043.png",
+          "svg": "variations/lopsided_gasp/0001_seed4300043.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.09972229885057471,
+          "svg_sha256": "7eb71d0cae25efcd426aba2594c13df48b7e475819dea20976cf78a67012d6a8"
+        },
+        {
+          "seed": 4300044,
+          "pose": "variations/lopsided_gasp/0002_seed4300044.json",
+          "png": "variations/lopsided_gasp/0002_seed4300044.png",
+          "svg": "variations/lopsided_gasp/0002_seed4300044.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.09845701149425287,
+          "svg_sha256": "c3c8c3b813ad13ba988b8a117811269c7b7507260a87f1ec64ba3cef856ad559"
+        },
+        {
+          "seed": 4300045,
+          "pose": "variations/lopsided_gasp/0003_seed4300045.json",
+          "png": "variations/lopsided_gasp/0003_seed4300045.png",
+          "svg": "variations/lopsided_gasp/0003_seed4300045.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.10265379310344827,
+          "svg_sha256": "f186ea5145a01f84d969a99dd6cfc5fec09f3356159159b85a9ea13b31df5105"
+        }
+      ]
+    },
+    {
+      "id": 44,
+      "slug": "sleepy_wink",
+      "label": "Müde noch schnell zwinkern",
+      "label_de": "Müde noch schnell zwinkern",
+      "family": "goofy",
+      "base_emotion": "fatigue",
+      "actions": {
+        "eye_open": 0.38,
+        "mouth_width": 0.68,
+        "mouth_open": 0.0,
+        "smile": 0.41,
+        "lid_curve": 0.47,
+        "mouth_asym": 0.36
+      },
+      "options": {
+        "mouth": "closed"
+      },
+      "constraints": {
+        "closed_eyes": [
+          "left"
+        ]
+      },
+      "visual_cues_de": "Ein Auge geschlossen, das andere schläfrig und ein warmer kleiner Smile.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false,
+      "archetype": "archetypes/44_sleepy_wink",
+      "archetype_valid": true,
+      "samples": [
+        {
+          "seed": 4400042,
+          "pose": "variations/sleepy_wink/0000_seed4400042.json",
+          "png": "variations/sleepy_wink/0000_seed4400042.png",
+          "svg": "variations/sleepy_wink/0000_seed4400042.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.06732781609195403,
+          "svg_sha256": "e6b5c5e950f55aca4ef32705a7e5520811dee0bd7459526a630dd845a683a976"
+        },
+        {
+          "seed": 4400043,
+          "pose": "variations/sleepy_wink/0001_seed4400043.json",
+          "png": "variations/sleepy_wink/0001_seed4400043.png",
+          "svg": "variations/sleepy_wink/0001_seed4400043.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.06762114942528735,
+          "svg_sha256": "b7bc8d1633eb92eadaaca92959e24cb81f21b59dd7fc2fc2ae0c0f5d3822a646"
+        },
+        {
+          "seed": 4400044,
+          "pose": "variations/sleepy_wink/0002_seed4400044.json",
+          "png": "variations/sleepy_wink/0002_seed4400044.png",
+          "svg": "variations/sleepy_wink/0002_seed4400044.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.06589425287356322,
+          "svg_sha256": "ab169f06379856adcb2ae06a52badde849b8d4104a2be24ef8ffee0e758eae66"
+        },
+        {
+          "seed": 4400045,
+          "pose": "variations/sleepy_wink/0003_seed4400045.json",
+          "png": "variations/sleepy_wink/0003_seed4400045.png",
+          "svg": "variations/sleepy_wink/0003_seed4400045.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.06698022988505747,
+          "svg_sha256": "e0b2edd49d2102f0a75ed746806e671c37116c331a09a4f9ff098a4cd3f91ff6"
+        }
+      ]
+    },
+    {
+      "id": 45,
+      "slug": "one_eye_squeeze",
+      "label": "Ein Auge lustig zukneifen",
+      "label_de": "Ein Auge lustig zukneifen",
+      "family": "goofy",
+      "base_emotion": "contentment",
+      "actions": {
+        "eye_open": 1.04,
+        "mouth_width": 0.87,
+        "mouth_open": 0.16,
+        "smile": 0.58,
+        "mouth_asym": -0.42,
+        "brow_asym": -0.22
+      },
+      "options": {
+        "mouth": "dark"
+      },
+      "constraints": {
+        "closed_eyes": [
+          "right"
+        ]
+      },
+      "visual_cues_de": "Rechtes Auge zu, linkes wach; die Asymmetrie läuft bewusst andersherum.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false,
+      "archetype": "archetypes/45_one_eye_squeeze",
+      "archetype_valid": true,
+      "samples": [
+        {
+          "seed": 4500042,
+          "pose": "variations/one_eye_squeeze/0000_seed4500042.json",
+          "png": "variations/one_eye_squeeze/0000_seed4500042.png",
+          "svg": "variations/one_eye_squeeze/0000_seed4500042.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.08423540229885057,
+          "svg_sha256": "cc5241c39c620d383b8676ca4184d3470f6971fb52bb704d45f49d3f548980cf"
+        },
+        {
+          "seed": 4500043,
+          "pose": "variations/one_eye_squeeze/0001_seed4500043.json",
+          "png": "variations/one_eye_squeeze/0001_seed4500043.png",
+          "svg": "variations/one_eye_squeeze/0001_seed4500043.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.08404045977011494,
+          "svg_sha256": "4b1a0004a01f545ecd072bfc7b2935d34523cf557efceb1f432b624a6ef30aae"
+        },
+        {
+          "seed": 4500044,
+          "pose": "variations/one_eye_squeeze/0002_seed4500044.json",
+          "png": "variations/one_eye_squeeze/0002_seed4500044.png",
+          "svg": "variations/one_eye_squeeze/0002_seed4500044.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.08412873563218391,
+          "svg_sha256": "6b4fc5ebcaf844b402c5be2036f2c5a5e203cb85b586e6749dc30bfabdfa6b56"
+        },
+        {
+          "seed": 4500045,
+          "pose": "variations/one_eye_squeeze/0003_seed4500045.json",
+          "png": "variations/one_eye_squeeze/0003_seed4500045.png",
+          "svg": "variations/one_eye_squeeze/0003_seed4500045.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.08392919540229885,
+          "svg_sha256": "13d800ab1c9e6c9c974d48af42f3519874fc01ce9217a102f0ba0168e7aae1be"
+        }
+      ]
+    },
+    {
+      "id": 46,
+      "slug": "stretchy_grin",
+      "label": "Überbreit albern grinsen",
+      "label_de": "Überbreit albern grinsen",
+      "family": "goofy",
+      "base_emotion": "triumph",
+      "actions": {
+        "frown": 0.0,
+        "brow_inner": 0.1,
+        "eye_open": 0.8,
+        "mouth_width": 1.5,
+        "mouth_open": 0.36,
+        "smile": 0.97,
+        "mouth_asym": 0.38
+      },
+      "options": {
+        "tongue": "none"
+      },
+      "constraints": {},
+      "visual_cues_de": "Ein sehr breites weißes Grinsen mit weichen wachen Augen.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false,
+      "archetype": "archetypes/46_stretchy_grin",
+      "archetype_valid": true,
+      "samples": [
+        {
+          "seed": 4600042,
+          "pose": "variations/stretchy_grin/0000_seed4600042.json",
+          "png": "variations/stretchy_grin/0000_seed4600042.png",
+          "svg": "variations/stretchy_grin/0000_seed4600042.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.09310620689655172,
+          "svg_sha256": "6bb94cc8c62668ce744b87642976eeb1c35d851f0aaa3b5861f9aae290a8141c"
+        },
+        {
+          "seed": 4600043,
+          "pose": "variations/stretchy_grin/0001_seed4600043.json",
+          "png": "variations/stretchy_grin/0001_seed4600043.png",
+          "svg": "variations/stretchy_grin/0001_seed4600043.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.08845241379310345,
+          "svg_sha256": "4762a1d810a93029edbb80a616ac32c4581652692e43734e9ff1c044ce83e639"
+        },
+        {
+          "seed": 4600044,
+          "pose": "variations/stretchy_grin/0002_seed4600044.json",
+          "png": "variations/stretchy_grin/0002_seed4600044.png",
+          "svg": "variations/stretchy_grin/0002_seed4600044.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.09264275862068966,
+          "svg_sha256": "99bafe809032308d9edf8dff498d7c8c680bdf80ce29d161c86cd1b74e1c2831"
+        },
+        {
+          "seed": 4600045,
+          "pose": "variations/stretchy_grin/0003_seed4600045.json",
+          "png": "variations/stretchy_grin/0003_seed4600045.png",
+          "svg": "variations/stretchy_grin/0003_seed4600045.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.09313379310344827,
+          "svg_sha256": "8c012fe39af149fc47349f781b2a76ae5b3e70d77f2d541e4843dcc1834fb808"
+        }
+      ]
+    },
+    {
+      "id": 47,
+      "slug": "tiny_o_big_eyes",
+      "label": "Riesenaugen, winziges Oh",
+      "label_de": "Riesenaugen, winziges Oh",
+      "family": "goofy",
+      "base_emotion": "surprise",
+      "actions": {
+        "eye_open": 1.48,
+        "pupil_scale": 1.09,
+        "mouth_width": 0.35,
+        "mouth_open": 0.23,
+        "mouth_asym": 0.05
+      },
+      "options": {},
+      "constraints": {},
+      "visual_cues_de": "Große glänzende Augen und ein bewusst winziger runder Mund.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false,
+      "archetype": "archetypes/47_tiny_o_big_eyes",
+      "archetype_valid": true,
+      "samples": [
+        {
+          "seed": 4700042,
+          "pose": "variations/tiny_o_big_eyes/0000_seed4700042.json",
+          "png": "variations/tiny_o_big_eyes/0000_seed4700042.png",
+          "svg": "variations/tiny_o_big_eyes/0000_seed4700042.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.1126096551724138,
+          "svg_sha256": "e40ff2bfc66d72eb3f2b88a1e7607c63e43c504bf2d72ca50169d3e36ffb0624"
+        },
+        {
+          "seed": 4700043,
+          "pose": "variations/tiny_o_big_eyes/0001_seed4700043.json",
+          "png": "variations/tiny_o_big_eyes/0001_seed4700043.png",
+          "svg": "variations/tiny_o_big_eyes/0001_seed4700043.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.11181885057471265,
+          "svg_sha256": "2541e29eaea3dbdb021234c40715c36eb800ee1398e1f36d5b714b0c74af3f13"
+        },
+        {
+          "seed": 4700044,
+          "pose": "variations/tiny_o_big_eyes/0002_seed4700044.json",
+          "png": "variations/tiny_o_big_eyes/0002_seed4700044.png",
+          "svg": "variations/tiny_o_big_eyes/0002_seed4700044.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.11558252873563218,
+          "svg_sha256": "2df510143a6fe32ce6c52f8fca89c9e23325268a16c61c6a6263be4783030937"
+        },
+        {
+          "seed": 4700045,
+          "pose": "variations/tiny_o_big_eyes/0003_seed4700045.json",
+          "png": "variations/tiny_o_big_eyes/0003_seed4700045.png",
+          "svg": "variations/tiny_o_big_eyes/0003_seed4700045.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.11616091954022989,
+          "svg_sha256": "2f92da540b3967155cf58376612dc61b206568c8c8896a75cffe052934927595"
+        }
+      ]
+    },
+    {
+      "id": 48,
+      "slug": "puzzled_pout",
+      "label": "Verwirrt die Lippen spitzen",
+      "label_de": "Verwirrt die Lippen spitzen",
+      "family": "goofy",
+      "base_emotion": "contemplation",
+      "actions": {
+        "eye_open": 1.02,
+        "eye_asym": 0.26,
+        "brow_asym": 0.82,
+        "gaze_x": 0.48,
+        "gaze_y": 0.2,
+        "mouth_width": 0.61,
+        "mouth_open": 0.2,
+        "mouth_asym": 0.28
+      },
+      "options": {},
+      "constraints": {},
+      "visual_cues_de": "Suchende ungleiche Augen und etwas überzeichnete Pucker-Lippen.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false,
+      "archetype": "archetypes/48_puzzled_pout",
+      "archetype_valid": true,
+      "samples": [
+        {
+          "seed": 4800042,
+          "pose": "variations/puzzled_pout/0000_seed4800042.json",
+          "png": "variations/puzzled_pout/0000_seed4800042.png",
+          "svg": "variations/puzzled_pout/0000_seed4800042.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.10168459770114943,
+          "svg_sha256": "a8bdbd873e35b5581d235fd7dc40e296851dd68c706e40a7b8c95252172e8d86"
+        },
+        {
+          "seed": 4800043,
+          "pose": "variations/puzzled_pout/0001_seed4800043.json",
+          "png": "variations/puzzled_pout/0001_seed4800043.png",
+          "svg": "variations/puzzled_pout/0001_seed4800043.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.10317425287356322,
+          "svg_sha256": "3be1dd741aebe7b2b755a6380090d76808f06391e20a42171a398e7807ab0f09"
+        },
+        {
+          "seed": 4800044,
+          "pose": "variations/puzzled_pout/0002_seed4800044.json",
+          "png": "variations/puzzled_pout/0002_seed4800044.png",
+          "svg": "variations/puzzled_pout/0002_seed4800044.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.0951567816091954,
+          "svg_sha256": "ac7cffc602ce013b9e243eeca93f9511e7b50081789f08cc959f2fb4f481b67d"
+        },
+        {
+          "seed": 4800045,
+          "pose": "variations/puzzled_pout/0003_seed4800045.json",
+          "png": "variations/puzzled_pout/0003_seed4800045.png",
+          "svg": "variations/puzzled_pout/0003_seed4800045.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.09751172413793104,
+          "svg_sha256": "22f26c3dfb3dda59f577f5175a2a634c2471b8c836a470dc8da0a8f95c4ce9bb"
+        }
+      ]
+    },
+    {
+      "id": 49,
+      "slug": "upside_gaze_grin",
+      "label": "Augen hoch und frech grinsen",
+      "label_de": "Augen hoch und frech grinsen",
+      "family": "goofy",
+      "base_emotion": "amusement",
+      "actions": {
+        "eye_open": 1.01,
+        "gaze_y": -1.0,
+        "mouth_width": 1.21,
+        "mouth_open": 0.28,
+        "smile": 0.88,
+        "mouth_asym": 0.4
+      },
+      "options": {
+        "tongue": "none"
+      },
+      "constraints": {
+        "gaze_y_max": -0.8
+      },
+      "visual_cues_de": "Aufwärts gerichtete Pupillen und ein offenes freches Grinsen.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false,
+      "archetype": "archetypes/49_upside_gaze_grin",
+      "archetype_valid": true,
+      "samples": [
+        {
+          "seed": 4900042,
+          "pose": "variations/upside_gaze_grin/0000_seed4900042.json",
+          "png": "variations/upside_gaze_grin/0000_seed4900042.png",
+          "svg": "variations/upside_gaze_grin/0000_seed4900042.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.11043310344827587,
+          "svg_sha256": "b4c383c5c1d3c0e7e906e8fa2eec98b3fd14fd6e365290c1ad3bc83dc21145c1"
+        },
+        {
+          "seed": 4900043,
+          "pose": "variations/upside_gaze_grin/0001_seed4900043.json",
+          "png": "variations/upside_gaze_grin/0001_seed4900043.png",
+          "svg": "variations/upside_gaze_grin/0001_seed4900043.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.09946666666666666,
+          "svg_sha256": "c03c4a14585b7b6cd8aedb2efae8605378ebf1621fce776a8a1006e1bf859809"
+        },
+        {
+          "seed": 4900044,
+          "pose": "variations/upside_gaze_grin/0002_seed4900044.json",
+          "png": "variations/upside_gaze_grin/0002_seed4900044.png",
+          "svg": "variations/upside_gaze_grin/0002_seed4900044.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.10442574712643678,
+          "svg_sha256": "323225cb86c9c888ec23686c2f17c97ea7572b4d87fae836829d9f421d0e36a6"
+        },
+        {
+          "seed": 4900045,
+          "pose": "variations/upside_gaze_grin/0003_seed4900045.json",
+          "png": "variations/upside_gaze_grin/0003_seed4900045.png",
+          "svg": "variations/upside_gaze_grin/0003_seed4900045.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.10664459770114942,
+          "svg_sha256": "03f58dd26bf7b4240d45a701cb60391dbdd069ad6bf2eaef892ce95b19b2c1df"
+        }
+      ]
+    },
+    {
+      "id": 50,
+      "slug": "theatrical_villain",
+      "label": "Der freundliche Cartoon-Bösewicht",
+      "label_de": "Der freundliche Cartoon-Bösewicht",
+      "family": "goofy",
+      "base_emotion": "malice",
+      "actions": {
+        "frown": 0.67,
+        "brow_inner": -0.17,
+        "eye_open": 0.78,
+        "pupil_scale": 1.03,
+        "mouth_width": 1.34,
+        "mouth_open": 0.34,
+        "smile": 0.86,
+        "mouth_asym": 0.46
+      },
+      "options": {
+        "mouth": "teeth",
+        "under_eye": "hatching"
+      },
+      "constraints": {},
+      "visual_cues_de": "Gespielt böse Brauen, breites Grinsen und warme große Pupillen.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false,
+      "archetype": "archetypes/50_theatrical_villain",
+      "archetype_valid": true,
+      "samples": [
+        {
+          "seed": 5000042,
+          "pose": "variations/theatrical_villain/0000_seed5000042.json",
+          "png": "variations/theatrical_villain/0000_seed5000042.png",
+          "svg": "variations/theatrical_villain/0000_seed5000042.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.09632091954022988,
+          "svg_sha256": "62a92c29dbf805d8c810b44ba5282f1ccf4faeee932711a609e0f13b204cb993"
+        },
+        {
+          "seed": 5000043,
+          "pose": "variations/theatrical_villain/0001_seed5000043.json",
+          "png": "variations/theatrical_villain/0001_seed5000043.png",
+          "svg": "variations/theatrical_villain/0001_seed5000043.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.08921471264367815,
+          "svg_sha256": "f2a30e838a99645ac3db234715e4e018112e6d0dc27299871f4723006ed0bf02"
+        },
+        {
+          "seed": 5000044,
+          "pose": "variations/theatrical_villain/0002_seed5000044.json",
+          "png": "variations/theatrical_villain/0002_seed5000044.png",
+          "svg": "variations/theatrical_villain/0002_seed5000044.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.10350896551724138,
+          "svg_sha256": "dc28ed453b2804c4b37ef2b156af0ac47f5fb542e92fa640ae942ec166368af2"
+        },
+        {
+          "seed": 5000045,
+          "pose": "variations/theatrical_villain/0003_seed5000045.json",
+          "png": "variations/theatrical_villain/0003_seed5000045.png",
+          "svg": "variations/theatrical_villain/0003_seed5000045.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.10382068965517241,
+          "svg_sha256": "989f3181092e72d62a36b5b8571ba5dc115be1fda5bb7551bb69119156969551"
+        }
+      ]
+    },
+    {
+      "id": 51,
+      "slug": "secret_sharing",
+      "label": "Ein Geheimnis erzählen",
+      "label_de": "Ein Geheimnis erzählen",
+      "family": "subtle",
+      "base_emotion": "contemplation",
+      "actions": {
+        "brow_asym": 0.27,
+        "eye_open": 0.68,
+        "gaze_x": -0.76,
+        "gaze_y": -0.06,
+        "mouth_width": 0.51,
+        "mouth_open": 0.12,
+        "mouth_asym": 0.38,
+        "smile": 0.18
+      },
+      "options": {
+        "mouth": "dark"
+      },
+      "constraints": {
+        "gaze_x_max": -0.45
+      },
+      "visual_cues_de": "Kleiner seitlicher Flüstermund und aufmerksamer Blick zur Seite.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false,
+      "archetype": "archetypes/51_secret_sharing",
+      "archetype_valid": true,
+      "samples": [
+        {
+          "seed": 5100042,
+          "pose": "variations/secret_sharing/0000_seed5100042.json",
+          "png": "variations/secret_sharing/0000_seed5100042.png",
+          "svg": "variations/secret_sharing/0000_seed5100042.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.09047908045977011,
+          "svg_sha256": "cecad3e4b25e40da8a7dc314aee043d790a52e990157216c74ed25348f915cd6"
+        },
+        {
+          "seed": 5100043,
+          "pose": "variations/secret_sharing/0001_seed5100043.json",
+          "png": "variations/secret_sharing/0001_seed5100043.png",
+          "svg": "variations/secret_sharing/0001_seed5100043.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.09112275862068965,
+          "svg_sha256": "d6a32db71187ebbeef076c77be05feedeac98770a2ae87cc93ca6aad03460a26"
+        },
+        {
+          "seed": 5100044,
+          "pose": "variations/secret_sharing/0002_seed5100044.json",
+          "png": "variations/secret_sharing/0002_seed5100044.png",
+          "svg": "variations/secret_sharing/0002_seed5100044.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.08741425287356322,
+          "svg_sha256": "be5b40853d57a07dd43d371a14664ddf8233299a22399422cc093b32eba85763"
+        },
+        {
+          "seed": 5100045,
+          "pose": "variations/secret_sharing/0003_seed5100045.json",
+          "png": "variations/secret_sharing/0003_seed5100045.png",
+          "svg": "variations/secret_sharing/0003_seed5100045.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.08938390804597701,
+          "svg_sha256": "cbad613bd9eccf54e3c668347219b1e50cb6042c3ea582d926633ec9378d3f61"
+        }
+      ]
+    },
+    {
+      "id": 52,
+      "slug": "conspiratorial_grin",
+      "label": "Verschwörerisch grinsen",
+      "label_de": "Verschwörerisch grinsen",
+      "family": "subtle",
+      "base_emotion": "pride",
+      "actions": {
+        "brow_asym": 0.42,
+        "eye_open": 0.58,
+        "gaze_x": -0.68,
+        "smile": 0.75,
+        "mouth_width": 1.02,
+        "mouth_asym": 0.58
+      },
+      "options": {},
+      "constraints": {
+        "gaze_x_max": -0.4
+      },
+      "visual_cues_de": "Enge freundliche Augen und ein verschwörerisches schiefes Lächeln.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false,
+      "archetype": "archetypes/52_conspiratorial_grin",
+      "archetype_valid": true,
+      "samples": [
+        {
+          "seed": 5200042,
+          "pose": "variations/conspiratorial_grin/0000_seed5200042.json",
+          "png": "variations/conspiratorial_grin/0000_seed5200042.png",
+          "svg": "variations/conspiratorial_grin/0000_seed5200042.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.08611034482758621,
+          "svg_sha256": "f41ad7215b17a86d8efcc688f7bcc1aaff76d6a7a9b05f3479877c5defddcefc"
+        },
+        {
+          "seed": 5200043,
+          "pose": "variations/conspiratorial_grin/0001_seed5200043.json",
+          "png": "variations/conspiratorial_grin/0001_seed5200043.png",
+          "svg": "variations/conspiratorial_grin/0001_seed5200043.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.08090666666666667,
+          "svg_sha256": "e3ba89e1606cd5f4910b1245f3aa6f1a3f3c771d894b30c9948ea6a31b530274"
+        },
+        {
+          "seed": 5200044,
+          "pose": "variations/conspiratorial_grin/0002_seed5200044.json",
+          "png": "variations/conspiratorial_grin/0002_seed5200044.png",
+          "svg": "variations/conspiratorial_grin/0002_seed5200044.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.0918519540229885,
+          "svg_sha256": "7e0fb60761b101edfdd7b5f2fee581892d7934b474a7e4f9840a369b2a0a6535"
+        },
+        {
+          "seed": 5200045,
+          "pose": "variations/conspiratorial_grin/0003_seed5200045.json",
+          "png": "variations/conspiratorial_grin/0003_seed5200045.png",
+          "svg": "variations/conspiratorial_grin/0003_seed5200045.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.08529747126436782,
+          "svg_sha256": "0a6a30d53488b5f093a7bb1cce278b03f0a225b7b1ad74159d0ac6a2fe3ea999"
+        }
+      ]
+    },
+    {
+      "id": 53,
+      "slug": "affectionate_tease",
+      "label": "Liebevoll necken",
+      "label_de": "Liebevoll necken",
+      "family": "subtle",
+      "base_emotion": "affection",
+      "actions": {
+        "brow_asym": 0.38,
+        "eye_open": 0.82,
+        "smile": 0.73,
+        "mouth_asym": 0.62,
+        "mouth_width": 1.01,
+        "gaze_x": 0.3
+      },
+      "options": {},
+      "constraints": {
+        "closed_eyes": [
+          "right"
+        ]
+      },
+      "visual_cues_de": "Großer warmer Blick, rechtes Zwinkern und liebevoll schiefer Smile.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false,
+      "archetype": "archetypes/53_affectionate_tease",
+      "archetype_valid": true,
+      "samples": [
+        {
+          "seed": 5300042,
+          "pose": "variations/affectionate_tease/0000_seed5300042.json",
+          "png": "variations/affectionate_tease/0000_seed5300042.png",
+          "svg": "variations/affectionate_tease/0000_seed5300042.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.07562942528735632,
+          "svg_sha256": "1f73d62b14138ba9afa92e91fbe09d10b3bb197ffd67371feb1c5e059352aba7"
+        },
+        {
+          "seed": 5300043,
+          "pose": "variations/affectionate_tease/0001_seed5300043.json",
+          "png": "variations/affectionate_tease/0001_seed5300043.png",
+          "svg": "variations/affectionate_tease/0001_seed5300043.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.07609471264367816,
+          "svg_sha256": "a5351f98036ef50f10807f2ff64b3832051a66261f8f1b8952272fd1f2306c7d"
+        },
+        {
+          "seed": 5300044,
+          "pose": "variations/affectionate_tease/0002_seed5300044.json",
+          "png": "variations/affectionate_tease/0002_seed5300044.png",
+          "svg": "variations/affectionate_tease/0002_seed5300044.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.07218666666666666,
+          "svg_sha256": "3569b090f05b06d4940d254d837aca7ed57d14e651606d57773dc06556287f84"
+        },
+        {
+          "seed": 5300045,
+          "pose": "variations/affectionate_tease/0003_seed5300045.json",
+          "png": "variations/affectionate_tease/0003_seed5300045.png",
+          "svg": "variations/affectionate_tease/0003_seed5300045.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.08110620689655172,
+          "svg_sha256": "6073ab3b0dba843bd2bcc1b679a01bb5cefb2f0478be888f386263e2f3f5ead3"
+        }
+      ]
+    },
+    {
+      "id": 54,
+      "slug": "supportive_concern",
+      "label": "Besorgt, aber bei dir",
+      "label_de": "Besorgt, aber bei dir",
+      "family": "subtle",
+      "base_emotion": "distress",
+      "actions": {
+        "frown": 0.25,
+        "brow_inner": 0.8,
+        "eye_open": 0.97,
+        "gaze_x": 0.0,
+        "smile": -0.34,
+        "mouth_open": 0.17,
+        "mouth_width": 0.81,
+        "mouth_asym": 0.1
+      },
+      "options": {
+        "under_eye": "continuous"
+      },
+      "constraints": {},
+      "visual_cues_de": "Besorgte innere Brauen, direkter weicher Blick und zurückhaltender Mund.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false,
+      "archetype": "archetypes/54_supportive_concern",
+      "archetype_valid": true,
+      "samples": [
+        {
+          "seed": 5400042,
+          "pose": "variations/supportive_concern/0000_seed5400042.json",
+          "png": "variations/supportive_concern/0000_seed5400042.png",
+          "svg": "variations/supportive_concern/0000_seed5400042.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.09373885057471264,
+          "svg_sha256": "c197cc6e7956af56a8bc435d976a3cda8286feb3cf7b66ca6389b106b695a4c7"
+        },
+        {
+          "seed": 5400043,
+          "pose": "variations/supportive_concern/0001_seed5400043.json",
+          "png": "variations/supportive_concern/0001_seed5400043.png",
+          "svg": "variations/supportive_concern/0001_seed5400043.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.10065287356321839,
+          "svg_sha256": "bf09a9f1f0bf14a4344fec858ab1064319042ca2ee96db1412a0d869fa670326"
+        },
+        {
+          "seed": 5400044,
+          "pose": "variations/supportive_concern/0002_seed5400044.json",
+          "png": "variations/supportive_concern/0002_seed5400044.png",
+          "svg": "variations/supportive_concern/0002_seed5400044.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.10722942528735632,
+          "svg_sha256": "75f3bbfd4984857f5a5905e421848cbd1d4c18fdd928ea766afc6d2525095797"
+        },
+        {
+          "seed": 5400045,
+          "pose": "variations/supportive_concern/0003_seed5400045.json",
+          "png": "variations/supportive_concern/0003_seed5400045.png",
+          "svg": "variations/supportive_concern/0003_seed5400045.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.09277609195402299,
+          "svg_sha256": "906eb7ace9eb90012e8bf78e39194b4b970d4b3bbd7291df62becc2dc14398b0"
+        }
+      ]
+    },
+    {
+      "id": 55,
+      "slug": "tender_pity",
+      "label": "Sanft mitfühlen",
+      "label_de": "Sanft mitfühlen",
+      "family": "subtle",
+      "base_emotion": "helplessness",
+      "actions": {
+        "brow_inner": 0.9,
+        "frown": 0.12,
+        "eye_open": 0.7,
+        "mouth_width": 0.6,
+        "mouth_open": 0.0,
+        "smile": -0.39,
+        "gaze_x": 0.15
+      },
+      "options": {
+        "mouth": "closed"
+      },
+      "constraints": {},
+      "visual_cues_de": "Ein weicher trauriger Blick ohne dramatische offene Grimasse.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false,
+      "archetype": "archetypes/55_tender_pity",
+      "archetype_valid": true,
+      "samples": [
+        {
+          "seed": 5500042,
+          "pose": "variations/tender_pity/0000_seed5500042.json",
+          "png": "variations/tender_pity/0000_seed5500042.png",
+          "svg": "variations/tender_pity/0000_seed5500042.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.08646252873563218,
+          "svg_sha256": "e46de67d3bfb0e0a7bbacb6dd0e6187c93d2c69772af54a9877ca64695cbde17"
+        },
+        {
+          "seed": 5500043,
+          "pose": "variations/tender_pity/0001_seed5500043.json",
+          "png": "variations/tender_pity/0001_seed5500043.png",
+          "svg": "variations/tender_pity/0001_seed5500043.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.08521011494252874,
+          "svg_sha256": "cec64122c1e46cd90ad4c76a60a8990707441981581e1580a9b9cb93bba8b4ac"
+        },
+        {
+          "seed": 5500044,
+          "pose": "variations/tender_pity/0002_seed5500044.json",
+          "png": "variations/tender_pity/0002_seed5500044.png",
+          "svg": "variations/tender_pity/0002_seed5500044.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.08507126436781609,
+          "svg_sha256": "95588b81d4fe12ed718b7688394d74ae949209aa5f9131f1c49eaeb43b3295eb"
+        },
+        {
+          "seed": 5500045,
+          "pose": "variations/tender_pity/0003_seed5500045.json",
+          "png": "variations/tender_pity/0003_seed5500045.png",
+          "svg": "variations/tender_pity/0003_seed5500045.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.08682022988505747,
+          "svg_sha256": "fe954f02d939c0a47656554d32aa15ac4567b0ac2f95f18ee58eaf9f6639cd56"
+        }
+      ]
+    },
+    {
+      "id": 56,
+      "slug": "friendly_boundary",
+      "label": "Freundlich eine Grenze setzen",
+      "label_de": "Freundlich eine Grenze setzen",
+      "family": "subtle",
+      "base_emotion": "concentration",
+      "actions": {
+        "frown": 0.34,
+        "brow_inner": 0.1,
+        "eye_open": 1.0,
+        "smile": -0.12,
+        "mouth_width": 0.97,
+        "mouth_asym": 0.08,
+        "gaze_x": 0.0
+      },
+      "options": {
+        "under_eye": "continuous"
+      },
+      "constraints": {},
+      "visual_cues_de": "Wacher klarer Blick und ruhige feste Mundlinie, ohne aggressiven Zug.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false,
+      "archetype": "archetypes/56_friendly_boundary",
+      "archetype_valid": true,
+      "samples": [
+        {
+          "seed": 5600042,
+          "pose": "variations/friendly_boundary/0000_seed5600042.json",
+          "png": "variations/friendly_boundary/0000_seed5600042.png",
+          "svg": "variations/friendly_boundary/0000_seed5600042.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.09908229885057471,
+          "svg_sha256": "6266bc427257786eb3dc07ba3ea1e7a787e5e57a8dd4576774e7b09557b95eb0"
+        },
+        {
+          "seed": 5600043,
+          "pose": "variations/friendly_boundary/0001_seed5600043.json",
+          "png": "variations/friendly_boundary/0001_seed5600043.png",
+          "svg": "variations/friendly_boundary/0001_seed5600043.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.10306574712643678,
+          "svg_sha256": "57dd5ae3a6cc24c91e683bdcd3952f12b1a65d9b4db3ae1738d765fc193a8377"
+        },
+        {
+          "seed": 5600044,
+          "pose": "variations/friendly_boundary/0002_seed5600044.json",
+          "png": "variations/friendly_boundary/0002_seed5600044.png",
+          "svg": "variations/friendly_boundary/0002_seed5600044.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.0983816091954023,
+          "svg_sha256": "d2cbce1542a97b08097dfc86f964a1385f591a1b6032af61286c1577e1d58c33"
+        },
+        {
+          "seed": 5600045,
+          "pose": "variations/friendly_boundary/0003_seed5600045.json",
+          "png": "variations/friendly_boundary/0003_seed5600045.png",
+          "svg": "variations/friendly_boundary/0003_seed5600045.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.09734344827586207,
+          "svg_sha256": "5028412464a15c4528bf29f2dac920bd9bff6f924d5cac19adadd141306b2712"
+        }
+      ]
+    },
+    {
+      "id": 57,
+      "slug": "impatient_waiting",
+      "label": "Immer noch freundlich warten",
+      "label_de": "Immer noch freundlich warten",
+      "family": "subtle",
+      "base_emotion": "impatience",
+      "actions": {
+        "frown": 0.33,
+        "brow_asym": 0.46,
+        "eye_open": 0.63,
+        "gaze_x": 0.74,
+        "smile": -0.14,
+        "mouth_width": 0.74,
+        "mouth_asym": -0.42
+      },
+      "options": {
+        "under_eye": "continuous"
+      },
+      "constraints": {
+        "gaze_x_min": 0.45
+      },
+      "visual_cues_de": "Leicht gereizter Seitenblick und kleiner schiefer wartender Mund.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false,
+      "archetype": "archetypes/57_impatient_waiting",
+      "archetype_valid": true,
+      "samples": [
+        {
+          "seed": 5700042,
+          "pose": "variations/impatient_waiting/0000_seed5700042.json",
+          "png": "variations/impatient_waiting/0000_seed5700042.png",
+          "svg": "variations/impatient_waiting/0000_seed5700042.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.08380505747126436,
+          "svg_sha256": "11733115283c6620d8594ad696070393eaab24f19b81226ac8727f7f997798f3"
+        },
+        {
+          "seed": 5700043,
+          "pose": "variations/impatient_waiting/0001_seed5700043.json",
+          "png": "variations/impatient_waiting/0001_seed5700043.png",
+          "svg": "variations/impatient_waiting/0001_seed5700043.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.07979310344827586,
+          "svg_sha256": "bd1f76b1f4dfe47944972a9f12105e8e3d071f167e4316d8d8e96c7881c1aa93"
+        },
+        {
+          "seed": 5700044,
+          "pose": "variations/impatient_waiting/0002_seed5700044.json",
+          "png": "variations/impatient_waiting/0002_seed5700044.png",
+          "svg": "variations/impatient_waiting/0002_seed5700044.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.08857747126436781,
+          "svg_sha256": "a3ea914445aaf2fb423c66974bdb13a7eaceb917ddc9bc413014868a47a842a7"
+        },
+        {
+          "seed": 5700045,
+          "pose": "variations/impatient_waiting/0003_seed5700045.json",
+          "png": "variations/impatient_waiting/0003_seed5700045.png",
+          "svg": "variations/impatient_waiting/0003_seed5700045.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.08446068965517241,
+          "svg_sha256": "5b5407802c413b0b232b79b40f17183ac9462b15893e2baf5cb6482ed2c036e5"
+        }
+      ]
+    },
+    {
+      "id": 58,
+      "slug": "hesitant_request",
+      "label": "Vorsichtig um etwas bitten",
+      "label_de": "Vorsichtig um etwas bitten",
+      "family": "subtle",
+      "base_emotion": "longing",
+      "actions": {
+        "brow_inner": 0.82,
+        "eye_open": 1.02,
+        "gaze_x": 0.2,
+        "gaze_y": 0.1,
+        "mouth_width": 0.49,
+        "mouth_open": 0.13,
+        "smile": 0.16,
+        "mouth_asym": 0.16
+      },
+      "options": {
+        "mouth": "dark"
+      },
+      "constraints": {},
+      "visual_cues_de": "Bittende innere Brauen und kleiner vorsichtig geöffneter Mund.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false,
+      "archetype": "archetypes/58_hesitant_request",
+      "archetype_valid": true,
+      "samples": [
+        {
+          "seed": 5800042,
+          "pose": "variations/hesitant_request/0000_seed5800042.json",
+          "png": "variations/hesitant_request/0000_seed5800042.png",
+          "svg": "variations/hesitant_request/0000_seed5800042.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.09609563218390804,
+          "svg_sha256": "c4e07a0415cc8096b14b39cc4f58c1839a4da17fa84399fff346cd2b88f17da1"
+        },
+        {
+          "seed": 5800043,
+          "pose": "variations/hesitant_request/0001_seed5800043.json",
+          "png": "variations/hesitant_request/0001_seed5800043.png",
+          "svg": "variations/hesitant_request/0001_seed5800043.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.10238436781609195,
+          "svg_sha256": "6c5177d7f916c592fe8dd0539d15baf7f3b7a645c6888c7cd456af3e45b0c9a0"
+        },
+        {
+          "seed": 5800044,
+          "pose": "variations/hesitant_request/0002_seed5800044.json",
+          "png": "variations/hesitant_request/0002_seed5800044.png",
+          "svg": "variations/hesitant_request/0002_seed5800044.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.09604689655172413,
+          "svg_sha256": "5cf349e80745d8a60541f996989d7cd266d0176025adf56face6ce00f53bc33c"
+        },
+        {
+          "seed": 5800045,
+          "pose": "variations/hesitant_request/0003_seed5800045.json",
+          "png": "variations/hesitant_request/0003_seed5800045.png",
+          "svg": "variations/hesitant_request/0003_seed5800045.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.09851310344827587,
+          "svg_sha256": "86e7e9df037dc1f3d7e8368ace285158169792ce50a1d9e24135ec9ef4e8aabd"
+        }
+      ]
+    },
+    {
+      "id": 59,
+      "slug": "incredulous_chuckle",
+      "label": "Ungläubig schmunzeln",
+      "label_de": "Ungläubig schmunzeln",
+      "family": "subtle",
+      "base_emotion": "amusement",
+      "actions": {
+        "brow_asym": 0.79,
+        "eye_open": 0.85,
+        "eye_asym": 0.35,
+        "mouth_width": 1.04,
+        "mouth_open": 0.25,
+        "smile": 0.64,
+        "mouth_asym": 0.53
+      },
+      "options": {
+        "tongue": "none"
+      },
+      "constraints": {},
+      "visual_cues_de": "Eine skeptische Braue und ein warmes beginnendes Lachen.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false,
+      "archetype": "archetypes/59_incredulous_chuckle",
+      "archetype_valid": true,
+      "samples": [
+        {
+          "seed": 5900042,
+          "pose": "variations/incredulous_chuckle/0000_seed5900042.json",
+          "png": "variations/incredulous_chuckle/0000_seed5900042.png",
+          "svg": "variations/incredulous_chuckle/0000_seed5900042.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.09956045977011495,
+          "svg_sha256": "e3c53f5dd7d703602f6ee1ca2cdfa22a0b8ab89165b775a213d197e9164b99b4"
+        },
+        {
+          "seed": 5900043,
+          "pose": "variations/incredulous_chuckle/0001_seed5900043.json",
+          "png": "variations/incredulous_chuckle/0001_seed5900043.png",
+          "svg": "variations/incredulous_chuckle/0001_seed5900043.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.09948965517241379,
+          "svg_sha256": "f79de2a7e8ad9b351fa3122d1e7008241b71f0b32fd9bca169732887e81981cc"
+        },
+        {
+          "seed": 5900044,
+          "pose": "variations/incredulous_chuckle/0002_seed5900044.json",
+          "png": "variations/incredulous_chuckle/0002_seed5900044.png",
+          "svg": "variations/incredulous_chuckle/0002_seed5900044.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.10573885057471265,
+          "svg_sha256": "b99275839d23f6c17d6e9a5ad1ca8a9a8b97228e31e1de6612f4e4f8a02fa9f6"
+        },
+        {
+          "seed": 5900045,
+          "pose": "variations/incredulous_chuckle/0003_seed5900045.json",
+          "png": "variations/incredulous_chuckle/0003_seed5900045.png",
+          "svg": "variations/incredulous_chuckle/0003_seed5900045.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.09903816091954024,
+          "svg_sha256": "0a0cd8eeb47a552a8fd4af0a778f14cf67308d820f445ccddb9f770c2cf51434"
+        }
+      ]
+    },
+    {
+      "id": 60,
+      "slug": "playful_reconciliation",
+      "label": "Versöhnlich wieder Scherze machen",
+      "label_de": "Versöhnlich wieder Scherze machen",
+      "family": "subtle",
+      "base_emotion": "gratitude",
+      "actions": {
+        "brow_inner": 0.6,
+        "eye_open": 0.83,
+        "mouth_width": 0.91,
+        "smile": 0.65,
+        "mouth_asym": 0.33,
+        "gaze_x": 0.12
+      },
+      "options": {
+        "under_eye": "continuous"
+      },
+      "constraints": {
+        "closed_eyes": [
+          "left"
+        ]
+      },
+      "visual_cues_de": "Weicher versöhnlicher Blick und ein kleines verbindendes Zwinkern.",
+      "interpretation": "authored social cartoon performance, context-dependent",
+      "human_validated": false,
+      "archetype": "archetypes/60_playful_reconciliation",
+      "archetype_valid": true,
+      "samples": [
+        {
+          "seed": 6000042,
+          "pose": "variations/playful_reconciliation/0000_seed6000042.json",
+          "png": "variations/playful_reconciliation/0000_seed6000042.png",
+          "svg": "variations/playful_reconciliation/0000_seed6000042.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.07314942528735632,
+          "svg_sha256": "8917d841bafe28cce7c8386735ed3cc2c3a4c06bcc71451456d76504e6af507f"
+        },
+        {
+          "seed": 6000043,
+          "pose": "variations/playful_reconciliation/0001_seed6000043.json",
+          "png": "variations/playful_reconciliation/0001_seed6000043.png",
+          "svg": "variations/playful_reconciliation/0001_seed6000043.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.07319172413793104,
+          "svg_sha256": "18d8e633f6a80052cbe12805bf2d4e25c070a5816a28c30f97dc654029fb1a7e"
+        },
+        {
+          "seed": 6000044,
+          "pose": "variations/playful_reconciliation/0002_seed6000044.json",
+          "png": "variations/playful_reconciliation/0002_seed6000044.png",
+          "svg": "variations/playful_reconciliation/0002_seed6000044.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.07409103448275862,
+          "svg_sha256": "b54521ce61bd01bf7c9b22a16402aff6622f4e6a2447645fbe2fad59c9f6eb3f"
+        },
+        {
+          "seed": 6000045,
+          "pose": "variations/playful_reconciliation/0003_seed6000045.json",
+          "png": "variations/playful_reconciliation/0003_seed6000045.png",
+          "svg": "variations/playful_reconciliation/0003_seed6000045.svg",
+          "valid": true,
+          "checks": {
+            "passed": true,
+            "failures": [],
+            "kind": "protected authoring cues, not human recognition"
+          },
+          "foreground_fraction": 0.07751264367816092,
+          "svg_sha256": "9bf556e7cac1498153f606c563272d354cd338c97e34e0309040cc81e2784d06"
+        }
+      ]
+    }
+  ]
+}

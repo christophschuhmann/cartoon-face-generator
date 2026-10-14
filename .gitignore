@@ -1,0 +1,9 @@
+.venv/
+.venv-training/
+datasets/
+__pycache__/
+.pytest_cache/
+*.egg-info/
+!viewer/index.html
+!viewer/emotions.html
+!viewer/social.html

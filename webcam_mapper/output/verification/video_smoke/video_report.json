@@ -1,0 +1,96 @@
+{
+  "source_fps": 12.0,
+  "target_fps": 5,
+  "frames": [
+    {
+      "frame": "frame_000000",
+      "timestamp_seconds": 0.0,
+      "tracking": true,
+      "inference_mapping_render_ms": 98.53705856949091
+    },
+    {
+      "frame": "frame_000001",
+      "timestamp_seconds": 0.25,
+      "tracking": true,
+      "inference_mapping_render_ms": 108.83148713037372
+    },
+    {
+      "frame": "frame_000002",
+      "timestamp_seconds": 0.4166666666666667,
+      "tracking": true,
+      "inference_mapping_render_ms": 103.8175942376256
+    },
+    {
+      "frame": "frame_000003",
+      "timestamp_seconds": 0.6666666666666666,
+      "tracking": true,
+      "inference_mapping_render_ms": 101.14495689049363
+    },
+    {
+      "frame": "frame_000004",
+      "timestamp_seconds": 0.8333333333333334,
+      "tracking": true,
+      "inference_mapping_render_ms": 109.6650529652834
+    },
+    {
+      "frame": "frame_000005",
+      "timestamp_seconds": 1.0,
+      "tracking": true,
+      "inference_mapping_render_ms": 110.1903822273016
+    },
+    {
+      "frame": "frame_000006",
+      "timestamp_seconds": 1.25,
+      "tracking": true,
+      "inference_mapping_render_ms": 110.14586826786399
+    },
+    {
+      "frame": "frame_000007",
+      "timestamp_seconds": 1.4166666666666667,
+      "tracking": true,
+      "inference_mapping_render_ms": 110.63428316265345
+    },
+    {
+      "frame": "frame_000008",
+      "timestamp_seconds": 1.6666666666666667,
+      "tracking": true,
+      "inference_mapping_render_ms": 124.08650573343039
+    },
+    {
+      "frame": "frame_000009",
+      "timestamp_seconds": 1.8333333333333333,
+      "tracking": true,
+      "inference_mapping_render_ms": 110.17942195758224
+    },
+    {
+      "frame": "frame_000010",
+      "timestamp_seconds": 2.0,
+      "tracking": true,
+      "inference_mapping_render_ms": 110.27503432705998
+    },
+    {
+      "frame": "frame_000011",
+      "timestamp_seconds": 2.25,
+      "tracking": true,
+      "inference_mapping_render_ms": 110.31450191512704
+    },
+    {
+      "frame": "frame_000012",
+      "timestamp_seconds": 2.4166666666666665,
+      "tracking": true,
+      "inference_mapping_render_ms": 112.09013173356652
+    },
+    {
+      "frame": "frame_000013",
+      "timestamp_seconds": 2.6666666666666665,
+      "tracking": true,
+      "inference_mapping_render_ms": 110.30364874750376
+    },
+    {
+      "frame": "frame_000014",
+      "timestamp_seconds": 2.8333333333333335,
+      "tracking": true,
+      "inference_mapping_render_ms": 110.27024500072002
+    }
+  ]
+}

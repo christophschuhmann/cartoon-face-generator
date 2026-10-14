@@ -1,0 +1,4680 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:cartoon-face:pose:1.0",
+  "title": "Cartoon face complete pose",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "topology_id",
+    "coordinate_system",
+    "canvas",
+    "keypoints",
+    "rig",
+    "variants",
+    "style"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "topology_id": {
+      "const": "cartoon_face_v1"
+    },
+    "coordinate_system": {
+      "const": "normalized"
+    },
+    "canvas": {
+      "type": "object",
+      "required": [
+        "width",
+        "height"
+      ],
+      "properties": {
+        "width": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 8192
+        },
+        "height": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 8192
+        }
+      }
+    },
+    "keypoints": {
+      "type": "object",
+      "properties": {
+        "left_brow_outer": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 0
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "left_brow_outer_arch": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 1
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "left_brow_apex": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 2
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "left_brow_inner_arch": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 3
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "left_brow_inner": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 4
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "left_eye_inner_corner": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 5
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "left_eye_upper_inner": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 6
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "left_eye_upper_center": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 7
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "left_eye_upper_outer": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 8
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "left_eye_outer_corner": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 9
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "left_eye_lower_inner_corner": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 10
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "left_eye_lower_center": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 11
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "left_eye_lower_outer_corner": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 12
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "left_eye_side_end": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 13
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "left_eye_lash_tip": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 14
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "left_pupil_center": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 15
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "left_highlight_center": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 16
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "left_secondary_highlight_center": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 17
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "left_under_eye_inner": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 18
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "left_under_eye_center": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 19
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "left_under_eye_outer": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 20
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "left_hatch_inner": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 21
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "left_hatch_outer": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 22
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "left_lid_accent_inner_start": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 23
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "left_lid_accent_inner_mid": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 24
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "left_lid_accent_inner_end": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 25
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "left_lid_accent_outer_start": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 26
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "left_lid_accent_outer_mid": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 27
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "left_lid_accent_outer_end": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 28
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "left_brow_accent_start": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 29
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "left_brow_accent_mid": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 30
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "left_brow_accent_end": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 31
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "left_moustache_inner_tip": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 32
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "left_moustache_shoulder": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 33
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "left_moustache_sweep": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 34
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "left_moustache_belly": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 35
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "left_moustache_outer_turn": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 36
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "left_moustache_curl_top": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 37
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "left_moustache_curl_inner": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 38
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "left_moustache_curl_tip": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 39
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "right_brow_outer": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 40
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "right_brow_outer_arch": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 41
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "right_brow_apex": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 42
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "right_brow_inner_arch": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 43
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "right_brow_inner": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 44
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "right_eye_inner_corner": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 45
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "right_eye_upper_inner": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 46
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "right_eye_upper_center": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 47
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "right_eye_upper_outer": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 48
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "right_eye_outer_corner": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 49
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "right_eye_lower_inner_corner": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 50
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "right_eye_lower_center": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 51
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "right_eye_lower_outer_corner": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 52
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "right_eye_side_end": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 53
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "right_eye_lash_tip": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 54
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "right_pupil_center": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 55
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "right_highlight_center": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 56
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "right_secondary_highlight_center": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 57
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "right_under_eye_inner": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 58
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "right_under_eye_center": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 59
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "right_under_eye_outer": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 60
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "right_hatch_inner": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 61
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "right_hatch_outer": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 62
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "right_lid_accent_inner_start": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 63
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "right_lid_accent_inner_mid": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 64
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "right_lid_accent_inner_end": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 65
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "right_lid_accent_outer_start": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 66
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "right_lid_accent_outer_mid": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 67
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "right_lid_accent_outer_end": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 68
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "right_brow_accent_start": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 69
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "right_brow_accent_mid": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 70
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "right_brow_accent_end": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 71
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "right_moustache_inner_tip": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 72
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "right_moustache_shoulder": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 73
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "right_moustache_sweep": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 74
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "right_moustache_belly": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 75
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "right_moustache_outer_turn": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 76
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "right_moustache_curl_top": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 77
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "right_moustache_curl_inner": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 78
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "right_moustache_curl_tip": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 79
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "nose_lower": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 80
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "nose_center": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 81
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "nose_tip": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 82
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "mouth_right_corner": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 83
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "mouth_upper_right": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 84
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "mouth_upper_center": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 85
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "mouth_upper_left": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 86
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "mouth_left_corner": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 87
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "mouth_lower_right": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 88
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "mouth_lower_center": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 89
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "mouth_lower_left": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 90
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "tongue_root_right": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 91
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "tongue_side_right": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 92
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "tongue_tip": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 93
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "tongue_side_left": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 94
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "tongue_root_left": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 95
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "tongue_root_center": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 96
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "tongue_crease_tip": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 97
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "chin_right": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 98
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "chin_center": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 99
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        },
+        "chin_left": {
+          "type": "object",
+          "required": [
+            "id",
+            "xy",
+            "state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": 100
+            },
+            "xy": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "state": {
+              "enum": [
+                "visible",
+                "occluded",
+                "absent"
+              ]
+            }
+          }
+        }
+      },
+      "required": [
+        "left_brow_outer",
+        "left_brow_outer_arch",
+        "left_brow_apex",
+        "left_brow_inner_arch",
+        "left_brow_inner",
+        "left_eye_inner_corner",
+        "left_eye_upper_inner",
+        "left_eye_upper_center",
+        "left_eye_upper_outer",
+        "left_eye_outer_corner",
+        "left_eye_lower_inner_corner",
+        "left_eye_lower_center",
+        "left_eye_lower_outer_corner",
+        "left_eye_side_end",
+        "left_eye_lash_tip",
+        "left_pupil_center",
+        "left_highlight_center",
+        "left_secondary_highlight_center",
+        "left_under_eye_inner",
+        "left_under_eye_center",
+        "left_under_eye_outer",
+        "left_hatch_inner",
+        "left_hatch_outer",
+        "left_lid_accent_inner_start",
+        "left_lid_accent_inner_mid",
+        "left_lid_accent_inner_end",
+        "left_lid_accent_outer_start",
+        "left_lid_accent_outer_mid",
+        "left_lid_accent_outer_end",
+        "left_brow_accent_start",
+        "left_brow_accent_mid",
+        "left_brow_accent_end",
+        "left_moustache_inner_tip",
+        "left_moustache_shoulder",
+        "left_moustache_sweep",
+        "left_moustache_belly",
+        "left_moustache_outer_turn",
+        "left_moustache_curl_top",
+        "left_moustache_curl_inner",
+        "left_moustache_curl_tip",
+        "right_brow_outer",
+        "right_brow_outer_arch",
+        "right_brow_apex",
+        "right_brow_inner_arch",
+        "right_brow_inner",
+        "right_eye_inner_corner",
+        "right_eye_upper_inner",
+        "right_eye_upper_center",
+        "right_eye_upper_outer",
+        "right_eye_outer_corner",
+        "right_eye_lower_inner_corner",
+        "right_eye_lower_center",
+        "right_eye_lower_outer_corner",
+        "right_eye_side_end",
+        "right_eye_lash_tip",
+        "right_pupil_center",
+        "right_highlight_center",
+        "right_secondary_highlight_center",
+        "right_under_eye_inner",
+        "right_under_eye_center",
+        "right_under_eye_outer",
+        "right_hatch_inner",
+        "right_hatch_outer",
+        "right_lid_accent_inner_start",
+        "right_lid_accent_inner_mid",
+        "right_lid_accent_inner_end",
+        "right_lid_accent_outer_start",
+        "right_lid_accent_outer_mid",
+        "right_lid_accent_outer_end",
+        "right_brow_accent_start",
+        "right_brow_accent_mid",
+        "right_brow_accent_end",
+        "right_moustache_inner_tip",
+        "right_moustache_shoulder",
+        "right_moustache_sweep",
+        "right_moustache_belly",
+        "right_moustache_outer_turn",
+        "right_moustache_curl_top",
+        "right_moustache_curl_inner",
+        "right_moustache_curl_tip",
+        "nose_lower",
+        "nose_center",
+        "nose_tip",
+        "mouth_right_corner",
+        "mouth_upper_right",
+        "mouth_upper_center",
+        "mouth_upper_left",
+        "mouth_left_corner",
+        "mouth_lower_right",
+        "mouth_lower_center",
+        "mouth_lower_left",
+        "tongue_root_right",
+        "tongue_side_right",
+        "tongue_tip",
+        "tongue_side_left",
+        "tongue_root_left",
+        "tongue_root_center",
+        "tongue_crease_tip",
+        "chin_right",
+        "chin_center",
+        "chin_left"
+      ],
+      "additionalProperties": false
+    },
+    "rig": {
+      "type": "object",
+      "properties": {
+        "left_brow": {
+          "type": "object",
+          "properties": {
+            "opacity": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "tangent_scales": {
+              "type": "array",
+              "minItems": 5,
+              "maxItems": 5,
+              "items": {
+                "type": "number",
+                "minimum": 0.1,
+                "maximum": 3
+              }
+            },
+            "widths": {
+              "type": "array",
+              "minItems": 5,
+              "maxItems": 5,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 130
+              }
+            }
+          },
+          "required": [
+            "opacity",
+            "tangent_scales",
+            "widths"
+          ]
+        },
+        "left_eye_upper": {
+          "type": "object",
+          "properties": {
+            "opacity": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "tangent_scales": {
+              "type": "array",
+              "minItems": 5,
+              "maxItems": 5,
+              "items": {
+                "type": "number",
+                "minimum": 0.1,
+                "maximum": 3
+              }
+            },
+            "widths": {
+              "type": "array",
+              "minItems": 5,
+              "maxItems": 5,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 130
+              }
+            }
+          },
+          "required": [
+            "opacity",
+            "tangent_scales",
+            "widths"
+          ]
+        },
+        "left_eye_lower": {
+          "type": "object",
+          "properties": {
+            "opacity": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "tangent_scales": {
+              "type": "array",
+              "minItems": 3,
+              "maxItems": 3,
+              "items": {
+                "type": "number",
+                "minimum": 0.1,
+                "maximum": 3
+              }
+            },
+            "widths": {
+              "type": "array",
+              "minItems": 3,
+              "maxItems": 3,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 130
+              }
+            },
+            "corner_accents": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number"
+              }
+            }
+          },
+          "required": [
+            "opacity",
+            "tangent_scales",
+            "widths",
+            "corner_accents"
+          ]
+        },
+        "left_eye_side": {
+          "type": "object",
+          "properties": {
+            "opacity": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "width": {
+              "type": "number"
+            },
+            "bulge": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "opacity",
+            "width",
+            "bulge"
+          ]
+        },
+        "left_lash": {
+          "type": "object",
+          "properties": {
+            "opacity": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "width": {
+              "type": "number"
+            },
+            "root_t": {
+              "type": "number"
+            },
+            "bend": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "opacity",
+            "width",
+            "root_t",
+            "bend"
+          ]
+        },
+        "left_pupil": {
+          "type": "object",
+          "properties": {
+            "opacity": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "rx": {
+              "type": "number"
+            },
+            "ry": {
+              "type": "number"
+            },
+            "angle": {
+              "type": "number"
+            },
+            "openness": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "opacity",
+            "rx",
+            "ry",
+            "angle",
+            "openness"
+          ]
+        },
+        "left_highlight": {
+          "type": "object",
+          "properties": {
+            "opacity": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "rx": {
+              "type": "number"
+            },
+            "ry": {
+              "type": "number"
+            },
+            "angle": {
+              "type": "number"
+            },
+            "heart_scale": {
+              "type": "number"
+            },
+            "heart_offset": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number"
+              }
+            },
+            "heart_angle": {
+              "type": "number"
+            },
+            "heart_opacity": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "opacity",
+            "rx",
+            "ry",
+            "angle",
+            "heart_scale",
+            "heart_offset",
+            "heart_angle",
+            "heart_opacity"
+          ]
+        },
+        "left_secondary_highlight": {
+          "type": "object",
+          "properties": {
+            "opacity": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "rx": {
+              "type": "number"
+            },
+            "ry": {
+              "type": "number"
+            },
+            "angle": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "opacity",
+            "rx",
+            "ry",
+            "angle"
+          ]
+        },
+        "left_under_eye": {
+          "type": "object",
+          "properties": {
+            "opacity": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "tangent_scales": {
+              "type": "array",
+              "minItems": 3,
+              "maxItems": 3,
+              "items": {
+                "type": "number",
+                "minimum": 0.1,
+                "maximum": 3
+              }
+            },
+            "widths": {
+              "type": "array",
+              "minItems": 3,
+              "maxItems": 3,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 130
+              }
+            }
+          },
+          "required": [
+            "opacity",
+            "tangent_scales",
+            "widths"
+          ]
+        },
+        "left_hatching": {
+          "type": "object",
+          "properties": {
+            "opacity": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "count": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 8
+            },
+            "length": {
+              "type": "number"
+            },
+            "angle": {
+              "type": "number"
+            },
+            "width": {
+              "type": "number"
+            },
+            "offsets": {
+              "type": "array",
+              "minItems": 8,
+              "maxItems": 8,
+              "items": {
+                "type": "array",
+                "minItems": 3,
+                "maxItems": 3,
+                "items": {
+                  "type": "number"
+                }
+              }
+            },
+            "foldness": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "slot_weights": {
+              "type": "array",
+              "minItems": 8,
+              "maxItems": 8,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            }
+          },
+          "required": [
+            "opacity",
+            "count",
+            "length",
+            "angle",
+            "width",
+            "offsets"
+          ]
+        },
+        "left_lid_accent_inner": {
+          "type": "object",
+          "properties": {
+            "opacity": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "tangent_scales": {
+              "type": "array",
+              "minItems": 3,
+              "maxItems": 3,
+              "items": {
+                "type": "number",
+                "minimum": 0.1,
+                "maximum": 3
+              }
+            },
+            "widths": {
+              "type": "array",
+              "minItems": 3,
+              "maxItems": 3,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 130
+              }
+            }
+          },
+          "required": [
+            "opacity",
+            "tangent_scales",
+            "widths"
+          ]
+        },
+        "left_lid_accent_outer": {
+          "type": "object",
+          "properties": {
+            "opacity": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "tangent_scales": {
+              "type": "array",
+              "minItems": 3,
+              "maxItems": 3,
+              "items": {
+                "type": "number",
+                "minimum": 0.1,
+                "maximum": 3
+              }
+            },
+            "widths": {
+              "type": "array",
+              "minItems": 3,
+              "maxItems": 3,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 130
+              }
+            }
+          },
+          "required": [
+            "opacity",
+            "tangent_scales",
+            "widths"
+          ]
+        },
+        "left_brow_accent": {
+          "type": "object",
+          "properties": {
+            "opacity": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "tangent_scales": {
+              "type": "array",
+              "minItems": 3,
+              "maxItems": 3,
+              "items": {
+                "type": "number",
+                "minimum": 0.1,
+                "maximum": 3
+              }
+            },
+            "widths": {
+              "type": "array",
+              "minItems": 3,
+              "maxItems": 3,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 130
+              }
+            }
+          },
+          "required": [
+            "opacity",
+            "tangent_scales",
+            "widths"
+          ]
+        },
+        "left_moustache": {
+          "type": "object",
+          "properties": {
+            "opacity": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "tangent_scales": {
+              "type": "array",
+              "minItems": 8,
+              "maxItems": 8,
+              "items": {
+                "type": "number",
+                "minimum": 0.1,
+                "maximum": 3
+              }
+            },
+            "widths": {
+              "type": "array",
+              "minItems": 8,
+              "maxItems": 8,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 130
+              }
+            }
+          },
+          "required": [
+            "opacity",
+            "tangent_scales",
+            "widths"
+          ]
+        },
+        "right_brow": {
+          "type": "object",
+          "properties": {
+            "opacity": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "tangent_scales": {
+              "type": "array",
+              "minItems": 5,
+              "maxItems": 5,
+              "items": {
+                "type": "number",
+                "minimum": 0.1,
+                "maximum": 3
+              }
+            },
+            "widths": {
+              "type": "array",
+              "minItems": 5,
+              "maxItems": 5,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 130
+              }
+            }
+          },
+          "required": [
+            "opacity",
+            "tangent_scales",
+            "widths"
+          ]
+        },
+        "right_eye_upper": {
+          "type": "object",
+          "properties": {
+            "opacity": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "tangent_scales": {
+              "type": "array",
+              "minItems": 5,
+              "maxItems": 5,
+              "items": {
+                "type": "number",
+                "minimum": 0.1,
+                "maximum": 3
+              }
+            },
+            "widths": {
+              "type": "array",
+              "minItems": 5,
+              "maxItems": 5,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 130
+              }
+            }
+          },
+          "required": [
+            "opacity",
+            "tangent_scales",
+            "widths"
+          ]
+        },
+        "right_eye_lower": {
+          "type": "object",
+          "properties": {
+            "opacity": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "tangent_scales": {
+              "type": "array",
+              "minItems": 3,
+              "maxItems": 3,
+              "items": {
+                "type": "number",
+                "minimum": 0.1,
+                "maximum": 3
+              }
+            },
+            "widths": {
+              "type": "array",
+              "minItems": 3,
+              "maxItems": 3,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 130
+              }
+            },
+            "corner_accents": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number"
+              }
+            }
+          },
+          "required": [
+            "opacity",
+            "tangent_scales",
+            "widths",
+            "corner_accents"
+          ]
+        },
+        "right_eye_side": {
+          "type": "object",
+          "properties": {
+            "opacity": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "width": {
+              "type": "number"
+            },
+            "bulge": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "opacity",
+            "width",
+            "bulge"
+          ]
+        },
+        "right_lash": {
+          "type": "object",
+          "properties": {
+            "opacity": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "width": {
+              "type": "number"
+            },
+            "root_t": {
+              "type": "number"
+            },
+            "bend": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "opacity",
+            "width",
+            "root_t",
+            "bend"
+          ]
+        },
+        "right_pupil": {
+          "type": "object",
+          "properties": {
+            "opacity": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "rx": {
+              "type": "number"
+            },
+            "ry": {
+              "type": "number"
+            },
+            "angle": {
+              "type": "number"
+            },
+            "openness": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "opacity",
+            "rx",
+            "ry",
+            "angle",
+            "openness"
+          ]
+        },
+        "right_highlight": {
+          "type": "object",
+          "properties": {
+            "opacity": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "rx": {
+              "type": "number"
+            },
+            "ry": {
+              "type": "number"
+            },
+            "angle": {
+              "type": "number"
+            },
+            "heart_scale": {
+              "type": "number"
+            },
+            "heart_offset": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number"
+              }
+            },
+            "heart_angle": {
+              "type": "number"
+            },
+            "heart_opacity": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "opacity",
+            "rx",
+            "ry",
+            "angle",
+            "heart_scale",
+            "heart_offset",
+            "heart_angle",
+            "heart_opacity"
+          ]
+        },
+        "right_secondary_highlight": {
+          "type": "object",
+          "properties": {
+            "opacity": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "rx": {
+              "type": "number"
+            },
+            "ry": {
+              "type": "number"
+            },
+            "angle": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "opacity",
+            "rx",
+            "ry",
+            "angle"
+          ]
+        },
+        "right_under_eye": {
+          "type": "object",
+          "properties": {
+            "opacity": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "tangent_scales": {
+              "type": "array",
+              "minItems": 3,
+              "maxItems": 3,
+              "items": {
+                "type": "number",
+                "minimum": 0.1,
+                "maximum": 3
+              }
+            },
+            "widths": {
+              "type": "array",
+              "minItems": 3,
+              "maxItems": 3,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 130
+              }
+            }
+          },
+          "required": [
+            "opacity",
+            "tangent_scales",
+            "widths"
+          ]
+        },
+        "right_hatching": {
+          "type": "object",
+          "properties": {
+            "opacity": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "count": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 8
+            },
+            "length": {
+              "type": "number"
+            },
+            "angle": {
+              "type": "number"
+            },
+            "width": {
+              "type": "number"
+            },
+            "offsets": {
+              "type": "array",
+              "minItems": 8,
+              "maxItems": 8,
+              "items": {
+                "type": "array",
+                "minItems": 3,
+                "maxItems": 3,
+                "items": {
+                  "type": "number"
+                }
+              }
+            },
+            "foldness": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "slot_weights": {
+              "type": "array",
+              "minItems": 8,
+              "maxItems": 8,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            }
+          },
+          "required": [
+            "opacity",
+            "count",
+            "length",
+            "angle",
+            "width",
+            "offsets"
+          ]
+        },
+        "right_lid_accent_inner": {
+          "type": "object",
+          "properties": {
+            "opacity": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "tangent_scales": {
+              "type": "array",
+              "minItems": 3,
+              "maxItems": 3,
+              "items": {
+                "type": "number",
+                "minimum": 0.1,
+                "maximum": 3
+              }
+            },
+            "widths": {
+              "type": "array",
+              "minItems": 3,
+              "maxItems": 3,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 130
+              }
+            }
+          },
+          "required": [
+            "opacity",
+            "tangent_scales",
+            "widths"
+          ]
+        },
+        "right_lid_accent_outer": {
+          "type": "object",
+          "properties": {
+            "opacity": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "tangent_scales": {
+              "type": "array",
+              "minItems": 3,
+              "maxItems": 3,
+              "items": {
+                "type": "number",
+                "minimum": 0.1,
+                "maximum": 3
+              }
+            },
+            "widths": {
+              "type": "array",
+              "minItems": 3,
+              "maxItems": 3,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 130
+              }
+            }
+          },
+          "required": [
+            "opacity",
+            "tangent_scales",
+            "widths"
+          ]
+        },
+        "right_brow_accent": {
+          "type": "object",
+          "properties": {
+            "opacity": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "tangent_scales": {
+              "type": "array",
+              "minItems": 3,
+              "maxItems": 3,
+              "items": {
+                "type": "number",
+                "minimum": 0.1,
+                "maximum": 3
+              }
+            },
+            "widths": {
+              "type": "array",
+              "minItems": 3,
+              "maxItems": 3,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 130
+              }
+            }
+          },
+          "required": [
+            "opacity",
+            "tangent_scales",
+            "widths"
+          ]
+        },
+        "right_moustache": {
+          "type": "object",
+          "properties": {
+            "opacity": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "tangent_scales": {
+              "type": "array",
+              "minItems": 8,
+              "maxItems": 8,
+              "items": {
+                "type": "number",
+                "minimum": 0.1,
+                "maximum": 3
+              }
+            },
+            "widths": {
+              "type": "array",
+              "minItems": 8,
+              "maxItems": 8,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 130
+              }
+            }
+          },
+          "required": [
+            "opacity",
+            "tangent_scales",
+            "widths"
+          ]
+        },
+        "nose": {
+          "type": "object",
+          "properties": {
+            "opacity": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "tangent_scales": {
+              "type": "array",
+              "minItems": 3,
+              "maxItems": 3,
+              "items": {
+                "type": "number",
+                "minimum": 0.1,
+                "maximum": 3
+              }
+            },
+            "widths": {
+              "type": "array",
+              "minItems": 3,
+              "maxItems": 3,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 130
+              }
+            }
+          },
+          "required": [
+            "opacity",
+            "tangent_scales",
+            "widths"
+          ]
+        },
+        "mouth_upper": {
+          "type": "object",
+          "properties": {
+            "opacity": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "tangent_scales": {
+              "type": "array",
+              "minItems": 5,
+              "maxItems": 5,
+              "items": {
+                "type": "number",
+                "minimum": 0.1,
+                "maximum": 3
+              }
+            },
+            "widths": {
+              "type": "array",
+              "minItems": 5,
+              "maxItems": 5,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 130
+              }
+            },
+            "fill_opacity": {
+              "type": "number"
+            },
+            "corner_accent": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number"
+              }
+            },
+            "corner_width": {
+              "type": "number"
+            },
+            "corner_size": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "opacity",
+            "tangent_scales",
+            "widths",
+            "fill_opacity",
+            "corner_accent",
+            "corner_width",
+            "corner_size"
+          ]
+        },
+        "mouth_lower": {
+          "type": "object",
+          "properties": {
+            "opacity": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "tangent_scales": {
+              "type": "array",
+              "minItems": 3,
+              "maxItems": 3,
+              "items": {
+                "type": "number",
+                "minimum": 0.1,
+                "maximum": 3
+              }
+            },
+            "widths": {
+              "type": "array",
+              "minItems": 3,
+              "maxItems": 3,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 130
+              }
+            }
+          },
+          "required": [
+            "opacity",
+            "tangent_scales",
+            "widths"
+          ]
+        },
+        "tongue": {
+          "type": "object",
+          "properties": {
+            "opacity": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "tangent_scales": {
+              "type": "array",
+              "minItems": 6,
+              "maxItems": 6,
+              "items": {
+                "type": "number",
+                "minimum": 0.1,
+                "maximum": 3
+              }
+            },
+            "width": {
+              "type": "number"
+            },
+            "fill": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "opacity",
+            "tangent_scales",
+            "width",
+            "fill"
+          ]
+        },
+        "tongue_crease": {
+          "type": "object",
+          "properties": {
+            "opacity": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "width": {
+              "type": "number"
+            },
+            "bend": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "opacity",
+            "width",
+            "bend"
+          ]
+        },
+        "chin": {
+          "type": "object",
+          "properties": {
+            "opacity": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "tangent_scales": {
+              "type": "array",
+              "minItems": 3,
+              "maxItems": 3,
+              "items": {
+                "type": "number",
+                "minimum": 0.1,
+                "maximum": 3
+              }
+            },
+            "widths": {
+              "type": "array",
+              "minItems": 3,
+              "maxItems": 3,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 130
+              }
+            }
+          },
+          "required": [
+            "opacity",
+            "tangent_scales",
+            "widths"
+          ]
+        }
+      },
+      "required": [
+        "left_brow",
+        "left_eye_upper",
+        "left_eye_lower",
+        "left_eye_side",
+        "left_lash",
+        "left_pupil",
+        "left_highlight",
+        "left_secondary_highlight",
+        "left_under_eye",
+        "left_hatching",
+        "left_lid_accent_inner",
+        "left_lid_accent_outer",
+        "left_brow_accent",
+        "left_moustache",
+        "right_brow",
+        "right_eye_upper",
+        "right_eye_lower",
+        "right_eye_side",
+        "right_lash",
+        "right_pupil",
+        "right_highlight",
+        "right_secondary_highlight",
+        "right_under_eye",
+        "right_hatching",
+        "right_lid_accent_inner",
+        "right_lid_accent_outer",
+        "right_brow_accent",
+        "right_moustache",
+        "nose",
+        "mouth_upper",
+        "mouth_lower",
+        "tongue",
+        "tongue_crease",
+        "chin"
+      ]
+    },
+    "variants": {
+      "type": "object",
+      "required": [
+        "right_under_eye",
+        "right_highlight",
+        "left_under_eye",
+        "left_highlight",
+        "mouth_interior"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "right_under_eye": {
+          "enum": [
+            "none",
+            "continuous",
+            "hatching",
+            "mixed"
+          ]
+        },
+        "right_highlight": {
+          "enum": [
+            "round",
+            "heart"
+          ]
+        },
+        "left_under_eye": {
+          "enum": [
+            "none",
+            "continuous",
+            "hatching",
+            "mixed"
+          ]
+        },
+        "left_highlight": {
+          "enum": [
+            "round",
+            "heart"
+          ]
+        },
+        "mouth_interior": {
+          "enum": [
+            "dark",
+            "white"
+          ]
+        }
+      }
+    },
+    "style": {
+      "const": {
+        "background": "white",
+        "ink": "black"
+      }
+    },
+    "geometry": {
+      "type": "object",
+      "description": "Optional smooth_v1 style. Absence preserves legacy SVG geometry.",
+      "required": [
+        "version",
+        "ribbon_smoothing",
+        "mouth_rounding"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "version": {
+          "const": "smooth_v1"
+        },
+        "ribbon_smoothing": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "mouth_rounding": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "under_eye_transition": {
+          "const": "stroke_bank_v1",
+          "description": "Continuous curve plus eight stable derived morph slots."
+        }
+      }
+    },
+    "emotion": {
+      "description": "Optional intended EmoNet target; weights are authoring controls, not probabilities.",
+      "type": "object",
+      "properties": {
+        "taxonomy_id": {
+          "type": "string"
+        },
+        "category_id": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1,
+          "maximum": 40
+        },
+        "weights": {
+          "type": "array",
+          "minItems": 40,
+          "maxItems": 40,
+          "items": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        },
+        "human_validated": {
+          "type": "boolean"
+        },
+        "label_kind": {
+          "type": "string"
+        }
+      }
+    },
+    "recipe": {
+      "type": "object",
+      "description": "Generation provenance. Renderer consumes resolved geometry instead of reapplying recipe."
+    },
+    "expression": {
+      "type": "object",
+      "description": "Independent authored social catalog; never extra official EmoNet classes.",
+      "properties": {
+        "catalog_id": {
+          "const": "cartoon_social_60_v1"
+        },
+        "category_id": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1,
+          "maximum": 60
+        },
+        "weights": {
+          "type": "array",
+          "minItems": 60,
+          "maxItems": 60,
+          "items": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        },
+        "human_validated": {
+          "type": "boolean"
+        }
+      }
+    }
+  }
+}

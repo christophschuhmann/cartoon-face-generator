@@ -1,0 +1,47 @@
+# Train the 101-point cartoon detector
+
+This is the small supervised **cartoon-image** model. The separate [MediaPipe application](../webcam_mapper/README.md) maps a human webcam to the SVG avatar; it does not use this model.
+
+`LandmarkNet` has 1,011,228 parameters. A compact convolutional encoder/decoder produces 101 heatmaps at one quarter of the input dimensions and 101 three-state visibility predictions. No human-face pretrained weights or expression classifier are required. Training uses spatial Gaussian distribution loss, an auxiliary coordinate loss and visibility classification. Visible landmarks have weight 1, occluded landmarks 0.35, absent/out-of-frame landmarks 0. Extreme OOD examples have additional weight 0.25.
+
+## Reproduce preparation and training
+
+From the project root, generate the final v2 SVG dataset first. Install the ordinary project dependencies, then a separate PyTorch environment. The tested configuration is Python 3.12, PyTorch 2.6.0 + CUDA 12.4 on one NVIDIA A100. The [official PyTorch installation matrix](https://pytorch.org/get-started/previous-versions/) also provides CPU wheels. Core SVG/webcam generation does not depend on PyTorch.
+
+```bash
+uv venv .venv-training --python 3.12
+uv pip install --python .venv-training/bin/python -e .
+uv pip install --python .venv-training/bin/python torch==2.6.0 \
+  --index-url https://download.pytorch.org/whl/cu124
+
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python -m training.prepare \
+  --dataset datasets/cartoon_landmarks_v2 --output datasets/training_cache_v2 --workers 16
+
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv-training/bin/python -m training.train \
+  --cache datasets/training_cache_v2 --output output/detector \
+  --epochs 15 --batch-size 128 --workers 12 --device cuda:0
+```
+
+Use `--device cpu` and a smaller batch/worker count for CPU-only training; no laptop training-time claim is made. `--resume output/detector/last.pt` resumes a matching dataset/architecture run. For the same 15-epoch schedule, pass the same epoch argument. Source/augmentation seeds are explicit. GPU arithmetic is not guaranteed bit-identical across different hardware or library versions.
+
+The cache is grayscale storage at 320 × 192; every training read creates exactly one new RGB augmented image. A letterbox preserves proportions and leaves varying lower margins. Mild affine transforms, invertible sine shears, bilateral flip permutation, pastel background palettes, contrast changes, noise, slight blur/downsampling/JPEG and occasional small occluders are applied together with the exact label transform. Original source SVGs remain available.
+
+## Holdouts and evaluation
+
+Every expression reserves five unseen validation poses and five additional unseen test poses. Each has a clean and one fixed augmented image, giving 1,000 normal validation images and 1,000 normal test images. Each split also has 200 separately reported extreme OOD images. Training uses all 84,000 source poses from the train split. No held-out source ID, clean view or transformed view is used for training.
+
+Checkpoints are selected only by normal validation normalized mean error. The test set is evaluated after the chosen checkpoint is loaded. `output/detector/config.json`, `history.json`, `evaluation.json`, `test_predictions.npz` and `test_examples.png` record the real run. `best.pt` contains the selected weights; `last.pt` additionally retains optimizer/scheduler/scaler state.
+
+NME divides Euclidean landmark error by the full image diagonal. PCK@1/2/5% thresholds use that same diagonal. Absent and outside landmarks are excluded; occluded landmarks are included. Reports separate clean, augmented and OOD conditions, and include every category. These are synthetic-cartoon landmark metrics, not human emotion recognition or evidence of generalization to arbitrary cartoons or videos.
+
+## Predict on another cartoon image
+
+```bash
+.venv-training/bin/python -m training.predict \
+  --image path/to/cartoon.png --checkpoint output/detector/best.pt \
+  --device cpu --output output/prediction.json
+```
+
+Inference letterboxes RGB input, predicts all 101 positions, then maps them back into the original image's pixel space. Three visibility probabilities are returned per point. Preserve negative/outside coordinates and inspect confidence instead of silently clamping them. The output annotation is a prediction, not an independently reconstructed full SVG rig: widths, tangents and optional shape details are not uniquely determined by landmarks alone.
+
+The [augmentation guide](../docs/dataset.md) documents schema and coordinate conventions. Tests cover Gaussian coordinate decode, output shapes, finite gradients, masking absent points, transformed label/image alignment, flip permutations and exact inverse warping.

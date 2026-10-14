@@ -1,0 +1,1401 @@
+{
+  "schema_version": "1.0",
+  "topology_id": "cartoon_face_v1",
+  "coordinate_system": "normalized",
+  "canvas": {
+    "width": 1450,
+    "height": 750
+  },
+  "name": "webcam_expression",
+  "keypoints": {
+    "left_brow_outer": {
+      "id": 0,
+      "xy": [
+        0.7755307869917674,
+        0.11524401481867202
+      ],
+      "state": "visible"
+    },
+    "left_brow_outer_arch": {
+      "id": 1,
+      "xy": [
+        0.7218502015265411,
+        0.077094733014854
+      ],
+      "state": "visible"
+    },
+    "left_brow_apex": {
+      "id": 2,
+      "xy": [
+        0.6376086782489379,
+        0.05891968378107903
+      ],
+      "state": "visible"
+    },
+    "left_brow_inner_arch": {
+      "id": 3,
+      "xy": [
+        0.5807742268985204,
+        0.08602447285393763
+      ],
+      "state": "visible"
+    },
+    "left_brow_inner": {
+      "id": 4,
+      "xy": [
+        0.5532207230088674,
+        0.11968720024204264
+      ],
+      "state": "visible"
+    },
+    "left_eye_inner_corner": {
+      "id": 5,
+      "xy": [
+        0.5717648665973041,
+        0.46593485585474126
+      ],
+      "state": "visible"
+    },
+    "left_eye_upper_inner": {
+      "id": 6,
+      "xy": [
+        0.6041559767598441,
+        0.3451536653695047
+      ],
+      "state": "visible"
+    },
+    "left_eye_upper_center": {
+      "id": 7,
+      "xy": [
+        0.6981438773418683,
+        0.25638125720343474
+      ],
+      "state": "visible"
+    },
+    "left_eye_upper_outer": {
+      "id": 8,
+      "xy": [
+        0.7781915112524934,
+        0.29914440975593903
+      ],
+      "state": "visible"
+    },
+    "left_eye_outer_corner": {
+      "id": 9,
+      "xy": [
+        0.8111915447697007,
+        0.42474666469116074
+      ],
+      "state": "visible"
+    },
+    "left_eye_lower_inner_corner": {
+      "id": 10,
+      "xy": [
+        0.5997447226192895,
+        0.5150830356323074
+      ],
+      "state": "visible"
+    },
+    "left_eye_lower_center": {
+      "id": 11,
+      "xy": [
+        0.6928228086967624,
+        0.4409320129096148
+      ],
+      "state": "visible"
+    },
+    "left_eye_lower_outer_corner": {
+      "id": 12,
+      "xy": [
+        0.8015515767138885,
+        0.4325233933324834
+      ],
+      "state": "visible"
+    },
+    "left_eye_side_end": {
+      "id": 13,
+      "xy": [
+        0.800280753268605,
+        0.4285252486853147
+      ],
+      "state": "absent"
+    },
+    "left_eye_lash_tip": {
+      "id": 14,
+      "xy": [
+        0.8300330195231265,
+        0.3615635058591505
+      ],
+      "state": "visible"
+    },
+    "left_pupil_center": {
+      "id": 15,
+      "xy": [
+        0.695571685594031,
+        0.3454004836552993
+      ],
+      "state": "visible"
+    },
+    "left_highlight_center": {
+      "id": 16,
+      "xy": [
+        0.6746424556354484,
+        0.3101632757207074
+      ],
+      "state": "visible"
+    },
+    "left_secondary_highlight_center": {
+      "id": 17,
+      "xy": [
+        0.7026446838825803,
+        0.35455403335756847
+      ],
+      "state": "absent"
+    },
+    "left_under_eye_inner": {
+      "id": 18,
+      "xy": [
+        0.5997447226192895,
+        0.5457497022989741
+      ],
+      "state": "visible"
+    },
+    "left_under_eye_center": {
+      "id": 19,
+      "xy": [
+        0.6481453273795754,
+        0.511191170483174
+      ],
+      "state": "visible"
+    },
+    "left_under_eye_outer": {
+      "id": 20,
+      "xy": [
+        0.6835150000890151,
+        0.48301378184855076
+      ],
+      "state": "visible"
+    },
+    "left_hatch_inner": {
+      "id": 21,
+      "xy": [
+        0.6602454785696469,
+        0.5082182041958906
+      ],
+      "state": "visible"
+    },
+    "left_hatch_outer": {
+      "id": 22,
+      "xy": [
+        0.7852422615113196,
+        0.4751180196023865
+      ],
+      "state": "visible"
+    },
+    "left_lid_accent_inner_start": {
+      "id": 23,
+      "xy": [
+        0.5764038359519396,
+        0.32005394443146523
+      ],
+      "state": "visible"
+    },
+    "left_lid_accent_inner_mid": {
+      "id": 24,
+      "xy": [
+        0.6005082479826774,
+        0.2309423668246435
+      ],
+      "state": "visible"
+    },
+    "left_lid_accent_inner_end": {
+      "id": 25,
+      "xy": [
+        0.6433282195722951,
+        0.1793096078340204
+      ],
+      "state": "visible"
+    },
+    "left_lid_accent_outer_start": {
+      "id": 26,
+      "xy": [
+        0.7047468228382964,
+        0.20886031903596516
+      ],
+      "state": "visible"
+    },
+    "left_lid_accent_outer_mid": {
+      "id": 27,
+      "xy": [
+        0.7382444105644568,
+        0.221922672298113
+      ],
+      "state": "visible"
+    },
+    "left_lid_accent_outer_end": {
+      "id": 28,
+      "xy": [
+        0.7698231088934894,
+        0.2558982693038018
+      ],
+      "state": "visible"
+    },
+    "left_brow_accent_start": {
+      "id": 29,
+      "xy": [
+        0.5348605806981244,
+        0.05739620396834726
+      ],
+      "state": "visible"
+    },
+    "left_brow_accent_mid": {
+      "id": 30,
+      "xy": [
+        0.522997182926221,
+        0.11273444503618109
+      ],
+      "state": "visible"
+    },
+    "left_brow_accent_end": {
+      "id": 31,
+      "xy": [
+        0.5293087865268895,
+        0.1508903707312092
+      ],
+      "state": "visible"
+    },
+    "left_moustache_inner_tip": {
+      "id": 32,
+      "xy": [
+        0.5252064200922123,
+        0.7127969052587361
+      ],
+      "state": "visible"
+    },
+    "left_moustache_shoulder": {
+      "id": 33,
+      "xy": [
+        0.5739601600825308,
+        0.6820748941827766
+      ],
+      "state": "visible"
+    },
+    "left_moustache_sweep": {
+      "id": 34,
+      "xy": [
+        0.6536895619157158,
+        0.7043640667307424
+      ],
+      "state": "visible"
+    },
+    "left_moustache_belly": {
+      "id": 35,
+      "xy": [
+        0.7074367976202007,
+        0.7083873306236577
+      ],
+      "state": "visible"
+    },
+    "left_moustache_outer_turn": {
+      "id": 36,
+      "xy": [
+        0.7450843582636447,
+        0.6711740613193912
+      ],
+      "state": "visible"
+    },
+    "left_moustache_curl_top": {
+      "id": 37,
+      "xy": [
+        0.7478367021749475,
+        0.6115774460061598
+      ],
+      "state": "visible"
+    },
+    "left_moustache_curl_inner": {
+      "id": 38,
+      "xy": [
+        0.7202373727764816,
+        0.5953903778586844
+      ],
+      "state": "visible"
+    },
+    "left_moustache_curl_tip": {
+      "id": 39,
+      "xy": [
+        0.7124316850983037,
+        0.6214874234691008
+      ],
+      "state": "visible"
+    },
+    "right_brow_outer": {
+      "id": 40,
+      "xy": [
+        0.14204169301076583,
+        0.25911878011488265
+      ],
+      "state": "visible"
+    },
+    "right_brow_outer_arch": {
+      "id": 41,
+      "xy": [
+        0.2063391307807046,
+        0.22096949831106458
+      ],
+      "state": "visible"
+    },
+    "right_brow_apex": {
+      "id": 42,
+      "xy": [
+        0.29309313247501456,
+        0.2027944490772896
+      ],
+      "state": "visible"
+    },
+    "right_brow_inner_arch": {
+      "id": 43,
+      "xy": [
+        0.34236071764095294,
+        0.22989923815014818
+      ],
+      "state": "visible"
+    },
+    "right_brow_inner": {
+      "id": 44,
+      "xy": [
+        0.3707144505195957,
+        0.26356196553825323
+      ],
+      "state": "visible"
+    },
+    "right_eye_inner_corner": {
+      "id": 45,
+      "xy": [
+        0.4111018972898502,
+        0.5537056968937306
+      ],
+      "state": "visible"
+    },
+    "right_eye_upper_inner": {
+      "id": 46,
+      "xy": [
+        0.3838655056601267,
+        0.449311455581587
+      ],
+      "state": "visible"
+    },
+    "right_eye_upper_center": {
+      "id": 47,
+      "xy": [
+        0.32791284611621635,
+        0.3912472917533317
+      ],
+      "state": "visible"
+    },
+    "right_eye_upper_outer": {
+      "id": 48,
+      "xy": [
+        0.23416409202722516,
+        0.44596749371467315
+      ],
+      "state": "visible"
+    },
+    "right_eye_outer_corner": {
+      "id": 49,
+      "xy": [
+        0.17713587806865658,
+        0.5688826189060864
+      ],
+      "state": "visible"
+    },
+    "right_eye_lower_inner_corner": {
+      "id": 50,
+      "xy": [
+        0.3976177381196943,
+        0.5653784590360927
+      ],
+      "state": "visible"
+    },
+    "right_eye_lower_center": {
+      "id": 51,
+      "xy": [
+        0.29269597727854946,
+        0.5833876848100531
+      ],
+      "state": "visible"
+    },
+    "right_eye_lower_outer_corner": {
+      "id": 52,
+      "xy": [
+        0.19923183268758055,
+        0.6658429807246307
+      ],
+      "state": "visible"
+    },
+    "right_eye_side_end": {
+      "id": 53,
+      "xy": [
+        0.18592321542175702,
+        0.6481979219123566
+      ],
+      "state": "visible"
+    },
+    "right_eye_lash_tip": {
+      "id": 54,
+      "xy": [
+        0.14435516655856603,
+        0.6013612711161105
+      ],
+      "state": "visible"
+    },
+    "right_pupil_center": {
+      "id": 55,
+      "xy": [
+        0.3103927542720986,
+        0.4786337528150825
+      ],
+      "state": "visible"
+    },
+    "right_highlight_center": {
+      "id": 56,
+      "xy": [
+        0.2884666616317907,
+        0.4454754640340083
+      ],
+      "state": "visible"
+    },
+    "right_secondary_highlight_center": {
+      "id": 57,
+      "xy": [
+        0.31640870369995133,
+        0.49074576605781084
+      ],
+      "state": "absent"
+    },
+    "right_under_eye_inner": {
+      "id": 58,
+      "xy": [
+        0.3976177381196943,
+        0.5960451257027594
+      ],
+      "state": "visible"
+    },
+    "right_under_eye_center": {
+      "id": 59,
+      "xy": [
+        0.343058422482299,
+        0.6094099231052188
+      ],
+      "state": "visible"
+    },
+    "right_under_eye_outer": {
+      "id": 60,
+      "xy": [
+        0.30318815336266397,
+        0.6162534288993238
+      ],
+      "state": "visible"
+    },
+    "right_hatch_inner": {
+      "id": 61,
+      "xy": [
+        0.32941859357295017,
+        0.6184177891225002
+      ],
+      "state": "visible"
+    },
+    "right_hatch_outer": {
+      "id": 62,
+      "xy": [
+        0.2132514543762259,
+        0.6948080196707772
+      ],
+      "state": "visible"
+    },
+    "right_lid_accent_inner_start": {
+      "id": 63,
+      "xy": [
+        0.27571961744799506,
+        0.3342660488045316
+      ],
+      "state": "visible"
+    },
+    "right_lid_accent_inner_mid": {
+      "id": 64,
+      "xy": [
+        0.32306073280864606,
+        0.33312422800074915
+      ],
+      "state": "visible"
+    },
+    "right_lid_accent_inner_end": {
+      "id": 65,
+      "xy": [
+        0.36853928084071363,
+        0.3756597985228144
+      ],
+      "state": "visible"
+    },
+    "right_lid_accent_outer_start": {
+      "id": 66,
+      "xy": [
+        0.17509821993055866,
+        0.5120473918123665
+      ],
+      "state": "visible"
+    },
+    "right_lid_accent_outer_mid": {
+      "id": 67,
+      "xy": [
+        0.18778827026992645,
+        0.44586396802867967
+      ],
+      "state": "visible"
+    },
+    "right_lid_accent_outer_end": {
+      "id": 68,
+      "xy": [
+        0.21392394313224278,
+        0.3884911828507167
+      ],
+      "state": "visible"
+    },
+    "right_brow_accent_start": {
+      "id": 69,
+      "xy": [
+        0.3819504145416968,
+        0.21327780676624306
+      ],
+      "state": "visible"
+    },
+    "right_brow_accent_mid": {
+      "id": 70,
+      "xy": [
+        0.39114399716315346,
+        0.2524650626344725
+      ],
+      "state": "visible"
+    },
+    "right_brow_accent_end": {
+      "id": 71,
+      "xy": [
+        0.388992417442137,
+        0.28454343757453426
+      ],
+      "state": "visible"
+    },
+    "right_moustache_inner_tip": {
+      "id": 72,
+      "xy": [
+        0.48690794582432595,
+        0.7307058175246828
+      ],
+      "state": "visible"
+    },
+    "right_moustache_shoulder": {
+      "id": 73,
+      "xy": [
+        0.43925318911905026,
+        0.7300825085651201
+      ],
+      "state": "visible"
+    },
+    "right_moustache_sweep": {
+      "id": 74,
+      "xy": [
+        0.36601499117360414,
+        0.7977883679487708
+      ],
+      "state": "visible"
+    },
+    "right_moustache_belly": {
+      "id": 75,
+      "xy": [
+        0.31428795740231885,
+        0.8307713797800029
+      ],
+      "state": "visible"
+    },
+    "right_moustache_outer_turn": {
+      "id": 76,
+      "xy": [
+        0.271802735865774,
+        0.7998462378988056
+      ],
+      "state": "visible"
+    },
+    "right_moustache_curl_top": {
+      "id": 77,
+      "xy": [
+        0.27605610221339505,
+        0.7363433863993861
+      ],
+      "state": "visible"
+    },
+    "right_moustache_curl_inner": {
+      "id": 78,
+      "xy": [
+        0.30279425611538074,
+        0.7246739395188755
+      ],
+      "state": "visible"
+    },
+    "right_moustache_curl_tip": {
+      "id": 79,
+      "xy": [
+        0.30829779876521196,
+        0.7489634392497385
+      ],
+      "state": "visible"
+    },
+    "nose_lower": {
+      "id": 80,
+      "xy": [
+        0.48733643240064417,
+        0.668169211864494
+      ],
+      "state": "visible"
+    },
+    "nose_center": {
+      "id": 81,
+      "xy": [
+        0.49956250527980517,
+        0.6126666361684988
+      ],
+      "state": "visible"
+    },
+    "nose_tip": {
+      "id": 82,
+      "xy": [
+        0.5330319887963961,
+        0.602645674128337
+      ],
+      "state": "visible"
+    },
+    "mouth_right_corner": {
+      "id": 83,
+      "xy": [
+        0.42600882673137064,
+        0.787470628984973
+      ],
+      "state": "visible"
+    },
+    "mouth_upper_right": {
+      "id": 84,
+      "xy": [
+        0.46152458990031275,
+        0.8400792558103545
+      ],
+      "state": "visible"
+    },
+    "mouth_upper_center": {
+      "id": 85,
+      "xy": [
+        0.5,
+        0.857393274559934
+      ],
+      "state": "visible"
+    },
+    "mouth_upper_left": {
+      "id": 86,
+      "xy": [
+        0.5384754100996872,
+        0.8416960363815993
+      ],
+      "state": "visible"
+    },
+    "mouth_left_corner": {
+      "id": 87,
+      "xy": [
+        0.5739911732686294,
+        0.7876529100552584
+      ],
+      "state": "visible"
+    },
+    "mouth_lower_right": {
+      "id": 88,
+      "xy": [
+        0.46152458990031275,
+        0.8525469342809087
+      ],
+      "state": "visible"
+    },
+    "mouth_lower_center": {
+      "id": 89,
+      "xy": [
+        0.5,
+        0.8747094946579259
+      ],
+      "state": "visible"
+    },
+    "mouth_lower_left": {
+      "id": 90,
+      "xy": [
+        0.5384754100996872,
+        0.8541637148521535
+      ],
+      "state": "visible"
+    },
+    "tongue_root_right": {
+      "id": 91,
+      "xy": [
+        0.47040353069254826,
+        0.8600599412266006
+      ],
+      "state": "absent"
+    },
+    "tongue_side_right": {
+      "id": 92,
+      "xy": [
+        0.4769147539401876,
+        0.9235266078932672
+      ],
+      "state": "absent"
+    },
+    "tongue_tip": {
+      "id": 93,
+      "xy": [
+        0.5055172413793103,
+        0.9507266078932672
+      ],
+      "state": "absent"
+    },
+    "tongue_side_left": {
+      "id": 94,
+      "xy": [
+        0.5325561162381969,
+        0.9235266078932672
+      ],
+      "state": "absent"
+    },
+    "tongue_root_left": {
+      "id": 95,
+      "xy": [
+        0.5295964693074517,
+        0.8507266078932673
+      ],
+      "state": "absent"
+    },
+    "tongue_root_center": {
+      "id": 96,
+      "xy": [
+        0.5,
+        0.8600599412266006
+      ],
+      "state": "absent"
+    },
+    "tongue_crease_tip": {
+      "id": 97,
+      "xy": [
+        0.5103448275862069,
+        0.9213932745599339
+      ],
+      "state": "absent"
+    },
+    "chin_right": {
+      "id": 98,
+      "xy": [
+        0.48137931034482756,
+        0.9053333333333333
+      ],
+      "state": "absent"
+    },
+    "chin_center": {
+      "id": 99,
+      "xy": [
+        0.5,
+        0.912
+      ],
+      "state": "absent"
+    },
+    "chin_left": {
+      "id": 100,
+      "xy": [
+        0.5186206896551724,
+        0.9053333333333333
+      ],
+      "state": "absent"
+    }
+  },
+  "rig": {
+    "left_brow": {
+      "opacity": 1.0,
+      "tangent_scales": [
+        0.87084487707953,
+        1.5228104081918346,
+        1.0865997174967525,
+        1.3313715779917432,
+        0.37
+      ],
+      "widths": [
+        4.602747607794416,
+        17.42946809524975,
+        38.93963228776957,
+        59.95296340747007,
+        36.174105256533316
+      ]
+    },
+    "left_eye_upper": {
+      "opacity": 1.0,
+      "tangent_scales": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "widths": [
+        7.67241805362327,
+        16.412035215774683,
+        19.276770981041672,
+        22.80190146960052,
+        1.5
+      ]
+    },
+    "left_eye_lower": {
+      "opacity": 1,
+      "tangent_scales": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "widths": [
+        9.57487067067623,
+        11.55688593251822,
+        8.150620451751578
+      ],
+      "corner_accents": [
+        0,
+        0
+      ]
+    },
+    "left_eye_side": {
+      "opacity": 0,
+      "width": 9,
+      "bulge": 14
+    },
+    "left_lash": {
+      "opacity": 1.0,
+      "width": 26.116875115654143,
+      "root_t": 0.76,
+      "bend": 17.319598866439325
+    },
+    "left_pupil": {
+      "opacity": 1,
+      "rx": 66.28133150393326,
+      "ry": 79.166300418791,
+      "angle": -21.906644567190426,
+      "openness": 0.9183240374922752
+    },
+    "left_highlight": {
+      "opacity": 1.0,
+      "rx": 19.491912260618065,
+      "ry": 18.724340905570255,
+      "angle": 0,
+      "heart_scale": 0.8816288705194845,
+      "heart_offset": [
+        7.6663380045172556,
+        16.29096825959917
+      ],
+      "heart_angle": 23,
+      "heart_opacity": 0.0
+    },
+    "left_secondary_highlight": {
+      "opacity": 0,
+      "rx": 1.4374383758469853,
+      "ry": 1.9165845011293139,
+      "angle": 10
+    },
+    "left_under_eye": {
+      "opacity": 0.5697045216193566,
+      "tangent_scales": [
+        0.9294971282980865,
+        1.3781278834286672,
+        0.8377641558603554
+      ],
+      "widths": [
+        2.0965125867188417,
+        6.978280066916289,
+        3.0958170298952794
+      ]
+    },
+    "left_hatching": {
+      "opacity": 0.4302954783806434,
+      "count": 5,
+      "length": 44,
+      "angle": -52,
+      "width": 5,
+      "offsets": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "slot_weights": [
+        1.0,
+        0.0,
+        1.0,
+        0.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0
+      ],
+      "foldness": 0.4302954783806434
+    },
+    "left_lid_accent_inner": {
+      "opacity": 1,
+      "tangent_scales": [
+        0.9867272899856825,
+        1.7522721514081039,
+        1.1960513403721005
+      ],
+      "widths": [
+        3.741057711901514,
+        10.223365406753025,
+        3.759893701570303
+      ]
+    },
+    "left_lid_accent_outer": {
+      "opacity": 1,
+      "tangent_scales": [
+        0.8460056523564248,
+        1.4305751102342033,
+        0.9694723350410688
+      ],
+      "widths": [
+        0.10282514373429175,
+        7.600740990272022,
+        0.778048168135165
+      ]
+    },
+    "left_brow_accent": {
+      "opacity": 1,
+      "tangent_scales": [
+        0.9362659297618261,
+        1.9943528808825841,
+        0.4723000690007776
+      ],
+      "widths": [
+        6.191257409060135,
+        13.3722753531578,
+        7.44047820602486
+      ]
+    },
+    "left_moustache": {
+      "opacity": 1.0,
+      "tangent_scales": [
+        0.8885692602351408,
+        1.441802512955196,
+        0.6027685501526812,
+        1.1868698459074478,
+        1.0520674826603647,
+        1.5642215225455183,
+        1.6815307511467186,
+        1.7958709327090663
+      ],
+      "widths": [
+        7.376581256216988,
+        38.709565421874636,
+        27.96838663844494,
+        20.1947737337603,
+        16.278787571373655,
+        14.937618395917138,
+        11.83410469306855,
+        10.667794186799494
+      ]
+    },
+    "right_brow": {
+      "opacity": 1.0,
+      "tangent_scales": [
+        0.8168423325101493,
+        1.6117736710648438,
+        0.999475951517542,
+        1.2530950086820798,
+        0.38705120570174223
+      ],
+      "widths": [
+        8.172152197932524,
+        27.203378853216098,
+        49.46688741553857,
+        56.962479047580274,
+        1.067674341064421
+      ]
+    },
+    "right_eye_upper": {
+      "opacity": 1.0,
+      "tangent_scales": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "widths": [
+        1.5,
+        18.15040214345861,
+        21.440583829792015,
+        18.768743898002217,
+        20.656556735709696
+      ]
+    },
+    "right_eye_lower": {
+      "opacity": 1,
+      "tangent_scales": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "widths": [
+        8.201443724337107,
+        11.519104722040144,
+        9.18037918832058
+      ],
+      "corner_accents": [
+        0,
+        0
+      ]
+    },
+    "right_eye_side": {
+      "opacity": 1,
+      "width": 12.136281955630729,
+      "bulge": 4.1287561770604455
+    },
+    "right_lash": {
+      "opacity": 1.0,
+      "width": 28.720222424100438,
+      "root_t": 0.94,
+      "bend": 16.74949189857926
+    },
+    "right_pupil": {
+      "opacity": 1,
+      "rx": 71.73963283043268,
+      "ry": 80.70423746087465,
+      "angle": -18.089310992636825,
+      "openness": 0.9532730254053305
+    },
+    "right_highlight": {
+      "opacity": 1.0,
+      "rx": 20.392199100619056,
+      "ry": 19.65277340575995,
+      "angle": 0,
+      "heart_scale": 0.8982484559981564,
+      "heart_offset": [
+        7.810856139114403,
+        16.598069295618107
+      ],
+      "heart_angle": 23,
+      "heart_opacity": 0.0
+    },
+    "right_secondary_highlight": {
+      "opacity": 0,
+      "rx": 1.4645355260839505,
+      "ry": 1.9527140347786007,
+      "angle": 10
+    },
+    "right_under_eye": {
+      "opacity": 0.5697045216193566,
+      "tangent_scales": [
+        0.9152197933421418,
+        1.2848835046529934,
+        0.947449265394581
+      ],
+      "widths": [
+        0.6934752862501159,
+        6.576944949492601,
+        1.4426275149216843
+      ]
+    },
+    "right_hatching": {
+      "opacity": 0.4302954783806434,
+      "count": 5,
+      "length": 44,
+      "angle": -52,
+      "width": 5,
+      "offsets": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "slot_weights": [
+        1.0,
+        0.0,
+        1.0,
+        0.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0
+      ],
+      "foldness": 0.4302954783806434
+    },
+    "right_lid_accent_inner": {
+      "opacity": 1,
+      "tangent_scales": [
+        0.6120518462390856,
+        1.4630698655725185,
+        0.8974608845332764
+      ],
+      "widths": [
+        0.30244195623984516,
+        8.939100313248288,
+        2.0606099515531717
+      ]
+    },
+    "right_lid_accent_outer": {
+      "opacity": 1,
+      "tangent_scales": [
+        0.8777090044698046,
+        1.4362910177983483,
+        0.6531758174219809
+      ],
+      "widths": [
+        0.7058510967426554,
+        8.578896035545222,
+        0.7289147887093443
+      ]
+    },
+    "right_brow_accent": {
+      "opacity": 1,
+      "tangent_scales": [
+        1.1338202996355013,
+        1.7971837813839862,
+        0.7585337068874741
+      ],
+      "widths": [
+        7.949314779765124,
+        12.829547927874312,
+        9.519681293493548
+      ]
+    },
+    "right_moustache": {
+      "opacity": 1.0,
+      "tangent_scales": [
+        1.0000538715445664,
+        1.5490991328519648,
+        0.8589131845741805,
+        1.1729961063162502,
+        1.5772723222545175,
+        1.1314141851762785,
+        1.839967095751237,
+        2.0396936665159466
+      ],
+      "widths": [
+        7.160009969244253,
+        39.528240929678,
+        31.789108611842035,
+        20.98695465970598,
+        17.682559611263336,
+        14.626315710155504,
+        12.44778375160889,
+        8.843320163519799
+      ]
+    },
+    "nose": {
+      "opacity": 1.0,
+      "tangent_scales": [
+        0.37,
+        2.2600000000000002,
+        0.42581679779700754
+      ],
+      "widths": [
+        16.802018800059155,
+        20.073611845802514,
+        10.786689195553832
+      ]
+    },
+    "mouth_upper": {
+      "opacity": 1.0,
+      "tangent_scales": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "widths": [
+        2,
+        7,
+        9,
+        7,
+        2
+      ],
+      "fill_opacity": 1.0,
+      "corner_accent": [
+        1.0,
+        1.0
+      ],
+      "corner_width": 5,
+      "corner_size": 16
+    },
+    "mouth_lower": {
+      "opacity": 1.0,
+      "tangent_scales": [
+        1,
+        1,
+        1
+      ],
+      "widths": [
+        5,
+        6,
+        5
+      ]
+    },
+    "tongue": {
+      "opacity": 0,
+      "tangent_scales": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "width": 6,
+      "fill": "white"
+    },
+    "tongue_crease": {
+      "opacity": 0,
+      "width": 4,
+      "bend": 12
+    },
+    "chin": {
+      "opacity": 0,
+      "tangent_scales": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "widths": [
+        1,
+        7,
+        1
+      ]
+    }
+  },
+  "variants": {
+    "right_under_eye": "continuous",
+    "right_highlight": "round",
+    "left_under_eye": "continuous",
+    "left_highlight": "round",
+    "mouth_interior": "dark"
+  },
+  "style": {
+    "background": "white",
+    "ink": "black"
+  },
+  "provenance": {
+    "kind": "human_blendshape_semantic_retargeting",
+    "mapper_version": "1.0.0",
+    "base_pose": "smile",
+    "identity": "fixed_soft_cartoon",
+    "human_recognition": "unmeasured",
+    "mapping_note": "Authored continuous motion cues; no emotion-class prediction and no human contour tracing."
+  },
+  "geometry": {
+    "version": "smooth_v1",
+    "ribbon_smoothing": 1.0,
+    "mouth_rounding": 0.08,
+    "under_eye_transition": "stroke_bank_v1"
+  },
+  "webcam_controls": {
+    "brow_raise": 0.037330177930685195,
+    "brow_inner": 0.0,
+    "brow_outer": 0.04269351676488534,
+    "brow_arch": 0.0,
+    "brow_asym": 0.019431114005736824,
+    "frown": 0.003950509180625279,
+    "eye_open": 0.9357985314488029,
+    "eye_asym": -0.03494898791305523,
+    "squint": 0.29256304716452575,
+    "lid_curve": 0.2697673595868624,
+    "lid_tilt": 0.0,
+    "gaze_x": 0.0033709666667840533,
+    "gaze_y": 0.11208657117990349,
+    "pupil_scale": 1.0,
+    "mouth_width": 1.0217828689477382,
+    "smile": 0.9522477959975217,
+    "mouth_open": 0.11293187020429579,
+    "mouth_asym": -0.0034177700678507394,
+    "mouth_tension": 0.07108715543380151,
+    "mouth_y": 0.0,
+    "cheek_lift": 0.4182024222153884,
+    "nose_lift": 0.0,
+    "curl": 0.0,
+    "warmth": 0.5,
+    "under_eye_blend": 0.4302954783806434
+  }
+}

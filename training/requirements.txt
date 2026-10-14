@@ -1,0 +1,4 @@
+# Install the project's ordinary renderer dependencies first: pip install -e .
+# CUDA 12.4 build: pip install torch==2.6.0 --index-url https://download.pytorch.org/whl/cu124
+# CPU builds can use the official /whl/cpu index instead.
+torch==2.6.0

@@ -1,0 +1,31 @@
+{
+  "sequences": [
+    {
+      "frames": 32,
+      "max_landmark_step_normalized": 0.008421468128222087,
+      "landmark_count": 101,
+      "method": "linear landmarks, positive widths, smooth optional-shape fades; continuous hatch count"
+    },
+    {
+      "frames": 32,
+      "max_landmark_step_normalized": 0.0057741249041486364,
+      "landmark_count": 101,
+      "method": "linear landmarks, positive widths, smooth optional-shape fades; continuous hatch count"
+    },
+    {
+      "frames": 32,
+      "max_landmark_step_normalized": 0.0025326401706498546,
+      "landmark_count": 101,
+      "method": "linear landmarks, positive widths, smooth optional-shape fades; continuous hatch count"
+    },
+    {
+      "frames": 32,
+      "max_landmark_step_normalized": 0.002032003331886791,
+      "landmark_count": 101,
+      "method": "linear landmarks, positive widths, smooth optional-shape fades; continuous hatch count"
+    }
+  ],
+  "frames_per_sequence": 32,
+  "fixed_landmarks": 101,
+  "under_eye_mode": "stroke_bank_v1"
+}

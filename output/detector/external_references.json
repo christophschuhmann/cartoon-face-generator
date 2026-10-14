@@ -1,0 +1,63 @@
+{
+  "kind": "additional external reference-domain evaluation, not used for checkpoint selection",
+  "source_images": 6,
+  "canvas": [
+    320,
+    192
+  ],
+  "checkpoint_epoch": 15,
+  "per_reference": [
+    {
+      "reference": "smile",
+      "annotated_points": 81,
+      "mean_error_px_320x192": 3.6643555877682217,
+      "pck_1pct": 0.9259259259259259,
+      "pck_2pct": 0.9259259259259259,
+      "cpu_inference_median_ms": 9.311723057180643
+    },
+    {
+      "reference": "tense",
+      "annotated_points": 84,
+      "mean_error_px_320x192": 4.568246815329573,
+      "pck_1pct": 0.6666666666666666,
+      "pck_2pct": 0.9285714285714286,
+      "cpu_inference_median_ms": 8.797576883807778
+    },
+    {
+      "reference": "love",
+      "annotated_points": 85,
+      "mean_error_px_320x192": 2.574467726926545,
+      "pck_1pct": 0.8235294117647058,
+      "pck_2pct": 0.9647058823529412,
+      "cpu_inference_median_ms": 8.877388201653957
+    },
+    {
+      "reference": "cheeky",
+      "annotated_points": 78,
+      "mean_error_px_320x192": 4.090188165740184,
+      "pck_1pct": 0.7948717948717948,
+      "pck_2pct": 0.9615384615384616,
+      "cpu_inference_median_ms": 8.788427570834756
+    },
+    {
+      "reference": "tongue",
+      "annotated_points": 89,
+      "mean_error_px_320x192": 6.23673108233988,
+      "pck_1pct": 0.47191011235955055,
+      "pck_2pct": 0.797752808988764,
+      "cpu_inference_median_ms": 8.799158968031406
+    },
+    {
+      "reference": "skeptical",
+      "annotated_points": 85,
+      "mean_error_px_320x192": 5.138391184685947,
+      "pck_1pct": 0.6,
+      "pck_2pct": 0.8235294117647058,
+      "cpu_inference_median_ms": 8.740977849811316
+    }
+  ],
+  "mean_error_px_mean_of_references": 4.378730093798391,
+  "cpu_inference_median_ms": 8.802878903225064,
+  "cpu_threads": 4,
+  "scope": "Six original drawings of the same identity; not arbitrary cartoons or real video. MediaPipe is evaluated separately."
+}

@@ -1,0 +1,83 @@
+{
+  "foreground_iou": 0.9111565451850794,
+  "dice": 0.9535132508957727,
+  "contour_chamfer_px": 0.9721779227256775,
+  "contour_p95_px": 2.8284270763397217,
+  "ssim": 0.9067622358706954,
+  "reference_foreground_pixels": 106916,
+  "generated_foreground_pixels": 107145,
+  "regions": {
+    "right_brow": {
+      "foreground_iou": 0.9239136146287636,
+      "dice": 0.9604522860108156,
+      "contour_chamfer_px": 0.8533321022987366,
+      "contour_p95_px": 3.0,
+      "ssim": 0.8928531376252451,
+      "reference_foreground_pixels": 18438,
+      "generated_foreground_pixels": 18176
+    },
+    "left_brow": {
+      "foreground_iou": 0.9210191082802548,
+      "dice": 0.9588859416445623,
+      "contour_chamfer_px": 1.3207002878189087,
+      "contour_p95_px": 3.1622776985168457,
+      "ssim": 0.8205619863664136,
+      "reference_foreground_pixels": 26307,
+      "generated_foreground_pixels": 26473
+    },
+    "right_eye": {
+      "foreground_iou": 0.9044305712164132,
+      "dice": 0.9498173206059468,
+      "contour_chamfer_px": 1.0994398593902588,
+      "contour_p95_px": 3.1622776985168457,
+      "ssim": 0.8051155621357107,
+      "reference_foreground_pixels": 34763,
+      "generated_foreground_pixels": 34484
+    },
+    "left_eye": {
+      "foreground_iou": 0.8788235294117647,
+      "dice": 0.9355040701314965,
+      "contour_chamfer_px": 1.2903010845184326,
+      "contour_p95_px": 3.1622776985168457,
+      "ssim": 0.8448901188201412,
+      "reference_foreground_pixels": 25299,
+      "generated_foreground_pixels": 25805
+    },
+    "nose": {
+      "foreground_iou": 0.9171544349392166,
+      "dice": 0.9567872240488492,
+      "contour_chamfer_px": 0.5307779312133789,
+      "contour_p95_px": 2.0,
+      "ssim": 0.8947868458364541,
+      "reference_foreground_pixels": 2127,
+      "generated_foreground_pixels": 2131
+    },
+    "right_moustache": {
+      "foreground_iou": 0.9217591727402977,
+      "dice": 0.9592868719611021,
+      "contour_chamfer_px": 0.577363133430481,
+      "contour_p95_px": 2.0,
+      "ssim": 0.8294110982225897,
+      "reference_foreground_pixels": 15240,
+      "generated_foreground_pixels": 15610
+    },
+    "left_moustache": {
+      "foreground_iou": 0.9366664237300488,
+      "dice": 0.9672976329356866,
+      "contour_chamfer_px": 0.6051757335662842,
+      "contour_p95_px": 2.8284270763397217,
+      "ssim": 0.8301938182341176,
+      "reference_foreground_pixels": 13255,
+      "generated_foreground_pixels": 13318
+    },
+    "mouth": {
+      "foreground_iou": 0.9076408034659315,
+      "dice": 0.951584597914731,
+      "contour_chamfer_px": 0.791544497013092,
+      "contour_p95_px": 2.8284270763397217,
+      "ssim": 0.8347425513578686,
+      "reference_foreground_pixels": 14491,
+      "generated_foreground_pixels": 14570
+    }
+  }
+}

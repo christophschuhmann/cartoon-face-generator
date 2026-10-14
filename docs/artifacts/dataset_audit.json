@@ -1,0 +1,10 @@
+{
+  "dataset_version": "cartoon_landmarks_105k_v2",
+  "generator_fingerprint_matches": true,
+  "all_shard_hashes_match": true,
+  "all_records_read_and_validated": 105000,
+  "unique_sample_ids": 105000,
+  "byte_exact_svg_replays": 909,
+  "shards": 303,
+  "seconds": 21.097727517131716
+}

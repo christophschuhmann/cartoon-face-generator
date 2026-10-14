@@ -1,0 +1,107 @@
+{
+  "test_input": {
+    "source": "https://scikit-image.org/docs/stable/api/skimage.data.html#skimage.data.astronaut",
+    "name": "NASA Eileen Collins astronaut via skimage.data.astronaut",
+    "license": "Public domain; no known copyright restrictions according to scikit-image documentation",
+    "independent_human_subjects": 1,
+    "image_size": [
+      512,
+      512
+    ],
+    "synthetic_video": "36 repeated still-image frames, 12 fps, 3 seconds; this is not a live webcam"
+  },
+  "environment": {
+    "python": "3.12.13",
+    "platform": "Linux-6.12.33+deb13-amd64-x86_64-with-glibc2.41",
+    "cpu_model": "Intel(R) Xeon(R) Gold 6338N CPU @ 2.20GHz",
+    "logical_cpus": 128,
+    "delegate": "MediaPipe BaseOptions.Delegate.CPU / TFLite XNNPACK",
+    "versions": {
+      "mediapipe": "0.10.35",
+      "numpy": "2.5.4",
+      "CairoSVG": "2.9.1",
+      "Flask": "3.1.3",
+      "Pillow": "12.3.0"
+    }
+  },
+  "human_landmarks": 478,
+  "human_blendshapes": 52,
+  "cartoon_landmarks": 101,
+  "timings": {
+    "image": {
+      "model_load_ms": 644.178,
+      "samples": 30,
+      "median_ms": 37.389,
+      "p95_ms": 38.441,
+      "min_ms": 22.562,
+      "max_ms": 50.781
+    },
+    "video": {
+      "model_load_ms": 84.531,
+      "samples": 30,
+      "median_ms": 32.442,
+      "p95_ms": 39.425,
+      "min_ms": 23.259,
+      "max_ms": 46.233
+    }
+  },
+  "mapping_and_python_svg": {
+    "samples": 30,
+    "median_ms": 115.095,
+    "p95_ms": 115.968,
+    "min_ms": 76.058,
+    "max_ms": 116.274
+  },
+  "actual_cpu_browser_api_smoke": {
+    "blendshape_count": 52,
+    "calibrated": false,
+    "calibration_remaining": 0,
+    "controls": {
+      "brow_arch": 0.0,
+      "brow_asym": 0.02164764210282922,
+      "brow_inner": 0.003984626819719689,
+      "brow_outer": 0.02567029019519606,
+      "brow_raise": 0.025298705113050136,
+      "cheek_lift": 0.33600483279737264,
+      "curl": 0.0,
+      "eye_asym": -0.03279231801797557,
+      "eye_open": 0.946613748260369,
+      "frown": 0.006460938186249472,
+      "gaze_x": 0.004939846042320025,
+      "gaze_y": 0.12828263119191907,
+      "lid_curve": 0.21972879728780345,
+      "lid_tilt": 0.0,
+      "mouth_asym": -0.005526101594857118,
+      "mouth_open": 0.10028396187117104,
+      "mouth_tension": 0.0499727667587592,
+      "mouth_width": 0.9756008990939571,
+      "mouth_y": 0.0,
+      "nose_lift": 0.0,
+      "pupil_scale": 1.0,
+      "smile": 0.7904564445638979,
+      "squint": 0.21516551540150647,
+      "under_eye_blend": 0.3681133138822512,
+      "warmth": 0.5
+    },
+    "inference_ms": 19.77,
+    "landmark_count": 478,
+    "mapping_render_ms": 81.83,
+    "suggested_fps": 6.56,
+    "total_ms": 101.61,
+    "tracking": true
+  },
+  "checks": {
+    "blank_frame_no_face": true,
+    "actual_cpu_api": true,
+    "neutral_calibration": true,
+    "synthetic_video_samples": 15,
+    "all_video_samples_tracked": true
+  },
+  "limits": [
+    "Server CPU repeated-photo timing only; no laptop/live webcam benchmark was possible here.",
+    "Inference timings exclude image decode, model load, browser capture, local transfer and display latency.",
+    "Only one public-domain human subject was used; no broad demographic or expression validation.",
+    "The nine extra contact-sheet cases are authored coefficient tests, not independently inferred emotions.",
+    "No human emotion recognition accuracy or 40-category classification was measured."
+  ]
+}

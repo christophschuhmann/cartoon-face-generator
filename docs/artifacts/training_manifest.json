@@ -1,0 +1,1854 @@
+{
+  "dataset_generator": "3b27ea6ee8a0a382210f04350a6b842b19e1dd950f4ee2cb9400750a3e989f6b",
+  "dataset_version": "cartoon_landmarks_105k_v2",
+  "canvas": [
+    320,
+    192
+  ],
+  "heldout_per_class": 5,
+  "seed": 42,
+  "clean_and_augmented": true,
+  "augmentation_version": "face_raster_aug_v2",
+  "train_records": 84000,
+  "holdout": {
+    "validation": {
+      "source_poses": 600,
+      "clean_images": 600,
+      "augmented_images": 600,
+      "normal_images": 1000,
+      "ood_images": 200,
+      "duplicate_source_ids_across_conditions": true
+    },
+    "test": {
+      "source_poses": 600,
+      "clean_images": 600,
+      "augmented_images": 600,
+      "normal_images": 1000,
+      "ood_images": 200,
+      "duplicate_source_ids_across_conditions": true
+    }
+  },
+  "split_disjoint": true,
+  "cache_shards": [
+    {
+      "file": "train/emonet_03_pleasure_ecstasy.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/emonet_03_pleasure_ecstasy.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/emonet_03_pleasure_ecstasy.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/emonet_16_relief.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/emonet_16_relief.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/emonet_16_relief.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/emonet_14_concentration.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/emonet_14_concentration.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/emonet_14_concentration.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/emonet_13_surprise.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/emonet_13_surprise.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/emonet_13_surprise.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/emonet_07_infatuation.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/emonet_07_infatuation.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/emonet_07_infatuation.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/emonet_01_amusement.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/emonet_01_amusement.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/emonet_01_amusement.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/emonet_10_pride.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/emonet_10_pride.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/emonet_10_pride.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/emonet_04_contentment.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/emonet_04_contentment.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/emonet_04_contentment.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/emonet_08_hope.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/emonet_08_hope.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/emonet_08_hope.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/emonet_06_affection.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/emonet_06_affection.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/emonet_06_affection.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/emonet_11_interest.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/emonet_11_interest.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/emonet_11_interest.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/emonet_15_contemplation.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/emonet_15_contemplation.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/emonet_15_contemplation.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/emonet_02_elation.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/emonet_02_elation.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/emonet_02_elation.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/emonet_12_awe.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/emonet_12_awe.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/emonet_12_awe.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/emonet_09_triumph.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/emonet_09_triumph.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/emonet_09_triumph.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/emonet_05_gratitude.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/emonet_05_gratitude.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/emonet_05_gratitude.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/emonet_18_teasing.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/emonet_18_teasing.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/emonet_18_teasing.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/emonet_17_longing.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/emonet_17_longing.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/emonet_17_longing.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/emonet_21_doubt.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/emonet_21_doubt.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/emonet_21_doubt.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/emonet_20_lust.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/emonet_20_lust.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/emonet_20_lust.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/emonet_19_impatience.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/emonet_19_impatience.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/emonet_19_impatience.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/emonet_23_distress.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/emonet_23_distress.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/emonet_23_distress.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/emonet_26_shame.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/emonet_26_shame.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/emonet_26_shame.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/emonet_25_embarrassment.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/emonet_25_embarrassment.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/emonet_25_embarrassment.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/emonet_24_confusion.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/emonet_24_confusion.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/emonet_24_confusion.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/emonet_29_bitterness.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/emonet_29_bitterness.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/emonet_29_bitterness.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/emonet_27_disappointment.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/emonet_27_disappointment.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/emonet_27_disappointment.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/emonet_28_sadness.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/emonet_28_sadness.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/emonet_28_sadness.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/emonet_22_fear.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/emonet_22_fear.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/emonet_22_fear.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/emonet_30_contempt.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/emonet_30_contempt.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/emonet_30_contempt.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/emonet_31_disgust.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/emonet_31_disgust.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/emonet_31_disgust.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/emonet_32_anger.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/emonet_32_anger.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/emonet_32_anger.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/emonet_33_malice.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/emonet_33_malice.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/emonet_33_malice.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/emonet_35_pain.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/emonet_35_pain.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/emonet_35_pain.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/emonet_36_helplessness.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/emonet_36_helplessness.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/emonet_36_helplessness.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/emonet_34_sourness.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/emonet_34_sourness.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/emonet_34_sourness.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/emonet_38_numbness.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/emonet_38_numbness.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/emonet_38_numbness.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/emonet_39_intoxication.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/emonet_39_intoxication.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/emonet_39_intoxication.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/emonet_37_fatigue.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/emonet_37_fatigue.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/emonet_37_fatigue.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/social_01_knowing_wink.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/social_01_knowing_wink.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/social_01_knowing_wink.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/social_02_double_wink.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/social_02_double_wink.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/social_02_double_wink.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/social_04_raspberry.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/social_04_raspberry.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/social_04_raspberry.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/social_05_mischievous_side_eye.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/social_05_mischievous_side_eye.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/social_05_mischievous_side_eye.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/emonet_40_envy.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/emonet_40_envy.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/emonet_40_envy.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/social_08_playful_eye_roll.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/social_08_playful_eye_roll.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/social_08_playful_eye_roll.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/social_06_mock_scolding.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/social_06_mock_scolding.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/social_06_mock_scolding.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/social_03_tongue_tease.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/social_03_tongue_tease.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/social_03_tongue_tease.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/social_07_gentle_challenge.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/social_07_gentle_challenge.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/social_07_gentle_challenge.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/social_10_innocent_after_mischief.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/social_10_innocent_after_mischief.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/social_10_innocent_after_mischief.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/social_09_mock_monster.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/social_09_mock_monster.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/social_09_mock_monster.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/social_11_warm_greeting.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/social_11_warm_greeting.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/social_11_warm_greeting.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/social_13_reassuring.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/social_13_reassuring.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/social_13_reassuring.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/social_16_pleased_agreement.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/social_16_pleased_agreement.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/social_16_pleased_agreement.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/social_15_curious_question.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/social_15_curious_question.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/social_15_curious_question.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/social_12_encouraging.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/social_12_encouraging.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/social_12_encouraging.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/social_14_attentive_listening.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/social_14_attentive_listening.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/social_14_attentive_listening.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/social_18_polite_disagreement.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/social_18_polite_disagreement.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/social_18_polite_disagreement.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/social_20_skeptical_challenge.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/social_20_skeptical_challenge.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/social_20_skeptical_challenge.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/social_17_doubtful_agreement.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/social_17_doubtful_agreement.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/social_17_doubtful_agreement.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/social_19_not_impressed.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/social_19_not_impressed.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/social_19_not_impressed.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/social_22_offended.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/social_22_offended.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/social_22_offended.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/social_21_sulking.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/social_21_sulking.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/social_21_sulking.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/social_23_pouty_protest.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/social_23_pouty_protest.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/social_23_pouty_protest.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/social_24_feeling_left_out.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/social_24_feeling_left_out.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/social_24_feeling_left_out.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/social_25_forgiving.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/social_25_forgiving.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/social_25_forgiving.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/social_26_apologetic_grimace.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/social_26_apologetic_grimace.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/social_26_apologetic_grimace.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/social_29_awkward_laugh.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/social_29_awkward_laugh.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/social_29_awkward_laugh.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/social_27_embarrassed_cover_smile.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/social_27_embarrassed_cover_smile.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/social_27_embarrassed_cover_smile.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/social_30_reluctant_smile.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/social_30_reluctant_smile.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/social_30_reluctant_smile.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/social_28_caught_in_act.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/social_28_caught_in_act.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/social_28_caught_in_act.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/social_31_comedic_shock.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/social_31_comedic_shock.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/social_31_comedic_shock.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/social_35_smug_but_soft.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/social_35_smug_but_soft.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/social_35_smug_but_soft.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/social_32_exaggerated_disbelief.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/social_32_exaggerated_disbelief.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/social_32_exaggerated_disbelief.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/social_34_told_you_so.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/social_34_told_you_so.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/social_34_told_you_so.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/social_37_pretend_crying.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/social_37_pretend_crying.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/social_37_pretend_crying.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/social_33_mock_outrage.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/social_33_mock_outrage.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/social_33_mock_outrage.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/social_36_sheepish_pride.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/social_36_sheepish_pride.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/social_36_sheepish_pride.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/social_39_startled_then_amused.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/social_39_startled_then_amused.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/social_39_startled_then_amused.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/social_38_dramatic_sigh.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/social_38_dramatic_sigh.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/social_38_dramatic_sigh.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/social_40_expectant_pause.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/social_40_expectant_pause.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/social_40_expectant_pause.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/social_41_cross_eyed_goof.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/social_41_cross_eyed_goof.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/social_41_cross_eyed_goof.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/social_42_wandering_eyes.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/social_42_wandering_eyes.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/social_42_wandering_eyes.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/social_44_sleepy_wink.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/social_44_sleepy_wink.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/social_44_sleepy_wink.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/social_43_lopsided_gasp.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/social_43_lopsided_gasp.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/social_43_lopsided_gasp.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/social_45_one_eye_squeeze.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/social_45_one_eye_squeeze.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/social_45_one_eye_squeeze.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/social_47_tiny_o_big_eyes.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/social_47_tiny_o_big_eyes.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/social_47_tiny_o_big_eyes.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/social_48_puzzled_pout.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/social_48_puzzled_pout.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/social_48_puzzled_pout.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/social_51_secret_sharing.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/social_51_secret_sharing.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/social_51_secret_sharing.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/social_52_conspiratorial_grin.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/social_52_conspiratorial_grin.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/social_52_conspiratorial_grin.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/social_46_stretchy_grin.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/social_46_stretchy_grin.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/social_46_stretchy_grin.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/social_49_upside_gaze_grin.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/social_49_upside_gaze_grin.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/social_49_upside_gaze_grin.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/social_50_theatrical_villain.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/social_50_theatrical_villain.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/social_50_theatrical_villain.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/social_53_affectionate_tease.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/social_53_affectionate_tease.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/social_53_affectionate_tease.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/social_55_tender_pity.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/social_55_tender_pity.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/social_55_tender_pity.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/social_54_supportive_concern.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/social_54_supportive_concern.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/social_54_supportive_concern.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/social_56_friendly_boundary.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/social_56_friendly_boundary.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/social_56_friendly_boundary.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/social_57_impatient_waiting.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/social_57_impatient_waiting.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/social_57_impatient_waiting.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/social_58_hesitant_request.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/social_58_hesitant_request.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/social_58_hesitant_request.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/social_60_playful_reconciliation.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/social_60_playful_reconciliation.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/social_60_playful_reconciliation.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/social_59_incredulous_chuckle.npz",
+      "split": "train",
+      "count": 800,
+      "ood": false
+    },
+    {
+      "file": "validation/social_59_incredulous_chuckle.npz",
+      "split": "validation",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "test/social_59_incredulous_chuckle.npz",
+      "split": "test",
+      "count": 5,
+      "ood": false
+    },
+    {
+      "file": "train/ood_01_independent_xy_jitter.npz",
+      "split": "train",
+      "count": 4000,
+      "ood": true
+    },
+    {
+      "file": "validation/ood_01_independent_xy_jitter.npz",
+      "split": "validation",
+      "count": 100,
+      "ood": true
+    },
+    {
+      "file": "test/ood_01_independent_xy_jitter.npz",
+      "split": "test",
+      "count": 100,
+      "ood": true
+    }
+  ],
+  "seconds": 420.13415009109303,
+  "compressed_bytes": 833717294
+}

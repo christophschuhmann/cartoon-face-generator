@@ -1,0 +1,1334 @@
+{
+  "schema_version": "1.0",
+  "topology_id": "cartoon_face_v1",
+  "coordinate_system": "normalized",
+  "canonical_canvas": {
+    "width": 1450,
+    "height": 750
+  },
+  "side_convention": "Anatomical: left is the character's left (viewer right). right is viewer left.",
+  "landmark_states": {
+    "visible": "Component opacity > 0.01, landmark concept present",
+    "occluded": "Pupil/reflex center hidden by the lid opening or pupil clipping geometry",
+    "absent": "Optional component not present; xy stays stable"
+  },
+  "keypoints": [
+    {
+      "id": 0,
+      "name": "left_brow_outer",
+      "region": "left_brow",
+      "component": "left_brow",
+      "meaning": "Äußerer Endpunkt der Brauenmittellinie, von der Nase abgewandt.",
+      "edit_effect": "Verschieben verändert die äußere Brauenhöhe und -neigung; Breite und Endkappe stehen separat im Rig.",
+      "landmark_role": "centerline_anchor",
+      "optional": false
+    },
+    {
+      "id": 1,
+      "name": "left_brow_outer_arch",
+      "region": "left_brow",
+      "component": "left_brow",
+      "meaning": "Anker im äußeren Viertel des Brauenbogens zwischen Außenende und zentralem Scheitel.",
+      "edit_effect": "Steuert den äußeren Anstieg unabhängig von der inneren Brauenhälfte.",
+      "landmark_role": "centerline_anchor",
+      "optional": false
+    },
+    {
+      "id": 2,
+      "name": "left_brow_apex",
+      "region": "left_brow",
+      "component": "left_brow",
+      "meaning": "Zentraler Bogenanker der Braue. Er ist der semantische Scheitel, nicht zwingend das mathematisch höchste Pixel jeder deformierten Pose.",
+      "edit_effect": "Hebt oder senkt die Bogenmitte und verändert die emotionale Überzeichnung.",
+      "landmark_role": "centerline_anchor",
+      "optional": false
+    },
+    {
+      "id": 3,
+      "name": "left_brow_inner_arch",
+      "region": "left_brow",
+      "component": "left_brow",
+      "meaning": "Anker der inneren Brauenhälfte unmittelbar vor dem zur Nase gerichteten Ende.",
+      "edit_effect": "Steuert die innere Wölbung, beispielsweise besorgtes Anheben oder zorniges Absenken.",
+      "landmark_role": "centerline_anchor",
+      "optional": false
+    },
+    {
+      "id": 4,
+      "name": "left_brow_inner",
+      "region": "left_brow",
+      "component": "left_brow",
+      "meaning": "Zur Nase gerichteter Endpunkt der Brauenmittellinie.",
+      "edit_effect": "Bestimmt die innere Brauenhöhe. Zusammen mit dem Außenende beeinflusst er die emotionale Neigung.",
+      "landmark_role": "centerline_anchor",
+      "optional": false
+    },
+    {
+      "id": 5,
+      "name": "left_eye_inner_corner",
+      "region": "left_eye_upper",
+      "component": "left_eye_upper",
+      "meaning": "Zur Nase gerichteter Endpunkt der oberen Lidkurve.",
+      "edit_effect": "Bestimmt den inneren Beginn des Oberlidbogens und eine Grenze des Pupillen-Clips; getrennt vom Unterlidende.",
+      "landmark_role": "centerline_anchor",
+      "optional": false
+    },
+    {
+      "id": 6,
+      "name": "left_eye_upper_inner",
+      "region": "left_eye_upper",
+      "component": "left_eye_upper",
+      "meaning": "Oberlidanker im inneren Viertel zwischen innerem Ende und Bogenmitte.",
+      "edit_effect": "Verändert die innere Lidwölbung unabhängig von Mitte und äußerer Hälfte.",
+      "landmark_role": "centerline_anchor",
+      "optional": false
+    },
+    {
+      "id": 7,
+      "name": "left_eye_upper_center",
+      "region": "left_eye_upper",
+      "component": "left_eye_upper",
+      "meaning": "Zentraler Anker auf der Mittellinie des oberen Lidbogens.",
+      "edit_effect": "Steuert die zentrale Augenöffnung und Wölbung; ist kein Ellipsenmittelpunkt.",
+      "landmark_role": "centerline_anchor",
+      "optional": false
+    },
+    {
+      "id": 8,
+      "name": "left_eye_upper_outer",
+      "region": "left_eye_upper",
+      "component": "left_eye_upper",
+      "meaning": "Oberlidanker im äußeren Viertel zwischen Bogenmitte und Außenende.",
+      "edit_effect": "Verändert äußere Lidwölbung und den abgeleiteten Wimpernansatz.",
+      "landmark_role": "centerline_anchor",
+      "optional": false
+    },
+    {
+      "id": 9,
+      "name": "left_eye_outer_corner",
+      "region": "left_eye_upper",
+      "component": "left_eye_upper",
+      "meaning": "Äußerer Endpunkt der oberen Lidkurve, häufig bereits im seitlichen Abstieg des stilisierten Auges.",
+      "edit_effect": "Bestimmt den äußeren Oberlidabschluss; der zusätzliche Seitenstrich startet hier.",
+      "landmark_role": "centerline_anchor",
+      "optional": false
+    },
+    {
+      "id": 10,
+      "name": "left_eye_lower_inner_corner",
+      "region": "left_eye_lower",
+      "component": "left_eye_lower",
+      "meaning": "Zur Nase gerichtetes Ende der separat gezeichneten unteren Lidkurve.",
+      "edit_effect": "Steuert den inneren Unterlidabschluss und die untere Clip-Grenze. Eine kleine Lücke zum Oberlid ist beabsichtigt.",
+      "landmark_role": "centerline_anchor",
+      "optional": false
+    },
+    {
+      "id": 11,
+      "name": "left_eye_lower_center",
+      "region": "left_eye_lower",
+      "component": "left_eye_lower",
+      "meaning": "Zentraler Mittellinienanker des unteren Lidbogens.",
+      "edit_effect": "Verändert Wangenheben und Unterlidspannung unabhängig von der oberen Augenöffnung.",
+      "landmark_role": "centerline_anchor",
+      "optional": false
+    },
+    {
+      "id": 12,
+      "name": "left_eye_lower_outer_corner",
+      "region": "left_eye_lower",
+      "component": "left_eye_lower",
+      "meaning": "Äußeres Ende der unteren Lidkurve, von der Nase abgewandt.",
+      "edit_effect": "Steuert den äußeren Unterlidabschluss und die daraus abgeleiteten kleinen Winkelakzente.",
+      "landmark_role": "centerline_anchor",
+      "optional": false
+    },
+    {
+      "id": 13,
+      "name": "left_eye_side_end",
+      "region": "left_eye_side",
+      "component": "left_eye_side",
+      "meaning": "Freies Ende des zusätzlichen seitlichen Lidstrichs; sein Start ist der obere Außenwinkel.",
+      "edit_effect": "Ändert Länge und Richtung dieses Abschlusses. Die Zwischenwölbung wird aus rig.bulge abgeleitet.",
+      "landmark_role": "endpoint_anchor",
+      "optional": false
+    },
+    {
+      "id": 14,
+      "name": "left_eye_lash_tip",
+      "region": "left_lash",
+      "component": "left_lash",
+      "meaning": "Äußerste Spitze der dekorativen Wimper.",
+      "edit_effect": "Ändert die Wimpernrichtung und -länge. Ansatzposition root_t, Krümmung bend und Breite sind interne Rig-Werte.",
+      "landmark_role": "endpoint_anchor",
+      "optional": false
+    },
+    {
+      "id": 15,
+      "name": "left_pupil_center",
+      "region": "left_pupil",
+      "component": "left_pupil",
+      "meaning": "Geometrischer Mittelpunkt der schwarzen Pupillenellipse vor dem Abschneiden durch die Lidöffnung.",
+      "edit_effect": "Steuert den Blick. Radius und Rotation stehen im Rig; der Mittelpunkt bleibt auch bei verdeckter Pupille erhalten.",
+      "landmark_role": "ellipse_center",
+      "optional": false
+    },
+    {
+      "id": 16,
+      "name": "left_highlight_center",
+      "region": "left_highlight",
+      "component": "left_highlight",
+      "meaning": "Mittelpunkt des primären runden weißen Lichtreflexes.",
+      "edit_effect": "Verschiebt den runden Reflex unabhängig von der Pupille. Das optionale Herz besitzt einen separaten internen Offset zum Pupillenmittelpunkt.",
+      "landmark_role": "ellipse_center",
+      "optional": true
+    },
+    {
+      "id": 17,
+      "name": "left_secondary_highlight_center",
+      "region": "left_secondary_highlight",
+      "component": "left_secondary_highlight",
+      "meaning": "Mittelpunkt eines zweiten kleinen runden weißen Reflexes mit dauerhaft eigener ID.",
+      "edit_effect": "Verschiebt den Zusatzreflex. opacity=0 bedeutet absent, nicht eine Umdeutung in ein anderes Detail.",
+      "landmark_role": "ellipse_center",
+      "optional": true
+    },
+    {
+      "id": 18,
+      "name": "left_under_eye_inner",
+      "region": "left_under_eye",
+      "component": "left_under_eye",
+      "meaning": "Zur Nase gerichtetes Ende der längeren durchgehenden Unteraugenfalte.",
+      "edit_effect": "Steuert Position und Länge der inneren Faltenhälfte. Im Modus hatching allein ist diese Komponente abwesend.",
+      "landmark_role": "centerline_anchor",
+      "optional": true
+    },
+    {
+      "id": 19,
+      "name": "left_under_eye_center",
+      "region": "left_under_eye",
+      "component": "left_under_eye",
+      "meaning": "Mittlerer Anker der durchgehenden Unteraugenfalte.",
+      "edit_effect": "Verändert deren Biegung unabhängig vom Unterlid und den Schraffuren.",
+      "landmark_role": "centerline_anchor",
+      "optional": true
+    },
+    {
+      "id": 20,
+      "name": "left_under_eye_outer",
+      "region": "left_under_eye",
+      "component": "left_under_eye",
+      "meaning": "Von der Nase abgewandtes Ende der durchgehenden Unteraugenfalte.",
+      "edit_effect": "Steuert den äußeren Abschluss; ist kein einzelner Schraffurstrich.",
+      "landmark_role": "centerline_anchor",
+      "optional": true
+    },
+    {
+      "id": 21,
+      "name": "left_hatch_inner",
+      "region": "left_hatching",
+      "component": "left_hatching",
+      "meaning": "Innerer Endanker der Schraffurzone; bei mehreren Strichen deren erster Mittelpunktsort nahe der Nase.",
+      "edit_effect": "Begrenzt die gemeinsame Zone. Die acht internen Strich-Slots werden dazwischen erzeugt; dieser Punkt bezeichnet keine wechselnde Strichspitze.",
+      "landmark_role": "zone_anchor",
+      "optional": true
+    },
+    {
+      "id": 22,
+      "name": "left_hatch_outer",
+      "region": "left_hatching",
+      "component": "left_hatching",
+      "meaning": "Äußerer Endanker der Schraffurzone, von der Nase abgewandt.",
+      "edit_effect": "Zusammen mit hatch_inner bestimmt er Lage, Ausdehnung und Verlauf der Zone; Anzahl und Neigung der Striche stehen im Rig.",
+      "landmark_role": "zone_anchor",
+      "optional": true
+    },
+    {
+      "id": 23,
+      "name": "left_lid_accent_inner_start",
+      "region": "left_lid_accent_inner",
+      "component": "left_lid_accent_inner",
+      "meaning": "Erster Anker des kleinen inneren Akzentbogens oberhalb des Lids.",
+      "edit_effect": "Verschiebt seinen Anfang. start/mid/end sind die feste Zeichenreihenfolge dieses Details, nicht allgemeine Augenwinkel.",
+      "landmark_role": "centerline_anchor",
+      "optional": true
+    },
+    {
+      "id": 24,
+      "name": "left_lid_accent_inner_mid",
+      "region": "left_lid_accent_inner",
+      "component": "left_lid_accent_inner",
+      "meaning": "Mittlerer Anker des inneren Lid-Akzentbogens.",
+      "edit_effect": "Verändert seine Wölbung und erhält dabei dessen Identität als optionales Detail.",
+      "landmark_role": "centerline_anchor",
+      "optional": true
+    },
+    {
+      "id": 25,
+      "name": "left_lid_accent_inner_end",
+      "region": "left_lid_accent_inner",
+      "component": "left_lid_accent_inner",
+      "meaning": "Letzter Anker des inneren Lid-Akzentbogens.",
+      "edit_effect": "Verändert Abschluss, Richtung und Länge dieses Akzents.",
+      "landmark_role": "centerline_anchor",
+      "optional": true
+    },
+    {
+      "id": 26,
+      "name": "left_lid_accent_outer_start",
+      "region": "left_lid_accent_outer",
+      "component": "left_lid_accent_outer",
+      "meaning": "Erster Anker des äußeren Akzentbogens oberhalb des Lids.",
+      "edit_effect": "Steuert seinen Anfang getrennt von Oberlid und innerem Akzent.",
+      "landmark_role": "centerline_anchor",
+      "optional": true
+    },
+    {
+      "id": 27,
+      "name": "left_lid_accent_outer_mid",
+      "region": "left_lid_accent_outer",
+      "component": "left_lid_accent_outer",
+      "meaning": "Mittlerer Anker des äußeren Lid-Akzentbogens.",
+      "edit_effect": "Verändert die äußere dekorative Wölbung.",
+      "landmark_role": "centerline_anchor",
+      "optional": true
+    },
+    {
+      "id": 28,
+      "name": "left_lid_accent_outer_end",
+      "region": "left_lid_accent_outer",
+      "component": "left_lid_accent_outer",
+      "meaning": "Letzter Anker des äußeren Lid-Akzentbogens.",
+      "edit_effect": "Steuert die äußere dekorative Endung; opacity bestimmt die Existenz des ganzen Details.",
+      "landmark_role": "centerline_anchor",
+      "optional": true
+    },
+    {
+      "id": 29,
+      "name": "left_brow_accent_start",
+      "region": "left_brow_accent",
+      "component": "left_brow_accent",
+      "meaning": "Erster Anker des kleinen, optionalen Strichs am inneren Brauenende.",
+      "edit_effect": "Steuert den Anfang dieses separaten Strichs, nicht die schwarze Hauptbraue.",
+      "landmark_role": "centerline_anchor",
+      "optional": true
+    },
+    {
+      "id": 30,
+      "name": "left_brow_accent_mid",
+      "region": "left_brow_accent",
+      "component": "left_brow_accent",
+      "meaning": "Mittlerer Anker des optionalen Brauenakzents.",
+      "edit_effect": "Verändert dessen Krümmung, beispielsweise einen kleinen Klammerbogen.",
+      "landmark_role": "centerline_anchor",
+      "optional": true
+    },
+    {
+      "id": 31,
+      "name": "left_brow_accent_end",
+      "region": "left_brow_accent",
+      "component": "left_brow_accent",
+      "meaning": "Letzter Anker des optionalen Brauenakzents.",
+      "edit_effect": "Steuert Richtung und Länge seines Endes.",
+      "landmark_role": "centerline_anchor",
+      "optional": true
+    },
+    {
+      "id": 32,
+      "name": "left_moustache_inner_tip",
+      "region": "left_moustache",
+      "component": "left_moustache",
+      "meaning": "Zur Gesichtsmitte gerichtete, zulaufende Spitze des schwarzen Wangenbands.",
+      "edit_effect": "Steuert dessen inneren Ansatz neben Nase und Mund. Dies ist die Spitze des Bandes, keine Mundwinkellandmark.",
+      "landmark_role": "centerline_anchor",
+      "optional": false
+    },
+    {
+      "id": 33,
+      "name": "left_moustache_shoulder",
+      "region": "left_moustache",
+      "component": "left_moustache",
+      "meaning": "Anker der breiteren inneren Schulter unmittelbar hinter der inneren Spitze.",
+      "edit_effect": "Steuert den charakteristischen inneren Schwung; lokale Breite ist widths[1].",
+      "landmark_role": "centerline_anchor",
+      "optional": false
+    },
+    {
+      "id": 34,
+      "name": "left_moustache_sweep",
+      "region": "left_moustache",
+      "component": "left_moustache",
+      "meaning": "Anker im langen mittleren Schwung des Wangenbands.",
+      "edit_effect": "Steuert dessen S-Kurve zwischen Schulter und äußerem Bauch.",
+      "landmark_role": "centerline_anchor",
+      "optional": false
+    },
+    {
+      "id": 35,
+      "name": "left_moustache_belly",
+      "region": "left_moustache",
+      "component": "left_moustache",
+      "meaning": "Anker im äußeren Bauch vor der eingerollten Endung.",
+      "edit_effect": "Verändert die ausladende Wangenkurve und ihren Übergang zur Spirale.",
+      "landmark_role": "centerline_anchor",
+      "optional": false
+    },
+    {
+      "id": 36,
+      "name": "left_moustache_outer_turn",
+      "region": "left_moustache",
+      "component": "left_moustache",
+      "meaning": "Anker am äußeren Richtungswechsel, wo das Band in die eingerollte Endung übergeht.",
+      "edit_effect": "Dient auch als Drehzentrum des prozeduralen Curl-Controls; ist nicht das freie Ende des Pfads.",
+      "landmark_role": "centerline_anchor",
+      "optional": false
+    },
+    {
+      "id": 37,
+      "name": "left_moustache_curl_top",
+      "region": "left_moustache",
+      "component": "left_moustache",
+      "meaning": "Scheitelanker auf der äußeren Hälfte der eingerollten Endung.",
+      "edit_effect": "Steuert Größe und Lage der Spirale. Bei gedrehter Spirale ist er nicht zwingend der oberste Bildpunkt.",
+      "landmark_role": "centerline_anchor",
+      "optional": false
+    },
+    {
+      "id": 38,
+      "name": "left_moustache_curl_inner",
+      "region": "left_moustache",
+      "component": "left_moustache",
+      "meaning": "Anker auf dem nach innen zurücklaufenden Teil der Spirale.",
+      "edit_effect": "Bestimmt die Einrollung und den eleganten Übergang zur freien Spitze.",
+      "landmark_role": "centerline_anchor",
+      "optional": false
+    },
+    {
+      "id": 39,
+      "name": "left_moustache_curl_tip",
+      "region": "left_moustache",
+      "component": "left_moustache",
+      "meaning": "Freie Spitze am Ende der eingerollten Wangenlinie.",
+      "edit_effect": "Steuert Endrichtung und Einrolltiefe. Breite widths[7] und Tangente entscheiden über den lokalen Abschluss.",
+      "landmark_role": "centerline_anchor",
+      "optional": false
+    },
+    {
+      "id": 40,
+      "name": "right_brow_outer",
+      "region": "right_brow",
+      "component": "right_brow",
+      "meaning": "Äußerer Endpunkt der Brauenmittellinie, von der Nase abgewandt.",
+      "edit_effect": "Verschieben verändert die äußere Brauenhöhe und -neigung; Breite und Endkappe stehen separat im Rig.",
+      "landmark_role": "centerline_anchor",
+      "optional": false
+    },
+    {
+      "id": 41,
+      "name": "right_brow_outer_arch",
+      "region": "right_brow",
+      "component": "right_brow",
+      "meaning": "Anker im äußeren Viertel des Brauenbogens zwischen Außenende und zentralem Scheitel.",
+      "edit_effect": "Steuert den äußeren Anstieg unabhängig von der inneren Brauenhälfte.",
+      "landmark_role": "centerline_anchor",
+      "optional": false
+    },
+    {
+      "id": 42,
+      "name": "right_brow_apex",
+      "region": "right_brow",
+      "component": "right_brow",
+      "meaning": "Zentraler Bogenanker der Braue. Er ist der semantische Scheitel, nicht zwingend das mathematisch höchste Pixel jeder deformierten Pose.",
+      "edit_effect": "Hebt oder senkt die Bogenmitte und verändert die emotionale Überzeichnung.",
+      "landmark_role": "centerline_anchor",
+      "optional": false
+    },
+    {
+      "id": 43,
+      "name": "right_brow_inner_arch",
+      "region": "right_brow",
+      "component": "right_brow",
+      "meaning": "Anker der inneren Brauenhälfte unmittelbar vor dem zur Nase gerichteten Ende.",
+      "edit_effect": "Steuert die innere Wölbung, beispielsweise besorgtes Anheben oder zorniges Absenken.",
+      "landmark_role": "centerline_anchor",
+      "optional": false
+    },
+    {
+      "id": 44,
+      "name": "right_brow_inner",
+      "region": "right_brow",
+      "component": "right_brow",
+      "meaning": "Zur Nase gerichteter Endpunkt der Brauenmittellinie.",
+      "edit_effect": "Bestimmt die innere Brauenhöhe. Zusammen mit dem Außenende beeinflusst er die emotionale Neigung.",
+      "landmark_role": "centerline_anchor",
+      "optional": false
+    },
+    {
+      "id": 45,
+      "name": "right_eye_inner_corner",
+      "region": "right_eye_upper",
+      "component": "right_eye_upper",
+      "meaning": "Zur Nase gerichteter Endpunkt der oberen Lidkurve.",
+      "edit_effect": "Bestimmt den inneren Beginn des Oberlidbogens und eine Grenze des Pupillen-Clips; getrennt vom Unterlidende.",
+      "landmark_role": "centerline_anchor",
+      "optional": false
+    },
+    {
+      "id": 46,
+      "name": "right_eye_upper_inner",
+      "region": "right_eye_upper",
+      "component": "right_eye_upper",
+      "meaning": "Oberlidanker im inneren Viertel zwischen innerem Ende und Bogenmitte.",
+      "edit_effect": "Verändert die innere Lidwölbung unabhängig von Mitte und äußerer Hälfte.",
+      "landmark_role": "centerline_anchor",
+      "optional": false
+    },
+    {
+      "id": 47,
+      "name": "right_eye_upper_center",
+      "region": "right_eye_upper",
+      "component": "right_eye_upper",
+      "meaning": "Zentraler Anker auf der Mittellinie des oberen Lidbogens.",
+      "edit_effect": "Steuert die zentrale Augenöffnung und Wölbung; ist kein Ellipsenmittelpunkt.",
+      "landmark_role": "centerline_anchor",
+      "optional": false
+    },
+    {
+      "id": 48,
+      "name": "right_eye_upper_outer",
+      "region": "right_eye_upper",
+      "component": "right_eye_upper",
+      "meaning": "Oberlidanker im äußeren Viertel zwischen Bogenmitte und Außenende.",
+      "edit_effect": "Verändert äußere Lidwölbung und den abgeleiteten Wimpernansatz.",
+      "landmark_role": "centerline_anchor",
+      "optional": false
+    },
+    {
+      "id": 49,
+      "name": "right_eye_outer_corner",
+      "region": "right_eye_upper",
+      "component": "right_eye_upper",
+      "meaning": "Äußerer Endpunkt der oberen Lidkurve, häufig bereits im seitlichen Abstieg des stilisierten Auges.",
+      "edit_effect": "Bestimmt den äußeren Oberlidabschluss; der zusätzliche Seitenstrich startet hier.",
+      "landmark_role": "centerline_anchor",
+      "optional": false
+    },
+    {
+      "id": 50,
+      "name": "right_eye_lower_inner_corner",
+      "region": "right_eye_lower",
+      "component": "right_eye_lower",
+      "meaning": "Zur Nase gerichtetes Ende der separat gezeichneten unteren Lidkurve.",
+      "edit_effect": "Steuert den inneren Unterlidabschluss und die untere Clip-Grenze. Eine kleine Lücke zum Oberlid ist beabsichtigt.",
+      "landmark_role": "centerline_anchor",
+      "optional": false
+    },
+    {
+      "id": 51,
+      "name": "right_eye_lower_center",
+      "region": "right_eye_lower",
+      "component": "right_eye_lower",
+      "meaning": "Zentraler Mittellinienanker des unteren Lidbogens.",
+      "edit_effect": "Verändert Wangenheben und Unterlidspannung unabhängig von der oberen Augenöffnung.",
+      "landmark_role": "centerline_anchor",
+      "optional": false
+    },
+    {
+      "id": 52,
+      "name": "right_eye_lower_outer_corner",
+      "region": "right_eye_lower",
+      "component": "right_eye_lower",
+      "meaning": "Äußeres Ende der unteren Lidkurve, von der Nase abgewandt.",
+      "edit_effect": "Steuert den äußeren Unterlidabschluss und die daraus abgeleiteten kleinen Winkelakzente.",
+      "landmark_role": "centerline_anchor",
+      "optional": false
+    },
+    {
+      "id": 53,
+      "name": "right_eye_side_end",
+      "region": "right_eye_side",
+      "component": "right_eye_side",
+      "meaning": "Freies Ende des zusätzlichen seitlichen Lidstrichs; sein Start ist der obere Außenwinkel.",
+      "edit_effect": "Ändert Länge und Richtung dieses Abschlusses. Die Zwischenwölbung wird aus rig.bulge abgeleitet.",
+      "landmark_role": "endpoint_anchor",
+      "optional": false
+    },
+    {
+      "id": 54,
+      "name": "right_eye_lash_tip",
+      "region": "right_lash",
+      "component": "right_lash",
+      "meaning": "Äußerste Spitze der dekorativen Wimper.",
+      "edit_effect": "Ändert die Wimpernrichtung und -länge. Ansatzposition root_t, Krümmung bend und Breite sind interne Rig-Werte.",
+      "landmark_role": "endpoint_anchor",
+      "optional": false
+    },
+    {
+      "id": 55,
+      "name": "right_pupil_center",
+      "region": "right_pupil",
+      "component": "right_pupil",
+      "meaning": "Geometrischer Mittelpunkt der schwarzen Pupillenellipse vor dem Abschneiden durch die Lidöffnung.",
+      "edit_effect": "Steuert den Blick. Radius und Rotation stehen im Rig; der Mittelpunkt bleibt auch bei verdeckter Pupille erhalten.",
+      "landmark_role": "ellipse_center",
+      "optional": false
+    },
+    {
+      "id": 56,
+      "name": "right_highlight_center",
+      "region": "right_highlight",
+      "component": "right_highlight",
+      "meaning": "Mittelpunkt des primären runden weißen Lichtreflexes.",
+      "edit_effect": "Verschiebt den runden Reflex unabhängig von der Pupille. Das optionale Herz besitzt einen separaten internen Offset zum Pupillenmittelpunkt.",
+      "landmark_role": "ellipse_center",
+      "optional": true
+    },
+    {
+      "id": 57,
+      "name": "right_secondary_highlight_center",
+      "region": "right_secondary_highlight",
+      "component": "right_secondary_highlight",
+      "meaning": "Mittelpunkt eines zweiten kleinen runden weißen Reflexes mit dauerhaft eigener ID.",
+      "edit_effect": "Verschiebt den Zusatzreflex. opacity=0 bedeutet absent, nicht eine Umdeutung in ein anderes Detail.",
+      "landmark_role": "ellipse_center",
+      "optional": true
+    },
+    {
+      "id": 58,
+      "name": "right_under_eye_inner",
+      "region": "right_under_eye",
+      "component": "right_under_eye",
+      "meaning": "Zur Nase gerichtetes Ende der längeren durchgehenden Unteraugenfalte.",
+      "edit_effect": "Steuert Position und Länge der inneren Faltenhälfte. Im Modus hatching allein ist diese Komponente abwesend.",
+      "landmark_role": "centerline_anchor",
+      "optional": true
+    },
+    {
+      "id": 59,
+      "name": "right_under_eye_center",
+      "region": "right_under_eye",
+      "component": "right_under_eye",
+      "meaning": "Mittlerer Anker der durchgehenden Unteraugenfalte.",
+      "edit_effect": "Verändert deren Biegung unabhängig vom Unterlid und den Schraffuren.",
+      "landmark_role": "centerline_anchor",
+      "optional": true
+    },
+    {
+      "id": 60,
+      "name": "right_under_eye_outer",
+      "region": "right_under_eye",
+      "component": "right_under_eye",
+      "meaning": "Von der Nase abgewandtes Ende der durchgehenden Unteraugenfalte.",
+      "edit_effect": "Steuert den äußeren Abschluss; ist kein einzelner Schraffurstrich.",
+      "landmark_role": "centerline_anchor",
+      "optional": true
+    },
+    {
+      "id": 61,
+      "name": "right_hatch_inner",
+      "region": "right_hatching",
+      "component": "right_hatching",
+      "meaning": "Innerer Endanker der Schraffurzone; bei mehreren Strichen deren erster Mittelpunktsort nahe der Nase.",
+      "edit_effect": "Begrenzt die gemeinsame Zone. Die acht internen Strich-Slots werden dazwischen erzeugt; dieser Punkt bezeichnet keine wechselnde Strichspitze.",
+      "landmark_role": "zone_anchor",
+      "optional": true
+    },
+    {
+      "id": 62,
+      "name": "right_hatch_outer",
+      "region": "right_hatching",
+      "component": "right_hatching",
+      "meaning": "Äußerer Endanker der Schraffurzone, von der Nase abgewandt.",
+      "edit_effect": "Zusammen mit hatch_inner bestimmt er Lage, Ausdehnung und Verlauf der Zone; Anzahl und Neigung der Striche stehen im Rig.",
+      "landmark_role": "zone_anchor",
+      "optional": true
+    },
+    {
+      "id": 63,
+      "name": "right_lid_accent_inner_start",
+      "region": "right_lid_accent_inner",
+      "component": "right_lid_accent_inner",
+      "meaning": "Erster Anker des kleinen inneren Akzentbogens oberhalb des Lids.",
+      "edit_effect": "Verschiebt seinen Anfang. start/mid/end sind die feste Zeichenreihenfolge dieses Details, nicht allgemeine Augenwinkel.",
+      "landmark_role": "centerline_anchor",
+      "optional": true
+    },
+    {
+      "id": 64,
+      "name": "right_lid_accent_inner_mid",
+      "region": "right_lid_accent_inner",
+      "component": "right_lid_accent_inner",
+      "meaning": "Mittlerer Anker des inneren Lid-Akzentbogens.",
+      "edit_effect": "Verändert seine Wölbung und erhält dabei dessen Identität als optionales Detail.",
+      "landmark_role": "centerline_anchor",
+      "optional": true
+    },
+    {
+      "id": 65,
+      "name": "right_lid_accent_inner_end",
+      "region": "right_lid_accent_inner",
+      "component": "right_lid_accent_inner",
+      "meaning": "Letzter Anker des inneren Lid-Akzentbogens.",
+      "edit_effect": "Verändert Abschluss, Richtung und Länge dieses Akzents.",
+      "landmark_role": "centerline_anchor",
+      "optional": true
+    },
+    {
+      "id": 66,
+      "name": "right_lid_accent_outer_start",
+      "region": "right_lid_accent_outer",
+      "component": "right_lid_accent_outer",
+      "meaning": "Erster Anker des äußeren Akzentbogens oberhalb des Lids.",
+      "edit_effect": "Steuert seinen Anfang getrennt von Oberlid und innerem Akzent.",
+      "landmark_role": "centerline_anchor",
+      "optional": true
+    },
+    {
+      "id": 67,
+      "name": "right_lid_accent_outer_mid",
+      "region": "right_lid_accent_outer",
+      "component": "right_lid_accent_outer",
+      "meaning": "Mittlerer Anker des äußeren Lid-Akzentbogens.",
+      "edit_effect": "Verändert die äußere dekorative Wölbung.",
+      "landmark_role": "centerline_anchor",
+      "optional": true
+    },
+    {
+      "id": 68,
+      "name": "right_lid_accent_outer_end",
+      "region": "right_lid_accent_outer",
+      "component": "right_lid_accent_outer",
+      "meaning": "Letzter Anker des äußeren Lid-Akzentbogens.",
+      "edit_effect": "Steuert die äußere dekorative Endung; opacity bestimmt die Existenz des ganzen Details.",
+      "landmark_role": "centerline_anchor",
+      "optional": true
+    },
+    {
+      "id": 69,
+      "name": "right_brow_accent_start",
+      "region": "right_brow_accent",
+      "component": "right_brow_accent",
+      "meaning": "Erster Anker des kleinen, optionalen Strichs am inneren Brauenende.",
+      "edit_effect": "Steuert den Anfang dieses separaten Strichs, nicht die schwarze Hauptbraue.",
+      "landmark_role": "centerline_anchor",
+      "optional": true
+    },
+    {
+      "id": 70,
+      "name": "right_brow_accent_mid",
+      "region": "right_brow_accent",
+      "component": "right_brow_accent",
+      "meaning": "Mittlerer Anker des optionalen Brauenakzents.",
+      "edit_effect": "Verändert dessen Krümmung, beispielsweise einen kleinen Klammerbogen.",
+      "landmark_role": "centerline_anchor",
+      "optional": true
+    },
+    {
+      "id": 71,
+      "name": "right_brow_accent_end",
+      "region": "right_brow_accent",
+      "component": "right_brow_accent",
+      "meaning": "Letzter Anker des optionalen Brauenakzents.",
+      "edit_effect": "Steuert Richtung und Länge seines Endes.",
+      "landmark_role": "centerline_anchor",
+      "optional": true
+    },
+    {
+      "id": 72,
+      "name": "right_moustache_inner_tip",
+      "region": "right_moustache",
+      "component": "right_moustache",
+      "meaning": "Zur Gesichtsmitte gerichtete, zulaufende Spitze des schwarzen Wangenbands.",
+      "edit_effect": "Steuert dessen inneren Ansatz neben Nase und Mund. Dies ist die Spitze des Bandes, keine Mundwinkellandmark.",
+      "landmark_role": "centerline_anchor",
+      "optional": false
+    },
+    {
+      "id": 73,
+      "name": "right_moustache_shoulder",
+      "region": "right_moustache",
+      "component": "right_moustache",
+      "meaning": "Anker der breiteren inneren Schulter unmittelbar hinter der inneren Spitze.",
+      "edit_effect": "Steuert den charakteristischen inneren Schwung; lokale Breite ist widths[1].",
+      "landmark_role": "centerline_anchor",
+      "optional": false
+    },
+    {
+      "id": 74,
+      "name": "right_moustache_sweep",
+      "region": "right_moustache",
+      "component": "right_moustache",
+      "meaning": "Anker im langen mittleren Schwung des Wangenbands.",
+      "edit_effect": "Steuert dessen S-Kurve zwischen Schulter und äußerem Bauch.",
+      "landmark_role": "centerline_anchor",
+      "optional": false
+    },
+    {
+      "id": 75,
+      "name": "right_moustache_belly",
+      "region": "right_moustache",
+      "component": "right_moustache",
+      "meaning": "Anker im äußeren Bauch vor der eingerollten Endung.",
+      "edit_effect": "Verändert die ausladende Wangenkurve und ihren Übergang zur Spirale.",
+      "landmark_role": "centerline_anchor",
+      "optional": false
+    },
+    {
+      "id": 76,
+      "name": "right_moustache_outer_turn",
+      "region": "right_moustache",
+      "component": "right_moustache",
+      "meaning": "Anker am äußeren Richtungswechsel, wo das Band in die eingerollte Endung übergeht.",
+      "edit_effect": "Dient auch als Drehzentrum des prozeduralen Curl-Controls; ist nicht das freie Ende des Pfads.",
+      "landmark_role": "centerline_anchor",
+      "optional": false
+    },
+    {
+      "id": 77,
+      "name": "right_moustache_curl_top",
+      "region": "right_moustache",
+      "component": "right_moustache",
+      "meaning": "Scheitelanker auf der äußeren Hälfte der eingerollten Endung.",
+      "edit_effect": "Steuert Größe und Lage der Spirale. Bei gedrehter Spirale ist er nicht zwingend der oberste Bildpunkt.",
+      "landmark_role": "centerline_anchor",
+      "optional": false
+    },
+    {
+      "id": 78,
+      "name": "right_moustache_curl_inner",
+      "region": "right_moustache",
+      "component": "right_moustache",
+      "meaning": "Anker auf dem nach innen zurücklaufenden Teil der Spirale.",
+      "edit_effect": "Bestimmt die Einrollung und den eleganten Übergang zur freien Spitze.",
+      "landmark_role": "centerline_anchor",
+      "optional": false
+    },
+    {
+      "id": 79,
+      "name": "right_moustache_curl_tip",
+      "region": "right_moustache",
+      "component": "right_moustache",
+      "meaning": "Freie Spitze am Ende der eingerollten Wangenlinie.",
+      "edit_effect": "Steuert Endrichtung und Einrolltiefe. Breite widths[7] und Tangente entscheiden über den lokalen Abschluss.",
+      "landmark_role": "centerline_anchor",
+      "optional": false
+    },
+    {
+      "id": 80,
+      "name": "nose_lower",
+      "region": "nose",
+      "component": "nose",
+      "meaning": "Unterer Beginn der kleinen stilisierten Nasenlinie.",
+      "edit_effect": "Steuert deren unteren Haken/Abschluss; kein anatomischer 3D-Nasenflügel.",
+      "landmark_role": "centerline_anchor",
+      "optional": false
+    },
+    {
+      "id": 81,
+      "name": "nose_center",
+      "region": "nose",
+      "component": "nose",
+      "meaning": "Mittellinienanker im Bogen der Nasenzeichnung.",
+      "edit_effect": "Verändert deren zentrale Krümmung und Orientierung.",
+      "landmark_role": "centerline_anchor",
+      "optional": false
+    },
+    {
+      "id": 82,
+      "name": "nose_tip",
+      "region": "nose",
+      "component": "nose",
+      "meaning": "Freies oberes/rechtes Ende der stilisierten Nasenlinie.",
+      "edit_effect": "Steuert deren Abschluss. Der Name bezeichnet die Spitze dieses gezeichneten Elements, nicht einen realen Nasenspitzen-Landmark.",
+      "landmark_role": "centerline_anchor",
+      "optional": false
+    },
+    {
+      "id": 83,
+      "name": "mouth_right_corner",
+      "region": "mouth_upper",
+      "component": "mouth_upper",
+      "meaning": "Rechter Mundwinkel aus Sicht der Figur, also in der linken Bildhälfte.",
+      "edit_effect": "Gemeinsamer Endpunkt von Ober- und Untermund; beeinflusst Mundbreite, Asymmetrie und den abgeleiteten Winkelakzent.",
+      "landmark_role": "centerline_anchor",
+      "optional": false
+    },
+    {
+      "id": 84,
+      "name": "mouth_upper_right",
+      "region": "mouth_upper",
+      "component": "mouth_upper",
+      "meaning": "Anker der rechten Hälfte der oberen Mundkurve zwischen rechtem Winkel und Mitte.",
+      "edit_effect": "Steuert die lokale Obermundwölbung unabhängig vom gegenüberliegenden Winkel.",
+      "landmark_role": "centerline_anchor",
+      "optional": false
+    },
+    {
+      "id": 85,
+      "name": "mouth_upper_center",
+      "region": "mouth_upper",
+      "component": "mouth_upper",
+      "meaning": "Zentraler Anker der oberen Mundkurve bzw. der geschlossenen Mundlinie.",
+      "edit_effect": "Steuert Lächeln, Stirnrunzel-Mund oder zentrale Obergrenze der Öffnung. Der Untermund bleibt unabhängig.",
+      "landmark_role": "centerline_anchor",
+      "optional": false
+    },
+    {
+      "id": 86,
+      "name": "mouth_upper_left",
+      "region": "mouth_upper",
+      "component": "mouth_upper",
+      "meaning": "Anker der linken Hälfte der oberen Mundkurve, aus Sicht der Figur.",
+      "edit_effect": "Steuert die linke Obermundwölbung und asymmetrische Formen.",
+      "landmark_role": "centerline_anchor",
+      "optional": false
+    },
+    {
+      "id": 87,
+      "name": "mouth_left_corner",
+      "region": "mouth_upper",
+      "component": "mouth_upper",
+      "meaning": "Linker Mundwinkel aus Sicht der Figur, also in der rechten Bildhälfte.",
+      "edit_effect": "Gemeinsamer Endpunkt von Ober- und Untermund; bleibt in allen Darstellungsmodi dieselbe ID.",
+      "landmark_role": "centerline_anchor",
+      "optional": false
+    },
+    {
+      "id": 88,
+      "name": "mouth_lower_right",
+      "region": "mouth_lower",
+      "component": "mouth_lower",
+      "meaning": "Rechter Zwischenanker der unteren Mundgrenze.",
+      "edit_effect": "Steuert die rechte Öffnungshälfte. Beim geschlossenen Mund ist die Untermund-Komponente absent und die Koordinate latent erhalten.",
+      "landmark_role": "centerline_anchor",
+      "optional": false
+    },
+    {
+      "id": 89,
+      "name": "mouth_lower_center",
+      "region": "mouth_lower",
+      "component": "mouth_lower",
+      "meaning": "Zentraler Anker der unteren Mundgrenze.",
+      "edit_effect": "Steuert vor allem Öffnungshöhe und unteren Mundbogen; ist keine Kinnposition.",
+      "landmark_role": "centerline_anchor",
+      "optional": false
+    },
+    {
+      "id": 90,
+      "name": "mouth_lower_left",
+      "region": "mouth_lower",
+      "component": "mouth_lower",
+      "meaning": "Linker Zwischenanker der unteren Mundgrenze, aus Sicht der Figur.",
+      "edit_effect": "Steuert deren linke Form. Die beiden Endwinkel werden aus dem Obermund übernommen und besitzen keine doppelte ID.",
+      "landmark_role": "centerline_anchor",
+      "optional": false
+    },
+    {
+      "id": 91,
+      "name": "tongue_root_right",
+      "region": "tongue",
+      "component": "tongue",
+      "meaning": "Rechter Ansatzpunkt auf dem geschlossenen Zungenumriss, aus Sicht der Figur.",
+      "edit_effect": "Verankert den Ansatz an der rechten Seite der Mundöffnung; erscheint nur bei aktivierter Zunge.",
+      "landmark_role": "contour_anchor",
+      "optional": true
+    },
+    {
+      "id": 92,
+      "name": "tongue_side_right",
+      "region": "tongue",
+      "component": "tongue",
+      "meaning": "Anker auf der rechten seitlichen Zungenkontur.",
+      "edit_effect": "Steuert seitliche Breite, Wölbung und Asymmetrie der Zunge.",
+      "landmark_role": "contour_anchor",
+      "optional": true
+    },
+    {
+      "id": 93,
+      "name": "tongue_tip",
+      "region": "tongue",
+      "component": "tongue",
+      "meaning": "Anker an der freien unteren Zungenspitze.",
+      "edit_effect": "Steuert Länge und tiefsten Abschnitt der Zunge; bei Innenzunge dieselbe semantische Konturposition.",
+      "landmark_role": "contour_anchor",
+      "optional": true
+    },
+    {
+      "id": 94,
+      "name": "tongue_side_left",
+      "region": "tongue",
+      "component": "tongue",
+      "meaning": "Anker auf der linken seitlichen Zungenkontur, aus Sicht der Figur.",
+      "edit_effect": "Steuert die gegenüberliegende Breite und Wölbung unabhängig von der rechten Seite.",
+      "landmark_role": "contour_anchor",
+      "optional": true
+    },
+    {
+      "id": 95,
+      "name": "tongue_root_left",
+      "region": "tongue",
+      "component": "tongue",
+      "meaning": "Linker Ansatzpunkt auf dem geschlossenen Zungenumriss, aus Sicht der Figur.",
+      "edit_effect": "Verankert die linke Ansatzseite an der Mundöffnung.",
+      "landmark_role": "contour_anchor",
+      "optional": true
+    },
+    {
+      "id": 96,
+      "name": "tongue_root_center",
+      "region": "tongue",
+      "component": "tongue",
+      "meaning": "Mittlerer Ansatzanker auf der oberen Zungenkontur; schließt die Kontur zwischen den beiden Wurzelseiten.",
+      "edit_effect": "Erzeugt einen runden Ansatz statt einer geraden Schließkante und ist der Start der abgeleiteten Zungenmittellinie.",
+      "landmark_role": "contour_anchor",
+      "optional": true
+    },
+    {
+      "id": 97,
+      "name": "tongue_crease_tip",
+      "region": "tongue_crease",
+      "component": "tongue_crease",
+      "meaning": "Freies Ende der schwarzen Mittellinie auf der Zunge.",
+      "edit_effect": "Start liegt bei tongue_root_center; Verlauf entsteht aus diesem Endpunkt und rig.bend. Abwesend, wenn Zunge oder Mittellinie deaktiviert sind.",
+      "landmark_role": "endpoint_anchor",
+      "optional": true
+    },
+    {
+      "id": 98,
+      "name": "chin_right",
+      "region": "chin",
+      "component": "chin",
+      "meaning": "Rechter Endanker des kleinen Akzentbogens unter dem Mund.",
+      "edit_effect": "Steuert dessen rechten Anfang; chin ist ein historischer Komponentenname und keine gezeichnete Gesichtssilhouette.",
+      "landmark_role": "centerline_anchor",
+      "optional": true
+    },
+    {
+      "id": 99,
+      "name": "chin_center",
+      "region": "chin",
+      "component": "chin",
+      "meaning": "Mittlerer Anker des optionalen Unterlippen-/Kinnakzentstrichs.",
+      "edit_effect": "Steuert dessen Wölbung und Abstand zum Mund.",
+      "landmark_role": "centerline_anchor",
+      "optional": true
+    },
+    {
+      "id": 100,
+      "name": "chin_left",
+      "region": "chin",
+      "component": "chin",
+      "meaning": "Linker Endanker des optionalen Akzentbogens unter dem Mund, aus Sicht der Figur.",
+      "edit_effect": "Steuert den linken Abschluss; beim ausgeschalteten Detail bleibt seine ID erhalten.",
+      "landmark_role": "centerline_anchor",
+      "optional": true
+    }
+  ],
+  "components": {
+    "left_brow": {
+      "kind": "ribbon",
+      "anchors": [
+        "left_brow_outer",
+        "left_brow_outer_arch",
+        "left_brow_apex",
+        "left_brow_inner_arch",
+        "left_brow_inner"
+      ],
+      "description": "Brauenmittellinie von außen nach innen"
+    },
+    "left_eye_upper": {
+      "kind": "ribbon",
+      "anchors": [
+        "left_eye_inner_corner",
+        "left_eye_upper_inner",
+        "left_eye_upper_center",
+        "left_eye_upper_outer",
+        "left_eye_outer_corner"
+      ],
+      "description": "Oberlidmittellinie von innen nach außen, einschließlich seitlichem Abstieg"
+    },
+    "left_eye_lower": {
+      "kind": "ribbon",
+      "anchors": [
+        "left_eye_lower_inner_corner",
+        "left_eye_lower_center",
+        "left_eye_lower_outer_corner"
+      ],
+      "description": "Unterlidmittellinie von innen nach außen; bewusst separate Endpunkte für den offenen Zeichenstil"
+    },
+    "left_eye_side": {
+      "kind": "derived",
+      "anchors": [
+        "left_eye_side_end"
+      ],
+      "description": "Seitlicher Lidabschluss; Startpunkt wird vom Oberlid übernommen"
+    },
+    "left_lash": {
+      "kind": "derived",
+      "anchors": [
+        "left_eye_lash_tip"
+      ],
+      "description": "Äußere Wimpernspitze; Ansatz wird aus Oberlidkurve abgeleitet"
+    },
+    "left_pupil": {
+      "kind": "ellipse",
+      "anchors": [
+        "left_pupil_center"
+      ],
+      "description": "Pupillenmittelpunkt, Größe im Rig; bei geschlossenem Auge verdeckt"
+    },
+    "left_highlight": {
+      "kind": "ellipse",
+      "anchors": [
+        "left_highlight_center"
+      ],
+      "description": "Primärer runder Reflex; Herz separat aber an derselben Pupille verankert"
+    },
+    "left_secondary_highlight": {
+      "kind": "ellipse",
+      "anchors": [
+        "left_secondary_highlight_center"
+      ],
+      "description": "Sekundärer weißer Reflex mit fester ID"
+    },
+    "left_under_eye": {
+      "kind": "ribbon",
+      "anchors": [
+        "left_under_eye_inner",
+        "left_under_eye_center",
+        "left_under_eye_outer"
+      ],
+      "description": "Durchgehende Unteraugenfalte"
+    },
+    "left_hatching": {
+      "kind": "hatching",
+      "anchors": [
+        "left_hatch_inner",
+        "left_hatch_outer"
+      ],
+      "description": "Endpunkte der Schraffurzone, keine Umbenennung einzelner Striche"
+    },
+    "left_lid_accent_inner": {
+      "kind": "ribbon",
+      "anchors": [
+        "left_lid_accent_inner_start",
+        "left_lid_accent_inner_mid",
+        "left_lid_accent_inner_end"
+      ],
+      "description": "Innerer Akzentbogen über dem Lid"
+    },
+    "left_lid_accent_outer": {
+      "kind": "ribbon",
+      "anchors": [
+        "left_lid_accent_outer_start",
+        "left_lid_accent_outer_mid",
+        "left_lid_accent_outer_end"
+      ],
+      "description": "Äußerer Akzentbogen über dem Lid"
+    },
+    "left_brow_accent": {
+      "kind": "ribbon",
+      "anchors": [
+        "left_brow_accent_start",
+        "left_brow_accent_mid",
+        "left_brow_accent_end"
+      ],
+      "description": "Optionaler kleiner Bogen am inneren Brauenende"
+    },
+    "left_moustache": {
+      "kind": "ribbon",
+      "anchors": [
+        "left_moustache_inner_tip",
+        "left_moustache_shoulder",
+        "left_moustache_sweep",
+        "left_moustache_belly",
+        "left_moustache_outer_turn",
+        "left_moustache_curl_top",
+        "left_moustache_curl_inner",
+        "left_moustache_curl_tip"
+      ],
+      "description": "Wangenband: acht Mittellinienanker bis zur eingerollten Spitze"
+    },
+    "right_brow": {
+      "kind": "ribbon",
+      "anchors": [
+        "right_brow_outer",
+        "right_brow_outer_arch",
+        "right_brow_apex",
+        "right_brow_inner_arch",
+        "right_brow_inner"
+      ],
+      "description": "Brauenmittellinie von außen nach innen"
+    },
+    "right_eye_upper": {
+      "kind": "ribbon",
+      "anchors": [
+        "right_eye_inner_corner",
+        "right_eye_upper_inner",
+        "right_eye_upper_center",
+        "right_eye_upper_outer",
+        "right_eye_outer_corner"
+      ],
+      "description": "Oberlidmittellinie von innen nach außen, einschließlich seitlichem Abstieg"
+    },
+    "right_eye_lower": {
+      "kind": "ribbon",
+      "anchors": [
+        "right_eye_lower_inner_corner",
+        "right_eye_lower_center",
+        "right_eye_lower_outer_corner"
+      ],
+      "description": "Unterlidmittellinie von innen nach außen; bewusst separate Endpunkte für den offenen Zeichenstil"
+    },
+    "right_eye_side": {
+      "kind": "derived",
+      "anchors": [
+        "right_eye_side_end"
+      ],
+      "description": "Seitlicher Lidabschluss; Startpunkt wird vom Oberlid übernommen"
+    },
+    "right_lash": {
+      "kind": "derived",
+      "anchors": [
+        "right_eye_lash_tip"
+      ],
+      "description": "Äußere Wimpernspitze; Ansatz wird aus Oberlidkurve abgeleitet"
+    },
+    "right_pupil": {
+      "kind": "ellipse",
+      "anchors": [
+        "right_pupil_center"
+      ],
+      "description": "Pupillenmittelpunkt, Größe im Rig; bei geschlossenem Auge verdeckt"
+    },
+    "right_highlight": {
+      "kind": "ellipse",
+      "anchors": [
+        "right_highlight_center"
+      ],
+      "description": "Primärer runder Reflex; Herz separat aber an derselben Pupille verankert"
+    },
+    "right_secondary_highlight": {
+      "kind": "ellipse",
+      "anchors": [
+        "right_secondary_highlight_center"
+      ],
+      "description": "Sekundärer weißer Reflex mit fester ID"
+    },
+    "right_under_eye": {
+      "kind": "ribbon",
+      "anchors": [
+        "right_under_eye_inner",
+        "right_under_eye_center",
+        "right_under_eye_outer"
+      ],
+      "description": "Durchgehende Unteraugenfalte"
+    },
+    "right_hatching": {
+      "kind": "hatching",
+      "anchors": [
+        "right_hatch_inner",
+        "right_hatch_outer"
+      ],
+      "description": "Endpunkte der Schraffurzone, keine Umbenennung einzelner Striche"
+    },
+    "right_lid_accent_inner": {
+      "kind": "ribbon",
+      "anchors": [
+        "right_lid_accent_inner_start",
+        "right_lid_accent_inner_mid",
+        "right_lid_accent_inner_end"
+      ],
+      "description": "Innerer Akzentbogen über dem Lid"
+    },
+    "right_lid_accent_outer": {
+      "kind": "ribbon",
+      "anchors": [
+        "right_lid_accent_outer_start",
+        "right_lid_accent_outer_mid",
+        "right_lid_accent_outer_end"
+      ],
+      "description": "Äußerer Akzentbogen über dem Lid"
+    },
+    "right_brow_accent": {
+      "kind": "ribbon",
+      "anchors": [
+        "right_brow_accent_start",
+        "right_brow_accent_mid",
+        "right_brow_accent_end"
+      ],
+      "description": "Optionaler kleiner Bogen am inneren Brauenende"
+    },
+    "right_moustache": {
+      "kind": "ribbon",
+      "anchors": [
+        "right_moustache_inner_tip",
+        "right_moustache_shoulder",
+        "right_moustache_sweep",
+        "right_moustache_belly",
+        "right_moustache_outer_turn",
+        "right_moustache_curl_top",
+        "right_moustache_curl_inner",
+        "right_moustache_curl_tip"
+      ],
+      "description": "Wangenband: acht Mittellinienanker bis zur eingerollten Spitze"
+    },
+    "nose": {
+      "kind": "ribbon",
+      "anchors": [
+        "nose_lower",
+        "nose_center",
+        "nose_tip"
+      ],
+      "description": "Kleine stilisierte Nasenlinie"
+    },
+    "mouth_upper": {
+      "kind": "ribbon",
+      "anchors": [
+        "mouth_right_corner",
+        "mouth_upper_right",
+        "mouth_upper_center",
+        "mouth_upper_left",
+        "mouth_left_corner"
+      ],
+      "description": "Mundoberkante, rechts nach links aus Sicht der Figur"
+    },
+    "mouth_lower": {
+      "kind": "ribbon",
+      "anchors": [
+        "mouth_lower_right",
+        "mouth_lower_center",
+        "mouth_lower_left"
+      ],
+      "description": "Untere Mundgrenze; Eckpunkte vom Obermund übernommen"
+    },
+    "tongue": {
+      "kind": "contour",
+      "anchors": [
+        "tongue_root_right",
+        "tongue_side_right",
+        "tongue_tip",
+        "tongue_side_left",
+        "tongue_root_left",
+        "tongue_root_center"
+      ],
+      "description": "Optionaler geschlossener Zungenumriss"
+    },
+    "tongue_crease": {
+      "kind": "derived",
+      "anchors": [
+        "tongue_crease_tip"
+      ],
+      "description": "Zungenmittellinie: Start am abgeleiteten Zungenansatz"
+    },
+    "chin": {
+      "kind": "ribbon",
+      "anchors": [
+        "chin_right",
+        "chin_center",
+        "chin_left"
+      ],
+      "description": "Optionaler Unterlippenakzent"
+    }
+  }
+}

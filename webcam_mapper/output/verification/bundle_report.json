@@ -1,0 +1,10 @@
+{
+  "manifest_verified_files": 35,
+  "isolated_image_inference": true,
+  "isolated_mapper_tests": true,
+  "resting_fallback_stroke_bank": true,
+  "bundle": "/home/deployer/laion/face/webcam_mapper/output/bundle_check/cartoon_webcam_mapper",
+  "source_renderer_bundled": true,
+  "zip_bytes": 3426338,
+  "zip_sha256": "1fa34d97a97591cacb7613a3ebd7a400591bd0c9e07473911da5d9c9752c5fa7"
+}
