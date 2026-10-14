@@ -1,0 +1,16 @@
+{
+  "core_tests": "198 passed, 1 skipped before the training runs; no rig contracts changed",
+  "focused_tests": "8 passed in final_focused_tests.log",
+  "frozen_eval_verified": true,
+  "all_candidates_completed_40_extra_epochs": true,
+  "selection_locked_before_tests": true,
+  "visual_reviews": [
+    "validation_curves.png",
+    "augmentation_examples_v3.png",
+    "../detector_v3/test_examples.png",
+    "../detector_v3/test_examples_normal.png",
+    "../detector_v3/test_ood_examples.png",
+    "../detector_v3/external_references.png"
+  ],
+  "cpu_cli_returns_101_stable_ids": true
+}
