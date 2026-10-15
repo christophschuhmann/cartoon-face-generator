@@ -1,7 +1,6 @@
 """Non-destructive reference inventory and exact shared crop, with no denoising."""
 from pathlib import Path
 import json
-import cv2
 import numpy as np
 from PIL import Image, ImageDraw, ImageOps
 

@@ -1,0 +1,11 @@
+# CPython 3.12 / Windows CPU configuration verified on this laptop.
+mediapipe==0.10.35
+opencv-contrib-python==4.11.0.86
+numpy==1.26.4
+scipy==1.13.1
+Pillow==10.4.0
+Flask==3.0.3
+absl-py==2.5.1
+flatbuffers==25.12.19
+onnxruntime==1.23.2
+threadpoolctl==3.5.0

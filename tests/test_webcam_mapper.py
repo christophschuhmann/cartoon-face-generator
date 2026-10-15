@@ -2,6 +2,7 @@
 import copy
 import io
 import math
+import re
 import threading
 import time
 import xml.etree.ElementTree as ET
@@ -42,6 +43,21 @@ def test_subject_left_wink_is_independent():
     assert controls["eye_asym"] > 0
 
 
+@pytest.mark.parametrize('live', [False, True])
+def test_live_svg_curves_keep_interpolatable_topology(live):
+    """Browser morphing must also cover eye clips, mouth fills and under-eye slots."""
+    number = re.compile(r"[-+]?(?:\d*\.\d+|\d+\.?\d*)(?:[eE][-+]?\d+)?")
+    def structure(signals):
+        svg = ET.fromstring(render_svg(controls_to_pose(controls_from_signals(signals)),live=live))
+        return [(node.tag, node.get("id"), number.sub("#", node.get("d", "")))
+                for node in svg.iter() if node.tag.endswith(("}path", "}ellipse"))]
+    neutral = structure({})
+    for signals in ({"eyeBlinkLeft": 1}, {"eyeBlinkRight": 1}, {"jawOpen": 1},
+                    {"mouthSmileLeft": 1, "mouthSmileRight": 1}, {"mouthPucker": 1},
+                    {"browInnerUp": 1, "eyeWideLeft": 1, "eyeWideRight": 1}):
+        assert structure(signals) == neutral
+
+
 def test_calibration_removes_resting_offsets_with_median():
     mapper = TemporalMapper(smoothing_seconds=0)
     mapper.begin_calibration(3)
@@ -50,7 +66,7 @@ def test_calibration_removes_resting_offsets_with_median():
     controls = mapper.update(Observation({"jawOpen": .21, "mouthSmileLeft": .2, "mouthSmileRight": .2}), .8)
     assert mapper.calibration["jawOpen"] == pytest.approx(.21)
     assert controls["mouth_open"] == 0
-    assert controls["smile"] == pytest.approx(.08)
+    assert controls["smile"] == pytest.approx(0.)  # no baked-in friendly mouth
     mapper.reset()
     assert mapper.calibration == {}
 
@@ -133,3 +149,17 @@ def test_local_web_api_and_export():
     assert client.post("/api/reset").json["ok"]
     assert client.get("/api/avatar.svg").mimetype == "image/svg+xml"
     validate_pose(client.get("/api/pose").json)
+    assert client.post('/api/mode',json={'mode':'invalid'}).status_code==400
+    assert client.post('/api/mode',json={'mode':'audio'}).json['mode']=='audio'
+    assert client.post('/api/frame',data=frame.getvalue(),content_type='image/jpeg').status_code==409
+    gaze=client.post('/api/audio/viewer',data=frame.getvalue(),content_type='image/jpeg')
+    assert gaze.status_code==200 and gaze.json['tracking']
+    assert set(gaze.json['position'])=={'x','y'}
+    assert client.post('/api/audio/viewer',data=b'bad',content_type='image/jpeg').status_code==400
+    assert client.get('/api/audio/status/unknown').status_code==404
+    assert client.get('/api/audio/result/unknown').status_code==404
+    assert client.post('/api/audio/cancel').json['ok']
+    assert client.post('/api/mode',json={'mode':'webcam'}).json['mode']=='webcam'
+    assert client.post('/api/audio/viewer',data=frame.getvalue(),content_type='image/jpeg').status_code==409
+    assert client.post('/api/settings',json={'animation':{'speech':True,'release_ms':400}}).json['animation']['speech']
+    assert client.post('/api/settings',json={'animation':{'release_ms':700}}).status_code==400

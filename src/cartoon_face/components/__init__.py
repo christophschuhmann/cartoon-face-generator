@@ -1,14 +1,15 @@
 """Shared SVG components. No reference-dependent branches or stored outlines."""
 import numpy as np
 from ..model import points,xy,topology
-from ..geometry import ribbon_path, cubic_segments, sample_cubics, path_data, contour_path, mouth_curves
+from ..geometry import ribbon_path, outline_cubics, cubic_segments, sample_cubics, path_data, contour_path, mouth_curves
 
-def _band(p,anchors,widths,scales=None,end_tangents=None):
-    return ribbon_path(anchors,widths,scales,p.get('geometry',{}).get('ribbon_smoothing',0),end_tangents)
+def _band(p,anchors,widths,scales=None,end_tangents=None,nose=False):
+    segments=outline_cubics(anchors,widths,scales,p.get('geometry',{}).get('ribbon_smoothing',0),end_tangents,preview=p.get('_live_preview',False))
+    return path_data(segments,True,projection=p.get('_projection'),nose=nose)
 
 def ribbon(p,name):
     r=p['rig'][name]
-    return {'id':name,'kind':'path','d':_band(p,points(p,name),r['widths'],r['tangent_scales']),'fill':'black','opacity':r.get('opacity',1)}
+    return {'id':name,'kind':'path','d':_band(p,points(p,name),r['widths'],r['tangent_scales'],nose=name=='nose'),'fill':'black','opacity':r.get('opacity',1)}
 
 def ellipse(p,name,fill='black'):
     r=p['rig'][name];c=points(p,name)[0]
@@ -16,7 +17,8 @@ def ellipse(p,name,fill='black'):
 
 def eye_opening(p,side):
     u=points(p,side+'_eye_upper');l=points(p,side+'_eye_lower')
-    return path_data(np.concatenate([cubic_segments(u,p['rig'][side+'_eye_upper']['tangent_scales']),cubic_segments(l[::-1],p['rig'][side+'_eye_lower']['tangent_scales'][::-1])]),True)
+    # Keep even zero-length joins: closed lids must retain morphable clip topology.
+    return path_data(np.concatenate([cubic_segments(u,p['rig'][side+'_eye_upper']['tangent_scales']),cubic_segments(l[::-1],p['rig'][side+'_eye_lower']['tangent_scales'][::-1])]),True,stable_connections=True,projection=p.get('_projection'))
 
 def render_eye(p,side):
     u=points(p,side+'_eye_upper');l=points(p,side+'_eye_lower');out=[]
@@ -28,7 +30,7 @@ def render_eye(p,side):
     scale=r['heart_scale'];angle=np.deg2rad(r['heart_angle']);rot=np.array([[np.cos(angle),-np.sin(angle)],[np.sin(angle),np.cos(angle)]])
     s=np.array([[[0,36],[-13,27],[-47,10],[-36,-9]],[[-36,-9],[-27,-28],[-5,-22],[0,-7]],[[0,-7],[5,-22],[27,-28],[36,-9]],[[36,-9],[47,10],[13,27],[0,36]]],float)*scale
     s=s@rot.T+c
-    out.append({'id':side+'_heart','kind':'path','d':path_data(s,True),'fill':'white','opacity':r.get('heart_opacity',0),'clip':side+'_pupil_clip'})
+    out.append({'id':side+'_heart','kind':'path','d':path_data(s,True,projection=p.get('_projection')),'fill':'white','opacity':r.get('heart_opacity',0),'clip':side+'_pupil_clip'})
     for c in (side+'_eye_upper',side+'_eye_lower'):out.append(ribbon(p,c))
     r=p['rig'][side+'_eye_side'];end=xy(p,side+'_eye_side_end');start=u[-1]
     mid=(start+end)/2+[r['bulge'],0]
@@ -82,7 +84,7 @@ def render_mouth(p):
         us,ls,du,dl=mouth_curves(u,l,r['tangent_scales'],lower_scales,rounding)
         boundary=np.concatenate([us,ls[::-1,::-1]])
     fill='white' if p['variants']['mouth_interior']=='white' else 'black'
-    out=[{'id':'mouth_fill','kind':'path','d':path_data(boundary,True),'fill':fill,'opacity':r['fill_opacity']}]
+    out=[{'id':'mouth_fill','kind':'path','d':path_data(boundary,True,projection=p.get('_projection')),'fill':fill,'opacity':r['fill_opacity']}]
     upper=ribbon(p,'mouth_upper')
     if rounding>0:upper['d']=_band(p,u,r['widths'],r['tangent_scales'],du)
     out.append(upper)
@@ -92,7 +94,7 @@ def render_mouth(p):
         size=r['corner_size'];sign=1 if i==0 else -1
         out.append({'id':f'mouth_corner_{i}','kind':'path','d':_band(p,[q+[sign*size*.35,8],q+[0,-size*.12],q+[-sign*size*.6,-6]],[.5,r['corner_width'],1]),'fill':'black','opacity':r['corner_accent'][i]})
     tongue=points(p,'tongue');tr=p['rig']['tongue']
-    out.append({'id':'tongue','kind':'path','d':contour_path(tongue,tr['tangent_scales']),'fill':'white','stroke':'black','stroke_width':tr['width'],'opacity':tr['opacity']})
+    out.append({'id':'tongue','kind':'path','d':contour_path(tongue,tr['tangent_scales'],p.get('_projection')),'fill':'white','stroke':'black','stroke_width':tr['width'],'opacity':tr['opacity']})
     cr=p['rig']['tongue_crease'];start=tongue[-1];end=xy(p,'tongue_crease_tip');mid=(start+end)/2+[cr['bend'],0]
     out.append({'id':'tongue_crease','kind':'path','d':_band(p,[start,mid,end],[cr['width'],cr['width'],.5]),'fill':'black','opacity':cr['opacity']*tr['opacity']})
     out.append(ribbon(p,'chin'));return out

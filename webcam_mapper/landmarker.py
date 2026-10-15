@@ -2,6 +2,7 @@
 from pathlib import Path
 import numpy as np
 from .mapping import Observation
+from .tongue import tongue_protrusion
 from .paths import DEFAULT_MODEL
 
 
@@ -22,7 +23,7 @@ class CpuFaceLandmarker:
             num_faces=1, min_face_detection_confidence=.5,
             min_face_presence_confidence=.5, min_tracking_confidence=.5,
             output_face_blendshapes=True,
-            output_facial_transformation_matrixes=False,
+            output_facial_transformation_matrixes=True,
         )
         self.detector = vision.FaceLandmarker.create_from_options(options)
 
@@ -41,7 +42,9 @@ class CpuFaceLandmarker:
             return None
         landmarks = [(float(q.x), float(q.y), float(q.z)) for q in result.face_landmarks[0]]
         blendshapes = {q.category_name: float(q.score) for q in result.face_blendshapes[0]} if result.face_blendshapes else {}
-        return Observation(blendshapes, landmarks, rgb.shape[1], rgb.shape[0])
+        matrix = result.facial_transformation_matrixes[0].tolist() if result.facial_transformation_matrixes else None
+        tongue = tongue_protrusion(rgb, landmarks, blendshapes.get('jawOpen', 0), blendshapes)
+        return Observation(blendshapes, landmarks, rgb.shape[1], rgb.shape[0], matrix, tongue)
 
     def close(self):
         self.detector.close()

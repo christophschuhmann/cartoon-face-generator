@@ -2,7 +2,9 @@
 
 Dieses Projekt erzeugt ein wiedererkennbares Cartoon-Gesicht vollständig als **parametrisches SVG**. Augen, Brauen, Pupillen, Mund und die geschwungenen Wangenlinien lassen sich unabhängig verformen. Alle Ausdrücke behalten dieselben **101 semantischen Keypoints**. Eine gespeicherte Pose enthält die vollständige Geometrie und lässt sich ohne Referenzbild erneut rendern.
 
-Vorhanden sind **40 EmoNet-Face-Ausdrücke**, **60 zusätzliche soziale und verspielte Ausdrücke**, ein Browser-Editor, Werkzeuge für synthetische Trainingsdaten, ein trainierter Cartoon-Keypoint-Detector und eine **CPU-Webcam-Demo mit MediaPipe**.
+Vorhanden sind **40 EmoNet-Face-Ausdrücke**, **60 zusätzliche soziale und verspielte Ausdrücke**, ein Browser-Editor, Werkzeuge für synthetische Trainingsdaten, ein trainierter Cartoon-Keypoint-Detector und eine **CPU-Webcam- und Audio-Demo**.
+
+Die aktuelle Windows-Demo **2.3.2** überträgt Webcam-Mimik auf das Rig und animiert ausgewählte MP3-/WAV-Dateien anhand von Wortzeitstempeln, LAION-Ears-Emotionswerten und Sprechstil. Dazu kommen weiche Übergänge, organische Sprechbewegungen und optionaler Blickkontakt mit Kopfbewegung per Webcam. Negative Ausdrücke berücksichtigen Ärger und Stimmspannung gemeinsam. [Start, Modellinstallation und Grenzen](webcam_mapper/README.md) sind separat beschrieben; die großen Audiomodelle werden nicht mit Git verteilt.
 
 ## Was möchtest du machen?
 
@@ -15,6 +17,7 @@ Vorhanden sind **40 EmoNet-Face-Ausdrücke**, **60 zusätzliche soziale und vers
 | JSON-Posen lesen, verändern oder speichern | [Datenformat und Einheiten](docs/data_format.md) |
 | Ausdrücke erzeugen, variieren oder mischen | [CLI-Beispiele](docs/cli.md), [40 Emotionen](docs/emotions.md), [60 soziale Ausdrücke](docs/social_expressions.md) |
 | mit meiner Webcam den Avatar steuern | [Laptop-Anleitung](webcam_mapper/README.md) |
+| eine MP3-/WAV-Datei mit passender Mimik abspielen | [Audio-Bühne und Einrichtung](webcam_mapper/README.md#audio-bühne) |
 | eigene Trainingsdaten erzeugen | [Datensatz und Augmentationen](docs/dataset.md) |
 | das Keypoint-Modell benutzen oder trainieren | [Training und Inferenz](training/README.md), [gemessene Ergebnisse](docs/detector_results.md) |
 | sprechende Cartoon-Videos mit LTX 2.5 erzeugen | [Videotests, Skripte und Zeitmessungen](video_experiments/README.md) |
@@ -100,7 +103,7 @@ Eine echte vollständige Beispielpose: [poses/smile.json](poses/smile.json). Ver
 | Quellcode, Dokumentation, sechs Referenzposen und alle 100 Archetypen | direkt in diesem Repository |
 | ein Beispiel je Ausdruck plus Kontaktbögen und Qualitätsberichte | [output](output); [Inhaltsverzeichnis](output/README.md) |
 | alle 100 Archetypen **und 560 weitere Vorschauvarianten** | [expression_previews.zip](https://github.com/christophschuhmann/cartoon-face-generator/releases/download/v1.0.0/expression_previews.zip), etwa 90 MB |
-| eigenständige Webcam-Demo einschließlich geprüftem MediaPipe-Modell | [cartoon_webcam_mapper.zip](https://github.com/christophschuhmann/cartoon-face-generator/releases/download/v1.0.0/cartoon_webcam_mapper.zip), etwa 3,4 MB |
+| aktuelle Webcam-/Audio-Demo einschließlich geprüftem MediaPipe-Modell | [cartoon_webcam_mapper.zip](webcam_mapper/output/cartoon_webcam_mapper.zip), etwa 3,6 MB; große Audio-/Emotionsmodelle separat installieren |
 | neuer robuster / normalpräziser Cartoon-Detector | [robust](https://github.com/christophschuhmann/cartoon-face-generator/releases/download/v1.1.0/cartoon_landmarks_robust.pt) / [normalpräzise](https://github.com/christophschuhmann/cartoon-face-generator/releases/download/v1.1.0/cartoon_landmarks_precise.pt), jeweils etwa 4,1 MB |
 | historische Detector-Baseline | [cartoon_landmarks_best.pt](https://github.com/christophschuhmann/cartoon-face-generator/releases/download/v1.0.0/cartoon_landmarks_best.pt) |
 | LTX-2.5-Videos mit Sprache, Eingaben und Zeitmessungen | [ltx25_examples.zip](https://github.com/christophschuhmann/cartoon-face-generator/releases/download/v1.1.0/ltx25_examples.zip), etwa 48 MB; [Galerie](https://owner-curves-cosmetics-taught.trycloudflare.com/refinement-assets/ltx25/index.html) |

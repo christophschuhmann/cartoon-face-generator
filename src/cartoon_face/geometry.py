@@ -1,5 +1,6 @@
 """Smooth cubic geometry. Widths and tangent handles are rig data, not landmarks."""
 import numpy as np
+from functools import lru_cache
 from scipy.interpolate import PchipInterpolator, CubicSpline
 
 def tangents(points, scales=None):
@@ -23,10 +24,15 @@ def sample_cubics(segments, samples=12):
     d=3*(1-t)**2*(s[:,None,1]-s[:,None,0])+6*(1-t)*t*(s[:,None,2]-s[:,None,1])+3*t*t*(s[:,None,3]-s[:,None,2])
     return np.concatenate([p.reshape(-1,2),s[-1,3:4]]),np.concatenate([d.reshape(-1,2),3*(s[-1,3:4]-s[-1,2:3])])
 
+@lru_cache(maxsize=512)
+def _sample_widths(widths, count):
+    return PchipInterpolator(np.arange(len(widths)),np.maximum(widths,0))(np.linspace(0,len(widths)-1,count))
+
+
 def ribbon_edges(points, widths, scales=None, samples=8, end_tangents=None):
     s=cubic_segments(points,scales,end_tangents);p,d=sample_cubics(s,samples)
     n=np.stack([-d[:,1],d[:,0]],axis=1)/np.maximum(np.linalg.norm(d,axis=1)[:,None],1e-8)
-    u=np.linspace(0,len(points)-1,len(p));w=PchipInterpolator(np.arange(len(points)),np.maximum(widths,0))(u)
+    w=_sample_widths(tuple(float(w) for w in widths),len(p))
     return p+n*w[:,None]/2,p-n*w[:,None]/2
 
 def _split_segments(segments):
@@ -50,19 +56,26 @@ def _smooth_edge(coords,start_direction,end_direction):
     return np.stack([q[:-1],q[:-1]+deriv[:-1]*step/3,q[1:]-deriv[1:]*step/3,q[1:]],axis=1)
 
 
-def outline_cubics(points, widths, scales=None, smoothing=0, end_tangents=None):
+def outline_cubics(points, widths, scales=None, smoothing=0, end_tangents=None, preview=False):
     # Offset samples become C1 cubic chains. Only the centerline anchors are semantic.
-    a,b=ribbon_edges(points,widths,scales,samples=4,end_tangents=end_tangents)
     p=np.asarray(points,float);d=tangents(p,scales)
     if end_tangents is not None:d[[0,-1]]=np.asarray(end_tangents,float)
+    if preview:
+        # The live outline uses the semantic anchors as offset samples. Avoid
+        # a per-frame PCHIP solve and duplicate centerline/derivative sampling.
+        n=np.stack([-d[:,1],d[:,0]],axis=1)/np.maximum(np.sqrt(np.sum(d*d,axis=1))[:,None],1e-8)
+        offset=n*np.maximum(np.asarray(widths),0)[:,None]/2
+        a,b=p+offset,p-offset
+    else:a,b=ribbon_edges(points,widths,scales,samples=4,end_tangents=end_tangents)
     def cap(start,end,center,direction):
         radius=np.linalg.norm(start-center);normal=(start-center)/max(radius,1e-8)
         direction=direction/max(np.linalg.norm(direction),1e-8);tip=center+direction*radius;k=.55228475*radius
         return np.array([[start,start+direction*k,tip+normal*k,tip],[tip,tip-normal*k,end+direction*k,end]])
-    edge_a=cubic_segments(a);edge_b=cubic_segments(b[::-1])
     cap_end=cap(a[-1],b[-1],p[-1],d[-1]);cap_start=cap(b[0],a[0],p[0],-d[0])
-    legacy=np.concatenate([edge_a,cap_end,edge_b,cap_start])
-    if smoothing<=0:return legacy
+    if preview or smoothing<1:
+        edge_a=cubic_segments(a);edge_b=cubic_segments(b[::-1])
+        legacy=np.concatenate([edge_a,cap_end,edge_b,cap_start])
+        if preview or smoothing<=0:return legacy
     a,b=ribbon_edges(points,widths,scales,samples=8,end_tangents=end_tangents)
     smooth=np.concatenate([_smooth_edge(a,d[0],d[-1]),cap_end,
       _smooth_edge(b[::-1],-d[-1],-d[0]),cap_start])
@@ -73,17 +86,23 @@ def outline_cubics(points, widths, scales=None, smoothing=0, end_tangents=None):
 
 def fmt(p):return f'{p[0]:.5f},{p[1]:.5f}'
 
-def path_data(segments, close=False):
-    s=np.asarray(segments);parts=['M '+fmt(s[0,0])]
-    last=s[0,0]
-    for q in s:
-        if np.linalg.norm(q[0]-last)>1e-6:parts.append('L '+fmt(q[0]))
-        parts.append('C '+fmt(q[1])+' '+fmt(q[2])+' '+fmt(q[3]));last=q[3]
+def path_data(segments, close=False, stable_connections=False, projection=None, nose=False):
+    s=np.asarray(segments)
+    if projection is not None:s=projection.points(s,nose)
+    joins=np.zeros(len(s),dtype=bool)
+    if len(s)>1:joins[1:]=np.sum((s[1:,0]-s[:-1,3])**2,axis=1)>1e-12
+    # Convert once: indexing and formatting thousands of NumPy scalar objects
+    # dominated live SVG serialization on older laptop CPUs.
+    rows=s.reshape(-1,8).tolist();first=rows[0]
+    parts=[f'M {first[0]:.5f},{first[1]:.5f}']
+    for index,q in enumerate(rows):
+        if (stable_connections and index>0) or joins[index]:parts.append(f'L {q[0]:.5f},{q[1]:.5f}')
+        parts.append(f'C {q[2]:.5f},{q[3]:.5f} {q[4]:.5f},{q[5]:.5f} {q[6]:.5f},{q[7]:.5f}')
     if close:parts.append('Z')
     return ' '.join(parts)
 
-def ribbon_path(points,widths,scales=None,smoothing=0,end_tangents=None):
-    return path_data(outline_cubics(points,widths,scales,smoothing,end_tangents),True)
+def ribbon_path(points,widths,scales=None,smoothing=0,end_tangents=None,preview=False):
+    return path_data(outline_cubics(points,widths,scales,smoothing,end_tangents,preview),True)
 
 
 def mouth_curves(upper,lower,upper_scales=None,lower_scales=None,rounding=0):
@@ -103,7 +122,7 @@ def mouth_curves(upper,lower,upper_scales=None,lower_scales=None,rounding=0):
     du=(1-rounding)*du+rounding*target;dl=(1-rounding)*dl-rounding*target
     return cubic_segments(u,upper_scales,du),cubic_segments(l,lower_scales,dl),du,dl
 
-def contour_path(points,scales=None):return path_data(closed_cubics(points,scales),True)
+def contour_path(points,scales=None,projection=None):return path_data(closed_cubics(points,scales),True,projection=projection)
 
 
 def closed_cubics(points,scales=None):

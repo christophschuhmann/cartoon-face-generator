@@ -16,8 +16,15 @@ def main():
     candidates += list((ROOT / "webcam_mapper").glob("requirements*.txt"))
     candidates += [ROOT / "webcam_mapper/README.md", ROOT / "webcam_mapper/THIRD_PARTY.md", ROOT / "LICENSE", ROOT / "poses/smile.json", ROOT / "tests/test_webcam_mapper.py"]
     candidates += list((ROOT / "webcam_mapper/static").rglob("*"))
+    candidates += list((ROOT / 'tests').glob('test_*tracking.py'))
+    candidates += [ROOT/'tests'/name for name in ('test_empathic.py','test_audio_performance.py',
+                    'test_speech_assist.mjs','test_head_follow.mjs')]
+    candidates += [ROOT/'webcam_mapper/models/ears'/name for name in (
+        'training_normalization.json','display_normalization.json','LICENSE','NOTICE.md',
+        'medium/speech_reference.json','medium/REFERENCE-LICENSE.md')]
     # Keep one renderer and its real helpers, not a second copy of vector code.
-    module_names = ("__init__", "model", "geometry", "renderer", "emotion_library", "animation", "expressions", "reference", "under_eye")
+    module_names = ("__init__", "model", "geometry", "renderer", "emotion_library", "animation", "expressions", "reference", "under_eye", "projection", "social_expressions")
+    candidates += [ROOT/'Start-Avatar.cmd',ROOT/'Start-Avatar.ps1',ROOT/'tests/test_expression_upgrade.py',ROOT/'tests/test_avatar_motion.mjs']
     candidates += [ROOT / f"src/cartoon_face/{name}.py" for name in module_names]
     candidates += list((ROOT / "src/cartoon_face/components").glob("*.py"))
     candidates += list((ROOT / "src/cartoon_face/topology").glob("*.json"))
@@ -31,11 +38,11 @@ def main():
     missing = [p for p in candidates if not p.exists()]
     if missing:
         raise FileNotFoundError(f"Bundle dependency missing: {missing}")
-    manifest = {str(p.relative_to(ROOT)): {"sha256": hashlib.sha256(p.read_bytes()).hexdigest(), "bytes": p.stat().st_size} for p in files}
+    manifest = {p.relative_to(ROOT).as_posix(): {"sha256": hashlib.sha256(p.read_bytes()).hexdigest(), "bytes": p.stat().st_size} for p in files}
     args.output.parent.mkdir(parents=True, exist_ok=True)
     with zipfile.ZipFile(args.output, "w", compression=zipfile.ZIP_DEFLATED) as archive:
         for path in files:
-            archive.write(path, "cartoon_webcam_mapper/" + str(path.relative_to(ROOT)))
+            archive.write(path, "cartoon_webcam_mapper/" + path.relative_to(ROOT).as_posix())
         archive.writestr("cartoon_webcam_mapper/BUNDLE_MANIFEST.json", json.dumps(manifest, indent=2) + "\n")
     print(json.dumps({"zip": str(args.output), "bytes": args.output.stat().st_size, "source_files": len(files), "includes_model": args.include_model}, indent=2))
 

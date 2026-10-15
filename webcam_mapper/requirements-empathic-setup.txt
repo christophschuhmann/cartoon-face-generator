@@ -1,0 +1,6 @@
+# One-time ONNX conversion; PyTorch CPU is also needed for weights-only MLP conversion.
+# Install the CPU wheel from https://download.pytorch.org/whl/cpu if unavailable.
+numpy==1.26.4
+onnx==1.19.1
+ml_dtypes==0.5.1
+threadpoolctl==3.5.0

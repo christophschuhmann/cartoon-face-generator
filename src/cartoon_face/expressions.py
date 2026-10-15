@@ -10,7 +10,7 @@ from .reference import ROOT
 EMOTIONS=('neutral','happy','joy','love','proud','sad','angry','surprised','afraid','worried','disgust','sleepy','wink','playful')
 
 
-def set_variant(p,name,value):
+def set_variant(p,name,value,refresh=True):
     p['variants'][name]=value
     if name.endswith('_under_eye'):
         side=name.removesuffix('_under_eye')
@@ -20,7 +20,7 @@ def set_variant(p,name,value):
         else:p['rig'][side+'_under_eye']['opacity']=float(value in ('continuous','mixed'));p['rig'][side+'_hatching']['opacity']=float(value in ('hatching','mixed'))
     elif name.endswith('_highlight'):
         side=name.removesuffix('_highlight');p['rig'][side+'_highlight']['heart_opacity']=float(value=='heart')
-    return refresh_states(p)
+    return refresh_states(p) if refresh else p
 
 
 def eye_openness(p,side,value,squint=0):

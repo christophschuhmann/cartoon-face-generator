@@ -13,7 +13,7 @@ from .model import points,topology,set_xy,refresh_states,validate_pose
 
 @lru_cache(maxsize=1)
 def social_catalog():
-    return json.loads((Path(__file__).parent/'emotions/social_catalog.json').read_text())
+    return json.loads((Path(__file__).parent/'emotions/social_catalog.json').read_text(encoding='utf-8'))
 
 
 def resolve_social(name):

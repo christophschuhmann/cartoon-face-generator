@@ -1,5 +1,23 @@
 .venv/
 .venv-training/
+.venv-audio/
+.env
+.env.*
+*.log
+webcam_mapper/output/
+# Downloaded weights, runtimes, caches and verification markers stay local.
+# Small published normalization tables and their notices are source data.
+webcam_mapper/models/*
+!webcam_mapper/models/ears/
+webcam_mapper/models/ears/*
+!webcam_mapper/models/ears/training_normalization.json
+!webcam_mapper/models/ears/display_normalization.json
+!webcam_mapper/models/ears/LICENSE
+!webcam_mapper/models/ears/NOTICE.md
+!webcam_mapper/models/ears/medium/
+webcam_mapper/models/ears/medium/*
+!webcam_mapper/models/ears/medium/speech_reference.json
+!webcam_mapper/models/ears/medium/REFERENCE-LICENSE.md
 datasets/
 video_experiments/.venv/
 video_experiments/models/

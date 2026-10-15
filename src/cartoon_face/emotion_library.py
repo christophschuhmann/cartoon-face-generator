@@ -20,7 +20,7 @@ CATALOG_PATH = Path(__file__).parent / 'emotions/catalog.json'
 
 @lru_cache(maxsize=1)
 def catalog():
-    return json.loads(CATALOG_PATH.read_text())
+    return json.loads(CATALOG_PATH.read_text(encoding='utf-8'))
 
 
 def resolve_emotion(name):
@@ -109,6 +109,10 @@ def sample_actions(profile,seed=None,variation=.65):
 
 
 def _brows(p,side,a):
+    if 'brow_raise_'+side in a:
+        a=dict(a)
+        for key in ('brow_raise','brow_inner','brow_outer','frown'):a[key]=a.get(key+'_'+side,a[key])
+        a['brow_asym']=0.
     old=points(p,side+'_brow');q=old.copy();t=np.linspace(0,1,5)
     lateral=a['brow_asym']*(1 if side=='left' else -1)
     # A neutral arch preserves fitted x spacing and width, but removes the
@@ -133,7 +137,7 @@ def _eyes(p,side,a,options):
     u[:,1]=baseline-(baseline-u[:,1])*v
     u[:,1]-=15*a['lid_curve']*np.sin(np.pi*t)
     u[:,1]+=22*a['lid_tilt']*(.5-t)
-    l[1,1]-=a['squint']*18
+    l[1,1]-=a.get('squint_'+side,a['squint'])*(26 if 'squint_'+side in a else 18)
     if v<.12:
         # Closure can be smiling (arch up) or painful (arch down), with the same IDs.
         ends=np.interp(t,[0,1],[old_l[0,1],old_l[-1,1]])
@@ -167,21 +171,28 @@ def _eyes(p,side,a,options):
     inner=.35*l[0]+.65*l[1]+[0,31];outer=.85*l[-1]+.15*l[1]+[0,31]
     _put(p,side+'_hatching',[inner,outer])
     h=p['rig'][side+'_hatching'];h.update(count=5,length=44,width=5,angle=-52,offsets=[[0,0,1] for _ in range(8)],slot_weights=[1.,0.,1.,0.,1.,1.,0.,1.])
-    set_variant(p,side+'_under_eye',options['under_eye'])
+    set_variant(p,side+'_under_eye',options['under_eye'],refresh=False)
     # Position the pupil in the current opening, not by scaling an entire eye.
-    old_center=xy(p,side+'_pupil_center');center=(u[2]+l[1])/2+[a['gaze_x']*38,0]
+    independent='gaze_x_'+side in a
+    old_center=xy(p,side+'_pupil_center')
+    travel_x=abs(u[-1,0]-u[0,0])*.31 if independent else 38
+    center=(u[2]+l[1])/2+[a.get('gaze_x_'+side,a['gaze_x'])*travel_x,0]
     pp=p['rig'][side+'_pupil'];scale=a['pupil_scale']*max(.78,min(1,np.sqrt(v)))
     pp.update(rx=pp['rx']*scale,ry=pp['ry']*scale,openness=min(1,v),opacity=1)
     warmth=a.get('warmth',0)
     pp['rx']*=1+.10*warmth;pp['ry']*=1+.05*warmth;pp['angle']*=1-.16*warmth
     lower_at_pupil=np.polyval(np.polyfit(l[:,0],l[:,1],2),center[0])
     center[1]=(u[2,1]+l[1,1])/2 if v>1.12 else lower_at_pupil-pp['ry']*.93
-    center[1]+=a['gaze_y']*26
+    gaze_y=a.get('gaze_y_'+side,a['gaze_y'])
+    # Extreme gaze may put 3/4 of an iris behind a lid. The clip, rather than
+    # clamping the pupil into the opening, determines the visible crescent.
+    travel_y=(abs(l[1,1]-u[2,1])*.52+pp['ry']*.28) if independent else 26
+    center[1]+=gaze_y*travel_y
     set_xy(p,side+'_pupil_center',center)
     for suffix in ('highlight','secondary_highlight'):
         c=side+'_'+suffix;old=points(p,c)[0];_put(p,c,[center+(old-old_center)*scale])
         for radius in ('rx','ry'):p['rig'][c][radius]*=scale*(1+.20*warmth if suffix=='highlight' else 1)
-    if v>=.12:
+    if v>=.12 and not independent:
         # A readable light glint follows the visible iris segment in narrow eyes.
         # Keeping the original upward offset would hide it entirely behind the lid.
         samples=sample_cubics(cubic_segments(u),32)[0];order=np.argsort(samples[:,0])
@@ -216,12 +227,22 @@ def _mouth(p,a,options):
         lower=np.column_stack([cx+width/2*np.array([-quarter,0,quarter]),cy+height/2*np.array([quarter,1,quarter])])
     else:
         lower=np.column_stack([cx+width/2*np.array([-.52,0,.52]),ys[[1,2,3]]+depth*np.array([.72,1,.72])])
+    # Optional live lip gesture, separate from the tongue, with stable anchors.
+    pout=float(np.clip(a.get('lip_pout',0),0,1))
+    pucker=float(np.clip(a.get('mouth_pucker',0),0,1))
+    if pout or pucker:
+        ys+=pout*np.array([0,-5,-12,-5,0])
+        lower[:,1]+=pout*np.array([2,10,2])
+        round_top=cy-(8+depth*.18)*np.array([0,.72,1,.72,0])
+        ys=ys*(1-pucker*.72)+round_top*pucker*.72
     upper=np.column_stack([xs,ys]);_put(p,'mouth_upper',upper);_put(p,'mouth_lower',lower)
     ur=p['rig']['mouth_upper'];lr=p['rig']['mouth_lower']
     opened=options['mouth']!='closed' and a['mouth_open']>.015
     p['geometry']['mouth_rounding']=1. if options['mouth'] in ('round','pucker') else (.28 if opened and options['mouth']=='teeth' else .08 if opened else 0.)
     ur.update(widths=[2,7,9,7,2],tangent_scales=[1,1,1,1,1],fill_opacity=int(opened),corner_accent=[0,0])
     lr.update(widths=[5,6,5],opacity=int(opened),tangent_scales=[1,1,1])
+    if pout:
+        lr.update(widths=[5+3*pout,6+8*pout,5+3*pout],opacity=max(int(opened),pout))
     p['variants']['mouth_interior']='white' if options['mouth'] in ('teeth','pucker') else 'dark'
     if options['mouth'] in ('round','pucker'):
         ur.update(widths=[3,4,4,4,3],tangent_scales=[1,1.12,1.12,1.12,1])
@@ -243,9 +264,14 @@ def _mouth(p,a,options):
     p['rig']['chin']['opacity']=int(options['mouth']=='closed' and a['smile']>.35)
 
 
-def build_pose(profile,actions):
+@lru_cache(maxsize=1)
+def _base_pose(modified_ns):
+    return load_pose(ROOT/'poses/smile.json')
+
+
+def build_pose(profile,actions,finalize=True):
     """Resolve compact expression actions into a complete, independently renderable pose."""
-    p=load_pose(ROOT/'poses/smile.json');a=actions;opt=profile['options']
+    p=copy.deepcopy(_base_pose((ROOT/'poses/smile.json').stat().st_mtime_ns));a=actions;opt=profile['options']
     # Opt-in geometry is saved in the pose. Old reference and recipe-1.0 JSONs
     # retain their exact original paths when this block is absent.
     p['geometry']={'version':'smooth_v1','ribbon_smoothing':1.,'mouth_rounding':0.,'under_eye_transition':'stroke_bank_v1'}
@@ -267,7 +293,8 @@ def build_pose(profile,actions):
         if np.any(np.abs(delta)>1e-9):_put(p,c,bounded);adjustments[c]=delta.tolist()
     p['name']=profile['slug'];p.pop('controls',None)
     p['provenance']={'kind':'procedural_emonet','base_pose':'smile','recipe_version':catalog()['recipe_version'],'bounds_adjustments':adjustments}
-    refresh_states(p);validate_pose(p);return p
+    if finalize:refresh_states(p);validate_pose(p)
+    return p
 
 
 def emotion_pose40(name,seed=None,variation=.65,intensity=1):
