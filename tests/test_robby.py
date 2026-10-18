@@ -25,3 +25,5 @@ def test_robby_optional_camera_never_requests_microphone():
     assert 'getUserMedia' in html
     assert 'pagehide' in html
     assert '0.10.21' in html
+    assert 'id="smile"' not in html  # Reserved for the embedded SVG path.
+    assert 'id="control-smile"' in html

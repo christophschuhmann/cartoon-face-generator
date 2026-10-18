@@ -11,9 +11,9 @@
 <button id="camera">Enable local camera</button> <button id="reset">Reset</button>
 <p id="status" role="status">Camera off. Try the expression sliders.</p>
 <video id="video" muted playsinline hidden></video>
-<label>Smile<input id="smile" type="range" min="0" max="1" step=".01" value="0"></label>
-<label>Mouth opening / audio level<input id="jaw" type="range" min="0" max="1" step=".01" value="0"></label>
-<label>Head tilt<input id="roll" type="range" min="-35" max="35" step="1" value="0"></label>
+<label>Smile<input id="control-smile" type="range" min="0" max="1" step=".01" value="0"></label>
+<label>Mouth opening / audio level<input id="control-jaw" type="range" min="0" max="1" step=".01" value="0"></label>
+<label>Head tilt<input id="control-roll" type="range" min="-35" max="35" step="1" value="0"></label>
 <small>Camera pixels and landmarks stay in your browser. Enabling tracking downloads MediaPipe code, WASM and a face model from third-party servers. This is an authored cartoon animation, not emotion recognition or a medical service.</small>
 </section></main>
 <footer><a href="README.md">Integration, stable SVG IDs and privacy notes</a> · <a href="../LICENSE">MIT</a></footer>
@@ -36,11 +36,11 @@ $('camera').onclick=async()=>{
   $('video').srcObject=stream;await $('video').play();$('video').hidden=false;$('camera').textContent='Disable camera';$('status').textContent='Tracking locally. Camera frames and landmarks never leave this browser.';
  }catch(e){stop();$('status').textContent='Camera unavailable: '+e.message;}finally{$('camera').disabled=false;}
 };
-$('reset').onclick=()=>{stop();for(const id of ['smile','jaw','roll'])$(id).value='0';rig.reset();};
+$('reset').onclick=()=>{stop();for(const id of ['smile','jaw','roll'])$('control-'+id).value='0';rig.reset();};
 function animate(t){
  if(stream&&$('video').readyState>=2&&$('video').currentTime!==lastVideo){lastVideo=$('video').currentTime;
   try{face=controlsFromFace(tracker.detectForVideo($('video'),t));}catch(e){$('status').textContent='Tracking paused: '+e.message;face={};}}
- const controls=stream?face:{smile:+$('smile').value,jaw:+$('jaw').value,roll:+$('roll').value};
+ const controls=stream?face:{smile:+$('control-smile').value,jaw:+$('control-jaw').value,roll:+$('control-roll').value};
  rig.update(controls,t-lastTime,t);lastTime=t;requestAnimationFrame(animate);
 }
 window.addEventListener('pagehide',stop);requestAnimationFrame(animate);
