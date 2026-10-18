@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Robby · local face mirror</title>
+<style>
+:root{font:17px/1.5 system-ui,sans-serif;color:#554c40;background:#f8f6f1}body{max-width:1100px;margin:auto;padding:2rem}header{display:flex;justify-content:space-between;align-items:center}a{color:inherit}main{display:grid;grid-template-columns:1.2fr 1fr;gap:3rem;align-items:center}#avatar svg{width:100%;max-height:75vh}h1{font-weight:500;font-size:2.5rem;line-height:1.15}button{border:1px solid #d9d0c2;border-radius:2rem;background:#fffdf9;color:inherit;padding:.8rem 1.3rem;cursor:pointer}label{display:block;margin:1rem 0}input{width:100%}video{width:240px;border-radius:1rem;transform:scaleX(-1)}small{color:#857767}#status{min-height:3em}footer{border-top:1px solid #e1d9ce;margin-top:2rem;padding-top:1rem}@media(max-width:650px){body{padding:1rem}main{grid-template-columns:1fr;gap:0}#avatar svg{max-height:48vh}}
+</style></head><body>
+<header><a href="../">← Cartoon Face Generator</a><span>♡ robby</span></header>
+<main><div id="avatar" aria-label="Animated cream-white robot"></div><section>
+<h1>A little company.<br>A lot of heart.</h1>
+<p>An independent SVG robot and an optional camera mirror. No microphone, account or server-side face recognition is required.</p>
+<button id="camera">Enable local camera</button> <button id="reset">Reset</button>
+<p id="status" role="status">Camera off. Try the expression sliders.</p>
+<video id="video" muted playsinline hidden></video>
+<label>Smile<input id="smile" type="range" min="0" max="1" step=".01" value="0"></label>
+<label>Mouth opening / audio level<input id="jaw" type="range" min="0" max="1" step=".01" value="0"></label>
+<label>Head tilt<input id="roll" type="range" min="-35" max="35" step="1" value="0"></label>
+<small>Camera pixels and landmarks stay in your browser. Enabling tracking downloads MediaPipe code, WASM and a face model from third-party servers. This is an authored cartoon animation, not emotion recognition or a medical service.</small>
+</section></main>
+<footer><a href="README.md">Integration, stable SVG IDs and privacy notes</a> · <a href="../LICENSE">MIT</a></footer>
+<script type="module">
+import {createRobbyRig,controlsFromFace} from './rig.js';
+const $=id=>document.getElementById(id);
+$('avatar').innerHTML=await fetch('./robby.svg').then(r=>r.text());
+const rig=createRobbyRig($('avatar').querySelector('svg'));
+let stream=null,tracker=null,face={},lastVideo=-1,lastTime=performance.now();
+function stop(){stream?.getTracks().forEach(t=>t.stop());stream=null;face={};$('video').srcObject=null;$('video').hidden=true;$('camera').textContent='Enable local camera';$('status').textContent='Camera off. No video was uploaded.';}
+$('camera').onclick=async()=>{
+ if(stream){stop();return;}
+ $('camera').disabled=true;
+ try{
+  $('status').textContent='Loading browser-only face tracking…';
+  if(!tracker){const {FilesetResolver,FaceLandmarker}=await import('https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.21/vision_bundle.mjs');
+   const wasm=await FilesetResolver.forVisionTasks('https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.21/wasm');
+   tracker=await FaceLandmarker.createFromOptions(wasm,{baseOptions:{modelAssetPath:'https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task',delegate:'CPU'},runningMode:'VIDEO',numFaces:1,outputFaceBlendshapes:true});}
+  stream=await navigator.mediaDevices.getUserMedia({video:{width:640,height:480,facingMode:'user'},audio:false});
+  $('video').srcObject=stream;await $('video').play();$('video').hidden=false;$('camera').textContent='Disable camera';$('status').textContent='Tracking locally. Camera frames and landmarks never leave this browser.';
+ }catch(e){stop();$('status').textContent='Camera unavailable: '+e.message;}finally{$('camera').disabled=false;}
+};
+$('reset').onclick=()=>{stop();for(const id of ['smile','jaw','roll'])$(id).value='0';rig.reset();};
+function animate(t){
+ if(stream&&$('video').readyState>=2&&$('video').currentTime!==lastVideo){lastVideo=$('video').currentTime;
+  try{face=controlsFromFace(tracker.detectForVideo($('video'),t));}catch(e){$('status').textContent='Tracking paused: '+e.message;face={};}}
+ const controls=stream?face:{smile:+$('smile').value,jaw:+$('jaw').value,roll:+$('roll').value};
+ rig.update(controls,t-lastTime,t);lastTime=t;requestAnimationFrame(animate);
+}
+window.addEventListener('pagehide',stop);requestAnimationFrame(animate);
+</script></body></html>

@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 900" role="img" aria-label="Robby, a friendly cream-white robot with a warm glowing heart">
+<defs>
+ <radialGradient id="shell" cx="35%" cy="15%" r="90%"><stop stop-color="#fffdfa"/><stop offset=".55" stop-color="#f2eee7"/><stop offset="1" stop-color="#d5cec4"/></radialGradient>
+ <linearGradient id="metal" x2="1" y2="1"><stop stop-color="#d5d0cc"/><stop offset=".55" stop-color="#aaa4a0"/><stop offset="1" stop-color="#e2dcd7"/></linearGradient>
+ <radialGradient id="eye" cx="35%" cy="25%"><stop stop-color="#4e4037"/><stop offset=".7" stop-color="#292320"/><stop offset="1" stop-color="#191715"/></radialGradient>
+ <radialGradient id="blush"><stop stop-color="#edb4a5" stop-opacity=".6"/><stop offset="1" stop-color="#edb4a5" stop-opacity="0"/></radialGradient>
+ <radialGradient id="heartlight"><stop stop-color="#fff9dc"/><stop offset=".8" stop-color="#ffe8c9"/><stop offset="1" stop-color="#eeb88f"/></radialGradient>
+ <filter id="shade" x="-.3" y="-.3" width="1.6" height="1.7"><feDropShadow dx="0" dy="12" stdDeviation="12" flood-color="#716457" flood-opacity=".14"/></filter>
+ <filter id="glow"><feGaussianBlur stdDeviation="10"/></filter>
+</defs>
+<ellipse cx="400" cy="850" rx="230" ry="24" fill="#8d8173" opacity=".1"/>
+<g id="body" filter="url(#shade)">
+ <ellipse cx="400" cy="671" rx="220" ry="208" fill="url(#shell)" stroke="#d4cec6" stroke-width="2"/>
+ <ellipse cx="400" cy="482" rx="156" ry="35" fill="url(#metal)" stroke="#b1aaa3" stroke-width="2"/>
+ <ellipse cx="400" cy="473" rx="126" ry="20" fill="#8b8580"/>
+ <ellipse cx="182" cy="660" rx="86" ry="156" transform="rotate(18 182 660)" fill="url(#shell)" stroke="#d3ccc3" stroke-width="2"/>
+ <ellipse cx="618" cy="660" rx="86" ry="156" transform="rotate(-18 618 660)" fill="url(#shell)" stroke="#d3ccc3" stroke-width="2"/>
+ <ellipse cx="203" cy="743" rx="66" ry="42" transform="rotate(25 203 743)" fill="url(#metal)"/>
+ <ellipse cx="597" cy="743" rx="66" ry="42" transform="rotate(-25 597 743)" fill="url(#metal)"/>
+ <circle cx="400" cy="608" r="61" fill="url(#metal)" stroke="#c5bdb4" stroke-width="3"/>
+ <circle cx="400" cy="608" r="50" fill="#d8c7b6"/>
+ <path id="heart-halo" d="M400 648 C305 592 367 554 400 584 C433 554 495 592 400 648Z" fill="#ffc98b" opacity=".6" filter="url(#glow)"/>
+ <path id="heart" d="M400 646 C315 595 368 560 400 585 C432 560 485 595 400 646Z" fill="url(#heartlight)" stroke="#f5cbad" stroke-width="2"/>
+ <path d="M535 565 h18 v20 h20 v18 h-20 v20 h-18 v-20 h-20 v-18 h20Z" fill="#c5c0ba" stroke="#b7b1aa" stroke-width="1.5"/>
+ <ellipse cx="270" cy="805" rx="132" ry="89" transform="rotate(20 270 805)" fill="url(#shell)" stroke="#d5cec5" stroke-width="2"/>
+ <ellipse cx="530" cy="805" rx="132" ry="89" transform="rotate(-20 530 805)" fill="url(#shell)" stroke="#d5cec5" stroke-width="2"/>
+ <ellipse cx="375" cy="835" rx="43" ry="60" transform="rotate(20 375 835)" fill="url(#shell)" stroke="#d3ccc4" stroke-width="2"/>
+ <ellipse cx="425" cy="835" rx="43" ry="60" transform="rotate(-20 425 835)" fill="url(#shell)" stroke="#d3ccc4" stroke-width="2"/>
+</g>
+<g id="head" transform="rotate(0 400 290)" filter="url(#shade)">
+ <ellipse cx="145" cy="272" rx="45" ry="91" fill="url(#metal)" stroke="#c5bfb9" stroke-width="2"/>
+ <ellipse cx="655" cy="272" rx="45" ry="91" fill="url(#metal)" stroke="#c5bfb9" stroke-width="2"/>
+ <path d="M124 206 Q97 270 124 337" fill="none" stroke="#fff2da" stroke-width="7" stroke-linecap="round"/>
+ <path d="M676 206 Q703 270 676 337" fill="none" stroke="#fff2da" stroke-width="7" stroke-linecap="round"/>
+ <path d="M170 211 C195 65 312 44 400 44 C499 44 610 76 632 211 L637 365 C634 437 561 471 400 471 C240 471 167 437 163 365Z" fill="url(#shell)" stroke="#d5cec6" stroke-width="2.5"/>
+ <path d="M290 65 L300 98 Q400 75 500 98 L511 67" fill="none" stroke="#dbd5cd" stroke-width="3"/>
+ <ellipse cx="242" cy="345" rx="66" ry="48" fill="url(#blush)"/>
+ <ellipse cx="558" cy="345" rx="66" ry="48" fill="url(#blush)"/>
+ <path id="brow-left" d="M251 192 Q269 174 288 180" fill="none" stroke="#69594d" stroke-width="7" stroke-linecap="round"/>
+ <path id="brow-right" d="M512 180 Q532 175 550 195" fill="none" stroke="#69594d" stroke-width="7" stroke-linecap="round"/>
+ <g id="eye-left" transform="translate(270 267)"><ellipse rx="34" ry="40" fill="url(#eye)"/><ellipse cx="-4" cy="-7" rx="24" ry="29" fill="#574438" opacity=".12"/><circle cx="14" cy="-22" r="7" fill="#fffdf7"/></g>
+ <g id="eye-right" transform="translate(530 267)"><ellipse rx="34" ry="40" fill="url(#eye)"/><ellipse cx="-4" cy="-7" rx="24" ry="29" fill="#574438" opacity=".12"/><circle cx="14" cy="-22" r="7" fill="#fffdf7"/></g>
+ <path id="smile" d="M360 346 Q400 375 440 346" fill="none" stroke="#5c4c40" stroke-width="7" stroke-linecap="round"/>
+ <ellipse id="mouth-open" cx="400" cy="354" rx="27" ry="1" fill="#584336" opacity="0"/>
+</g>
+</svg>
