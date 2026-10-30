@@ -1,0 +1,9 @@
+{
+  "passed": false,
+  "scope": "End-to-end HTTPS stem lab test with Chromium fake camera and synthetic microphone.",
+  "source_sha256": "4eeef857d59f0a6af0e19f8746927d5daa3f291b5957bca3c8f6c8a80c715806",
+  "error": "TimeoutError: Page.select_option: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"#lfm-separator\")\n    - locator resolved to <select id=\"lfm-separator\">…</select>\n  - attempting select option action\n    2 × waiting for element to be visible and enabled\n      - element is not visible\n    - retrying select option action\n    - waiting 20ms\n    2 × waiting for element to be visible and enabled\n      - element is not visible\n    - retrying select option action\n      - waiting 100ms\n    60 × waiting for element to be visible and enabled\n       - element is not visible\n     - retrying select option action\n       - waiting 500ms\n",
+  "failure_status": "MOSS Audio 4B and LFM3 Video ready. Press Record.",
+  "page_errors": [],
+  "source_unchanged": true
+}
