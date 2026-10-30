@@ -45,8 +45,8 @@
       "bytes": 11794
     },
     "STEM_LAB.md": {
-      "sha256": "8f8a4a1ea4324bad3decb12b92d9cb117bc0b580983a9eb6f1e6a33d5dec1002",
-      "bytes": 6552
+      "sha256": "37705b35e09941a1c0da47595171e9151b6f7966c3ca337bf77ca30aaabe5de7",
+      "bytes": 7074
     },
     "TWO_STAGE_SPEECH.md": {
       "sha256": "8d3965b744b4c1d4f5d075bacd15f356dfb00ff35f6b14d9e370487c67175ebf",
@@ -949,8 +949,8 @@
       "bytes": 62038
     },
     "run_unit_checks.py": {
-      "sha256": "bf1d2abad026f7f28ba588151d3e2da2d3dcc8c5fb9af6cfc384b27aaf35a455",
-      "bytes": 2149
+      "sha256": "864a31f7bc4c0aa6838531aec6396b78eebac82098afb490cf1e979c73b76bf5",
+      "bytes": 2170
     },
     "run_voice_assistant_checks.py": {
       "sha256": "f6fe3205a5a9edcc23089e9cb2165836ee127262937110bb14460465177ec378",
@@ -1897,8 +1897,8 @@
       "bytes": 2865
     },
     "static/lfm3-lab.js": {
-      "sha256": "33b5b5888f35396636122f73c178b9ef1c6cc8a4b030b8282283e9915d6780ec",
-      "bytes": 16301
+      "sha256": "087a2914fe930402333f253be24a91b4c5daa9ac8ae9b2db4e7a7a38b124849d",
+      "bytes": 16392
     },
     "static/lfm3-music-prompt-test.json": {
       "sha256": "e08c2dae48bb6b91f81a22c7621b3324263fdd04db4064e5eea243af105369d4",
@@ -2384,6 +2384,10 @@
       "sha256": "a5ad4a54a7b629f73a10ca51d1b0ebedb525851f0b00063f9b2d945816c61f01",
       "bytes": 5504
     },
+    "static/stem-lab-browser-20261030T181616Z.json": {
+      "sha256": "d0c34d72c66dbf30e231cb4def8e484ee1734c0a368952e51030d1b1a4ffdb0c",
+      "bytes": 5352
+    },
     "static/stem-lab-report.html": {
       "sha256": "4fcfac58e13ba6ce5edab6037aef0a461ad51bae838e1f3c57dd91ca20d76f23",
       "bytes": 3500
@@ -2617,8 +2621,8 @@
       "bytes": 72938
     },
     "stem_lab.py": {
-      "sha256": "74b21ded444a6bc04e2d26b19b203bf4130be785decf833838c3a07bc45fbc08",
-      "bytes": 5354
+      "sha256": "1e8ec8744d4b2fd291aa8b166a1f1f26cd01c10c8ba23abe07d0fdc5e9185219",
+      "bytes": 5907
     },
     "stem_separation_worker.py": {
       "sha256": "c6db0e8e43c6834d8bec199874ec58b05a42f858663d757491136bff05abd5bf",
@@ -2799,6 +2803,10 @@
     "test_speaker_turns.py": {
       "sha256": "b1f28d91169dc4067b46e3a410b163e983031c8ffeca7518f9b3042fba5edc91",
       "bytes": 22519
+    },
+    "test_stem_asr_gate.py": {
+      "sha256": "5982ef8086a5ee25b04f1c45541fa8cfdb271d20ac66509a42d25a38e0a31625",
+      "bytes": 1570
     },
     "test_stop_commands.py": {
       "sha256": "ebadc17f8a73278c404f635e090f0adb729b7f0e84870fdd43419be30de0e2f7",
