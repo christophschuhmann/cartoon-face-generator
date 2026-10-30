@@ -1,0 +1,45 @@
+{
+  "model": "convaiinnovations/laya-multilingual",
+  "revision": "e4e9ddf21a7b1903b7acffd8814ad4307bf63a67",
+  "actual_laya_requests": 6,
+  "cases": [
+    {
+      "input": "Stopp!",
+      "expected": "stop_reply",
+      "choice": "stop_reply",
+      "ms": 277.57
+    },
+    {
+      "input": "Hör bitte auf.",
+      "expected": "stop_reply",
+      "choice": "stop_reply",
+      "ms": 276.33
+    },
+    {
+      "input": "Warte bitte, ich möchte etwas fragen.",
+      "expected": "stop_reply",
+      "choice": "stop_reply",
+      "ms": 285.12
+    },
+    {
+      "input": "Bitte hör nicht auf.",
+      "expected": "listen",
+      "choice": "listen",
+      "ms": 279.92
+    },
+    {
+      "input": "Was bedeutet das Wort Stopp?",
+      "expected": "listen",
+      "choice": "listen",
+      "ms": 285.23
+    },
+    {
+      "input": "Es geht um Stop Motion Filme.",
+      "expected": "listen",
+      "choice": "listen",
+      "ms": 285.51
+    }
+  ],
+  "passed": true,
+  "scope": "Text-to-decision service and route only; no acoustic identity or playback claim."
+}
