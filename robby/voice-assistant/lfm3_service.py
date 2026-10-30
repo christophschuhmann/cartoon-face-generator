@@ -52,7 +52,7 @@ async def analyze(request):
  if lock.locked():raise web.HTTPConflict(text='Another analysis is running; please retry')
  async with lock:
   with tempfile.TemporaryDirectory(prefix='lfm3-',dir=ROOT/'.runtime') as tmp:
-   tmp=Path(tmp);upload=tmp/'input.webm';size=0;window=3.;stride=1.;capability=None;recent=[];use_context=False
+   tmp=Path(tmp);upload=tmp/'input.webm';size=0;window=3.;stride=1.;capability=None;recent=[];use_context=False;separator='off';two_speakers=False
    try:
     reader=await request.multipart()
     async for part in reader:
@@ -69,6 +69,10 @@ async def analyze(request):
       if len(raw)>20:raise ValueError('Invalid window setting')
       if part.name=='window':window=float(raw)
       else:stride=float(raw)
+     elif part.name=='separator':
+      separator=await part.text()
+      if separator not in ('off','tuss','bandit'):raise ValueError('Invalid separator')
+     elif part.name=='two_speakers':two_speakers=(await part.text())=='true'
      elif part.name in ('context_enabled','memory_capability','recent_context'):
       raw=await part.read_chunk(8192)
       if await part.read_chunk(1):raise ValueError('Context field is too large')
@@ -123,13 +127,18 @@ async def analyze(request):
      out=tmp/'playback.mp4'
      await cmd('ffmpeg','-hide_banner','-loglevel','error','-y','-i',str(normalized),'-vf','scale=320:240:force_original_aspect_ratio=decrease','-c:v','libx264','-preset','ultrafast','-pix_fmt','yuv420p','-c:a','aac','-max_muxing_queue_size','4096','-movflags','+faststart',str(out))
      return base64.b64encode(out.read_bytes()).decode('ascii')
-    tasks=[asyncio.create_task(coro) for coro in (process('audio'),process('video'),playback())]
-    try:audio,video,playable=await asyncio.gather(*tasks)
+    async def stems():
+     if separator=='off':return {'status':'disabled','windows':[]}
+     from stem_lab import analyze as analyze_stems
+     try:return await analyze_stems(normalized,tmp,starts,min(window,duration),separator,two_speakers,cmd)
+     except Exception as e:return {'status':'error','error':type(e).__name__+': '+str(e)[:180],'windows':[]}
+    tasks=[asyncio.create_task(coro) for coro in (process('audio'),process('video'),playback(),stems())]
+    try:audio,video,playable,stem_results=await asyncio.gather(*tasks)
     except BaseException:
      for task in tasks:task.cancel()
      await asyncio.gather(*tasks,return_exceptions=True)
      raise
-    return web.json_response({'duration_s':round(duration,3),'window_s':window,'stride_s':stride,'wall_ms':round((time.perf_counter()-started)*1000,1),'playback_mp4_base64':playable,'relevance_context':context_meta,
+    return web.json_response({'duration_s':round(duration,3),'window_s':window,'stride_s':stride,'wall_ms':round((time.perf_counter()-started)*1000,1),'playback_mp4_base64':playable,'relevance_context':context_meta,'stem_analysis':stem_results,
       'segments':[{'start_s':s,'end_s':round(min(s+window,duration),3),'audio':a,'video':v} for s,a,v in zip(starts,audio,video)],
       'notes':['Models may hallucinate. Person IDs are approximate, not face recognition.','Visual event times are model estimates, not verified frame timestamps; samples are about 5 fps.','Previous two descriptions are supplied separately to each model; results may hallucinate.','Token/s includes prefill and decoding. Media is deleted when the request finishes.']})
    except web.HTTPException:raise

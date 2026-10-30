@@ -1,0 +1,34 @@
+{
+  "scope": "One synthetic English 3 s overlap mixture, espeak voices plus generated music and impulses; not representative of real rooms or trained model accuracy.",
+  "scores": {
+    "speech": {
+      "mixture_sdr_db": 1.77,
+      "estimate_sdr_db": 6.15
+    },
+    "music": {
+      "mixture_sdr_db": -5.03,
+      "estimate_sdr_db": 12.21
+    },
+    "effects": {
+      "mixture_sdr_db": -7.15,
+      "estimate_sdr_db": 24.63
+    }
+  },
+  "timing": {
+    "model": "TUSS Medium",
+    "device": "CPU",
+    "load_ms": 302.8,
+    "separation_ms": 4033.1,
+    "input_s": 3.0,
+    "realtime_factor": 1.344,
+    "speech_split_ms": 2652.9,
+    "rms": {
+      "speech": 0.018672628328204155,
+      "music": 0.016212135553359985,
+      "effects": 0.013177763670682907,
+      "speaker_1": 0.01751335710287094,
+      "speaker_2": 0.0030190967954695225
+    }
+  },
+  "wall_s": 8.61
+}
