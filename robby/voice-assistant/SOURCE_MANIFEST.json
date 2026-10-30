@@ -45,8 +45,8 @@
       "bytes": 11794
     },
     "STEM_LAB.md": {
-      "sha256": "493b358ec29b6ab7cd065f369a4594523c04e6eb98c67216f2b341bc42eacf63",
-      "bytes": 5102
+      "sha256": "5393c78c9a35b1bef2b4a0a2dc90b0cafecd1e981b88f96ad578d3db76efc5f2",
+      "bytes": 6370
     },
     "TWO_STAGE_SPEECH.md": {
       "sha256": "8d3965b744b4c1d4f5d075bacd15f356dfb00ff35f6b14d9e370487c67175ebf",
@@ -197,12 +197,16 @@
       "bytes": 3862
     },
     "benchmark_stem_lab.py": {
-      "sha256": "9be69cdbc65f19447878610ed31b80e4eb7a4ad0dc7456ac24db0c64b744f072",
-      "bytes": 3087
+      "sha256": "5ac109e1f7895eee129c4f9b17ff1f2bcccd09af900fb062d3c657e2aa939cc8",
+      "bytes": 3112
     },
     "benchmark_tts_precision.py": {
       "sha256": "3d30758a0c5194858102a65ca4a629ec24b71b9386b317fed525fbafc069b640",
       "bytes": 11634
+    },
+    "benchmark_tuss_gpu.py": {
+      "sha256": "151565a6f0f8c9169a230b37349d4e417ce3ce9579c77edfa2af1b0a93c60b3e",
+      "bytes": 2182
     },
     "benchmark_two_stage.py": {
       "sha256": "bfd4e3400c12b6abf9e9a2513995155f3aef1d4cac1a31daaf797ac9f524521d",
@@ -401,8 +405,8 @@
       "bytes": 7179
     },
     "browser_stem_lab_check.py": {
-      "sha256": "89945d91e603dd919f7c138d37dad6a158645b1ad520580cf964e5e534dbb0cb",
-      "bytes": 4856
+      "sha256": "1675c858766683d12800322ef962f04439764139a5bac562baa14765eb418628",
+      "bytes": 4892
     },
     "browser_stop_controls.py": {
       "sha256": "fde7623b2e7c142c6323b988b0d72c3ca0d6d01762f1ae88f870310941c65fb9",
@@ -1893,8 +1897,8 @@
       "bytes": 2865
     },
     "static/lfm3-lab.js": {
-      "sha256": "14c6f4711af22109bce28d9aada3bc375ae2217fd9b31a058c2c6ccd77329d35",
-      "bytes": 16072
+      "sha256": "3e9db034eb3f22ed72b1ac54e4849bd6361a11dfdce7435467eb7e24e5872e6b",
+      "bytes": 16090
     },
     "static/lfm3-music-prompt-test.json": {
       "sha256": "e08c2dae48bb6b91f81a22c7621b3324263fdd04db4064e5eea243af105369d4",
@@ -2364,9 +2368,13 @@
       "sha256": "ec629a416f93564ad719dbfa17f8ccdc46b49fb2a3e3424c1f338848008cb250",
       "bytes": 4985
     },
+    "static/stem-lab-browser-20261030T175601Z.json": {
+      "sha256": "bdf3c3027371f9e1b938a4779277c38806e19dc7c610622c88ed2c96909cebae",
+      "bytes": 5275
+    },
     "static/stem-lab-report.html": {
-      "sha256": "a3a3569e9349cb43423dcd754c40648e900a92f3759bfef43cbe77a446fa8aaf",
-      "bytes": 2826
+      "sha256": "8844308675707133d1eda746cfac0d0428fa003232bee01266d8d4fcb0fbd017",
+      "bytes": 3202
     },
     "static/stem-lab-synthetic.json": {
       "sha256": "764bd064287843f1653a9912cf019a37fd420dc7cabb8b8d754723ca083cca23",
@@ -2601,8 +2609,8 @@
       "bytes": 5354
     },
     "stem_separation_worker.py": {
-      "sha256": "966574460408ec010c0a899e0cb0105d79e3b6e3f88139ed7493fc847b9dc068",
-      "bytes": 3904
+      "sha256": "c6db0e8e43c6834d8bec199874ec58b05a42f858663d757491136bff05abd5bf",
+      "bytes": 4115
     },
     "stop_commands.py": {
       "sha256": "aee933bf1dde6c033a2dc58ad3fc9c554f2d9d7d346c89b3e69d1f1105ae062e",

@@ -25,7 +25,7 @@ def main():
         for start in (int(.9*48000),int(2.2*48000)):
             length=5000;effects[start:start+length]+=rng.standard_normal(length).astype('float32')*np.exp(-np.arange(length)/800)*.18
         mixture=np.clip(speech+music+effects,-.99,.99);source=t/'mix.wav';sf.write(source,mixture,48000,subtype='FLOAT')
-        env={**os.environ,'PYTHONPATH':':'.join((str(ROOT/'vendor/tuss'),'/mnt/nvme/moss-15-v2/tuss-env',str(ROOT/'vendor/bandit-infer/src')))}
+        env={**os.environ,'ROBO_TUSS_DEVICE':'cpu','PYTHONPATH':':'.join((str(ROOT/'vendor/tuss'),'/mnt/nvme/moss-15-v2/tuss-env',str(ROOT/'vendor/bandit-infer/src')))}
         t0=time.perf_counter();p=subprocess.Popen([os.sys.executable,str(ROOT/'stem_separation_worker.py')],stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True,env=env)
         try:
             assert json.loads(p.stdout.readline())['ready'];p.stdin.write(json.dumps({'model':'tuss','path':str(source),'outdir':str(t),'two_speakers':True})+'\n');p.stdin.flush()
