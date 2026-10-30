@@ -131,9 +131,31 @@ async def analyze(request):
      if separator=='off':return {'status':'disabled','windows':[]}
      from stem_lab import analyze as analyze_stems
      try:return await analyze_stems(normalized,tmp,starts,min(window,duration),separator,two_speakers,cmd)
-     except Exception as e:return {'status':'error','error':type(e).__name__+': '+str(e)[:180],'windows':[]}
-    tasks=[asyncio.create_task(coro) for coro in (process('audio'),process('video'),playback(),stems())]
-    try:audio,video,playable,stem_results=await asyncio.gather(*tasks)
+     except Exception as e:
+      reason='GPU memory unavailable; try again when fewer models are active.' if 'out of memory' in str(e).lower() else type(e).__name__+': '+str(e)[:180]
+      return {'status':'error','error':reason,'windows':[]}
+    # With shared GPUs, a second CUDA context plus concurrent video decoding can
+    # exhaust VRAM. Finish the original analyses first, temporarily release the
+    # video worker for GPU TUSS, then restore it before completing the request.
+    serial_gpu_tuss=separator=='tuss' and os.getenv('ROBO_TUSS_DEVICE','cuda:0')==f"cuda:{int(os.getenv('LFM3_VIDEO_GPU','0'))}"
+    coros=(process('audio'),process('video'),playback()) if serial_gpu_tuss else (process('audio'),process('video'),playback(),stems())
+    tasks=[asyncio.create_task(coro) for coro in coros]
+    try:
+     values=await asyncio.gather(*tasks)
+     if serial_gpu_tuss:
+      audio,video,playable=values;video_worker=workers.pop('video');status['ready']=False
+      try:
+       if video_worker.returncode is None:video_worker.terminate()
+       try:await asyncio.wait_for(video_worker.wait(),10)
+       except asyncio.TimeoutError:
+        video_worker.kill();await video_worker.wait()
+       stem_results=await stems()
+      finally:
+       try:
+        info=await start_worker('video',int(os.getenv('LFM3_VIDEO_GPU','0')))
+        status.update(ready=True,error=None,models=[status['models'][0],info])
+       except Exception as exc:status.update(ready=False,error='Video restart failed: '+type(exc).__name__)
+     else:audio,video,playable,stem_results=values
     except BaseException:
      for task in tasks:task.cancel()
      await asyncio.gather(*tasks,return_exceptions=True)
