@@ -13,7 +13,7 @@ async def main(url):
   try:
    response=await page.goto(url.rstrip('/')+'/desk-robot/');assert response.status==200
    await page.wait_for_selector('#lfm-open',state='attached',timeout=45000);await page.locator('#lfm-open').evaluate('e=>e.closest("details").open=true');await page.click('#lfm-open')
-   await page.locator('#lfm-separator').evaluate('e=>e.closest("details").open=true');await page.select_option('#lfm-separator','tuss');await page.check('#lfm-speakers');assert await page.locator('#lfm-context').is_checked()
+   assert await page.locator('#lfm-separator').is_visible();assert 'FastDialogueSidon · not yet available' in await page.locator('.lfm-dialog').inner_text();await page.select_option('#lfm-separator','tuss');await page.check('#lfm-speakers');assert await page.locator('#lfm-context').is_checked()
    assert await page.locator('#lfm-win').input_value()=='3';assert await page.locator('#lfm-stride').input_value()=='1'
    await page.locator('#lfm-win').evaluate("e=>{e.value='3';e.dispatchEvent(new Event('input'))}")
    await page.locator('#lfm-stride').evaluate("e=>{e.value='3';e.dispatchEvent(new Event('input'))}")

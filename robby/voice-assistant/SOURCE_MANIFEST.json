@@ -45,8 +45,8 @@
       "bytes": 11794
     },
     "STEM_LAB.md": {
-      "sha256": "5393c78c9a35b1bef2b4a0a2dc90b0cafecd1e981b88f96ad578d3db76efc5f2",
-      "bytes": 6370
+      "sha256": "8f8a4a1ea4324bad3decb12b92d9cb117bc0b580983a9eb6f1e6a33d5dec1002",
+      "bytes": 6552
     },
     "TWO_STAGE_SPEECH.md": {
       "sha256": "8d3965b744b4c1d4f5d075bacd15f356dfb00ff35f6b14d9e370487c67175ebf",
@@ -405,8 +405,8 @@
       "bytes": 7179
     },
     "browser_stem_lab_check.py": {
-      "sha256": "1675c858766683d12800322ef962f04439764139a5bac562baa14765eb418628",
-      "bytes": 4892
+      "sha256": "5f75b008a64ed49d06b5d2ed6ddd63a4762b545e181fd48213ef73bcf31ea555",
+      "bytes": 4964
     },
     "browser_stop_controls.py": {
       "sha256": "fde7623b2e7c142c6323b988b0d72c3ca0d6d01762f1ae88f870310941c65fb9",
@@ -785,8 +785,8 @@
       "bytes": 5567
     },
     "lfm3_service.py": {
-      "sha256": "a9b6ad311515f79c7f520290e9223dc575d8abd1bf873ae7cba326ad5c797e98",
-      "bytes": 10479
+      "sha256": "64b227f67e7877d1915b498b19e6d844cb1df38dc647a7c7e35928fd2ee873c9",
+      "bytes": 11768
     },
     "lfm3_three_model_check.py": {
       "sha256": "0fb37ed747c901000756e8d42183dd8e2a3f1f7ad796441ea75cdd178e7dc89b",
@@ -1897,8 +1897,8 @@
       "bytes": 2865
     },
     "static/lfm3-lab.js": {
-      "sha256": "3e9db034eb3f22ed72b1ac54e4849bd6361a11dfdce7435467eb7e24e5872e6b",
-      "bytes": 16090
+      "sha256": "33b5b5888f35396636122f73c178b9ef1c6cc8a4b030b8282283e9915d6780ec",
+      "bytes": 16301
     },
     "static/lfm3-music-prompt-test.json": {
       "sha256": "e08c2dae48bb6b91f81a22c7621b3324263fdd04db4064e5eea243af105369d4",
@@ -2372,9 +2372,21 @@
       "sha256": "bdf3c3027371f9e1b938a4779277c38806e19dc7c610622c88ed2c96909cebae",
       "bytes": 5275
     },
+    "static/stem-lab-browser-20261030T175936Z.json": {
+      "sha256": "c89706dcd96e61b64ed46328ddbb7bb87a911d739f4e9f2adc0b02d1d1cf6c95",
+      "bytes": 4000
+    },
+    "static/stem-lab-browser-20261030T180129Z.json": {
+      "sha256": "541acbb0e138d3ba020631a4d73ffdf5c4fc7284ebc9152b17fc3044215c6380",
+      "bytes": 5310
+    },
+    "static/stem-lab-browser-20261030T180236Z.json": {
+      "sha256": "a5ad4a54a7b629f73a10ca51d1b0ebedb525851f0b00063f9b2d945816c61f01",
+      "bytes": 5504
+    },
     "static/stem-lab-report.html": {
-      "sha256": "8844308675707133d1eda746cfac0d0428fa003232bee01266d8d4fcb0fbd017",
-      "bytes": 3202
+      "sha256": "4fcfac58e13ba6ce5edab6037aef0a461ad51bae838e1f3c57dd91ca20d76f23",
+      "bytes": 3500
     },
     "static/stem-lab-synthetic.json": {
       "sha256": "764bd064287843f1653a9912cf019a37fd420dc7cabb8b8d754723ca083cca23",
