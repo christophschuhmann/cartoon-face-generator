@@ -1,0 +1,11 @@
+{
+  "passed": true,
+  "scope": "End-to-end HTTPS lab test with Chromium fake camera and synthetic microphone.",
+  "source_sha256": "dc4bdc47c030a02b6c6f9c2dc27bcdfe6373c2ee1770f137acba1e51b0ccde7d",
+  "status": "1 windows analyzed in 4.4 s. MOSS audio and LFM3 video were processed in parallel. Context: 305 token-bound, no saved memory retrieved.",
+  "windows": 1,
+  "ui_fields": "0.0–3.0 s\nMOSS Audio 4B · foreground, background & music\nObservations · relevance to the conversation\naudio · relevance unknown\nA low, steady electronic hum fills the space, smooth and unchanging, like a quiet machine running in the background. It’s not loud, just a soft presence, and there’s no echo or reverb, making the sound feel close and contained. The tone is simple, with no melody or rhythm, and it lasts for about three seconds. No voices, no music, no movement—just this one sound, clear and constant, with no shifts or interruptions.\nProcessing 3757 ms · generation 3735 ms · 95 tokens · 25.44 tokens/s (including prefill) · model calls 1\nLFM3 Video · objects, people & movement\nforeground\nA bright green pie chart with a wedge missing rotates clockwise across frames.\nbackground\nSolid dark green screen with light green digital timer text at top center.\nObservations · relevance to the conversation\nforeground · 1 · medium\nPie chart starts with a large light green segment covering most of the circle, wedge removed on right side.\nforeground · 1 · medium\nPie chart continues rotating clockwise, wedge shrinking until nearly complete by final frame.\nbackground · relevance unknown\nSolid dark green screen with light green digital timer text at top center.\nVisible people · tentative labels\nNone reported.\nObserved timeline · approximate\nTime uncertain · observation · 1 · medium\nTimer counts up from 0:00:00:150 to 0:00:02:950, indicating elapsed time during rotation.\ntimeline_status\nModel estimates, not verified frame timestamps; visual sampling is about 5 fps.\nProcessing 4329 ms · generation 4294 ms · 207 tokens · 48.2 tokens/s (including prefill) · model calls 1 · 5 fps sampled",
+  "playback_time": 0.007692,
+  "page_errors": [],
+  "source_unchanged": true
+}
