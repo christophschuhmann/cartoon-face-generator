@@ -69,3 +69,8 @@ camera is not proof of a real-world facial-tracking accuracy measurement.
 The new SVG, JavaScript and HTML are original project contributions under the
 repository's [MIT license](../LICENSE). No private microphone recordings,
 speaker voiceprints, access tokens, TTS weights or face-model weights are included.
+# Robby Voice Assistant
+
+The full conversational Robby application, 3D desk robot, model configuration,
+test protocols and reproducible checks live in [voice-assistant/](voice-assistant/README.md).
+The small standalone SVG avatar described above remains available independently.

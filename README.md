@@ -18,6 +18,7 @@ Die aktuelle Windows-Demo **2.3.2** überträgt Webcam-Mimik auf das Rig und ani
 | Ausdrücke erzeugen, variieren oder mischen | [CLI-Beispiele](docs/cli.md), [40 Emotionen](docs/emotions.md), [60 soziale Ausdrücke](docs/social_expressions.md) |
 | mit meiner Webcam den Avatar steuern | [Laptop-Anleitung](webcam_mapper/README.md) |
 | den neuen freundlichen Robby-Roboter im Browser animieren | [Robby SVG und lokale Webcam-Demo](robby/README.md) |
+| mit Robby sprechen und die Sprachassistenten-Demo einrichten | [Robby Voice Assistant: Einrichtung, Modelle und Tests](robby/voice-assistant/README.md) |
 | eine MP3-/WAV-Datei mit passender Mimik abspielen | [Audio-Bühne und Einrichtung](webcam_mapper/README.md#audio-bühne) |
 | eigene Trainingsdaten erzeugen | [Datensatz und Augmentationen](docs/dataset.md) |
 | das Keypoint-Modell benutzen oder trainieren | [Training und Inferenz](training/README.md), [gemessene Ergebnisse](docs/detector_results.md) |
