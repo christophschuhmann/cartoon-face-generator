@@ -6,6 +6,8 @@
 
 The canonical repository for this conversational demo is [cartoon-face-generator](https://github.com/christophschuhmann/cartoon-face-generator), under `robby/voice-assistant/`. The existing standalone SVG remains in `robby/`. Earlier LAION-AI/Humaneness-Voice links below are historical reports or release assets and have not been moved.
 
+**Inference speed (October 31):** On an NVIDIA Jetson Thor the TTS now starts speaking 0.18 s after receiving a sentence (it was 2.3–2.9 s), and a request reaches Robby's first sound in a median of 0.66 s (it was 4.2 s). The changes are BF16 merged weights, CUDA graphs with kernel fusion, codec CUDA graphs, growing chunks, a reference-voice cache fix and a stable LLM prompt prefix. [What we changed, why it helps and how to reproduce it](INFERENCE_OPTIMIZATIONS.md).
+
 **Experimental audio/video lab:** Record an opt-in short clip and inspect overlapping windows with pinned Liquid LFM3 Audio and LFM3 Vision models, timing and segment playback. It runs separately from the conversation. [Setup, privacy, measurements and limitations](LFM3_LAB.md).
 
 **Current conversation fix:** The streaming and tool directors no longer forcibly append a name question to a provisional voice track. A new track is not proof of a new person. The system prompts instruct Robby to use relevant remembered information, avoid asking what is already known, and avoid guessing an uncertain acoustic identity. Test with `python check_name_continuity.py` and `python run_unit_checks.py`.
