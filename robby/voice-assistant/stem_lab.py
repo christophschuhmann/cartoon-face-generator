@@ -24,7 +24,8 @@ async def transcribe_speech(client,sound):
         result=response.json();result['request_ms']=round((time.perf_counter()-begin)*1000,1);return result
     except (httpx.HTTPError,ValueError) as e:return {'status':'unavailable','reason':str(e)[:120]}
 
-async def analyze(normalized,tmp,starts,window,model,two_speakers,cmd):
+async def analyze(normalized,tmp,starts,window,model,two_speakers,cmd,options=None):
+    options=options or {}
     env={**os.environ,'PYTHONPATH':':'.join((str(ROOT/'vendor/tuss'),'/mnt/nvme/moss-15-v2/tuss-env',str(ROOT/'vendor/bandit-infer/src'))),'PYTHONUNBUFFERED':'1'}
     worker=await asyncio.create_subprocess_exec(sys.executable,str(ROOT/'stem_separation_worker.py'),stdin=asyncio.subprocess.PIPE,stdout=asyncio.subprocess.PIPE,stderr=None,env=env,limit=1024*1024)
     started=time.perf_counter();results=[]
@@ -41,12 +42,21 @@ async def analyze(normalized,tmp,starts,window,model,two_speakers,cmd):
                 if not line:raise RuntimeError('Separator worker stopped')
                 item=json.loads(line)
                 if not item.get('ok'):raise RuntimeError(item.get('error','Separator failed'))
-                item=item['result'];tracks=[]
-                for label,path in item.pop('paths').items():
+                item=item['result'];tracks=[];paths=item.pop('paths')
+                # Sum the separated estimates, rather than captioning the full
+                # mixture again. Both stems share sample rate and time origin.
+                music,music_sr=sf.read(paths['music'],dtype='float32');effects,effects_sr=sf.read(paths['effects'],dtype='float32')
+                if music_sr!=effects_sr:raise ValueError('Stem sample rates differ')
+                length=min(len(music),len(effects));combined=music[:length]+effects[:length]
+                clipped=int(np.count_nonzero(np.abs(combined)>1));combined=np.clip(combined,-1,1)
+                merged=folder/'music_effects.wav';sf.write(merged,combined,music_sr,subtype='PCM_16');paths['music_effects']=str(merged)
+                item['rms']['music_effects']=float(np.sqrt(np.mean(combined.astype(np.float64)**2))) if length else 0.
+                item['merged_clipped_samples']=clipped
+                for label,path in paths.items():
                     sound,_=sf.read(path,dtype='float32');level=item['rms'].get(label,0.)
                     mp3=folder/(label+'.mp3');await cmd('ffmpeg','-hide_banner','-loglevel','error','-y','-i',path,'-ac','1','-ar','16000','-b:a','64k',str(mp3))
                     row={'kind':label,'rms':round(level,6),'audio_mpeg_base64':base64.b64encode(mp3.read_bytes()).decode('ascii')}
-                    if label in ('speech','music','effects','speaker_1','speaker_2'):
+                    if options.get('sound_caption',True) and label in ('speech','music','effects','music_effects','speaker_1','speaker_2'):
                         if level<0.001:row['caption']={'status':'skipped','reason':'Very quiet estimated stem; not proof that this source is absent.'}
                         else:
                             pcm=resample_poly(sound,1,3).astype('<f4');begin=time.perf_counter()
@@ -54,13 +64,13 @@ async def analyze(normalized,tmp,starts,window,model,two_speakers,cmd):
                                 response=await client.post('http://127.0.0.1:8803/caption',content=pcm.tobytes());response.raise_for_status();row['caption']=response.json()
                                 row['caption']['request_ms']=round((time.perf_counter()-begin)*1000,1)
                             except (httpx.HTTPError,ValueError):row['caption']={'status':'unavailable','reason':'Shared captioner busy or unavailable.'}
-                    if label in ('speech','speaker_1','speaker_2') and level>=0.001:
+                    if options.get('ears',True) and label in ('speech','speaker_1','speaker_2') and level>=0.001:
                         begin=time.perf_counter()
                         try:
                             response=await client.post('http://127.0.0.1:8802/caption?impression=1',content=resample_poly(sound,1,3).astype('<f4').tobytes());response.raise_for_status()
                             row['voice']=response.json();row['voice']['request_ms']=round((time.perf_counter()-begin)*1000,1)
                         except (httpx.HTTPError,ValueError):row['voice']={'status':'unavailable','reason':'Shared Humaneness Ears worker busy or unavailable.'}
-                    if label in ('speech','speaker_1','speaker_2'):
+                    if options.get('asr',True) and label in ('speech','speaker_1','speaker_2'):
                         row['asr']=await transcribe_speech(client,sound)
                     tracks.append(row)
                 item['tracks']=tracks;item['start_s']=start;item['end_s']=round(start+item['input_s'],3)

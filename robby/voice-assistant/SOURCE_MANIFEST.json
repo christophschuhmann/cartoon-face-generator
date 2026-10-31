@@ -9,8 +9,8 @@
       "bytes": 12569
     },
     "LFM3_LAB.md": {
-      "sha256": "5069263969e564b8a7c76c9b29694f1cc8479c4fbd54f6be8bf28b204a0cd70d",
-      "bytes": 21708
+      "sha256": "cf5bdb66c0247da7ed6841f94a502dbe12f5c3828981a07bc5a318dabf4d84e8",
+      "bytes": 25894
     },
     "LICENSE": {
       "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
@@ -33,8 +33,8 @@
       "bytes": 8222
     },
     "README.md": {
-      "sha256": "9f84b6255c154f69e534780c984e3723820a181e3a578869a8e559ba7d38a3a7",
-      "bytes": 182675
+      "sha256": "9d9c1139699ae9419de2fd2be25b6bd8dc3d5148ed7a50a2c49eaed6bb6dc477",
+      "bytes": 182670
     },
     "RESTORE_BEFORE_PROACTIVE.md": {
       "sha256": "cce1cc637c17540da5b5847f79158a75f013a6fde6bbf67c34677aa334b29507",
@@ -360,6 +360,10 @@
       "sha256": "0d7dea515cc784271bd4b1098a20bdcca4c18e8c18755bf58d1d38b2836cad2b",
       "bytes": 8174
     },
+    "browser_omni_options_check.py": {
+      "sha256": "252ea86a955694a9279128a1f5d97f15d61507c4d1575ef18414cd9572600cba",
+      "bytes": 4575
+    },
     "browser_open_speakers_checks.py": {
       "sha256": "7cd32a2d5be581a8090a9b579965a32bf188087b304b2e734f815d563d73e7e4",
       "bytes": 4333
@@ -384,6 +388,10 @@
       "sha256": "90f997d16a3d6e1b5480942134f3a82cd8353a0110182946819e458550d69511",
       "bytes": 6632
     },
+    "browser_salmon_lab_check.py": {
+      "sha256": "b9e8173db4a02fc8ca5b46b95b829ccf4312bfc7d613d7a6fc3fe7adfd1b3b96",
+      "bytes": 4490
+    },
     "browser_social_curiosity.py": {
       "sha256": "34a9ae65d33e032afba39074b667599ee92ed72f9f12e05aec9015acdc7f5976",
       "bytes": 3057
@@ -405,8 +413,8 @@
       "bytes": 7179
     },
     "browser_stem_lab_check.py": {
-      "sha256": "5f75b008a64ed49d06b5d2ed6ddd63a4762b545e181fd48213ef73bcf31ea555",
-      "bytes": 4964
+      "sha256": "100e9c67beb88549df0f7b7d53e02a7ca77e6a64962507d75d017d76fcc0c661",
+      "bytes": 5020
     },
     "browser_stop_controls.py": {
       "sha256": "fde7623b2e7c142c6323b988b0d72c3ca0d6d01762f1ae88f870310941c65fb9",
@@ -665,8 +673,8 @@
       "bytes": 1479
     },
     "export_source.py": {
-      "sha256": "d0d63429cb1fafe0ecc5dcf873607930534d0a97d3558ce8142952124ebe9afa",
-      "bytes": 7236
+      "sha256": "e1ef86b0b52c7870a35235aa7533719c7103bee1f5e17ab6af9532eca6a2e827",
+      "bytes": 7295
     },
     "expression_checks.py": {
       "sha256": "3e5408a367212f56ce798c44b203bf8d9c2293644b10bd41eafcedd69be7dfb5",
@@ -785,8 +793,8 @@
       "bytes": 5567
     },
     "lfm3_service.py": {
-      "sha256": "64b227f67e7877d1915b498b19e6d844cb1df38dc647a7c7e35928fd2ee873c9",
-      "bytes": 11768
+      "sha256": "ba61f29bcccee839ebf6c7e97dddaa0127556abfda1da3e89296532a35544499",
+      "bytes": 13349
     },
     "lfm3_three_model_check.py": {
       "sha256": "0fb37ed747c901000756e8d42183dd8e2a3f1f7ad796441ea75cdd178e7dc89b",
@@ -831,6 +839,14 @@
     "memory_session.py": {
       "sha256": "760cfec01bb9ca894dea245d21a5a73a38c35aa036ee5eaf50ec7c3e96816caf",
       "bytes": 10843
+    },
+    "minicpm-linux-fnocache.patch": {
+      "sha256": "8e7e3be70923f79bb00dc8c0035a81f10781f2deb0af6cf0f24577f097dc9d7f",
+      "bytes": 407
+    },
+    "minicpm_av_lab.py": {
+      "sha256": "86fc633f9dd9e68ac5f1dc488e13a5e3c67916f5c843a1841bd3362f08ede1d6",
+      "bytes": 6546
     },
     "moss_audio_worker.py": {
       "sha256": "405540888f5e2544e3c37d4b607c9156c40a411fe8e7ce49a46e601c22685c01",
@@ -955,6 +971,14 @@
     "run_voice_assistant_checks.py": {
       "sha256": "f6fe3205a5a9edcc23089e9cb2165836ee127262937110bb14460465177ec378",
       "bytes": 13655
+    },
+    "salmon_av_lab.py": {
+      "sha256": "1376d488ded33e63aa636e70a4a03275344f9f5943d7258ad8df9db15cfad0b9",
+      "bytes": 2884
+    },
+    "salmon_av_worker.py": {
+      "sha256": "713f96d924ea81090bec2b2ef0c1fc214200be1406f839c0531ad809a313e7f2",
+      "bytes": 4330
     },
     "scan_staged_release.py": {
       "sha256": "b7053b920bfa075d9759d9d4d829e19596f8aea2152e2a24765bd594ec624c5b",
@@ -1897,8 +1921,8 @@
       "bytes": 2865
     },
     "static/lfm3-lab.js": {
-      "sha256": "087a2914fe930402333f253be24a91b4c5daa9ac8ae9b2db4e7a7a38b124849d",
-      "bytes": 16392
+      "sha256": "54003a6613417424524295f940ef0b4841d226a658fb76c5535c4a69a1e51fd9",
+      "bytes": 18522
     },
     "static/lfm3-music-prompt-test.json": {
       "sha256": "e08c2dae48bb6b91f81a22c7621b3324263fdd04db4064e5eea243af105369d4",
@@ -2039,6 +2063,14 @@
     "static/name-continuity-20261028T102152Z.json": {
       "sha256": "3b43ff843be3c0f670dd620a14e918621da9dcd75c791d8468c9ec57bac2111c",
       "bytes": 2057
+    },
+    "static/omni-lab-browser-20261031T082210Z.json": {
+      "sha256": "7d840a36dd71db3ddd1269507262a4a0676cfc467bfcb6c19fc91fd1a32f71db",
+      "bytes": 3136
+    },
+    "static/omni-lab-browser-20261031T082407Z.json": {
+      "sha256": "eea5ef80f08a86d2c94e22e2718a254fd351fdd24931c4b49690c4cfacd85f17",
+      "bytes": 2723
     },
     "static/openrouter-browser.json": {
       "sha256": "fcf8e68e384d88bc77c2203624b2d9ae68ff58c373b1b2ade27fa7f97ead6bd5",
@@ -2256,6 +2288,10 @@
       "sha256": "985fba5851387fa3df4dc3f3576be4a86e599fff23b99c11206024e4833ff05d",
       "bytes": 5365
     },
+    "static/salmon-lab-browser-20261031T081450Z.json": {
+      "sha256": "a83cd69efa059302aa0a74c810527890aa544fcd24270dbfeb0285fb40c424b2",
+      "bytes": 1787
+    },
     "static/social-browser-20261027T152951Z.json": {
       "sha256": "d35fcbeac39d1b698dad8e1f369137386d11383eb87fdabef7b7b10416574ac2",
       "bytes": 51062
@@ -2387,6 +2423,14 @@
     "static/stem-lab-browser-20261030T181616Z.json": {
       "sha256": "d0c34d72c66dbf30e231cb4def8e484ee1734c0a368952e51030d1b1a4ffdb0c",
       "bytes": 5352
+    },
+    "static/stem-lab-browser-20261031T081740Z.json": {
+      "sha256": "e29dbad73c08ecc3de52de9e8c1b17fa369330c164497a9c5b9d96591b32f73b",
+      "bytes": 5546
+    },
+    "static/stem-lab-browser-20261031T082435Z.json": {
+      "sha256": "3f3f38e6bcf30f80cc990bd44c35f162dd995da1defb66f6f898c38216934c13",
+      "bytes": 5196
     },
     "static/stem-lab-report.html": {
       "sha256": "4fcfac58e13ba6ce5edab6037aef0a461ad51bae838e1f3c57dd91ca20d76f23",
@@ -2621,8 +2665,8 @@
       "bytes": 72938
     },
     "stem_lab.py": {
-      "sha256": "1e8ec8744d4b2fd291aa8b166a1f1f26cd01c10c8ba23abe07d0fdc5e9185219",
-      "bytes": 5907
+      "sha256": "9f0ac12b0cc68c6a0a011ee056865b0d183309bcc27d252af007d41fe557b383",
+      "bytes": 6946
     },
     "stem_separation_worker.py": {
       "sha256": "c6db0e8e43c6834d8bec199874ec58b05a42f858663d757491136bff05abd5bf",

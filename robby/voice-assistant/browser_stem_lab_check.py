@@ -24,7 +24,7 @@ async def main(url):
    report['windows']=await page.locator('.lfm-card').count();assert report['windows']>=1
    report['ui_fields']=await page.locator('.lfm-card').first.inner_text();assert 'MOSS Audio 4B' in report['ui_fields'] and 'LFM3 Video' in report['ui_fields'] and 'tokens/s' in report['ui_fields']
    assert '5 fps sampled' in report['ui_fields'] and 'model calls 1' in report['ui_fields']
-   assert 'TUSS Medium' in report['ui_fields'] and 'cuda:0' in report['ui_fields'] and 'speech' in report['ui_fields'] and 'music' in report['ui_fields'] and 'effects' in report['ui_fields'], report['ui_fields']
+   assert 'TUSS Medium' in report['ui_fields'] and 'cuda:0' in report['ui_fields'] and 'speech' in report['ui_fields'] and 'music' in report['ui_fields'] and 'effects' in report['ui_fields'] and 'Music + effects (combined)' in report['ui_fields'], report['ui_fields']
    assert await page.locator('.lfm-track audio').count() >= 3
    assert 'Humaneness Ears' in report['ui_fields'] and 'Parakeet:' in report['ui_fields'],report['ui_fields']
    await page.locator('.lfm-card video').first.evaluate('(v)=>v.play()');await page.wait_for_function('document.querySelectorAll(".lfm-card video")[0].currentTime>0',timeout=10000);report['playback_time']=await page.locator('.lfm-card video').first.evaluate('v=>v.currentTime')

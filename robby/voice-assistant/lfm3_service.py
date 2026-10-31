@@ -53,6 +53,7 @@ async def analyze(request):
  async with lock:
   with tempfile.TemporaryDirectory(prefix='lfm3-',dir=ROOT/'.runtime') as tmp:
    tmp=Path(tmp);upload=tmp/'input.webm';size=0;window=3.;stride=1.;capability=None;recent=[];use_context=False;separator='off';two_speakers=False
+   options={'audio':True,'video':True,'sound_caption':True,'ears':True,'asr':True,'minicpm':False,'salmon':False}
    try:
     reader=await request.multipart()
     async for part in reader:
@@ -73,6 +74,12 @@ async def analyze(request):
       separator=await part.text()
       if separator not in ('off','tuss','bandit'):raise ValueError('Invalid separator')
      elif part.name=='two_speakers':two_speakers=(await part.text())=='true'
+     elif part.name=='model_options':
+      raw=await part.read_chunk(2048)
+      if await part.read_chunk(1):raise ValueError('Model options too large')
+      selected=json.loads(raw.decode('utf-8'))
+      if not isinstance(selected,dict) or set(selected)-set(options) or any(type(v) is not bool for v in selected.values()):raise ValueError('Invalid model options')
+      options.update(selected)
      elif part.name in ('context_enabled','memory_capability','recent_context'):
       raw=await part.read_chunk(8192)
       if await part.read_chunk(1):raise ValueError('Context field is too large')
@@ -130,7 +137,7 @@ async def analyze(request):
     async def stems():
      if separator=='off':return {'status':'disabled','windows':[]}
      from stem_lab import analyze as analyze_stems
-     try:return await analyze_stems(normalized,tmp,starts,min(window,duration),separator,two_speakers,cmd)
+     try:return await analyze_stems(normalized,tmp,starts,min(window,duration),separator,two_speakers,cmd,options)
      except Exception as e:
       reason='GPU memory unavailable; try again when fewer models are active.' if 'out of memory' in str(e).lower() else type(e).__name__+': '+str(e)[:180]
       return {'status':'error','error':reason,'windows':[]}
@@ -138,12 +145,28 @@ async def analyze(request):
     # exhaust VRAM. Finish the original analyses first, temporarily release the
     # video worker for GPU TUSS, then restore it before completing the request.
     serial_gpu_tuss=separator=='tuss' and os.getenv('ROBO_TUSS_DEVICE','cuda:0')==f"cuda:{int(os.getenv('LFM3_VIDEO_GPU','0'))}"
-    coros=(process('audio'),process('video'),playback()) if serial_gpu_tuss else (process('audio'),process('video'),playback(),stems())
+    async def selected(mode):
+     return await process(mode) if options[mode] else [None for _ in starts]
+    async def av_models():
+     result={}
+     # Both models use GPU 1; request-scoped processes are loaded sequentially.
+     for name in ('salmon','minicpm'):
+      if not options[name]:result[name]={'status':'disabled','windows':[]};continue
+      started_one=time.perf_counter()
+      try:
+       if name=='salmon':from salmon_av_lab import analyze as run_av
+       else:from minicpm_av_lab import analyze as run_av
+       result[name]=await run_av(normalized,tmp,starts,min(window,duration),context,cmd)
+      except Exception as e:
+       reason='GPU memory unavailable; try again when fewer models are active.' if 'out of memory' in str(e).lower() else type(e).__name__+': '+str(e)[:180]
+       result[name]={'status':'error','error':reason,'total_ms':round((time.perf_counter()-started_one)*1000,1),'windows':[]}
+     return result
+    coros=(selected('audio'),selected('video'),playback(),av_models()) if serial_gpu_tuss else (selected('audio'),selected('video'),playback(),stems(),av_models())
     tasks=[asyncio.create_task(coro) for coro in coros]
     try:
      values=await asyncio.gather(*tasks)
      if serial_gpu_tuss:
-      audio,video,playable=values;video_worker=workers.pop('video');status['ready']=False
+      audio,video,playable,omni_results=values;video_worker=workers.pop('video');status['ready']=False
       try:
        if video_worker.returncode is None:video_worker.terminate()
        try:await asyncio.wait_for(video_worker.wait(),10)
@@ -155,12 +178,13 @@ async def analyze(request):
         info=await start_worker('video',int(os.getenv('LFM3_VIDEO_GPU','0')))
         status.update(ready=True,error=None,models=[status['models'][0],info])
        except Exception as exc:status.update(ready=False,error='Video restart failed: '+type(exc).__name__)
-     else:audio,video,playable,stem_results=values
+     else:audio,video,playable,stem_results,omni_results=values
     except BaseException:
      for task in tasks:task.cancel()
      await asyncio.gather(*tasks,return_exceptions=True)
      raise
     return web.json_response({'duration_s':round(duration,3),'window_s':window,'stride_s':stride,'wall_ms':round((time.perf_counter()-started)*1000,1),'playback_mp4_base64':playable,'relevance_context':context_meta,'stem_analysis':stem_results,
+      'model_options':options,'omni_analysis':omni_results,
       'segments':[{'start_s':s,'end_s':round(min(s+window,duration),3),'audio':a,'video':v} for s,a,v in zip(starts,audio,video)],
       'notes':['Models may hallucinate. Person IDs are approximate, not face recognition.','Visual event times are model estimates, not verified frame timestamps; samples are about 5 fps.','Previous two descriptions are supplied separately to each model; results may hallucinate.','Token/s includes prefill and decoding. Media is deleted when the request finishes.']})
    except web.HTTPException:raise
