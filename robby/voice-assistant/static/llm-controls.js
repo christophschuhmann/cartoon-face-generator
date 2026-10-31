@@ -3,6 +3,8 @@ export class LLMControls{
  constructor(client){
   this.client=client;this.model=document.getElementById('llm-model');this.provider=document.getElementById('llm-provider');this.status=document.getElementById('llm-status');
   this.desired={model:'local',provider:'local'};this.current=null;this.connected=false;this.hasSaved=false;
+  // Version 2: Qwen 3.8 27B on Cerebras is the demo default; drop older saved choices once.
+  try{if(localStorage.getItem('robby.llmDefaultVersion')!=='2'){localStorage.removeItem('robby.llmSelection');localStorage.setItem('robby.llmDefaultVersion','2');}}catch{}
   try{const saved=JSON.parse(localStorage.getItem('robby.llmSelection'));if(saved&&['qwen','local','gemma12'].includes(saved.model)){this.desired=saved;this.hasSaved=true;}}catch{}
   this.model.onchange=()=>{this.desired={model:this.model.value,provider:this.model.value==='qwen'?'cerebras/fp16':'local'};this.render();this.apply();};
   this.provider.onchange=()=>{this.desired.provider=this.provider.value;this.apply();};
@@ -22,7 +24,7 @@ export class LLMControls{
    if(!this.catalog.models.some(m=>m.id===this.desired.model))this.desired=this.catalog.default;
    if(this.desired.model==='qwen'&&!this.catalog.providers.some(p=>p.id===this.desired.provider))this.desired.provider='cerebras/fp16';
    this.render();if(this.connected)this.client.send('llm:select:'+JSON.stringify(this.desired));
-   this.status.textContent=this.catalog.server_key_available?'The server key is configured and hidden. Choose a model and endpoint.':'OpenRouter needs a personal key or an administrator-configured server key. Local Nemotron needs no API key.';
+   this.status.textContent=this.catalog.server_key_available?'The server key is configured and hidden. Choose a model and endpoint.':'OpenRouter needs a personal key or an administrator-configured server key. The local GPU model needs no API key.';
   }catch(e){this.status.textContent=e.message;}
  }
  render(){
@@ -45,7 +47,7 @@ export class LLMControls{
   if(m.type==='llm_settings'){
    this.current={model:m.model,provider:m.provider};
    const local=m.model!=='qwen';
-   this.status.textContent=(local?(m.model==='gemma12'?'Gemma 4 12B Q4 on this GPU':'Local Nemotron on this GPU'):`Qwen 3.8 27B · ${m.provider}`)+' · '+(local?'no API key needed':m.key_mode==='personal_session'?'personal key for this connection':m.key_available?'hidden server key':'API key missing')+'. Changes apply to the next response.';
+   this.status.textContent=(local?(this.catalog?.models.find(x=>x.id===m.model)?.label||'Local model on this GPU'):`Qwen 3.8 27B · ${m.provider}`)+' · '+(local?'no API key needed':m.key_mode==='personal_session'?'personal key for this connection':m.key_available?'hidden server key':'API key missing')+'. Changes apply to the next response.';
    document.querySelector('.privacy').textContent=local?'Camera tracking stays in this browser. Speech recognition, voice matching, local LLM and TTS run on this server. No microphone recordings are saved.':'Camera tracking stays in this browser. Audio is processed on this server; conversation text is sent to OpenRouter and the selected provider. The server API key stays hidden.';
   }
  }

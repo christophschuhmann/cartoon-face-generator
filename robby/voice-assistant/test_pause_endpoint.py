@@ -83,3 +83,26 @@ class PauseSubmissionTests(unittest.IsolatedAsyncioTestCase):
         s.c._on_barge.assert_awaited_once();self.assertTrue(s.queue.empty())
 
 if __name__=='__main__':unittest.main()
+
+class EarlyFinalAsrTests(unittest.IsolatedAsyncioTestCase):
+    def session(self):
+        c=SimpleNamespace(ws=SimpleNamespace(send_json=AsyncMock()),speaking=False,halting=False,
+            session=SimpleNamespace(reset=Mock()),ears=SimpleNamespace(sr=16000),_on_barge=AsyncMock())
+        s=SentenceSession(c);s.wake.configure(False);s.set_pause(300);s.begin=0.;s.last_speech=1.;s.mic_now=s.now=1.15
+        s.records.append((0.,2.,np.zeros(32000,np.float32)))
+        s.vad=SimpleNamespace(active=False,probability=.01)
+        s.asr=SimpleNamespace(selected='parakeet_v3',transcribe=AsyncMock(return_value={'text':'Hallo Robby.','model':'parakeet_v3'}))
+        return s
+    async def test_early_transcript_is_kept_while_no_new_speech(self):
+        s=self.session();s._maybe_early_final(1.15);await s.early_task
+        self.assertEqual(s.early_final['key'],s.early_key())
+        s.asr.transcribe.assert_awaited_once()
+        s._maybe_early_final(1.2);self.assertEqual(s.asr.transcribe.await_count,1)
+    async def test_new_speech_invalidates_the_early_transcript(self):
+        s=self.session();s._maybe_early_final(1.15);await s.early_task
+        s.last_speech=1.18
+        self.assertNotEqual(s.early_final['key'],s.early_key())
+    async def test_disabled_or_native_asr_never_runs_early(self):
+        s=self.session();s.early_final_ms=0;s._maybe_early_final(1.15);self.assertIsNone(s.early_task)
+        s=self.session();s.asr.selected='nemotron';s._maybe_early_final(1.15);self.assertIsNone(s.early_task)
+        s=self.session();s.mic_now=1.05;s._maybe_early_final(1.05);self.assertIsNone(s.early_task)

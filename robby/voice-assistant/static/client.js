@@ -99,7 +99,10 @@ export class RoboClient {
   for(let i=0;i<pcm.length;i++)ch[i]=pcm[i]/32768;
   const source=this.ctx.createBufferSource();source.roboId=id;source.buffer=b;source.connect(this.output);
   const firstReply=!!id&&!this.queued[id];
-  this.startupReserve??=.18;
+  // Optional override for latency experiments (robby.startReserveMs). Measured:
+  // 160 ms saved ~120 ms but caused 0.2-0.35 s gaps in 5 of 12 browser runs,
+  // so the default keeps the original 0.3 s / 0.18 s cushion.
+  if(this.startupReserve===undefined){let ms=NaN;try{ms=Number(localStorage.getItem('robby.startReserveMs'));}catch{}this.fixedReserve=Number.isFinite(ms)&&ms>0?ms/1000:null;this.startupReserve=this.fixedReserve??.18;}
   if(id&&!firstReply&&this.next>0){const gap=Math.max(0,this.ctx.currentTime-this.next);
    if(gap>.02){this.startupReserve=Math.min(.65,Math.max(this.startupReserve,gap+.12));this.metrics.underflows=(this.metrics.underflows||0)+1;this.metrics.max_gap_ms=Math.max(this.metrics.max_gap_ms||0,gap*1000);}}
   // The short optional reaction has 160-ms TTS chunks. Keep adaptive recovery
@@ -107,7 +110,7 @@ export class RoboClient {
   // prefix while keeping warm first playback below the old 300-ms floor.
   const reserve=id===this.quickReplyId
    ? Math.max(.22,this.startupReserve)
-   : Math.max(this.startupReserve,b.duration<.8?.3:.18);
+   : this.fixedReserve!==null?this.startupReserve:Math.max(this.startupReserve,b.duration<.8?.3:.18);
   if(firstReply)this.metrics.startup_buffer_ms=reserve*1000;
   const start=playbackStart(this.ctx,this.next,firstReply,reserve),end=start+b.duration;
   const first=this.queued[id]||0;this.queued[id]=first+pcm.length;

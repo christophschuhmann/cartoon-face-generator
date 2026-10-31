@@ -6,7 +6,7 @@ Vorhanden sind **40 EmoNet-Face-Ausdrücke**, **60 zusätzliche soziale und vers
 
 Die aktuelle Windows-Demo **2.3.2** überträgt Webcam-Mimik auf das Rig und animiert ausgewählte MP3-/WAV-Dateien anhand von Wortzeitstempeln, LAION-Ears-Emotionswerten und Sprechstil. Dazu kommen weiche Übergänge, organische Sprechbewegungen und optionaler Blickkontakt mit Kopfbewegung per Webcam. Negative Ausdrücke berücksichtigen Ärger und Stimmspannung gemeinsam. [Start, Modellinstallation und Grenzen](webcam_mapper/README.md) sind separat beschrieben; die großen Audiomodelle werden nicht mit Git verteilt.
 
-**Schnellere Sprachausgabe für Robby:** Auf einer NVIDIA Jetson Thor beginnt die Sprachsynthese jetzt 0,18 s nach Erhalt eines Satzes (vorher 2,3–2,9 s). Wie das geht, mit allen Messwerten und Code-Ausschnitten, steht in [INFERENCE_OPTIMIZATIONS.md](robby/voice-assistant/INFERENCE_OPTIMIZATIONS.md) (Englisch).
+**Schnellere Sprachausgabe für Robby:** Auf einer NVIDIA Jetson Thor beginnt die Sprachsynthese jetzt 0,16 s nach Erhalt eines Satzes (vorher 2,3–2,9 s). Wie das geht, mit allen Messwerten und Code-Ausschnitten, steht in [INFERENCE_OPTIMIZATIONS.md](robby/voice-assistant/INFERENCE_OPTIMIZATIONS.md) (Englisch).
 
 ## Was möchtest du machen?
 

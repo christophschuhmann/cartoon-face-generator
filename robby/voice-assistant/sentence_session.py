@@ -125,6 +125,10 @@ class SentenceSession:
         self.now=0.;self.begin=None;self.last_speech=-100.;self.reset_at=-100.;self.fresh_asr_at=-100.;self.probe_text='';self.probe_at=-100.
         self.queue=asyncio.Queue(maxsize=12);self.tasks=set();self.worker=None;self.probe=None
         self.last_probe=-100.;self.closed=False;self.epoch=0;self.last_context=None
+        # Speculative final ASR: transcribe the same window shortly before the
+        # speech-pause deadline; reused only if the window is unchanged.
+        self.early_final=None;self.early_task=None
+        self.early_final_ms=float(os.environ.get('ROBO_EARLY_FINAL_ASR_MS','120'))
         self.embedding_task=None;self.prefetched=None;self.last_embedding=-100.;self.sentence_begin=None;self.pause_checked=False
         self.pause_ms=300
         self.set_pause(float(os.environ.get('ROBO_SPEECH_PAUSE_MS','300')))
@@ -576,8 +580,31 @@ class SentenceSession:
         if not self.mic_driven:await self._speech_audio(wave,at,event.get('playback_audio16'))
         self.prepare_embedding(at)
         self.prepare_focus_activity(at)
+    def early_key(self):
+        # Valid while no new speech arrived: same segment, same speech end.
+        return (self.epoch,self.begin,round(self.last_speech,3),round(self.foreground_last,3),self.asr.selected)
+    def _maybe_early_final(self,at):
+        if (self.early_final_ms<=0 or self.begin is None or self.asr.selected=='nemotron' or self.c.speaking
+            or (self.early_task and not self.early_task.done())):return
+        if self.vad is None or self.vad.active or self.vad.probability>=.35:return
+        quiet=(self.mic_now-self.last_speech)*1000
+        if not self.early_final_ms<=quiet<self.pause_ms:return
+        key=self.early_key()
+        if self.early_final and self.early_final['key']==key:return
+        # Everything up to now, so the window covers whatever the final one keeps.
+        model=self.asr.selected;audio=self.audio(self.final_audio_start(self.begin),at)
+        if len(audio)<3200:return
+        async def run():
+            try:
+                receipt=await self.asr.transcribe(model,audio)
+                if not self.closed:self.early_final={'key':key,'receipt':receipt}
+            except asyncio.CancelledError:raise
+            except Exception:pass
+        self.early_running=key
+        self.early_task=asyncio.create_task(run());self.tasks.add(self.early_task);self.early_task.add_done_callback(self.tasks.discard)
     def _maybe_probe(self):
         at=self.now;due=self.quiet_ready()
+        if not due:self._maybe_early_final(at)
         if (self.begin is not None and at-self.begin>=.32 and self.mic_now-self.last_probe>=(.16 if due else .48)
             and not self.pause_checked and (self.probe is None or self.probe.done())
             and (due or self.c.speaking or at-self.fresh_asr_at>.48)):
@@ -597,7 +624,12 @@ class SentenceSession:
                     model=self.asr.selected;receipt={'model':'nemotron'}
                     if due and model!='nemotron':
                         await self.c.ws.send_json({'type':'asr_finalizing','model':model,'label':'Transcribing the completed speech segment…'})
-                        receipt=await self.asr.transcribe(model,self.audio(audio_start,audio_end))
+                        key=self.early_key()
+                        if self.early_task and not self.early_task.done() and getattr(self,'early_running',None)==key:
+                            await asyncio.shield(self.early_task)
+                        early=self.early_final if self.early_final and self.early_final['key']==key else None
+                        if early:receipt={**early['receipt'],'speculative':True}
+                        else:receipt=await self.asr.transcribe(model,self.audio(audio_start,audio_end))
                         result=[receipt['text']]
                     else:
                         async with self.c.speaker_ext.asr_slot(5):
