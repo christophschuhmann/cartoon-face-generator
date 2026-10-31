@@ -1,0 +1,10 @@
+{
+  "passed": false,
+  "scope": "Long-recording end-to-end HTTPS stem lab test with Chromium fake camera and synthetic microphone.",
+  "source_sha256": "46ef8373d7860a40de2a64cae08bbd7d471caa0a19e6a03ad1ec1b70e5bd80a4",
+  "status": "Analysis failed: 404: Not Found",
+  "error": "AssertionError: Analysis failed: 404: Not Found",
+  "failure_status": "Analysis failed: 404: Not Found",
+  "page_errors": [],
+  "source_unchanged": true
+}
