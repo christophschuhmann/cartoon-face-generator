@@ -4,6 +4,7 @@ import json
 import logging
 import math
 import os
+MOUTH_PORT=int(os.environ.get('ROBO_MOUTH_PORT','8795'))
 from pathlib import Path
 import time
 import hashlib
@@ -744,8 +745,8 @@ async def startup(app):
     import torch
     torch.set_num_threads(4)
     bridge=MouthBridge();app['bridge']=bridge;app['tasks']=[]
-    app['mouth_server']=await asyncio.start_server(bridge.accept,'127.0.0.1',8795)
-    cfg={'server':{'max_sessions':1,'max_session_s':int(os.environ.get('ROBO_MAX_SESSION_S','1800')),'mouth_host':'127.0.0.1','mouth_port':8795},'mouth':{}}
+    app['mouth_server']=await asyncio.start_server(bridge.accept,'127.0.0.1',MOUTH_PORT)
+    cfg={'server':{'max_sessions':1,'max_session_s':int(os.environ.get('ROBO_MAX_SESSION_S','1800')),'mouth_host':'127.0.0.1','mouth_port':MOUTH_PORT},'mouth':{}}
     app['cfg']=cfg
     from llm_backends import refresh_providers
     async def providers():
@@ -1005,7 +1006,7 @@ def main():
     app.on_startup.append(startup);app.on_cleanup.append(cleanup)
     logging.basicConfig(level=logging.INFO,format='%(asctime)s %(name)s %(message)s')
     logging.getLogger('httpx').setLevel(logging.WARNING)
-    web.run_app(app,host='127.0.0.1',port=8793,access_log=None)
+    web.run_app(app,host='127.0.0.1',port=int(os.environ.get('ROBO_PORT','8793')),access_log=None)
 
 
 if __name__=='__main__':main()
