@@ -2,6 +2,7 @@ import asyncio
 from contextlib import asynccontextmanager
 from types import SimpleNamespace
 import unittest
+import unittest.mock
 from unittest.mock import AsyncMock,Mock
 import numpy as np
 from pause_vad import SpeechClock
@@ -106,3 +107,26 @@ class EarlyFinalAsrTests(unittest.IsolatedAsyncioTestCase):
         s=self.session();s.early_final_ms=0;s._maybe_early_final(1.15);self.assertIsNone(s.early_task)
         s=self.session();s.asr.selected='nemotron';s._maybe_early_final(1.15);self.assertIsNone(s.early_task)
         s=self.session();s.mic_now=1.05;s._maybe_early_final(1.05);self.assertIsNone(s.early_task)
+
+class SpeechTurnDecisionTests(unittest.IsolatedAsyncioTestCase):
+    def session(self,decide=None):
+        c=SimpleNamespace(ws=SimpleNamespace(send_json=AsyncMock()),speaking=True,halting=False,open_agent_text='Es war einmal ein Drache.',
+            session=SimpleNamespace(reset=Mock()),ears=SimpleNamespace(sr=16000),_on_barge=AsyncMock(),
+            decisions=SimpleNamespace(client=object(),last_agent='',history=[]))
+        return SentenceSession(c)
+    async def test_explicit_stop_needs_no_model(self):
+        import live_decisions
+        with unittest.mock.patch.object(live_decisions,'speech_turn_action',AsyncMock(side_effect=AssertionError)):
+            self.assertEqual(await self.session().speech_turn_action('Stopp Robby, hör kurz auf!'),'stop')
+    async def test_model_decides_other_utterances(self):
+        import live_decisions
+        for answer in ('answer','continue','stop'):
+            with unittest.mock.patch.object(live_decisions,'speech_turn_action',AsyncMock(return_value=answer)) as call:
+                self.assertEqual(await self.session().speech_turn_action('Wie spät ist es?'),answer)
+                self.assertEqual(call.await_args.args[2],'Es war einmal ein Drache.')
+    async def test_failure_or_disabled_keeps_the_old_queue(self):
+        import live_decisions,os
+        with unittest.mock.patch.object(live_decisions,'speech_turn_action',AsyncMock(side_effect=RuntimeError)):
+            self.assertIsNone(await self.session().speech_turn_action('Wie spät ist es?'))
+        with unittest.mock.patch.dict(os.environ,{'ROBO_SPEECH_TURN_DECISIONS':'0'}):
+            self.assertIsNone(await self.session().speech_turn_action('Wie spät ist es?'))

@@ -580,6 +580,17 @@ class SentenceSession:
         if not self.mic_driven:await self._speech_audio(wave,at,event.get('playback_audio16'))
         self.prepare_embedding(at)
         self.prepare_focus_activity(at)
+    async def speech_turn_action(self,text):
+        """'stop' | 'answer' | 'continue', or None to keep the old queue-until-done behavior."""
+        from stop_commands import has_stop_intent
+        if has_stop_intent(text):return 'stop'
+        decisions=getattr(self.c,'decisions',None)
+        if decisions is None or os.environ.get('ROBO_SPEECH_TURN_DECISIONS','1')!='1':return None
+        from live_decisions import speech_turn_action
+        try:
+            return await asyncio.wait_for(speech_turn_action(decisions.client,text,getattr(self.c,'open_agent_text','') or decisions.last_agent,
+                list(decisions.history)),2.5)
+        except Exception:return None
     def early_key(self):
         # Valid while no new speech arrived: same segment, same speech end.
         return (self.epoch,self.begin,round(self.last_speech,3),round(self.foreground_last,3),self.asr.selected)
@@ -852,6 +863,19 @@ class SentenceSession:
                 from stop_commands import is_stop_command
                 if self.c.speaking and is_stop_command(text):
                     self.propose_barge({'yield_prob':1.,'onset_s':0.,'source':'open_sentence_stop','stop_text':text},round(at*self.c.ears.sr));continue
+                if self.c.speaking:
+                    # A full utterance from the accepted speaker while Robby talks:
+                    # let the decision model choose stop / answer now / keep talking.
+                    action=await self.speech_turn_action(text)
+                    await self.c.ws.send_json({'type':'speech_turn_decision','text':text,'action':action or 'queue'})
+                    if action=='continue':
+                        await self.c.ws.send_json({'type':'ignored','source':'decision_model','reason':'Backchannel or comment while Robby speaks'});continue
+                    if action in ('stop','answer') and self.c.speaking:
+                        await self.c._on_barge({'yield_prob':1.,'onset_s':0.,'source':'decision_'+action,**({'stop_text':text} if action=='stop' else {})},round(at*self.c.ears.sr))
+                        if action=='stop':
+                            self.reset_segment();self.c.session.reset()
+                            await self.c.ws.send_json({'type':'stop_command','speaker_name':self.memory.users.get(self.focus.owner,{}).get('name'),'identity_uncertain':False})
+                            continue
                 while (self.c.speaking or self.c.halting) and not self.closed:await asyncio.sleep(.02)
                 if self.closed:return
                 if admission!=self.admission_epoch:continue
