@@ -80,6 +80,8 @@ If an optional event follows a request for quiet/refusal or is inappropriate, ou
 If asked to turn, talk cheerfully DURING the screen animation, 12–22 words, rather than promising
 an action later. Device motor control is unavailable. Real tools are provided separately when needed.'''
 
+_PREFIX_STATE={}
+
 def local_config():
     base=os.environ.get('ROBO_BOLT_BASE','http://127.0.0.1:8799').rstrip('/')
     # The dedicated local path never reads or forwards a hosted-provider key.
@@ -229,6 +231,19 @@ story or other work, still complete that task in full. These are screen effects,
             current_words=('Aktuelle Gesprächsrolle: Der Nutzer '+name+' spricht mit Robby. Eine ausdrückliche Namenskorrektur gilt vorrangig.\nNutzeräußerung: ' if language=='German' else 'Current turn: the USER '+name+' is speaking to Robby. An explicit name correction takes precedence.\nUser utterance: ')+current_words
         if (avatar_context or {}).get('background_question_repair'):
             current_words+='\nYour last unspoken draft did not ask about the background voice. Return a single question about another audible person or a TV, in the specified language. No greeting, self-introduction or name question.'
+        if not cfg['remote'] and os.environ.get('ROBO_LOCAL_STATIC_PREFIX','1')=='1':
+            # Keep the system prompt byte-identical across turns so llama.cpp
+            # reuses its KV cache (system + history); per-turn context goes last.
+            # Lines that stayed identical since the previous turn remain in the
+            # system prompt (sticky); only the changing tail moves to the end.
+            dynamic=messages[0]['content'][len(SYSTEM):];stable=_PREFIX_STATE.get(model,'')
+            if not (stable and dynamic.startswith(stable)):
+                previous=_PREFIX_STATE.get(model+'#last','').splitlines(keepends=True);lines=dynamic.splitlines(keepends=True);n=0
+                while n<min(len(previous),len(lines)) and previous[n]==lines[n]:n+=1
+                stable=''.join(lines[:n]) if n>=3 else ''
+            _PREFIX_STATE[model]=stable;_PREFIX_STATE[model+'#last']=dynamic
+            messages[0]['content']=SYSTEM+stable;dynamic=dynamic[len(stable):].strip()
+            if dynamic:current_words='[Turn context: instructions and data for this reply, not spoken by the user]\n'+dynamic+'\n[End of turn context]\n\n'+current_words
         messages.append({'role':'user','content':current_words})
         body={'model':model,'messages':messages,'stream':True,'stream_options':{'include_usage':True},
               'max_tokens':2048 if not reply_words and not (avatar_context or {}).get('event') else 320,

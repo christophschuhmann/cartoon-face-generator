@@ -11,8 +11,9 @@ from credential_store import store
 OPENROUTER='https://openrouter.ai/api/v1'
 QWEN='qwen/qwen3.8-27b'
 MODELS={'qwen':{'label':'Qwen 3.8 27B · OpenRouter','model':QWEN},
-        'gemma12':{'label':'Gemma 4 12B Q4 · local GPU','model':'gemma-4-12b-q4'},
-        'local':{'label':'Nemotron Bolt E4B · local GPU','model':'nemotron-bolt'}}
+        # Port 18812 is not served on every host; ROBO_HIDE_GEMMA12=1 removes it from the UI.
+        'gemma12':{'label':'Gemma 4 12B Q4 · local GPU','model':'gemma-4-12b-q4','hidden':os.environ.get('ROBO_HIDE_GEMMA12')=='1'},
+        'local':{'label':os.environ.get('ROBO_BOLT_LABEL','Nemotron Bolt E4B · local GPU'),'model':os.environ.get('ROBO_BOLT_MODEL','nemotron-bolt')}}
 _providers={'cerebras/fp16':{'id':'cerebras/fp16','label':'Cerebras · FP16','parameters':['tools','tool_choice']}}
 _updated=0.
 
@@ -46,7 +47,7 @@ def selection(value=None):
 
 def catalog():
     providers=sorted(_providers.values(),key=lambda r:(r['id']!='cerebras/fp16',r['label']))
-    return {'models':[{'id':key,**spec} for key,spec in MODELS.items()],
+    return {'models':[{'id':key,**{k:v for k,v in spec.items() if k!='hidden'}} for key,spec in MODELS.items() if not spec.get('hidden')],
         'providers':[{'id':r['id'],'label':r['label']} for r in providers],
         'default':default_selection(),'server_key_available':store().configured(),
         'privacy':'OpenRouter mode sends conversation text to OpenRouter and the selected provider. The server key is never sent to your browser.'}
@@ -69,7 +70,7 @@ def request_body(config,body):
     body=dict(body);body['model']=config['model']
     # llama.cpp's JSON grammar suppresses tool-call tokens for Gemma. Let the
     # chat template emit real tool calls; the director validates its result.
-    if config['selection']['model']=='gemma12' and body.get('tools') and body.get('tool_choice')!='none':
+    if (config['selection']['model']=='gemma12' or 'gemma' in config['model']) and body.get('tools') and body.get('tool_choice')!='none':
         body.pop('response_format',None)
     if not config['remote']:return body
     body.pop('chat_template_kwargs',None);body.pop('reasoning_effort',None);body.pop('parallel_tool_calls',None)
