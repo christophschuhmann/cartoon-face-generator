@@ -176,6 +176,17 @@ async def websocket(ws:WebSocket):
         try:await ws.close()
         except (RuntimeError,WebSocketDisconnect):pass
 
+@app.api_route('/api/lfm3/jobs',methods=['POST','GET','DELETE'])
+async def lfm3_jobs_proxy(request:Request):
+    body=await request.body()
+    if len(body)>25*1024*1024:raise HTTPException(413,'Recording upload is too large')
+    headers={k:v for k,v in request.headers.items() if k.lower() in ('content-type','x-lab-token')}
+    try:
+        async with httpx.AsyncClient(timeout=60.) as client:
+            r=await client.request(request.method,ASR_BASE+'/api/lfm3/jobs',content=body,headers=headers)
+    except httpx.HTTPError:raise HTTPException(503,'Audio/video analysis service unavailable')
+    return Response(content=r.content,status_code=r.status_code,headers={'Content-Type':r.headers.get('content-type','text/plain'),'Cache-Control':'no-store'})
+
 @app.post('/api/lfm3/analyze')
 async def lfm3_analyze_proxy(request:Request):
     """Forward only the opt-in media upload to Robby; other POSTs remain blocked."""
