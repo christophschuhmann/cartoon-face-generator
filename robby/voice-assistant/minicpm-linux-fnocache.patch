@@ -1,0 +1,11 @@
+diff --git a/src/llama-moe-slot.cpp b/src/llama-moe-slot.cpp
+index 28c7666..de07f1f 100644
+--- a/src/llama-moe-slot.cpp
++++ b/src/llama-moe-slot.cpp
+@@ -1348 +1348 @@ struct llama_moe_slot_runtime::impl {
+-#ifndef _WIN32
++#if defined(F_NOCACHE) && !defined(_WIN32)
+@@ -1374,0 +1375 @@ struct llama_moe_slot_runtime::impl {
++#ifdef F_NOCACHE
+@@ -1377,0 +1379 @@ struct llama_moe_slot_runtime::impl {
++#endif

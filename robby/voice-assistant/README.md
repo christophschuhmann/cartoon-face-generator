@@ -2,7 +2,7 @@
 
 **Experimental source separation:** the audio/video lab optionally adds TUSS Medium and Bandit v2 stems, playback and per-model timing alongside MOSS and Liquid video. See [STEM_LAB.md](STEM_LAB.md) for reproducible tests, the separate FastDialogueSidon speed pilot and important limitations.
 
-**Audio/video lab pilot, 2026-10-30:** The restarted experimental lab uses quantized MOSS Audio 4B Instruct and LFM3-VL for separate parallel audio and video analysis. The older Liquid Audio and Omni workers are stopped. MOSS 8B and MiniCPM weights are prepared on disk but are not yet selectable or integrated. [Setup, measurements, available GPU memory and limitations](LFM3_LAB.md).
+**Audio/video lab, 2026-10-31:** Independently select MOSS Audio 4B, LFM3-VL, MiniCPM-o 4.5, SALMONN 2 Pro and optional source-separation analyses. MiniCPM and SALMONN each inspect original audio and video together and load on demand. Music, effects and their combined stem can each be captioned by LAION's sound-effect model. [Setup, timings, tests and limitations](LFM3_LAB.md).
 
 The canonical repository for this conversational demo is [cartoon-face-generator](https://github.com/christophschuhmann/cartoon-face-generator), under `robby/voice-assistant/`. The existing standalone SVG remains in `robby/`. Earlier LAION-AI/Humaneness-Voice links below are historical reports or release assets and have not been moved.
 

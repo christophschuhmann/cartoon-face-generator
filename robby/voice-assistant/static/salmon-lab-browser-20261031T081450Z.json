@@ -1,0 +1,11 @@
+{
+  "passed": true,
+  "scope": "HTTPS SALMONN-only lab test with synthetic camera and microphone.",
+  "source_sha256": "7ce256e8e490d01936db47458f9ae0ddcba5bc6267c5d1309df55f6d43d0a8a9",
+  "status": "1 windows analyzed in 25.9 s. Selected analyses completed; model timing appears on each result. Context: 305 token-bound, no saved memory retrieved.",
+  "windows": 1,
+  "ui_fields": "0.0–3.0 s\nSALMONN 2 Pro · audio + video\ncharacter\nRobby is a warm, playful and attentive conversational robot. He helps the current user, follows their requests, and may notice relevant surroundings. Visual and audio impressions are uncertain; do not assume identity or inner feelings.\nrecent_conversation\n[]\nrelevant_memory\n[]\nforeground\n[ { \"category\": \"Digital Display\", \"description\": \"A bright green digital display with a lime green background. It shows a digital clock in the top left corner, starting at 0:00:00:250 and counting up. Below the clock is a lime green pie chart with a single slice removed, indicating progress or a timer.\", \"relevance\": 2 } ]\nbackground\n[]\nObservations · relevance to the conversation\nAudio · 2 · high\nA continuous, high-pitched, descending electronic tone is playing, similar to a digital countdown or timer sound. The tone is steady and does not change in pitch or volume.\nVisible people · tentative labels\nNone reported.\nObserved timeline · approximate\nNo distinct events reported.\ntimeline_status\nModel estimates, not verified frame timestamps; visual sampling is about 5 fps.\nProcessing 10323 ms · generation 9919 ms · 239 tokens · 24.1 tokens/s (including prefill) · model calls 1\nModel loading 11859 ms · whole model branch 25784 ms",
+  "playback_time": 0.013665,
+  "page_errors": [],
+  "source_unchanged": true
+}
