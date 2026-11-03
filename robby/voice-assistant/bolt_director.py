@@ -127,6 +127,15 @@ Use natural, grammatical language; don't force nonsense words or broken grammar 
         return {'kind':'story','units':sentences,'guidance':('This is a storytelling task. Start directly with the story, not an acknowledgment. '
             +(f'Write exactly {sentences} complete prose sentences, each ending in punctuation. ' if sentences else '')
             +'Include the requested characters and events, a development and a satisfying ending. Complete the actual story now.')}
+    # Count ordinary answer sentences too, but only when the request actually
+    # specifies an answer length (not e.g. 'I read three sentences yesterday').
+    sentences=count(r'satz|sätze[n]?|sentences?')
+    length_request=bool(re.search(r'\b(?:antworte\w*|antwort\w*|erkläre?\w*|beschreib\w*|erzähl\w*|schreib\w*|formuliere\w*|fasse?\w*|reply|respond|answer|explain|describe|write|tell|give)\b',text,re.I) or re.search(r'\b(?:in|mit|using|within)\s+(?:genau\s+|exactly\s+)?(?:\d{1,2}|'+ '|'.join(words)+r')\s+(?:kurzen?\s+|short\s+)?(?:satz|sätze[n]?|sentences?)\b',text,re.I))
+    if sentences and 1<=sentences<=12 and length_request and not re.search(r'\b(?:mindestens|höchstens|ungefähr|etwa|bis zu|at least|at most|about|up to)\b',text,re.I):
+        return {'kind':'chat','units':sentences,'guidance':f'The user explicitly requested {sentences} complete spoken sentences. Answer the actual request directly and fully in exactly {sentences} complete sentences. No preamble or unrelated question.'}
+    detailed=bool(re.search(r'\b(?:ausführlich\w*|ausfuehrlich\w*|detailliert\w*|eingehend|in\s+mehreren\s+sätzen|mehrere\s+sätze|in\s+detail|detailed\s+(?:answer|explanation)|several\s+sentences)\b',text,re.I) and not re.search(r'\b(?:nicht|kein\w*|not|no)\s+(?:zu\s+)?(?:ausführlich\w*|ausfuehrlich\w*|detailliert\w*|detailed)\b',text,re.I))
+    if detailed:
+        return {'kind':'chat','units':None,'minimum_units':3,'guidance':'The user asked for detail. Give a substantive answer in several complete sentences, covering the important points; do not pad or stop after an acknowledgment.'}
     return {'kind':'chat','units':None,'guidance':''}
 
 def response_guidance(text,history):return response_plan(text,history)['guidance']
@@ -254,18 +263,18 @@ story or other work, still complete that task in full. These are screen effects,
         from bolt_text import join_sentences
         from conversation_tasks import acknowledgement_only
         first=True;emitted=[];units=0;target=plan['units'];poetry=plan['kind']=='poem'
-        repair_task=not target and plan['kind'] in ('story','joke')
+        repair_task=not target and (plan['kind'] in ('story','joke') or bool(plan.get('minimum_units')))
         explicit_tiny=bool(re.search(r'\b(?:einzeiler|one[- ]liner|(?:ein\w*|one|1)\s+(?:satz|zeile|sentence|line))\b',text,re.I))
-        minimum_units=(2 if plan['kind']=='joke' else 3) if repair_task and not explicit_tiny else 0
+        minimum_units=plan.get('minimum_units',2 if plan['kind']=='joke' else 3) if repair_task and not explicit_tiny else 0
         for attempt in range(3 if target else 2 if repair_task else 1):
             framer=SentenceFramer(lines_only=poetry);attempt_parts=0;guard_stop=False
             request=dict(body)
             if attempt:
                 remaining=target-units if target else None
-                instruction=((f'Continue the SAME {plan["kind"]} with exactly {remaining} additional '
+                instruction=((f'Continue the SAME {"answer" if plan["kind"]=="chat" else plan["kind"]} with exactly {remaining} additional '
                     +('verse lines' if poetry else 'complete prose sentences')
                     +'. Continue from its ending, using the same subject and style. Do not repeat existing text, add an introduction or restart. Put each new unit on its own line with an acting cue. Output only the missing continuation.') if target else
-                    f'The previous response stopped before completing the requested {plan["kind"]}. Continue from the existing words, keeping the SAME characters and setting, and deliver the COMPLETE actual {plan["kind"]} with its development and final payoff/ending. Do not repeat the existing setup. No promise, introduction, apology or follow-up question. Use short acting cues and the original requested reply language.')
+                    (f'The response was too short for the user’s request for detail. Continue the same answer with at least {max(1,minimum_units-units)} additional informative sentences. Do not repeat the answer or add a preamble. Use short acting cues and the original reply language.' if plan['kind']=='chat' else f'The previous response stopped before completing the requested {plan["kind"]}. Continue from the existing words, keeping the SAME characters and setting, and deliver the COMPLETE actual {plan["kind"]} with its development and final payoff/ending. Do not repeat the existing setup. No promise, introduction, apology or follow-up question. Use short acting cues and the original requested reply language.'))
                 request['messages']=messages+[{'role':'assistant','content':join_sentences(emitted)},
                     {'role':'user','content':instruction}]
                 request['max_tokens']=min(2048,max(256,remaining*56)) if target else 2048

@@ -1,0 +1,35 @@
+{
+  "passed": true,
+  "scope": "Synthetic typed requests with Qwen 27B, real TTS and rendered screen avatar. No physical microphone.",
+  "turns": [
+    {
+      "request": "Erkläre mir in vier Sätzen, warum es Jahreszeiten gibt.",
+      "sentences": 4,
+      "reply": "Die Jahreszeiten entstehen durch die Neigung der Erdachse um etwa 23,5 Grad zu ihrer Umlaufbahn um die Sonne.\nDiese Neigung bleibt über das Jahr hinweg in derselben Himmelsrichtung ausgerichtet, während die Erde ihre Bahn zieht.\nDadurch erhalten verschiedene Erdregionen in unterschiedlichen Jahresabschnitten mehr oder weniger direkte Sonneneinstrahlung.\nDiese Veränderungen in der Intensität und Dauer des Sonnenlichts führen schließlich zu den uns bekannten Jahreszeiten.",
+      "emotion": null,
+      "audio_chunks": 27
+    },
+    {
+      "request": "Erkläre mir ausführlich, wie Regen entsteht.",
+      "sentences": 6,
+      "reply": "Sehr gerne, ich erkläre dir das jetzt ausführlich!\nRegen entsteht durch den Wasserkreislauf, der an Land und in den Ozeanen ständig abläuft.\nZuerst verdunstet das Wasser durch die Sonnenwärme und steigt als unsichtbarer Wasserdampf in die Atmosphäre auf.\nIn größerer Höhe trifft der Wasserdampf auf kältere Luftschichten und kondensiert an winzigen Staub- oder Salzkörnchen zu feinen Wassertropfen oder Eiskristallen.\nDiese Tröpfchen sammeln sich zu Wolken zusammen, und wenn sie schwer genug werden, fallen sie als Regen, Schnee oder Hagel zu Boden zurück.\nSo schließt sich der Kreislauf, und das Wasser steht der Natur wieder für Pflanzen, Tiere und uns Menschen zur Verfügung.",
+      "emotion": null,
+      "audio_chunks": 41
+    },
+    {
+      "request": "Ich möchte, dass du sauer bist.",
+      "sentences": 2,
+      "reply": "Oh, das ist aber wirklich aufreibend!\nIch bin jetzt furchtbar sauer!",
+      "emotion": "anger",
+      "audio_chunks": 8
+    },
+    {
+      "request": "Hallo Robby!",
+      "sentences": 2,
+      "reply": "Hallo! Schön, dass du da bist!",
+      "emotion": null,
+      "audio_chunks": 9
+    }
+  ],
+  "page_errors": []
+}

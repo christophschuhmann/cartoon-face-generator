@@ -181,6 +181,48 @@ class BoltAsyncTests(unittest.IsolatedAsyncioTestCase):
         self.assertIn('"turn": 2',calls[2]['messages'][-1]['content'])
         self.assertNotIn('"turn"',calls[2]['messages'][0]['content'])
 
+    async def test_explicit_chat_sentence_count_continues_if_model_stops_early(self):
+        from bolt_director import BoltDirector,response_plan
+        calls=[]
+        class Response:
+            def __init__(self,text):self.text=text
+            async def __aenter__(self):return self
+            async def __aexit__(self,*args):pass
+            async def aiter_lines(self):
+                yield 'data: '+json.dumps({'choices':[{'delta':{'content':self.text}}]})
+                yield 'data: '+json.dumps({'choices':[{'delta':{},'finish_reason':'stop'}]})
+        class Client:
+            def stream(self,*args,**kwargs):
+                calls.append(kwargs['json'])
+                return Response('(interest) Erstens ist der Mond hell.' if len(calls)==1 else '(interest) Zweitens ist er weit entfernt. (interest) Drittens umkreist er die Erde.')
+        metrics={};parts=[p async for p in BoltDirector().stream(Client(),'Erkläre den Mond in drei Sätzen.',{},[],metrics=metrics)]
+        self.assertEqual(len(parts),3);self.assertEqual(len(calls),2)
+        self.assertIn('exactly 2 additional complete prose sentences',calls[1]['messages'][-1]['content'])
+        self.assertTrue(metrics['response_complete']);self.assertEqual(metrics['completion_repairs'],1)
+        self.assertIsNone(response_plan('Ich habe drei Sätze gelesen.',[])['units'])
+        self.assertEqual(response_plan('Antworte bitte mit fünf Sätzen.',[])['units'],5)
+        self.assertEqual(response_plan('Erkläre mir ausführlich, wie Regen entsteht.',[])['minimum_units'],3)
+        self.assertNotIn('minimum_units',response_plan('Bitte nicht ausführlich erklären.',[]))
+
+    async def test_detailed_reply_repairs_a_one_sentence_answer_without_truncating_extra(self):
+        from bolt_director import BoltDirector
+        calls=[]
+        class Response:
+            def __init__(self,text):self.text=text
+            async def __aenter__(self):return self
+            async def __aexit__(self,*args):pass
+            async def aiter_lines(self):
+                yield 'data: '+json.dumps({'choices':[{'delta':{'content':self.text}}]})
+                yield 'data: '+json.dumps({'choices':[{'delta':{},'finish_reason':'stop'}]})
+        class Client:
+            def stream(self,*args,**kwargs):
+                calls.append(kwargs['json'])
+                return Response('(interest) Regen beginnt mit Verdunstung.' if len(calls)==1 else '(interest) Der Dampf steigt auf. (interest) Er kühlt ab. (interest) Tropfen bilden Wolken. (interest) Diese fallen als Regen.')
+        metrics={};parts=[p async for p in BoltDirector().stream(Client(),'Erkläre ausführlich, wie Regen entsteht.',{},[],metrics=metrics)]
+        self.assertEqual(len(parts),5);self.assertEqual(len(calls),2)
+        self.assertIn('at least 2 additional informative sentences',calls[1]['messages'][-1]['content'])
+        self.assertTrue(metrics['response_complete'])
+
     async def test_acknowledgment_only_story_gets_one_bounded_real_continuation(self):
         from bolt_director import BoltDirector
         calls=[]

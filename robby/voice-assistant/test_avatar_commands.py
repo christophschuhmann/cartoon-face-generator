@@ -21,6 +21,14 @@ class CommandTests(unittest.TestCase):
         self.assertEqual(explicit_actions('Show me how you make a goofy face.')[0]['kind'],'grimace')
         for text in ['Mach eine Grimasse und sag etwas Lustiges.','Mach eine Grimasse und sag "Hallo".','Mach bitte grimmassen.','Sag etwas Lustiges und mach eine Grimasse.']:
             self.assertTrue(explicit_actions(text),text)
+    def test_direct_emotional_requests_trigger_the_correct_face(self):
+        for text in ('Sei mal sauer.', 'Kannst du bitte wütend sein?', 'Kannst du sauer sein?', 'Be angry.', 'Ich möchte, dass du sauer bist.', 'Tu so als wärst du wütend.'):
+            actions=explicit_actions(text)
+            self.assertEqual([(a['kind'],a['emotion']) for a in actions],[('emotion','anger')],text)
+        self.assertEqual(explicit_actions('Sei mal traurig.')[0]['emotion'],'sadness')
+        for text in ('Ich bin sauer.', 'Erkläre mir, warum du sauer bist.', 'Sei nicht sauer.', 'Sag "Sei sauer".'):
+            self.assertEqual(explicit_actions(text),[],text)
+
     def test_negation_quotes_explanations_conditions_and_descriptions_never_trigger(self):
         for text in ['Mach keine Grimasse.','Do not make a funny face.','Sag "Mach eine Grimasse".',
             'Wenn ich Banane sage, mach eine Grimasse.','Erkläre mir, wie man Grimassen schneidet.',
