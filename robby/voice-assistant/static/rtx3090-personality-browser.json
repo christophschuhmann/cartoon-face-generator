@@ -1,0 +1,35 @@
+{
+  "passed": true,
+  "scope": "Synthetic typed requests with Qwen 27B, real TTS and rendered screen avatar. No physical microphone.",
+  "turns": [
+    {
+      "request": "Wie geht es dir heute, kleiner Roboter?",
+      "sentences": 2,
+      "reply": "Mein Akku ist voll und meine Antennen kribbeln ein bisschen vor Neugier!\nUnd bei dir?",
+      "emotion": null,
+      "audio_chunks": 10
+    },
+    {
+      "request": "Was würdest du gerne mit mir unternehmen?",
+      "sentences": 2,
+      "reply": "Wie wäre es mit einer kleinen Zeitreise? Wir könnten uns ein Zimmer vornehmen und es in fünf Minuten in eine Höhle, einen Weltraum oder ein Piratenschiff verwandeln.",
+      "emotion": null,
+      "audio_chunks": 15
+    },
+    {
+      "request": "Erkläre mir in zwei Sätzen, warum der Mond leuchtet.",
+      "sentences": 2,
+      "reply": "Der Mond reflektiert das Sonnenlicht mit seiner hellen, staubigen Oberfläche, ähnlich wie ein Spiegel, und sendet es zur Erde zurück.\nEigentlich strahlt er also gar nicht selbst, sondern ist nur ein passiver Lichtspiegel im Weltraum.",
+      "emotion": null,
+      "audio_chunks": 16
+    },
+    {
+      "request": "Sei mal sauer.",
+      "sentences": 1,
+      "reply": "Ugh!",
+      "emotion": "anger",
+      "audio_chunks": 3
+    }
+  ],
+  "page_errors": []
+}

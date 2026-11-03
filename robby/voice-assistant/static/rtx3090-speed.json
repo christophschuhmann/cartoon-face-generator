@@ -1,0 +1,196 @@
+{
+  "hardware": "Two RTX 3090 24 GiB; TTS on GPU 1; other resident services remain loaded.",
+  "versions": "torch 2.6.0+cu124, Triton 3.2.0",
+  "checkpoint": "laion/Humaneness-Voice-Small-1.1-Alpha-RL-r128-v1, revision 182bc700",
+  "source": "LAION-AI/Humaneness-Voice d3d1045; local zero-temperature sampler guard",
+  "before": {
+    "first_chunk_frames": "server default",
+    "first_pcm_s": 0.771,
+    "gap_s": 0.0,
+    "total_s": 1.81,
+    "audio_s": 4.64,
+    "timeline": [
+      [
+        0.76,
+        0.6
+      ],
+      [
+        1.25,
+        2.2
+      ],
+      [
+        1.76,
+        3.72
+      ],
+      [
+        1.81,
+        4.51
+      ]
+    ]
+  },
+  "after": {
+    "first_chunk_frames": "server default",
+    "first_pcm_s": 0.078,
+    "gap_s": 0.0,
+    "total_s": 0.637,
+    "audio_s": 4.8,
+    "timeline": [
+      [
+        0.08,
+        0.24
+      ],
+      [
+        0.13,
+        0.72
+      ],
+      [
+        0.21,
+        1.68
+      ],
+      [
+        0.59,
+        2.78
+      ],
+      [
+        0.79,
+        4.3
+      ],
+      [
+        0.84,
+        4.8
+      ]
+    ]
+  },
+  "flags": {
+    "HVS_RL_PRECISION": "bf16_merged",
+    "SMALL_LIVE_FAST_START": "1",
+    "SMALL_LIVE_FAST_TAIL_S": "0.5",
+    "SMALL_LIVE_FAST_TAIL_WORDS": "3",
+    "SMALL_LIVE_SCORE_FRACTION": "0.5",
+    "HVS_SEMANTIC_CUDA_GRAPH": "1",
+    "HVS_SEMANTIC_COMPILE": "1",
+    "HVS_SEMANTIC_BUCKET": "512",
+    "HVS_SEMANTIC_BANKS": "2",
+    "HVS_FAST_SAMPLE": "1",
+    "HVS_LOCAL_COMPILE": "0",
+    "HVS_LOCAL_TRITON": "1",
+    "HVS_CODEC_GRAPH": "1",
+    "HVS_CODEC_FUSED": "1",
+    "HVS_CHUNK_RAMP": "1",
+    "HVS_RAMP_START": "3",
+    "HUMANENESS_PRELOAD_EXPERIMENTAL": "1"
+  },
+  "quality": {
+    "scope": "Authored German TTS fixtures: timing, finite PCM, final transcription and silent-tail sanity.",
+    "rows": [
+      {
+        "text": "Heute scheint die Sonne und wir gehen gemeinsam spazieren.",
+        "cue": "contentment, soft",
+        "temperature": 0.8,
+        "first_pcm_s": 0.09107965975999832,
+        "first_nonquiet_chunk_s": 0.139277882874012,
+        "generation_s": 0.7003600373864174,
+        "audio_s": 3.31,
+        "wer": 0.0,
+        "transcript": "Heute scheint die Sonne und wir gehen gemeinsam spazieren.",
+        "rms": 0.1293954700231552,
+        "chunks": 6
+      },
+      {
+        "text": "Mein kleiner Roboter erzählt heute einen richtig lustigen Witz.",
+        "cue": "amusement, playful",
+        "temperature": 0.8,
+        "first_pcm_s": 0.08179637044668198,
+        "first_nonquiet_chunk_s": 0.12722144275903702,
+        "generation_s": 0.6293138340115547,
+        "audio_s": 3.79,
+        "wer": 0.0,
+        "transcript": "Mein kleiner Roboter erzählt heute einen richtig lustigen Witz.",
+        "rms": 0.14828796684741974,
+        "chunks": 6
+      },
+      {
+        "text": "Ich bin wirklich sauer, weil mein letzter Keks verschwunden ist.",
+        "cue": "anger, firm",
+        "temperature": 0.8,
+        "first_pcm_s": 0.08151634782552719,
+        "first_nonquiet_chunk_s": 0.12686589360237122,
+        "generation_s": 0.6375005021691322,
+        "audio_s": 4.43,
+        "wer": 0.0,
+        "transcript": "Ich bin wirklich sauer, weil mein letzter Keks verschwunden ist.",
+        "rms": 0.1577884554862976,
+        "chunks": 6
+      },
+      {
+        "text": "Wir testen heute eine klare und verständliche Stimme.",
+        "cue": "interest, natural",
+        "temperature": 0.0,
+        "first_pcm_s": 0.4610077291727066,
+        "first_nonquiet_chunk_s": 0.5188263058662415,
+        "generation_s": 1.0384613946080208,
+        "audio_s": 3.31,
+        "wer": 0.0,
+        "transcript": "Wir testen heute eine klare und verständliche Stimme.",
+        "rms": 0.3234623968601227,
+        "chunks": 6
+      }
+    ],
+    "passed": true
+  },
+  "browser_rows": [
+    {
+      "mouth_to_ear_ms": 1398,
+      "speech_end_to_asr_text_ms": 403,
+      "server_first_audio_ms": 666.39,
+      "server_llm_first_sentence_ms": 517.45,
+      "server_tts_first_audio_ms": 147.66,
+      "browser_start_buffer_ms": 315,
+      "underflows": 0,
+      "max_gap_ms": 0,
+      "speculative_asr": true,
+      "asr": "Hey, Robby, wie geht es dir heute?",
+      "config": "optimized-final",
+      "request": 0
+    },
+    {
+      "mouth_to_ear_ms": 1708,
+      "speech_end_to_asr_text_ms": 306,
+      "server_first_audio_ms": 1076.81,
+      "server_llm_first_sentence_ms": 988.49,
+      "server_tts_first_audio_ms": 86.87,
+      "browser_start_buffer_ms": 315,
+      "underflows": 0,
+      "max_gap_ms": 0,
+      "speculative_asr": false,
+      "asr": "Hey, Robby, was ist dein Lieblingsessen?",
+      "config": "optimized-final",
+      "request": 1
+    },
+    {
+      "mouth_to_ear_ms": 1150,
+      "speech_end_to_asr_text_ms": 260,
+      "server_first_audio_ms": 568.86,
+      "server_llm_first_sentence_ms": 466.47,
+      "server_tts_first_audio_ms": 101.28,
+      "browser_start_buffer_ms": 315,
+      "underflows": 0,
+      "max_gap_ms": 0,
+      "speculative_asr": true,
+      "asr": "Hey Robby, erzähl mir einen kurzen Witz.",
+      "config": "optimized-final",
+      "request": 2
+    }
+  ],
+  "browser_medians_ms": {
+    "mouth_to_ear_ms": 1398,
+    "speech_end_to_asr_text_ms": 306,
+    "server_first_audio_ms": 666.39,
+    "server_llm_first_sentence_ms": 517.45,
+    "server_tts_first_audio_ms": 101.28,
+    "browser_start_buffer_ms": 315
+  },
+  "scope": "Warm local TTS runs (three seeds per condition); synthetic browser microphone through HTTPS (three requests), no physical mic or device latency. Different seeds/numerics can produce different durations.",
+  "codec_correctness": "On three fixed seeds, BF16 waveforms were bit-identical with and without codec graphs. Reference copy cache: 262.9 ms initial encode, 0.6 ms on subsequent copies.",
+  "limitations": "BF16 and different sampling random streams can change outputs. Four zero-WER fixtures are not a comprehensive naturalness or speaker-identity evaluation. One cold-load compiled sampler failed on torch 2.6, so its flag is off; Triton local decode is enabled. First PCM can contain leading silence: in three positive-temperature quality probes the first nonquiet chunk arrived at approximately 127–139 ms. Browser results exclude physical device latency. Preliminary mouth-to-ear values counted an internal pause as speech end and are superseded by the final runs."
+}

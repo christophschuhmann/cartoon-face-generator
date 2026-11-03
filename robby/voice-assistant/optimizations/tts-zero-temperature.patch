@@ -1,0 +1,5 @@
+--- a/performance_core.py
++++ b/performance_core.py
+@@ -32,0 +33,2 @@
++    if temperature == 0:
++        return logits.argmax(dim=-1)

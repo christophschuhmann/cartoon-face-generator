@@ -10,8 +10,9 @@ ROOT=Path(__file__).resolve().parent
 
 def main():
     files=list(ROOT.glob('*.py'))
-    files += [ROOT/name for name in ['README.md','WAKE_MODE.md','SOCIAL_IDENTITY.md','PROACTIVE_ENVIRONMENT.md','RESTORE_BEFORE_PROACTIVE.md','restore-before-proactive-2026-10-27.json','TWO_STAGE_SPEECH.md','QUICK_REACTIONS.md','PERSISTENT_MEMORY.md','LFM3_LAB.md','STEM_LAB.md','minicpm-linux-fnocache.patch','VOICE_CAPTIONS.md','BRIDGE_PHRASES_PLAN.md','VOICE_ASSISTANT_TEST_PROTOCOL.md','voice_assistant_test_matrix.json','LICENSE','NOTICE','requirements.txt','requirements-asr.txt','config.example.json','.gitignore']]
+    files += [ROOT/name for name in ['README.md','RTX3090_OPTIMIZATIONS.md','WAKE_MODE.md','SOCIAL_IDENTITY.md','PROACTIVE_ENVIRONMENT.md','RESTORE_BEFORE_PROACTIVE.md','restore-before-proactive-2026-10-27.json','TWO_STAGE_SPEECH.md','QUICK_REACTIONS.md','PERSISTENT_MEMORY.md','LFM3_LAB.md','STEM_LAB.md','minicpm-linux-fnocache.patch','VOICE_CAPTIONS.md','BRIDGE_PHRASES_PLAN.md','VOICE_ASSISTANT_TEST_PROTOCOL.md','voice_assistant_test_matrix.json','LICENSE','NOTICE','requirements.txt','requirements-asr.txt','config.example.json','.gitignore']]
     files.append(ROOT/'static/VOICE_ASSISTANT_TEST_PROTOCOL.md')
+    files += [ROOT/'optimizations'/n for n in ('rtx3090-speed.env','start_rtx3090_tts.sh','test_fast_sample.py','tts-zero-temperature.patch')]
     for pattern in ['*.js','*.css','*.html','*.svg','LICENSE-MIT.txt']:files+=list((ROOT/'static').glob(pattern))
     files.append(ROOT/'static/emotion-catalog.json')
     for name in ('bolt-speed.json','bolt-speaker-speed.json','bolt-engine-comparison.json',
@@ -37,7 +38,7 @@ def main():
         path=ROOT/'static'/name
         if path.exists():files.append(path)
     # Authored synthetic quick-reaction and memory receipts, never private storage.
-    for prefix in ('quick-reaction-', 'quick-quality-', 'two-stage-', 'knowledge-memory-', 'environment-', 'social-', 'wake-', 'auto-wake-', 'name-continuity-', 'lfm3-', 'gemma12-', 'stem-lab-', 'stem-long-lab-', 'reply-face-', 'salmon-lab-', 'omni-lab-'):
+    for prefix in ('quick-reaction-', 'quick-quality-', 'two-stage-', 'knowledge-memory-', 'environment-', 'social-', 'wake-', 'auto-wake-', 'name-continuity-', 'lfm3-', 'gemma12-', 'stem-lab-', 'stem-long-lab-', 'reply-face-', 'rtx3090-', 'salmon-lab-', 'omni-lab-'):
         files+=list((ROOT/'static').glob(prefix+'*.json'))
     # Reviewed synthetic experiment implementations and original prompt only.
     files += [ROOT/'experiments/quick-reaction-v1.json']

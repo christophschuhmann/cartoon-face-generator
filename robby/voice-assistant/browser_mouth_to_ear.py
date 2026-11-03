@@ -4,8 +4,8 @@ Chromium (Playwright) gets a WAV file as its microphone: 3 s silence, a German "
 request in a different voice than Robby's, then silence. Everything is timed with the page's
 own clock (performance.now):
 
-  speech end   last loud microphone block before >= 700 ms of silence (AnalyserNode tap on
-               the captured stream), so short pauses inside the sentence don't count
+  speech end   last audible microphone block before reply playback in the controlled fixture
+               (the fake microphone contains no TTS echo), including internal pauses
   first sound  when the first Robby reply buffer is scheduled to play (AudioContext time
                mapped to performance.now); the device's own output latency is excluded
 
@@ -22,7 +22,7 @@ Runs are serialized and wait until the shared TTS server is idle.
 
 Requires: pip install playwright && python -m playwright install chromium
 """
-import argparse,asyncio,io,json,statistics
+import argparse,asyncio,io,json,statistics,subprocess
 from pathlib import Path
 import httpx,numpy as np,soundfile as sf
 from playwright.async_api import async_playwright
@@ -46,7 +46,7 @@ AudioBufferSourceNode.prototype.start=function(when,...rest){
   if(this.roboId)m2e.plays.push({id:this.roboId,dur:this.buffer.duration,at:performance.now(),
     audible:performance.now()+Math.max(0,(when||0)-this.context.currentTime)*1000});
   return start.call(this,when,...rest);};
-localStorage.setItem('robby.cameraAuto','false');localStorage.setItem('robby.cameraAutoVersion','3');
+localStorage.setItem('robby.memoryDefaultVersion','1');localStorage.setItem('robby.memorySettings',JSON.stringify({enabled:false}));localStorage.setItem('robby.cameraAuto','false');localStorage.setItem('robby.cameraAutoVersion','3');
 localStorage.setItem('robby.avatar-idle-enabled','false');localStorage.setItem('robby.avatar-pet-invites-enabled','false');
 """
 
@@ -65,7 +65,11 @@ def fixtures():
             with client.stream('POST','/api/turn',json=body) as response:
                 for line in response.iter_lines():
                     if line.startswith('data: ') and json.loads(line[6:]).get('event')=='result':result=json.loads(line[6:])
-            wave,rate=sf.read(io.BytesIO(client.get(result['candidates'][0]['url']).content),dtype='float32')
+            response=client.get(result['candidates'][0]['url']);response.raise_for_status()
+            try:wave,rate=sf.read(io.BytesIO(response.content),dtype='float32')
+            except RuntimeError:
+                raw=subprocess.run(['ffmpeg','-v','error','-i','pipe:0','-f','f32le','-ac','1','-ar','48000','pipe:1'],input=response.content,capture_output=True,check=True).stdout
+                wave=np.frombuffer(raw,dtype='<f4');rate=48000
             sf.write(path,wave.mean(1) if wave.ndim>1 else wave,rate)
     return paths
 
@@ -78,7 +82,7 @@ async def tts_idle():
 
 async def run_once(playwright,mic,url,reserve):
     await tts_idle()
-    browser=await playwright.chromium.launch(headless=True,args=['--no-sandbox','--use-fake-device-for-media-stream',
+    browser=await playwright.chromium.launch(executable_path='/usr/bin/google-chrome',headless=True,args=['--no-sandbox','--use-fake-device-for-media-stream',
         '--use-fake-ui-for-media-stream','--use-file-for-fake-audio-capture='+str(mic),'--autoplay-policy=no-user-gesture-required'])
     page=await browser.new_page()
     await page.add_init_script(INIT+(f"localStorage.setItem('robby.startReserveMs','{reserve}');" if reserve else "localStorage.removeItem('robby.startReserveMs');"))
@@ -92,7 +96,9 @@ async def run_once(playwright,mic,url,reserve):
         data=await page.evaluate('m2e');metrics=await page.evaluate('robo.metrics')
     finally:await browser.close()
     first=data['plays'][0];loud=[t for t in data['loud'] if t<first['at']]
-    speech_end=next((a for a,b in zip(loud,loud[1:]+[first['at']]) if b-a>=700),None)
+    # The microphone is a known prerecorded fixture and contains no speaker echo.
+    # Use its final audible block: a pause after 'Hey Robby' is not the utterance end.
+    speech_end=loud[-1] if loud else None
     if speech_end is None:raise RuntimeError('No speech end before the reply')
     asr=next((m for m in data['msgs'] if m['type']=='asr_sentence'),None)
     server=next((m['m'] for m in data['msgs'] if m['type']=='pipeline_metrics' and m['m'].get('first_audio_ms')),{})
