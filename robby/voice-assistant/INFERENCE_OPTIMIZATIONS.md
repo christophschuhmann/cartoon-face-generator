@@ -1,5 +1,7 @@
 # Inference optimizations: fast streaming speech on small GPUs
 
+For measured results on two RTX 3090 cards with PyTorch 2.6/CUDA 12.4, see [RTX3090_OPTIMIZATIONS.md](RTX3090_OPTIMIZATIONS.md).
+
 This guide explains how we made the Humaneness Voice **Small RL** text-to-speech model
 (and the Robby voice assistant built on it) start speaking much sooner. The numbers
 in this guide come from an **NVIDIA Jetson Thor**, but most of the ideas apply to any

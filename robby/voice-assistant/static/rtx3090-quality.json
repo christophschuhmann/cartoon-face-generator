@@ -1,0 +1,58 @@
+{
+  "scope": "Authored German TTS fixtures: timing, finite PCM, final transcription and silent-tail sanity.",
+  "rows": [
+    {
+      "text": "Heute scheint die Sonne und wir gehen gemeinsam spazieren.",
+      "cue": "contentment, soft",
+      "temperature": 0.8,
+      "first_pcm_s": 0.09107965975999832,
+      "first_nonquiet_chunk_s": 0.139277882874012,
+      "generation_s": 0.7003600373864174,
+      "audio_s": 3.31,
+      "wer": 0.0,
+      "transcript": "Heute scheint die Sonne und wir gehen gemeinsam spazieren.",
+      "rms": 0.1293954700231552,
+      "chunks": 6
+    },
+    {
+      "text": "Mein kleiner Roboter erzählt heute einen richtig lustigen Witz.",
+      "cue": "amusement, playful",
+      "temperature": 0.8,
+      "first_pcm_s": 0.08179637044668198,
+      "first_nonquiet_chunk_s": 0.12722144275903702,
+      "generation_s": 0.6293138340115547,
+      "audio_s": 3.79,
+      "wer": 0.0,
+      "transcript": "Mein kleiner Roboter erzählt heute einen richtig lustigen Witz.",
+      "rms": 0.14828796684741974,
+      "chunks": 6
+    },
+    {
+      "text": "Ich bin wirklich sauer, weil mein letzter Keks verschwunden ist.",
+      "cue": "anger, firm",
+      "temperature": 0.8,
+      "first_pcm_s": 0.08151634782552719,
+      "first_nonquiet_chunk_s": 0.12686589360237122,
+      "generation_s": 0.6375005021691322,
+      "audio_s": 4.43,
+      "wer": 0.0,
+      "transcript": "Ich bin wirklich sauer, weil mein letzter Keks verschwunden ist.",
+      "rms": 0.1577884554862976,
+      "chunks": 6
+    },
+    {
+      "text": "Wir testen heute eine klare und verständliche Stimme.",
+      "cue": "interest, natural",
+      "temperature": 0.0,
+      "first_pcm_s": 0.4610077291727066,
+      "first_nonquiet_chunk_s": 0.5188263058662415,
+      "generation_s": 1.0384613946080208,
+      "audio_s": 3.31,
+      "wer": 0.0,
+      "transcript": "Wir testen heute eine klare und verständliche Stimme.",
+      "rms": 0.3234623968601227,
+      "chunks": 6
+    }
+  ],
+  "passed": true
+}
