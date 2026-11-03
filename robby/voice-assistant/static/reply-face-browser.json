@@ -1,0 +1,49 @@
+{
+  "passed": true,
+  "scope": "Synthetic typed requests with Qwen 27B, real TTS and rendered screen avatar. No physical microphone.",
+  "turns": [
+    {
+      "request": "Erkläre mir in zwei Sätzen, warum es Tag und Nacht gibt.",
+      "sentences": 2,
+      "reply": "Tag und Nacht entstehen, weil sich die Erde auf ihrer eigenen Achse dreht und dabei verschiedene Hälften abwechselnd der Sonne zugewandt sind.\nWenn dein Standort dem Licht zugewandt ist, hast du Tag, und wenn er sich davon wegdreht, wird es Nacht.",
+      "emotion": null,
+      "audio_chunks": 15
+    },
+    {
+      "request": "Erkläre mir in drei Sätzen, warum Katzen schnurren.",
+      "sentences": 3,
+      "reply": "Katzen schnurren vor allem, um sich wohlzufühlen und ihre Zufriedenheit zu zeigen.\nAber sie tun das auch, wenn sie gestresst sind oder sich selbst bei kleineren Verletzungen beruhigen wollen.\nManche Forscher glauben sogar, dass dieses Vibrationsschnurren sogar zur Heilung von Knochen und Gewebe beitragen kann.",
+      "emotion": null,
+      "audio_chunks": 18
+    },
+    {
+      "request": "Erkläre mir in vier Sätzen, warum der Mond leuchtet.",
+      "sentences": 4,
+      "reply": "Der Mond erzeugt selbst kein Licht, sondern reflektiert das Sonnenlicht mit seiner Oberfläche.\nJe nach Stand des Mondes zur Sonne sehen wir so unterschiedliche Teile seiner beleuchteten Seite.\nDeshalb erscheint er uns abwechselnd als dünne Sichel, Halbmond oder voller Mond.\nDas ist der Grund, warum er nachts so hell und freundlich am Himmel steht.",
+      "emotion": null,
+      "audio_chunks": 24
+    },
+    {
+      "request": "Erkläre mir in fünf Sätzen, warum Regen entsteht.",
+      "sentences": 5,
+      "reply": "Wasser verdunstet von Seen, Meeren und Pflanzen und steigt als unsichtbarer Dampf in die Luft auf.\nIn größeren Höhen wird diese Luft kälter, sodass sich der Dampf in winzige Tröpfchen oder Eiskristalle verwandelt.\nDiese kleinen Partikel haften an Staubkörnern und wachsen zusammen zu immer schwereren Wassertropfen.\nWenn die Tropfen zu schwer für den Luftstrom werden, fallen sie als Regen zurück auf die Erde.\nSo wandert das Wasser in einem großen Kreislauf immer wieder zwischen Himmel und Boden hin und her.",
+      "emotion": null,
+      "audio_chunks": 34
+    },
+    {
+      "request": "Sei mal sauer.",
+      "sentences": 3,
+      "reply": "*Robbins Augen fangen an, rot zu flackern, und sein kleiner Lautsprecher piepst kurz und streng auf.*\nIch bin jetzt offiziell sauer!\nWer hat das denn hier angestellt?!",
+      "emotion": "anger",
+      "audio_chunks": 15
+    },
+    {
+      "request": "Kannst du bitte traurig sein?",
+      "sentences": 1,
+      "reply": "Ja, mein kleines Metallherz fühlt sich gerade ein bisschen schwer an.",
+      "emotion": "sadness",
+      "audio_chunks": 5
+    }
+  ],
+  "page_errors": []
+}
