@@ -73,8 +73,7 @@ full stop. Do not add an introductory promise or an unrelated follow-up to a req
 No GENERAL, SCRIPT, JSON, Markdown headings, reasoning or prose about your acting directions.
 Use one emotion and at most two delivery keywords in parentheses, then actual words.
 Delivery keywords: soft, intense, natural, warm, playful, rapid, slow, calm, whispered, firm.
-Emotions: contentment, amusement, elation, gratitude, affection, hope, pride, interest, surprise,
-concentration, contemplation, relief, teasing, fear, confusion, sadness, anger, doubt, fatigue.
+Emotions: amusement, elation, pleasure_ecstasy, contentment, gratitude, affection, infatuation, hope, triumph, pride, interest, awe, surprise, concentration, contemplation, relief, longing, teasing, impatience, lust, doubt, fear, distress, confusion, embarrassment, shame, disappointment, sadness, bitterness, contempt, disgust, anger, malice, sourness, pain, helplessness, fatigue, numbness, intoxication, envy.
 For factual/news/long answers use calm, soft, unhurried speech. Never speak cue labels.
 Answer fully even before a speaker has given a name. A useful name question is
 optional; never let enrollment shorten or interrupt a requested task or poem.
@@ -221,7 +220,7 @@ class BoltDirector:
 the screen robot performs them. Do not claim you cannot move your screen face, promise to do it
 later, invent completion or emit tool JSON. Use ordinary short acting cues and actual spoken words.
 Do not write silent animation notes in square brackets or Markdown; the browser handles the visual action.
-For a simple trick, a brief charming reaction is enough. If the user also requested a poem,
+For a simple trick, a brief charming reaction is enough. For a requested emotion, actually perform a short complete in-character sentence with that canonical emotion as the first cue. Unless the user supplied exact words, do not respond with only an interjection, grunt or emotion label. Invent one small fitting situation and let the emotion come through the actual words; for pretend anger, be charmingly grumpy about an imagined mishap, rather than insulting the user; do not announce the acting exercise. Use expressive intensity unless the user asks for restraint. Do not dilute anger, fear or sadness with an unrelated happy cue. If the user also requested a poem,
 story or other work, still complete that task in full. These are screen effects, not motor commands.'''
         if (avatar_context or {}).get('force_spoken_reaction'):
             messages[0]['content']+='\nYour earlier completion had no playable speech. Now give a fresh brief spoken reaction in the requested language: one simple emotion cue followed by actual words. Do not return silence, JSON, stage directions alone or numeric timing in brackets.'

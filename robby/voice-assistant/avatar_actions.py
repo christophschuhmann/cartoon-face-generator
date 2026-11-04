@@ -25,6 +25,10 @@ def explicit_spin(text):
         direct=re.search(r'^(?:(?:ja|okay|also|bitte|nochmal|noch mal|jetzt|mal|robb[yi]|hey)\s*[,!:]?\s*)*(?:(?:kannst|könntest|würdest|willst)\s+du\s+)?(?:dreh(?:e|en)?|rotier(?:e|en)?|spin|rotate)\b',t)
         if not direct:
             direct=re.fullmatch(r'(?:(?:bitte|please|nochmal|noch mal|sich|dich)\s+)*(?:im\s+kreis|rundherum|einmal\s+herum|360\s*(?:grad|degrees|°))\s+(?:drehen|rotieren)(?:\s+bitte)?[.!?]*',t)
+    if not direct:
+        direct=re.search(r'\b(?:mach\w*|zeig\w*|führe?|fuehre?|vollführ\w*|vollfuehr\w*|mache?|do|make|perform)\b.{0,65}\b(?:drehung|umdrehung|rotation|360\s*(?:grad|degrees|°)|(?:full|complete)\s+(?:turn|rotation))\b',t)
+    if not direct and re.search(r'\b(?:drehung|umdrehung|rotation)\b',t):
+        direct=re.search(r'\b(?:(?:kannst|könntest|würdest)\s+du|ich\s+(?:möchte|moechte|will)\s*,?\s*dass\s+du)\b',t)
     if not direct:return []
     direction='counterclockwise' if re.search(r'gegen\s+den\s+uhrzeigersinn|counter[- ]?clockwise|anti[- ]?clockwise',t) else 'clockwise'
     return [{'kind':'spin','duration_s':6.,'sentence':0,'direction':direction}]

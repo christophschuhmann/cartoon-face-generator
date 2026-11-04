@@ -22,11 +22,22 @@ class CommandTests(unittest.TestCase):
         for text in ['Mach eine Grimasse und sag etwas Lustiges.','Mach eine Grimasse und sag "Hallo".','Mach bitte grimmassen.','Sag etwas Lustiges und mach eine Grimasse.']:
             self.assertTrue(explicit_actions(text),text)
     def test_direct_emotional_requests_trigger_the_correct_face(self):
-        for text in ('Sei mal sauer.', 'Kannst du bitte wütend sein?', 'Kannst du sauer sein?', 'Be angry.', 'Ich möchte, dass du sauer bist.', 'Tu so als wärst du wütend.'):
+        for text in ('Sei mal sauer.', 'Kannst du bitte wütend sein?', 'Kannst du sauer sein?', 'Be angry.', 'Ich möchte, dass du sauer bist.', 'Tu so als wärst du wütend.', 'Show anger.'):
             actions=explicit_actions(text)
             self.assertEqual([(a['kind'],a['emotion']) for a in actions],[('emotion','anger')],text)
         self.assertEqual(explicit_actions('Sei mal traurig.')[0]['emotion'],'sadness')
         for text in ('Ich bin sauer.', 'Erkläre mir, warum du sauer bist.', 'Sei nicht sauer.', 'Sag "Sei sauer".'):
+            self.assertEqual(explicit_actions(text),[],text)
+
+    def test_noun_commands_and_all_german_emotion_names(self):
+        from emotion_recipes import GERMAN
+        for text in ('Mach eine Drehung.', 'Kannst du eine Drehung machen?', 'Führe eine Drehung durch.', 'Ich möchte, dass du eine Drehung machst.'):
+            self.assertEqual(explicit_actions(text)[0]['kind'],'spin',text)
+        self.assertEqual(explicit_actions('Führe eine Drehung gegen den Uhrzeigersinn durch.')[0]['direction'],'counterclockwise')
+        for slug,names in GERMAN.items():
+            text='Zeig mir '+names.split('|')[0]+'.'
+            self.assertEqual(explicit_actions(text)[0]['emotion'],slug,text)
+        for text in ('Erkläre eine Drehung.', 'Mach keine Drehung.', 'Ich habe eine Drehung gesehen.', 'Zeig mir eine traurige Geschichte.'):
             self.assertEqual(explicit_actions(text),[],text)
 
     def test_negation_quotes_explanations_conditions_and_descriptions_never_trigger(self):
@@ -88,6 +99,18 @@ class PipelineTests(unittest.IsolatedAsyncioTestCase):
                 events=[(k,v) async for k,v in pipeline(None,'Mach eine Grimasse.',{},[],tts=False)]
             self.assertEqual(len(calls),2);self.assertEqual(sum(k=='avatar_action' for k,v in events),1)
             self.assertTrue(any(k=='sentence' for k,v in events))
+    async def test_requested_emotion_is_shared_with_tts_even_if_model_cue_is_neutral(self):
+        from bolt_pipeline import pipeline
+        from bolt_text import Sentence
+        async def words(*args,**kwargs):yield Sentence('Mein letzter Keks ist weg!','contentment, soft',language='de')
+        with patch('bolt_pipeline.BoltDirector.stream',words):
+            events=[(k,v) async for k,v in pipeline(None,'Zeig mir Wut.',{},[],tts=False)]
+        self.assertEqual(events[0][1]['steps'][0]['emotion'],'anger')
+        part=next(v for k,v in events if k=='sentence')
+        self.assertEqual(part['template_id'],'anger.intense')
+        self.assertEqual(part['performance']['sentences'][0]['emotion'],'anger')
+        self.assertIn('(anger, intense, natural)',part['script'])
+
     async def test_explicitly_silent_request_needs_neither_llm_nor_tts(self):
         from bolt_pipeline import pipeline
         with patch('bolt_pipeline.BoltDirector.stream',side_effect=AssertionError('Silent action')):

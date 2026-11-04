@@ -10,7 +10,7 @@ ROOT=Path(__file__).resolve().parent
 
 def main():
     files=list(ROOT.glob('*.py'))
-    files += [ROOT/name for name in ['README.md','RTX3090_OPTIMIZATIONS.md','WAKE_MODE.md','SOCIAL_IDENTITY.md','PROACTIVE_ENVIRONMENT.md','RESTORE_BEFORE_PROACTIVE.md','restore-before-proactive-2026-10-27.json','TWO_STAGE_SPEECH.md','QUICK_REACTIONS.md','PERSISTENT_MEMORY.md','LFM3_LAB.md','STEM_LAB.md','minicpm-linux-fnocache.patch','VOICE_CAPTIONS.md','BRIDGE_PHRASES_PLAN.md','VOICE_ASSISTANT_TEST_PROTOCOL.md','voice_assistant_test_matrix.json','LICENSE','NOTICE','requirements.txt','requirements-asr.txt','config.example.json','.gitignore']]
+    files += [ROOT/name for name in ['README.md','STUNTS_AND_EMOTIONS.md','RTX3090_OPTIMIZATIONS.md','WAKE_MODE.md','SOCIAL_IDENTITY.md','PROACTIVE_ENVIRONMENT.md','RESTORE_BEFORE_PROACTIVE.md','restore-before-proactive-2026-10-27.json','TWO_STAGE_SPEECH.md','QUICK_REACTIONS.md','PERSISTENT_MEMORY.md','LFM3_LAB.md','STEM_LAB.md','minicpm-linux-fnocache.patch','VOICE_CAPTIONS.md','BRIDGE_PHRASES_PLAN.md','VOICE_ASSISTANT_TEST_PROTOCOL.md','voice_assistant_test_matrix.json','LICENSE','NOTICE','requirements.txt','requirements-asr.txt','config.example.json','.gitignore']]
     files.append(ROOT/'static/VOICE_ASSISTANT_TEST_PROTOCOL.md')
     files += [ROOT/'optimizations'/n for n in ('rtx3090-speed.env','start_rtx3090_tts.sh','test_fast_sample.py','tts-zero-temperature.patch')]
     for pattern in ['*.js','*.css','*.html','*.svg','LICENSE-MIT.txt']:files+=list((ROOT/'static').glob(pattern))
@@ -38,7 +38,7 @@ def main():
         path=ROOT/'static'/name
         if path.exists():files.append(path)
     # Authored synthetic quick-reaction and memory receipts, never private storage.
-    for prefix in ('quick-reaction-', 'quick-quality-', 'two-stage-', 'knowledge-memory-', 'environment-', 'social-', 'wake-', 'auto-wake-', 'name-continuity-', 'lfm3-', 'gemma12-', 'stem-lab-', 'stem-long-lab-', 'reply-face-', 'rtx3090-', 'salmon-lab-', 'omni-lab-'):
+    for prefix in ('quick-reaction-', 'quick-quality-', 'two-stage-', 'knowledge-memory-', 'environment-', 'social-', 'wake-', 'auto-wake-', 'name-continuity-', 'lfm3-', 'gemma12-', 'stem-lab-', 'stem-long-lab-', 'reply-face-', 'rtx3090-', 'stunts-emotions-', 'salmon-lab-', 'omni-lab-'):
         files+=list((ROOT/'static').glob(prefix+'*.json'))
     # Reviewed synthetic experiment implementations and original prompt only.
     files += [ROOT/'experiments/quick-reaction-v1.json']
@@ -77,11 +77,11 @@ def main():
     # Retain every synthetic stress attempt (including failures), compacting
     # JSON whitespace only. The new evidence adds about 8 MB of text.
     # The UTF-8, path allowlist and credential checks above still apply.
-    # Expanded 28-MB cap also retains the reviewed sound-diversity receipts,
+    # Expanded 32-MB cap retains the reviewed authored action/listening probes, plus the reviewed sound-diversity receipts,
     # CPU-event implementation and failed browser attempts. JSON compaction
     # removes whitespace only; no event or failed measurement is discarded.
     # No binary/secret/path checks are relaxed.
-    if sum(len(raw) for raw in payload.values())>28_000_000:raise ValueError('Unexpected source export size: '+str(sum(len(raw) for raw in payload.values())))
+    if sum(len(raw) for raw in payload.values())>32_000_000:raise ValueError('Unexpected source export size: '+str(sum(len(raw) for raw in payload.values())))
     folder=ROOT/'releases';folder.mkdir(exist_ok=True)
     target=folder/'robby-source.zip';temporary=folder/'robby-source.tmp.zip'
     with zipfile.ZipFile(temporary,'w',zipfile.ZIP_DEFLATED) as archive:

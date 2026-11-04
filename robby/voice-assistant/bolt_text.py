@@ -6,7 +6,8 @@ lookup is an in-memory nearest-neighbour search over sparse lexical features.
 from dataclasses import dataclass
 import math
 import re
-from performance import SLUGS, cue
+from performance import SLUGS, cue, PATTERNS
+from emotion_recipes import TTS
 
 REFERENCE = "Use the same speaker as the reference audio. Preserve that speaker's voice identity."
 DELIVERIES = ('natural', 'soft', 'calm', 'warm', 'playful', 'rapid', 'slow', 'whispered', 'firm', 'conversational')
@@ -27,8 +28,8 @@ def cosine(a,b):
 CATALOGUE=[]
 for emotion in SLUGS:
     for level in ('soft','intense'):
-        description=(f"Express {emotion.replace('_',' ')} with {'gentle, subtle' if level=='soft' else 'vivid, expressive'} acting. "
-                     "Keep articulation clear and the delivery natural, spontaneous and conversational.")
+        description=("Express "+emotion.replace("_"," ")+". "+TTS[emotion]+" "+("Keep the emotion contained but recognizable." if level=='soft' else
+                     "Make the emotion vivid and unmistakable; keep clear diction.")+" Perform the line spontaneously, not as a label or an instruction.")
         CATALOGUE.append({'id':f'{emotion}.{level}','emotion':emotion,'level':level,
                           'keywords':features(emotion+' '+level),'general':REFERENCE+' '+description})
 for delivery in DELIVERIES:
@@ -43,9 +44,14 @@ def select_template(direction):
     # Emotion aliases also cover the existing 40-expression performance map.
     inferred=cue(direction)['emotion']
     explicit=any(k in SLUGS for k in query)
+    if explicit:inferred=next(k for k in query if k in SLUGS)
     if not explicit and not any(k in DELIVERIES for k in query):query[inferred]=1
     query.setdefault('intense' if re.search(r'\b(intense|strong|loud|very|rapid)\b',direction,re.I) else 'soft',1)
-    row=max(CATALOGUE,key=lambda t:cosine(query,t['keywords']))
+    # A named emotional cue must never lose to a generic 'warm'/'soft' modifier.
+    level='intense' if query.get('intense') else 'soft'
+    emotional=any(pattern.search(direction) for pattern in PATTERNS.values()) or explicit
+    choices=[t for t in CATALOGUE if t['id']==inferred+'.'+level] if emotional else CATALOGUE
+    row=max(choices,key=lambda t:cosine(query,t['keywords']))
     general=row['general']
     # A second keyword selects a fixed modifier; it costs no LLM output prose.
     modifiers={
