@@ -33,8 +33,8 @@
       "bytes": 8222
     },
     "README.md": {
-      "sha256": "f0b9376982dd79a47209e6bc586aac66cf67d197dd6d9eda6a224e1d6f7ffab7",
-      "bytes": 185453
+      "sha256": "dcd8dbc605554a8216faf4d4f9a6d3039b81fe53a114ade573bb85be8c447c23",
+      "bytes": 186018
     },
     "RESTORE_BEFORE_PROACTIVE.md": {
       "sha256": "cce1cc637c17540da5b5847f79158a75f013a6fde6bbf67c34677aa334b29507",
@@ -53,8 +53,8 @@
       "bytes": 9116
     },
     "VOICE_ASSISTANT_TEST_PROTOCOL.md": {
-      "sha256": "5b13c1d089bdfd852cb4921e312aa97a8d0f64272101033eae2d135e327e529d",
-      "bytes": 91359
+      "sha256": "8414a0301b59f5a7d47a96fb7f1b9385c6d190dbe24b79a6f324866a9a36a9cb",
+      "bytes": 92489
     },
     "VOICE_CAPTIONS.md": {
       "sha256": "2efe2eb92e67bb76eafdcde40a8baac95219aa161b496e50d3198cf1376578d8",
@@ -109,16 +109,16 @@
       "bytes": 1426
     },
     "avatar_actions.py": {
-      "sha256": "b05447406b2df18f334ec0784e0e2f79ab2cc7a0a0d90d9f9e7757996bd8cdc7",
-      "bytes": 7215
+      "sha256": "ccfde61bdd29b9e003277b11a1a56c1b39a0a8251d829f0431ec7cf2f87dee2a",
+      "bytes": 7655
     },
     "avatar_browser_checks.py": {
       "sha256": "cb8b266c8da08bae575fe79778c8243b038a33c320334690698a9b5a4359502f",
       "bytes": 10935
     },
     "avatar_commands.py": {
-      "sha256": "7999dc9e1606066ed18d6bce5767450e3ecf28a8fafa8e561ae15af1b6fdda8a",
-      "bytes": 6154
+      "sha256": "ca6fd62a0824cabd372f280f3b69b20fd64829575bbfb6fb100a8159ee24e287",
+      "bytes": 6780
     },
     "avatar_decision_checks.py": {
       "sha256": "54f03227aed5d40d79d30ec2a9f76594c0eb31a0ee7001846a98f34fc387ec97",
@@ -217,20 +217,20 @@
       "bytes": 12826
     },
     "bolt_director.py": {
-      "sha256": "9ecfdcac32508f8bc87b87c4bed01df4a6ff876a9cba5ab994765cfbc9f75de4",
-      "bytes": 31016
+      "sha256": "b4c90dcf1bca56cd396a355b6077425a28fdc03252cd341b0311dea90b4dc4d8",
+      "bytes": 31814
     },
     "bolt_pipeline.py": {
-      "sha256": "7c766ca56d03b846465ce26f82256eb846d24a5e0697211e1421bdfcb946b82b",
-      "bytes": 15862
+      "sha256": "686061203577c88c7939c5a580f90cdfb38b342942fe8fca502935923f362d29",
+      "bytes": 16546
     },
     "bolt_socket_check.py": {
       "sha256": "05205c66c51fcb05804ec5394402f74e0806724d85d4f6d8654e49432b313c78",
       "bytes": 3794
     },
     "bolt_text.py": {
-      "sha256": "6764c82c0a0e7d72177e5441ac0a200417764a89492233b643ae02f68290455f",
-      "bytes": 11028
+      "sha256": "5d43bb8aa2918a8d26b85f85d1f97bfe2baba7b9080e1ebfe078e866a44b9215",
+      "bytes": 11515
     },
     "bootstrap.py": {
       "sha256": "a9f1ad43f46c3f4a78705bf25191182634d02cd1e1f2834d522ed32476a238c2",
@@ -677,8 +677,8 @@
       "bytes": 1479
     },
     "export_source.py": {
-      "sha256": "0ef83b9ad9c9384e6557c06755c858b2c93c0a81d82c16d262ff446f3862f53d",
-      "bytes": 7510
+      "sha256": "dba4901e2cbf05a1d3109971ba654b6e4a3fd495730123615f3e4e61f3c55eb6",
+      "bytes": 7602
     },
     "expression_checks.py": {
       "sha256": "3e5408a367212f56ce798c44b203bf8d9c2293644b10bd41eafcedd69be7dfb5",
@@ -1001,8 +1001,8 @@
       "bytes": 62406
     },
     "server.py": {
-      "sha256": "771ecaf3178ab3014e09a241f6db85018512d53056f713d3e7c4522247e2829a",
-      "bytes": 65280
+      "sha256": "e08f961a75c4b70fe9ce5edb9beda552d35bd5a22f8308364323dae1f72618eb",
+      "bytes": 65405
     },
     "shared_cancel_check.py": {
       "sha256": "4f428516a72283657363c741d1359e8d098083646c67e07b9b7806f6145d606f",
@@ -1801,8 +1801,8 @@
       "bytes": 8775
     },
     "static/index.html": {
-      "sha256": "38f876c55d78b995d6ac651a5074a6266c9593130df7ae938ac1e6c4f72eb5d8",
-      "bytes": 13720
+      "sha256": "3365f202ddf5dba4bb18102e9c6156093ae529aac3c0f721da2e617f3e02a765",
+      "bytes": 13845
     },
     "static/internal-note-model.json": {
       "sha256": "72f8c588ca2d6875f2099d3fd3449cd2ecc82f3c7d4800b74c46826153a95fdc",
@@ -2681,8 +2681,8 @@
       "bytes": 2636
     },
     "static/worklog.html": {
-      "sha256": "4bfc888a1489852bad51be5a52690abc8c454baea5a01477fc485633f3db0eb0",
-      "bytes": 72938
+      "sha256": "b2b499e9bbc47b9ef465c45b0046f06f3a4a730d3de70f33420a6da0a7d16590",
+      "bytes": 73805
     },
     "stem_lab.py": {
       "sha256": "9f0ac12b0cc68c6a0a011ee056865b0d183309bcc27d252af007d41fe557b383",
@@ -2737,16 +2737,16 @@
       "bytes": 4602
     },
     "test_avatar_commands.py": {
-      "sha256": "d2e8d5063494b29b651039322594001f0463d5f6c8ccb511897c684a9451afe8",
-      "bytes": 6946
+      "sha256": "6bc82f5deff447cc6f672cef5fac3a514c45667d81e492bcf59ed8055d8257ea",
+      "bytes": 8588
     },
     "test_avatar_personality.py": {
       "sha256": "2822c93f4e760f3c8ecb224203c1de0f0c62372f63e3860cd613e1ed87007da6",
       "bytes": 6033
     },
     "test_bolt.py": {
-      "sha256": "e1cc1a869fed2552fe54c7c8e904ce0fada890e3c6933fb73deca1a442cd7cef",
-      "bytes": 22160
+      "sha256": "f60b063588cb53b2d229fd1d9604d8d48d177176fb1b2a93680fe490fbda3b1d",
+      "bytes": 22717
     },
     "test_bridge.py": {
       "sha256": "2ea440a35251ed61cf985139c93fcc02155008de6891b93320c6c7ceb25981eb",
@@ -3051,6 +3051,50 @@
     "INFERENCE_OPTIMIZATIONS.md": {
       "sha256": "144eb5568f2aad60a2c09c1a68ae15f5198c706c554256ff842c32e7dbd90337",
       "bytes": 38137
+    },
+    "emotion_recipes.py": {
+      "sha256": "059fc6e94de291c09810ee93b912cd6bb6e3eafb93e357ec99d4a9d3ee5a73d2",
+      "bytes": 6556
+    },
+    "browser_stunts_emotions_check.py": {
+      "sha256": "8b18f769ac42d7a474433227d908204226480820f828150fd07dc6188b0d8a6a",
+      "bytes": 5134
+    },
+    "browser_spoken_stunts_check.py": {
+      "sha256": "604eb00ffc934b925841ba09824d425cb9ea0f31e8c3aafbf7674a0f4a962024",
+      "bytes": 3072
+    },
+    "validate_emotion_recipes.py": {
+      "sha256": "a753020b04359de31200614aafc56616f5dc1b136738a0258cafdb7762476370",
+      "bytes": 4721
+    },
+    "write_stunt_report.py": {
+      "sha256": "1b571b9b22182177d2e41c865de2d32575ca29e052b9920793647cb4b10eeb5d",
+      "bytes": 1748
+    },
+    "STUNTS_AND_EMOTIONS.md": {
+      "sha256": "f627b8f5c30acd88a69db342b55beaff77ed5ef1cafc32b95d0829526fc5844f",
+      "bytes": 5020
+    },
+    "static/stunts-emotions.html": {
+      "sha256": "827c765a38a20fbfa4d304f5e0ee8cfd11654521e9e2618b2fd0cb00b6af13f5",
+      "bytes": 698245
+    },
+    "static/stunts-emotions-spoken.json": {
+      "sha256": "74269d5756131a1bb861d5f1d62562387546059b7e45fcbbc87841916e939a30",
+      "bytes": 1484
+    },
+    "static/stunts-emotions-browser.json": {
+      "sha256": "edf5a6f0006dbdf8072a7d1afbcdb3a690a8b4b2e4010619903e8f7b6e36e639",
+      "bytes": 43857
+    },
+    "static/stunts-emotions-audio-initial.json": {
+      "sha256": "4b5b9a894314613c8f9eb18bf8e297e64ef25ba4fa3fd8b6f563764def851b8f",
+      "bytes": 461750
+    },
+    "static/stunts-emotions-audio.json": {
+      "sha256": "27ffa49b4be75719ff122a1b8e390f95e861492eded9afeb088f1b36be18a035",
+      "bytes": 442338
     }
   },
   "private_recordings": 0,

@@ -6,12 +6,13 @@ with normal conversation/tools. No motor/device commands are ever produced.
 import re
 from avatar_actions import VARIANTS,explicit_spin,validate
 from performance import ALIASES
+from emotion_recipes import GERMAN
 
 _BLOCK=re.compile(r'\b(?:wenn|falls|if|example|beispiel|zitiere|quote|erklär\w*|explain|beschreib\w*|describe|warum|why)\b',re.I)
 _SPEECH_ONLY=re.compile(r'^\s*(?:(?:(?:bitte|please)|(?:(?:kannst|könntest|würdest)\s+du|(?:can|could|would)\s+you)(?:\s+mir)?(?:\s+bitte|\s+please)?)\s+)?(?:sag(?:e|en)?|say|repeat|wiederhol\w*)\b',re.I)
-_REQUEST=re.compile(r'\b(?:bitte|please|kannst\s+du|könntest\s+du|würdest\s+du|can\s+you|could\s+you|would\s+you)\b|^(?:(?:ja|okay|also|hey|robb[yi]|well|now|first|erst)\s*[,!:]?\s+){0,3}(?:mach\w*|schneid\w*|zieh\w*|zeig\w*|guck\w*|schau\w*|schiel\w*|nick(?:e|en)?|zwinker\w*|schüttel\w*|shake|roll\w*|augenroll\w*|verdreh\w*|dreh\w*|grins\w*|sei|wirke|werde|make|show|do|look|act|be|nod|wink|cross|spin|rotate)\b',re.I)
+_REQUEST=re.compile(r'\b(?:bitte|please|kannst\s+du|könntest\s+du|würdest\s+du|can\s+you|could\s+you|would\s+you)\b|^(?:(?:ja|okay|also|hey|robb[yi]|well|now|first|erst)\s*[,!:]?\s+){0,3}(?:mach\w*|schneid\w*|zieh\w*|zeig\w*|guck\w*|schau\w*|schiel\w*|nick(?:e|en)?|zwinker\w*|schüttel\w*|shake|roll\w*|augenroll\w*|verdreh\w*|dreh\w*|grins\w*|nimm|sieh|demonstrier\w*|vollführ\w*|vollfuehr\w*|rotier\w*|führ\w*|fuehr\w*|stell\w*|spiel\w*|sei|wirke|werde|make|show|perform|demonstrate|do|look|act|be|nod|wink|cross|spin|rotate)\b',re.I)
 _FACE=re.compile(r'\b(?:grim+ass\w*|grimace\w*|(?:funny|silly|cute|goofy|crazy)\s+faces?|fischgesicht|(?:lustig\w*|komisch\w*|verrückt\w*)\s+gesicht)\b',re.I)
-_EMOTIONS={slug:re.compile(r'(?<!\w)(?:'+re.escape(slug)+'|'+aliases+r')(?:e|en|es|er|em)?(?!\w)',re.I) for slug,aliases in ALIASES.items()}
+_EMOTIONS={slug:re.compile(r'(?<!\w)(?:'+re.escape(slug)+'|'+aliases+'|'+GERMAN[slug]+r')(?:e|en|es|er|em)?(?!\w)',re.I) for slug,aliases in ALIASES.items()}
 
 def unquoted(text):
     # A quoted command is data, but a quoted spoken phrase must not suppress
@@ -31,14 +32,16 @@ def command_intent(text):
         later=re.split(r'\b(?:und|and|dann|then)\b',text,flags=re.I)[1:]
         return any(_REQUEST.search(clause.strip()) for clause in later)
     ellipse=bool(re.fullmatch(r'(?:(?:bitte|nochmal|noch mal|sich|dich)\s+)*(?:im\s+kreis|rundherum|einmal\s+herum|360\s*(?:grad|degrees|°))\s+(?:drehen|rotieren)(?:\s+bitte)?[.!?]*',text.strip(),re.I))
-    direct_emotion=bool(re.search(r'\b(?:ich\s+(?:möchte|moechte|will)\s*[,]?\s*dass\s+du|(?:i\s+want\s+you\s+to)|tu\s+so\s+als\s+(?:wärst|waerst|ob\s+du)|pretend\s+(?:to\s+be|you\s+are))\b',text,re.I) and any(pattern.search(text) for pattern in _EMOTIONS.values()))
+    direct_emotion=bool(re.search(r'\b(?:du\s+sollst|ich\s+(?:möchte|moechte|will)\s*[,]?\s*dass\s+du|(?:i\s+want\s+you\s+to)|tu\s+so\s+als\s+(?:wärst|waerst|ob\s+du)|pretend\s+(?:to\s+be|you\s+are))\b',text,re.I) and (any(pattern.search(text) for pattern in _EMOTIONS.values()) or bool(explicit_spin(text))))
     return bool(_REQUEST.search(text) or _FACE.fullmatch(text.strip(' .!?')) or ellipse or direct_emotion)
 
 def explicit_actions(text,variant_index=0):
     if not command_intent(text):return []
     text=unquoted(text)
+    whole_spin=explicit_spin(text)
+    if whole_spin and not re.search(r'\b(?:und|and|dann|then|danach)\b',text,re.I):return validate({'steps':whole_spin})
     steps=[]
-    pose_request=bool(re.search(r'\b(?:guck\w*|schau\w*|look|ausseh\w*|gesicht\w*|emotion\w*|ausdruck|expression|pose|sei|sein|bist|wärst|waerst|wirke|wirken|werde|be|act)\b',text,re.I))
+    pose_request=bool(re.search(r'\b(?:guck\w*|schau\w*|look|ausseh\w*|gesicht\w*|emotion\w*|ausdruck|expression|pose|show|demonstrate|sieh|nimm|demonstrier\w*|zeig\w*|stell\w*|spiel\w*|mach\w*|sei|sein|bist|wärst|waerst|wirke|wirken|werde|be|act)\b',text,re.I))
     normalized=re.sub(r'\b(roll\w*|schau\w*|guck\w*|mach\w*|make|look|show|schiel\w*|shake|schüttel\w*)\s+(?:dann|then)\b',r'\1',text,flags=re.I)
     clauses=re.split(r'[,;.!?]+|\b(?:und|and|dann|then|danach|erst|first|sondern|but)\b',normalized,flags=re.I)
     for clause in clauses:
@@ -62,8 +65,8 @@ def explicit_actions(text,variant_index=0):
         elif re.search(r'\b(?:zwinker\w*|wink\w*)\b',t):steps.append({'kind':'wink','duration_s':2.5})
         elif re.search(r'\b(?:schüttel\w*|shake\w*)\b.*\b(?:kopf|head)\b|\b(?:kopf|head)\b.*\b(?:schüttel\w*|shake\w*)\b',t):steps.append({'kind':'shake','duration_s':2.5})
         elif re.search(r'\b(?:nick(?:e|en)?|nod)\b',t):steps.append({'kind':'nod','duration_s':2.5})
-        elif pose_request:
-            found=[(m.start(), 'anger' if slug=='sourness' and re.search(r'\bsauer\w*\b',m.group(),re.I) else slug) for slug,pattern in _EMOTIONS.items() for m in [pattern.search(t)] if m]
+        elif pose_request and not re.search(r'\b(?:gedicht|geschichte|märchen|lied|song|poem|story|fairy\s+tale|film|buch|book)\b',t):
+            found=[(m.start(), 'anger' if slug=='sourness' and re.search(r'\bsauer\w*\b',m.group(),re.I) else slug) for slug,pattern in _EMOTIONS.items() for m in [pattern.search(t)] if m and not (slug=='sourness' and re.search(r'\bsauer\w*\b',m.group(),re.I))]
             for label,slug in [('happy|fröhlich|glücklich|froh','elation'),('lustig|witzig|amüsiert','amusement'),('böse|boese','anger'),('frech','teasing')]:
                 match=re.search(r'\b(?:'+label+r')(?:e|en|es|er|em)?\b',t)
                 if match and not found:found=[(match.start(),slug)]

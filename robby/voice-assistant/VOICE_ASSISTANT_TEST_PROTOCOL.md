@@ -916,3 +916,10 @@ The live report is `/static/environment-report.html`; the publication copy is
 Raw microphone recordings, private wiki entries, voiceprints and credentials
 must remain excluded from GitHub and Pages. Session-only voice identity and
 opt-in persistent factual memory are distinct systems.
+
+
+## Action and emotional-acting regression (4 November 2026)
+
+Run `browser_stunts_emotions_check.py` with the current HTTPS URL: verify actual renderer yaw exceeds 340° in the requested direction, audio packets arrive, four named emotions agree between controller and sentence performance metadata, a grimace animates, and all forty canonical poses reach the renderer. Run `browser_spoken_stunts_check.py` serially to repeat rotation, anger and sadness through a synthetic microphone and real ASR. These are not physical-room tests. Explicitly include noun requests (“eine Drehung”, “Wut”, “Enttäuschung”) and negative/quoted commands in controller tests.
+
+Run `validate_emotion_recipes.py` and `write_stunt_report.py` for six authored listening probes using fixed words, reference, seed, temperature and CFG. Report word error rate and raw audio separately from perceived emotional fidelity. Optional machine emotion captions are uncalibrated and may disagree with targets; they must not be treated as recognition accuracy. See `STUNTS_AND_EMOTIONS.md` for scope and `static/stunts-emotions.html` for the samples.

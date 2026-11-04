@@ -138,6 +138,14 @@ async def pipeline(client,text,identity,history,voice='emolia_c1699',avatar_cont
                 main_started=True
                 if intro and duplicate_acknowledgment(intro.text,sentence.text):
                     metrics['duplicate_first_ack_skipped']=True;continue
+            # One explicitly requested emotion is an acting constraint, shared
+            # by the screen pose and TTS even if the LLM emits a neutral cue.
+            if role=='answer' and len(requested)==1 and requested[0]['kind']=='emotion':
+                import re
+                gentle=bool(re.search(r'\b(?:leise|sanft|zurückhaltend|zurueckhaltend|flüster\w*|whisper\w*|gently|subtle|restrained)\b',text,re.I))
+                delivery='soft, natural' if gentle else 'intense, natural'
+                if re.search(r'\b(?:flüster\w*|fluester\w*|whisper\w*)\b',text,re.I):delivery='soft, whispered'
+                sentence.direction=requested[0]['emotion']+', '+delivery
             spec=sentence.spec();spoken.append(sentence);scripts.append(spec['script'])
             at=total_samples/24000
             current=plan(spec)['sentences']

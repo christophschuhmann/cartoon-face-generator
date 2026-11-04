@@ -54,6 +54,17 @@ class BoltTextTests(unittest.TestCase):
         self.assertTrue(select_template('happy, soft')['id'].startswith('elation.'))
         self.assertTrue(select_template('pleasure_ecstasy, intense')['id'].startswith('pleasure_ecstasy.'))
         self.assertIn('unhurried',select_template('interest, slow')['general'])
+    def test_all_emotional_templates_have_concrete_playable_directions(self):
+        from performance import SLUGS
+        from emotion_recipes import TTS
+        self.assertEqual(set(TTS),set(SLUGS))
+        for emotion in SLUGS:
+            row=select_template(emotion+', intense, natural')
+            self.assertEqual(row['id'],emotion+'.intense')
+            self.assertIn(TTS[emotion],row['general'])
+            self.assertIn('reference audio',row['general'])
+        self.assertNotIn('gentle, subtle',select_template('anger, intense')['general'])
+
     def test_decimal_and_abbreviation_not_prematurely_split(self):
         f=SentenceFramer();out=f.feed('(interest) Dr. Bob hat 3.5 Euro. Noch etwas?',final=True)
         self.assertEqual([s.text for s in out],['Dr. Bob hat 3.5 Euro.','Noch etwas?'])
