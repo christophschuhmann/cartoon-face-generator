@@ -1004,6 +1004,9 @@ def main():
     app.router.add_get('/downloads/robby-source.zip',source_download)
     app.router.add_get('/api/asr/models',asr_models)
     app.router.add_get('/api/llm/models',llm_models)
+    import tts_models
+    app.router.add_get('/api/tts/models',tts_models.status)
+    app.router.add_post('/api/tts/models',tts_models.select)
     app.router.add_static('/static/',ROOT/'static')
     app.on_startup.append(startup);app.on_cleanup.append(cleanup)
     logging.basicConfig(level=logging.INFO,format='%(asctime)s %(name)s %(message)s')

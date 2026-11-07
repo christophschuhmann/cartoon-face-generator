@@ -65,6 +65,8 @@ class MouthBridge:
     def __init__(self,base=None):
         self.base=base or os.environ.get('ROBO_TTS_BASE','http://127.0.0.1:8792')
         self.active=0
+        self.tts_model='small_rl';self.tts_loading=None;self.tts_error=None
+        self.tts_ready=asyncio.Event();self.tts_ready.set()
         self.ack=None
         self.director_mode=os.environ.get('ROBO_DIRECTOR_MODE','compact')
         if self.director_mode not in ('compact','shared','bolt'):raise ValueError('Invalid Robby director mode')
@@ -75,7 +77,7 @@ class MouthBridge:
             async with httpx.AsyncClient(base_url=self.base,timeout=90) as client:
                 state=(await client.get('/api/state')).json()
                 if state.get('busy'):return
-                body={'model':'small_rl','input_mode':'manual','format':'structured',
+                body={'model':self.tts_model,'input_mode':'manual','format':'structured',
                     'message':'GENERAL: Gentle natural affirmative acknowledgement.\nSCRIPT:\nMm-hm.',
                     'generation':'single','n':1,'streaming':False,'seconds':1.6,
                     'temperature':.7,'guidance':2.,'voice_mode':'profile','voice_profile':'emolia_c1699',
@@ -124,7 +126,7 @@ class MouthBridge:
                     if pending and not pending.done():await asyncio.shield(pending)
                     for literal in replies[:4]:
                         if not isinstance(literal,str) or not 1<=len(literal)<=180 or len(literal.split())>8:continue
-                        prepared_voice=voice;key=(prepared_voice,language,literal)
+                        prepared_voice=voice;key=(self.tts_model,prepared_voice,language,literal)
                         if key in literal_cache:continue
                         state=(await client.get('/api/state')).json()
                         if state.get('busy'):
@@ -132,7 +134,7 @@ class MouthBridge:
                         from conversation_director import validate
                         directed=validate({'general':'Brief, firm, playful conversational interruption.',
                             'script':'(determination, firm and playful) '+literal,'language':language})
-                        body={'model':'small_rl','message':directed['manual_prompt'],'input_mode':'manual','format':'structured',
+                        body={'model':self.tts_model,'message':directed['manual_prompt'],'input_mode':'manual','format':'structured',
                             'generation':'single','n':1,'streaming':False,'seconds':6.,'temperature':.7,'guidance':2.,
                             'voice_mode':'profile','voice_profile':prepared_voice,'voice_conversion':False,'align':True}
                         async with client.stream('POST','/api/turn',json=body,timeout=30.) as response:
@@ -154,6 +156,8 @@ class MouthBridge:
                 except Exception as exc:log.info('Optional interjection preparation unavailable: %s',type(exc).__name__)
 
             async def turn(record):
+                await self.tts_ready.wait()
+                turn_model=self.tts_model
                 text=record['text']
                 turn_voice=voice
                 self.active+=1
@@ -163,7 +167,7 @@ class MouthBridge:
                     identity=record.get('speaker') or {};speaker_update=validated_speaker_update(text,identity)
                     if self.director_mode=='bolt' and not record.get('interaction_reply'):
                         from bolt_pipeline import pipeline
-                        async for event,value in pipeline(client,text,identity,history,voice=turn_voice,
+                        async for event,value in pipeline(client,text,identity,history,voice=turn_voice,tts_model=turn_model,
                                 avatar_context=record.get('avatar_context'),interaction_state=record.get('interaction_state'),
                                 llm_selection=record.get('llm_selection'),credential=record.get('llm_credential'),quick_replies=record.get('quick_replies',False),memory=memory):
                             if event=='sentence':
@@ -180,7 +184,7 @@ class MouthBridge:
                     from conversation_tasks import history_for_model
                     shared_history,playback_note=history_for_model(history[-16:])
                     from voice_captioning import prompt_hint
-                    body={'model':'small_rl','message':conversation_message(text,{k:v for k,v in identity.items() if k!='voice_delivery'})+playback_note+prompt_hint(identity),'input_mode':'chat','format':'structured',
+                    body={'model':self.tts_model,'message':conversation_message(text,{k:v for k,v in identity.items() if k!='voice_delivery'})+playback_note+prompt_hint(identity),'input_mode':'chat','format':'structured',
                         'generation':'single','n':1,'streaming':True,'chunk_frames':TTS_CHUNK_FRAMES,
                         'cancel_on_disconnect':True,
                         'temperature':.7,'guidance':2.,'voice_mode':'profile','voice_profile':turn_voice,
@@ -217,9 +221,9 @@ class MouthBridge:
                             'speaker_update':speaker_update,'timing':{'director_ms':director_ms,
                                 'director_mode':'compact','completion_tokens':directed.get('completion_tokens'),
                                 'director_model':directed.get('director_model'),
-                                'interjection_cache_hit':(turn_voice,directed['language'],record.get('interaction_reply')) in literal_cache}})
+                                'interjection_cache_hit':(turn_model,turn_voice,directed['language'],record.get('interaction_reply')) in literal_cache}})
                         body.update(message=directed['manual_prompt'],input_mode='manual',history=[],language=directed['language'])
-                        cached=literal_cache.get((turn_voice,directed['language'],record.get('interaction_reply')))
+                        cached=literal_cache.get((turn_model,turn_voice,directed['language'],record.get('interaction_reply')))
                         if cached is not None:
                             for at in range(0,len(cached),9600):await send(b'A',cached[at:at+9600].astype(np.float32).tobytes())
                             remember(record);await send(b'D',{});return

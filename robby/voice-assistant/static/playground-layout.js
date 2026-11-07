@@ -10,6 +10,7 @@ export function organisePlayground(){
  const section=(id,label,nodes)=>{const d=document.createElement('details');d.id=id;d.className='settings option-menu';const s=document.createElement('summary');s.textContent=label;d.append(s,...nodes.filter(Boolean));aside.append(d);return d;};
  // Keep the language-model switch visible near the top of the page.
  document.querySelector('.stage h1').insertAdjacentElement('afterend',$('llm-model-controls'));
+ if($('tts-model-controls'))$('llm-model-controls').insertAdjacentElement('afterend',$('tts-model-controls'));
  section('model-settings','Speech recognition & quick replies',[$('asr-model-controls'),$('quick-reply-controls')]);
  section('camera-settings','Camera & eye contact',[$('camera'),document.querySelector('.follow-controls'),$('follow-status')]);
  const conversation=$('conversation-options');conversation.classList.add('settings','option-menu');

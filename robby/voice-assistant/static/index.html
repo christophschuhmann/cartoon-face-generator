@@ -8,6 +8,11 @@
 <p>Persistent text memory is on by default; <a href="#memory-settings">review, turn off or reset memory</a>. Conversation text may be sent to your selected language-model provider.</p>
 <div id="quick-controls" class="quick-controls">
 <div class="call-controls"><button id="call" class="primary" disabled>◉ Start talking</button><button id="camera" class="secondary">Starting camera…</button><button id="interrupt" class="secondary" aria-label="Stop Robby speaking">Stop reply</button></div>
+<section id="tts-model-controls" aria-label="Speaking voice model">
+<label for="tts-model">Voice synthesis <select id="tts-model"><option value="small_rl">Humaneness Small · 1.1 Alpha RL</option><option value="large17">Humaneness Large · 1.7 BF16</option></select></label>
+<p id="tts-model-status" role="status">Checking voice model…</p>
+<a href="/static/large17-speed.html" target="_blank" rel="noopener">Speed measurements ↗</a>
+</section>
 <section id="llm-model-controls" aria-label="Language model and provider">
 <div class="llm-selectors"><label>Language model<select id="llm-model"><option value="qwen">Qwen 3.8 27B · OpenRouter</option><option value="gemma12">Gemma 4 12B Q4 · local GPU</option><option value="local">Nemotron Bolt E4B · local GPU</option></select></label><label>Endpoint<select id="llm-provider"><option value="cerebras/fp16">Cerebras · FP16</option></select></label></div>
 <p id="llm-status" role="status">Loading available models and endpoints…</p><p><a href="/static/gemma12-latency.html" target="_blank" rel="noopener">Gemma vs Qwen latency measurements</a></p>
@@ -79,4 +84,4 @@
 <a href="/speaker-training/" target="_blank" rel="noopener">Larger speaker training · live progress ↗</a>
 </details></aside></main>
 <footer>HUMANENESS VOICE · LAION <span>Authored cartoon expressions, not an emotion detector or medical service.</span></footer>
-<script type="module" src="/static/ui.js"></script><script type="module" src="/static/lfm3-lab.js"></script></body></html>
+<script type="module" src="/static/ui.js"></script><script type="module" src="/static/lfm3-lab.js"></script><script type="module" src="/static/tts-models.js"></script></body></html>
