@@ -10,6 +10,22 @@ Die aktuelle Windows-Demo **2.3.2** überträgt Webcam-Mimik auf das Rig und ani
 
 **Robby mit Large 1.7:** Oben in der Demo zwischen Small und Large 1.7 wechseln; Small bleibt Standard. [Messungen auf RTX 3090, Einrichtung und reproduzierbare Tests](robby/voice-assistant/LARGE17.md).
 
+**Matched Small/Large performance (7 November 2026):** One GPU, BF16,
+CFG 2, temperature 0.8, one streaming candidate, the same structured German
+prompt and reference, three warm repeats; final alignment disabled. First PCM
+is server response timing, not browser playback. RTF measures TTS and codec
+compute separately.
+
+| Model | GPU | First PCM over local HTTP | On-device RTF | Audio seconds / compute second |
+| --- | --- | ---: | ---: | ---: |
+| Small 1.1 Alpha RL r128 v1 | RTX 3090, 24 GiB | 0.394 s | 0.1669 | 5.99 |
+| Large 1.7 | RTX 3090, 24 GiB | 0.470 s | 0.2873 | 3.48 |
+
+Large also reaches **15.45 audio seconds/s** in a short 16-candidate offline
+batch at CFG 2; the live cap stays 8. [Conditions, batch results, reproduction
+and separately labelled Jetson Thor results](https://github.com/LAION-AI/Humaneness-Voice/blob/main/docs/TTS_PERFORMANCE.md) ·
+[The same measured optimization report in the Large 1.7 model repository](https://huggingface.co/laion/Humaneness-Voice-Large-1.7/blob/main/ROBBY_RTX3090.md).
+
 ## Was möchtest du machen?
 
 | Ich möchte … | Hier anfangen |

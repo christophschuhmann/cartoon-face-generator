@@ -14,6 +14,11 @@ reference handling and benchmark scripts live in
 Use the fixed Mira reference (10.26 seconds); Large accepts 5.04–14.96 seconds
 of reference speech. Its reference waveform is cropped before tokenization.
 
+The [Small/Large performance comparison](https://github.com/LAION-AI/Humaneness-Voice/blob/main/docs/TTS_PERFORMANCE.md) includes the matched
+RTX 3090 table, Large batch results and separate historical Jetson Thor figures.
+It is also [published in the Large 1.7 Hugging Face model repository](https://huggingface.co/laion/Humaneness-Voice-Large-1.7/blob/main/ROBBY_RTX3090.md)
+and linked from its [release optimization notes](https://huggingface.co/laion/Humaneness-Voice-Large-1.7/blob/main/INFERENCE_OPTIMIZATIONS.md).
+
 ## Request flow
 
 1. `POST /api/tts/models` validates the choice, rejects a switch during an
