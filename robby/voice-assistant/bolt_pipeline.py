@@ -13,10 +13,10 @@ from performance import plan
 from shared_turn import admitted_turn
 
 async def pipeline(client,text,identity,history,voice='emolia_c1699',avatar_context=None,
-                   interaction_state=None,chunk_frames=None,tts=True,preset=None,reply_words=None,llm_selection=None,credential=None,quick_replies=False,memory=None):
+                   interaction_state=None,chunk_frames=None,tts=True,preset=None,reply_words=None,llm_selection=None,credential=None,quick_replies=False,memory=None,tts_model='small_rl'):
     from app.runtime.audio import StreamingAudioResampler
     from tts_bridge import decode_mp3
-    start=time.perf_counter();metrics={};queue=asyncio.Queue(maxsize=4)
+    start=time.perf_counter();metrics={'tts_model':tts_model};queue=asyncio.Queue(maxsize=4)
     chunk_frames=chunk_frames or int(os.environ.get('ROBO_BOLT_CHUNK_FRAMES','20'))
     if chunk_frames not in (2,5,10,20):raise ValueError('Unsupported TTS chunk size')
     from avatar_commands import explicit_actions,silent_requested
@@ -109,7 +109,7 @@ async def pipeline(client,text,identity,history,voice='emolia_c1699',avatar_cont
     producer=asyncio.create_task(produce());spoken=[];scripts=[];cues=[];total_samples=0;index=0
     first_main=asyncio.create_task(queue.get());intro=None;initial=True;main_started=False;actions_sent=False
     try:
-        if reaction_enabled:
+        if reaction_enabled and tts_model=='small_rl':
             from live_speech import LiveSpeech
             live=await LiveSpeech.open(client,voice)
             if live is not None:
@@ -166,7 +166,7 @@ async def pipeline(client,text,identity,history,voice='emolia_c1699',avatar_cont
             if not tts:index+=1;continue
             # Each completed sentence is admitted immediately; LLM generation
             # continues while this consumer performs the first TTS inference.
-            body={'model':'small_rl','input_mode':'manual','format':'structured',
+            body={'model':tts_model,'input_mode':'manual','format':'structured',
                 'message':spec['manual_prompt'],'language':spec['language'],
                 'generation':'single','n':1,'batch_size':1,'streaming':True,'stream_transport':'pcm_f32','live_only':True,
                 'chunk_frames':5 if role=='reaction' else chunk_frames,'cancel_on_disconnect':True,
@@ -191,6 +191,10 @@ async def pipeline(client,text,identity,history,voice='emolia_c1699',avatar_cont
                         import logging
                         logging.getLogger('robo.pipeline').warning('TTS sentence failed: %s',str(event.get('error') or event.get('message') or event.get('text'))[:300])
                         raise RuntimeError('TTS sentence generation failed')
+                    if kind=='model':
+                        metrics['tts_actual_model']=event.get('model_id')
+                        metrics['tts_revision']=(event.get('checkpoint') or {}).get('revision')
+                        if event.get('model_id')!=tts_model:raise RuntimeError('TTS returned the wrong selected model')
                     if kind=='result':
                         metrics.setdefault('tts_server_stages',[]).append({k:event.get(k) for k in
                             ('generation_ms','alignment_ms','scoring_ms','speaker_preparation_ms','total_ms','performance')})

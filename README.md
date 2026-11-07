@@ -8,6 +8,8 @@ Die aktuelle Windows-Demo **2.3.2** überträgt Webcam-Mimik auf das Rig und ani
 
 **Schnellere Sprachausgabe für Robby:** Auf einer NVIDIA Jetson Thor beginnt die Sprachsynthese jetzt 0,16 s nach Erhalt eines Satzes (vorher 2,3–2,9 s). Wie das geht, mit allen Messwerten und Code-Ausschnitten, steht in [INFERENCE_OPTIMIZATIONS.md](robby/voice-assistant/INFERENCE_OPTIMIZATIONS.md) (Englisch).
 
+**Robby mit Large 1.7:** Oben in der Demo zwischen Small und Large 1.7 wechseln; Small bleibt Standard. [Messungen auf RTX 3090, Einrichtung und reproduzierbare Tests](robby/voice-assistant/LARGE17.md).
+
 ## Was möchtest du machen?
 
 | Ich möchte … | Hier anfangen |

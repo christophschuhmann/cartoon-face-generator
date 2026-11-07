@@ -1,0 +1,101 @@
+{
+  "purpose": "Explicit allowlist for reviewed public benchmark artifacts",
+  "files": [
+    {
+      "path": "robby/voice-assistant/static/large17-audio/sample-fast-cfg2.5-stream.mp3",
+      "sha256": "1b14db50a3635384dbe887555b25c49516b56ae3d1b657b570ebcc048b7c5e93",
+      "bytes": 61101,
+      "source": "Synthetic benchmark TTS; fixed synthetic Mira reference; no microphone recording"
+    },
+    {
+      "path": "robby/voice-assistant/static/large17-audio/long-1803.mp3",
+      "sha256": "2124026562ab6a05c4073e6a73f8aabd81f3f0b896eb98f6fcb9bcc4928c5363",
+      "bytes": 119853,
+      "source": "Synthetic benchmark TTS; fixed synthetic Mira reference; no microphone recording"
+    },
+    {
+      "path": "robby/voice-assistant/static/large17-audio/sample-eager-cfg2.5-offline.mp3",
+      "sha256": "5d87c369fb419ae77c34555192dc847e5587b4e65f729185ca8e7ec19041cf1e",
+      "bytes": 61101,
+      "source": "Synthetic benchmark TTS; fixed synthetic Mira reference; no microphone recording"
+    },
+    {
+      "path": "robby/voice-assistant/static/large17-audio/sample-eager-cfg1.0-offline.mp3",
+      "sha256": "7a0dc70bf3e79e71c496713b1ef4228320ea76b6f5e1719d551621c2d2a7a245",
+      "bytes": 61101,
+      "source": "Synthetic benchmark TTS; fixed synthetic Mira reference; no microphone recording"
+    },
+    {
+      "path": "robby/voice-assistant/static/large17-audio/sample-fast-cfg2.5-offline.mp3",
+      "sha256": "b6122173acea2772ecb18547de86be9d69a45e6af6356bcde54e4ff49768f9fe",
+      "bytes": 61101,
+      "source": "Synthetic benchmark TTS; fixed synthetic Mira reference; no microphone recording"
+    },
+    {
+      "path": "robby/voice-assistant/static/large17-audio/sample-fast-cfg1.0-stream.mp3",
+      "sha256": "3614e4eb279f24d77384943d420d5a0de4cd92ebe0350a2cea8c767cda0ca87b",
+      "bytes": 61101,
+      "source": "Synthetic benchmark TTS; fixed synthetic Mira reference; no microphone recording"
+    },
+    {
+      "path": "robby/voice-assistant/static/large17-audio/sample-fast-cfg2.0-stream.mp3",
+      "sha256": "347317d8361e44f9d7ded984acacc72281612e97c2ec7aa524ab733b4b67398a",
+      "bytes": 61101,
+      "source": "Synthetic benchmark TTS; fixed synthetic Mira reference; no microphone recording"
+    },
+    {
+      "path": "robby/voice-assistant/static/large17-audio/sample-fast-cfg1.0-offline.mp3",
+      "sha256": "51eaff876b321fe037bb939adf698b71eeb2aa6027e935e96db540ad7008b43e",
+      "bytes": 61101,
+      "source": "Synthetic benchmark TTS; fixed synthetic Mira reference; no microphone recording"
+    },
+    {
+      "path": "robby/voice-assistant/static/large17-audio/sample-eager-cfg2.0-stream.mp3",
+      "sha256": "82bc83f2a44964116a4b2e4186a922fc2e01b3fe674e665033f67be003a09899",
+      "bytes": 61101,
+      "source": "Synthetic benchmark TTS; fixed synthetic Mira reference; no microphone recording"
+    },
+    {
+      "path": "robby/voice-assistant/static/large17-audio/sample-eager-cfg1.0-stream.mp3",
+      "sha256": "b7b24a934c6202402867ddef6833366c0cc60be45ca27b794407c1fb821fda93",
+      "bytes": 61101,
+      "source": "Synthetic benchmark TTS; fixed synthetic Mira reference; no microphone recording"
+    },
+    {
+      "path": "robby/voice-assistant/static/large17-audio/long-1801.mp3",
+      "sha256": "73054b28de2596120c9184a1c6f4c9d6eefaa7b72521f627e1de3c47bd4966f8",
+      "bytes": 119853,
+      "source": "Synthetic benchmark TTS; fixed synthetic Mira reference; no microphone recording"
+    },
+    {
+      "path": "robby/voice-assistant/static/large17-audio/long-1802.mp3",
+      "sha256": "34a623223025c3fd72a82b2e9d8781b492ec1f5ef09228fa8ee05e7a1e330f6b",
+      "bytes": 119853,
+      "source": "Synthetic benchmark TTS; fixed synthetic Mira reference; no microphone recording"
+    },
+    {
+      "path": "robby/voice-assistant/static/large17-audio/sample-fast-cfg2.0-offline.mp3",
+      "sha256": "259744248538cbfc2a93512011dcd855741ef813faa1704dc44c4cbb6a81e01b",
+      "bytes": 61101,
+      "source": "Synthetic benchmark TTS; fixed synthetic Mira reference; no microphone recording"
+    },
+    {
+      "path": "robby/voice-assistant/static/large17-audio/sample-eager-cfg2.5-stream.mp3",
+      "sha256": "a15a6e7ee39df292277cae6f541b179ca33d53d33355a5e5782cbadc049447a5",
+      "bytes": 61101,
+      "source": "Synthetic benchmark TTS; fixed synthetic Mira reference; no microphone recording"
+    },
+    {
+      "path": "robby/voice-assistant/static/large17-audio/sample-eager-cfg2.0-offline.mp3",
+      "sha256": "02c2edc847d2cb33edc63fa944e021bd4540109a162842a1a77b65e137e8bb01",
+      "bytes": 61101,
+      "source": "Synthetic benchmark TTS; fixed synthetic Mira reference; no microphone recording"
+    },
+    {
+      "path": "robby/voice-assistant/experiments/large17/browser-model-choice.png",
+      "sha256": "d80d40ebfa2299c8b1f4855123045280da74e11938ea37cde74ec0752d1b14e8",
+      "bytes": 210777,
+      "source": "Isolated browser test with typed synthetic prompts; memory and camera disabled"
+    }
+  ]
+}

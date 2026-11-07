@@ -1,5 +1,7 @@
 # Robby voice chat and TYGER speaker predictor
 
+**Large 1.7 TTS (7 November 2026):** The top Voice synthesis selector switches between Small and the merged Large 1.7 BF16 release. Small remains the default. [Setup, measured RTX 3090 streaming/batching, browser checks and limitations](LARGE17.md).
+
 **Experimental source separation:** the audio/video lab optionally adds TUSS Medium and Bandit v2 stems, playback and per-model timing alongside MOSS and Liquid video. See [STEM_LAB.md](STEM_LAB.md) for reproducible tests, the separate FastDialogueSidon speed pilot and important limitations.
 
 **Actions and emotional acting (2026-11-04):** Direct requests now include “Mach eine Drehung” and German noun forms for all forty expressions. A single requested emotion is shared by the face and TTS even if the LLM returns a neutral cue. All forty TTS templates have concrete performance recipes. Real HTTPS renderer, synthetic-microphone and listening probes are documented in [STUNTS_AND_EMOTIONS.md](STUNTS_AND_EMOTIONS.md); [listening samples and evidence](static/stunts-emotions.html). These checks do not establish human recognition of forty emotions.
