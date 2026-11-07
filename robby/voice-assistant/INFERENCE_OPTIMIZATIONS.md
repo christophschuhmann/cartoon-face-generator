@@ -14,6 +14,14 @@ The same guide exists in both repositories:
 [LAION-AI/Humaneness-Voice](https://github.com/LAION-AI/Humaneness-Voice/blob/main/INFERENCE_OPTIMIZATIONS.md) (TTS server)
 and [christophschuhmann/cartoon-face-generator](https://github.com/christophschuhmann/cartoon-face-generator/blob/main/robby/voice-assistant/INFERENCE_OPTIMIZATIONS.md) (Robby).
 
+## New: Large 1.7 and matched Small/Large measurements
+
+The [Small/Large comparison](https://github.com/LAION-AI/Humaneness-Voice/blob/main/docs/TTS_PERFORMANCE.md) reports the same RTX 3090, prompt,
+reference and CFG, plus Large batch throughput and its limits. See also
+[the Robby model switch](LARGE17.md) and
+[the measured Large report beside its Hugging Face weights](https://huggingface.co/laion/Humaneness-Voice-Large-1.7/blob/main/ROBBY_RTX3090.md).
+The Thor measurements below retain their original hardware and scope.
+
 ## Results
 
 | Measurement | Start | After all steps |

@@ -2,6 +2,22 @@
 
 **Large 1.7 TTS (7 November 2026):** The top Voice synthesis selector switches between Small and the merged Large 1.7 BF16 release. Small remains the default. [Setup, measured RTX 3090 streaming/batching, browser checks and limitations](LARGE17.md).
 
+**Matched Small/Large performance (7 November 2026):** One GPU, BF16,
+CFG 2, temperature 0.8, one streaming candidate, the same structured German
+prompt and reference, three warm repeats; final alignment disabled. First PCM
+is server response timing, not browser playback. RTF measures TTS and codec
+compute separately.
+
+| Model | GPU | First PCM over local HTTP | On-device RTF | Audio seconds / compute second |
+| --- | --- | ---: | ---: | ---: |
+| Small 1.1 Alpha RL r128 v1 | RTX 3090, 24 GiB | 0.394 s | 0.1669 | 5.99 |
+| Large 1.7 | RTX 3090, 24 GiB | 0.470 s | 0.2873 | 3.48 |
+
+Large also reaches **15.45 audio seconds/s** in a short 16-candidate offline
+batch at CFG 2; the live cap stays 8. [Conditions, batch results, reproduction
+and separately labelled Jetson Thor results](https://github.com/LAION-AI/Humaneness-Voice/blob/main/docs/TTS_PERFORMANCE.md) ·
+[The same measured optimization report in the Large 1.7 model repository](https://huggingface.co/laion/Humaneness-Voice-Large-1.7/blob/main/ROBBY_RTX3090.md).
+
 **Experimental source separation:** the audio/video lab optionally adds TUSS Medium and Bandit v2 stems, playback and per-model timing alongside MOSS and Liquid video. See [STEM_LAB.md](STEM_LAB.md) for reproducible tests, the separate FastDialogueSidon speed pilot and important limitations.
 
 **Actions and emotional acting (2026-11-04):** Direct requests now include “Mach eine Drehung” and German noun forms for all forty expressions. A single requested emotion is shared by the face and TTS even if the LLM returns a neutral cue. All forty TTS templates have concrete performance recipes. Real HTTPS renderer, synthetic-microphone and listening probes are documented in [STUNTS_AND_EMOTIONS.md](STUNTS_AND_EMOTIONS.md); [listening samples and evidence](static/stunts-emotions.html). These checks do not establish human recognition of forty emotions.
