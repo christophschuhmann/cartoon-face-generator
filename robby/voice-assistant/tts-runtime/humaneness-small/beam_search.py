@@ -31,12 +31,13 @@ def common_prefix(codes, rows):
     return int(differing[0]) if len(differing) else codes.shape[1]
 
 
-def reorder_codec(codec, indexes, n):
+def reorder_codec(codec, indexes, n, inplace=False):
     """Pinned codec state has per-row tensors, all with batch axis zero.
 
     Copy via index_select, including duplicates; never share mutable child KV.
     Fail closed if a new codec revision adds an unsupported state shape.
     """
+    visited=set()
     for module in codec.modules():
         state = getattr(module, '_streaming_state', None)
         if state is None:
@@ -45,7 +46,9 @@ def reorder_codec(codec, indexes, n):
             if torch.is_tensor(value):
                 if value.ndim == 0 or value.shape[0] != n:
                     raise ValueError(f'Unsupported codec state tensor {name}: {tuple(value.shape)}')
-                setattr(state, name, value.index_select(0, indexes))
+                if inplace:
+                    if id(value) not in visited:value.copy_(value.index_select(0,indexes));visited.add(id(value))
+                else:setattr(state, name, value.index_select(0, indexes))
 
 
 class ChunkSearch:
@@ -54,13 +57,14 @@ class ChunkSearch:
 
     @torch.inference_mode()
     def generate(self, spec, n=8, beam_width=1, chunk_frames=10, max_seconds=6.6,
-                 guidance=1.5, temperature=1., seed=777, reference_path=None, on_commit=None, conversion=None):
+                 guidance=1.5, temperature=1., seed=777, reference_path=None, on_commit=None, conversion=None,
+                 check_cancel=lambda:None, semantic_graph=False, codec_graph=False):
         if not 1 <= n <= 16 or beam_width not in [1,2]:
             raise ValueError('Search supports batch sizes 1 through 16 and beam width 1/2')
         requested_beam_width = beam_width
         beam_width = min(n, beam_width)
-        if chunk_frames not in [10,20]:
-            raise ValueError('Search chunk must be 800 or 1600 ms')
+        if chunk_frames not in [10,12,20]:
+            raise ValueError('Search chunk must be 800, 960 or 1600 ms')
         engine, mdl = self.engine, self.engine.model
         cfg = mdl.config
         budget = min(750, math.ceil(max_seconds/.08))
@@ -88,21 +92,33 @@ class ChunkSearch:
             torch.manual_seed(seed)
             torch.cuda.manual_seed_all(seed)
             capture_start = engine.fast.capture_seconds
+            semantic=engine.fast.semantic.prepare(ids,budget) if semantic_graph and engine.fast.semantic else None
+            semantic_cold=bool(semantic is not None and semantic.graph is None)
             decoder = engine.proc.audio_tokenizer
-            with StreamingCodec(decoder,n,cfg.audio_pad_token_id) as streaming:
+            if codec_graph and n in (3,4):
+                from search_codec_graph import SearchStreamingCodec
+                stream=SearchStreamingCodec(decoder,n,cfg.audio_pad_token_id,chunk_frames)
+            else:stream=StreamingCodec(decoder,n,cfg.audio_pad_token_id)
+            codec_capture_before=getattr(getattr(stream,'graphs',None),'capture_seconds',0.)
+            with stream as streaming:
                 while steps < budget:
+                    check_cancel()
                     phase_start = time.perf_counter()
                     event_start,event_end = [torch.cuda.Event(enable_timing=True) for _ in range(2)]
                     event_start.record()
                     new = []
                     new_pcm=[np.zeros(0,np.float32) for _ in range(n)]
                     for _ in range(min(chunk_frames,budget-steps)):
-                        out = mdl.transformer(inputs_embeds=mdl._build_inputs_embeds(model_input),input_ids=None,
-                            attention_mask=masks[:,:length+steps],past_key_values=past,use_cache=True,
-                            position_ids=None,output_attentions=False,output_hidden_states=False,
-                            return_dict=True,cu_seqlens=None,num_sequences=None)
-                        past = out.past_key_values
-                        local = mdl._global_hidden_to_local(out.last_hidden_state[:,-1]).to(mdl.local_transformer.ln_f.weight.dtype)
+                        check_cancel()
+                        if semantic:
+                            local=semantic.prefill(model_input,masks[:,:length]) if steps==0 else semantic.decode(model_input,masks[:,:length+steps])
+                        else:
+                            out = mdl.transformer(inputs_embeds=mdl._build_inputs_embeds(model_input),input_ids=None,
+                                attention_mask=masks[:,:length+steps],past_key_values=past,use_cache=True,
+                                position_ids=None,output_attentions=False,output_hidden_states=False,
+                                return_dict=True,cu_seqlens=None,num_sequences=None)
+                            past = out.past_key_values
+                            local = mdl._global_hidden_to_local(out.last_hidden_state[:,-1]).to(mdl.local_transformer.ln_f.weight.dtype)
                         stop,sampled = engine.fast.frame(local,n,nb,guidance,p,graph=True)
                         continues = stop.eq(cfg.audio_assistant_slot_token_id) & ~finished
                         finished |= stop.eq(cfg.audio_end_token_id)
@@ -115,6 +131,8 @@ class ChunkSearch:
                         model_input = row.repeat(nb,1,1)
                         masks[:,length+steps] = continues.repeat(nb)
                         steps += 1
+                    token_seconds=time.perf_counter()-phase_start
+                    codec_started=time.perf_counter()
                     if new:
                         chunk = torch.stack(new,dim=1)
                         codes = torch.cat((codes,chunk),dim=1)
@@ -122,6 +140,7 @@ class ChunkSearch:
                         for i in range(n):
                             new_pcm[i]=wave[i,:int(lengths[i])].float().cpu().numpy().copy()
                             if conversion is None:pcm[i] = np.concatenate((pcm[i],new_pcm[i]))
+                    codec_seconds=time.perf_counter()-codec_started
                     event_end.record()
                     event_end.synchronize()
                     generation_seconds = time.perf_counter()-phase_start
@@ -140,6 +159,7 @@ class ChunkSearch:
                         scores = self.scorer.score(pcm,spec['text'],[endpoint or bool(x) for x in finished.cpu()])
                     order = sorted(range(n),key=lambda i:(not scores[i].get('ranking_available',True),-scores[i]['reward'],scores[i]['prefix_wer'],i))
                     winners = order[:beam_width] if not endpoint else order[:1]
+                    if hasattr(self.scorer,'select'):self.scorer.select(winners[0])
                     safe = common_prefix(codes,winners)
                     if safe < committed:
                         raise RuntimeError('Search attempted to revise committed acoustic prefix')
@@ -154,6 +174,7 @@ class ChunkSearch:
                         'committed_audio_seconds':committed_seconds,'committed_until_seconds':safe_samples/48000,
                         'voice_conversion_seconds':conversion_seconds,
                         'generation_wall_seconds':generation_seconds,'tts_codec_device_seconds':event_start.elapsed_time(event_end)/1000,
+                        'token_wall_seconds':token_seconds,'codec_wall_seconds':codec_seconds,
                         'scores':scores, **self.scorer.last_timing}
                     if safe_samples > committed_samples:
                         if first_commit is None:
@@ -169,7 +190,13 @@ class ChunkSearch:
                         break
                     indexes = torch.tensor(expansion_indices(winners,n),device=engine.device)
                     branch_indexes = torch.cat([indexes+branch*n for branch in range(nb)])
-                    past = tuple(tuple(value.index_select(0,branch_indexes) for value in layer) for layer in past)
+                    if semantic:
+                        # Preserve captured CUDA-graph addresses while cloning the
+                        # winning conditional AND unconditional KV rows.
+                        for layer in semantic.cache:
+                            for value in layer:value.copy_(value.index_select(0,branch_indexes))
+                    else:
+                        past = tuple(tuple(value.index_select(0,branch_indexes) for value in layer) for layer in past)
                     masks = masks.index_select(0,branch_indexes)
                     model_input = model_input.index_select(0,branch_indexes)
                     codes = codes.index_select(0,indexes)
@@ -179,7 +206,7 @@ class ChunkSearch:
                         parents=indexes.cpu().tolist()
                         vc_states=[vc_states[parent].fork(seed+104729*(child+1)+10007*steps)
                                    for child,parent in enumerate(parents)]
-                    reorder_codec(decoder,indexes,n)
+                    reorder_codec(decoder,indexes,n,inplace=getattr(streaming,'graphs',None) is not None)
                 else:
                     winner = 0
             output = pcm[winner]
@@ -187,6 +214,7 @@ class ChunkSearch:
                 output=np.concatenate((output,conversion.chunk(np.zeros(0,np.float32),vc_states[winner],final=True)))
             engine.last_codes = [codes[winner][codes[winner,:,0].ne(cfg.audio_pad_token_id)].cpu()]
             capture_seconds = engine.fast.capture_seconds-capture_start
+            codec_capture_seconds=getattr(getattr(stream,'graphs',None),'capture_seconds',0.)-codec_capture_before
         total = time.perf_counter()-started
         seconds = len(output)/48000
         if not seconds:
@@ -196,6 +224,7 @@ class ChunkSearch:
             'actual_seconds':seconds,'search_wall_seconds':total,'search_rtf':total/seconds,
             'first_commit_seconds':first_commit,'tts_codec_seconds':sum(x['tts_codec_device_seconds'] for x in timeline),
             'scoring_seconds':sum(x['total_seconds'] for x in timeline),'graph_capture_seconds':capture_seconds,
+            'codec_graph_capture_seconds':codec_capture_seconds,'semantic_cold':semantic_cold,
             'voice_conversion_seconds':sum(x['voice_conversion_seconds'] for x in timeline),
             'streaming_rule':'Winner commits immediately; top-2 emits only common acoustic-token prefixes',
             'includes':'reference encoding, packing, global/local TTS, codec, GPU transfers, batched ASR/timestamps, shared VoiceCLAP, heads, selected Humaneness Ears/VoiceNet/EIV+, burst locator/classifier if configured, CPU selection and KV cloning',

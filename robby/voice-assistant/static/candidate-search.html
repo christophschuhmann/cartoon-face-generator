@@ -1,0 +1,138 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Robby · causal candidate streaming</title><style>body{font:16px/1.6 system-ui;max-width:1150px;margin:32px auto;padding:0 20px;color:#e7eef7;background:#111b28}a{color:#91c6ff}table{border-collapse:collapse;width:100%}td,th{padding:9px;text-align:left;border-bottom:1px solid #3a4859}pre{white-space:pre-wrap;background:#1c2c40;padding:16px}section{overflow:auto}h2{margin-top:36px}</style><h1>Causal Best-of-3 streaming</h1><p>14 November 2026 · RTX 3090 · Small 1.1 Alpha RL · CFG 2 · temperature 0.8 · fixed Mira reference.</p><p>Enable <b>Speed &amp; verification → Best-of-3 streaming</b> in <a href="/desk-robot/">Robby</a>. The existing single-stream mode remains the default. Three continuations are generated in one batch. Every 12 semantic frames (960 ms of audio), actual ASR word accuracy and progress select a winner. Its complete semantic and codec state are copied into the next three lanes. Already emitted audio is never revised. Optional edge fades reuse these timestamps; there is no extra output ASR pass.</p><h2>Measured warm comparison</h2><p>Three seeds per condition. Entries are medians; success counts include failures. First PCM is local HTTP request to received samples, not audible browser onset. RTF is total wall time divided by emitted audio duration, including selection. ASR runs on GPU 1; this is not a one-GPU-only throughput claim. The single stream uses the previous parallel word checker and 1.6-s maximum chunks with its initial ramp. Search uses fixed 960-ms selection chunks.</p><section><table><tr><th>Mode</th><th>Authored prompt</th><th>Completed</th><th>First PCM (s)</th><th>Wall RTF</th><th>ASR WER</th><th>Selection ASR (s)</th><th>Zero-reserve gaps (ms)</th></tr><tr><td>single</td><td>de</td><td>3/3</td><td>0.791</td><td>0.418</td><td>0.000</td><td>not measured</td><td>0.000</td></tr><tr><td>single</td><td>en</td><td>3/3</td><td>0.653</td><td>0.252</td><td>0.000</td><td>not measured</td><td>0.000</td></tr><tr><td>single</td><td>negation</td><td>3/3</td><td>0.671</td><td>0.266</td><td>0.000</td><td>not measured</td><td>0.000</td></tr><tr><td>single</td><td>long</td><td>3/3</td><td>0.676</td><td>0.189</td><td>0.000</td><td>not measured</td><td>0.000</td></tr><tr><td>search_asr</td><td>de</td><td>3/3</td><td>1.089</td><td>0.505</td><td>0.000</td><td>0.737</td><td>0.000</td></tr><tr><td>search_asr</td><td>en</td><td>3/3</td><td>1.031</td><td>0.515</td><td>0.071</td><td>0.849</td><td>0.000</td></tr><tr><td>search_asr</td><td>negation</td><td>3/3</td><td>0.699</td><td>0.591</td><td>0.000</td><td>1.079</td><td>0.000</td></tr><tr><td>search_asr</td><td>long</td><td>3/3</td><td>0.691</td><td>0.702</td><td>0.000</td><td>5.821</td><td>0.000</td></tr></table></section><p>de/en: friendly two-sentence reply; negation: German “do not open the door”; long: English explanation of rainbows. WER is a final Parakeet Ultra transcript check using the same ASR family as selection. It is not independent perceptual evidence or a large quality study. Zero-reserve gaps assume playback immediately on the first received sample; the browser normally buffers additional audio.</p><h2>Cold start and limitations</h2><p>A newly encountered batch shape compiles and autotunes before producing audio. This can take minutes and must not be presented as normal warm latency. The service also warms its existing single/continuous-stream paths at startup.</p><pre>[
+  {
+    &quot;prompt&quot;: &quot;de&quot;,
+    &quot;mode&quot;: &quot;search_asr&quot;,
+    &quot;seed&quot;: 777,
+    &quot;first_pcm_ms&quot;: 461793.76784712076,
+    &quot;wall_ms&quot;: 468019.0081000328,
+    &quot;audio_s&quot;: 4.66,
+    &quot;rtf&quot;: 100.43326354077956,
+    &quot;passed&quot;: true,
+    &quot;label&quot;: &quot;cold&quot;,
+    &quot;asr_seconds&quot;: 4.603590428829193,
+    &quot;tts_codec_seconds&quot;: 462.8360628051758,
+    &quot;selection_steps&quot;: 5,
+    &quot;winner_rows&quot;: [
+      0,
+      1,
+      0,
+      0,
+      0
+    ],
+    &quot;asr_backends&quot;: [
+      &quot;Parakeet Ultra · Photon native CUDA graphs&quot;,
+      &quot;Parakeet v3 target-word gate&quot;
+    ],
+    &quot;emitted_end_verified&quot;: true,
+    &quot;graph_capture_seconds&quot;: 1.4142165333032608,
+    &quot;zero_reserve_underrun_ms&quot;: 2454.629386067438,
+    &quot;target&quot;: &quot;Hallo, schön dich zu sehen. Heute können wir gemeinsam etwas Neues entdecken.&quot;,
+    &quot;asr_hypothesis&quot;: &quot;Hallo, schön dich zu sehen. Heute können wir gemeinsam etwas Neues entdecken.&quot;,
+    &quot;wer&quot;: 0.0
+  },
+  {
+    &quot;prompt&quot;: &quot;de&quot;,
+    &quot;mode&quot;: &quot;search_asr&quot;,
+    &quot;seed&quot;: 777,
+    &quot;first_pcm_ms&quot;: 93382.68011063337,
+    &quot;wall_ms&quot;: 94641.46868139505,
+    &quot;audio_s&quot;: 4.66,
+    &quot;rtf&quot;: 20.30932804321782,
+    &quot;passed&quot;: true,
+    &quot;label&quot;: &quot;graph-cold&quot;,
+    &quot;asr_seconds&quot;: 0.7785968780517578,
+    &quot;tts_codec_seconds&quot;: 65.92170764160156,
+    &quot;selection_steps&quot;: 5,
+    &quot;winner_rows&quot;: [
+      0,
+      1,
+      0,
+      0,
+      0
+    ],
+    &quot;asr_backends&quot;: [
+      &quot;Parakeet Ultra · Photon native CUDA graphs&quot;
+    ],
+    &quot;emitted_end_verified&quot;: true,
+    &quot;graph_capture_seconds&quot;: 1.3256666734814644,
+    &quot;zero_reserve_underrun_ms&quot;: 0.0,
+    &quot;target&quot;: &quot;Hallo, schön dich zu sehen. Heute können wir gemeinsam etwas Neues entdecken.&quot;,
+    &quot;asr_hypothesis&quot;: &quot;Hallo, schön dich zu sehen. Heute können wir gemeinsam etwas Neues entdecken.&quot;,
+    &quot;wer&quot;: 0.0
+  },
+  {
+    &quot;prompt&quot;: &quot;de&quot;,
+    &quot;mode&quot;: &quot;search_asr&quot;,
+    &quot;seed&quot;: 777,
+    &quot;first_pcm_ms&quot;: 98301.19547247887,
+    &quot;wall_ms&quot;: 99577.04333215952,
+    &quot;audio_s&quot;: 4.66,
+    &quot;rtf&quot;: 21.368464234368997,
+    &quot;passed&quot;: true,
+    &quot;label&quot;: &quot;final-cold&quot;,
+    &quot;asr_seconds&quot;: 0.6598724871873856,
+    &quot;tts_codec_seconds&quot;: 73.11234101867676,
+    &quot;selection_steps&quot;: 5,
+    &quot;winner_rows&quot;: [
+      0,
+      1,
+      0,
+      0,
+      0
+    ],
+    &quot;asr_backends&quot;: [
+      &quot;Parakeet Ultra · Photon native CUDA graphs&quot;
+    ],
+    &quot;emitted_end_verified&quot;: true,
+    &quot;graph_capture_seconds&quot;: 1.333299145102501,
+    &quot;zero_reserve_underrun_ms&quot;: 0.0,
+    &quot;target&quot;: &quot;Hallo, schön dich zu sehen. Heute können wir gemeinsam etwas Neues entdecken.&quot;,
+    &quot;asr_hypothesis&quot;: &quot;Hallo, schön dich zu sehen. Heute können wir gemeinsam etwas Neues entdecken.&quot;,
+    &quot;wer&quot;: 0.0
+  }
+]</pre><p>Search can select incorrect or faster-but-less-natural speech. It does not optimize speaker similarity or enjoyment. ASR uses approximately 12-second rolling windows; later decoding can revise earlier recognized words. Missing openings are bounded to 3.84 seconds of generated audio. Natural endings are checked using selection timestamps, without a second full-text gate. Large, quick reactions and optional idle speech retain their existing paths.</p><h2>Recovery and browser checks</h2><p>Transient candidate ASR errors get one retry. Before any published sentence audio, missing openings/empty audio get up to three attempts; a first search OOM falls back to a single stream. Audio that has already played is not replayed. Cancellation remains cooperative at frame/ASR boundaries.</p><pre>{
+  &quot;browser&quot;: {
+    &quot;passed&quot;: true,
+    &quot;physical_microphone&quot;: false,
+    &quot;turns&quot;: [
+      {
+        &quot;search&quot;: true,
+        &quot;audio_chunks&quot;: 3,
+        &quot;metrics&quot;: {
+          &quot;llm_first_sentence_ms&quot;: 670.2,
+          &quot;tts_generation_mode&quot;: &quot;search_asr&quot;,
+          &quot;tts_first_audio_ms&quot;: 797.65,
+          &quot;first_audio_ms&quot;: 1473.01
+        }
+      },
+      {
+        &quot;search&quot;: false,
+        &quot;audio_chunks&quot;: 2,
+        &quot;metrics&quot;: {
+          &quot;llm_rate_limit_retries&quot;: 1,
+          &quot;llm_first_sentence_ms&quot;: 8665.21,
+          &quot;tts_generation_mode&quot;: &quot;single&quot;,
+          &quot;tts_retries&quot;: [
+            {
+              &quot;event&quot;: &quot;speech_retry&quot;,
+              &quot;attempt&quot;: 2,
+              &quot;max_attempts&quot;: 3,
+              &quot;code&quot;: &quot;unverified_speech&quot;,
+              &quot;strategy&quot;: &quot;compact_direction&quot;,
+              &quot;sentence&quot;: 0
+            }
+          ],
+          &quot;tts_first_audio_ms&quot;: 1834.6,
+          &quot;first_audio_ms&quot;: 10506.35
+        }
+      }
+    ],
+    &quot;page_errors&quot;: [],
+    &quot;error&quot;: null
+  },
+  &quot;cancellation&quot;: {
+    &quot;passed&quot;: true,
+    &quot;first_pcm_ms&quot;: 883.2667469978333,
+    &quot;idle_after_disconnect_ms&quot;: 135.24100184440613
+  }
+}</pre><p>The browser test uses real HTTPS, LLM, TTS and playback scheduling, plus toggle persistence. It is not a physical microphone or listening-quality test. Fault recovery is covered by injected transport unit tests; no intentional production OOM was induced.</p><p><a href="/static/candidate-search-results.json">Complete measured summaries</a> · <a href="https://github.com/christophschuhmann/cartoon-face-generator/blob/main/robby/voice-assistant/ASR_CANDIDATE_STREAMING.md">Algorithm, test commands and source guide</a> · <a href="/desk-robot/">Back to Robby</a></p></html>

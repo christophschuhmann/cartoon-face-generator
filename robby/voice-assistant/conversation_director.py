@@ -4,7 +4,8 @@ Same configured provider/model/key as the Playground. Return one SCRIPT, not
 several duplicated text fields; submit it to the shared TTS manual endpoint so
 the backend cannot run a second director. No second GPU model is loaded.
 """
-import json,re,time,os,datetime
+import json,re,time,os,datetime,asyncio
+import httpx
 from conversation_prompt import POLICY
 from performance import DIRECTOR_NOTE
 from speaker_names import shared_settings
@@ -91,13 +92,19 @@ def complete_visual_acknowledgment(raw,steps):
 
 
 async def provider_post(client,url,**kwargs):
-    """One bounded retry for the provider's observed transient rejection only.
+    """One bounded retry for transport/server failures or a known rejection.
 
     No retry for invalid schemas, authentication, safety rejections, arbitrary
-    400s, or returned tool calls. Rejected calls have not applied local tools.
+    400s, or returned tool calls. No local tool is executed inside this request;
+    a transport retry can repeat remote inference, but cannot repeat an action.
     """
     for attempt in range(2):
-        response=await client.post(url,**kwargs)
+        try:response=await client.post(url,**kwargs)
+        except httpx.TransportError:
+            if attempt:raise
+            await asyncio.sleep(.4);continue
+        if attempt==0 and getattr(response,'status_code',200) in (408,500,502,503,504):
+            await asyncio.sleep(.5);continue
         if attempt==0 and getattr(response,'status_code',200)==400:
             try:error=response.json().get('error',{})
             except (ValueError,TypeError,AttributeError):error={}
