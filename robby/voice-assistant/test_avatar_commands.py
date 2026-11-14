@@ -5,6 +5,31 @@ from avatar_actions import EMOTIONS
 from avatar_commands import explicit_actions
 
 class CommandTests(unittest.TestCase):
+    def test_whole_body_spin_head_scope_and_flips(self):
+        self.assertEqual(explicit_actions('Hey Robby, dreh dich mal im Kreis.')[0]['scope'],'body')
+        self.assertEqual(explicit_actions('Dreh deinen Kopf gegen den Uhrzeigersinn.')[0]['scope'],'head')
+        for text,direction in [('Mach mal einen Salto.','forward'),('Mach einen Salto rückwärts.','backward'),
+                               ('Can you do a somersault?','forward'),('Do a backflip.','backward')]:
+            action=explicit_actions(text)[0]
+            self.assertEqual((action['kind'],action['direction']),('somersault',direction),text)
+        self.assertEqual([s['kind'] for s in explicit_actions('Mach einen Salto und dreh dich dann im Kreis.')],['somersault','spin'])
+        for text in ['Mach keinen Salto.','Erkläre mir einen Salto.','Sag "Mach einen Salto".',
+                     'Wenn ich klatsche, mach einen Salto.','Alice macht einen Salto.']:
+            self.assertEqual(explicit_actions(text),[],text)
+
+    def test_token_split_stage_directions_cannot_become_speech(self):
+        from bolt_text import SentenceFramer
+        texts=[('(amusement) *Robby dreht sich kreisrund im Bildschirm!*',[]),
+               ('(elation) *spins around* Schau mal, ich drehe eine Runde!',['Schau mal, ich drehe eine Runde!']),
+               ('(amusement) **Hallo!**',['Hallo!']),('*Ich drehe eine Runde!*',['Ich drehe eine Runde!']),
+               ('*Robby macht einen Salto!*',[]),('*does a flip*',[])]
+        for text,expected in texts:
+            for size in (1,2,7,999):
+                f=SentenceFramer(strip_stage_directions=True);parts=[]
+                for start in range(0,len(text),size):parts.extend(f.feed(text[start:start+size]))
+                parts.extend(f.feed('',final=True))
+                self.assertEqual([p.text for p in parts],expected,(size,text))
+        self.assertEqual(SentenceFramer().feed('*Robby dreht sich um.*',final=True)[0].text,'*Robby dreht sich um.*')
     def test_common_german_english_commands_and_order(self):
         cases=[('Kannst du bitte eine lustige Grimasse schneiden?',['grimace']),
             ('Mach mal eine verrückte Grimasse!',['grimace']),('Make some funny faces.',['grimace']),
@@ -54,6 +79,54 @@ class CommandTests(unittest.TestCase):
         self.assertLessEqual(len(explicit_actions('Mach Grimassen und Grimassen und Grimassen und Grimassen.')),6)
 
 class PipelineTests(unittest.IsolatedAsyncioTestCase):
+    async def test_transient_provider_failure_does_not_make_a_valid_trick_silent(self):
+        import httpx
+        from bolt_pipeline import pipeline
+        request=httpx.Request('POST','https://example.invalid')
+        response=httpx.Response(503,request=request)
+        async def unavailable(*args,**kwargs):
+            raise httpx.HTTPStatusError('Model unavailable',request=request,response=response)
+            yield
+        with patch('bolt_pipeline.BoltDirector.stream',unavailable):
+            events=[(k,v) async for k,v in pipeline(None,'Mach mal einen Salto.',{},[],tts=False)]
+        self.assertEqual(sum(k=='avatar_action' for k,v in events),1)
+        self.assertTrue(any(k=='sentence' for k,v in events))
+        done=next(v for k,v in events if k=='done')
+        self.assertEqual(done['visual_acknowledgment_http_status'],503)
+
+    async def test_two_nonverbal_replies_have_a_bounded_ack_not_a_silent_error(self):
+        from bolt_pipeline import pipeline
+        from bolt_text import Sentence
+        async def words(*args,**kwargs):yield Sentence('Haha!','amusement',language='de')
+        with patch('bolt_pipeline.BoltDirector.stream',words):
+            events=[(k,v) async for k,v in pipeline(None,'Mach mal einen Salto.',{},[],tts=False)]
+        self.assertEqual(sum(k=='avatar_action' for k,v in events),1)
+        self.assertTrue(next(v for k,v in events if k=='done')['visual_acknowledgment_fallback'])
+        self.assertEqual([v['text'] for k,v in events if k=='sentence'],['Schau mal, jetzt kommt mein kleines Kunststück!'])
+
+    async def test_pure_laughter_requests_real_words_without_replaying_action(self):
+        from bolt_pipeline import pipeline
+        from bolt_text import Sentence
+        calls=[]
+        async def words(*args,**kwargs):
+            calls.append(True)
+            yield Sentence('Haha!' if len(calls)==1 else 'Mein letzter Keks ist weg!','anger',language='de')
+        with patch('bolt_pipeline.BoltDirector.stream',words):
+            events=[(k,v) async for k,v in pipeline(None,'Sei mal wütend.',{},[],tts=False)]
+        self.assertEqual(len(calls),2)
+        self.assertEqual(sum(k=='avatar_action' for k,v in events),1)
+        self.assertEqual([v['text'] for k,v in events if k=='sentence'],['Mein letzter Keks ist weg!'])
+
+    async def test_tiny_emotion_fragment_does_not_block_the_following_sentence(self):
+        from bolt_pipeline import pipeline
+        from bolt_text import Sentence
+        async def words(*args,**kwargs):
+            yield Sentence('ACH!','anger',language='de')
+            yield Sentence('Mein letzter Keks ist weg!','anger',language='de')
+        with patch('bolt_pipeline.BoltDirector.stream',words):
+            events=[(k,v) async for k,v in pipeline(None,'Sei mal wütend.',{},[],tts=False)]
+        self.assertEqual([v['text'] for k,v in events if k=='sentence'],['Mein letzter Keks ist weg!'])
+
     async def test_animation_dispatched_before_even_starting_llm_and_survives_failure(self):
         from bolt_pipeline import pipeline
         async def fail(*args,**kwargs):

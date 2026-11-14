@@ -16,9 +16,40 @@ async def start_worker(mode,gpu):
  ready=await asyncio.wait_for(p.stdout.readline(),90);info=json.loads(ready);assert info.get('ready'),info
  workers[mode]=p;return info
 async def startup(app):
+ # Optional lab models are resident after use, and reload on demand after the
+ # decision lab has borrowed their GPU slot. The conversation server is separate.
+ status.update(ready=True,models=[],models_offloaded=True)
+
+async def ensure_workers():
+ info=[]
+ for mode,gpu in [('audio',int(os.getenv('MOSS_AUDIO_GPU','0'))),('video',int(os.getenv('LFM3_VIDEO_GPU','0')))]:
+  if mode not in workers or workers[mode].returncode is not None:info.append(await start_worker(mode,gpu))
+ if info:status['models']=info
+ status.update(ready=True,error=None,models_offloaded=False)
+
+async def offload_optional(request):
+ if lock.locked():raise web.HTTPConflict(text='Audio/video lab is busy')
+ async with lock:
+  await cleanup(None);workers.clear();status.update(ready=True,models_offloaded=True)
+ return web.json_response({'offloaded':True})
+
+@web.middleware
+async def optional_gpu_lease(request,handler):
+ if request.path!='/analyze':return await handler(request)
+ from optional_lab_gpu import Lease,OptionalLabBusy
+ import aiohttp
+ try:lease=Lease().acquire()
+ except OptionalLabBusy as exc:raise web.HTTPConflict(text=str(exc))
  try:
-  info=[await start_worker('audio',int(os.getenv('MOSS_AUDIO_GPU','0'))),await start_worker('video',int(os.getenv('LFM3_VIDEO_GPU','0')))];status.update(ready=True,models=info)
- except Exception as e:status.update(ready=False,error=type(e).__name__+': '+str(e)[:160]);print('Worker startup failed',status['error'],flush=True)
+  # Loopback only. The decision server refuses offload during active inference.
+  try:
+   async with aiohttp.ClientSession() as session:
+    async with session.post('http://127.0.0.1:8815/internal/offload',timeout=aiohttp.ClientTimeout(total=30)) as r:
+     if r.status!=200:raise web.HTTPConflict(text='Decision lab is busy; retry shortly')
+  except aiohttp.ClientConnectorError:pass
+  await ensure_workers()
+  return await handler(request)
+ finally:lease.release()
 async def cleanup(app):
  for p in workers.values():
   if p.returncode is None:p.terminate()
@@ -192,6 +223,7 @@ async def analyze(request):
    except Exception as e:raise web.HTTPBadGateway(text=type(e).__name__+': '+str(e)[:180])
 if __name__=='__main__':
  (ROOT/'.runtime').mkdir(exist_ok=True)
- app=web.Application(client_max_size=LIMIT+1024*1024);app.on_startup.append(startup);app.on_cleanup.append(cleanup)
+ app=web.Application(client_max_size=LIMIT+1024*1024,middlewares=[optional_gpu_lease]);app.on_startup.append(startup);app.on_cleanup.append(cleanup)
  app.router.add_get('/status',get_status);app.router.add_post('/analyze',analyze)
+ app.router.add_post('/internal/offload',offload_optional)
  web.run_app(app,host='127.0.0.1',port=8810,access_log=None)

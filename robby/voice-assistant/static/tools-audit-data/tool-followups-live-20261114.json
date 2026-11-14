@@ -1,0 +1,223 @@
+{
+  "cases": [
+    {
+      "request": "Kannst du das mal nachgucken?",
+      "history": [
+        {
+          "role": "user",
+          "content": "Ich möchte etwas über Viktor Frankls Logotherapie wissen."
+        },
+        {
+          "role": "assistant",
+          "content": "Sie beschäftigt sich mit Sinn und Verantwortung."
+        }
+      ],
+      "text": "Klar, ich habe das gerade für dich nachgeschaut. Die Logotherapie, oft als die „Dritte Wiener Schule“ bezeichnet, geht darauf zurück, dass Menschen nicht primär von Trieben oder Macht getrieben sind, sondern von einem grundlegenden Willen zum Sinn. Das bedeutet: Sinn lässt sich laut Frankl auf drei Wegen erleben – durch Leistung, durch das Erleben eines Moments oder einer Person, und durch die Art und Weise, wie wir mit einem unausweichlichen Leid umgehen. Am spannendsten ist für mich, dass er betonte, man kann sich seine persönliche Antwort immer und überall aussuchen, selbst in den härtesten Umständen. Wenn du möchtest, können wir auch über eine dieser drei Sinnmöglichkeiten tiefer sprechen.",
+      "lookups": [
+        {
+          "tool": "search_web",
+          "ms": 1720.46,
+          "arguments": {
+            "query": "Viktor Frankl Logotherapie Grundprinzipien"
+          },
+          "error": null,
+          "cache_hit": false,
+          "retrieved_at": "2026-11-14T09:40:45.610788+00:00",
+          "result_sha256": "70a11ce608110ba869af1176aca880b5d2f27786196d066f563c81f1a3463c17"
+        }
+      ],
+      "sources": [
+        {
+          "title": "VFI / Logotherapie und Existenzanalyse",
+          "url": "https://www.viktorfrankl.org/logotherapie.html",
+          "publisher": "www.viktorfrankl.org"
+        },
+        {
+          "title": "Grundkonzepte der Logotherapie | Viktor Frankl Zentrum Wien",
+          "url": "https://www.franklzentrum.org/museum/buecher/59/grundkonzepte-der-logotherapie.html",
+          "publisher": "www.franklzentrum.org"
+        },
+        {
+          "title": "Die Frage nach dem Sinn in der Psychotherapie aus der Perspektive der Logotherapie | PTT - Persönlichkeitsstörungen: Theorie und Therapie",
+          "url": "https://elibrary.utb.de/doi/10.5555/ptt-11-4-229",
+          "publisher": "elibrary.utb.de"
+        }
+      ],
+      "actions": [],
+      "metrics": {
+        "tts_model": "small_rl",
+        "verification": {
+          "align": true,
+          "speech_verification": "parallel"
+        },
+        "quick_reply_status": "disabled_or_ineligible",
+        "tool_director_ms": 3393.96,
+        "director_model": "qwen/qwen3.8-27b",
+        "llm_model": "qwen/qwen3.8-27b",
+        "llm_provider": "cerebras/fp16",
+        "llm_backend": "OpenRouter",
+        "llm_actual_provider": "Cerebras",
+        "total_ms": 3611.55,
+        "audio_s": 0.0,
+        "sentences": 5
+      },
+      "passed": true,
+      "ms": 3625
+    },
+    {
+      "request": "Ich möchte sehen, wie du deine Augen einmal im Kreis wandern lässt.",
+      "history": [],
+      "text": "Schau mal, meine Augen machen jetzt eine kleine Runde!\nIch hoffe, das sieht für dich recht lustig aus.",
+      "lookups": [],
+      "sources": [],
+      "actions": [
+        {
+          "kind": "eye_roll",
+          "duration_s": 3.0,
+          "sentence": 0
+        }
+      ],
+      "metrics": {
+        "tts_model": "small_rl",
+        "verification": {
+          "align": true,
+          "speech_verification": "parallel"
+        },
+        "quick_reply_status": "disabled_or_ineligible",
+        "llm_model": "qwen/qwen3.8-27b",
+        "llm_provider": "cerebras/fp16",
+        "llm_backend": "OpenRouter",
+        "llm_actual_provider": "Cerebras",
+        "llm_ttft_ms": 340.25,
+        "llm_first_sentence_ms": 371.78,
+        "finish_reason": "stop",
+        "usage": {
+          "prompt_tokens": 2993,
+          "completion_tokens": 35,
+          "total_tokens": 3028,
+          "cost": 0.0029850678,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 1024,
+            "cache_write_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.00301522,
+            "upstream_inference_prompt_cost": 0.00296307,
+            "upstream_inference_completions_cost": 5.215e-05
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "image_tokens": 0,
+            "audio_tokens": 0
+          }
+        },
+        "generation_calls": 1,
+        "llm_total_ms": 383.9,
+        "response_complete": true,
+        "total_ms": 394.42,
+        "audio_s": 0.0,
+        "sentences": 2
+      },
+      "passed": true,
+      "ms": 395
+    },
+    {
+      "request": "Unterbrich mich, wenn ich Bananen sage, und sage Stopp, stopp.",
+      "expected_mode": "any_term",
+      "actions": [
+        {
+          "name": "set_interruption_rule",
+          "arguments": {
+            "condition": "Der Sprecher erwähnt Bananen (deutsch oder englisch).",
+            "trigger_terms": [
+              "banane",
+              "bananen",
+              "banana",
+              "bananas"
+            ],
+            "match_mode": "any_term",
+            "reply": "Stopp, stopp!"
+          }
+        }
+      ],
+      "text": "Fertig! Sobald du „Banane“ oder „Bananen“ sagst, spring ich mit „Stopp, stopp!“ ein. Pass auf, dass du nicht versehentlich einen Bananensalat bestellst – ich wäre sofort zur Stelle.",
+      "rulebook_after": [
+        {
+          "id": "4d155ce4a0c2",
+          "owner": "test-owner",
+          "condition": "Der Sprecher erwähnt Bananen (deutsch oder englisch).",
+          "reply": "Stopp, stopp!",
+          "match_mode": "any_term",
+          "trigger_terms": [
+            "banane",
+            "bananen",
+            "banana",
+            "bananas"
+          ]
+        }
+      ],
+      "passed": true,
+      "ms": 1034
+    },
+    {
+      "request": "Unterbrich mich, wenn meine Erklärung sich selbst widerspricht. Entscheide nach der Bedeutung, nicht nach bestimmten Wörtern.",
+      "expected_mode": "semantic",
+      "actions": [
+        {
+          "name": "set_interruption_rule",
+          "arguments": {
+            "condition": "Der Sprecher ist widersprüchlich und erklärt etwas, das sich mit einer vorherigen Aussage im Gespräch semantisch widerspricht.",
+            "trigger_terms": [],
+            "match_mode": "semantic",
+            "reply": "Stopp, da widersprichst du dir!"
+          }
+        }
+      ],
+      "text": "Okay, ich halte jetzt nach selbstwidersprüchlichen Aussagen Ausschau – nach Bedeutung, nicht nach bestimmten Wörtern. Wenn es klickt, sage ich kurz: Stopp, da widersprichst du dir!",
+      "rulebook_after": [
+        {
+          "id": "4d155ce4a0c2",
+          "owner": "test-owner",
+          "condition": "Der Sprecher erwähnt Bananen (deutsch oder englisch).",
+          "reply": "Stopp, stopp!",
+          "match_mode": "any_term",
+          "trigger_terms": [
+            "banane",
+            "bananen",
+            "banana",
+            "bananas"
+          ]
+        },
+        {
+          "id": "d665d7404a75",
+          "owner": "test-owner",
+          "condition": "Der Sprecher ist widersprüchlich und erklärt etwas, das sich mit einer vorherigen Aussage im Gespräch semantisch widerspricht.",
+          "reply": "Stopp, da widersprichst du dir!",
+          "match_mode": "semantic",
+          "trigger_terms": []
+        }
+      ],
+      "passed": true,
+      "ms": 3282
+    },
+    {
+      "request": "Lösche bitte die Unterbrechungsregeln.",
+      "expected_mode": null,
+      "actions": [
+        {
+          "name": "clear_interruption_rules",
+          "arguments": {}
+        }
+      ],
+      "text": "Alles klar, die Unterbrechungsregeln sind gelöscht.",
+      "rulebook_after": [],
+      "passed": true,
+      "ms": 869
+    }
+  ],
+  "date": "2026-11-14",
+  "passed": true
+}

@@ -84,6 +84,39 @@ class TeacherTests(unittest.TestCase):
         self.assertTrue(stream.update(self.speech, speech=True)['fresh'])
         self.assertEqual(len(fake.calls), 2)
 
+    def test_remote_teacher_validates_revision_and_falls_back_without_new_identity(self):
+        import httpx
+        from unittest.mock import Mock
+        from speaker_teacher import RemoteTeacher,TEACHER_REVISION
+        with self.assertRaises(ValueError):RemoteTeacher('/unused','https://untrusted.example')
+        teacher=RemoteTeacher('/unused','http://127.0.0.1:8823');teacher.client.close()
+        vector=np.eye(192,dtype=np.float32)[0]
+        teacher.fallback=Mock();teacher.fallback.embed.return_value=vector.copy()
+        teacher.client=Mock()
+        teacher.client.post.return_value.json.return_value={'revision':'wrong','embedding':vector.tolist()}
+        np.testing.assert_array_equal(teacher.embed(np.full(16000,.05,np.float32)),vector)
+        teacher.fallback.embed.assert_called_once()
+        teacher.retry_at=0
+        teacher.client.post.return_value.json.return_value={'revision':TEACHER_REVISION,'embedding':vector.tolist()}
+        np.testing.assert_array_equal(teacher.embed(np.full(16000,.05,np.float32)),vector)
+        self.assertEqual(teacher.fallback.embed.call_count,1)
+
+    def test_exact_pcm_cache_is_bounded_expires_and_returns_copies(self):
+        import torch
+        from unittest.mock import Mock,patch
+        teacher=EcapaTeacher('/not/used')
+        teacher._model=Mock();teacher._model.encode_batch.return_value=torch.ones(192)
+        x=np.tile(self.speech,3)
+        with patch('speaker_teacher.time.monotonic',return_value=1.):
+            a=teacher.embed(x);a[:]=0
+            self.assertGreater(float(teacher.embed(x).sum()),1)
+            self.assertEqual(teacher._model.encode_batch.call_count,1)
+            for i in range(40):teacher.embed(x+i*.001)
+            self.assertLessEqual(len(teacher._recent),32)
+        count=teacher._model.encode_batch.call_count
+        with patch('speaker_teacher.time.monotonic',return_value=30.):teacher.embed(x+.039)
+        self.assertEqual(teacher._model.encode_batch.call_count,count+1)
+
     def test_silence_overlap_unknown_reset_and_memory_bound(self):
         fake = FakeTeacher()
         stream = StreamingTeacher(fake, max_context_seconds=2.)

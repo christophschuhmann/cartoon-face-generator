@@ -3,7 +3,7 @@ import {GRIMACES} from './avatar-actions.js';
 export function attachActionControls(actions){
  const panel=document.createElement('details');panel.className='desk-controls';panel.id='avatar-action-controls';
  panel.innerHTML=`<summary>Personality &amp; little tricks</summary>
- <p>Ask “Nod”, “Roll your eyes”, “Turn 360 degrees counterclockwise”, or “Look angry, then make a funny face”. These are screen animations, not motor commands.</p>
+ <p>Ask “Dreh dich im Kreis”, “Mach einen Salto”, “Do a backflip”, or “Look angry, then make a funny face”. A body spin or flip moves the platform too. These are screen animations, not motor commands.</p>
  <label><input id="avatar-actions-enabled" type="checkbox" checked> Allow expressive actions</label>
  <label><input id="avatar-idle-enabled" type="checkbox" checked> Play when bored · silly faces and an accelerating carousel</label>
  <label for="avatar-play-intensity">Silliness intensity <output id="avatar-play-intensity-value">100%</output></label>
@@ -29,7 +29,7 @@ export function attachActionControls(actions){
  <p>Listening cues reuse enabled live usefulness/rule decisions and require a recognized speaker.</p>
  <a href="/static/avatar-manual.html" target="_blank" rel="noopener">Illustrated manual · all 40 expressions ↗</a> · <a href="https://laion-ai.github.io/Humaneness-Voice/robby/" target="_blank" rel="noopener">GitHub Pages copy ↗</a>`;
  document.getElementById('avatar').after(panel);
- const items=[['Nod yes',{kind:'nod'}],['Shake head no',{kind:'shake'}],['360° clockwise (from above)',{kind:'spin',direction:'clockwise',duration_s:4}],['360° counterclockwise (from above)',{kind:'spin',direction:'counterclockwise',duration_s:4}],['Roll eyes',{kind:'eye_roll'}],['Wink',{kind:'wink'}],['Curious peek',{kind:'curious'}],
+ const items=[['Nod yes',{kind:'nod'}],['Shake head no',{kind:'shake'}],['Body · 360° clockwise (from above)',{kind:'spin',scope:'body',direction:'clockwise',duration_s:6}],['Body · 360° counterclockwise (from above)',{kind:'spin',scope:'body',direction:'counterclockwise',duration_s:6}],['Forward somersault · whole robot',{kind:'somersault',direction:'forward',duration_s:4.8}],['Backflip · whole robot',{kind:'somersault',direction:'backward',duration_s:4.8}],['Head only · 360°',{kind:'spin',scope:'head',direction:'clockwise',duration_s:6}],['Roll eyes',{kind:'eye_roll'}],['Wink',{kind:'wink'}],['Curious peek',{kind:'curious'}],
   ...GRIMACES.slice(0,4).map(variant=>['Cute grimace: '+variant,{kind:'grimace',variant}]),
   ...profiles.map(p=>[p.label,{kind:'emotion',emotion:p.slug,duration_s:3}]),
   ['Angry → cheeky → content',[{kind:'emotion',emotion:'anger'},{kind:'grimace',variant:'cheeky'},{kind:'emotion',emotion:'contentment'}]],
@@ -55,7 +55,7 @@ export function attachActionControls(actions){
  }
  document.getElementById('avatar-perform').onclick=()=>{const value=items[+select.value][1];actions.play((Array.isArray(value)?value:[value]).map(s=>({duration_s:2,...s})));};
  document.getElementById('avatar-stop').onclick=()=>actions.clear();
- let last='';const timer=setInterval(()=>{const text=actions.warning|| (actions.active?`Performing ${actions.active.kind.replaceAll('_',' ')} · ${actions.active.source}`:!actions.enabled?'Expressive actions disabled.':'Camera tracking resumes automatically after each trick.');if(text!==last){document.getElementById('avatar-action-status').textContent=text;last=text;}const notice=document.getElementById('action-notice');if(notice){notice.hidden=!actions.warning;notice.textContent=actions.warning||'';}},250);
+ let last='';const timer=setInterval(()=>{const text=actions.warning|| (actions.pendingRequest?'Trick ready · starting with speech, or within four seconds.':actions.active?`Performing ${actions.active.kind.replaceAll('_',' ')} · ${actions.active.source}`:!actions.enabled?'Expressive actions disabled.':'Camera tracking resumes automatically after each trick.');if(text!==last){document.getElementById('avatar-action-status').textContent=text;last=text;}const notice=document.getElementById('action-notice');if(notice){notice.hidden=!actions.warning;notice.textContent=actions.warning||'';}},250);
  addEventListener('pagehide',()=>clearInterval(timer),{once:true});
  return panel;
 }

@@ -1,0 +1,720 @@
+{
+  "url": "https://diane-asylum-understood-invoice.trycloudflare.com/audio-decision/",
+  "checks": [
+    "HTTPS, verified Strong taxonomy and defaults",
+    "WAV upload, real d1 inference, every selected score present",
+    "Paused seek selects Top-N from the correct target interval",
+    "Playback advances and pause stops the playhead",
+    "JSON/CSV exports include actual matrices, settings and class IDs",
+    "Other browser cannot read private audio",
+    "Changed context never relabels old results",
+    "Browser microphone recording, WebM decode and replay",
+    "Real AudioWorklet → HTTPS WebSocket → d1 → rendered results at 100/200/300 ms; controlled gaps and replay after stop",
+    "Responsive 390 px mobile layout"
+  ],
+  "errors": [],
+  "live": [
+    {
+      "hop_ms": 100,
+      "ages": [
+        376.47459859696755,
+        399.2932003306705,
+        434.47687380005664,
+        442.5605411659308,
+        442.6000061035156,
+        444.5442176870747,
+        466.1233499055561,
+        470.36530459656933,
+        522.6489765400802,
+        532.1188223875579,
+        542.1977293745476,
+        546.4326561129819,
+        556.2954679043651,
+        565.6535193168675,
+        579.6448994850616,
+        579.9000015258789,
+        580.4841269841272,
+        648.1494346324544
+      ],
+      "rows": [
+        {
+          "start": 0,
+          "end": 0.1,
+          "status": "skipped",
+          "inference_ms": null
+        },
+        {
+          "start": 0.1,
+          "end": 0.2,
+          "status": "evaluated",
+          "inference_ms": 291.4223000407219
+        },
+        {
+          "start": 0.2,
+          "end": 0.3,
+          "status": "skipped",
+          "inference_ms": null
+        },
+        {
+          "start": 0.3,
+          "end": 0.4,
+          "status": "evaluated",
+          "inference_ms": 264.90405946969986
+        },
+        {
+          "start": 0.4,
+          "end": 0.5,
+          "status": "skipped",
+          "inference_ms": null
+        },
+        {
+          "start": 0.5,
+          "end": 0.6,
+          "status": "evaluated",
+          "inference_ms": 276.2535437941551
+        },
+        {
+          "start": 0.6,
+          "end": 0.7,
+          "status": "skipped",
+          "inference_ms": null
+        },
+        {
+          "start": 0.7,
+          "end": 0.8,
+          "status": "skipped",
+          "inference_ms": null
+        },
+        {
+          "start": 0.8,
+          "end": 0.9,
+          "status": "skipped",
+          "inference_ms": null
+        },
+        {
+          "start": 0.9,
+          "end": 1,
+          "status": "evaluated",
+          "inference_ms": 315.6100809574127
+        },
+        {
+          "start": 1,
+          "end": 1.1,
+          "status": "skipped",
+          "inference_ms": null
+        },
+        {
+          "start": 1.1,
+          "end": 1.2,
+          "status": "evaluated",
+          "inference_ms": 298.04716259241104
+        },
+        {
+          "start": 1.2,
+          "end": 1.3,
+          "status": "skipped",
+          "inference_ms": null
+        },
+        {
+          "start": 1.3,
+          "end": 1.4,
+          "status": "skipped",
+          "inference_ms": null
+        },
+        {
+          "start": 1.4,
+          "end": 1.5,
+          "status": "skipped",
+          "inference_ms": null
+        },
+        {
+          "start": 1.5,
+          "end": 1.6,
+          "status": "evaluated",
+          "inference_ms": 273.4760418534279
+        },
+        {
+          "start": 1.6,
+          "end": 1.7,
+          "status": "skipped",
+          "inference_ms": null
+        },
+        {
+          "start": 1.7,
+          "end": 1.8,
+          "status": "evaluated",
+          "inference_ms": 299.76703226566315
+        },
+        {
+          "start": 1.8,
+          "end": 1.9,
+          "status": "skipped",
+          "inference_ms": null
+        },
+        {
+          "start": 1.9,
+          "end": 2,
+          "status": "skipped",
+          "inference_ms": null
+        },
+        {
+          "start": 2,
+          "end": 2.1,
+          "status": "skipped",
+          "inference_ms": null
+        },
+        {
+          "start": 2.1,
+          "end": 2.2,
+          "status": "evaluated",
+          "inference_ms": 260.02897322177887
+        },
+        {
+          "start": 2.2,
+          "end": 2.3,
+          "status": "skipped",
+          "inference_ms": null
+        },
+        {
+          "start": 2.3,
+          "end": 2.4,
+          "status": "evaluated",
+          "inference_ms": 268.26125383377075
+        },
+        {
+          "start": 2.4,
+          "end": 2.5,
+          "status": "skipped",
+          "inference_ms": null
+        },
+        {
+          "start": 2.5,
+          "end": 2.6,
+          "status": "evaluated",
+          "inference_ms": 313.83249163627625
+        },
+        {
+          "start": 2.6,
+          "end": 2.7,
+          "status": "skipped",
+          "inference_ms": null
+        },
+        {
+          "start": 2.7,
+          "end": 2.8,
+          "status": "skipped",
+          "inference_ms": null
+        },
+        {
+          "start": 2.8,
+          "end": 2.9,
+          "status": "skipped",
+          "inference_ms": null
+        },
+        {
+          "start": 2.9,
+          "end": 3,
+          "status": "evaluated",
+          "inference_ms": 390.20971953868866
+        },
+        {
+          "start": 3,
+          "end": 3.1,
+          "status": "skipped",
+          "inference_ms": null
+        },
+        {
+          "start": 3.1,
+          "end": 3.2,
+          "status": "skipped",
+          "inference_ms": null
+        },
+        {
+          "start": 3.2,
+          "end": 3.3,
+          "status": "skipped",
+          "inference_ms": null
+        },
+        {
+          "start": 3.3,
+          "end": 3.4,
+          "status": "evaluated",
+          "inference_ms": 292.09358245134354
+        },
+        {
+          "start": 3.4,
+          "end": 3.5,
+          "status": "skipped",
+          "inference_ms": null
+        },
+        {
+          "start": 3.5,
+          "end": 3.6,
+          "status": "evaluated",
+          "inference_ms": 283.50983560085297
+        },
+        {
+          "start": 3.6,
+          "end": 3.7,
+          "status": "skipped",
+          "inference_ms": null
+        },
+        {
+          "start": 3.7,
+          "end": 3.8,
+          "status": "skipped",
+          "inference_ms": null
+        },
+        {
+          "start": 3.8,
+          "end": 3.9,
+          "status": "skipped",
+          "inference_ms": null
+        },
+        {
+          "start": 3.9,
+          "end": 4,
+          "status": "evaluated",
+          "inference_ms": 288.48759084939957
+        },
+        {
+          "start": 4,
+          "end": 4.1,
+          "status": "skipped",
+          "inference_ms": null
+        },
+        {
+          "start": 4.1,
+          "end": 4.2,
+          "status": "evaluated",
+          "inference_ms": 332.0072889328003
+        },
+        {
+          "start": 4.2,
+          "end": 4.3,
+          "status": "skipped",
+          "inference_ms": null
+        },
+        {
+          "start": 4.3,
+          "end": 4.4,
+          "status": "skipped",
+          "inference_ms": null
+        },
+        {
+          "start": 4.4,
+          "end": 4.5,
+          "status": "skipped",
+          "inference_ms": null
+        },
+        {
+          "start": 4.5,
+          "end": 4.6,
+          "status": "evaluated",
+          "inference_ms": 381.193183362484
+        },
+        {
+          "start": 4.6,
+          "end": 4.7,
+          "status": "skipped",
+          "inference_ms": null
+        },
+        {
+          "start": 4.7,
+          "end": 4.8,
+          "status": "skipped",
+          "inference_ms": null
+        },
+        {
+          "start": 4.8,
+          "end": 4.9,
+          "status": "skipped",
+          "inference_ms": null
+        },
+        {
+          "start": 4.9,
+          "end": 5,
+          "status": "evaluated",
+          "inference_ms": 359.7653657197952
+        },
+        {
+          "start": 5,
+          "end": 5.1,
+          "status": "skipped",
+          "inference_ms": null
+        },
+        {
+          "start": 5.1,
+          "end": 5.2,
+          "status": "skipped",
+          "inference_ms": null
+        },
+        {
+          "start": 5.2,
+          "end": 5.3,
+          "status": "skipped",
+          "inference_ms": null
+        },
+        {
+          "start": 5.3,
+          "end": 5.4,
+          "status": "evaluated",
+          "inference_ms": 377.2416338324547
+        },
+        {
+          "start": 5.4,
+          "end": 5.5,
+          "status": "skipped",
+          "inference_ms": null
+        },
+        {
+          "start": 5.5,
+          "end": 5.6,
+          "status": "skipped",
+          "inference_ms": null
+        }
+      ],
+      "duration": 5.6
+    },
+    {
+      "hop_ms": 200,
+      "ages": [
+        359.1721103694181,
+        377.6210823318579,
+        400.7233560090681,
+        417.6095268612844,
+        421.3698397439657,
+        428.8907059996054,
+        434.6047664824,
+        450.7117929090964,
+        460.3442207388325,
+        478.9954648526109,
+        494.5791398478759,
+        499.4768661706621,
+        503.8281224914681,
+        517.262813317262,
+        528.2605457435675,
+        541.5725623582766,
+        596.9444444444453,
+        599.8163265306139,
+        618.1814058956952
+      ],
+      "rows": [
+        {
+          "start": 0,
+          "end": 0.2,
+          "status": "evaluated",
+          "inference_ms": 287.32605278491974
+        },
+        {
+          "start": 0.2,
+          "end": 0.4,
+          "status": "evaluated",
+          "inference_ms": 291.472926735878
+        },
+        {
+          "start": 0.4,
+          "end": 0.6,
+          "status": "evaluated",
+          "inference_ms": 323.2996240258217
+        },
+        {
+          "start": 0.6,
+          "end": 0.8,
+          "status": "skipped",
+          "inference_ms": null
+        },
+        {
+          "start": 0.8,
+          "end": 1,
+          "status": "evaluated",
+          "inference_ms": 330.28828352689743
+        },
+        {
+          "start": 1,
+          "end": 1.2,
+          "status": "skipped",
+          "inference_ms": null
+        },
+        {
+          "start": 1.2,
+          "end": 1.4,
+          "status": "evaluated",
+          "inference_ms": 300.5673810839653
+        },
+        {
+          "start": 1.4,
+          "end": 1.6,
+          "status": "evaluated",
+          "inference_ms": 271.12826704978943
+        },
+        {
+          "start": 1.6,
+          "end": 1.8,
+          "status": "skipped",
+          "inference_ms": null
+        },
+        {
+          "start": 1.8,
+          "end": 2,
+          "status": "evaluated",
+          "inference_ms": 269.05257999897003
+        },
+        {
+          "start": 2,
+          "end": 2.2,
+          "status": "evaluated",
+          "inference_ms": 254.33211028575897
+        },
+        {
+          "start": 2.2,
+          "end": 2.4,
+          "status": "evaluated",
+          "inference_ms": 272.1041515469551
+        },
+        {
+          "start": 2.4,
+          "end": 2.6,
+          "status": "skipped",
+          "inference_ms": null
+        },
+        {
+          "start": 2.6,
+          "end": 2.8,
+          "status": "evaluated",
+          "inference_ms": 307.92707949876785
+        },
+        {
+          "start": 2.8,
+          "end": 3,
+          "status": "evaluated",
+          "inference_ms": 274.7391164302826
+        },
+        {
+          "start": 3,
+          "end": 3.2,
+          "status": "skipped",
+          "inference_ms": null
+        },
+        {
+          "start": 3.2,
+          "end": 3.4,
+          "status": "evaluated",
+          "inference_ms": 298.9087477326393
+        },
+        {
+          "start": 3.4,
+          "end": 3.6,
+          "status": "evaluated",
+          "inference_ms": 270.44031023979187
+        },
+        {
+          "start": 3.6,
+          "end": 3.8,
+          "status": "evaluated",
+          "inference_ms": 275.7933661341667
+        },
+        {
+          "start": 3.8,
+          "end": 4,
+          "status": "skipped",
+          "inference_ms": null
+        },
+        {
+          "start": 4,
+          "end": 4.2,
+          "status": "evaluated",
+          "inference_ms": 296.40814661979675
+        },
+        {
+          "start": 4.2,
+          "end": 4.4,
+          "status": "evaluated",
+          "inference_ms": 352.3350730538368
+        },
+        {
+          "start": 4.4,
+          "end": 4.6,
+          "status": "skipped",
+          "inference_ms": null
+        },
+        {
+          "start": 4.6,
+          "end": 4.8,
+          "status": "evaluated",
+          "inference_ms": 292.28030890226364
+        },
+        {
+          "start": 4.8,
+          "end": 5,
+          "status": "skipped",
+          "inference_ms": null
+        },
+        {
+          "start": 5,
+          "end": 5.2,
+          "status": "evaluated",
+          "inference_ms": 308.3289861679077
+        },
+        {
+          "start": 5.2,
+          "end": 5.4,
+          "status": "evaluated",
+          "inference_ms": 282.6740890741348
+        },
+        {
+          "start": 5.4,
+          "end": 5.6,
+          "status": "skipped",
+          "inference_ms": null
+        }
+      ],
+      "duration": 5.6
+    },
+    {
+      "hop_ms": 300,
+      "ages": [
+        491.84422073883616,
+        494.218820861679,
+        508.56054116592713,
+        524.432648483591,
+        538.4489795918344,
+        545.6768707482988,
+        570.1070340560982,
+        580.7653061224482,
+        581.1816311271832,
+        590.2907075254843,
+        612.623357534947,
+        620.3954663784898,
+        677.2396794879241,
+        778.5117883314597
+      ],
+      "rows": [
+        {
+          "start": 0,
+          "end": 0.3,
+          "status": "evaluated",
+          "inference_ms": 322.13711738586426
+        },
+        {
+          "start": 0.3,
+          "end": 0.6,
+          "status": "evaluated",
+          "inference_ms": 291.48366302251816
+        },
+        {
+          "start": 0.6,
+          "end": 0.9,
+          "status": "evaluated",
+          "inference_ms": 311.6763085126877
+        },
+        {
+          "start": 0.9,
+          "end": 1.2,
+          "status": "evaluated",
+          "inference_ms": 322.4169611930847
+        },
+        {
+          "start": 1.2,
+          "end": 1.5,
+          "status": "evaluated",
+          "inference_ms": 305.7122305035591
+        },
+        {
+          "start": 1.5,
+          "end": 1.8,
+          "status": "evaluated",
+          "inference_ms": 290.34360498189926
+        },
+        {
+          "start": 1.8,
+          "end": 2.1,
+          "status": "evaluated",
+          "inference_ms": 347.1955135464668
+        },
+        {
+          "start": 2.1,
+          "end": 2.4,
+          "status": "evaluated",
+          "inference_ms": 288.8856753706932
+        },
+        {
+          "start": 2.4,
+          "end": 2.7,
+          "status": "evaluated",
+          "inference_ms": 294.4502979516983
+        },
+        {
+          "start": 2.7,
+          "end": 3,
+          "status": "evaluated",
+          "inference_ms": 290.74854403734207
+        },
+        {
+          "start": 3,
+          "end": 3.3,
+          "status": "evaluated",
+          "inference_ms": 340.2508720755577
+        },
+        {
+          "start": 3.3,
+          "end": 3.6,
+          "status": "evaluated",
+          "inference_ms": 308.3275929093361
+        },
+        {
+          "start": 3.6,
+          "end": 3.9,
+          "status": "evaluated",
+          "inference_ms": 348.450243473053
+        },
+        {
+          "start": 3.9,
+          "end": 4.2,
+          "status": "evaluated",
+          "inference_ms": 290.338933467865
+        },
+        {
+          "start": 4.2,
+          "end": 4.5,
+          "status": "skipped",
+          "inference_ms": null
+        },
+        {
+          "start": 4.5,
+          "end": 4.6,
+          "status": "skipped",
+          "inference_ms": null
+        }
+      ],
+      "duration": 4.6
+    }
+  ],
+  "file": {
+    "rows": 20,
+    "classes": 16,
+    "inference_ms": [
+      388.6440470814705,
+      329.66940104961395,
+      343.83052587509155,
+      382.47162103652954,
+      339.06346559524536,
+      340.95945954322815,
+      346.55871987342834,
+      323.02046567201614,
+      320.65004855394363,
+      320.53641229867935,
+      346.7266485095024,
+      312.58153170347214,
+      328.96438241004944,
+      370.2748641371727,
+      323.85141402482986,
+      373.0722740292549,
+      353.77709567546844,
+      406.8562313914299,
+      347.94942289590836,
+      349.6537432074547
+    ]
+  },
+  "completed": true
+}

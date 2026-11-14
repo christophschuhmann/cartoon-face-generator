@@ -9,7 +9,7 @@ from speech_language import reply_language
 class LanguageTests(unittest.TestCase):
     def test_default_final_model_and_explicit_override(self):
         from asr_catalog import default_model
-        with patch.dict('os.environ',{},clear=True):self.assertEqual(default_model(),'parakeet_v3')
+        with patch.dict('os.environ',{},clear=True):self.assertEqual(default_model(),'parakeet_ultra')
         with patch.dict('os.environ',{'ROBO_ASR_MODEL':'nemotron'}):self.assertEqual(default_model(),'nemotron')
     def test_german_default_and_explicit_language(self):
         self.assertEqual(reply_language('Hello Robby, what can we do?'),'German')
@@ -67,5 +67,16 @@ class ChoiceTests(unittest.IsolatedAsyncioTestCase):
         s=self.session();s.asr.http=SimpleNamespace(post=AsyncMock(),aclose=AsyncMock())
         await s.asr.select('../../arbitrary');s.asr.http.post.assert_not_called()
         self.assertEqual(s.asr.selected,'nemotron');await s.close()
+
+    async def test_photon_uses_separate_loopback_worker(self):
+        from asr_catalog import worker_url
+        s=self.session();s.asr.http=SimpleNamespace(post=AsyncMock(return_value=httpx.Response(200,
+            json={'text':'Hallo Robby','transcribe_ms':123},request=httpx.Request('POST','http://localhost'))),aclose=AsyncMock())
+        result=await s.asr.transcribe('parakeet_ultra',np.full(32000,.04,np.float32))
+        self.assertEqual(result['model'],'parakeet_ultra')
+        self.assertEqual(s.asr.http.post.call_args.args[0],worker_url('parakeet_ultra')+'/transcribe/parakeet_ultra')
+        with patch.dict('os.environ',{'ROBO_PHOTON_BASE':'https://untrusted.example'}):
+            with self.assertRaises(ValueError):worker_url('parakeet_ultra')
+        await s.close()
 
 if __name__=='__main__':unittest.main()

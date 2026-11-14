@@ -23,11 +23,22 @@
 <option value="nemotron">Nemotron 3.5 · original</option>
 <option value="moonshine_de">Moonshine Streaming Small · German</option>
 <option value="nemotron_de">Nemotron 3.5 · German telephony</option>
-<option value="parakeet_v3" selected>Parakeet TDT v3 · multilingual</option>
+<option value="parakeet_v3">Parakeet TDT v3 · multilingual</option>
+<option value="parakeet_ultra" selected>Parakeet Ultra · fast GPU</option>
+<option value="parakeet_redux">Parakeet Redux · CPU comparison</option>
 <option value="whisper_turbo">Whisper Large v3 Turbo · German</option>
 </select></label>
-<p id="asr-model-status" role="status">Default: Parakeet v3 final transcripts. Nemotron provides live previews and interruptions.</p>
-<details><summary>How recognition and model loading work</summary><p>Nemotron keeps providing live previews, speaker features and interruptions. After your speech pause, the selected model produces the final transcript. Whisper uses buffered speech segments. Other recognizers are held in CPU RAM and moved to the GPU in the background when selected. Your choice is remembered in this browser. Ask explicitly for another reply language if desired.</p><p id="asr-cache-status" role="status">Checking model readiness…</p><a href="/static/voice-caption-update.html" target="_blank" rel="noopener">GPU voice captions · tests &amp; bridge-phrase PDF ↗</a> · <a href="/static/asr-model-update.html" target="_blank" rel="noopener">Model timings, offloading and test results ↗</a></details>
+<p id="asr-model-status" role="status">Default: Parakeet Ultra final transcripts. Nemotron provides live previews and interruptions. Redux is available as a CPU comparison.</p>
+<section id="input-isolation-controls" aria-label="Optional CUDA microphone filter">
+<label for="input-isolation-model">Microphone voice isolation · optional
+<select id="input-isolation-model"><option value="off" selected>Off · original microphone</option><option value="voxlock">VoxLock · CUDA · 40 ms</option><option value="scicom">Scicom Agent · CUDA · 40 ms</option></select></label>
+<p id="input-isolation-status" role="status">OFF · original microphone. No additional model loaded.</p>
+<button id="input-isolation-learn" type="button" class="secondary">Manual reset &amp; learn · speak for 4 s</button>
+<button id="input-isolation-clear" type="button" class="secondary">Reset learned filter voices</button>
+<p>Choose a filter and say “Hey Robby” (or “Hi Robbie”). Robby compares your voice with his session speaker database and automatically collects a four-second reference for that person. Short introductions can be completed with later matched speech. Known people reuse their reference; new people are added. No learning button is required. Voice audio stays in session RAM.</p>
+<details><summary>Filtering, latency &amp; switching speakers</summary><p>Both models use CUDA Graphs on GPU 1 and process 40-ms chunks before speech detection, ASR and interruption recognition. The displayed compute time excludes microphone capture and ASR. Environmental sound analysis still receives the original audio. Off is the default; your choice is remembered in this browser.</p><p>Experimental: VoxLock can let other voices through; Scicom can suppress parts of your own speech. Use Off if words disappear. Another person can introduce themselves with Hey Robby; existing voices stay registered. Reset learned filter voices forgets all filter references. Up to four registered voices are kept together using independent filter states and an experimental spectral union. A raw-audio wake check lets a new person say Hey Robby even when the main filter suppresses them. It waits for a speech pause and adds ASR latency. Switching off releases GPU memory.</p><a href="/static/input-isolation-gpu.html" target="_blank" rel="noopener">Measured GPU timings &amp; synthetic listening tests ↗</a></details>
+</section>
+<details><summary>How recognition and model loading work</summary><p>Nemotron keeps providing live previews, speaker features and interruptions. After your speech pause, the selected model produces the final transcript. Ultra stays on GPU 1 in a separate worker; Redux stays on CPU. The older recognizers use the existing CPU/GPU model bank. Whisper uses buffered speech segments. Your choice is remembered in this browser. Ask explicitly for another reply language if desired.</p><p id="asr-cache-status" role="status">Checking model readiness…</p><a href="/static/isolation-latency.html" target="_blank" rel="noopener">Current latency measurements &amp; limitations ↗</a> · <a href="/static/asr-model-update.html" target="_blank" rel="noopener">Earlier model timings and tests ↗</a></details>
 </section>
 <section id="quick-reply-controls" aria-label="Optional local reaction"><label><input id="quick-replies" type="checkbox"> Enable a short local reaction before Qwen (optional)</label><p>Off by default. When enabled, the local model reads the same memory and sound context, then writes up to six useful words. Qwen receives that exact phrase and continues the answer. Reaction playback and the main answer’s text/audio generation overlap. No second filler bridge. Exact-output requests skip the introduction.</p><p><a href="/static/environment-report.html" target="_blank" rel="noopener">Current flow and tests</a> · <a href="/static/two-stage-report.html" target="_blank" rel="noopener">Previous three-part experiment</a></p><p id="quick-reply-status" role="status">Off: play the main answer directly.</p></section>
 <section id="voice-caption-controls" aria-label="Tone of voice"><label><input id="voice-captions" type="checkbox" checked> Use uncertain tone-of-voice hints</label><p id="voice-caption-status" role="status">Short GPU audio captions run alongside ASR and help Robby interpret delivery. They can be wrong; your words take priority.</p></section>
@@ -71,6 +82,7 @@
 <p id="camera-status">Camera is off. Face tracking uses local MediaPipe processing.</p>
 <div class="meters"><label>Endpoint <meter id="end-meter" min="0" max="1"></meter></label><label>Interruption <meter id="barge-meter" min="0" max="1"></meter></label></div>
 <p id="sync-status">Playback sync: waiting for microphone.</p><p id="identity-status">Speaker identity extension: experimental; no voiceprint stored.</p>
+<a href="/audio-decision/" target="_blank" rel="noopener">Audio Decision Lab · contextual sound-event timeline ↗</a>
 <a href="/static/stunts-emotions.html" target="_blank" rel="noopener">Actions and emotion tests · listening samples ↗</a>
 <a href="/static/rtx3090-speed.html" target="_blank" rel="noopener">RTX 3090 speed measurements ↗</a>
 <a href="/static/sync-report.html" target="_blank" rel="noopener">Synchronization checks ↗</a>

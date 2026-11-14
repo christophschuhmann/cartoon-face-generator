@@ -12,6 +12,15 @@ def main():
     files=list(ROOT.glob('*.py'))
     files += [ROOT/name for name in ['README.md','STUNTS_AND_EMOTIONS.md','RTX3090_OPTIMIZATIONS.md','WAKE_MODE.md','SOCIAL_IDENTITY.md','PROACTIVE_ENVIRONMENT.md','RESTORE_BEFORE_PROACTIVE.md','restore-before-proactive-2026-10-27.json','TWO_STAGE_SPEECH.md','QUICK_REACTIONS.md','PERSISTENT_MEMORY.md','LFM3_LAB.md','STEM_LAB.md','minicpm-linux-fnocache.patch','VOICE_CAPTIONS.md','BRIDGE_PHRASES_PLAN.md','VOICE_ASSISTANT_TEST_PROTOCOL.md','voice_assistant_test_matrix.json','LICENSE','NOTICE','requirements.txt','requirements-asr.txt','config.example.json','.gitignore']]
     files.append(ROOT/'static/VOICE_ASSISTANT_TEST_PROTOCOL.md')
+    files += [ROOT/name for name in (
+        'WHOLE_BODY_STUNTS.md','PARALLEL_TTS_VERIFICATION.md','TOOLS_AND_LATENCY_GUIDE.md',
+        'INPUT_ISOLATION_REVIEW.md','INPUT_ISOLATION_GPU.md','INPUT_ISOLATION_UI.md',
+        'ISOLATION_AUTO_ENROLLMENT.md','ISOLATION_LATENCY.md','PHOTON_ASR.md',
+        'TURN_RELIABILITY.md','GPU_LAYOUT_2026-11-09.md','VOICE_ATTRIBUTE_DISPLAY_NOTES.md',
+        'start_ecapa_gpu.sh','start_photon_asr.sh')]
+    files.append(ROOT/'static/tool-catalogue.json')
+    # Only the separately reviewed synthetic audit receipts, never session logs.
+    files += list((ROOT/'static/tools-audit-data').glob('*.json'))
     files += [ROOT/'optimizations'/n for n in ('rtx3090-speed.env','start_rtx3090_tts.sh','test_fast_sample.py','tts-zero-temperature.patch')]
     for pattern in ['*.js','*.css','*.html','*.svg','LICENSE-MIT.txt']:files+=list((ROOT/'static').glob(pattern))
     files.append(ROOT/'static/emotion-catalog.json')
@@ -81,7 +90,9 @@ def main():
     # CPU-event implementation and failed browser attempts. JSON compaction
     # removes whitespace only; no event or failed measurement is discarded.
     # No binary/secret/path checks are relaxed.
-    if sum(len(raw) for raw in payload.values())>32_000_000:raise ValueError('Unexpected source export size: '+str(sum(len(raw) for raw in payload.values())))
+    # November 14: reviewed isolation/verification/tool tests and diagrams add
+    # ~2 MB. The allowlist, UTF-8 and credential checks remain unchanged.
+    if sum(len(raw) for raw in payload.values())>40_000_000:raise ValueError('Unexpected source export size: '+str(sum(len(raw) for raw in payload.values())))
     folder=ROOT/'releases';folder.mkdir(exist_ok=True)
     target=folder/'robby-source.zip';temporary=folder/'robby-source.tmp.zip'
     with zipfile.ZipFile(temporary,'w',zipfile.ZIP_DEFLATED) as archive:

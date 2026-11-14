@@ -1,0 +1,5132 @@
+{
+  "date": "2026-11-14",
+  "url": "https://diane-asylum-understood-invoice.trycloudflare.com/desk-robot/",
+  "turns": [
+    {
+      "request": "Hey Robbie, schneid eine Grimasse.",
+      "elapsed_ms": 8701,
+      "events": [
+        {
+          "type": "verification_settings",
+          "verify_tts": true,
+          "verify_input": true,
+          "serial_tts": false
+        },
+        {
+          "type": "avatar_action",
+          "action_id": "a5f3156bbf9148a582379d0e9f6ee22e",
+          "steps": [
+            {
+              "kind": "grimace",
+              "duration_s": 3,
+              "sentence": 0,
+              "variant": "crossed"
+            }
+          ],
+          "source": "validated_direct_request",
+          "wait_for_audio": true
+        },
+        {
+          "type": "reply",
+          "text": "Na dann, ich verziehe mein Gesicht mal richtig krass!",
+          "reply_id": 1,
+          "performance": {
+            "sentences": [
+              {
+                "emotion": "amusement",
+                "secondary": null,
+                "blend": 0,
+                "intensity": 0.72,
+                "direction": "amusement, playful",
+                "text": "Na dann, ich verziehe mein Gesicht mal richtig krass!",
+                "start_s": 0,
+                "end_s": 3.06
+              }
+            ],
+            "source": "qwen/qwen3.8-27b sentence cues + fixed GENERAL catalogue",
+            "timing": "Sentence starts anchored to actual preceding PCM duration; within-sentence estimates"
+          },
+          "avatar_actions": [
+            {
+              "kind": "grimace",
+              "duration_s": 3,
+              "sentence": 0,
+              "variant": "crossed"
+            }
+          ],
+          "avatar_action_id": "a5f3156bbf9148a582379d0e9f6ee22e",
+          "avatar_event": null,
+          "sentence_index": 0,
+          "sentence_text": "Na dann, ich verziehe mein Gesicht mal richtig krass!",
+          "sentence_role": "answer",
+          "speaker_id": null,
+          "speaker_name": null,
+          "speaker_update": null,
+          "timing": {
+            "tts_model": "small_rl",
+            "verification": {
+              "align": true,
+              "speech_verification": "parallel"
+            },
+            "quick_reply_status": "disabled_or_ineligible",
+            "llm_model": "qwen/qwen3.8-27b",
+            "llm_provider": "cerebras/fp16",
+            "llm_backend": "OpenRouter",
+            "llm_actual_provider": "Cerebras",
+            "llm_ttft_ms": 595.98,
+            "finish_reason": "stop",
+            "usage": {
+              "prompt_tokens": 3045,
+              "completion_tokens": 20,
+              "total_tokens": 3065,
+              "cost": 0.0030139065,
+              "is_byok": false,
+              "prompt_tokens_details": {
+                "cached_tokens": 2048,
+                "cache_write_tokens": 0,
+                "audio_tokens": 0,
+                "video_tokens": 0
+              },
+              "cost_details": {
+                "upstream_inference_cost": 0.00304435,
+                "upstream_inference_prompt_cost": 0.00301455,
+                "upstream_inference_completions_cost": 2.98e-05
+              },
+              "completion_tokens_details": {
+                "reasoning_tokens": 0,
+                "image_tokens": 0,
+                "audio_tokens": 0
+              }
+            },
+            "llm_first_sentence_ms": 620.67,
+            "generation_calls": 1,
+            "llm_total_ms": 622.24,
+            "response_complete": true,
+            "sentence_ready_ms": 763.82,
+            "director_mode": "bolt",
+            "director_model": "qwen/qwen3.8-27b",
+            "template_id": "amusement.soft"
+          },
+          "sources": [],
+          "lookups": []
+        },
+        {
+          "type": "pipeline_metrics",
+          "reply_id": 1,
+          "metrics": {
+            "tts_model": "small_rl",
+            "verification": {
+              "align": true,
+              "speech_verification": "parallel"
+            },
+            "quick_reply_status": "disabled_or_ineligible",
+            "llm_model": "qwen/qwen3.8-27b",
+            "llm_provider": "cerebras/fp16",
+            "llm_backend": "OpenRouter",
+            "llm_actual_provider": "Cerebras",
+            "llm_ttft_ms": 595.98,
+            "finish_reason": "stop",
+            "usage": {
+              "prompt_tokens": 3045,
+              "completion_tokens": 20,
+              "total_tokens": 3065,
+              "cost": 0.0030139065,
+              "is_byok": false,
+              "prompt_tokens_details": {
+                "cached_tokens": 2048,
+                "cache_write_tokens": 0,
+                "audio_tokens": 0,
+                "video_tokens": 0
+              },
+              "cost_details": {
+                "upstream_inference_cost": 0.00304435,
+                "upstream_inference_prompt_cost": 0.00301455,
+                "upstream_inference_completions_cost": 2.98e-05
+              },
+              "completion_tokens_details": {
+                "reasoning_tokens": 0,
+                "image_tokens": 0,
+                "audio_tokens": 0
+              }
+            },
+            "llm_first_sentence_ms": 620.67,
+            "generation_calls": 1,
+            "llm_total_ms": 622.24,
+            "response_complete": true,
+            "tts_actual_model": "small_rl",
+            "tts_revision": "182bc700cac29b2d69295a33398b13e1ca7fba69",
+            "tts_retries": [
+              {
+                "event": "speech_retry",
+                "attempt": 2,
+                "max_attempts": 3,
+                "code": "unverified_speech",
+                "strategy": "compact_direction",
+                "sentence": 0
+              }
+            ],
+            "answer_first_audio_ms": 2699.21,
+            "tts_first_audio_ms": 1935,
+            "first_audio_ms": 2699.24,
+            "tts_server_stages": [
+              {
+                "generation_ms": 863,
+                "alignment_ms": 1,
+                "scoring_ms": 0,
+                "speaker_preparation_ms": 0,
+                "total_ms": 873,
+                "performance": {
+                  "device_seconds": 0.6116694915294647,
+                  "raw_audio_seconds": 3.68,
+                  "aggregate_rtf": 0.16621453574170236,
+                  "audio_seconds_per_second": 6.016320988640858,
+                  "batches": [
+                    {
+                      "batch_size": 1,
+                      "device_seconds": 0.6116694915294647,
+                      "audio_seconds": [
+                        3.68
+                      ],
+                      "model_wall_seconds": 0.6167235597968102,
+                      "first_audio_seconds": 0.23135740661621093,
+                      "graph_capture_seconds": 0,
+                      "live_callback_seconds": 0.003530651330947876,
+                      "first_chunk_components_ms": {
+                        "codec_stream_setup": 4.782048225402832,
+                        "semantic_prefill": 198.53517150878906,
+                        "semantic_decode_first_steps": 7.649215936660767,
+                        "acoustic_tokens_first_steps": 6.546432018280029,
+                        "codec_first_chunk": 9.708352088928223,
+                        "profiled_frames": 3
+                      }
+                    }
+                  ],
+                  "streaming": true,
+                  "chunk_frames": 20,
+                  "backend": "fused CFG + local CUDA graphs + compiled global",
+                  "includes": "TTS prefill, autoregressive decode and PCM codec; GPU event span including launch gaps",
+                  "excludes": "reference encoding, prompt packing, Luna, alignment, scoring, voice conversion, CPU audio copy, MP3, network",
+                  "graph_capture_seconds": 0,
+                  "oom_batch_retries": []
+                }
+              }
+            ],
+            "sentence_tts": [
+              {
+                "sentence": 0,
+                "total_ms": 2221.8,
+                "audio_s": 3.3
+              }
+            ],
+            "total_ms": 2986.15,
+            "audio_s": 3.3,
+            "sentences": 1,
+            "generation_rtf": 0.9049
+          }
+        },
+        {
+          "type": "turn_done",
+          "barged": false
+        }
+      ],
+      "frames": [
+        {
+          "kind": "grimace",
+          "pose": "neutral",
+          "spin": 0,
+          "flip": 0,
+          "audio": true
+        },
+        {
+          "kind": "grimace",
+          "pose": "amusement",
+          "spin": 0,
+          "flip": 0,
+          "audio": true
+        },
+        {
+          "kind": "grimace",
+          "pose": "amusement",
+          "spin": 0,
+          "flip": 0,
+          "audio": true
+        },
+        {
+          "kind": "grimace",
+          "pose": "amusement",
+          "spin": 0,
+          "flip": 0,
+          "audio": true
+        },
+        {
+          "kind": "grimace",
+          "pose": "amusement",
+          "spin": 0,
+          "flip": 0,
+          "audio": true
+        },
+        {
+          "kind": "grimace",
+          "pose": "amusement",
+          "spin": 0,
+          "flip": 0,
+          "audio": true
+        },
+        {
+          "kind": "grimace",
+          "pose": "amusement",
+          "spin": 0,
+          "flip": 0,
+          "audio": true
+        },
+        {
+          "kind": "grimace",
+          "pose": "amusement",
+          "spin": 0,
+          "flip": 0,
+          "audio": true
+        }
+      ],
+      "audio": 4,
+      "passed": true
+    },
+    {
+      "request": "Mach ein ernstes Gesicht.",
+      "elapsed_ms": 10899,
+      "events": [
+        {
+          "type": "avatar_action",
+          "action_id": "2b9b0bafa65740489f09aee73e534e43",
+          "steps": [
+            {
+              "kind": "emotion",
+              "duration_s": 3,
+              "sentence": 0,
+              "emotion": "concentration"
+            }
+          ],
+          "source": "validated_direct_request",
+          "wait_for_audio": true
+        },
+        {
+          "type": "reply",
+          "text": "Verstanden, ich mache jetzt ein ernstes Gesicht.",
+          "reply_id": 2,
+          "performance": {
+            "sentences": [
+              {
+                "emotion": "concentration",
+                "secondary": "contentment",
+                "blend": 0.25,
+                "intensity": 0.9,
+                "direction": "concentration, intense, natural",
+                "text": "Verstanden, ich mache jetzt ein ernstes Gesicht.",
+                "start_s": 0,
+                "end_s": 2.38
+              }
+            ],
+            "source": "qwen/qwen3.8-27b sentence cues + fixed GENERAL catalogue",
+            "timing": "Sentence starts anchored to actual preceding PCM duration; within-sentence estimates"
+          },
+          "avatar_actions": [
+            {
+              "kind": "emotion",
+              "duration_s": 3,
+              "sentence": 0,
+              "emotion": "concentration"
+            }
+          ],
+          "avatar_action_id": "2b9b0bafa65740489f09aee73e534e43",
+          "avatar_event": null,
+          "sentence_index": 0,
+          "sentence_text": "Verstanden, ich mache jetzt ein ernstes Gesicht.",
+          "sentence_role": "answer",
+          "speaker_id": null,
+          "speaker_name": null,
+          "speaker_update": null,
+          "timing": {
+            "tts_model": "small_rl",
+            "verification": {
+              "align": true,
+              "speech_verification": "parallel"
+            },
+            "quick_reply_status": "disabled_or_ineligible",
+            "llm_model": "qwen/qwen3.8-27b",
+            "llm_provider": "cerebras/fp16",
+            "llm_backend": "OpenRouter",
+            "llm_rate_limit_retries": 1,
+            "llm_actual_provider": "Cerebras",
+            "llm_ttft_ms": 4157.56,
+            "finish_reason": "stop",
+            "usage": {
+              "prompt_tokens": 3079,
+              "completion_tokens": 17,
+              "total_tokens": 3096,
+              "cost": 0.0030428046,
+              "is_byok": false,
+              "prompt_tokens_details": {
+                "cached_tokens": 2048,
+                "cache_write_tokens": 0,
+                "audio_tokens": 0,
+                "video_tokens": 0
+              },
+              "cost_details": {
+                "upstream_inference_cost": 0.00307354,
+                "upstream_inference_prompt_cost": 0.00304821,
+                "upstream_inference_completions_cost": 2.533e-05
+              },
+              "completion_tokens_details": {
+                "reasoning_tokens": 0,
+                "image_tokens": 0,
+                "audio_tokens": 0
+              }
+            },
+            "llm_first_sentence_ms": 4183.34,
+            "generation_calls": 1,
+            "llm_total_ms": 4183.5,
+            "response_complete": true,
+            "sentence_ready_ms": 4198.26,
+            "director_mode": "bolt",
+            "director_model": "qwen/qwen3.8-27b",
+            "template_id": "concentration.intense"
+          },
+          "sources": [],
+          "lookups": []
+        },
+        {
+          "type": "pipeline_metrics",
+          "reply_id": 2,
+          "metrics": {
+            "tts_model": "small_rl",
+            "verification": {
+              "align": true,
+              "speech_verification": "parallel"
+            },
+            "quick_reply_status": "disabled_or_ineligible",
+            "llm_model": "qwen/qwen3.8-27b",
+            "llm_provider": "cerebras/fp16",
+            "llm_backend": "OpenRouter",
+            "llm_rate_limit_retries": 1,
+            "llm_actual_provider": "Cerebras",
+            "llm_ttft_ms": 4157.56,
+            "finish_reason": "stop",
+            "usage": {
+              "prompt_tokens": 3079,
+              "completion_tokens": 17,
+              "total_tokens": 3096,
+              "cost": 0.0030428046,
+              "is_byok": false,
+              "prompt_tokens_details": {
+                "cached_tokens": 2048,
+                "cache_write_tokens": 0,
+                "audio_tokens": 0,
+                "video_tokens": 0
+              },
+              "cost_details": {
+                "upstream_inference_cost": 0.00307354,
+                "upstream_inference_prompt_cost": 0.00304821,
+                "upstream_inference_completions_cost": 2.533e-05
+              },
+              "completion_tokens_details": {
+                "reasoning_tokens": 0,
+                "image_tokens": 0,
+                "audio_tokens": 0
+              }
+            },
+            "llm_first_sentence_ms": 4183.34,
+            "generation_calls": 1,
+            "llm_total_ms": 4183.5,
+            "response_complete": true,
+            "tts_actual_model": "small_rl",
+            "tts_revision": "182bc700cac29b2d69295a33398b13e1ca7fba69",
+            "answer_first_audio_ms": 5179.38,
+            "tts_first_audio_ms": 980.73,
+            "first_audio_ms": 5179.42,
+            "tts_server_stages": [
+              {
+                "generation_ms": 860,
+                "alignment_ms": 1,
+                "scoring_ms": 0,
+                "speaker_preparation_ms": 0,
+                "total_ms": 872,
+                "performance": {
+                  "device_seconds": 0.5845285851955414,
+                  "raw_audio_seconds": 3.36,
+                  "aggregate_rtf": 0.17396684083200636,
+                  "audio_seconds_per_second": 5.748221875027694,
+                  "batches": [
+                    {
+                      "batch_size": 1,
+                      "device_seconds": 0.5845285851955414,
+                      "audio_seconds": [
+                        3.36
+                      ],
+                      "model_wall_seconds": 0.589322492480278,
+                      "first_audio_seconds": 0.2288670654296875,
+                      "graph_capture_seconds": 0,
+                      "live_callback_seconds": 0.003270871937274933,
+                      "first_chunk_components_ms": {
+                        "codec_stream_setup": 4.942848205566406,
+                        "semantic_prefill": 194.33267211914062,
+                        "semantic_decode_first_steps": 8.153088092803955,
+                        "acoustic_tokens_first_steps": 6.7102720737457275,
+                        "codec_first_chunk": 10.513376235961914,
+                        "profiled_frames": 3
+                      }
+                    }
+                  ],
+                  "streaming": true,
+                  "chunk_frames": 20,
+                  "backend": "fused CFG + local CUDA graphs + compiled global",
+                  "includes": "TTS prefill, autoregressive decode and PCM codec; GPU event span including launch gaps",
+                  "excludes": "reference encoding, prompt packing, Luna, alignment, scoring, voice conversion, CPU audio copy, MP3, network",
+                  "graph_capture_seconds": 0,
+                  "oom_batch_retries": []
+                }
+              }
+            ],
+            "sentence_tts": [
+              {
+                "sentence": 0,
+                "total_ms": 985.63,
+                "audio_s": 3.14
+              }
+            ],
+            "total_ms": 5184.37,
+            "audio_s": 3.14,
+            "sentences": 1,
+            "generation_rtf": 1.6511
+          }
+        },
+        {
+          "type": "turn_done",
+          "barged": false
+        }
+      ],
+      "frames": [
+        {
+          "kind": "emotion",
+          "pose": "neutral",
+          "spin": 0,
+          "flip": 0,
+          "audio": false
+        },
+        {
+          "kind": "emotion",
+          "pose": "neutral",
+          "spin": 0,
+          "flip": 0,
+          "audio": false
+        },
+        {
+          "kind": "emotion",
+          "pose": "neutral",
+          "spin": 0,
+          "flip": 0,
+          "audio": false
+        },
+        {
+          "kind": "emotion",
+          "pose": "neutral",
+          "spin": 0,
+          "flip": 0,
+          "audio": false
+        },
+        {
+          "kind": "emotion",
+          "pose": "concentration",
+          "spin": 0,
+          "flip": 0,
+          "audio": false
+        },
+        {
+          "kind": "emotion",
+          "pose": "concentration",
+          "spin": 0,
+          "flip": 0,
+          "audio": false
+        },
+        {
+          "kind": "emotion",
+          "pose": "concentration",
+          "spin": 0,
+          "flip": 0,
+          "audio": false
+        },
+        {
+          "kind": "emotion",
+          "pose": "concentration",
+          "spin": 0,
+          "flip": 0,
+          "audio": false
+        },
+        {
+          "kind": "emotion",
+          "pose": "concentration",
+          "spin": 0,
+          "flip": 0,
+          "audio": false
+        },
+        {
+          "kind": "emotion",
+          "pose": "concentration",
+          "spin": 0,
+          "flip": 0,
+          "audio": true
+        },
+        {
+          "kind": "emotion",
+          "pose": "concentration",
+          "spin": 0,
+          "flip": 0,
+          "audio": true
+        },
+        {
+          "kind": "emotion",
+          "pose": "concentration",
+          "spin": 0,
+          "flip": 0,
+          "audio": true
+        },
+        {
+          "kind": "emotion",
+          "pose": "concentration",
+          "spin": 0,
+          "flip": 0,
+          "audio": true
+        },
+        {
+          "kind": "emotion",
+          "pose": "concentration",
+          "spin": 0,
+          "flip": 0,
+          "audio": true
+        },
+        {
+          "kind": "emotion",
+          "pose": "concentration",
+          "spin": 0,
+          "flip": 0,
+          "audio": true
+        },
+        {
+          "kind": "emotion",
+          "pose": "concentration",
+          "spin": 0,
+          "flip": 0,
+          "audio": true
+        },
+        {
+          "kind": "emotion",
+          "pose": "concentration",
+          "spin": 0,
+          "flip": 0,
+          "audio": true
+        },
+        {
+          "kind": "emotion",
+          "pose": "concentration",
+          "spin": 0,
+          "flip": 0,
+          "audio": true
+        },
+        {
+          "kind": "emotion",
+          "pose": "concentration",
+          "spin": 0,
+          "flip": 0,
+          "audio": true
+        }
+      ],
+      "audio": 2,
+      "passed": true
+    },
+    {
+      "request": "Mach einen Salto rückwärts.",
+      "elapsed_ms": 7226,
+      "events": [
+        {
+          "type": "avatar_action",
+          "action_id": "d27747434b7a49b1a7a6e6bc1e4fcaa1",
+          "steps": [
+            {
+              "kind": "somersault",
+              "duration_s": 4.8,
+              "sentence": 0,
+              "direction": "backward"
+            }
+          ],
+          "source": "validated_direct_request",
+          "wait_for_audio": true
+        },
+        {
+          "type": "reply",
+          "text": "Ich hole kurz Schwung, und dann geht es kopfüber!",
+          "reply_id": 3,
+          "performance": {
+            "sentences": [
+              {
+                "emotion": "interest",
+                "secondary": "amusement",
+                "blend": 0.25,
+                "intensity": 0.72,
+                "direction": "interest, playful",
+                "text": "Ich hole kurz Schwung, und dann geht es kopfüber!",
+                "start_s": 0,
+                "end_s": 3.06
+              }
+            ],
+            "source": "qwen/qwen3.8-27b sentence cues + fixed GENERAL catalogue",
+            "timing": "Sentence starts anchored to actual preceding PCM duration; within-sentence estimates"
+          },
+          "avatar_actions": [
+            {
+              "kind": "somersault",
+              "duration_s": 4.8,
+              "sentence": 0,
+              "direction": "backward"
+            }
+          ],
+          "avatar_action_id": "d27747434b7a49b1a7a6e6bc1e4fcaa1",
+          "avatar_event": null,
+          "sentence_index": 0,
+          "sentence_text": "Ich hole kurz Schwung, und dann geht es kopfüber!",
+          "sentence_role": "answer",
+          "speaker_id": null,
+          "speaker_name": null,
+          "speaker_update": null,
+          "timing": {
+            "tts_model": "small_rl",
+            "verification": {
+              "align": true,
+              "speech_verification": "parallel"
+            },
+            "quick_reply_status": "disabled_or_ineligible",
+            "llm_model": "qwen/qwen3.8-27b",
+            "llm_provider": "cerebras/fp16",
+            "llm_backend": "OpenRouter",
+            "llm_actual_provider": "Cerebras",
+            "llm_ttft_ms": 325.26,
+            "finish_reason": "stop",
+            "usage": {
+              "prompt_tokens": 3113,
+              "completion_tokens": 20,
+              "total_tokens": 3133,
+              "cost": 0.0030805533,
+              "is_byok": false,
+              "prompt_tokens_details": {
+                "cached_tokens": 2048,
+                "cache_write_tokens": 0,
+                "audio_tokens": 0,
+                "video_tokens": 0
+              },
+              "cost_details": {
+                "upstream_inference_cost": 0.00311167,
+                "upstream_inference_prompt_cost": 0.00308187,
+                "upstream_inference_completions_cost": 2.98e-05
+              },
+              "completion_tokens_details": {
+                "reasoning_tokens": 0,
+                "image_tokens": 0,
+                "audio_tokens": 0
+              }
+            },
+            "llm_first_sentence_ms": 345.8,
+            "generation_calls": 1,
+            "llm_total_ms": 345.95,
+            "response_complete": true,
+            "sentence_ready_ms": 351.85,
+            "director_mode": "bolt",
+            "director_model": "qwen/qwen3.8-27b",
+            "template_id": "interest.soft"
+          },
+          "sources": [],
+          "lookups": []
+        },
+        {
+          "type": "pipeline_metrics",
+          "reply_id": 3,
+          "metrics": {
+            "tts_model": "small_rl",
+            "verification": {
+              "align": true,
+              "speech_verification": "parallel"
+            },
+            "quick_reply_status": "disabled_or_ineligible",
+            "llm_model": "qwen/qwen3.8-27b",
+            "llm_provider": "cerebras/fp16",
+            "llm_backend": "OpenRouter",
+            "llm_actual_provider": "Cerebras",
+            "llm_ttft_ms": 325.26,
+            "finish_reason": "stop",
+            "usage": {
+              "prompt_tokens": 3113,
+              "completion_tokens": 20,
+              "total_tokens": 3133,
+              "cost": 0.0030805533,
+              "is_byok": false,
+              "prompt_tokens_details": {
+                "cached_tokens": 2048,
+                "cache_write_tokens": 0,
+                "audio_tokens": 0,
+                "video_tokens": 0
+              },
+              "cost_details": {
+                "upstream_inference_cost": 0.00311167,
+                "upstream_inference_prompt_cost": 0.00308187,
+                "upstream_inference_completions_cost": 2.98e-05
+              },
+              "completion_tokens_details": {
+                "reasoning_tokens": 0,
+                "image_tokens": 0,
+                "audio_tokens": 0
+              }
+            },
+            "llm_first_sentence_ms": 345.8,
+            "generation_calls": 1,
+            "llm_total_ms": 345.95,
+            "response_complete": true,
+            "tts_actual_model": "small_rl",
+            "tts_revision": "182bc700cac29b2d69295a33398b13e1ca7fba69",
+            "answer_first_audio_ms": 1139.93,
+            "tts_first_audio_ms": 787.68,
+            "first_audio_ms": 1139.96,
+            "tts_server_stages": [
+              {
+                "generation_ms": 1231,
+                "alignment_ms": 1,
+                "scoring_ms": 0,
+                "speaker_preparation_ms": 0,
+                "total_ms": 1243,
+                "performance": {
+                  "device_seconds": 0.768023864030838,
+                  "raw_audio_seconds": 4.32,
+                  "aggregate_rtf": 0.17778330185899027,
+                  "audio_seconds_per_second": 5.624825220048816,
+                  "batches": [
+                    {
+                      "batch_size": 1,
+                      "device_seconds": 0.768023864030838,
+                      "audio_seconds": [
+                        4.32
+                      ],
+                      "model_wall_seconds": 0.7755720466375351,
+                      "first_audio_seconds": 0.2901637268066406,
+                      "graph_capture_seconds": 0,
+                      "live_callback_seconds": 0.004152469336986542,
+                      "first_chunk_components_ms": {
+                        "codec_stream_setup": 6.648831844329834,
+                        "semantic_prefill": 245.02272033691406,
+                        "semantic_decode_first_steps": 8.286208152770996,
+                        "acoustic_tokens_first_steps": 6.76147198677063,
+                        "codec_first_chunk": 10.546175956726074,
+                        "profiled_frames": 3
+                      }
+                    }
+                  ],
+                  "streaming": true,
+                  "chunk_frames": 20,
+                  "backend": "fused CFG + local CUDA graphs + compiled global",
+                  "includes": "TTS prefill, autoregressive decode and PCM codec; GPU event span including launch gaps",
+                  "excludes": "reference encoding, prompt packing, Luna, alignment, scoring, voice conversion, CPU audio copy, MP3, network",
+                  "graph_capture_seconds": 0,
+                  "oom_batch_retries": []
+                }
+              }
+            ],
+            "sentence_tts": [
+              {
+                "sentence": 0,
+                "total_ms": 1310,
+                "audio_s": 4.32
+              }
+            ],
+            "total_ms": 1662.32,
+            "audio_s": 4.32,
+            "sentences": 1,
+            "generation_rtf": 0.3848
+          }
+        },
+        {
+          "type": "turn_done",
+          "barged": false
+        }
+      ],
+      "frames": [
+        {
+          "kind": "somersault",
+          "pose": "interest",
+          "spin": 0,
+          "flip": -0.0,
+          "audio": true
+        },
+        {
+          "kind": "somersault",
+          "pose": "interest",
+          "spin": 0,
+          "flip": -0.0,
+          "audio": true
+        },
+        {
+          "kind": "somersault",
+          "pose": "concentration",
+          "spin": 0,
+          "flip": -0.0,
+          "audio": true
+        },
+        {
+          "kind": "somersault",
+          "pose": "elation",
+          "spin": 0,
+          "flip": -2.511870108432457,
+          "audio": true
+        },
+        {
+          "kind": "somersault",
+          "pose": "elation",
+          "spin": 0,
+          "flip": -19.8044884951235,
+          "audio": true
+        },
+        {
+          "kind": "somersault",
+          "pose": "elation",
+          "spin": 0,
+          "flip": -48.478825478389474,
+          "audio": true
+        },
+        {
+          "kind": "somersault",
+          "pose": "elation",
+          "spin": 0,
+          "flip": -86.61678614645083,
+          "audio": true
+        },
+        {
+          "kind": "somersault",
+          "pose": "elation",
+          "spin": 0,
+          "flip": -129.49977801769768,
+          "audio": true
+        },
+        {
+          "kind": "somersault",
+          "pose": "elation",
+          "spin": 0,
+          "flip": -176.3088881386952,
+          "audio": true
+        },
+        {
+          "kind": "somersault",
+          "pose": "elation",
+          "spin": 0,
+          "flip": -223.42989922076228,
+          "audio": true
+        },
+        {
+          "kind": "somersault",
+          "pose": "elation",
+          "spin": 0,
+          "flip": -270.2771322009486,
+          "audio": true
+        },
+        {
+          "kind": "somersault",
+          "pose": "elation",
+          "spin": 0,
+          "flip": -311.4929014986507,
+          "audio": true
+        },
+        {
+          "kind": "somersault",
+          "pose": "elation",
+          "spin": 0,
+          "flip": -340.17802521029387,
+          "audio": true
+        },
+        {
+          "kind": "somersault",
+          "pose": "elation",
+          "spin": 0,
+          "flip": -354.81534817796455,
+          "audio": true
+        },
+        {
+          "kind": "somersault",
+          "pose": "elation",
+          "spin": 0,
+          "flip": -359.7067547082752,
+          "audio": true
+        },
+        {
+          "kind": "somersault",
+          "pose": "elation",
+          "spin": 0,
+          "flip": -360,
+          "audio": true
+        },
+        {
+          "kind": "somersault",
+          "pose": "elation",
+          "spin": 0,
+          "flip": -360,
+          "audio": false
+        },
+        {
+          "kind": "somersault",
+          "pose": "neutral",
+          "spin": 0,
+          "flip": -360,
+          "audio": false
+        }
+      ],
+      "audio": 6,
+      "passed": true
+    },
+    {
+      "request": "Mach einen Hundeblick.",
+      "elapsed_ms": 6390,
+      "events": [
+        {
+          "type": "avatar_action",
+          "action_id": "09b3b80ac0414fc19d371cc35baa8780",
+          "steps": [
+            {
+              "kind": "puppy",
+              "duration_s": 4,
+              "sentence": 0
+            }
+          ],
+          "source": "validated_direct_request",
+          "wait_for_audio": true
+        },
+        {
+          "type": "reply",
+          "text": "Oh, ich schaue dich jetzt ganz treu an wie ein kleiner Welpe!",
+          "reply_id": 4,
+          "performance": {
+            "sentences": [
+              {
+                "emotion": "hope",
+                "secondary": null,
+                "blend": 0,
+                "intensity": 0.55,
+                "direction": "hope, soft",
+                "text": "Oh, ich schaue dich jetzt ganz treu an wie ein kleiner Welpe!",
+                "start_s": 0,
+                "end_s": 4.08
+              }
+            ],
+            "source": "qwen/qwen3.8-27b sentence cues + fixed GENERAL catalogue",
+            "timing": "Sentence starts anchored to actual preceding PCM duration; within-sentence estimates"
+          },
+          "avatar_actions": [
+            {
+              "kind": "puppy",
+              "duration_s": 4,
+              "sentence": 0
+            }
+          ],
+          "avatar_action_id": "09b3b80ac0414fc19d371cc35baa8780",
+          "avatar_event": null,
+          "sentence_index": 0,
+          "sentence_text": "Oh, ich schaue dich jetzt ganz treu an wie ein kleiner Welpe!",
+          "sentence_role": "answer",
+          "speaker_id": null,
+          "speaker_name": null,
+          "speaker_update": null,
+          "timing": {
+            "tts_model": "small_rl",
+            "verification": {
+              "align": true,
+              "speech_verification": "parallel"
+            },
+            "quick_reply_status": "disabled_or_ineligible",
+            "llm_model": "qwen/qwen3.8-27b",
+            "llm_provider": "cerebras/fp16",
+            "llm_backend": "OpenRouter",
+            "llm_actual_provider": "Cerebras",
+            "llm_ttft_ms": 482.3,
+            "finish_reason": "stop",
+            "usage": {
+              "prompt_tokens": 3141,
+              "completion_tokens": 23,
+              "total_tokens": 3164,
+              "cost": 0.0031124214,
+              "is_byok": false,
+              "prompt_tokens_details": {
+                "cached_tokens": 2048,
+                "cache_write_tokens": 0,
+                "audio_tokens": 0,
+                "video_tokens": 0
+              },
+              "cost_details": {
+                "upstream_inference_cost": 0.00314386,
+                "upstream_inference_prompt_cost": 0.00310959,
+                "upstream_inference_completions_cost": 3.427e-05
+              },
+              "completion_tokens_details": {
+                "reasoning_tokens": 0,
+                "image_tokens": 0,
+                "audio_tokens": 0
+              }
+            },
+            "llm_first_sentence_ms": 516.8,
+            "generation_calls": 1,
+            "llm_total_ms": 516.96,
+            "response_complete": true,
+            "sentence_ready_ms": 522.48,
+            "director_mode": "bolt",
+            "director_model": "qwen/qwen3.8-27b",
+            "template_id": "hope.soft"
+          },
+          "sources": [],
+          "lookups": []
+        },
+        {
+          "type": "pipeline_metrics",
+          "reply_id": 4,
+          "metrics": {
+            "tts_model": "small_rl",
+            "verification": {
+              "align": true,
+              "speech_verification": "parallel"
+            },
+            "quick_reply_status": "disabled_or_ineligible",
+            "llm_model": "qwen/qwen3.8-27b",
+            "llm_provider": "cerebras/fp16",
+            "llm_backend": "OpenRouter",
+            "llm_actual_provider": "Cerebras",
+            "llm_ttft_ms": 482.3,
+            "finish_reason": "stop",
+            "usage": {
+              "prompt_tokens": 3141,
+              "completion_tokens": 23,
+              "total_tokens": 3164,
+              "cost": 0.0031124214,
+              "is_byok": false,
+              "prompt_tokens_details": {
+                "cached_tokens": 2048,
+                "cache_write_tokens": 0,
+                "audio_tokens": 0,
+                "video_tokens": 0
+              },
+              "cost_details": {
+                "upstream_inference_cost": 0.00314386,
+                "upstream_inference_prompt_cost": 0.00310959,
+                "upstream_inference_completions_cost": 3.427e-05
+              },
+              "completion_tokens_details": {
+                "reasoning_tokens": 0,
+                "image_tokens": 0,
+                "audio_tokens": 0
+              }
+            },
+            "llm_first_sentence_ms": 516.8,
+            "generation_calls": 1,
+            "llm_total_ms": 516.96,
+            "response_complete": true,
+            "tts_actual_model": "small_rl",
+            "tts_revision": "182bc700cac29b2d69295a33398b13e1ca7fba69",
+            "answer_first_audio_ms": 1261.35,
+            "tts_first_audio_ms": 738.37,
+            "first_audio_ms": 1261.38,
+            "tts_server_stages": [
+              {
+                "generation_ms": 1277,
+                "alignment_ms": 1,
+                "scoring_ms": 0,
+                "speaker_preparation_ms": 0,
+                "total_ms": 1289,
+                "performance": {
+                  "device_seconds": 0.7552979559898376,
+                  "raw_audio_seconds": 4.96,
+                  "aggregate_rtf": 0.15227781370762855,
+                  "audio_seconds_per_second": 6.566944820471268,
+                  "batches": [
+                    {
+                      "batch_size": 1,
+                      "device_seconds": 0.7552979559898376,
+                      "audio_seconds": [
+                        4.96
+                      ],
+                      "model_wall_seconds": 0.7618361487984657,
+                      "first_audio_seconds": 0.2348062744140625,
+                      "graph_capture_seconds": 0,
+                      "live_callback_seconds": 0.004553616046905518,
+                      "first_chunk_components_ms": {
+                        "codec_stream_setup": 5.360640048980713,
+                        "semantic_prefill": 199.79469299316406,
+                        "semantic_decode_first_steps": 8.159232139587402,
+                        "acoustic_tokens_first_steps": 6.727679967880249,
+                        "codec_first_chunk": 10.488832473754883,
+                        "profiled_frames": 3
+                      }
+                    }
+                  ],
+                  "streaming": true,
+                  "chunk_frames": 20,
+                  "backend": "fused CFG + local CUDA graphs + compiled global",
+                  "includes": "TTS prefill, autoregressive decode and PCM codec; GPU event span including launch gaps",
+                  "excludes": "reference encoding, prompt packing, Luna, alignment, scoring, voice conversion, CPU audio copy, MP3, network",
+                  "graph_capture_seconds": 0,
+                  "oom_batch_retries": []
+                }
+              }
+            ],
+            "sentence_tts": [
+              {
+                "sentence": 0,
+                "total_ms": 1331.56,
+                "audio_s": 0.98
+              }
+            ],
+            "total_ms": 1854.62,
+            "audio_s": 0.98,
+            "sentences": 1,
+            "generation_rtf": 1.8924
+          }
+        },
+        {
+          "type": "turn_done",
+          "barged": false
+        }
+      ],
+      "frames": [
+        {
+          "kind": "puppy",
+          "pose": "hope",
+          "spin": 0,
+          "flip": 0,
+          "audio": true
+        },
+        {
+          "kind": "puppy",
+          "pose": "affection",
+          "spin": 0,
+          "flip": 0,
+          "audio": true
+        },
+        {
+          "kind": "puppy",
+          "pose": "affection",
+          "spin": 0,
+          "flip": 0,
+          "audio": false
+        },
+        {
+          "kind": "puppy",
+          "pose": "affection",
+          "spin": 0,
+          "flip": 0,
+          "audio": false
+        },
+        {
+          "kind": "puppy",
+          "pose": "affection",
+          "spin": 0,
+          "flip": 0,
+          "audio": false
+        },
+        {
+          "kind": "puppy",
+          "pose": "affection",
+          "spin": 0,
+          "flip": 0,
+          "audio": false
+        },
+        {
+          "kind": "puppy",
+          "pose": "affection",
+          "spin": 0,
+          "flip": 0,
+          "audio": false
+        },
+        {
+          "kind": "puppy",
+          "pose": "affection",
+          "spin": 0,
+          "flip": 0,
+          "audio": false
+        },
+        {
+          "kind": "puppy",
+          "pose": "affection",
+          "spin": 0,
+          "flip": 0,
+          "audio": false
+        },
+        {
+          "kind": "puppy",
+          "pose": "affection",
+          "spin": 0,
+          "flip": 0,
+          "audio": false
+        },
+        {
+          "kind": "puppy",
+          "pose": "affection",
+          "spin": 0,
+          "flip": 0,
+          "audio": false
+        },
+        {
+          "kind": "puppy",
+          "pose": "neutral",
+          "spin": 0,
+          "flip": 0,
+          "audio": false
+        },
+        {
+          "kind": "puppy",
+          "pose": "neutral",
+          "spin": 0,
+          "flip": 0,
+          "audio": false
+        }
+      ],
+      "audio": 3,
+      "passed": true
+    },
+    {
+      "request": "Kannst du kurz mit einem Auge blinzeln?",
+      "elapsed_ms": 4935,
+      "events": [
+        {
+          "type": "avatar_action",
+          "action_id": "b1ae576a7be44e428e646042422978b6",
+          "steps": [
+            {
+              "kind": "wink",
+              "duration_s": 2.5,
+              "sentence": 0
+            }
+          ],
+          "source": "validated_direct_request",
+          "wait_for_audio": true
+        },
+        {
+          "type": "reply",
+          "text": "Da bin ich!",
+          "reply_id": 5,
+          "performance": {
+            "sentences": [
+              {
+                "emotion": "contentment",
+                "secondary": null,
+                "blend": 0,
+                "intensity": 0.55,
+                "direction": "contentment, soft",
+                "text": "Da bin ich!",
+                "start_s": 0,
+                "end_s": 1.02
+              }
+            ],
+            "source": "qwen/qwen3.8-27b sentence cues + fixed GENERAL catalogue",
+            "timing": "Sentence starts anchored to actual preceding PCM duration; within-sentence estimates"
+          },
+          "avatar_actions": [
+            {
+              "kind": "wink",
+              "duration_s": 2.5,
+              "sentence": 0
+            }
+          ],
+          "avatar_action_id": "b1ae576a7be44e428e646042422978b6",
+          "avatar_event": null,
+          "sentence_index": 0,
+          "sentence_text": "Da bin ich!",
+          "sentence_role": "answer",
+          "speaker_id": null,
+          "speaker_name": null,
+          "speaker_update": null,
+          "timing": {
+            "tts_model": "small_rl",
+            "verification": {
+              "align": true,
+              "speech_verification": "parallel"
+            },
+            "quick_reply_status": "disabled_or_ineligible",
+            "llm_model": "qwen/qwen3.8-27b",
+            "llm_provider": "cerebras/fp16",
+            "llm_backend": "OpenRouter",
+            "llm_actual_provider": "Cerebras",
+            "llm_ttft_ms": 307.03,
+            "finish_reason": "stop",
+            "usage": {
+              "prompt_tokens": 3184,
+              "completion_tokens": 5,
+              "total_tokens": 3189,
+              "cost": 0.0031280139,
+              "is_byok": false,
+              "prompt_tokens_details": {
+                "cached_tokens": 2048,
+                "cache_write_tokens": 0,
+                "audio_tokens": 0,
+                "video_tokens": 0
+              },
+              "cost_details": {
+                "upstream_inference_cost": 0.00315961,
+                "upstream_inference_prompt_cost": 0.00315216,
+                "upstream_inference_completions_cost": 7.45e-06
+              },
+              "completion_tokens_details": {
+                "reasoning_tokens": 0,
+                "image_tokens": 0,
+                "audio_tokens": 0
+              }
+            },
+            "llm_first_sentence_ms": 324.2,
+            "generation_calls": 1,
+            "llm_total_ms": 324.37,
+            "response_complete": true,
+            "sentence_ready_ms": 329.34,
+            "director_mode": "bolt",
+            "director_model": "qwen/qwen3.8-27b",
+            "template_id": "contentment.soft"
+          },
+          "sources": [],
+          "lookups": []
+        },
+        {
+          "type": "pipeline_metrics",
+          "reply_id": 5,
+          "metrics": {
+            "tts_model": "small_rl",
+            "verification": {
+              "align": true,
+              "speech_verification": "parallel"
+            },
+            "quick_reply_status": "disabled_or_ineligible",
+            "llm_model": "qwen/qwen3.8-27b",
+            "llm_provider": "cerebras/fp16",
+            "llm_backend": "OpenRouter",
+            "llm_actual_provider": "Cerebras",
+            "llm_ttft_ms": 307.03,
+            "finish_reason": "stop",
+            "usage": {
+              "prompt_tokens": 3184,
+              "completion_tokens": 5,
+              "total_tokens": 3189,
+              "cost": 0.0031280139,
+              "is_byok": false,
+              "prompt_tokens_details": {
+                "cached_tokens": 2048,
+                "cache_write_tokens": 0,
+                "audio_tokens": 0,
+                "video_tokens": 0
+              },
+              "cost_details": {
+                "upstream_inference_cost": 0.00315961,
+                "upstream_inference_prompt_cost": 0.00315216,
+                "upstream_inference_completions_cost": 7.45e-06
+              },
+              "completion_tokens_details": {
+                "reasoning_tokens": 0,
+                "image_tokens": 0,
+                "audio_tokens": 0
+              }
+            },
+            "llm_first_sentence_ms": 324.2,
+            "generation_calls": 1,
+            "llm_total_ms": 324.37,
+            "response_complete": true,
+            "tts_actual_model": "small_rl",
+            "tts_revision": "182bc700cac29b2d69295a33398b13e1ca7fba69",
+            "answer_first_audio_ms": 1032.94,
+            "tts_first_audio_ms": 703.21,
+            "first_audio_ms": 1032.97,
+            "tts_server_stages": [
+              {
+                "generation_ms": 633,
+                "alignment_ms": 1,
+                "scoring_ms": 0,
+                "speaker_preparation_ms": 0,
+                "total_ms": 643,
+                "performance": {
+                  "device_seconds": 0.5278778860569,
+                  "raw_audio_seconds": 2.8,
+                  "aggregate_rtf": 0.18852781644889288,
+                  "audio_seconds_per_second": 5.304257052545269,
+                  "batches": [
+                    {
+                      "batch_size": 1,
+                      "device_seconds": 0.5278778860569,
+                      "audio_seconds": [
+                        2.8
+                      ],
+                      "model_wall_seconds": 0.5319873616099358,
+                      "first_audio_seconds": 0.2389063720703125,
+                      "graph_capture_seconds": 0,
+                      "live_callback_seconds": 0.002607882022857666,
+                      "first_chunk_components_ms": {
+                        "codec_stream_setup": 7.018496036529541,
+                        "semantic_prefill": 201.9358673095703,
+                        "semantic_decode_first_steps": 8.197088241577148,
+                        "acoustic_tokens_first_steps": 6.711296081542969,
+                        "codec_first_chunk": 10.488832473754883,
+                        "profiled_frames": 3
+                      }
+                    }
+                  ],
+                  "streaming": true,
+                  "chunk_frames": 20,
+                  "backend": "fused CFG + local CUDA graphs + compiled global",
+                  "includes": "TTS prefill, autoregressive decode and PCM codec; GPU event span including launch gaps",
+                  "excludes": "reference encoding, prompt packing, Luna, alignment, scoring, voice conversion, CPU audio copy, MP3, network",
+                  "graph_capture_seconds": 0,
+                  "oom_batch_retries": []
+                }
+              }
+            ],
+            "sentence_tts": [
+              {
+                "sentence": 0,
+                "total_ms": 723.43,
+                "audio_s": 1.6
+              }
+            ],
+            "total_ms": 1053.23,
+            "audio_s": 1.6,
+            "sentences": 1,
+            "generation_rtf": 0.6583
+          }
+        },
+        {
+          "type": "turn_done",
+          "barged": false
+        }
+      ],
+      "frames": [
+        {
+          "kind": "wink",
+          "pose": "neutral",
+          "spin": 0,
+          "flip": 0,
+          "audio": true
+        },
+        {
+          "kind": "wink",
+          "pose": "contentment",
+          "spin": 0,
+          "flip": 0,
+          "audio": true
+        },
+        {
+          "kind": "wink",
+          "pose": "amusement",
+          "spin": 0,
+          "flip": 0,
+          "audio": true
+        },
+        {
+          "kind": "wink",
+          "pose": "amusement",
+          "spin": 0,
+          "flip": 0,
+          "audio": true
+        },
+        {
+          "kind": "wink",
+          "pose": "amusement",
+          "spin": 0,
+          "flip": 0,
+          "audio": true
+        },
+        {
+          "kind": "wink",
+          "pose": "amusement",
+          "spin": 0,
+          "flip": 0,
+          "audio": false
+        },
+        {
+          "kind": "wink",
+          "pose": "amusement",
+          "spin": 0,
+          "flip": 0,
+          "audio": false
+        },
+        {
+          "kind": "wink",
+          "pose": "neutral",
+          "spin": 0,
+          "flip": 0,
+          "audio": false
+        }
+      ],
+      "audio": 2,
+      "passed": true
+    },
+    {
+      "request": "Schüttle den Kopf.",
+      "elapsed_ms": 6529,
+      "events": [
+        {
+          "type": "avatar_action",
+          "action_id": "012095b098bc4b458801b5d3a5866dcd",
+          "steps": [
+            {
+              "kind": "shake",
+              "duration_s": 2.5,
+              "sentence": 0
+            }
+          ],
+          "source": "validated_direct_request",
+          "wait_for_audio": true
+        },
+        {
+          "type": "reply",
+          "text": "Ich schüttle den Kopf, genau wie du es dir wünschst!",
+          "reply_id": 6,
+          "performance": {
+            "sentences": [
+              {
+                "emotion": "contentment",
+                "secondary": null,
+                "blend": 0,
+                "intensity": 0.55,
+                "direction": "contentment, soft",
+                "text": "Ich schüttle den Kopf, genau wie du es dir wünschst!",
+                "start_s": 0,
+                "end_s": 3.4
+              }
+            ],
+            "source": "qwen/qwen3.8-27b sentence cues + fixed GENERAL catalogue",
+            "timing": "Sentence starts anchored to actual preceding PCM duration; within-sentence estimates"
+          },
+          "avatar_actions": [
+            {
+              "kind": "shake",
+              "duration_s": 2.5,
+              "sentence": 0
+            }
+          ],
+          "avatar_action_id": "012095b098bc4b458801b5d3a5866dcd",
+          "avatar_event": null,
+          "sentence_index": 0,
+          "sentence_text": "Ich schüttle den Kopf, genau wie du es dir wünschst!",
+          "sentence_role": "answer",
+          "speaker_id": null,
+          "speaker_name": null,
+          "speaker_update": null,
+          "timing": {
+            "tts_model": "small_rl",
+            "verification": {
+              "align": true,
+              "speech_verification": "parallel"
+            },
+            "quick_reply_status": "disabled_or_ineligible",
+            "llm_model": "qwen/qwen3.8-27b",
+            "llm_provider": "cerebras/fp16",
+            "llm_backend": "OpenRouter",
+            "llm_actual_provider": "Cerebras",
+            "llm_ttft_ms": 329.82,
+            "finish_reason": "stop",
+            "usage": {
+              "prompt_tokens": 3207,
+              "completion_tokens": 17,
+              "total_tokens": 3224,
+              "cost": 0.0031682574,
+              "is_byok": false,
+              "prompt_tokens_details": {
+                "cached_tokens": 2048,
+                "cache_write_tokens": 0,
+                "audio_tokens": 0,
+                "video_tokens": 0
+              },
+              "cost_details": {
+                "upstream_inference_cost": 0.00320026,
+                "upstream_inference_prompt_cost": 0.00317493,
+                "upstream_inference_completions_cost": 2.533e-05
+              },
+              "completion_tokens_details": {
+                "reasoning_tokens": 0,
+                "image_tokens": 0,
+                "audio_tokens": 0
+              }
+            },
+            "llm_first_sentence_ms": 364.48,
+            "generation_calls": 1,
+            "llm_total_ms": 364.63,
+            "response_complete": true,
+            "sentence_ready_ms": 369.65,
+            "director_mode": "bolt",
+            "director_model": "qwen/qwen3.8-27b",
+            "template_id": "contentment.soft"
+          },
+          "sources": [],
+          "lookups": []
+        },
+        {
+          "type": "pipeline_metrics",
+          "reply_id": 6,
+          "metrics": {
+            "tts_model": "small_rl",
+            "verification": {
+              "align": true,
+              "speech_verification": "parallel"
+            },
+            "quick_reply_status": "disabled_or_ineligible",
+            "llm_model": "qwen/qwen3.8-27b",
+            "llm_provider": "cerebras/fp16",
+            "llm_backend": "OpenRouter",
+            "llm_actual_provider": "Cerebras",
+            "llm_ttft_ms": 329.82,
+            "finish_reason": "stop",
+            "usage": {
+              "prompt_tokens": 3207,
+              "completion_tokens": 17,
+              "total_tokens": 3224,
+              "cost": 0.0031682574,
+              "is_byok": false,
+              "prompt_tokens_details": {
+                "cached_tokens": 2048,
+                "cache_write_tokens": 0,
+                "audio_tokens": 0,
+                "video_tokens": 0
+              },
+              "cost_details": {
+                "upstream_inference_cost": 0.00320026,
+                "upstream_inference_prompt_cost": 0.00317493,
+                "upstream_inference_completions_cost": 2.533e-05
+              },
+              "completion_tokens_details": {
+                "reasoning_tokens": 0,
+                "image_tokens": 0,
+                "audio_tokens": 0
+              }
+            },
+            "llm_first_sentence_ms": 364.48,
+            "generation_calls": 1,
+            "llm_total_ms": 364.63,
+            "response_complete": true,
+            "tts_actual_model": "small_rl",
+            "tts_revision": "182bc700cac29b2d69295a33398b13e1ca7fba69",
+            "answer_first_audio_ms": 1066.53,
+            "tts_first_audio_ms": 696.49,
+            "first_audio_ms": 1066.56,
+            "tts_server_stages": [
+              {
+                "generation_ms": 887,
+                "alignment_ms": 1,
+                "scoring_ms": 0,
+                "speaker_preparation_ms": 0,
+                "total_ms": 901,
+                "performance": {
+                  "device_seconds": 0.7734701449871064,
+                  "raw_audio_seconds": 5.12,
+                  "aggregate_rtf": 0.1510683876927942,
+                  "audio_seconds_per_second": 6.61951858540752,
+                  "batches": [
+                    {
+                      "batch_size": 1,
+                      "device_seconds": 0.7734701449871064,
+                      "audio_seconds": [
+                        5.12
+                      ],
+                      "model_wall_seconds": 0.7793062925338745,
+                      "first_audio_seconds": 0.23193894958496095,
+                      "graph_capture_seconds": 0,
+                      "live_callback_seconds": 0.004069775342941284,
+                      "first_chunk_components_ms": {
+                        "codec_stream_setup": 6.322048187255859,
+                        "semantic_prefill": 196.13491821289062,
+                        "semantic_decode_first_steps": 8.145920276641846,
+                        "acoustic_tokens_first_steps": 6.709248065948486,
+                        "codec_first_chunk": 10.491904258728027,
+                        "profiled_frames": 3
+                      }
+                    }
+                  ],
+                  "streaming": true,
+                  "chunk_frames": 20,
+                  "backend": "fused CFG + local CUDA graphs + compiled global",
+                  "includes": "TTS prefill, autoregressive decode and PCM codec; GPU event span including launch gaps",
+                  "excludes": "reference encoding, prompt packing, Luna, alignment, scoring, voice conversion, CPU audio copy, MP3, network",
+                  "graph_capture_seconds": 0,
+                  "oom_batch_retries": []
+                }
+              }
+            ],
+            "sentence_tts": [
+              {
+                "sentence": 0,
+                "total_ms": 978.21,
+                "audio_s": 3.36
+              }
+            ],
+            "total_ms": 1348.32,
+            "audio_s": 3.36,
+            "sentences": 1,
+            "generation_rtf": 0.4013
+          }
+        },
+        {
+          "type": "turn_done",
+          "barged": false
+        }
+      ],
+      "frames": [
+        {
+          "kind": "shake",
+          "pose": "contentment",
+          "spin": 0,
+          "flip": 0,
+          "audio": true
+        },
+        {
+          "kind": "shake",
+          "pose": "contentment",
+          "spin": 0,
+          "flip": 0,
+          "audio": true
+        },
+        {
+          "kind": "shake",
+          "pose": "contentment",
+          "spin": 0,
+          "flip": 0,
+          "audio": true
+        },
+        {
+          "kind": "shake",
+          "pose": "contentment",
+          "spin": 0,
+          "flip": 0,
+          "audio": true
+        },
+        {
+          "kind": "shake",
+          "pose": "contentment",
+          "spin": 0,
+          "flip": 0,
+          "audio": true
+        },
+        {
+          "kind": "shake",
+          "pose": "contentment",
+          "spin": 0,
+          "flip": 0,
+          "audio": true
+        },
+        {
+          "kind": "shake",
+          "pose": "contentment",
+          "spin": 0,
+          "flip": 0,
+          "audio": true
+        },
+        {
+          "kind": "shake",
+          "pose": "contentment",
+          "spin": 0,
+          "flip": 0,
+          "audio": true
+        }
+      ],
+      "audio": 5,
+      "passed": true
+    },
+    {
+      "request": "Puste deine Backen auf und schiele lustig.",
+      "elapsed_ms": 8281,
+      "events": [
+        {
+          "type": "avatar_action",
+          "action_id": "b563612d30f04c9ab12304979c71bb44",
+          "steps": [
+            {
+              "kind": "grimace",
+              "duration_s": 3,
+              "sentence": 0,
+              "variant": "squishy"
+            },
+            {
+              "kind": "grimace",
+              "duration_s": 3,
+              "sentence": 0,
+              "variant": "crossed"
+            }
+          ],
+          "source": "validated_direct_request",
+          "wait_for_audio": true
+        },
+        {
+          "type": "reply",
+          "text": "Hier ist mein lustiges Quetschgesicht für dich!",
+          "reply_id": 7,
+          "performance": {
+            "sentences": [
+              {
+                "emotion": "amusement",
+                "secondary": null,
+                "blend": 0,
+                "intensity": 0.72,
+                "direction": "happy, playful",
+                "text": "Hier ist mein lustiges Quetschgesicht für dich!",
+                "start_s": 0,
+                "end_s": 2.38
+              }
+            ],
+            "source": "qwen/qwen3.8-27b sentence cues + fixed GENERAL catalogue",
+            "timing": "Sentence starts anchored to actual preceding PCM duration; within-sentence estimates"
+          },
+          "avatar_actions": [
+            {
+              "kind": "grimace",
+              "duration_s": 3,
+              "sentence": 0,
+              "variant": "squishy"
+            },
+            {
+              "kind": "grimace",
+              "duration_s": 3,
+              "sentence": 0,
+              "variant": "crossed"
+            }
+          ],
+          "avatar_action_id": "b563612d30f04c9ab12304979c71bb44",
+          "avatar_event": null,
+          "sentence_index": 0,
+          "sentence_text": "Hier ist mein lustiges Quetschgesicht für dich!",
+          "sentence_role": "answer",
+          "speaker_id": null,
+          "speaker_name": null,
+          "speaker_update": null,
+          "timing": {
+            "tts_model": "small_rl",
+            "verification": {
+              "align": true,
+              "speech_verification": "parallel"
+            },
+            "quick_reply_status": "disabled_or_ineligible",
+            "llm_model": "qwen/qwen3.8-27b",
+            "llm_provider": "cerebras/fp16",
+            "llm_backend": "OpenRouter",
+            "llm_actual_provider": "Cerebras",
+            "llm_ttft_ms": 345,
+            "finish_reason": "stop",
+            "usage": {
+              "prompt_tokens": 3288,
+              "completion_tokens": 19,
+              "total_tokens": 3307,
+              "cost": 0.0032505957,
+              "is_byok": false,
+              "prompt_tokens_details": {
+                "cached_tokens": 2048,
+                "cache_write_tokens": 0,
+                "audio_tokens": 0,
+                "video_tokens": 0
+              },
+              "cost_details": {
+                "upstream_inference_cost": 0.00328343,
+                "upstream_inference_prompt_cost": 0.00325512,
+                "upstream_inference_completions_cost": 2.831e-05
+              },
+              "completion_tokens_details": {
+                "reasoning_tokens": 0,
+                "image_tokens": 0,
+                "audio_tokens": 0
+              }
+            },
+            "llm_first_sentence_ms": 373,
+            "generation_calls": 1,
+            "llm_total_ms": 373.19,
+            "response_complete": true,
+            "sentence_ready_ms": 379.77,
+            "director_mode": "bolt",
+            "director_model": "qwen/qwen3.8-27b",
+            "template_id": "elation.soft"
+          },
+          "sources": [],
+          "lookups": []
+        },
+        {
+          "type": "pipeline_metrics",
+          "reply_id": 7,
+          "metrics": {
+            "tts_model": "small_rl",
+            "verification": {
+              "align": true,
+              "speech_verification": "parallel"
+            },
+            "quick_reply_status": "disabled_or_ineligible",
+            "llm_model": "qwen/qwen3.8-27b",
+            "llm_provider": "cerebras/fp16",
+            "llm_backend": "OpenRouter",
+            "llm_actual_provider": "Cerebras",
+            "llm_ttft_ms": 345,
+            "finish_reason": "stop",
+            "usage": {
+              "prompt_tokens": 3288,
+              "completion_tokens": 19,
+              "total_tokens": 3307,
+              "cost": 0.0032505957,
+              "is_byok": false,
+              "prompt_tokens_details": {
+                "cached_tokens": 2048,
+                "cache_write_tokens": 0,
+                "audio_tokens": 0,
+                "video_tokens": 0
+              },
+              "cost_details": {
+                "upstream_inference_cost": 0.00328343,
+                "upstream_inference_prompt_cost": 0.00325512,
+                "upstream_inference_completions_cost": 2.831e-05
+              },
+              "completion_tokens_details": {
+                "reasoning_tokens": 0,
+                "image_tokens": 0,
+                "audio_tokens": 0
+              }
+            },
+            "llm_first_sentence_ms": 373,
+            "generation_calls": 1,
+            "llm_total_ms": 373.19,
+            "response_complete": true,
+            "tts_actual_model": "small_rl",
+            "tts_revision": "182bc700cac29b2d69295a33398b13e1ca7fba69",
+            "answer_first_audio_ms": 1076,
+            "tts_first_audio_ms": 695.84,
+            "first_audio_ms": 1076.03,
+            "tts_server_stages": [
+              {
+                "generation_ms": 873,
+                "alignment_ms": 1,
+                "scoring_ms": 0,
+                "speaker_preparation_ms": 0,
+                "total_ms": 887,
+                "performance": {
+                  "device_seconds": 0.5578339195251465,
+                  "raw_audio_seconds": 3.28,
+                  "aggregate_rtf": 0.17007131692839833,
+                  "audio_seconds_per_second": 5.879886262190876,
+                  "batches": [
+                    {
+                      "batch_size": 1,
+                      "device_seconds": 0.5578339195251465,
+                      "audio_seconds": [
+                        3.28
+                      ],
+                      "model_wall_seconds": 0.5625723078846931,
+                      "first_audio_seconds": 0.22522572326660156,
+                      "graph_capture_seconds": 0,
+                      "live_callback_seconds": 0.003198966383934021,
+                      "first_chunk_components_ms": {
+                        "codec_stream_setup": 4.967423915863037,
+                        "semantic_prefill": 190.78970336914062,
+                        "semantic_decode_first_steps": 8.147968292236328,
+                        "acoustic_tokens_first_steps": 6.713279962539673,
+                        "codec_first_chunk": 10.492927551269531,
+                        "profiled_frames": 3
+                      }
+                    }
+                  ],
+                  "streaming": true,
+                  "chunk_frames": 20,
+                  "backend": "fused CFG + local CUDA graphs + compiled global",
+                  "includes": "TTS prefill, autoregressive decode and PCM codec; GPU event span including launch gaps",
+                  "excludes": "reference encoding, prompt packing, Luna, alignment, scoring, voice conversion, CPU audio copy, MP3, network",
+                  "graph_capture_seconds": 0,
+                  "oom_batch_retries": []
+                }
+              }
+            ],
+            "sentence_tts": [
+              {
+                "sentence": 0,
+                "total_ms": 962.18,
+                "audio_s": 3.22
+              }
+            ],
+            "total_ms": 1342.42,
+            "audio_s": 3.22,
+            "sentences": 1,
+            "generation_rtf": 0.4169
+          }
+        },
+        {
+          "type": "turn_done",
+          "barged": false
+        }
+      ],
+      "frames": [
+        {
+          "kind": "grimace",
+          "pose": "amusement",
+          "spin": 0,
+          "flip": 0,
+          "audio": true
+        },
+        {
+          "kind": "grimace",
+          "pose": "amusement",
+          "spin": 0,
+          "flip": 0,
+          "audio": true
+        },
+        {
+          "kind": "grimace",
+          "pose": "amusement",
+          "spin": 0,
+          "flip": 0,
+          "audio": true
+        },
+        {
+          "kind": "grimace",
+          "pose": "amusement",
+          "spin": 0,
+          "flip": 0,
+          "audio": true
+        },
+        {
+          "kind": "grimace",
+          "pose": "amusement",
+          "spin": 0,
+          "flip": 0,
+          "audio": true
+        },
+        {
+          "kind": "grimace",
+          "pose": "amusement",
+          "spin": 0,
+          "flip": 0,
+          "audio": true
+        },
+        {
+          "kind": "grimace",
+          "pose": "amusement",
+          "spin": 0,
+          "flip": 0,
+          "audio": true
+        },
+        {
+          "kind": "grimace",
+          "pose": "amusement",
+          "spin": 0,
+          "flip": 0,
+          "audio": true
+        },
+        {
+          "kind": "grimace",
+          "pose": "amusement",
+          "spin": 0,
+          "flip": 0,
+          "audio": true
+        },
+        {
+          "kind": "grimace",
+          "pose": "amusement",
+          "spin": 0,
+          "flip": 0,
+          "audio": false
+        },
+        {
+          "kind": "grimace",
+          "pose": "amusement",
+          "spin": 0,
+          "flip": 0,
+          "audio": false
+        },
+        {
+          "kind": "grimace",
+          "pose": "amusement",
+          "spin": 0,
+          "flip": 0,
+          "audio": false
+        },
+        {
+          "kind": "grimace",
+          "pose": "amusement",
+          "spin": 0,
+          "flip": 0,
+          "audio": false
+        },
+        {
+          "kind": "grimace",
+          "pose": "amusement",
+          "spin": 0,
+          "flip": 0,
+          "audio": false
+        },
+        {
+          "kind": "grimace",
+          "pose": "amusement",
+          "spin": 0,
+          "flip": 0,
+          "audio": false
+        },
+        {
+          "kind": "grimace",
+          "pose": "amusement",
+          "spin": 0,
+          "flip": 0,
+          "audio": false
+        },
+        {
+          "kind": "grimace",
+          "pose": "amusement",
+          "spin": 0,
+          "flip": 0,
+          "audio": false
+        },
+        {
+          "kind": "grimace",
+          "pose": "amusement",
+          "spin": 0,
+          "flip": 0,
+          "audio": false
+        },
+        {
+          "kind": "grimace",
+          "pose": "neutral",
+          "spin": 0,
+          "flip": 0,
+          "audio": false
+        }
+      ],
+      "audio": 3,
+      "passed": true
+    },
+    {
+      "request": "Mach so 😡",
+      "elapsed_ms": 8381,
+      "events": [
+        {
+          "type": "avatar_action",
+          "action_id": "5fb08cdeeea24096b4fd271ce7f863ac",
+          "steps": [
+            {
+              "kind": "emotion",
+              "duration_s": 3,
+              "sentence": 0,
+              "emotion": "anger"
+            }
+          ],
+          "source": "validated_direct_request",
+          "wait_for_audio": true
+        },
+        {
+          "type": "reply",
+          "text": "Ugh, mein linker Schrauber ist gerade in den Sockel gefallen und will nicht mehr rauskommen!",
+          "reply_id": 8,
+          "performance": {
+            "sentences": [
+              {
+                "emotion": "anger",
+                "secondary": "contentment",
+                "blend": 0.25,
+                "intensity": 0.9,
+                "direction": "anger, intense, natural",
+                "text": "Ugh, mein linker Schrauber ist gerade in den Sockel gefallen und will nicht mehr rauskommen!",
+                "start_s": 0,
+                "end_s": 5.1
+              }
+            ],
+            "source": "qwen/qwen3.8-27b sentence cues + fixed GENERAL catalogue",
+            "timing": "Sentence starts anchored to actual preceding PCM duration; within-sentence estimates"
+          },
+          "avatar_actions": [
+            {
+              "kind": "emotion",
+              "duration_s": 3,
+              "sentence": 0,
+              "emotion": "anger"
+            }
+          ],
+          "avatar_action_id": "5fb08cdeeea24096b4fd271ce7f863ac",
+          "avatar_event": null,
+          "sentence_index": 0,
+          "sentence_text": "Ugh, mein linker Schrauber ist gerade in den Sockel gefallen und will nicht mehr rauskommen!",
+          "sentence_role": "answer",
+          "speaker_id": null,
+          "speaker_name": null,
+          "speaker_update": null,
+          "timing": {
+            "tts_model": "small_rl",
+            "verification": {
+              "align": true,
+              "speech_verification": "parallel"
+            },
+            "quick_reply_status": "disabled_or_ineligible",
+            "llm_model": "qwen/qwen3.8-27b",
+            "llm_provider": "cerebras/fp16",
+            "llm_backend": "OpenRouter",
+            "llm_actual_provider": "Cerebras",
+            "llm_ttft_ms": 307.33,
+            "finish_reason": "stop",
+            "usage": {
+              "prompt_tokens": 3250,
+              "completion_tokens": 29,
+              "total_tokens": 3279,
+              "cost": 0.0032281029,
+              "is_byok": false,
+              "prompt_tokens_details": {
+                "cached_tokens": 2048,
+                "cache_write_tokens": 0,
+                "audio_tokens": 0,
+                "video_tokens": 0
+              },
+              "cost_details": {
+                "upstream_inference_cost": 0.00326071,
+                "upstream_inference_prompt_cost": 0.0032175,
+                "upstream_inference_completions_cost": 4.321e-05
+              },
+              "completion_tokens_details": {
+                "reasoning_tokens": 0,
+                "image_tokens": 0,
+                "audio_tokens": 0
+              }
+            },
+            "llm_first_sentence_ms": 355.48,
+            "generation_calls": 1,
+            "llm_total_ms": 355.64,
+            "response_complete": true,
+            "sentence_ready_ms": 361.99,
+            "director_mode": "bolt",
+            "director_model": "qwen/qwen3.8-27b",
+            "template_id": "anger.intense"
+          },
+          "sources": [],
+          "lookups": []
+        },
+        {
+          "type": "pipeline_metrics",
+          "reply_id": 8,
+          "metrics": {
+            "tts_model": "small_rl",
+            "verification": {
+              "align": true,
+              "speech_verification": "parallel"
+            },
+            "quick_reply_status": "disabled_or_ineligible",
+            "llm_model": "qwen/qwen3.8-27b",
+            "llm_provider": "cerebras/fp16",
+            "llm_backend": "OpenRouter",
+            "llm_actual_provider": "Cerebras",
+            "llm_ttft_ms": 307.33,
+            "finish_reason": "stop",
+            "usage": {
+              "prompt_tokens": 3250,
+              "completion_tokens": 29,
+              "total_tokens": 3279,
+              "cost": 0.0032281029,
+              "is_byok": false,
+              "prompt_tokens_details": {
+                "cached_tokens": 2048,
+                "cache_write_tokens": 0,
+                "audio_tokens": 0,
+                "video_tokens": 0
+              },
+              "cost_details": {
+                "upstream_inference_cost": 0.00326071,
+                "upstream_inference_prompt_cost": 0.0032175,
+                "upstream_inference_completions_cost": 4.321e-05
+              },
+              "completion_tokens_details": {
+                "reasoning_tokens": 0,
+                "image_tokens": 0,
+                "audio_tokens": 0
+              }
+            },
+            "llm_first_sentence_ms": 355.48,
+            "generation_calls": 1,
+            "llm_total_ms": 355.64,
+            "response_complete": true,
+            "tts_actual_model": "small_rl",
+            "tts_revision": "182bc700cac29b2d69295a33398b13e1ca7fba69",
+            "tts_retries": [
+              {
+                "event": "speech_retry",
+                "attempt": 2,
+                "max_attempts": 3,
+                "code": "unverified_speech",
+                "strategy": "compact_direction",
+                "sentence": 0
+              },
+              {
+                "event": "speech_retry",
+                "attempt": 3,
+                "max_attempts": 3,
+                "code": "unverified_speech",
+                "strategy": "natural_delivery",
+                "sentence": 0
+              }
+            ],
+            "answer_first_audio_ms": 4434.31,
+            "tts_first_audio_ms": 4071.93,
+            "first_audio_ms": 4434.36,
+            "tts_server_stages": [
+              {
+                "generation_ms": 1527,
+                "alignment_ms": 1,
+                "scoring_ms": 0,
+                "speaker_preparation_ms": 0,
+                "total_ms": 1538,
+                "performance": {
+                  "device_seconds": 1.1733859529495239,
+                  "raw_audio_seconds": 5.76,
+                  "aggregate_rtf": 0.2037128390537368,
+                  "audio_seconds_per_second": 4.908870764577647,
+                  "batches": [
+                    {
+                      "batch_size": 1,
+                      "device_seconds": 1.1733859529495239,
+                      "audio_seconds": [
+                        5.76
+                      ],
+                      "model_wall_seconds": 1.2061179503798485,
+                      "first_audio_seconds": 0.24215756225585938,
+                      "graph_capture_seconds": 0,
+                      "live_callback_seconds": 0.005140677094459534,
+                      "first_chunk_components_ms": {
+                        "codec_stream_setup": 4.963327884674072,
+                        "semantic_prefill": 208.65126037597656,
+                        "semantic_decode_first_steps": 7.772160053253174,
+                        "acoustic_tokens_first_steps": 6.560768127441406,
+                        "codec_first_chunk": 9.781248092651367,
+                        "profiled_frames": 3
+                      }
+                    }
+                  ],
+                  "streaming": true,
+                  "chunk_frames": 20,
+                  "backend": "fused CFG + local CUDA graphs + compiled global",
+                  "includes": "TTS prefill, autoregressive decode and PCM codec; GPU event span including launch gaps",
+                  "excludes": "reference encoding, prompt packing, Luna, alignment, scoring, voice conversion, CPU audio copy, MP3, network",
+                  "graph_capture_seconds": 0,
+                  "oom_batch_retries": []
+                }
+              }
+            ],
+            "sentence_tts": [
+              {
+                "sentence": 0,
+                "total_ms": 4655.75,
+                "audio_s": 1.54
+              }
+            ],
+            "total_ms": 5018.21,
+            "audio_s": 1.54,
+            "sentences": 1,
+            "generation_rtf": 3.2585
+          }
+        },
+        {
+          "type": "turn_done",
+          "barged": false
+        }
+      ],
+      "frames": [
+        {
+          "kind": "emotion",
+          "pose": "neutral",
+          "spin": 0,
+          "flip": 0,
+          "audio": false
+        },
+        {
+          "kind": "emotion",
+          "pose": "anger",
+          "spin": 0,
+          "flip": 0,
+          "audio": false
+        },
+        {
+          "kind": "emotion",
+          "pose": "anger",
+          "spin": 0,
+          "flip": 0,
+          "audio": true
+        },
+        {
+          "kind": "emotion",
+          "pose": "anger",
+          "spin": 0,
+          "flip": 0,
+          "audio": true
+        },
+        {
+          "kind": "emotion",
+          "pose": "anger",
+          "spin": 0,
+          "flip": 0,
+          "audio": true
+        },
+        {
+          "kind": "emotion",
+          "pose": "anger",
+          "spin": 0,
+          "flip": 0,
+          "audio": true
+        },
+        {
+          "kind": "emotion",
+          "pose": "anger",
+          "spin": 0,
+          "flip": 0,
+          "audio": true
+        },
+        {
+          "kind": "emotion",
+          "pose": "anger",
+          "spin": 0,
+          "flip": 0,
+          "audio": true
+        },
+        {
+          "kind": "emotion",
+          "pose": "anger",
+          "spin": 0,
+          "flip": 0,
+          "audio": true
+        },
+        {
+          "kind": "emotion",
+          "pose": "anger",
+          "spin": 0,
+          "flip": 0,
+          "audio": true
+        },
+        {
+          "kind": "emotion",
+          "pose": "anger",
+          "spin": 0,
+          "flip": 0,
+          "audio": true
+        },
+        {
+          "kind": "emotion",
+          "pose": "anger",
+          "spin": 0,
+          "flip": 0,
+          "audio": false
+        },
+        {
+          "kind": "emotion",
+          "pose": "anger",
+          "spin": 0,
+          "flip": 0,
+          "audio": false
+        },
+        {
+          "kind": "emotion",
+          "pose": "anger",
+          "spin": 0,
+          "flip": 0,
+          "audio": false
+        },
+        {
+          "kind": "emotion",
+          "pose": "anger",
+          "spin": 0,
+          "flip": 0,
+          "audio": false
+        },
+        {
+          "kind": "emotion",
+          "pose": "neutral",
+          "spin": 0,
+          "flip": 0,
+          "audio": false
+        }
+      ],
+      "audio": 4,
+      "passed": true
+    },
+    {
+      "request": "Schau bei Wikipedia nach Pinguinen und nenne einen kurzen Fakt.",
+      "elapsed_ms": 19171,
+      "events": [
+        {
+          "type": "reply",
+          "text": "Der direkte Wikipedia-Eintrag zu Pinguinen war in der Liste leider nicht dabei, aber ich habe gerade über Wale gelesen.",
+          "reply_id": 9,
+          "performance": {
+            "sentences": [
+              {
+                "emotion": "interest",
+                "secondary": "contentment",
+                "blend": 0.25,
+                "intensity": 0.72,
+                "direction": "interest, calm and unhurried",
+                "text": "Der direkte Wikipedia-Eintrag zu Pinguinen war in der Liste leider nicht dabei, aber ich habe gerade über Wale gelesen.",
+                "start_s": 0,
+                "end_s": 6.46
+              }
+            ],
+            "source": "qwen/qwen3.8-27b sentence cues + fixed GENERAL catalogue",
+            "timing": "Sentence starts anchored to actual preceding PCM duration; within-sentence estimates"
+          },
+          "avatar_actions": [],
+          "avatar_action_id": null,
+          "avatar_event": null,
+          "sentence_index": 0,
+          "sentence_text": "Der direkte Wikipedia-Eintrag zu Pinguinen war in der Liste leider nicht dabei, aber ich habe gerade über Wale gelesen.",
+          "sentence_role": "answer",
+          "speaker_id": null,
+          "speaker_name": null,
+          "speaker_update": null,
+          "timing": {
+            "tts_model": "small_rl",
+            "verification": {
+              "align": true,
+              "speech_verification": "parallel"
+            },
+            "quick_reply_status": "disabled_or_ineligible",
+            "tool_director_ms": 1792.38,
+            "director_model": "qwen/qwen3.8-27b",
+            "llm_model": "qwen/qwen3.8-27b",
+            "llm_provider": "cerebras/fp16",
+            "llm_backend": "OpenRouter",
+            "llm_actual_provider": "Cerebras",
+            "sentence_ready_ms": 1810.26,
+            "director_mode": "bolt",
+            "template_id": "interest.soft"
+          },
+          "sources": [
+            {
+              "title": "Albanien",
+              "url": "https://de.wikipedia.org/wiki/Albanien",
+              "publisher": "Wikipedia"
+            },
+            {
+              "title": "Dreyfus-Affäre",
+              "url": "https://de.wikipedia.org/wiki/Dreyfus-Aff%C3%A4re",
+              "publisher": "Wikipedia"
+            },
+            {
+              "title": "Wale",
+              "url": "https://de.wikipedia.org/wiki/Wale",
+              "publisher": "Wikipedia"
+            }
+          ],
+          "lookups": [
+            {
+              "tool": "search_wikipedia",
+              "ms": 406.12,
+              "arguments": {
+                "query": "Pinguinen und nenne einen kurzen Fakt",
+                "language": "de"
+              },
+              "error": null,
+              "cache_hit": false,
+              "retrieved_at": "2026-11-14T09:44:25.948302+00:00",
+              "result_sha256": "ae5b72b136e6d1ce8fbfbe2035ac6fd5844ec6ed428d36ec944dc8222687ac22"
+            }
+          ]
+        },
+        {
+          "type": "reply",
+          "text": "Der direkte Wikipedia-Eintrag zu Pinguinen war in der Liste leider nicht dabei, aber ich habe gerade über Wale gelesen. Ein kurzer Fakt: Der Blauwal ist das größte Tier der Evolutionsgeschichte.",
+          "reply_id": 9,
+          "performance": {
+            "sentences": [
+              {
+                "emotion": "interest",
+                "secondary": "contentment",
+                "blend": 0.25,
+                "intensity": 0.72,
+                "direction": "interest, calm and unhurried",
+                "text": "Der direkte Wikipedia-Eintrag zu Pinguinen war in der Liste leider nicht dabei, aber ich habe gerade über Wale gelesen.",
+                "start_s": 0,
+                "end_s": 6.98
+              },
+              {
+                "emotion": "contentment",
+                "secondary": null,
+                "blend": 0,
+                "intensity": 0.72,
+                "direction": "contentment, clear and steady",
+                "text": "Ein kurzer Fakt: Der Blauwal ist das größte Tier der Evolutionsgeschichte.",
+                "start_s": 6.98,
+                "end_s": 10.72
+              }
+            ],
+            "source": "qwen/qwen3.8-27b sentence cues + fixed GENERAL catalogue",
+            "timing": "Sentence starts anchored to actual preceding PCM duration; within-sentence estimates"
+          },
+          "avatar_actions": [],
+          "avatar_action_id": null,
+          "avatar_event": null,
+          "sentence_index": 1,
+          "sentence_text": "Ein kurzer Fakt: Der Blauwal ist das größte Tier der Evolutionsgeschichte.",
+          "sentence_role": "answer",
+          "speaker_id": null,
+          "speaker_name": null,
+          "speaker_update": null,
+          "timing": {
+            "tts_model": "small_rl",
+            "verification": {
+              "align": true,
+              "speech_verification": "parallel"
+            },
+            "quick_reply_status": "disabled_or_ineligible",
+            "tool_director_ms": 1792.38,
+            "director_model": "qwen/qwen3.8-27b",
+            "llm_model": "qwen/qwen3.8-27b",
+            "llm_provider": "cerebras/fp16",
+            "llm_backend": "OpenRouter",
+            "llm_actual_provider": "Cerebras",
+            "tts_actual_model": "small_rl",
+            "tts_revision": "182bc700cac29b2d69295a33398b13e1ca7fba69",
+            "answer_first_audio_ms": 2503.42,
+            "tts_first_audio_ms": 692.76,
+            "first_audio_ms": 2503.45,
+            "tts_server_stages": [
+              {
+                "generation_ms": 1503,
+                "alignment_ms": 1,
+                "scoring_ms": 0,
+                "speaker_preparation_ms": 0,
+                "total_ms": 1516,
+                "performance": {
+                  "device_seconds": 0.9701461443901062,
+                  "raw_audio_seconds": 7.04,
+                  "aggregate_rtf": 0.1378048500554128,
+                  "audio_seconds_per_second": 7.256638642238566,
+                  "batches": [
+                    {
+                      "batch_size": 1,
+                      "device_seconds": 0.9701461443901062,
+                      "audio_seconds": [
+                        7.04
+                      ],
+                      "model_wall_seconds": 0.9781471341848373,
+                      "first_audio_seconds": 0.22794239807128908,
+                      "graph_capture_seconds": 0,
+                      "live_callback_seconds": 0.005813136696815491,
+                      "first_chunk_components_ms": {
+                        "codec_stream_setup": 4.922368049621582,
+                        "semantic_prefill": 193.6046142578125,
+                        "semantic_decode_first_steps": 8.137727737426758,
+                        "acoustic_tokens_first_steps": 6.713344097137451,
+                        "codec_first_chunk": 10.494976043701172,
+                        "profiled_frames": 3
+                      }
+                    }
+                  ],
+                  "streaming": true,
+                  "chunk_frames": 20,
+                  "backend": "fused CFG + local CUDA graphs + compiled global",
+                  "includes": "TTS prefill, autoregressive decode and PCM codec; GPU event span including launch gaps",
+                  "excludes": "reference encoding, prompt packing, Luna, alignment, scoring, voice conversion, CPU audio copy, MP3, network",
+                  "graph_capture_seconds": 0,
+                  "oom_batch_retries": []
+                }
+              }
+            ],
+            "sentence_tts": [
+              {
+                "sentence": 0,
+                "total_ms": 1602.75,
+                "audio_s": 6.98
+              }
+            ],
+            "sentence_ready_ms": 3416.83,
+            "director_mode": "bolt",
+            "template_id": "contentment.soft"
+          },
+          "sources": [
+            {
+              "title": "Albanien",
+              "url": "https://de.wikipedia.org/wiki/Albanien",
+              "publisher": "Wikipedia"
+            },
+            {
+              "title": "Dreyfus-Affäre",
+              "url": "https://de.wikipedia.org/wiki/Dreyfus-Aff%C3%A4re",
+              "publisher": "Wikipedia"
+            },
+            {
+              "title": "Wale",
+              "url": "https://de.wikipedia.org/wiki/Wale",
+              "publisher": "Wikipedia"
+            }
+          ],
+          "lookups": [
+            {
+              "tool": "search_wikipedia",
+              "ms": 406.12,
+              "arguments": {
+                "query": "Pinguinen und nenne einen kurzen Fakt",
+                "language": "de"
+              },
+              "error": null,
+              "cache_hit": false,
+              "retrieved_at": "2026-11-14T09:44:25.948302+00:00",
+              "result_sha256": "ae5b72b136e6d1ce8fbfbe2035ac6fd5844ec6ed428d36ec944dc8222687ac22"
+            }
+          ]
+        },
+        {
+          "type": "reply",
+          "text": "Der direkte Wikipedia-Eintrag zu Pinguinen war in der Liste leider nicht dabei, aber ich habe gerade über Wale gelesen. Ein kurzer Fakt: Der Blauwal ist das größte Tier der Evolutionsgeschichte. Ein bisschen Meer statt Eis, oder?",
+          "reply_id": 9,
+          "performance": {
+            "sentences": [
+              {
+                "emotion": "interest",
+                "secondary": "contentment",
+                "blend": 0.25,
+                "intensity": 0.72,
+                "direction": "interest, calm and unhurried",
+                "text": "Der direkte Wikipedia-Eintrag zu Pinguinen war in der Liste leider nicht dabei, aber ich habe gerade über Wale gelesen.",
+                "start_s": 0,
+                "end_s": 6.98
+              },
+              {
+                "emotion": "contentment",
+                "secondary": null,
+                "blend": 0,
+                "intensity": 0.72,
+                "direction": "contentment, clear and steady",
+                "text": "Ein kurzer Fakt: Der Blauwal ist das größte Tier der Evolutionsgeschichte.",
+                "start_s": 6.98,
+                "end_s": 11.78
+              },
+              {
+                "emotion": "amusement",
+                "secondary": "affection",
+                "blend": 0.25,
+                "intensity": 0.72,
+                "direction": "amusement, warm and light",
+                "text": "Ein bisschen Meer statt Eis, oder?",
+                "start_s": 11.78,
+                "end_s": 13.82
+              }
+            ],
+            "source": "qwen/qwen3.8-27b sentence cues + fixed GENERAL catalogue",
+            "timing": "Sentence starts anchored to actual preceding PCM duration; within-sentence estimates"
+          },
+          "avatar_actions": [],
+          "avatar_action_id": null,
+          "avatar_event": null,
+          "sentence_index": 2,
+          "sentence_text": "Ein bisschen Meer statt Eis, oder?",
+          "sentence_role": "answer",
+          "speaker_id": null,
+          "speaker_name": null,
+          "speaker_update": null,
+          "timing": {
+            "tts_model": "small_rl",
+            "verification": {
+              "align": true,
+              "speech_verification": "parallel"
+            },
+            "quick_reply_status": "disabled_or_ineligible",
+            "tool_director_ms": 1792.38,
+            "director_model": "qwen/qwen3.8-27b",
+            "llm_model": "qwen/qwen3.8-27b",
+            "llm_provider": "cerebras/fp16",
+            "llm_backend": "OpenRouter",
+            "llm_actual_provider": "Cerebras",
+            "tts_actual_model": "small_rl",
+            "tts_revision": "182bc700cac29b2d69295a33398b13e1ca7fba69",
+            "answer_first_audio_ms": 2503.42,
+            "tts_first_audio_ms": 692.76,
+            "first_audio_ms": 2503.45,
+            "tts_server_stages": [
+              {
+                "generation_ms": 1503,
+                "alignment_ms": 1,
+                "scoring_ms": 0,
+                "speaker_preparation_ms": 0,
+                "total_ms": 1516,
+                "performance": {
+                  "device_seconds": 0.9701461443901062,
+                  "raw_audio_seconds": 7.04,
+                  "aggregate_rtf": 0.1378048500554128,
+                  "audio_seconds_per_second": 7.256638642238566,
+                  "batches": [
+                    {
+                      "batch_size": 1,
+                      "device_seconds": 0.9701461443901062,
+                      "audio_seconds": [
+                        7.04
+                      ],
+                      "model_wall_seconds": 0.9781471341848373,
+                      "first_audio_seconds": 0.22794239807128908,
+                      "graph_capture_seconds": 0,
+                      "live_callback_seconds": 0.005813136696815491,
+                      "first_chunk_components_ms": {
+                        "codec_stream_setup": 4.922368049621582,
+                        "semantic_prefill": 193.6046142578125,
+                        "semantic_decode_first_steps": 8.137727737426758,
+                        "acoustic_tokens_first_steps": 6.713344097137451,
+                        "codec_first_chunk": 10.494976043701172,
+                        "profiled_frames": 3
+                      }
+                    }
+                  ],
+                  "streaming": true,
+                  "chunk_frames": 20,
+                  "backend": "fused CFG + local CUDA graphs + compiled global",
+                  "includes": "TTS prefill, autoregressive decode and PCM codec; GPU event span including launch gaps",
+                  "excludes": "reference encoding, prompt packing, Luna, alignment, scoring, voice conversion, CPU audio copy, MP3, network",
+                  "graph_capture_seconds": 0,
+                  "oom_batch_retries": []
+                }
+              },
+              {
+                "generation_ms": 1134,
+                "alignment_ms": 1,
+                "scoring_ms": 0,
+                "speaker_preparation_ms": 0,
+                "total_ms": 1146,
+                "performance": {
+                  "device_seconds": 0.713264538526535,
+                  "raw_audio_seconds": 4.8,
+                  "aggregate_rtf": 0.1485967788596948,
+                  "audio_seconds_per_second": 6.729620976133007,
+                  "batches": [
+                    {
+                      "batch_size": 1,
+                      "device_seconds": 0.713264538526535,
+                      "audio_seconds": [
+                        4.8
+                      ],
+                      "model_wall_seconds": 0.7186898440122604,
+                      "first_audio_seconds": 0.228316162109375,
+                      "graph_capture_seconds": 0,
+                      "live_callback_seconds": 0.0037823840975761414,
+                      "first_chunk_components_ms": {
+                        "codec_stream_setup": 4.911104202270508,
+                        "semantic_prefill": 195.4027557373047,
+                        "semantic_decode_first_steps": 7.631775856018066,
+                        "acoustic_tokens_first_steps": 6.576128244400024,
+                        "codec_first_chunk": 9.756671905517578,
+                        "profiled_frames": 3
+                      }
+                    }
+                  ],
+                  "streaming": true,
+                  "chunk_frames": 20,
+                  "backend": "fused CFG + local CUDA graphs + compiled global",
+                  "includes": "TTS prefill, autoregressive decode and PCM codec; GPU event span including launch gaps",
+                  "excludes": "reference encoding, prompt packing, Luna, alignment, scoring, voice conversion, CPU audio copy, MP3, network",
+                  "graph_capture_seconds": 0,
+                  "oom_batch_retries": []
+                }
+              }
+            ],
+            "sentence_tts": [
+              {
+                "sentence": 0,
+                "total_ms": 1602.75,
+                "audio_s": 6.98
+              },
+              {
+                "sentence": 1,
+                "total_ms": 1264.75,
+                "audio_s": 4.8
+              }
+            ],
+            "sentence_ready_ms": 4685.77,
+            "director_mode": "bolt",
+            "template_id": "amusement.soft"
+          },
+          "sources": [
+            {
+              "title": "Albanien",
+              "url": "https://de.wikipedia.org/wiki/Albanien",
+              "publisher": "Wikipedia"
+            },
+            {
+              "title": "Dreyfus-Affäre",
+              "url": "https://de.wikipedia.org/wiki/Dreyfus-Aff%C3%A4re",
+              "publisher": "Wikipedia"
+            },
+            {
+              "title": "Wale",
+              "url": "https://de.wikipedia.org/wiki/Wale",
+              "publisher": "Wikipedia"
+            }
+          ],
+          "lookups": [
+            {
+              "tool": "search_wikipedia",
+              "ms": 406.12,
+              "arguments": {
+                "query": "Pinguinen und nenne einen kurzen Fakt",
+                "language": "de"
+              },
+              "error": null,
+              "cache_hit": false,
+              "retrieved_at": "2026-11-14T09:44:25.948302+00:00",
+              "result_sha256": "ae5b72b136e6d1ce8fbfbe2035ac6fd5844ec6ed428d36ec944dc8222687ac22"
+            }
+          ]
+        },
+        {
+          "type": "reply",
+          "text": "Der direkte Wikipedia-Eintrag zu Pinguinen war in der Liste leider nicht dabei, aber ich habe gerade über Wale gelesen. Ein kurzer Fakt: Der Blauwal ist das größte Tier der Evolutionsgeschichte. Ein bisschen Meer statt Eis, oder? Soll ich gezielt noch nach den eigentlichen Pinguin-Arten suchen?",
+          "reply_id": 9,
+          "performance": {
+            "sentences": [
+              {
+                "emotion": "interest",
+                "secondary": "contentment",
+                "blend": 0.25,
+                "intensity": 0.72,
+                "direction": "interest, calm and unhurried",
+                "text": "Der direkte Wikipedia-Eintrag zu Pinguinen war in der Liste leider nicht dabei, aber ich habe gerade über Wale gelesen.",
+                "start_s": 0,
+                "end_s": 6.98
+              },
+              {
+                "emotion": "contentment",
+                "secondary": null,
+                "blend": 0,
+                "intensity": 0.72,
+                "direction": "contentment, clear and steady",
+                "text": "Ein kurzer Fakt: Der Blauwal ist das größte Tier der Evolutionsgeschichte.",
+                "start_s": 6.98,
+                "end_s": 11.78
+              },
+              {
+                "emotion": "amusement",
+                "secondary": "affection",
+                "blend": 0.25,
+                "intensity": 0.72,
+                "direction": "amusement, warm and light",
+                "text": "Ein bisschen Meer statt Eis, oder?",
+                "start_s": 11.78,
+                "end_s": 12.52
+              },
+              {
+                "emotion": "interest",
+                "secondary": null,
+                "blend": 0,
+                "intensity": 0.72,
+                "direction": "interest, gently inquiring",
+                "text": "Soll ich gezielt noch nach den eigentlichen Pinguin-Arten suchen?",
+                "start_s": 12.52,
+                "end_s": 15.58
+              }
+            ],
+            "source": "qwen/qwen3.8-27b sentence cues + fixed GENERAL catalogue",
+            "timing": "Sentence starts anchored to actual preceding PCM duration; within-sentence estimates"
+          },
+          "avatar_actions": [],
+          "avatar_action_id": null,
+          "avatar_event": null,
+          "sentence_index": 3,
+          "sentence_text": "Soll ich gezielt noch nach den eigentlichen Pinguin-Arten suchen?",
+          "sentence_role": "answer",
+          "speaker_id": null,
+          "speaker_name": null,
+          "speaker_update": null,
+          "timing": {
+            "tts_model": "small_rl",
+            "verification": {
+              "align": true,
+              "speech_verification": "parallel"
+            },
+            "quick_reply_status": "disabled_or_ineligible",
+            "tool_director_ms": 1792.38,
+            "director_model": "qwen/qwen3.8-27b",
+            "llm_model": "qwen/qwen3.8-27b",
+            "llm_provider": "cerebras/fp16",
+            "llm_backend": "OpenRouter",
+            "llm_actual_provider": "Cerebras",
+            "tts_actual_model": "small_rl",
+            "tts_revision": "182bc700cac29b2d69295a33398b13e1ca7fba69",
+            "answer_first_audio_ms": 2503.42,
+            "tts_first_audio_ms": 692.76,
+            "first_audio_ms": 2503.45,
+            "tts_server_stages": [
+              {
+                "generation_ms": 1503,
+                "alignment_ms": 1,
+                "scoring_ms": 0,
+                "speaker_preparation_ms": 0,
+                "total_ms": 1516,
+                "performance": {
+                  "device_seconds": 0.9701461443901062,
+                  "raw_audio_seconds": 7.04,
+                  "aggregate_rtf": 0.1378048500554128,
+                  "audio_seconds_per_second": 7.256638642238566,
+                  "batches": [
+                    {
+                      "batch_size": 1,
+                      "device_seconds": 0.9701461443901062,
+                      "audio_seconds": [
+                        7.04
+                      ],
+                      "model_wall_seconds": 0.9781471341848373,
+                      "first_audio_seconds": 0.22794239807128908,
+                      "graph_capture_seconds": 0,
+                      "live_callback_seconds": 0.005813136696815491,
+                      "first_chunk_components_ms": {
+                        "codec_stream_setup": 4.922368049621582,
+                        "semantic_prefill": 193.6046142578125,
+                        "semantic_decode_first_steps": 8.137727737426758,
+                        "acoustic_tokens_first_steps": 6.713344097137451,
+                        "codec_first_chunk": 10.494976043701172,
+                        "profiled_frames": 3
+                      }
+                    }
+                  ],
+                  "streaming": true,
+                  "chunk_frames": 20,
+                  "backend": "fused CFG + local CUDA graphs + compiled global",
+                  "includes": "TTS prefill, autoregressive decode and PCM codec; GPU event span including launch gaps",
+                  "excludes": "reference encoding, prompt packing, Luna, alignment, scoring, voice conversion, CPU audio copy, MP3, network",
+                  "graph_capture_seconds": 0,
+                  "oom_batch_retries": []
+                }
+              },
+              {
+                "generation_ms": 1134,
+                "alignment_ms": 1,
+                "scoring_ms": 0,
+                "speaker_preparation_ms": 0,
+                "total_ms": 1146,
+                "performance": {
+                  "device_seconds": 0.713264538526535,
+                  "raw_audio_seconds": 4.8,
+                  "aggregate_rtf": 0.1485967788596948,
+                  "audio_seconds_per_second": 6.729620976133007,
+                  "batches": [
+                    {
+                      "batch_size": 1,
+                      "device_seconds": 0.713264538526535,
+                      "audio_seconds": [
+                        4.8
+                      ],
+                      "model_wall_seconds": 0.7186898440122604,
+                      "first_audio_seconds": 0.228316162109375,
+                      "graph_capture_seconds": 0,
+                      "live_callback_seconds": 0.0037823840975761414,
+                      "first_chunk_components_ms": {
+                        "codec_stream_setup": 4.911104202270508,
+                        "semantic_prefill": 195.4027557373047,
+                        "semantic_decode_first_steps": 7.631775856018066,
+                        "acoustic_tokens_first_steps": 6.576128244400024,
+                        "codec_first_chunk": 9.756671905517578,
+                        "profiled_frames": 3
+                      }
+                    }
+                  ],
+                  "streaming": true,
+                  "chunk_frames": 20,
+                  "backend": "fused CFG + local CUDA graphs + compiled global",
+                  "includes": "TTS prefill, autoregressive decode and PCM codec; GPU event span including launch gaps",
+                  "excludes": "reference encoding, prompt packing, Luna, alignment, scoring, voice conversion, CPU audio copy, MP3, network",
+                  "graph_capture_seconds": 0,
+                  "oom_batch_retries": []
+                }
+              },
+              {
+                "generation_ms": 806,
+                "alignment_ms": 1,
+                "scoring_ms": 0,
+                "speaker_preparation_ms": 0,
+                "total_ms": 817,
+                "performance": {
+                  "device_seconds": 0.5254297072887422,
+                  "raw_audio_seconds": 3.04,
+                  "aggregate_rtf": 0.17283871950287572,
+                  "audio_seconds_per_second": 5.785740619209817,
+                  "batches": [
+                    {
+                      "batch_size": 1,
+                      "device_seconds": 0.5254297072887422,
+                      "audio_seconds": [
+                        3.04
+                      ],
+                      "model_wall_seconds": 0.5295365825295448,
+                      "first_audio_seconds": 0.22731776428222655,
+                      "graph_capture_seconds": 0,
+                      "live_callback_seconds": 0.0026553794741630554,
+                      "first_chunk_components_ms": {
+                        "codec_stream_setup": 7.057407855987549,
+                        "semantic_prefill": 191.7532196044922,
+                        "semantic_decode_first_steps": 7.6338560581207275,
+                        "acoustic_tokens_first_steps": 6.538240194320679,
+                        "codec_first_chunk": 9.756671905517578,
+                        "profiled_frames": 3
+                      }
+                    }
+                  ],
+                  "streaming": true,
+                  "chunk_frames": 20,
+                  "backend": "fused CFG + local CUDA graphs + compiled global",
+                  "includes": "TTS prefill, autoregressive decode and PCM codec; GPU event span including launch gaps",
+                  "excludes": "reference encoding, prompt packing, Luna, alignment, scoring, voice conversion, CPU audio copy, MP3, network",
+                  "graph_capture_seconds": 0,
+                  "oom_batch_retries": []
+                }
+              }
+            ],
+            "sentence_tts": [
+              {
+                "sentence": 0,
+                "total_ms": 1602.75,
+                "audio_s": 6.98
+              },
+              {
+                "sentence": 1,
+                "total_ms": 1264.75,
+                "audio_s": 4.8
+              },
+              {
+                "sentence": 2,
+                "total_ms": 866.73,
+                "audio_s": 0.74
+              }
+            ],
+            "sentence_ready_ms": 5556.53,
+            "director_mode": "bolt",
+            "template_id": "interest.soft"
+          },
+          "sources": [
+            {
+              "title": "Albanien",
+              "url": "https://de.wikipedia.org/wiki/Albanien",
+              "publisher": "Wikipedia"
+            },
+            {
+              "title": "Dreyfus-Affäre",
+              "url": "https://de.wikipedia.org/wiki/Dreyfus-Aff%C3%A4re",
+              "publisher": "Wikipedia"
+            },
+            {
+              "title": "Wale",
+              "url": "https://de.wikipedia.org/wiki/Wale",
+              "publisher": "Wikipedia"
+            }
+          ],
+          "lookups": [
+            {
+              "tool": "search_wikipedia",
+              "ms": 406.12,
+              "arguments": {
+                "query": "Pinguinen und nenne einen kurzen Fakt",
+                "language": "de"
+              },
+              "error": null,
+              "cache_hit": false,
+              "retrieved_at": "2026-11-14T09:44:25.948302+00:00",
+              "result_sha256": "ae5b72b136e6d1ce8fbfbe2035ac6fd5844ec6ed428d36ec944dc8222687ac22"
+            }
+          ]
+        },
+        {
+          "type": "pipeline_metrics",
+          "reply_id": 9,
+          "metrics": {
+            "tts_model": "small_rl",
+            "verification": {
+              "align": true,
+              "speech_verification": "parallel"
+            },
+            "quick_reply_status": "disabled_or_ineligible",
+            "tool_director_ms": 1792.38,
+            "director_model": "qwen/qwen3.8-27b",
+            "llm_model": "qwen/qwen3.8-27b",
+            "llm_provider": "cerebras/fp16",
+            "llm_backend": "OpenRouter",
+            "llm_actual_provider": "Cerebras",
+            "tts_actual_model": "small_rl",
+            "tts_revision": "182bc700cac29b2d69295a33398b13e1ca7fba69",
+            "answer_first_audio_ms": 2503.42,
+            "tts_first_audio_ms": 692.76,
+            "first_audio_ms": 2503.45,
+            "tts_server_stages": [
+              {
+                "generation_ms": 1503,
+                "alignment_ms": 1,
+                "scoring_ms": 0,
+                "speaker_preparation_ms": 0,
+                "total_ms": 1516,
+                "performance": {
+                  "device_seconds": 0.9701461443901062,
+                  "raw_audio_seconds": 7.04,
+                  "aggregate_rtf": 0.1378048500554128,
+                  "audio_seconds_per_second": 7.256638642238566,
+                  "batches": [
+                    {
+                      "batch_size": 1,
+                      "device_seconds": 0.9701461443901062,
+                      "audio_seconds": [
+                        7.04
+                      ],
+                      "model_wall_seconds": 0.9781471341848373,
+                      "first_audio_seconds": 0.22794239807128908,
+                      "graph_capture_seconds": 0,
+                      "live_callback_seconds": 0.005813136696815491,
+                      "first_chunk_components_ms": {
+                        "codec_stream_setup": 4.922368049621582,
+                        "semantic_prefill": 193.6046142578125,
+                        "semantic_decode_first_steps": 8.137727737426758,
+                        "acoustic_tokens_first_steps": 6.713344097137451,
+                        "codec_first_chunk": 10.494976043701172,
+                        "profiled_frames": 3
+                      }
+                    }
+                  ],
+                  "streaming": true,
+                  "chunk_frames": 20,
+                  "backend": "fused CFG + local CUDA graphs + compiled global",
+                  "includes": "TTS prefill, autoregressive decode and PCM codec; GPU event span including launch gaps",
+                  "excludes": "reference encoding, prompt packing, Luna, alignment, scoring, voice conversion, CPU audio copy, MP3, network",
+                  "graph_capture_seconds": 0,
+                  "oom_batch_retries": []
+                }
+              },
+              {
+                "generation_ms": 1134,
+                "alignment_ms": 1,
+                "scoring_ms": 0,
+                "speaker_preparation_ms": 0,
+                "total_ms": 1146,
+                "performance": {
+                  "device_seconds": 0.713264538526535,
+                  "raw_audio_seconds": 4.8,
+                  "aggregate_rtf": 0.1485967788596948,
+                  "audio_seconds_per_second": 6.729620976133007,
+                  "batches": [
+                    {
+                      "batch_size": 1,
+                      "device_seconds": 0.713264538526535,
+                      "audio_seconds": [
+                        4.8
+                      ],
+                      "model_wall_seconds": 0.7186898440122604,
+                      "first_audio_seconds": 0.228316162109375,
+                      "graph_capture_seconds": 0,
+                      "live_callback_seconds": 0.0037823840975761414,
+                      "first_chunk_components_ms": {
+                        "codec_stream_setup": 4.911104202270508,
+                        "semantic_prefill": 195.4027557373047,
+                        "semantic_decode_first_steps": 7.631775856018066,
+                        "acoustic_tokens_first_steps": 6.576128244400024,
+                        "codec_first_chunk": 9.756671905517578,
+                        "profiled_frames": 3
+                      }
+                    }
+                  ],
+                  "streaming": true,
+                  "chunk_frames": 20,
+                  "backend": "fused CFG + local CUDA graphs + compiled global",
+                  "includes": "TTS prefill, autoregressive decode and PCM codec; GPU event span including launch gaps",
+                  "excludes": "reference encoding, prompt packing, Luna, alignment, scoring, voice conversion, CPU audio copy, MP3, network",
+                  "graph_capture_seconds": 0,
+                  "oom_batch_retries": []
+                }
+              },
+              {
+                "generation_ms": 806,
+                "alignment_ms": 1,
+                "scoring_ms": 0,
+                "speaker_preparation_ms": 0,
+                "total_ms": 817,
+                "performance": {
+                  "device_seconds": 0.5254297072887422,
+                  "raw_audio_seconds": 3.04,
+                  "aggregate_rtf": 0.17283871950287572,
+                  "audio_seconds_per_second": 5.785740619209817,
+                  "batches": [
+                    {
+                      "batch_size": 1,
+                      "device_seconds": 0.5254297072887422,
+                      "audio_seconds": [
+                        3.04
+                      ],
+                      "model_wall_seconds": 0.5295365825295448,
+                      "first_audio_seconds": 0.22731776428222655,
+                      "graph_capture_seconds": 0,
+                      "live_callback_seconds": 0.0026553794741630554,
+                      "first_chunk_components_ms": {
+                        "codec_stream_setup": 7.057407855987549,
+                        "semantic_prefill": 191.7532196044922,
+                        "semantic_decode_first_steps": 7.6338560581207275,
+                        "acoustic_tokens_first_steps": 6.538240194320679,
+                        "codec_first_chunk": 9.756671905517578,
+                        "profiled_frames": 3
+                      }
+                    }
+                  ],
+                  "streaming": true,
+                  "chunk_frames": 20,
+                  "backend": "fused CFG + local CUDA graphs + compiled global",
+                  "includes": "TTS prefill, autoregressive decode and PCM codec; GPU event span including launch gaps",
+                  "excludes": "reference encoding, prompt packing, Luna, alignment, scoring, voice conversion, CPU audio copy, MP3, network",
+                  "graph_capture_seconds": 0,
+                  "oom_batch_retries": []
+                }
+              },
+              {
+                "generation_ms": 1117,
+                "alignment_ms": 1,
+                "scoring_ms": 0,
+                "speaker_preparation_ms": 0,
+                "total_ms": 1128,
+                "performance": {
+                  "device_seconds": 0.5997025578022003,
+                  "raw_audio_seconds": 3.6,
+                  "aggregate_rtf": 0.1665840438339445,
+                  "audio_seconds_per_second": 6.002975897240357,
+                  "batches": [
+                    {
+                      "batch_size": 1,
+                      "device_seconds": 0.5997025578022003,
+                      "audio_seconds": [
+                        3.6
+                      ],
+                      "model_wall_seconds": 0.610829122364521,
+                      "first_audio_seconds": 0.23027711486816407,
+                      "graph_capture_seconds": 0,
+                      "live_callback_seconds": 0.0038972198963165283,
+                      "first_chunk_components_ms": {
+                        "codec_stream_setup": 4.824063777923584,
+                        "semantic_prefill": 197.1630096435547,
+                        "semantic_decode_first_steps": 7.634944200515747,
+                        "acoustic_tokens_first_steps": 6.5556480884552,
+                        "codec_first_chunk": 9.764863967895508,
+                        "profiled_frames": 3
+                      }
+                    }
+                  ],
+                  "streaming": true,
+                  "chunk_frames": 20,
+                  "backend": "fused CFG + local CUDA graphs + compiled global",
+                  "includes": "TTS prefill, autoregressive decode and PCM codec; GPU event span including launch gaps",
+                  "excludes": "reference encoding, prompt packing, Luna, alignment, scoring, voice conversion, CPU audio copy, MP3, network",
+                  "graph_capture_seconds": 0,
+                  "oom_batch_retries": []
+                }
+              }
+            ],
+            "sentence_tts": [
+              {
+                "sentence": 0,
+                "total_ms": 1602.75,
+                "audio_s": 6.98
+              },
+              {
+                "sentence": 1,
+                "total_ms": 1264.75,
+                "audio_s": 4.8
+              },
+              {
+                "sentence": 2,
+                "total_ms": 866.73,
+                "audio_s": 0.74
+              },
+              {
+                "sentence": 3,
+                "total_ms": 2449.94,
+                "audio_s": 2.1
+              }
+            ],
+            "tts_retries": [
+              {
+                "event": "speech_retry",
+                "attempt": 2,
+                "max_attempts": 3,
+                "code": "unverified_speech",
+                "strategy": "compact_direction",
+                "sentence": 3
+              }
+            ],
+            "total_ms": 8007.24,
+            "audio_s": 14.62,
+            "sentences": 4,
+            "generation_rtf": 0.5477
+          }
+        },
+        {
+          "type": "turn_done",
+          "barged": false
+        }
+      ],
+      "frames": [],
+      "audio": 17,
+      "passed": true
+    },
+    {
+      "request": "Kannst du die offizielle Website des Viktor Frankl Instituts nachgucken? Antworte in einem Satz.",
+      "elapsed_ms": 9157,
+      "events": [
+        {
+          "type": "reply",
+          "text": "Die offizielle Website des Viktor Frankl Instituts findest du unter der Domain www.viktorfrankl.org.",
+          "reply_id": 10,
+          "performance": {
+            "sentences": [
+              {
+                "emotion": "contentment",
+                "secondary": null,
+                "blend": 0,
+                "intensity": 0.72,
+                "direction": "contentment, calm and informative",
+                "text": "Die offizielle Website des Viktor Frankl Instituts findest du unter der Domain www.viktorfrankl.org.",
+                "start_s": 0,
+                "end_s": 4.42
+              }
+            ],
+            "source": "qwen/qwen3.8-27b sentence cues + fixed GENERAL catalogue",
+            "timing": "Sentence starts anchored to actual preceding PCM duration; within-sentence estimates"
+          },
+          "avatar_actions": [],
+          "avatar_action_id": null,
+          "avatar_event": null,
+          "sentence_index": 0,
+          "sentence_text": "Die offizielle Website des Viktor Frankl Instituts findest du unter der Domain www.viktorfrankl.org.",
+          "sentence_role": "answer",
+          "speaker_id": null,
+          "speaker_name": null,
+          "speaker_update": null,
+          "timing": {
+            "tts_model": "small_rl",
+            "verification": {
+              "align": true,
+              "speech_verification": "parallel"
+            },
+            "quick_reply_status": "disabled_or_ineligible",
+            "tool_director_ms": 3388.22,
+            "director_model": "qwen/qwen3.8-27b",
+            "llm_model": "qwen/qwen3.8-27b",
+            "llm_provider": "cerebras/fp16",
+            "llm_backend": "OpenRouter",
+            "llm_actual_provider": "Cerebras",
+            "sentence_ready_ms": 3400.44,
+            "director_mode": "bolt",
+            "template_id": "contentment.soft"
+          },
+          "sources": [
+            {
+              "title": "VFI / Das Institut",
+              "url": "https://www.viktorfrankl.org/institut_agendaD.html",
+              "publisher": "www.viktorfrankl.org"
+            },
+            {
+              "title": "Viktor Frankl Institute Vienna",
+              "url": "https://www.viktorfrankl.org/",
+              "publisher": "www.viktorfrankl.org"
+            },
+            {
+              "title": "VFI / Logotherapie und Existenzanalyse",
+              "url": "https://viktorfrankl.org/logotherapie.html",
+              "publisher": "viktorfrankl.org"
+            }
+          ],
+          "lookups": [
+            {
+              "tool": "search_web",
+              "ms": 2471.33,
+              "arguments": {
+                "query": "Viktor Frankl Institut offizielle Website"
+              },
+              "error": null,
+              "cache_hit": false,
+              "retrieved_at": "2026-11-14T09:44:46.988219+00:00",
+              "result_sha256": "bef169eaf6bd24e07143cdcfdd4a66bce4d0e4e488014b3c599c66139a10b0af"
+            }
+          ]
+        },
+        {
+          "type": "pipeline_metrics",
+          "reply_id": 10,
+          "metrics": {
+            "tts_model": "small_rl",
+            "verification": {
+              "align": true,
+              "speech_verification": "parallel"
+            },
+            "quick_reply_status": "disabled_or_ineligible",
+            "tool_director_ms": 3388.22,
+            "director_model": "qwen/qwen3.8-27b",
+            "llm_model": "qwen/qwen3.8-27b",
+            "llm_provider": "cerebras/fp16",
+            "llm_backend": "OpenRouter",
+            "llm_actual_provider": "Cerebras",
+            "tts_actual_model": "small_rl",
+            "tts_revision": "182bc700cac29b2d69295a33398b13e1ca7fba69",
+            "answer_first_audio_ms": 4081.15,
+            "tts_first_audio_ms": 680.34,
+            "first_audio_ms": 4081.18,
+            "tts_server_stages": [
+              {
+                "generation_ms": 1458,
+                "alignment_ms": 1,
+                "scoring_ms": 0,
+                "speaker_preparation_ms": 0,
+                "total_ms": 1472,
+                "performance": {
+                  "device_seconds": 0.8952032971382141,
+                  "raw_audio_seconds": 6.4,
+                  "aggregate_rtf": 0.13987551517784594,
+                  "audio_seconds_per_second": 7.149214061721533,
+                  "batches": [
+                    {
+                      "batch_size": 1,
+                      "device_seconds": 0.8952032971382141,
+                      "audio_seconds": [
+                        6.4
+                      ],
+                      "model_wall_seconds": 0.90128093957901,
+                      "first_audio_seconds": 0.22769046020507813,
+                      "graph_capture_seconds": 0,
+                      "live_callback_seconds": 0.0044877901673316956,
+                      "first_chunk_components_ms": {
+                        "codec_stream_setup": 4.965343952178955,
+                        "semantic_prefill": 192.79359436035156,
+                        "semantic_decode_first_steps": 8.265727996826172,
+                        "acoustic_tokens_first_steps": 6.717439889907837,
+                        "codec_first_chunk": 10.514304161071777,
+                        "profiled_frames": 3
+                      }
+                    }
+                  ],
+                  "streaming": true,
+                  "chunk_frames": 20,
+                  "backend": "fused CFG + local CUDA graphs + compiled global",
+                  "includes": "TTS prefill, autoregressive decode and PCM codec; GPU event span including launch gaps",
+                  "excludes": "reference encoding, prompt packing, Luna, alignment, scoring, voice conversion, CPU audio copy, MP3, network",
+                  "graph_capture_seconds": 0,
+                  "oom_batch_retries": []
+                }
+              }
+            ],
+            "sentence_tts": [
+              {
+                "sentence": 0,
+                "total_ms": 1513.13,
+                "audio_s": 3.22
+              }
+            ],
+            "total_ms": 4914.02,
+            "audio_s": 3.22,
+            "sentences": 1,
+            "generation_rtf": 1.5261
+          }
+        },
+        {
+          "type": "turn_done",
+          "barged": false
+        }
+      ],
+      "frames": [],
+      "audio": 5,
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "catalogue": {
+    "poses": [
+      {
+        "slug": "amusement",
+        "controls": {
+          "brow_raise": 0,
+          "brow_inner": 0,
+          "brow_outer": 0,
+          "brow_arch": 0,
+          "brow_asym": 0,
+          "frown": 0,
+          "eye_open": 0.5,
+          "eye_asym": 0,
+          "squint": 0.85,
+          "lid_curve": 0.9,
+          "lid_tilt": 0,
+          "gaze_x": 0,
+          "gaze_y": 0,
+          "pupil_scale": 1,
+          "mouth_width": 1.18,
+          "smile": 0.9,
+          "mouth_open": 0.5,
+          "mouth_asym": 0.3,
+          "mouth_tension": 0,
+          "mouth_y": 0,
+          "cheek_lift": 0.7,
+          "nose_lift": 0,
+          "curl": 0,
+          "warmth": 0.35
+        }
+      },
+      {
+        "slug": "elation",
+        "controls": {
+          "brow_raise": 0.7,
+          "brow_inner": 0,
+          "brow_outer": 0,
+          "brow_arch": 0.5,
+          "brow_asym": 0,
+          "frown": 0,
+          "eye_open": 1.2,
+          "eye_asym": 0,
+          "squint": 0,
+          "lid_curve": 0.2,
+          "lid_tilt": 0,
+          "gaze_x": 0,
+          "gaze_y": 0,
+          "pupil_scale": 1.07,
+          "mouth_width": 1.35,
+          "smile": 1,
+          "mouth_open": 0.7,
+          "mouth_asym": 0,
+          "mouth_tension": 0,
+          "mouth_y": 0,
+          "cheek_lift": 0.8,
+          "nose_lift": 0,
+          "curl": 0,
+          "warmth": 0.35
+        }
+      },
+      {
+        "slug": "pleasure_ecstasy",
+        "controls": {
+          "brow_raise": 0,
+          "brow_inner": 0.4,
+          "brow_outer": 0,
+          "brow_arch": 0.35,
+          "brow_asym": 0,
+          "frown": 0,
+          "eye_open": 0.05500000000000005,
+          "eye_asym": 0,
+          "squint": 0,
+          "lid_curve": 0.9,
+          "lid_tilt": 0,
+          "gaze_x": 0,
+          "gaze_y": 0,
+          "pupil_scale": 1,
+          "mouth_width": 0.65,
+          "smile": 0.6,
+          "mouth_open": 0.2,
+          "mouth_asym": 0,
+          "mouth_tension": 0,
+          "mouth_y": 0,
+          "cheek_lift": 0.5,
+          "nose_lift": 0,
+          "curl": 0,
+          "warmth": 0.35
+        }
+      },
+      {
+        "slug": "contentment",
+        "controls": {
+          "brow_raise": -0.2,
+          "brow_inner": 0,
+          "brow_outer": 0,
+          "brow_arch": 0,
+          "brow_asym": 0,
+          "frown": 0,
+          "eye_open": 0.38,
+          "eye_asym": 0,
+          "squint": 0.2,
+          "lid_curve": 0.72,
+          "lid_tilt": 0,
+          "gaze_x": 0,
+          "gaze_y": 0,
+          "pupil_scale": 1,
+          "mouth_width": 0.8,
+          "smile": 0.55,
+          "mouth_open": 0,
+          "mouth_asym": 0,
+          "mouth_tension": 0,
+          "mouth_y": 0,
+          "cheek_lift": 0,
+          "nose_lift": 0,
+          "curl": 0,
+          "warmth": 0.35
+        }
+      },
+      {
+        "slug": "gratitude",
+        "controls": {
+          "brow_raise": 0,
+          "brow_inner": 0.7,
+          "brow_outer": 0,
+          "brow_arch": 0.2,
+          "brow_asym": 0,
+          "frown": 0,
+          "eye_open": 0.72,
+          "eye_asym": 0,
+          "squint": 0.3,
+          "lid_curve": 0.2,
+          "lid_tilt": 0,
+          "gaze_x": 0,
+          "gaze_y": -0.15,
+          "pupil_scale": 1,
+          "mouth_width": 0.72,
+          "smile": 0.72,
+          "mouth_open": 0,
+          "mouth_asym": 0,
+          "mouth_tension": 0,
+          "mouth_y": 0,
+          "cheek_lift": 0.45,
+          "nose_lift": 0,
+          "curl": 0,
+          "warmth": 0.4
+        }
+      },
+      {
+        "slug": "affection",
+        "controls": {
+          "brow_raise": 0,
+          "brow_inner": 0.25,
+          "brow_outer": 0,
+          "brow_arch": 0,
+          "brow_asym": 0,
+          "frown": 0,
+          "eye_open": 0.78,
+          "eye_asym": 0,
+          "squint": 0.45,
+          "lid_curve": 0.2,
+          "lid_tilt": 0,
+          "gaze_x": 0.25,
+          "gaze_y": 0,
+          "pupil_scale": 1.12,
+          "mouth_width": 0.95,
+          "smile": 0.8,
+          "mouth_open": 0,
+          "mouth_asym": 0,
+          "mouth_tension": 0,
+          "mouth_y": 0,
+          "cheek_lift": 0.5,
+          "nose_lift": 0,
+          "curl": 0,
+          "warmth": 0.35
+        }
+      },
+      {
+        "slug": "infatuation",
+        "controls": {
+          "brow_raise": 0.2,
+          "brow_inner": 0.35,
+          "brow_outer": 0,
+          "brow_arch": 0,
+          "brow_asym": 0,
+          "frown": 0,
+          "eye_open": 1,
+          "eye_asym": 0,
+          "squint": 0,
+          "lid_curve": 0.2,
+          "lid_tilt": 0,
+          "gaze_x": 0,
+          "gaze_y": 0,
+          "pupil_scale": 1.12,
+          "mouth_width": 0.82,
+          "smile": 0.8,
+          "mouth_open": 0.45,
+          "mouth_asym": 0,
+          "mouth_tension": 0,
+          "mouth_y": 0,
+          "cheek_lift": 0.55,
+          "nose_lift": 0,
+          "curl": 0,
+          "warmth": 0.35
+        }
+      },
+      {
+        "slug": "hope",
+        "controls": {
+          "brow_raise": 0.6,
+          "brow_inner": 0.6,
+          "brow_outer": 0,
+          "brow_arch": 0,
+          "brow_asym": 0,
+          "frown": 0,
+          "eye_open": 1.08,
+          "eye_asym": 0,
+          "squint": 0,
+          "lid_curve": 0.2,
+          "lid_tilt": 0,
+          "gaze_x": 0,
+          "gaze_y": -0.6,
+          "pupil_scale": 1.05,
+          "mouth_width": 0.96,
+          "smile": 0.66,
+          "mouth_open": 0,
+          "mouth_asym": 0,
+          "mouth_tension": 0,
+          "mouth_y": 0,
+          "cheek_lift": 0,
+          "nose_lift": 0,
+          "curl": 0,
+          "warmth": 0.35
+        }
+      },
+      {
+        "slug": "triumph",
+        "controls": {
+          "brow_raise": 0.65,
+          "brow_inner": -0.35,
+          "brow_outer": 0.65,
+          "brow_arch": 0,
+          "brow_asym": 0,
+          "frown": 0,
+          "eye_open": 0.7,
+          "eye_asym": 0,
+          "squint": 0.65,
+          "lid_curve": 0.2,
+          "lid_tilt": 0.25,
+          "gaze_x": 0,
+          "gaze_y": 0,
+          "pupil_scale": 1,
+          "mouth_width": 1.4,
+          "smile": 1,
+          "mouth_open": 0.35,
+          "mouth_asym": 0,
+          "mouth_tension": 0,
+          "mouth_y": 0,
+          "cheek_lift": 0.85,
+          "nose_lift": 0,
+          "curl": 0,
+          "warmth": 0.35
+        }
+      },
+      {
+        "slug": "pride",
+        "controls": {
+          "brow_raise": 0,
+          "brow_inner": 0,
+          "brow_outer": 0.5,
+          "brow_arch": 0,
+          "brow_asym": 0.18,
+          "frown": 0,
+          "eye_open": 0.7,
+          "eye_asym": 0,
+          "squint": 0,
+          "lid_curve": 0.2,
+          "lid_tilt": 0,
+          "gaze_x": 0,
+          "gaze_y": -0.15,
+          "pupil_scale": 1,
+          "mouth_width": 1.04,
+          "smile": 0.48,
+          "mouth_open": 0,
+          "mouth_asym": 0.28,
+          "mouth_tension": 0,
+          "mouth_y": 0,
+          "cheek_lift": 0.08,
+          "nose_lift": 0,
+          "curl": 0,
+          "warmth": 0.35
+        }
+      },
+      {
+        "slug": "interest",
+        "controls": {
+          "brow_raise": 0.35,
+          "brow_inner": 0,
+          "brow_outer": 0.15,
+          "brow_arch": 0,
+          "brow_asym": 0,
+          "frown": 0,
+          "eye_open": 1.17,
+          "eye_asym": 0,
+          "squint": 0,
+          "lid_curve": 0.2,
+          "lid_tilt": 0,
+          "gaze_x": 0,
+          "gaze_y": 0,
+          "pupil_scale": 1.14,
+          "mouth_width": 0.72,
+          "smile": 0.15,
+          "mouth_open": 0,
+          "mouth_asym": 0,
+          "mouth_tension": 0,
+          "mouth_y": 0,
+          "cheek_lift": 0,
+          "nose_lift": 0,
+          "curl": 0,
+          "warmth": 0.35
+        }
+      },
+      {
+        "slug": "awe",
+        "controls": {
+          "brow_raise": 0.75,
+          "brow_inner": 0.4,
+          "brow_outer": 0,
+          "brow_arch": 0,
+          "brow_asym": 0,
+          "frown": 0,
+          "eye_open": 1.25,
+          "eye_asym": 0,
+          "squint": 0,
+          "lid_curve": 0.2,
+          "lid_tilt": 0,
+          "gaze_x": 0,
+          "gaze_y": -0.35,
+          "pupil_scale": 1.1,
+          "mouth_width": 0.54,
+          "smile": 0,
+          "mouth_open": 0.4,
+          "mouth_asym": 0,
+          "mouth_tension": 0,
+          "mouth_y": 0,
+          "cheek_lift": 0.1,
+          "nose_lift": 0,
+          "curl": 0,
+          "warmth": 0.35
+        }
+      },
+      {
+        "slug": "surprise",
+        "controls": {
+          "brow_raise": 1,
+          "brow_inner": 0,
+          "brow_outer": 0.4,
+          "brow_arch": 0,
+          "brow_asym": 0,
+          "frown": 0,
+          "eye_open": 1.4,
+          "eye_asym": 0,
+          "squint": 0,
+          "lid_curve": 0.2,
+          "lid_tilt": 0,
+          "gaze_x": 0,
+          "gaze_y": 0,
+          "pupil_scale": 0.7,
+          "mouth_width": 0.72,
+          "smile": 0,
+          "mouth_open": 0.85,
+          "mouth_asym": 0,
+          "mouth_tension": 0,
+          "mouth_y": 0,
+          "cheek_lift": 0,
+          "nose_lift": 0,
+          "curl": 0,
+          "warmth": 0.35
+        }
+      },
+      {
+        "slug": "concentration",
+        "controls": {
+          "brow_raise": -0.4,
+          "brow_inner": 0,
+          "brow_outer": 0,
+          "brow_arch": 0,
+          "brow_asym": 0,
+          "frown": 0.42,
+          "eye_open": 0.72,
+          "eye_asym": 0,
+          "squint": 0,
+          "lid_curve": 0.2,
+          "lid_tilt": 0.15,
+          "gaze_x": 0,
+          "gaze_y": 0.25,
+          "pupil_scale": 0.9,
+          "mouth_width": 0.63,
+          "smile": -0.03,
+          "mouth_open": 0,
+          "mouth_asym": 0,
+          "mouth_tension": 0.15,
+          "mouth_y": 0,
+          "cheek_lift": 0,
+          "nose_lift": 0,
+          "curl": 0,
+          "warmth": 0.35
+        }
+      },
+      {
+        "slug": "contemplation",
+        "controls": {
+          "brow_raise": 0,
+          "brow_inner": 0.3,
+          "brow_outer": 0,
+          "brow_arch": 0,
+          "brow_asym": 0.65,
+          "frown": 0,
+          "eye_open": 0.86,
+          "eye_asym": 0.16,
+          "squint": 0,
+          "lid_curve": 0.2,
+          "lid_tilt": 0,
+          "gaze_x": -0.65,
+          "gaze_y": -0.42,
+          "pupil_scale": 1,
+          "mouth_width": 0.43999999999999995,
+          "smile": 0,
+          "mouth_open": 0.08,
+          "mouth_asym": -0.25,
+          "mouth_tension": 0,
+          "mouth_y": 0,
+          "cheek_lift": 0,
+          "nose_lift": 0,
+          "curl": 0,
+          "warmth": 0.35
+        }
+      },
+      {
+        "slug": "relief",
+        "controls": {
+          "brow_raise": -0.12,
+          "brow_inner": 0.4,
+          "brow_outer": 0,
+          "brow_arch": 0,
+          "brow_asym": 0,
+          "frown": 0,
+          "eye_open": 0.30000000000000004,
+          "eye_asym": 0,
+          "squint": 0,
+          "lid_curve": 0.55,
+          "lid_tilt": 0,
+          "gaze_x": 0,
+          "gaze_y": 0,
+          "pupil_scale": 1,
+          "mouth_width": 0.52,
+          "smile": 0.2,
+          "mouth_open": 0.17,
+          "mouth_asym": 0,
+          "mouth_tension": 0,
+          "mouth_y": 0,
+          "cheek_lift": 0,
+          "nose_lift": 0,
+          "curl": 0,
+          "warmth": 0.35
+        }
+      },
+      {
+        "slug": "longing",
+        "controls": {
+          "brow_raise": 0,
+          "brow_inner": 0.75,
+          "brow_outer": 0,
+          "brow_arch": 0,
+          "brow_asym": 0,
+          "frown": 0,
+          "eye_open": 0.87,
+          "eye_asym": 0,
+          "squint": 0,
+          "lid_curve": 0.2,
+          "lid_tilt": 0,
+          "gaze_x": 0.58,
+          "gaze_y": -0.42,
+          "pupil_scale": 1.1,
+          "mouth_width": 0.78,
+          "smile": -0.35,
+          "mouth_open": 0,
+          "mouth_asym": 0.16,
+          "mouth_tension": 0,
+          "mouth_y": 0,
+          "cheek_lift": 0,
+          "nose_lift": 0,
+          "curl": 0,
+          "warmth": 0.4
+        }
+      },
+      {
+        "slug": "teasing",
+        "controls": {
+          "brow_raise": 0,
+          "brow_inner": 0,
+          "brow_outer": 0,
+          "brow_arch": 0,
+          "brow_asym": 0.45,
+          "frown": 0,
+          "eye_open": 0.54,
+          "eye_asym": -0.98,
+          "squint": 0,
+          "lid_curve": 0.8,
+          "lid_tilt": 0,
+          "gaze_x": 0.25,
+          "gaze_y": 0,
+          "pupil_scale": 1,
+          "mouth_width": 1.05,
+          "smile": 0.75,
+          "mouth_open": 0.2,
+          "mouth_asym": 0.65,
+          "mouth_tension": 0,
+          "mouth_y": 0,
+          "cheek_lift": 0.55,
+          "nose_lift": 0,
+          "curl": 0,
+          "warmth": 0.35
+        }
+      },
+      {
+        "slug": "impatience",
+        "controls": {
+          "brow_raise": -0.15,
+          "brow_inner": 0,
+          "brow_outer": 0,
+          "brow_arch": 0,
+          "brow_asym": 0.35,
+          "frown": 0.65,
+          "eye_open": 0.58,
+          "eye_asym": 0,
+          "squint": 0,
+          "lid_curve": 0.2,
+          "lid_tilt": 0.3,
+          "gaze_x": -0.55,
+          "gaze_y": 0,
+          "pupil_scale": 1,
+          "mouth_width": 0.87,
+          "smile": -0.26,
+          "mouth_open": 0,
+          "mouth_asym": -0.3,
+          "mouth_tension": 0.45,
+          "mouth_y": 0,
+          "cheek_lift": 0,
+          "nose_lift": 0,
+          "curl": 0,
+          "warmth": 0.35
+        }
+      },
+      {
+        "slug": "lust",
+        "controls": {
+          "brow_raise": 0,
+          "brow_inner": 0,
+          "brow_outer": 0.15,
+          "brow_arch": 0,
+          "brow_asym": 0,
+          "frown": 0,
+          "eye_open": 0.44999999999999996,
+          "eye_asym": 0.12,
+          "squint": 0,
+          "lid_curve": 0.2,
+          "lid_tilt": 0,
+          "gaze_x": 0.15,
+          "gaze_y": 0,
+          "pupil_scale": 1.15,
+          "mouth_width": 0.7,
+          "smile": 0.42000000000000004,
+          "mouth_open": 0.15,
+          "mouth_asym": 0.35,
+          "mouth_tension": 0,
+          "mouth_y": 0,
+          "cheek_lift": 0.15,
+          "nose_lift": 0,
+          "curl": 0,
+          "warmth": 0.35
+        }
+      },
+      {
+        "slug": "doubt",
+        "controls": {
+          "brow_raise": 0,
+          "brow_inner": 0,
+          "brow_outer": 0,
+          "brow_arch": 0,
+          "brow_asym": 0.9,
+          "frown": 0.2,
+          "eye_open": 0.75,
+          "eye_asym": 0.42,
+          "squint": 0,
+          "lid_curve": 0.28,
+          "lid_tilt": 0,
+          "gaze_x": 0.55,
+          "gaze_y": 0,
+          "pupil_scale": 1,
+          "mouth_width": 0.82,
+          "smile": -0.22,
+          "mouth_open": 0,
+          "mouth_asym": 0.4,
+          "mouth_tension": 0,
+          "mouth_y": 0,
+          "cheek_lift": 0,
+          "nose_lift": 0,
+          "curl": 0,
+          "warmth": 0.35
+        }
+      },
+      {
+        "slug": "fear",
+        "controls": {
+          "brow_raise": 0.65,
+          "brow_inner": 1,
+          "brow_outer": 0,
+          "brow_arch": 0,
+          "brow_asym": 0.08,
+          "frown": 0.4,
+          "eye_open": 1.32,
+          "eye_asym": 0,
+          "squint": 0,
+          "lid_curve": 0.2,
+          "lid_tilt": 0,
+          "gaze_x": 0,
+          "gaze_y": 0,
+          "pupil_scale": 0.78,
+          "mouth_width": 1.15,
+          "smile": -0.19999999999999998,
+          "mouth_open": 0.36,
+          "mouth_asym": 0.12,
+          "mouth_tension": 0.3,
+          "mouth_y": 0,
+          "cheek_lift": 0,
+          "nose_lift": 0,
+          "curl": 0,
+          "warmth": 0.42
+        }
+      },
+      {
+        "slug": "distress",
+        "controls": {
+          "brow_raise": 0,
+          "brow_inner": 0.95,
+          "brow_outer": 0,
+          "brow_arch": 0,
+          "brow_asym": 0,
+          "frown": 0.65,
+          "eye_open": 1.02,
+          "eye_asym": 0.14,
+          "squint": 0,
+          "lid_curve": 0.2,
+          "lid_tilt": 0,
+          "gaze_x": 0,
+          "gaze_y": 0,
+          "pupil_scale": 0.92,
+          "mouth_width": 1,
+          "smile": -0.5,
+          "mouth_open": 0.36,
+          "mouth_asym": 0,
+          "mouth_tension": 0.42,
+          "mouth_y": 0,
+          "cheek_lift": 0,
+          "nose_lift": 0,
+          "curl": 0,
+          "warmth": 0.42
+        }
+      },
+      {
+        "slug": "confusion",
+        "controls": {
+          "brow_raise": 0.2,
+          "brow_inner": 0,
+          "brow_outer": 0,
+          "brow_arch": 0,
+          "brow_asym": 0.95,
+          "frown": 0,
+          "eye_open": 1.2,
+          "eye_asym": 0.28,
+          "squint": 0,
+          "lid_curve": 0.2,
+          "lid_tilt": 0,
+          "gaze_x": -0.3,
+          "gaze_y": 0,
+          "pupil_scale": 1,
+          "mouth_width": 0.62,
+          "smile": -0.04000000000000001,
+          "mouth_open": 0.3,
+          "mouth_asym": 0.5,
+          "mouth_tension": 0.4,
+          "mouth_y": 0,
+          "cheek_lift": 0,
+          "nose_lift": 0,
+          "curl": 0,
+          "warmth": 0.35
+        }
+      },
+      {
+        "slug": "embarrassment",
+        "controls": {
+          "brow_raise": 0,
+          "brow_inner": 0.45,
+          "brow_outer": 0,
+          "brow_arch": 0,
+          "brow_asym": 0.25,
+          "frown": 0,
+          "eye_open": 0.74,
+          "eye_asym": 0,
+          "squint": 0,
+          "lid_curve": 0.2,
+          "lid_tilt": 0,
+          "gaze_x": -0.7,
+          "gaze_y": 0.42,
+          "pupil_scale": 1,
+          "mouth_width": 0.85,
+          "smile": 0.38,
+          "mouth_open": 0,
+          "mouth_asym": 0.45,
+          "mouth_tension": 0.2,
+          "mouth_y": 0,
+          "cheek_lift": 0.2,
+          "nose_lift": 0,
+          "curl": 0,
+          "warmth": 0.35
+        }
+      },
+      {
+        "slug": "shame",
+        "controls": {
+          "brow_raise": -0.15,
+          "brow_inner": 0.75,
+          "brow_outer": 0,
+          "brow_arch": 0,
+          "brow_asym": 0,
+          "frown": 0.2,
+          "eye_open": 0.48,
+          "eye_asym": 0,
+          "squint": 0,
+          "lid_curve": 0.2,
+          "lid_tilt": 0,
+          "gaze_x": 0,
+          "gaze_y": 0.78,
+          "pupil_scale": 1,
+          "mouth_width": 0.5,
+          "smile": -0.38,
+          "mouth_open": 0,
+          "mouth_asym": 0,
+          "mouth_tension": 0.1,
+          "mouth_y": 0,
+          "cheek_lift": 0,
+          "nose_lift": 0,
+          "curl": 0,
+          "warmth": 0.35
+        }
+      },
+      {
+        "slug": "disappointment",
+        "controls": {
+          "brow_raise": -0.35,
+          "brow_inner": 0.3,
+          "brow_outer": 0,
+          "brow_arch": 0,
+          "brow_asym": 0,
+          "frown": 0,
+          "eye_open": 0.58,
+          "eye_asym": 0,
+          "squint": 0,
+          "lid_curve": 0.2,
+          "lid_tilt": 0,
+          "gaze_x": 0,
+          "gaze_y": 0.3,
+          "pupil_scale": 1,
+          "mouth_width": 0.94,
+          "smile": -0.4,
+          "mouth_open": 0,
+          "mouth_asym": 0,
+          "mouth_tension": 0,
+          "mouth_y": 0,
+          "cheek_lift": 0,
+          "nose_lift": 0,
+          "curl": 0,
+          "warmth": 0.35
+        }
+      },
+      {
+        "slug": "sadness",
+        "controls": {
+          "brow_raise": 0,
+          "brow_inner": 1,
+          "brow_outer": 0,
+          "brow_arch": 0,
+          "brow_asym": 0,
+          "frown": 0.18,
+          "eye_open": 0.77,
+          "eye_asym": 0,
+          "squint": 0,
+          "lid_curve": -0.2,
+          "lid_tilt": 0,
+          "gaze_x": 0,
+          "gaze_y": 0.48,
+          "pupil_scale": 1.06,
+          "mouth_width": 0.9,
+          "smile": -0.76,
+          "mouth_open": 0,
+          "mouth_asym": 0.1,
+          "mouth_tension": 0,
+          "mouth_y": 0,
+          "cheek_lift": 0,
+          "nose_lift": 0,
+          "curl": 0,
+          "warmth": 0.42
+        }
+      },
+      {
+        "slug": "bitterness",
+        "controls": {
+          "brow_raise": -0.18,
+          "brow_inner": 0.3,
+          "brow_outer": 0,
+          "brow_arch": 0,
+          "brow_asym": 0.24,
+          "frown": 0.55,
+          "eye_open": 0.62,
+          "eye_asym": 0,
+          "squint": 0,
+          "lid_curve": 0.2,
+          "lid_tilt": 0,
+          "gaze_x": 0.35,
+          "gaze_y": 0,
+          "pupil_scale": 1,
+          "mouth_width": 1,
+          "smile": -0.4,
+          "mouth_open": 0,
+          "mouth_asym": 0.62,
+          "mouth_tension": 0.25,
+          "mouth_y": 0,
+          "cheek_lift": 0,
+          "nose_lift": 0,
+          "curl": 0,
+          "warmth": 0.35
+        }
+      },
+      {
+        "slug": "contempt",
+        "controls": {
+          "brow_raise": 0,
+          "brow_inner": 0,
+          "brow_outer": 0.45,
+          "brow_arch": 0,
+          "brow_asym": 0.5,
+          "frown": 0,
+          "eye_open": 0.57,
+          "eye_asym": 0.18,
+          "squint": 0,
+          "lid_curve": 0.2,
+          "lid_tilt": 0.18,
+          "gaze_x": 0,
+          "gaze_y": 0.2,
+          "pupil_scale": 1,
+          "mouth_width": 0.9,
+          "smile": 0.1,
+          "mouth_open": 0,
+          "mouth_asym": 0.95,
+          "mouth_tension": 0,
+          "mouth_y": 0,
+          "cheek_lift": 0,
+          "nose_lift": 0,
+          "curl": 0,
+          "warmth": 0.35
+        }
+      },
+      {
+        "slug": "disgust",
+        "controls": {
+          "brow_raise": -0.1,
+          "brow_inner": 0,
+          "brow_outer": 0,
+          "brow_arch": 0,
+          "brow_asym": 0,
+          "frown": 0.52,
+          "eye_open": 0.54,
+          "eye_asym": 0.3,
+          "squint": 0.3,
+          "lid_curve": -0.2,
+          "lid_tilt": 0,
+          "gaze_x": 0,
+          "gaze_y": 0,
+          "pupil_scale": 1,
+          "mouth_width": 0.88,
+          "smile": -0.5,
+          "mouth_open": 0.26,
+          "mouth_asym": 0.35,
+          "mouth_tension": 0.55,
+          "mouth_y": 0,
+          "cheek_lift": 0,
+          "nose_lift": 1,
+          "curl": 0,
+          "warmth": 0.35
+        }
+      },
+      {
+        "slug": "anger",
+        "controls": {
+          "brow_raise": -0.15,
+          "brow_inner": -0.52,
+          "brow_outer": 0,
+          "brow_arch": 0,
+          "brow_asym": 0,
+          "frown": 0.92,
+          "eye_open": 0.68,
+          "eye_asym": 0,
+          "squint": 0.2,
+          "lid_curve": 0.2,
+          "lid_tilt": 0.85,
+          "gaze_x": 0,
+          "gaze_y": 0,
+          "pupil_scale": 0.92,
+          "mouth_width": 1.25,
+          "smile": -0.17999999999999997,
+          "mouth_open": 0.27,
+          "mouth_asym": 0.1,
+          "mouth_tension": 0.25,
+          "mouth_y": 0,
+          "cheek_lift": 0,
+          "nose_lift": 0,
+          "curl": 0,
+          "warmth": 0.3
+        }
+      },
+      {
+        "slug": "malice",
+        "controls": {
+          "brow_raise": 0,
+          "brow_inner": -0.27,
+          "brow_outer": 0,
+          "brow_arch": 0,
+          "brow_asym": 0.28,
+          "frown": 0.84,
+          "eye_open": 0.51,
+          "eye_asym": 0,
+          "squint": 0,
+          "lid_curve": 0.2,
+          "lid_tilt": 0.75,
+          "gaze_x": 0.3,
+          "gaze_y": 0,
+          "pupil_scale": 0.93,
+          "mouth_width": 1.3,
+          "smile": 0.78,
+          "mouth_open": 0,
+          "mouth_asym": 0.5,
+          "mouth_tension": 0,
+          "mouth_y": 0,
+          "cheek_lift": 0.3,
+          "nose_lift": 0,
+          "curl": 0,
+          "warmth": 0.24
+        }
+      },
+      {
+        "slug": "sourness",
+        "controls": {
+          "brow_raise": 0,
+          "brow_inner": 0.55,
+          "brow_outer": 0,
+          "brow_arch": 0,
+          "brow_asym": 0,
+          "frown": 0.35,
+          "eye_open": 0.32000000000000006,
+          "eye_asym": -0.48,
+          "squint": 0,
+          "lid_curve": -0.8,
+          "lid_tilt": 0,
+          "gaze_x": 0,
+          "gaze_y": 0,
+          "pupil_scale": 1,
+          "mouth_width": 0.4,
+          "smile": 0,
+          "mouth_open": 0.12,
+          "mouth_asym": 0.28,
+          "mouth_tension": 0.65,
+          "mouth_y": 0,
+          "cheek_lift": 0,
+          "nose_lift": 0.8,
+          "curl": 0,
+          "warmth": 0.35
+        }
+      },
+      {
+        "slug": "pain",
+        "controls": {
+          "brow_raise": -0.15,
+          "brow_inner": 0.6,
+          "brow_outer": 0,
+          "brow_arch": 0,
+          "brow_asym": 0,
+          "frown": 1,
+          "eye_open": 0.05500000000000005,
+          "eye_asym": 0,
+          "squint": 0.75,
+          "lid_curve": -1,
+          "lid_tilt": 0,
+          "gaze_x": 0,
+          "gaze_y": 0,
+          "pupil_scale": 1,
+          "mouth_width": 1.1,
+          "smile": -0.25,
+          "mouth_open": 0.6,
+          "mouth_asym": 0,
+          "mouth_tension": 0.65,
+          "mouth_y": 0,
+          "cheek_lift": 0,
+          "nose_lift": 0.25,
+          "curl": 0,
+          "warmth": 0.4
+        }
+      },
+      {
+        "slug": "helplessness",
+        "controls": {
+          "brow_raise": 0,
+          "brow_inner": 0.95,
+          "brow_outer": 0,
+          "brow_arch": 0,
+          "brow_asym": 0,
+          "frown": 0.3,
+          "eye_open": 0.86,
+          "eye_asym": 0,
+          "squint": 0,
+          "lid_curve": 0.2,
+          "lid_tilt": 0,
+          "gaze_x": 0,
+          "gaze_y": 0.5,
+          "pupil_scale": 1,
+          "mouth_width": 0.74,
+          "smile": -0.7,
+          "mouth_open": 0.33,
+          "mouth_asym": 0,
+          "mouth_tension": 0,
+          "mouth_y": 0,
+          "cheek_lift": 0,
+          "nose_lift": 0,
+          "curl": 0,
+          "warmth": 0.42
+        }
+      },
+      {
+        "slug": "fatigue",
+        "controls": {
+          "brow_raise": -0.4,
+          "brow_inner": 0,
+          "brow_outer": 0,
+          "brow_arch": -0.4,
+          "brow_asym": 0,
+          "frown": 0,
+          "eye_open": 0.21999999999999997,
+          "eye_asym": 0,
+          "squint": 0,
+          "lid_curve": -0.2,
+          "lid_tilt": 0,
+          "gaze_x": 0,
+          "gaze_y": 0.4,
+          "pupil_scale": 0.9,
+          "mouth_width": 0.48,
+          "smile": 0,
+          "mouth_open": 0.34,
+          "mouth_asym": 0,
+          "mouth_tension": 0,
+          "mouth_y": 0,
+          "cheek_lift": -0.2,
+          "nose_lift": 0,
+          "curl": 0,
+          "warmth": 0.35
+        }
+      },
+      {
+        "slug": "numbness",
+        "controls": {
+          "brow_raise": -0.2,
+          "brow_inner": 0,
+          "brow_outer": 0,
+          "brow_arch": -0.65,
+          "brow_asym": 0,
+          "frown": 0,
+          "eye_open": 0.63,
+          "eye_asym": 0,
+          "squint": 0,
+          "lid_curve": 0,
+          "lid_tilt": 0,
+          "gaze_x": 0,
+          "gaze_y": 0,
+          "pupil_scale": 0.9,
+          "mouth_width": 0.77,
+          "smile": 0,
+          "mouth_open": 0,
+          "mouth_asym": 0,
+          "mouth_tension": 0,
+          "mouth_y": 0,
+          "cheek_lift": 0,
+          "nose_lift": 0,
+          "curl": 0,
+          "warmth": 0.35
+        }
+      },
+      {
+        "slug": "intoxication",
+        "controls": {
+          "brow_raise": 0,
+          "brow_inner": 0,
+          "brow_outer": 0,
+          "brow_arch": -0.25,
+          "brow_asym": 0.7,
+          "frown": 0,
+          "eye_open": 0.53,
+          "eye_asym": 0.5,
+          "squint": 0,
+          "lid_curve": 0.2,
+          "lid_tilt": 0,
+          "gaze_x": -0.35,
+          "gaze_y": 0.25,
+          "pupil_scale": 1.06,
+          "mouth_width": 1,
+          "smile": 0.35,
+          "mouth_open": 0.22,
+          "mouth_asym": 0.85,
+          "mouth_tension": 0.25,
+          "mouth_y": 0,
+          "cheek_lift": 0,
+          "nose_lift": 0,
+          "curl": 0,
+          "warmth": 0.35
+        }
+      },
+      {
+        "slug": "envy",
+        "controls": {
+          "brow_raise": 0,
+          "brow_inner": -0.15,
+          "brow_outer": 0,
+          "brow_arch": 0,
+          "brow_asym": 0.35,
+          "frown": 0.75,
+          "eye_open": 0.65,
+          "eye_asym": -0.12,
+          "squint": 0,
+          "lid_curve": 0.2,
+          "lid_tilt": 0.45,
+          "gaze_x": -0.82,
+          "gaze_y": 0,
+          "pupil_scale": 1,
+          "mouth_width": 0.83,
+          "smile": -0.35,
+          "mouth_open": 0,
+          "mouth_asym": -0.5,
+          "mouth_tension": 0.25,
+          "mouth_y": 0,
+          "cheek_lift": 0,
+          "nose_lift": 0,
+          "curl": 0,
+          "warmth": 0.35
+        }
+      }
+    ],
+    "faces": [
+      "crossed",
+      "opposite",
+      "wiggle",
+      "cheeky",
+      "goofy",
+      "squishy",
+      "fish",
+      "peekaboo"
+    ],
+    "uniquePoses": 40
+  },
+  "checks": [
+    {
+      "enabled": false,
+      "serial": false,
+      "metrics": {
+        "tts_model": "small_rl",
+        "verification": {
+          "align": false,
+          "speech_verification": "parallel"
+        },
+        "quick_reply_status": "disabled_or_ineligible",
+        "llm_model": "qwen/qwen3.8-27b",
+        "llm_provider": "cerebras/fp16",
+        "llm_backend": "OpenRouter",
+        "llm_actual_provider": "Cerebras",
+        "llm_ttft_ms": 370.85,
+        "finish_reason": "stop",
+        "usage": {
+          "prompt_tokens": 3388,
+          "completion_tokens": 9,
+          "total_tokens": 3397,
+          "cost": 0.0033338547,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 2048,
+            "cache_write_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.00336753,
+            "upstream_inference_prompt_cost": 0.00335412,
+            "upstream_inference_completions_cost": 1.341e-05
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "image_tokens": 0,
+            "audio_tokens": 0
+          }
+        },
+        "llm_first_sentence_ms": 386.29,
+        "generation_calls": 1,
+        "llm_total_ms": 386.38,
+        "response_complete": true,
+        "tts_actual_model": "small_rl",
+        "tts_revision": "182bc700cac29b2d69295a33398b13e1ca7fba69",
+        "answer_first_audio_ms": 696.86,
+        "tts_first_audio_ms": 305.6,
+        "first_audio_ms": 696.89,
+        "tts_server_stages": [
+          {
+            "generation_ms": 581,
+            "alignment_ms": 2,
+            "scoring_ms": 0,
+            "speaker_preparation_ms": 0,
+            "total_ms": 598,
+            "performance": {
+              "device_seconds": 0.5446148767471313,
+              "raw_audio_seconds": 2.96,
+              "aggregate_rtf": 0.18399151241457137,
+              "audio_seconds_per_second": 5.435033316899916,
+              "batches": [
+                {
+                  "batch_size": 1,
+                  "device_seconds": 0.5446148767471313,
+                  "audio_seconds": [
+                    2.96
+                  ],
+                  "model_wall_seconds": 0.5574889108538628,
+                  "first_audio_seconds": 0.2328299560546875,
+                  "graph_capture_seconds": 0,
+                  "live_callback_seconds": 0.003150463104248047,
+                  "first_chunk_components_ms": {
+                    "codec_stream_setup": 4.981760025024414,
+                    "semantic_prefill": 197.7692108154297,
+                    "semantic_decode_first_steps": 8.352767944335938,
+                    "acoustic_tokens_first_steps": 6.738944053649902,
+                    "codec_first_chunk": 10.493951797485352,
+                    "profiled_frames": 3
+                  }
+                }
+              ],
+              "streaming": true,
+              "chunk_frames": 20,
+              "backend": "fused CFG + local CUDA graphs + compiled global",
+              "includes": "TTS prefill, autoregressive decode and PCM codec; GPU event span including launch gaps",
+              "excludes": "reference encoding, prompt packing, Luna, alignment, scoring, voice conversion, CPU audio copy, MP3, network",
+              "graph_capture_seconds": 0,
+              "oom_batch_retries": []
+            }
+          }
+        ],
+        "sentence_tts": [
+          {
+            "sentence": 0,
+            "total_ms": 659.71,
+            "audio_s": 2.96
+          }
+        ],
+        "total_ms": 1051.03,
+        "audio_s": 2.96,
+        "sentences": 1,
+        "generation_rtf": 0.3551
+      },
+      "pcm_chunks": 5
+    },
+    {
+      "enabled": true,
+      "serial": false,
+      "metrics": {
+        "tts_model": "small_rl",
+        "verification": {
+          "align": true,
+          "speech_verification": "parallel"
+        },
+        "quick_reply_status": "disabled_or_ineligible",
+        "llm_model": "qwen/qwen3.8-27b",
+        "llm_provider": "cerebras/fp16",
+        "llm_backend": "OpenRouter",
+        "llm_actual_provider": "Cerebras",
+        "llm_ttft_ms": 392.31,
+        "finish_reason": "stop",
+        "usage": {
+          "prompt_tokens": 3392,
+          "completion_tokens": 9,
+          "total_tokens": 3401,
+          "cost": 0.0033377751,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 2048,
+            "cache_write_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.00337149,
+            "upstream_inference_prompt_cost": 0.00335808,
+            "upstream_inference_completions_cost": 1.341e-05
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "image_tokens": 0,
+            "audio_tokens": 0
+          }
+        },
+        "llm_first_sentence_ms": 404.2,
+        "generation_calls": 1,
+        "llm_total_ms": 404.32,
+        "response_complete": true,
+        "tts_actual_model": "small_rl",
+        "tts_revision": "182bc700cac29b2d69295a33398b13e1ca7fba69",
+        "answer_first_audio_ms": 1138.38,
+        "tts_first_audio_ms": 727.89,
+        "first_audio_ms": 1138.42,
+        "tts_server_stages": [
+          {
+            "generation_ms": 877,
+            "alignment_ms": 1,
+            "scoring_ms": 0,
+            "speaker_preparation_ms": 0,
+            "total_ms": 890,
+            "performance": {
+              "device_seconds": 0.5366880996227265,
+              "raw_audio_seconds": 2.96,
+              "aggregate_rtf": 0.18131354716984002,
+              "audio_seconds_per_second": 5.515307684446105,
+              "batches": [
+                {
+                  "batch_size": 1,
+                  "device_seconds": 0.5366880996227265,
+                  "audio_seconds": [
+                    2.96
+                  ],
+                  "model_wall_seconds": 0.5416014045476913,
+                  "first_audio_seconds": 0.2311383056640625,
+                  "graph_capture_seconds": 0,
+                  "live_callback_seconds": 0.003280065953731537,
+                  "first_chunk_components_ms": {
+                    "codec_stream_setup": 6.392831802368164,
+                    "semantic_prefill": 193.2728271484375,
+                    "semantic_decode_first_steps": 8.358911991119385,
+                    "acoustic_tokens_first_steps": 6.7205119132995605,
+                    "codec_first_chunk": 10.508288383483887,
+                    "profiled_frames": 3
+                  }
+                }
+              ],
+              "streaming": true,
+              "chunk_frames": 20,
+              "backend": "fused CFG + local CUDA graphs + compiled global",
+              "includes": "TTS prefill, autoregressive decode and PCM codec; GPU event span including launch gaps",
+              "excludes": "reference encoding, prompt packing, Luna, alignment, scoring, voice conversion, CPU audio copy, MP3, network",
+              "graph_capture_seconds": 0,
+              "oom_batch_retries": []
+            }
+          }
+        ],
+        "sentence_tts": [
+          {
+            "sentence": 0,
+            "total_ms": 959.15,
+            "audio_s": 2.96
+          }
+        ],
+        "total_ms": 1369.72,
+        "audio_s": 2.96,
+        "sentences": 1,
+        "generation_rtf": 0.4627
+      },
+      "pcm_chunks": 3
+    },
+    {
+      "enabled": true,
+      "serial": true,
+      "metrics": {
+        "tts_model": "small_rl",
+        "verification": {
+          "align": true,
+          "speech_verification": "serial"
+        },
+        "quick_reply_status": "disabled_or_ineligible",
+        "llm_model": "qwen/qwen3.8-27b",
+        "llm_provider": "cerebras/fp16",
+        "llm_backend": "OpenRouter",
+        "llm_rate_limit_retries": 1,
+        "llm_actual_provider": "Cerebras",
+        "llm_ttft_ms": 2831.78,
+        "finish_reason": "stop",
+        "usage": {
+          "prompt_tokens": 3390,
+          "completion_tokens": 9,
+          "total_tokens": 3399,
+          "cost": 0.0033358149,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 2048,
+            "cache_write_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.00336951,
+            "upstream_inference_prompt_cost": 0.0033561,
+            "upstream_inference_completions_cost": 1.341e-05
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "image_tokens": 0,
+            "audio_tokens": 0
+          }
+        },
+        "llm_first_sentence_ms": 2851.93,
+        "generation_calls": 1,
+        "llm_total_ms": 2852.02,
+        "response_complete": true,
+        "tts_actual_model": "small_rl",
+        "tts_revision": "182bc700cac29b2d69295a33398b13e1ca7fba69",
+        "answer_first_audio_ms": 3738.87,
+        "tts_first_audio_ms": 881.51,
+        "first_audio_ms": 3738.9,
+        "tts_server_stages": [
+          {
+            "generation_ms": 1177,
+            "alignment_ms": 1,
+            "scoring_ms": 0,
+            "speaker_preparation_ms": 0,
+            "total_ms": 1191,
+            "performance": {
+              "device_seconds": 0.5472446041107177,
+              "raw_audio_seconds": 2.96,
+              "aggregate_rtf": 0.18487993382118842,
+              "audio_seconds_per_second": 5.408915826242001,
+              "batches": [
+                {
+                  "batch_size": 1,
+                  "device_seconds": 0.5472446041107177,
+                  "audio_seconds": [
+                    2.96
+                  ],
+                  "model_wall_seconds": 1.1535257175564766,
+                  "first_audio_seconds": 0.22296678161621095,
+                  "graph_capture_seconds": 0,
+                  "live_callback_seconds": 0.6044053882360458,
+                  "first_chunk_components_ms": {
+                    "codec_stream_setup": 4.981760025024414,
+                    "semantic_prefill": 188.36172485351562,
+                    "semantic_decode_first_steps": 8.227839946746826,
+                    "acoustic_tokens_first_steps": 6.714368104934692,
+                    "codec_first_chunk": 10.507264137268066,
+                    "profiled_frames": 3
+                  }
+                }
+              ],
+              "streaming": true,
+              "chunk_frames": 20,
+              "backend": "fused CFG + local CUDA graphs + compiled global",
+              "includes": "TTS prefill, autoregressive decode and PCM codec; GPU event span including launch gaps",
+              "excludes": "reference encoding, prompt packing, Luna, alignment, scoring, voice conversion, CPU audio copy, MP3, network",
+              "graph_capture_seconds": 0,
+              "oom_batch_retries": []
+            }
+          }
+        ],
+        "sentence_tts": [
+          {
+            "sentence": 0,
+            "total_ms": 1279.58,
+            "audio_s": 2.96
+          }
+        ],
+        "total_ms": 4137.01,
+        "audio_s": 2.96,
+        "sentences": 1,
+        "generation_rtf": 1.3976
+      },
+      "pcm_chunks": 3
+    }
+  ],
+  "guide": {
+    "diagrams": [
+      {
+        "src": "/static/system-conversation.svg",
+        "loaded": true
+      },
+      {
+        "src": "/static/system-tools.svg",
+        "loaded": true
+      },
+      {
+        "src": "/static/system-latency.svg",
+        "loaded": true
+      }
+    ],
+    "belowSettings": true,
+    "bodyOverflow": false
+  },
+  "page_errors": []
+}

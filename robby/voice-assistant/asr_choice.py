@@ -36,7 +36,7 @@ class ASRChoice:
                     try:await self.client().post('/activate/'+key,timeout=3)
                     except Exception:pass
                     return
-                response=await self.client().post('/activate/'+key);response.raise_for_status()
+                response=await self.client().post(worker_url(key)+'/activate/'+key);response.raise_for_status()
                 # Invalidate any old finalization, retaining all audio and text.
                 self.session.epoch+=1;self.session.pause_checked=False
                 self.selected=key;self.switch_ms=response.json()['switch_ms']
@@ -57,7 +57,7 @@ class ASRChoice:
         audio=np.asarray(audio,np.float32);parts=[];receipts=[]
         for start in range(0,len(audio),27*16000):
             chunk=audio[max(0,start-4000):start+27*16000]
-            response=await self.client().post('/transcribe/'+key,content=chunk.astype('<f4').tobytes(),headers={'Content-Type':'application/octet-stream'})
+            response=await self.client().post(worker_url(key)+'/transcribe/'+key,content=chunk.astype('<f4').tobytes(),headers={'Content-Type':'application/octet-stream'})
             response.raise_for_status();row=response.json();text=row['text'].strip();receipts.append(row)
             if parts:
                 old=re.findall(r'\S+',parts[-1]);new=text.split();keep=0

@@ -84,9 +84,10 @@ class SentenceFramer:
     are metadata, never spoken TTS instructions. Arbitrary token boundaries
     must produce the same words and line breaks as a single complete feed.
     """
-    def __init__(self,lines_only=False):
+    def __init__(self,lines_only=False,strip_stage_directions=False):
         self.buffer='';self.direction='contentment, soft';self.separator=' ';self.total=0
         self.lines_only=lines_only
+        self.strip_stage_directions=strip_stage_directions
     def feed(self,text,final=False):
         self.buffer+=text;self.total+=len(text);out=[]
         if self.total>60000:raise ValueError('Streamed response too long')
@@ -108,6 +109,18 @@ class SentenceFramer:
                 # Never forward arbitrary cue text to TTS or an action tool.
                 self.direction=raw.strip() if re.fullmatch(r'[A-Za-z_ ,\-]{1,100}',raw) else 'contentment, soft'
                 self.buffer=self.buffer[end+1:].lstrip()
+            # Do not send third-person Markdown stage directions to TTS.
+            # Hold an incomplete marked span across provider token boundaries;
+            # ordinary emphasis (e.g. **Hallo!**) remains spoken text.
+            if self.strip_stage_directions and self.buffer.startswith('*'):
+                marker='**' if self.buffer.startswith('**') else '*'
+                end=self.buffer.find(marker,len(marker))
+                if end<0 and not final and len(self.buffer)<512:break
+                if end>=0:
+                    inner=self.buffer[len(marker):end].strip()
+                    stage=bool(re.match(r'(?:(?:robb[yi]e?|der\s+roboter|the\s+robot|er|he)\b.{0,50})?\b(?:dreht|rotiert|nickt|schüttelt|zwinkert|springt|hüpft|lächelt|grinst|verbeugt|spins?|rotates?|turns?|nods?|winks?|jumps?|smiles?|bows?|(?:macht|does?|performs?)\b.{0,30}\b(?:salto|flip|somersault|drehung))\b',inner,re.I))
+                    self.buffer=('' if stage else inner)+self.buffer[end+len(marker):]
+                    if stage:continue
             # Old playback metadata may be echoed by a model. Buffer its
             # partial prefix before sentence punctuation can leak fragments
             # into the UI or TTS; retain legitimate square-bracket pause cues.

@@ -46,6 +46,14 @@ class VaultTests(unittest.TestCase):
         with self.assertRaises(ValueError):selection({'model':'gemma12','provider':'cerebras/fp16'})
 
 class TransportTests(unittest.IsolatedAsyncioTestCase):
+    def test_http_failure_retains_status_for_retry_without_provider_details(self):
+        from llm_backends import check_response
+        request=httpx.Request('POST','https://example.invalid')
+        response=httpx.Response(503,request=request,text='private provider error body')
+        with self.assertRaises(httpx.HTTPStatusError) as caught:check_response(response)
+        self.assertEqual(caught.exception.response.status_code,503)
+        self.assertNotIn('private provider',str(caught.exception))
+
     async def test_public_catalog_refresh_installs_alternative_endpoint_tags(self):
         import llm_backends
         data={'data':{'endpoints':[

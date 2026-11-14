@@ -60,6 +60,9 @@ lengthened opening breath or slow preamble. Keep speech text and SCRIPT aligned;
 never speak instructions, emotion labels, interface actions or this policy.'''
 
 
+from tool_capabilities import CAPABILITY_NOTE
+POLICY += "\n" + CAPABILITY_NOTE
+
 def speaker_update(text,identity):
     """No extra API: the complete self-introduction was acoustically bound."""
     name=self_name(text)

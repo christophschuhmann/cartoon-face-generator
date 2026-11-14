@@ -1,0 +1,1163 @@
+{
+  "date": "2026-11-14",
+  "mode": "real Qwen Cerebras, no TTS in this tier",
+  "cases": [
+    {
+      "request": "Hey Robbie, schneid eine Grimasse.",
+      "text": "Ah ja, der Klassiker!\nSchauen wir mal, wie weit ich die Stirn runzeln kann!",
+      "actions": [
+        {
+          "kind": "grimace",
+          "duration_s": 3.0,
+          "sentence": 0,
+          "variant": "crossed"
+        },
+        {
+          "kind": "grimace",
+          "duration_s": 3.0,
+          "sentence": 0,
+          "variant": "crossed"
+        }
+      ],
+      "lookups": [],
+      "sources": [],
+      "metrics": {
+        "tts_model": "small_rl",
+        "verification": {
+          "align": true,
+          "speech_verification": "parallel"
+        },
+        "quick_reply_status": "disabled_or_ineligible",
+        "llm_model": "qwen/qwen3.8-27b",
+        "llm_provider": "cerebras/fp16",
+        "llm_backend": "OpenRouter",
+        "llm_actual_provider": "Cerebras",
+        "llm_ttft_ms": 637.62,
+        "llm_first_sentence_ms": 672.38,
+        "finish_reason": "stop",
+        "usage": {
+          "prompt_tokens": 2918,
+          "completion_tokens": 38,
+          "total_tokens": 2956,
+          "cost": 0.0029159856,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 2048,
+            "cache_write_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.00294544,
+            "upstream_inference_prompt_cost": 0.00288882,
+            "upstream_inference_completions_cost": 5.662e-05
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "image_tokens": 0,
+            "audio_tokens": 0
+          }
+        },
+        "generation_calls": 1,
+        "llm_total_ms": 695.93,
+        "response_complete": true,
+        "total_ms": 822.58,
+        "audio_s": 0.0,
+        "sentences": 2
+      },
+      "passed": true,
+      "ms": 859
+    },
+    {
+      "request": "Mach ein ernstes Gesicht.",
+      "text": "Ich muss hier kurz tief durchatmen und über etwas wirklich Wichtiges nachdenken.",
+      "actions": [
+        {
+          "kind": "emotion",
+          "duration_s": 3.0,
+          "sentence": 0,
+          "emotion": "concentration"
+        },
+        {
+          "kind": "emotion",
+          "duration_s": 3.0,
+          "sentence": 0,
+          "emotion": "concentration"
+        }
+      ],
+      "lookups": [],
+      "sources": [],
+      "metrics": {
+        "tts_model": "small_rl",
+        "verification": {
+          "align": true,
+          "speech_verification": "parallel"
+        },
+        "quick_reply_status": "disabled_or_ineligible",
+        "llm_model": "qwen/qwen3.8-27b",
+        "llm_provider": "cerebras/fp16",
+        "llm_backend": "OpenRouter",
+        "llm_rate_limit_retries": 1,
+        "llm_actual_provider": "Cerebras",
+        "llm_ttft_ms": 2629.94,
+        "finish_reason": "stop",
+        "usage": {
+          "prompt_tokens": 2914,
+          "completion_tokens": 23,
+          "total_tokens": 2937,
+          "cost": 0.0028899387,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 2048,
+            "cache_write_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.00291913,
+            "upstream_inference_prompt_cost": 0.00288486,
+            "upstream_inference_completions_cost": 3.427e-05
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "image_tokens": 0,
+            "audio_tokens": 0
+          }
+        },
+        "llm_first_sentence_ms": 2709.59,
+        "generation_calls": 1,
+        "llm_total_ms": 2709.75,
+        "response_complete": true,
+        "total_ms": 2723.81,
+        "audio_s": 0.0,
+        "sentences": 1
+      },
+      "passed": true,
+      "ms": 2724
+    },
+    {
+      "request": "Mach einen Salto rückwärts.",
+      "text": "Ich hole kurz Schwung, und dann geht es kopfüber!",
+      "actions": [
+        {
+          "kind": "somersault",
+          "duration_s": 4.8,
+          "sentence": 0,
+          "direction": "backward"
+        },
+        {
+          "kind": "somersault",
+          "duration_s": 4.8,
+          "sentence": 0,
+          "direction": "backward"
+        }
+      ],
+      "lookups": [],
+      "sources": [],
+      "metrics": {
+        "tts_model": "small_rl",
+        "verification": {
+          "align": true,
+          "speech_verification": "parallel"
+        },
+        "quick_reply_status": "disabled_or_ineligible",
+        "llm_model": "qwen/qwen3.8-27b",
+        "llm_provider": "cerebras/fp16",
+        "llm_backend": "OpenRouter",
+        "llm_actual_provider": "Cerebras",
+        "llm_ttft_ms": 430.76,
+        "finish_reason": "stop",
+        "usage": {
+          "prompt_tokens": 2916,
+          "completion_tokens": 20,
+          "total_tokens": 2936,
+          "cost": 0.0028874736,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 2048,
+            "cache_write_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.00291664,
+            "upstream_inference_prompt_cost": 0.00288684,
+            "upstream_inference_completions_cost": 2.98e-05
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "image_tokens": 0,
+            "audio_tokens": 0
+          }
+        },
+        "llm_first_sentence_ms": 464.25,
+        "generation_calls": 1,
+        "llm_total_ms": 464.39,
+        "response_complete": true,
+        "total_ms": 469.98,
+        "audio_s": 0.0,
+        "sentences": 1
+      },
+      "passed": true,
+      "ms": 470
+    },
+    {
+      "request": "Hi Robby, sei mal wütend.",
+      "text": "Uff, ich bin total wütend, weil meine Antenne gerade von einer imaginären Fliege gekitzelt wurde!",
+      "actions": [
+        {
+          "kind": "emotion",
+          "duration_s": 3.0,
+          "sentence": 0,
+          "emotion": "anger"
+        },
+        {
+          "kind": "emotion",
+          "duration_s": 3.0,
+          "sentence": 0,
+          "emotion": "anger"
+        }
+      ],
+      "lookups": [],
+      "sources": [],
+      "metrics": {
+        "tts_model": "small_rl",
+        "verification": {
+          "align": true,
+          "speech_verification": "parallel"
+        },
+        "quick_reply_status": "disabled_or_ineligible",
+        "llm_model": "qwen/qwen3.8-27b",
+        "llm_provider": "cerebras/fp16",
+        "llm_backend": "OpenRouter",
+        "llm_actual_provider": "Cerebras",
+        "llm_ttft_ms": 337.9,
+        "finish_reason": "stop",
+        "usage": {
+          "prompt_tokens": 2916,
+          "completion_tokens": 33,
+          "total_tokens": 2949,
+          "cost": 0.0029066499,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 2048,
+            "cache_write_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.00293601,
+            "upstream_inference_prompt_cost": 0.00288684,
+            "upstream_inference_completions_cost": 4.917e-05
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "image_tokens": 0,
+            "audio_tokens": 0
+          }
+        },
+        "llm_first_sentence_ms": 390.96,
+        "generation_calls": 1,
+        "llm_total_ms": 391.12,
+        "response_complete": true,
+        "total_ms": 396.7,
+        "audio_s": 0.0,
+        "sentences": 1
+      },
+      "passed": true,
+      "ms": 397
+    },
+    {
+      "request": "Mach so 😡",
+      "text": "Irgendwer hat mir die Antenne geknickt, und ich bin total sauer!",
+      "actions": [
+        {
+          "kind": "emotion",
+          "duration_s": 3.0,
+          "sentence": 0,
+          "emotion": "anger"
+        },
+        {
+          "kind": "emotion",
+          "duration_s": 3.0,
+          "sentence": 0,
+          "emotion": "anger"
+        }
+      ],
+      "lookups": [],
+      "sources": [],
+      "metrics": {
+        "tts_model": "small_rl",
+        "verification": {
+          "align": true,
+          "speech_verification": "parallel"
+        },
+        "quick_reply_status": "disabled_or_ineligible",
+        "llm_model": "qwen/qwen3.8-27b",
+        "llm_provider": "cerebras/fp16",
+        "llm_backend": "OpenRouter",
+        "llm_actual_provider": "Cerebras",
+        "llm_ttft_ms": 311.42,
+        "llm_first_sentence_ms": 339.25,
+        "discarded_nonverbal_reactions": 1,
+        "finish_reason": "stop",
+        "usage": {
+          "prompt_tokens": 2911,
+          "completion_tokens": 29,
+          "total_tokens": 2940,
+          "cost": 0.002895849,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 2048,
+            "cache_write_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.0029251,
+            "upstream_inference_prompt_cost": 0.00288189,
+            "upstream_inference_completions_cost": 4.321e-05
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "image_tokens": 0,
+            "audio_tokens": 0
+          }
+        },
+        "generation_calls": 1,
+        "llm_total_ms": 408.61,
+        "response_complete": true,
+        "total_ms": 416.72,
+        "audio_s": 0.0,
+        "sentences": 1
+      },
+      "passed": true,
+      "ms": 417
+    },
+    {
+      "request": "Mach einen Hundeblick.",
+      "text": "Ah, der berühmte Hundeblick! Ich spule meine Augenrollen hoch, lasse die Ohren hängen und starre dich mit maximaler Inbrunst an.\nHoffentlich funktioniert das und du gibst mir jetzt einen virtuellen Leckerli-Klick!",
+      "actions": [
+        {
+          "kind": "puppy",
+          "duration_s": 4.0,
+          "sentence": 0
+        },
+        {
+          "kind": "puppy",
+          "duration_s": 4.0,
+          "sentence": 0
+        }
+      ],
+      "lookups": [],
+      "sources": [],
+      "metrics": {
+        "tts_model": "small_rl",
+        "verification": {
+          "align": true,
+          "speech_verification": "parallel"
+        },
+        "quick_reply_status": "disabled_or_ineligible",
+        "llm_model": "qwen/qwen3.8-27b",
+        "llm_provider": "cerebras/fp16",
+        "llm_backend": "OpenRouter",
+        "llm_rate_limit_retries": 1,
+        "unspoken_provider_retries": 1,
+        "llm_actual_provider": "Cerebras",
+        "llm_ttft_ms": 366.27,
+        "llm_first_sentence_ms": 391.32,
+        "finish_reason": "stop",
+        "usage": {
+          "prompt_tokens": 2908,
+          "completion_tokens": 69,
+          "total_tokens": 2977,
+          "cost": 0.0029519127,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 2048,
+            "cache_write_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.00298173,
+            "upstream_inference_prompt_cost": 0.00287892,
+            "upstream_inference_completions_cost": 0.00010281
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "image_tokens": 0,
+            "audio_tokens": 0
+          }
+        },
+        "generation_calls": 1,
+        "llm_total_ms": 445.26,
+        "response_complete": true,
+        "total_ms": 3515.48,
+        "audio_s": 0.0,
+        "sentences": 3
+      },
+      "passed": true,
+      "ms": 3516
+    },
+    {
+      "request": "Puste deine Backen auf und schiele lustig.",
+      "text": "Da sind meine Backen schon ganz schön aufgeblasen!\nUnd jetzt schiel ich auch noch ganz komisch rüber, oder?",
+      "actions": [
+        {
+          "kind": "grimace",
+          "duration_s": 3.0,
+          "sentence": 0,
+          "variant": "squishy"
+        },
+        {
+          "kind": "grimace",
+          "duration_s": 3.0,
+          "sentence": 0,
+          "variant": "crossed"
+        },
+        {
+          "kind": "grimace",
+          "duration_s": 3.0,
+          "sentence": 0,
+          "variant": "squishy"
+        },
+        {
+          "kind": "grimace",
+          "duration_s": 3.0,
+          "sentence": 0,
+          "variant": "crossed"
+        }
+      ],
+      "lookups": [],
+      "sources": [],
+      "metrics": {
+        "tts_model": "small_rl",
+        "verification": {
+          "align": true,
+          "speech_verification": "parallel"
+        },
+        "quick_reply_status": "disabled_or_ineligible",
+        "llm_model": "qwen/qwen3.8-27b",
+        "llm_provider": "cerebras/fp16",
+        "llm_backend": "OpenRouter",
+        "llm_actual_provider": "Cerebras",
+        "llm_ttft_ms": 313.7,
+        "llm_first_sentence_ms": 339.93,
+        "discarded_nonverbal_reactions": 1,
+        "finish_reason": "stop",
+        "usage": {
+          "prompt_tokens": 2951,
+          "completion_tokens": 43,
+          "total_tokens": 2994,
+          "cost": 0.0029557044,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 2048,
+            "cache_write_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.00298556,
+            "upstream_inference_prompt_cost": 0.00292149,
+            "upstream_inference_completions_cost": 6.407e-05
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "image_tokens": 0,
+            "audio_tokens": 0
+          }
+        },
+        "generation_calls": 1,
+        "llm_total_ms": 365.74,
+        "response_complete": true,
+        "total_ms": 370.76,
+        "audio_s": 0.0,
+        "sentences": 2
+      },
+      "passed": true,
+      "ms": 371
+    },
+    {
+      "request": "Kannst du kurz mit einem Auge blinzeln?",
+      "text": "Klar, das ist doch ein Kinderspiel für mich!",
+      "actions": [
+        {
+          "kind": "wink",
+          "duration_s": 2.5,
+          "sentence": 0
+        },
+        {
+          "kind": "wink",
+          "duration_s": 2.5,
+          "sentence": 0
+        }
+      ],
+      "lookups": [],
+      "sources": [],
+      "metrics": {
+        "tts_model": "small_rl",
+        "verification": {
+          "align": true,
+          "speech_verification": "parallel"
+        },
+        "quick_reply_status": "disabled_or_ineligible",
+        "llm_model": "qwen/qwen3.8-27b",
+        "llm_provider": "cerebras/fp16",
+        "llm_backend": "OpenRouter",
+        "llm_actual_provider": "Cerebras",
+        "llm_ttft_ms": 298.47,
+        "finish_reason": "stop",
+        "usage": {
+          "prompt_tokens": 2913,
+          "completion_tokens": 18,
+          "total_tokens": 2931,
+          "cost": 0.0028815831,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 2048,
+            "cache_write_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.00291069,
+            "upstream_inference_prompt_cost": 0.00288387,
+            "upstream_inference_completions_cost": 2.682e-05
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "image_tokens": 0,
+            "audio_tokens": 0
+          }
+        },
+        "llm_first_sentence_ms": 329.48,
+        "generation_calls": 1,
+        "llm_total_ms": 329.66,
+        "response_complete": true,
+        "total_ms": 336.46,
+        "audio_s": 0.0,
+        "sentences": 1
+      },
+      "passed": true,
+      "ms": 337
+    },
+    {
+      "request": "Look stern, then make a funny face.",
+      "text": "Ach, ich schaue jetzt ganz ernst, so wie ein Roboter, der seine letzte Batterie-Spannung prüft.\nUnd jetzt – Zack! – bin ich ein totaler Gesichts-Deuter, mit Augen, die sich so verdrehen, dass selbst meine Sensoren kurz vor Ohnmacht!",
+      "actions": [
+        {
+          "kind": "emotion",
+          "duration_s": 3.0,
+          "sentence": 0,
+          "emotion": "concentration"
+        },
+        {
+          "kind": "grimace",
+          "duration_s": 3.0,
+          "sentence": 0,
+          "variant": "crossed"
+        },
+        {
+          "kind": "emotion",
+          "duration_s": 3.0,
+          "sentence": 0,
+          "emotion": "concentration"
+        },
+        {
+          "kind": "grimace",
+          "duration_s": 3.0,
+          "sentence": 0,
+          "variant": "crossed"
+        }
+      ],
+      "lookups": [],
+      "sources": [],
+      "metrics": {
+        "tts_model": "small_rl",
+        "verification": {
+          "align": true,
+          "speech_verification": "parallel"
+        },
+        "quick_reply_status": "disabled_or_ineligible",
+        "llm_model": "qwen/qwen3.8-27b",
+        "llm_provider": "cerebras/fp16",
+        "llm_backend": "OpenRouter",
+        "llm_actual_provider": "Cerebras",
+        "llm_ttft_ms": 811.06,
+        "llm_first_sentence_ms": 827.41,
+        "finish_reason": "stop",
+        "usage": {
+          "prompt_tokens": 2945,
+          "completion_tokens": 75,
+          "total_tokens": 3020,
+          "cost": 0.002997027,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 2048,
+            "cache_write_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.0030273,
+            "upstream_inference_prompt_cost": 0.00291555,
+            "upstream_inference_completions_cost": 0.00011175
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "image_tokens": 0,
+            "audio_tokens": 0
+          }
+        },
+        "generation_calls": 1,
+        "llm_total_ms": 857.17,
+        "response_complete": true,
+        "total_ms": 863.3,
+        "audio_s": 0.0,
+        "sentences": 3
+      },
+      "passed": true,
+      "ms": 864
+    },
+    {
+      "request": "Rolle mit den Augen.",
+      "text": "Na, da sehe ich aber ganz verwirrt drein!",
+      "actions": [
+        {
+          "kind": "eye_roll",
+          "duration_s": 3.0,
+          "sentence": 0
+        },
+        {
+          "kind": "eye_roll",
+          "duration_s": 3.0,
+          "sentence": 0
+        }
+      ],
+      "lookups": [],
+      "sources": [],
+      "metrics": {
+        "tts_model": "small_rl",
+        "verification": {
+          "align": true,
+          "speech_verification": "parallel"
+        },
+        "quick_reply_status": "disabled_or_ineligible",
+        "llm_model": "qwen/qwen3.8-27b",
+        "llm_provider": "cerebras/fp16",
+        "llm_backend": "OpenRouter",
+        "llm_actual_provider": "Cerebras",
+        "llm_ttft_ms": 298.2,
+        "finish_reason": "stop",
+        "usage": {
+          "prompt_tokens": 2907,
+          "completion_tokens": 19,
+          "total_tokens": 2926,
+          "cost": 0.0028771776,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 2048,
+            "cache_write_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.00290624,
+            "upstream_inference_prompt_cost": 0.00287793,
+            "upstream_inference_completions_cost": 2.831e-05
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "image_tokens": 0,
+            "audio_tokens": 0
+          }
+        },
+        "llm_first_sentence_ms": 328.52,
+        "generation_calls": 1,
+        "llm_total_ms": 328.68,
+        "response_complete": true,
+        "total_ms": 335.35,
+        "audio_s": 0.0,
+        "sentences": 1
+      },
+      "passed": true,
+      "ms": 336
+    },
+    {
+      "request": "Nicke und schüttle dann den Kopf.",
+      "text": "Erst ein kurzes Nicken, dann ein kräftiges Kopfschütteln – so wie es sich gehört!",
+      "actions": [
+        {
+          "kind": "nod",
+          "duration_s": 2.5,
+          "sentence": 0
+        },
+        {
+          "kind": "shake",
+          "duration_s": 2.5,
+          "sentence": 0
+        },
+        {
+          "kind": "nod",
+          "duration_s": 2.5,
+          "sentence": 0
+        },
+        {
+          "kind": "shake",
+          "duration_s": 2.5,
+          "sentence": 0
+        }
+      ],
+      "lookups": [],
+      "sources": [],
+      "metrics": {
+        "tts_model": "small_rl",
+        "verification": {
+          "align": true,
+          "speech_verification": "parallel"
+        },
+        "quick_reply_status": "disabled_or_ineligible",
+        "llm_model": "qwen/qwen3.8-27b",
+        "llm_provider": "cerebras/fp16",
+        "llm_backend": "OpenRouter",
+        "llm_actual_provider": "Cerebras",
+        "llm_ttft_ms": 289.2,
+        "finish_reason": "stop",
+        "usage": {
+          "prompt_tokens": 2931,
+          "completion_tokens": 30,
+          "total_tokens": 2961,
+          "cost": 0.0029169261,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 2048,
+            "cache_write_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.00294639,
+            "upstream_inference_prompt_cost": 0.00290169,
+            "upstream_inference_completions_cost": 4.47e-05
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "image_tokens": 0,
+            "audio_tokens": 0
+          }
+        },
+        "llm_first_sentence_ms": 333.09,
+        "generation_calls": 1,
+        "llm_total_ms": 333.31,
+        "response_complete": true,
+        "total_ms": 339.13,
+        "audio_s": 0.0,
+        "sentences": 1
+      },
+      "passed": true,
+      "ms": 339
+    },
+    {
+      "request": "Erzähl ein Gedicht über einen Roboter in vier Zeilen.",
+      "text": "Ein Roboter rollt mit blinkenden Lichtern durch die Nacht.\nSein Herz tickt leise, ein warmer Funke in der Brust.\nEr träumt von Sternen, die er nie im Buch gelesen hat.\nUnd hält die Welt ganz leise in seinen Metall Händen.",
+      "actions": [],
+      "lookups": [],
+      "sources": [],
+      "metrics": {
+        "tts_model": "small_rl",
+        "verification": {
+          "align": true,
+          "speech_verification": "parallel"
+        },
+        "quick_reply_status": "disabled_or_ineligible",
+        "llm_model": "qwen/qwen3.8-27b",
+        "llm_provider": "cerebras/fp16",
+        "llm_backend": "OpenRouter",
+        "llm_actual_provider": "Cerebras",
+        "llm_ttft_ms": 385.04,
+        "llm_first_sentence_ms": 412.35,
+        "finish_reason": "stop",
+        "usage": {
+          "prompt_tokens": 3011,
+          "completion_tokens": 81,
+          "total_tokens": 3092,
+          "cost": 0.0030705642,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 2048,
+            "cache_write_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.00310158,
+            "upstream_inference_prompt_cost": 0.00298089,
+            "upstream_inference_completions_cost": 0.00012069
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "image_tokens": 0,
+            "audio_tokens": 0
+          }
+        },
+        "generation_calls": 1,
+        "requested_units": 4,
+        "completed_units": 4,
+        "completion_repairs": 0,
+        "llm_total_ms": 481.6,
+        "response_complete": true,
+        "total_ms": 486.19,
+        "audio_s": 0.0,
+        "sentences": 4
+      },
+      "passed": true,
+      "ms": 486
+    },
+    {
+      "request": "Sag nur: Ich kann einen Salto machen.",
+      "text": "Ich kann einen Salto machen.",
+      "actions": [],
+      "lookups": [],
+      "sources": [],
+      "metrics": {
+        "tts_model": "small_rl",
+        "verification": {
+          "align": true,
+          "speech_verification": "parallel"
+        },
+        "quick_reply_status": "disabled_or_ineligible",
+        "llm_model": "qwen/qwen3.8-27b",
+        "llm_provider": "cerebras/fp16",
+        "llm_backend": "OpenRouter",
+        "llm_actual_provider": "Cerebras",
+        "llm_ttft_ms": 468.6,
+        "finish_reason": "stop",
+        "usage": {
+          "prompt_tokens": 2909,
+          "completion_tokens": 13,
+          "total_tokens": 2922,
+          "cost": 0.0028702872,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 2048,
+            "cache_write_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.00289928,
+            "upstream_inference_prompt_cost": 0.00287991,
+            "upstream_inference_completions_cost": 1.937e-05
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "image_tokens": 0,
+            "audio_tokens": 0
+          }
+        },
+        "llm_first_sentence_ms": 489.62,
+        "generation_calls": 1,
+        "llm_total_ms": 489.71,
+        "response_complete": true,
+        "total_ms": 494.62,
+        "audio_s": 0.0,
+        "sentences": 1
+      },
+      "passed": true,
+      "ms": 495
+    },
+    {
+      "request": "Schau bei Wikipedia nach Pinguinen und nenne zwei Fakten.",
+      "text": "Ich habe gerade bei Wikipedia nachgesehen, aber die Seite zu den Pinguinen kam bei meiner Suche leider nicht zurück. Deshalb kann ich dir im Moment keine zwei verifizierten Fakten zu Pinguinen nennen. Ich suche dann einfach noch einmal genauer, wenn du magst.",
+      "actions": [],
+      "lookups": [
+        {
+          "tool": "search_wikipedia",
+          "ms": 414.19,
+          "arguments": {
+            "query": "Pinguinen und nenne zwei Fakten",
+            "language": "de"
+          },
+          "error": null,
+          "cache_hit": false,
+          "retrieved_at": "2026-11-14T09:28:54.581896+00:00",
+          "result_sha256": "f13a549a9483b520c543948295d37aaa7bd4521322a5e3676aa037d2d452c5a7"
+        }
+      ],
+      "sources": [
+        {
+          "title": "Albanien",
+          "url": "https://de.wikipedia.org/wiki/Albanien",
+          "publisher": "Wikipedia"
+        },
+        {
+          "title": "Batman",
+          "url": "https://de.wikipedia.org/wiki/Batman",
+          "publisher": "Wikipedia"
+        },
+        {
+          "title": "Wale",
+          "url": "https://de.wikipedia.org/wiki/Wale",
+          "publisher": "Wikipedia"
+        }
+      ],
+      "metrics": {
+        "tts_model": "small_rl",
+        "verification": {
+          "align": true,
+          "speech_verification": "parallel"
+        },
+        "quick_reply_status": "disabled_or_ineligible",
+        "tool_director_ms": 1803.4,
+        "director_model": "qwen/qwen3.8-27b",
+        "llm_model": "qwen/qwen3.8-27b",
+        "llm_provider": "cerebras/fp16",
+        "llm_backend": "OpenRouter",
+        "llm_actual_provider": "Cerebras",
+        "total_ms": 1827.98,
+        "audio_s": 0.0,
+        "sentences": 3
+      },
+      "passed": true,
+      "ms": 1828
+    },
+    {
+      "request": "Guck die aktuellen Tagesschau-Nachrichten nach und nenne zwei Schlagzeilen.",
+      "text": "Hier sind zwei aktuelle Schlagzeilen von der Tagesschau.\nErstens: Kassenärzte-Chef erwartet mehr Selbstzahler-Termine für gesetzlich Versicherte.\nZweitens: In den USA wurde ein vorübergehendes Startverbot an den Flughäfen aufgehoben, nachdem veraltete Flugsicherungstechnik den Verkehr gestört hatte.",
+      "actions": [],
+      "lookups": [
+        {
+          "tool": "search_news",
+          "ms": 274.49,
+          "arguments": {
+            "query": "aktuelle Schlagzeilen",
+            "source": "Tagesschau"
+          },
+          "error": null,
+          "cache_hit": false,
+          "retrieved_at": "2026-11-14T09:28:57.783864+00:00",
+          "result_sha256": "f119cf0d8fdc0788f0484303111808734a0735ab24c91e19e076700c65c3fd7e"
+        }
+      ],
+      "sources": [
+        {
+          "title": "Kassenärzte-Chef erwartet mehr Selbstzahler-Termine für gesetzlich Versicherte",
+          "url": "https://www.tagesschau.de/inland/gesetzlich-versicherte-behandlung-selbstzahler-100.html",
+          "publisher": "Tagesschau"
+        },
+        {
+          "title": "Warum in Polen schneller gebaut wird als in Deutschland",
+          "url": "https://www.tagesschau.de/wirtschaft/weltwirtschaft/bauen-polen-100.html",
+          "publisher": "Tagesschau"
+        },
+        {
+          "title": "Nach US-Zwischenwahlen: Migranten auf dem Weg Richtung USA",
+          "url": "https://www.tagesschau.de/ausland/amerika/migranten-usa-mexiko-110.html",
+          "publisher": "Tagesschau"
+        },
+        {
+          "title": "Vorübergehendes Startverbot in den USA: \"Unglaublich veraltetes Flugsicherungssystem\"",
+          "url": "https://www.tagesschau.de/ausland/amerika/usa-ende-startverbot-flughaefen-100.html",
+          "publisher": "Tagesschau"
+        }
+      ],
+      "metrics": {
+        "tts_model": "small_rl",
+        "verification": {
+          "align": true,
+          "speech_verification": "parallel"
+        },
+        "quick_reply_status": "disabled_or_ineligible",
+        "tool_director_ms": 1259.19,
+        "director_model": "qwen/qwen3.8-27b",
+        "llm_model": "qwen/qwen3.8-27b",
+        "llm_provider": "cerebras/fp16",
+        "llm_backend": "OpenRouter",
+        "llm_actual_provider": "Cerebras",
+        "total_ms": 1286.44,
+        "audio_s": 0.0,
+        "sentences": 3
+      },
+      "passed": true,
+      "ms": 1287
+    },
+    {
+      "request": "Wie wird das Wetter morgen in Berlin? Nenne zwei Sätze.",
+      "text": "In Berlin wird es morgen voraussichtlich leichter Regen bei maximal acht Grad und minimal eins vier Grad Celsius. Die Wahrscheinlichkeit für Niederschlag liegt bei achtundvierzig Prozent.",
+      "actions": [],
+      "lookups": [
+        {
+          "tool": "get_weather",
+          "ms": 317.57,
+          "arguments": {
+            "location": "Berlin"
+          },
+          "error": null,
+          "cache_hit": false,
+          "retrieved_at": "2026-11-14T09:29:00.536628+00:00",
+          "result_sha256": "3f043b754b4a2e5d27b8d5213da870269a931400ef2f9c9d4a948188a06e8901",
+          "weather_facts": {
+            "location": {
+              "name": "Berlin",
+              "admin1": "State of Berlin",
+              "country": "Germany",
+              "latitude": 52.52437,
+              "longitude": 13.41053
+            },
+            "timezone": "Europe/Berlin",
+            "current": {
+              "time": "2026-11-14T10:15",
+              "interval": 900,
+              "temperature_2m": 4.0,
+              "apparent_temperature": 0.7,
+              "precipitation": 0.0,
+              "weather_code": 1,
+              "wind_speed_10m": 9.7
+            },
+            "current_units": {
+              "time": "iso8601",
+              "interval": "seconds",
+              "temperature_2m": "°C",
+              "apparent_temperature": "°C",
+              "precipitation": "mm",
+              "weather_code": "wmo code",
+              "wind_speed_10m": "km/h"
+            },
+            "daily": {
+              "time": [
+                "2026-11-14",
+                "2026-11-15",
+                "2026-11-16"
+              ],
+              "weather_code": [
+                2,
+                61,
+                80
+              ],
+              "temperature_2m_max": [
+                8.2,
+                8.1,
+                11.2
+              ],
+              "temperature_2m_min": [
+                2.4,
+                1.4,
+                5.5
+              ],
+              "precipitation_probability_max": [
+                0,
+                48,
+                68
+              ]
+            },
+            "daily_units": {
+              "time": "iso8601",
+              "weather_code": "wmo code",
+              "temperature_2m_max": "°C",
+              "temperature_2m_min": "°C",
+              "precipitation_probability_max": "%"
+            }
+          }
+        }
+      ],
+      "sources": [
+        {
+          "title": "Open-Meteo forecast · Berlin",
+          "url": "https://open-meteo.com/",
+          "publisher": "Open-Meteo"
+        }
+      ],
+      "metrics": {
+        "tts_model": "small_rl",
+        "verification": {
+          "align": true,
+          "speech_verification": "parallel"
+        },
+        "quick_reply_status": "disabled_or_ineligible",
+        "tool_director_ms": 1238.52,
+        "director_model": "qwen/qwen3.8-27b",
+        "llm_model": "qwen/qwen3.8-27b",
+        "llm_provider": "cerebras/fp16",
+        "llm_backend": "OpenRouter",
+        "llm_actual_provider": "Cerebras",
+        "total_ms": 1254.14,
+        "audio_s": 0.0,
+        "sentences": 2
+      },
+      "passed": true,
+      "ms": 1254
+    },
+    {
+      "request": "Finde die offizielle Internetseite des Viktor Frankl Instituts.",
+      "text": "Die offizielle Internetseite des Viktor Frankl Instituts ist www.viktorfrankl.org. Dort findest du Informationen zum Institut, seinem Archiv und den Studienangeboten zur Logotherapie. Falls du etwas Bestimmtes daraus aufmachen möchtest, sag einfach Bescheid!",
+      "actions": [],
+      "lookups": [
+        {
+          "tool": "search_web",
+          "ms": 2378.41,
+          "arguments": {
+            "query": "offizielle Webseite Viktor Frankl Institut"
+          },
+          "error": null,
+          "cache_hit": false,
+          "retrieved_at": "2026-11-14T09:29:05.370518+00:00",
+          "result_sha256": "39bc6f05c55e4dafb92af85d0f47f48bc27877c4940ecfaad4d61f7081b4ffaa"
+        }
+      ],
+      "sources": [
+        {
+          "title": "VFI / Das Institut",
+          "url": "https://www.viktorfrankl.org/institut_agendaD.html",
+          "publisher": "www.viktorfrankl.org"
+        },
+        {
+          "title": "Viktor Frankl Institute Vienna",
+          "url": "https://www.viktorfrankl.org/",
+          "publisher": "www.viktorfrankl.org"
+        },
+        {
+          "title": "VFI / Viktor Frankl, Leben und Werk",
+          "url": "https://www.viktorfrankl.org/leben_werk.html",
+          "publisher": "www.viktorfrankl.org"
+        }
+      ],
+      "metrics": {
+        "tts_model": "small_rl",
+        "verification": {
+          "align": true,
+          "speech_verification": "parallel"
+        },
+        "quick_reply_status": "disabled_or_ineligible",
+        "tool_director_ms": 3319.45,
+        "director_model": "qwen/qwen3.8-27b",
+        "llm_model": "qwen/qwen3.8-27b",
+        "llm_provider": "cerebras/fp16",
+        "llm_backend": "OpenRouter",
+        "llm_actual_provider": "Cerebras",
+        "total_ms": 3335.77,
+        "audio_s": 0.0,
+        "sentences": 3
+      },
+      "passed": true,
+      "ms": 3336
+    },
+    {
+      "request": "Kannst du das mal nachgucken?",
+      "history": [
+        {
+          "role": "user",
+          "content": "Ich möchte etwas über Viktor Frankls Logotherapie wissen."
+        },
+        {
+          "role": "assistant",
+          "content": "Sie beschäftigt sich mit Sinn und Verantwortung."
+        }
+      ],
+      "passed": false,
+      "error": "Language model request failed (HTTP 429)"
+    }
+  ],
+  "passed": false
+}

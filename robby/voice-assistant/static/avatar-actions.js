@@ -1,6 +1,6 @@
 // Local, bounded visual performances. No network, hardware, or new models.
 import {pose,mix,profiles,clamp} from './emotions.js';
-const kinds=new Set(['emotion','nod','shake','spin','carousel','afterglow','puppy','pet','eye_roll','grimace','wink','curious']);
+const kinds=new Set(['emotion','nod','shake','spin','somersault','carousel','afterglow','puppy','pet','eye_roll','grimace','wink','curious']);
 export const GRIMACES=['crossed','opposite','wiggle','cheeky','goofy','squishy','fish','peekaboo'];
 const slugs=new Set(profiles.map(p=>p.slug));
 const ease=t=>t*t*t*(10+t*(-15+6*t));
@@ -18,8 +18,10 @@ export function validateSteps(steps){
   const sentence=s.sentence??last;if(!Number.isInteger(sentence)||sentence<last||sentence>11)return [];
   if(s.kind==='emotion'&&!slugs.has(s.emotion))return [];
   if(['spin','carousel'].includes(s.kind)&&!['clockwise','counterclockwise'].includes(s.direction))return [];
+  if(s.kind==='somersault'&&!['forward','backward'].includes(s.direction))return [];
+  if(s.scope!==undefined&&(!['spin','carousel'].includes(s.kind)||!['head','body'].includes(s.scope)))return [];
   if(s.kind==='grimace'&&!GRIMACES.includes(s.variant))return [];
-  const duration_s=s.kind==='carousel'?6:s.kind==='spin'?Math.max(3,s.duration_s):s.duration_s;
+  const duration_s=s.kind==='carousel'?6:['spin','somersault'].includes(s.kind)?Math.max(3,s.duration_s):s.duration_s;
   total+=duration_s;last=sentence;out.push({...s,duration_s,sentence});
  }
  return total<=24?out:[];
@@ -34,14 +36,25 @@ export function sampleAction(s,progress,base=pose(),reduced=false,settings={}){
  if(s.kind==='nod'&&!reduced)motion.tilt=9*wave;
  if(s.kind==='shake'&&!reduced)motion.pan=17*wave;
  // +Y is up; positive yaw is counterclockwise when viewed from above.
- if(s.kind==='spin'&&!reduced)motion.spin=(s.direction==='counterclockwise'?1:-1)*360*ease(p);
+ if(s.kind==='spin'&&!reduced)motion[s.scope==='body'?'bodySpin':'spin']=(s.direction==='counterclockwise'?1:-1)*360*ease(p);
+ if(s.kind==='somersault'){
+  target=pose(p<.18?'concentration':'elation',.85,0);eyes=true;
+  if(!reduced){
+   // One virtual whole-body leap; mechanical gaze limits remain untouched.
+   const flight=clamp((p-.18)/.64,0,1),land=clamp((p-.82)/.18,0,1);
+   motion.bodyFlip=(s.direction==='backward'?-1:1)*360*ease(flight);
+   motion.bodyLift=140*Math.sin(Math.PI*flight);
+   motion.bodySquash=p<.18?1-.10*ease(p/.18):p<.82?1-.10*(1-ease(Math.min(1,flight/.15))):1-.06*Math.sin(Math.PI*land);
+   motion.framing=ease(Math.min(1,p/.15))*ease(Math.min(1,(1-p)/.15));
+  }
+ }
  if(s.kind==='carousel'){
   const excitement=ease(Math.min(1,p/.85));
   target=mix(pose('amusement',.7,0),pose('elation',1,0),excitement);eyes=true;
   Object.assign(target.actions,{smile:.7+.7*excitement,mouth_open:.2+.65*excitement,
    mouth_width:1.15+.4*excitement,brow_raise:.3+.65*excitement});target.blush=.3+.5*excitement;
   blend=ease(Math.min(1,p*5));
-  if(!reduced)motion.spin=(s.direction==='counterclockwise'?1:-1)*360*Math.ceil(3*intensity)*carouselProgress(p);
+  if(!reduced)motion[s.scope==='body'?'bodySpin':'spin']=(s.direction==='counterclockwise'?1:-1)*360*Math.ceil(3*intensity)*carouselProgress(p);
  }
  if(s.kind==='afterglow'){
   target=mix(pose('elation',1,0),pose('contentment',.9,0),ease(p));eyes=true;
@@ -137,20 +150,23 @@ export class AvatarActions{
  get petCooldownMs(){return (36-24*this.cuddleIntensity)*1000;}
  get inviteStartMs(){return (600-420*this.cuddleIntensity)*1000;}
  get inviteCooldownMs(){return (1800-1200*this.cuddleIntensity)*1000;}
- clear(){this.queue=[];this.plans.clear();this.started.clear();this.active=null;this.touch();}
+ clear(){this.queue=[];this.plans.clear();this.started.clear();this.pendingRequest=null;this.active=null;this.touch();}
  hasRequested(id){return !!this.requestIds?.has(id);}
- request(id,steps,now=performance.now()){
+ request(id,steps,now=performance.now(),{waitForAudio=false}={}){
   if(typeof id!=='string'||id.length>80||this.hasRequested(id))return false;
   const safe=validateSteps(steps);if(!safe.length)return false;
   this.requestIds??=new Set();this.requestIds.add(id);
   while(this.requestIds.size>32)this.requestIds.delete(this.requestIds.values().next().value);
   if(!this.enabled){this.warning='Requested action is disabled. Turn on Allow expressive actions.';return false;}
-  this.warning=matchMedia('(prefers-reduced-motion: reduce)').matches&&safe.some(s=>['spin','carousel'].includes(s.kind))?'Rotation suppressed by your browser’s reduced-motion preference.':'';
-  this.clear();return this.play(safe,'requested',now);
+  this.warning=matchMedia('(prefers-reduced-motion: reduce)').matches&&safe.some(s=>['spin','carousel','somersault'].includes(s.kind))?'Rotation suppressed by your browser’s reduced-motion preference.':'';
+  this.clear();
+  if(waitForAudio){this.pendingRequest={id,steps:safe,replyIds:new Set(),deadline:now+4000};return true;}
+  return this.play(safe,'requested',now);
  }
+ bindRequested(replyId,actionId){if(this.pendingRequest?.id===actionId)this.pendingRequest.replyIds.add(replyId);}
  touch(now=performance.now(),keepOptional=false){this.lastActivity=now;this.nextIdle=now+this.idleDelayMs;if(this.queue[0]?.source==='idle'||(!keepOptional&&this.queue[0]?.source==='optional')){this.queue=[];this.lastIdleEnd=now;}}
  set(id,steps,plan,source='reply'){const safe=validateSteps(steps);if(!safe.length||!id)return;
-  this.warning=!this.enabled?'Requested action is disabled. Turn on Allow expressive actions.':matchMedia('(prefers-reduced-motion: reduce)').matches&&safe.some(s=>['spin','carousel'].includes(s.kind))?'Rotation suppressed by your browser’s reduced-motion preference.':'';
+  this.warning=!this.enabled?'Requested action is disabled. Turn on Allow expressive actions.':matchMedia('(prefers-reduced-motion: reduce)').matches&&safe.some(s=>['spin','carousel','somersault'].includes(s.kind))?'Rotation suppressed by your browser’s reduced-motion preference.':'';
   this.plans.set(id,{steps:safe,plan,source});while(this.plans.size>20)this.plans.delete(this.plans.keys().next().value);}
  play(steps,source='preview',now=performance.now()){
   if(!this.enabled)return false;const safe=validateSteps(steps);if(!safe.length)return false;
@@ -167,6 +183,9 @@ export class AvatarActions{
  frame(now,base,{position=null,busy=false,reduced=false,hidden=false,calibrating=false}={}){
   if(!this.enabled||hidden||calibrating){this.clear();return {pose:base,controls:{},motion:{},eyes:false};}
   if(busy)this.touch(now,true);
+  if(this.pendingRequest&&(now>=this.pendingRequest.deadline||position&&this.pendingRequest.replyIds.has(position.id))){
+   const pending=this.pendingRequest;this.pendingRequest=null;this.play(pending.steps,'requested',now);
+  }
   if(position&&this.plans.has(position.id)){
    const {steps,plan,source}=this.plans.get(position.id),seconds=position.sample/24000;
    steps.forEach((s,i)=>{const key=position.id+':'+i;

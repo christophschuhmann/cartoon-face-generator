@@ -6,6 +6,28 @@ This is the repeatable test procedure for Robby's microphone → ASR → person 
 
 Start with the executable regression checks below. Use the configuration-search procedure only after those checks work. **Implemented**, **executed**, and **proposed** are different statuses throughout this document. A passing unit test is not a successful microphone conversation. A lower cosine threshold is not automatically an improvement.
 
+## Voice-isolation latency regression (12 November 2026)
+
+See [ISOLATION_LATENCY.md](ISOLATION_LATENCY.md) for controlled before/after
+recipes and receipts. Run `browser_isolation_latency.py` over real HTTPS with
+synthetic audio, then `browser_isolation_enrollment.py` once with VoxLock and once
+with Scicom, sequentially. Keep failed and cold-compile runs. The latter checks
+complete replies for two enrolled people, an old person's return without wake,
+and an unrelated non-wake TV voice that must not cause a reply or new profile.
+Never substitute filtered target-conditioned audio for identity evidence.
+
+Report final-ASR work, foreground speaker wait, background speaker compute, LLM
+first sentence, verified TTS first PCM, browser playback lead and speech-end to
+scheduled output separately. They overlap. Test both a short greeting and a long
+story to exercise the 512/1024 semantic graph banks. Cold compilation is not warm
+inference. Use the same fixtures/seeds/settings for before/after TTS. Keep neural
+pause and first-target-word gates enabled; compare unverified audio only as a
+clearly labelled diagnostic. `test_sentence_reliability` covers resumed speech,
+complete fresh PCM versus delayed features, stale turn epochs and exact original
+waveform cache keys. `test_speaker_teacher` covers GPU response validation and
+CPU fallback. These tests do not certify real-room accuracy or physical output
+latency, and do not erase the separately documented short-stop/echo limitations.
+
 ## Current conversational continuity regression
 
 `check_name_continuity.py` sends authored named and provisionally unnamed greeting, remembered-partner and joke examples to both configured Qwen and local Bolt. `test_bolt.py` and `test_knowledge_tools.py` verify that neither streaming nor tool paths append a forced name question, and that retrieved wiki and history reach the director. These small probes do not establish real-world speaker identity or general conversational quality.
@@ -916,3 +938,127 @@ The live report is `/static/environment-report.html`; the publication copy is
 Raw microphone recordings, private wiki entries, voiceprints and credentials
 must remain excluded from GitHub and Pages. Session-only voice identity and
 opt-in persistent factual memory are distinct systems.
+
+## Action and emotional-acting regression (4 November 2026)
+
+Run `browser_stunts_emotions_check.py` with the current HTTPS URL: verify actual renderer yaw exceeds 340° in the requested direction, audio packets arrive, four named emotions agree between controller and sentence performance metadata, a grimace animates, and all forty canonical poses reach the renderer. Run `browser_spoken_stunts_check.py` serially to repeat rotation, anger and sadness through a synthetic microphone and real ASR. These are not physical-room tests. Explicitly include noun requests (“eine Drehung”, “Wut”, “Enttäuschung”) and negative/quoted commands in controller tests.
+
+Run `validate_emotion_recipes.py` and `write_stunt_report.py` for six authored listening probes using fixed words, reference, seed, temperature and CFG. Report word error rate and raw audio separately from perceived emotional fidelity. Optional machine emotion captions are uncalibrated and may disagree with targets; they must not be treated as recognition accuracy. See `STUNTS_AND_EMOTIONS.md` for scope and `static/stunts-emotions.html` for the samples.
+
+
+## Pause and speech-recovery regression suite (2026-11-11)
+
+See [TURN_RELIABILITY.md](TURN_RELIABILITY.md). Run `test_pause_endpoint`,
+`test_sentence_reliability`, and `test_speech_retry` before live checks. Required
+negative controls: active VAD plus quieter voice, stalled word counts, new speech
+while final ASR is running, final syllables still in the GPU hop backlog, an
+unrelated TTS opening, and cancelling during retry. A retry must change the
+seed and retain sentence order; no already published sentence may be replayed.
+Test failures before audio, after audio, empty completion, OOM, and ambiguous
+transport loss separately. Real-model/browser reproduction:
+`verify_turn_reliability.py`; receipts in `logs/turn-reliability/`. Do not replace
+actual microphone evidence with mocked scores or claim synthetic fixtures cover
+arbitrary room acoustics. Ongoing background speech may delay neural-pause-only
+submission; separately evaluate that trade-off instead of hiding it.
+# Optional input-isolation comparison
+
+See [INPUT_ISOLATION_REVIEW.md](INPUT_ISOLATION_REVIEW.md) and
+`benchmark_input_isolation.py` for the pinned Alkove/VoxLock CPU experiment.
+Use separate clean enrollment and evaluation utterances; keep raw baselines,
+background-only tails and identical source mixtures. Run `--asr` only after
+filter processing finishes. The initial synthetic test is diagnostic, not a
+release gate for physical-room performance. Neither filter is enabled in the
+live demo. Continue with the real-room and interruption matrix in the review
+before changing defaults.
+
+
+
+## Optional 40-ms CUDA microphone filters (2026-11-12)
+
+See [INPUT_ISOLATION_UI.md](INPUT_ISOLATION_UI.md) for the deployed route and pinned
+model setup. Run each filter separately with a separate clean reference. Preserve
+the raw environmental branch and original playback-position labels. Never infer
+quality from attenuation alone: an apparently quiet track may have lost the user.
+
+- `python -m unittest test_input_isolation`: default raw path, causal lag and packet
+  boundaries, switch-off drain, no lost/repeated samples, simulated timeout fallback,
+  automatic reference eligibility, playback exclusion, manual enrollment and stale
+  load cancellation. This suite explicitly uses a fake worker.
+- `python test_input_isolation_cuda.py`: real weights and CUDA Graphs on GPU 1,
+  20-ms input packets coalesced to 40-ms inference, exact flush lengths, raw branch
+  sample count, actual Parakeet transcription and measured first-output latency.
+- `uv run --no-project --with playwright --python /path/to/robby/python
+  browser_input_isolation.py`: actual public HTTPS page, synthetic Chrome capture
+  through AudioWorklet, both filter selectors, manual reference, ASR/LLM/TTS, clear
+  to raw and persisted Off. Receipts: `logs/input-isolation-ui-*.json`.
+- `browser_input_isolation_stop.py`: synthetic controlled MediaStream through the
+  real AudioWorklet, 120-ms delayed bot echo at gain .05, spoken Christoph Stop
+  during long real TTS. The receipt distinguishes recognition from playback
+  cancellation and reports onset-to-cancel, not word-end latency.
+
+Follow-up matrix for physical-room validation: clean/off baseline, moderate and
+strong TV, two simultaneous users, emotional target speech, changed distance,
+contaminated enrollment, quiet Stop/Wait, invited speaker handover, and GPU
+contention. Require ASR retention and correct speaker admission as well as noise
+reduction. Keep failure receipts; do not claim population accuracy or authentication.
+
+Current additional Stop/echo stress result: failed for native VoxLock and also
+for Off, reaching ASR `audio_too_fast` under a long typed reply. Do not fold this
+into the ordinary UI/ASR/TTS pass. This does not prove which component caused
+all scheduling delays; it shows the failure is reproducible without isolation.
+
+The independent Scicom Stop/echo test also missed Stop: about 4.23 s final-ASR
+backlog and bot speech in its preview. Its final barge was manual cleanup, not a
+successful spoken Stop. Receipt: `logs/input-isolation-stop-scicom.json`.
+
+
+## Automatic per-person isolation references (2026-11-12)
+
+See [ISOLATION_AUTO_ENROLLMENT.md](ISOLATION_AUTO_ENROLLMENT.md). This extends
+optional CUDA isolation; it does not make the separator a trusted identity model.
+The selected separator's output must never certify its own target identity:
+ECAPA admission, registration and interruption verification use the aligned
+original microphone signal. Do not train references on playback-tagged audio.
+
+Reproduce with the pinned Python/model environment in INPUT_ISOLATION_UI.md:
+
+```sh
+python -m unittest test_input_isolation test_isolation_enrollment test_sentence_reliability test_stop_commands test_stop_feedback test_wake_mode test_open_speakers test_speaker_management test_pause_endpoint test_gpu_guard
+python test_isolation_bank_cuda.py
+uv run --no-project --with playwright --python /path/to/robby/python browser_isolation_enrollment.py
+ROBBY_FILTER_MODEL=scicom uv run --no-project --with playwright --python /path/to/robby/python browser_isolation_enrollment.py
+```
+
+Use the existing authored fixtures; never enroll or publish private microphone
+recordings. The Chrome test goes through public HTTPS and real AudioWorklet,
+CUDA, ECAPA, ASR and LLM/TTS. It introduces Christoph, introduces Selma without
+pressing Learn, returns to Christoph without wake, and plays an unknown TV voice.
+Require independent four-second references, stable person IDs, no extra unknown
+profile and no unknown conversational turn. Preserve initial failures as well
+as reruns. `logs/isolation-enrollment-browser-*-before.json` and the
+`*-filtered-identity-failure.json` receipt show why the timing and original-audio
+identity corrections were needed. Native-filter unknown-TV leakage is separately
+measured by `logs/isolation-known-bank-cuda.json`, not hidden by the admission gate.
+
+Additional unit cases cover short-reference accumulation without counting the
+same interval twice, retained earlier people, expired/deleted profiles, rejection
+of name-only registration without an embedding, raw/filtered deduplication,
+filtered-voice contamination, correct returning-person identity despite another
+wake owner, and exact causal multi-reference output/flush length. Worker failures
+and orthogonal embeddings in unit tests are explicitly simulated. Real CUDA and
+browser receipts are separate evidence.
+
+The four-reference capacity test uses repeated copies of two references; it proves
+memory/compute capacity and sample counts, **not** four-person recognition quality.
+Next physical-room matrix: quiet/TV/music, two overlapping enrolled people,
+unknown wake during ongoing TV, voice changes, very short wake, new wake during
+bot playback, five-person capacity bypass, profile timeout, and Stop with echo.
+Use per-speaker false accepts/rejects and full-sentence retention, not only WER
+or attenuation. No authentication or perfect isolation claim is supported.
+
+Final rerun status: both `isolation-enrollment-browser-voxlock.json` and
+`isolation-enrollment-browser-scicom.json` report passed for all four automatic
+enrollment/return/unknown-TV checks, using real models and synthetic microphone
+audio. No browser or server error was reported in these final runs. 141 targeted
+unit regressions passed. This does not replace the separate failed echo/Stop
+stress test or establish robustness in physical overlapping conversations.

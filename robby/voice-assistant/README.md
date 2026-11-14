@@ -1,22 +1,38 @@
 # Robby voice chat and TYGER speaker predictor
 
-**Large 1.7 TTS (7 November 2026):** The top Voice synthesis selector switches between Small and the merged Large 1.7 BF16 release. Small remains the default. [Setup, measured RTX 3090 streaming/batching, browser checks and limitations](LARGE17.md).
+**2026-11-13 whole-body tricks:** “Dreh dich im Kreis” turns the complete desk
+robot; “Mach einen Salto” crouches, jumps, flips and lands with the platform.
+Both directions are available. Markdown stage directions are separated from
+speech, with bounded recovery for nonverbal LLM responses.
+[Tool contract, rendering and reproducible browser tests](WHOLE_BODY_STUNTS.md).
 
-**Matched Small/Large performance (7 November 2026):** One GPU, BF16,
-CFG 2, temperature 0.8, one streaming candidate, the same structured German
-prompt and reference, three warm repeats; final alignment disabled. First PCM
-is server response timing, not browser playback. RTF measures TTS and codec
-compute separately.
+**2026-11-13 parallel streamed-speech verification:** Single-take streaming now
+runs actual ASR alongside TTS, releases an ordered recognized target prefix,
+and fades out after the confirmed final word. A CUDA-graph codec reset removes
+per-request launch overhead without changing PCM. A faster padded-prefill
+prototype remains off after its quality pilot.
+[Implementation and reproducible tests](PARALLEL_TTS_VERIFICATION.md)
+· [Measured HTML report](static/parallel-tts-verification.html).
 
-| Model | GPU | First PCM over local HTTP | On-device RTF | Audio seconds / compute second |
-| --- | --- | ---: | ---: | ---: |
-| Small 1.1 Alpha RL r128 v1 | RTX 3090, 24 GiB | 0.394 s | 0.1669 | 5.99 |
-| Large 1.7 | RTX 3090, 24 GiB | 0.470 s | 0.2873 | 3.48 |
+**2026-11-12 latency with voice isolation:** Ultra CUDA final ASR, overlapping
+original-audio FP32 ECAPA on GPU, finalization from complete microphone PCM,
+faster verified output boundaries and a smaller adaptive browser reserve.
+Controlled verified first PCM improved from **1,213 to 925 ms median**; this is
+TTS latency, not total response latency. The longer TTS context is also warmed
+to avoid a measured compilation stall. [Measurements, tests and limits](ISOLATION_LATENCY.md)
+· [Worker setup/restart](PHOTON_ASR.md) · [HTML report](static/isolation-latency.html).
 
-Large also reaches **15.45 audio seconds/s** in a short 16-candidate offline
-batch at CFG 2; the live cap stays 8. [Conditions, batch results, reproduction
-and separately labelled Jetson Thor results](https://github.com/LAION-AI/Humaneness-Voice/blob/main/docs/TTS_PERFORMANCE.md) ·
-[The same measured optimization report in the Large 1.7 model repository](https://huggingface.co/laion/Humaneness-Voice-Large-1.7/blob/main/ROBBY_RTX3090.md).
+**2026-11-12 automatic isolation enrollment:** With VoxLock or Scicom selected,
+“Hey Robby” matches or registers a speaker and collects a four-second reference
+per person. Known people remain available when somebody else joins. A bounded
+raw-audio wake path lets a new person join even when the filter suppresses them;
+unknown non-wake leakage is checked against the voice database before a reply.
+[Behavior, actual CUDA results, tests and limitations](ISOLATION_AUTO_ENROLLMENT.md).
+
+**2026-11-12 optional CUDA microphone filters:** Select VoxLock or Scicom Agent with 40-ms chunks in Speech recognition & quick replies. Off by default, session-only voice references, automatic raw fallback. [Setup, measured timings and real browser tests](INPUT_ISOLATION_UI.md).
+
+**2026-11-11 turn reliability repair:** Neural-pause-only submission, stale-ASR rejection, conservative spelling-tolerant output boundaries, and bounded retries of entirely unheard sentences. [Behavior, trade-offs and reproducible tests](TURN_RELIABILITY.md).
+
 
 **Experimental source separation:** the audio/video lab optionally adds TUSS Medium and Bandit v2 stems, playback and per-model timing alongside MOSS and Liquid video. See [STEM_LAB.md](STEM_LAB.md) for reproducible tests, the separate FastDialogueSidon speed pilot and important limitations.
 
@@ -29,10 +45,6 @@ and separately labelled Jetson Thor results](https://github.com/LAION-AI/Humanen
 **Audio/video lab, 2026-10-31:** Independently select MOSS Audio 4B, LFM3-VL, MiniCPM-o 4.5, SALMONN 2 Pro and optional source-separation analyses. MiniCPM and SALMONN each inspect original audio and video together and load on demand. Music, effects and their combined stem can each be captioned by LAION's sound-effect model. [Setup, timings, tests and limitations](LFM3_LAB.md).
 
 The canonical repository for this conversational demo is [cartoon-face-generator](https://github.com/christophschuhmann/cartoon-face-generator), under `robby/voice-assistant/`. The existing standalone SVG remains in `robby/`. Earlier LAION-AI/Humaneness-Voice links below are historical reports or release assets and have not been moved.
-
-**Interrupting Robby (October 31):** When you speak while Robby is talking, a decision model now chooses whether Robby should stop, stop and answer you (a new question, a correction, a topic change), or keep talking ("mhm", "ja", laughter, echo). Before, everything except a strictly matched stop command waited until Robby had finished. The browser check passes 4/4; stopping via the model still takes about 2 s after you finish speaking. [How it works, results and limits](INTERRUPTIONS.md).
-
-**Inference speed (October 31):** On an NVIDIA Jetson Thor the TTS now starts speaking 0.16 s after receiving a sentence (it was 2.3–2.9 s). Measured in a real browser, Robby's first sound comes a median 1.46–1.58 s after you stop speaking; a typed request reaches the first sound in a median of 0.66 s (it was 4.2 s). The changes include BF16 merged weights, CUDA graphs with kernel fusion, codec CUDA graphs and fused Triton codec kernels, Triton kernels for the codebook steps, growing chunks, a reference-voice cache fix and a stable LLM prompt prefix. `browser_mouth_to_ear.py` reproduces the browser measurement. [What we changed, why it helps and how to reproduce it](INFERENCE_OPTIMIZATIONS.md).
 
 **Experimental audio/video lab:** Record an opt-in short clip and inspect overlapping windows with pinned Liquid LFM3 Audio and LFM3 Vision models, timing and segment playback. It runs separately from the conversation. [Setup, privacy, measurements and limitations](LFM3_LAB.md).
 
@@ -2773,3 +2785,13 @@ CUDA_VISIBLE_DEVICES=0 /mnt/nvme/moss-15-v2/lfm3-llama-cpp/build/bin/llama-serve
 Run `python benchmark_gemma12_comparison.py` with both endpoints up and the owner credential configured. It uses four synthetic German prompts, the actual Robby text director, and emits `static/gemma12-latency.json`; it does not measure microphone, ASR or TTS. Provider and GPU contention, caching, context and output lengths affect the result. Live audio was separately checked in the browser. See `/static/gemma12-latency.html`.
 
 For local Gemma tool calls, the transport removes the conflicting forced JSON grammar on the first tool-enabled request; the director still validates the actual call and output. A live weather lookup for Berlin completed in 12.9 s in one warm example, including a real Open-Meteo query. This single case does not validate every tool or conversation. `browser_gemma12_check.py` exercises the HTTPS selector, typed request, audio delivery, and return to Qwen with a synthetic browser microphone.
+
+
+## Tools, expressions and latency controls (November 14)
+
+The live screen demo now shares a capability catalogue across its streaming and tool directors, supports context-aware public web lookup, and offers independent input/output verification switches. See [the implementation and reproducible test guide](TOOLS_AND_LATENCY_GUIDE.md), [live results](https://diane-asylum-understood-invoice.trycloudflare.com/static/tools-audit.html), and the three diagrams at the bottom of [the demo](https://diane-asylum-understood-invoice.trycloudflare.com/desk-robot/#system-guide). The public schema catalogue includes 13 animation kinds, 40 authored emotions, 8 grimaces, and the actual knowledge/interruption tools.
+
+
+## Context-aware AudioSet Decision Lab
+
+[Implementation, measurements, privacy and restart instructions](audio_decision/README.md) for the additive `/audio-decision/` page using pinned LiquidAI d1-Omni-2B. Upload, recording, real live scheduling, class-score roll and JSON/CSV exports are implemented. Temporal localization remains an explicit model limitation; see the measured counterexample.

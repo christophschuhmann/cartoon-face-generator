@@ -4,22 +4,27 @@ No generated waveform needs to finish before the first PCM chunk is sent.
 Cancellation closes both upstream streams and drops their bounded queues.
 """
 import asyncio,os,time,json,uuid
+import httpx
 import paths
 import numpy as np
-from bolt_director import BoltDirector,needs_tools
+from bolt_director import BoltDirector,needs_tools,ModelStreamError
 from bolt_text import Sentence,join_sentences
 from avatar_actions import explicit_spin
+from tool_capabilities import ToolRouteRequest
 from performance import plan
 from shared_turn import admitted_turn
+from speech_retry import speech_events
 
 async def pipeline(client,text,identity,history,voice='emolia_c1699',avatar_context=None,
-                   interaction_state=None,chunk_frames=None,tts=True,preset=None,reply_words=None,llm_selection=None,credential=None,quick_replies=False,memory=None,tts_model='small_rl'):
+                   interaction_state=None,chunk_frames=None,tts=True,preset=None,reply_words=None,llm_selection=None,credential=None,quick_replies=False,memory=None,tts_model='small_rl',verification_settings=None):
     from app.runtime.audio import StreamingAudioResampler
     from tts_bridge import decode_mp3
-    start=time.perf_counter();metrics={'tts_model':tts_model};queue=asyncio.Queue(maxsize=4)
+    from verification_settings import tts_options
+    verify=tts_options(verification_settings)
+    start=time.perf_counter();metrics={'tts_model':tts_model,'verification':verify};queue=asyncio.Queue(maxsize=4)
     chunk_frames=chunk_frames or int(os.environ.get('ROBO_BOLT_CHUNK_FRAMES','20'))
     if chunk_frames not in (2,5,10,20):raise ValueError('Unsupported TTS chunk size')
-    from avatar_commands import explicit_actions,silent_requested
+    from avatar_commands import explicit_actions,silent_requested,interjection_only
     context=dict(avatar_context or {})
     if memory is not None and not context.get('event'):
         try:
@@ -32,7 +37,7 @@ async def pipeline(client,text,identity,history,voice='emolia_c1699',avatar_cont
             await memory.notice(state='error',error=type(exc).__name__)
     if (interaction_state or {}).get('current_rule_applied'):
         context['applied_interruption_rules']=(interaction_state or {}).get('rules',[])
-    requested=explicit_actions(text,sum(h.get('role')=='user' for h in history)) if preset is None and not context.get('event') else []
+    requested=explicit_actions(text,sum(h.get('role')=='user' for h in history),history) if preset is None and not context.get('event') else []
     avatar_steps=list(requested);actions=[];sources=[];lookups=[]
     silent=bool(requested and silent_requested(text))
     # A direct screen command must work even if LLM/TTS playback is delayed.
@@ -45,7 +50,7 @@ async def pipeline(client,text,identity,history,voice='emolia_c1699',avatar_cont
         if state.json().get('busy'):
             yield 'done',{'silent':True,'reason':'optional event skipped while TTS is busy'};return
     if immediate:
-        yield 'avatar_action',{'action_id':action_id,'steps':requested,'source':'validated_direct_request'}
+        yield 'avatar_action',{'action_id':action_id,'steps':requested,'source':'validated_direct_request','wait_for_audio':not silent}
     if silent:
         yield 'done',{'silent':True,'reason':'User explicitly requested a silent visual action'};return
 
@@ -56,6 +61,24 @@ async def pipeline(client,text,identity,history,voice='emolia_c1699',avatar_cont
     metrics['quick_reply_status']='preparing_contextual_reaction' if reaction_enabled else 'disabled_or_ineligible'
     from speech_language import reply_language
     reaction_task=asyncio.create_task(generate(client,text,identity,history,reply_language(text,history),memory=context.get('knowledge_memory'),environment=context.get('environment'))) if reaction_enabled else None
+
+    async def tool_sentences(semantic=False):
+        if semantic:context['tool_routing_requested']=True
+        from conversation_director import CompactDirector
+        from bolt_director import local_config,response_plan
+        from bolt_text import SentenceFramer
+        from llm_backends import config
+        result=await CompactDirector().generate(client,text,identity,history,
+            interaction_state=interaction_state,avatar_context=context,
+            provider=config(llm_selection,credential) if llm_selection is not None else local_config())
+        avatar_steps[:]=requested or result.get('avatar_actions',[]);actions[:]=result.get('interaction_actions',[])
+        sources[:]=result.get('sources',[])
+        lookups[:]=result.get('lookups',[])
+        framer=SentenceFramer(lines_only=response_plan(text,history)['kind']=='poem')
+        for sentence in framer.feed(result['script'],final=True):
+            sentence.language=result['language'];await queue.put(sentence)
+        metrics['tool_director_ms']=result['director_ms']
+        metrics.update({k:v for k,v in result.items() if k.startswith('llm_') or k=='director_model'})
 
     async def produce():
         try:
@@ -71,37 +94,66 @@ async def pipeline(client,text,identity,history,voice='emolia_c1699',avatar_cont
             if preset is not None:
                 for sentence in preset:await queue.put(sentence)
             elif needs_tools(text,history,interaction_state) and not context.get('event'):
-                # Preserve the existing real news/weather/rule tools through
-                # the same local endpoint; their verified result precedes speech.
-                from conversation_director import CompactDirector
-                from bolt_director import local_config,response_plan
-                from bolt_text import SentenceFramer
-                from llm_backends import config
-                result=await CompactDirector().generate(client,text,identity,history,
-                    interaction_state=interaction_state,avatar_context=context,
-                    provider=config(llm_selection,credential) if llm_selection is not None else local_config())
-                avatar_steps[:]=requested or result.get('avatar_actions',[]);actions[:]=result.get('interaction_actions',[])
-                sources[:]=result.get('sources',[])
-                lookups[:]=result.get('lookups',[])
-                framer=SentenceFramer(lines_only=response_plan(text,history)['kind']=='poem')
-                for sentence in framer.feed(result['script'],final=True):
-                    sentence.language=result['language'];await queue.put(sentence)
-                metrics['tool_director_ms']=result['director_ms']
-                metrics.update({k:v for k,v in result.items() if k.startswith('llm_') or k=='director_model'})
+                await tool_sentences()
             else:
                 count=0
-                for attempt in range(2 if requested else 1):
+                for attempt in range(2):
                     try:
                         async for sentence in BoltDirector().stream(client,text,identity,history,context,metrics,reply_words=reply_words,backend=llm_selection,credential=credential):
+                            # One/two-word fragments such as "ACH!" repeatedly
+                            # fail acoustic word verification on their own. For
+                            # a trick, wait for a real spoken phrase or repair
+                            # the response; explicit spoken-word requests stay.
+                            if requested and (interjection_only(sentence.text) or len(sentence.text.split())<3):
+                                import re
+                                if not re.search(r'\b(?:sag\w*|ruf\w*|say|shout|call)\b',text,re.I):
+                                    metrics['discarded_nonverbal_reactions']=metrics.get('discarded_nonverbal_reactions',0)+1
+                                    continue
                             await queue.put(sentence);count+=1
+                    except ToolRouteRequest:
+                        await tool_sentences(semantic=True)
+                        count+=1
                     except ValueError:
                         # Retry only an unspoken malformed completion. The
                         # visual action was already dispatched and cannot be
                         # duplicated, and no spoken words are replayed.
-                        if not requested or count or attempt:raise
+                        if count or attempt:raise
+                        context["format_reminder"]="Return spoken text with closed acting cues; no JSON or unclosed parentheses."
+                        metrics["unspoken_format_retries"]=attempt+1
+                        continue
+                    except (ModelStreamError,httpx.TransportError,httpx.HTTPStatusError) as exc:
+                        # The read-only director has not dispatched any tools.
+                        # Retry only before yielding a sentence, on the selected
+                        # backend, without replaying any partial spoken answer.
+                        retryable=(exc.retryable if isinstance(exc,ModelStreamError) else
+                            exc.response.status_code in (408,429,500,502,503,504,529) if isinstance(exc,httpx.HTTPStatusError) else True)
+                        if requested and not count and attempt and retryable:
+                            metrics['visual_acknowledgment_provider_failure']=type(exc).__name__
+                            if isinstance(exc,httpx.HTTPStatusError):metrics['visual_acknowledgment_http_status']=exc.response.status_code
+                            break
+                        if count or attempt or not retryable:raise
+                        metrics['unspoken_provider_retries']=attempt+1
+                        await asyncio.sleep(.3)
+                        continue
+                    if not count and not requested and not context.get('event'):
+                        # An empty/cue-only streaming response is not a completed
+                        # user request. One bounded full director pass preserves
+                        # access to actual tools and validates spoken words.
+                        metrics['empty_stream_tool_recovery']=True
+                        await tool_sentences(semantic=True);count+=1
                     if count or not requested:break
                     context['force_spoken_reaction']=True;metrics['spoken_reaction_retries']=attempt+1
-                if requested and not count:raise RuntimeError('The language model did not provide a spoken reaction')
+                if requested and not count:
+                    # The visual tool has already succeeded. Two nonverbal LLM
+                    # completions must not turn it into a silent service error.
+                    # A bounded acknowledgment is explicit in the metrics;
+                    # optional petting/idle dialogue never uses this fallback.
+                    from bolt_text import Sentence
+                    from speech_language import reply_language
+                    de=reply_language(text,history)=='German'
+                    words='Schau mal, jetzt kommt mein kleines Kunststück!' if de else 'Watch this, here comes my little trick!'
+                    await queue.put(Sentence(words,'amusement, playful',language='de' if de else 'en'))
+                    metrics['visual_acknowledgment_fallback']=True
         except asyncio.CancelledError:raise
         except Exception as exc:await queue.put(exc)
         await queue.put(None)
@@ -112,6 +164,7 @@ async def pipeline(client,text,identity,history,voice='emolia_c1699',avatar_cont
         if reaction_enabled and tts_model=='small_rl':
             from live_speech import LiveSpeech
             live=await LiveSpeech.open(client,voice)
+            if live is not None:live.verify_tts=verify['align']
             if live is not None:
                 from two_stage_pipeline import render
                 async for kind,value in render(client,live,text=text,identity=identity,history=history,queue=queue,
@@ -172,7 +225,7 @@ async def pipeline(client,text,identity,history,voice='emolia_c1699',avatar_cont
                 'chunk_frames':5 if role=='reaction' else chunk_frames,'cancel_on_disconnect':True,
                 'temperature':.8,'guidance':2.,'voice_mode':'profile','voice_profile':voice,
                 'voice_conversion':False,'speaker_steering':False,'dynamic_reference':False,
-                'align':role!='reaction','seed':int(os.environ.get('ROBO_BOLT_SEED','777'))+index}
+                **verify,'seed':int(os.environ.get('ROBO_BOLT_SEED','777'))+index}
             if role=='reaction':
                 # This is the model's duration CONDITION, not a hard ceiling.
                 # A 6.4-second condition stretched four words over seven seconds.
@@ -183,46 +236,45 @@ async def pipeline(client,text,identity,history,voice='emolia_c1699',avatar_cont
             envelope=AudioEnvelope() if role=='reaction' else None
             tts_start=time.perf_counter();resampler=StreamingAudioResampler(48000,24000);played=False
             async def wait_notice(text,stage):pass
-            async with admitted_turn(client,body,wait_notice,timeout=.25 if context.get('event') else 45.) as response:
-                async for line in response.aiter_lines():
-                    if not line.startswith('data: '):continue
-                    event=json.loads(line[6:]);kind=event.get('event')
-                    if kind=='error':
-                        import logging
-                        logging.getLogger('robo.pipeline').warning('TTS sentence failed: %s',str(event.get('error') or event.get('message') or event.get('text'))[:300])
-                        raise RuntimeError('TTS sentence generation failed')
-                    if kind=='model':
-                        metrics['tts_actual_model']=event.get('model_id')
-                        metrics['tts_revision']=(event.get('checkpoint') or {}).get('revision')
-                        if event.get('model_id')!=tts_model:raise RuntimeError('TTS returned the wrong selected model')
-                    if kind=='result':
-                        metrics.setdefault('tts_server_stages',[]).append({k:event.get(k) for k in
-                            ('generation_ms','alignment_ms','scoring_ms','speaker_preparation_ms','total_ms','performance')})
-                    url=event.get('url') if kind=='audio_chunk' else None
-                    if kind=='result' and not played:
-                        candidates=event.get('candidates') or []
-                        selected=next((c for c in candidates if c.get('index')==event.get('winner',0)),candidates[0] if candidates else {})
-                        url=selected.get('url')
-                    if event.get('pcm_f32') is not None and kind=='audio_chunk':
-                        import base64
-                        if event.get('sample_rate')!=48000 or event.get('channels')!=1:raise ValueError('Unsupported PCM stream')
-                        raw_pcm=np.frombuffer(base64.b64decode(event['pcm_f32'],validate=True),dtype='<f4')
-                        if not np.isfinite(raw_pcm).all():raise ValueError('Invalid PCM stream')
-                    elif url:
-                        # Compatibility with older MP3-only Playground servers.
-                        response_audio=await client.get(url);response_audio.raise_for_status()
-                        raw_pcm=await decode_mp3(response_audio.content)
-                    else:continue
-                    pcm=resampler.process(raw_pcm)
-                    if envelope is not None:pcm=envelope.feed(pcm)
-                    if not len(pcm):continue
-                    if not played:
-                        if role=='answer':metrics.setdefault('answer_first_audio_ms',round((time.perf_counter()-start)*1000,2))
-                        else:metrics['quick_reply_status']='played'
-                        metrics.setdefault('tts_first_audio_ms',round((time.perf_counter()-tts_start)*1000,2))
-                        metrics.setdefault('first_audio_ms',round((time.perf_counter()-start)*1000,2))
-                        yield 'latency',dict(metrics)
-                    played=True;total_samples+=len(pcm);yield 'audio',pcm
+            async for event in speech_events(client,body,wait_notice,timeout=.25 if context.get('event') else 45.,attempts=1 if context.get('event') else 3):
+                kind=event.get('event')
+                if kind=='speech_retry':
+                    metrics.setdefault('tts_retries',[]).append({**event,'sentence':index})
+                    yield 'status',{'stage':'speech_retry','text':'Preparing this sentence again; no audio from it has been played.',
+                        'attempt':event['attempt'],'max_attempts':event['max_attempts']}
+                    continue
+                if kind=='model':
+                    metrics['tts_actual_model']=event.get('model_id')
+                    metrics['tts_revision']=(event.get('checkpoint') or {}).get('revision')
+                    if event.get('model_id')!=tts_model:raise RuntimeError('TTS returned the wrong selected model')
+                if kind=='result':
+                    metrics.setdefault('tts_server_stages',[]).append({k:event.get(k) for k in
+                        ('generation_ms','alignment_ms','scoring_ms','speaker_preparation_ms','total_ms','performance')})
+                url=event.get('url') if kind=='audio_chunk' else None
+                if kind=='result' and not played:
+                    candidates=event.get('candidates') or []
+                    selected=next((c for c in candidates if c.get('index')==event.get('winner',0)),candidates[0] if candidates else {})
+                    url=selected.get('url')
+                if event.get('pcm_f32') is not None and kind=='audio_chunk':
+                    import base64
+                    if event.get('sample_rate')!=48000 or event.get('channels')!=1:raise ValueError('Unsupported PCM stream')
+                    raw_pcm=np.frombuffer(base64.b64decode(event['pcm_f32'],validate=True),dtype='<f4')
+                    if not np.isfinite(raw_pcm).all():raise ValueError('Invalid PCM stream')
+                elif url:
+                    # Compatibility with older MP3-only Playground servers.
+                    response_audio=await client.get(url);response_audio.raise_for_status()
+                    raw_pcm=await decode_mp3(response_audio.content)
+                else:continue
+                pcm=resampler.process(raw_pcm)
+                if envelope is not None:pcm=envelope.feed(pcm)
+                if not len(pcm):continue
+                if not played:
+                    if role=='answer':metrics.setdefault('answer_first_audio_ms',round((time.perf_counter()-start)*1000,2))
+                    else:metrics['quick_reply_status']='played'
+                    metrics.setdefault('tts_first_audio_ms',round((time.perf_counter()-tts_start)*1000,2))
+                    metrics.setdefault('first_audio_ms',round((time.perf_counter()-start)*1000,2))
+                    yield 'latency',dict(metrics)
+                played=True;total_samples+=len(pcm);yield 'audio',pcm
             tail=resampler.process(np.zeros(0,np.float32),final=True)
             if envelope is not None:tail=np.concatenate((envelope.feed(tail),envelope.finish()))
             if len(tail):total_samples+=len(tail);yield 'audio',tail

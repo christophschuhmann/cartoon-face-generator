@@ -23,9 +23,9 @@ DOMAINS={'www.tagesschau.de','www.bbc.com','www.bbc.co.uk','bbc.com','bbc.co.uk'
  'geocoding-api.open-meteo.com','api.open-meteo.com','open-meteo.com'}
 CACHE=OrderedDict()
 NOTE='''Read-only public information tools are available: search_news, get_weather,
-search_wikipedia. Use them for current news/weather, explicit source lookups, or
+search_wikipedia, search_web. Use them for current news/weather, explicit source lookups, or
 facts that need checking. Do not claim live access without a successful tool
-result. News search covers recent publisher feeds, NOT the whole web. Empty or
+result. News search covers recent publisher feeds, NOT the whole web. Use search_web for broader research. Infer short queries from recent conversational context when asked to look something up. Never require the user to name a tool. Empty or
 failed results are not evidence that no event happened. Explain missing access
 briefly; never invent a forecast/headline. For weather ask for a city if absent;
 do not infer location from a voice or name. State the resolved location and date.
@@ -47,28 +47,40 @@ def tool(name,description,properties):
         'type':'object','properties':properties,'required':list(properties),'additionalProperties':False}}}
 
 TOOLS=[
- tool('search_news','Find latest headlines, optionally filter recent feeds by topic. Empty query means top headlines.',{'query':{'type':'string'},'source':{'type':'string','enum':['all',*FEEDS]}}),
+ tool('search_web','Search the public web for a short topical query. Use for implicit look-it-up requests and topics outside encyclopedia/news/weather; infer the topic from recent dialogue. Returns real source annotations. Billed through OpenRouter.',{'query':{'type':'string'}}),
+ tool('search_news','Find latest headlines, optionally filter recent feeds by topic. For latest/current headlines without a specific TOPIC use an empty query, never generic headline words.',{'query':{'type':'string'},'source':{'type':'string','enum':['all',*FEEDS]}}),
  tool('get_weather','Get a current weather model estimate and 3-day forecast for a named city. Ask the user if no city is known.',{'location':{'type':'string'}}),
  tool('search_wikipedia','Search Wikipedia for a concise encyclopedia extract, with source links.',{'query':{'type':'string'},'language':{'type':'string','enum':['de','en']}}),
 ]
 NAMES={t['function']['name'] for t in TOOLS}
 
-def required_lookup(text):
+def required_lookup(text,history=()):
     """Require evidence for explicit current-source requests, not mere mentions.
 
     This is conservative capability routing. It never supplies query arguments
     or facts, and excludes negation/fiction so ordinary conversation stays local.
     """
     t=text.casefold()
-    if re.search(r'\b(?:nicht|keine?\w*|ohne|don.t|do not|without|no)\b|\b(?:erfind\w*|fiktiv\w*|ausgedacht\w*|invent\w*|fiction\w*)\b',t):return None
-    directive=bool(re.search(r'\b(?:schau\w*|such\w*|recherch\w*|prüf\w*|check|search|look|fetch|find)\b',t))
+    if lookup_negated(t):return None
+    directive=bool(re.search(r'\b(?:guck\w*|schau\w*|such\w*|recherch\w*|prüf\w*|check|search|look|fetch|find)\b',t))
     if 'wikipedia' in t and directive:return 'search_wikipedia'
     if re.search(r'\b(?:wetter\w*|weather|forecast)\b',t) and re.search(r'\b(?:wie|how|heute|morgen|aktuell\w*|today|tomorrow|current|forecast)\b',t):return 'get_weather'
     publishers=any(p in t for p in ('tagesschau','bbc','deutsche welle','deutschlandfunk','guardian'))
     headlines=bool(re.search(r'\b(?:nachricht\w*|news|headlines?)\b',t))
     current=bool(re.search(r'\b(?:aktuell\w*|neueste\w*|heute|latest|current|today)\b',t))
     if headlines and (directive or current) or publishers and directive:return 'search_news'
+    if re.search(r'\b(?:nachguck\w*|nachscha\w*|nachseh\w*|nachschlag\w*|recherch\w*|googel\w*|google|bing|online|internet\w*|webseite\w*|website\w*|web|look\s+(?:that\s+|it\s+)?up|check\s+(?:that|this))\b',t) or directive and re.search(r'\b(?:nach|up|out)\b',t):
+        # The LLM supplies the query; routing only selects an available tool.
+        recent=' '.join(str(h.get('content','')) for h in history[-4:] if h.get('role')=='user').casefold()
+        if re.search(r'\b(?:das|dazu|darüber|that|it)\b',t):
+            if re.search(r'\b(?:wikipedia|wiki)\b',recent):return 'search_wikipedia'
+            if re.search(r'\b(?:nachrichten|news|headlines|tagesschau|bbc)\b',recent):return 'search_news'
+            if re.search(r'\b(?:wetter|weather|forecast)\b',recent):return 'get_weather'
+        return 'search_web'
     return None
+
+def lookup_negated(text):
+    return bool(re.search(r'\b(?:erfind\w*|fiktiv\w*|ausgedacht\w*|invent\w*|fiction\w*)\b|\b(?:nicht|keine?\w*|ohne|don.t|do not|without|no)\s+(?:(?:im|in|on|online|bitte|any|the)\s+){0,2}(?:such\w*|nach\w*|recherch\w*|google|internet|web|search|look\w*|browse\w*)\b',text,re.I))
 
 def relevant(text,history=()):
     """Cheap capability routing, not answer generation or factual confidence.
@@ -76,8 +88,14 @@ def relevant(text,history=()):
     Recent user context keeps tools available for follow-ups such as 'And Paris?'.
     Ordinary stories/arithmetic do not need all the remote-lookup schemas.
     """
-    context=' '.join([str(h.get('content','')) for h in history[-16:] if h.get('role')=='user']+[text])
-    return bool(re.search(r'\b(?:wikipedia|wiki|wetter\w*|weather|forecast|vorhersag\w*|nachricht\w*|news|headlines?|aktuell\w*|latest|today|heute|morgen|tomorrow|gestern|yesterday|quelle\w*|sources?|recherch\w*|informier\w*|nachscha\w*|nachseh\w*|such\w*|search|check|verif\w*|prüf\w*|look\s+(?:it\s+)?up|wer\s+ist|who\s+is)\b',context,re.I))
+    if lookup_negated(text):return False
+    if required_lookup(text,history):return True
+    if re.search(r'\b(?:wer\s+ist|who\s+is|aktuell\w*|current|latest)\b',text,re.I):return True
+    explicit=bool(re.search(r'\b(?:wikipedia|wiki|wetter\w*|weather|forecast|nachricht\w*|news|headlines?|quelle\w*|sources?|recherch\w*|nachguck\w*|nachscha\w*|nachseh\w*|such\w*|search|check|verif\w*|prüf\w*|google|bing|internet)\b',text,re.I))
+    if explicit:return True
+    # Topic-preserving short follow-ups, not every later turn after a lookup.
+    follow=bool(re.match(r'^\s*(?:und|and|was ist mit|what about|dort|there)\b',text,re.I) and len(text.split())<12)
+    return follow and any(relevant(str(h.get('content',''))) for h in history[-4:] if h.get('role')=='user')
 
 def clean(value,limit=400):
     return ' '.join(html.unescape(re.sub(r'<[^>]*>',' ',str(value))).split())[:limit]
@@ -105,7 +123,8 @@ async def fetch(client,url,params=None):
 def parse_feed(raw,publisher,query):
     if b'<!DOCTYPE' in raw.upper() or b'<!ENTITY' in raw.upper():raise ValueError('External XML declarations not accepted')
     root=ET.fromstring(raw);items=[]
-    terms=re.findall(r'\w+',query.casefold())
+    generic=r'\b(?:aktuell\w*|neueste\w*|letzte\w*|heut\w*|nachricht\w*|schlagzeile\w*|news|latest|current|today|headlines?|tagesschau|bbc|guardian|deutsche|welle|deutschlandfunk)\b'
+    terms=re.findall(r'\w+',re.sub(generic,' ',query.casefold()))
     for node in root.iter():
         if node.tag.rsplit('}',1)[-1] not in ('item','entry'):continue
         values={c.tag.rsplit('}',1)[-1]:c for c in node}
@@ -168,7 +187,7 @@ async def weather(client,location):
 
 def arguments(name,raw):
     args=json.loads(raw) if isinstance(raw,str) else raw
-    expected={'search_news':{'query','source'},'get_weather':{'location'},'search_wikipedia':{'query','language'}}
+    expected={'search_web':{'query'},'search_news':{'query','source'},'get_weather':{'location'},'search_wikipedia':{'query','language'}}
     if name not in expected or not isinstance(args,dict) or set(args)!=expected[name]:raise ValueError('Invalid public tool arguments')
     if any(not isinstance(v,str) or len(v)>180 for v in args.values()):raise ValueError('Tool argument must be a short string')
     if name=='search_news' and args['source'] not in ('all',*FEEDS):raise ValueError('Unknown news source')
@@ -176,16 +195,19 @@ def arguments(name,raw):
     if name!='search_news' and not args.get('query',args.get('location','')).strip():raise ValueError('A topic or location is required')
     return args
 
-async def execute(name,raw,client):
+async def execute(name,raw,client,transport=None):
     args=arguments(name,raw);key=(name,json.dumps(args,sort_keys=True));now=time.monotonic()
     if key in CACHE and now-CACHE[key][0]<(600 if name=='get_weather' else 180):
         CACHE.move_to_end(key);return {**CACHE[key][1],'cache_hit':True}
     try:
-        async with asyncio.timeout(10):
-            if name=='search_news':result=await news(client,**args)
+        async with asyncio.timeout(30 if name=='search_web' else 10):
+            if name=='search_web':
+                from web_lookup import search
+                result=await search(client,**args,transport=transport)
+            elif name=='search_news':result=await news(client,**args)
             elif name=='get_weather':result=await weather(client,**args)
             else:result=await wiki(client,**args)
-    except (httpx.HTTPError,ValueError,ET.ParseError,TimeoutError) as exc:
+    except (httpx.HTTPError,ValueError,ET.ParseError,TimeoutError,RuntimeError,KeyError) as exc:
         result=dict(error='Source lookup unavailable: '+type(exc).__name__,sources=[])
     result.update(retrieved_at=datetime.datetime.now(datetime.timezone.utc).isoformat(),tool=name,cache_hit=False)
     if not result.get('error'):

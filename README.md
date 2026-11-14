@@ -1,5 +1,7 @@
 # Cartoon Face Generator · 101 Keypoints
 
+
+**Robby restore point (14 November):** [Current source, tests, diagrams and known limitations before candidate streaming](robby/voice-assistant/RESTORE_2026-11-14.md).
 Dieses Projekt erzeugt ein wiedererkennbares Cartoon-Gesicht vollständig als **parametrisches SVG**. Augen, Brauen, Pupillen, Mund und die geschwungenen Wangenlinien lassen sich unabhängig verformen. Alle Ausdrücke behalten dieselben **101 semantischen Keypoints**. Eine gespeicherte Pose enthält die vollständige Geometrie und lässt sich ohne Referenzbild erneut rendern.
 
 Vorhanden sind **40 EmoNet-Face-Ausdrücke**, **60 zusätzliche soziale und verspielte Ausdrücke**, ein Browser-Editor, Werkzeuge für synthetische Trainingsdaten, ein trainierter Cartoon-Keypoint-Detector und eine **CPU-Webcam- und Audio-Demo**.
@@ -9,6 +11,8 @@ Die aktuelle Windows-Demo **2.3.2** überträgt Webcam-Mimik auf das Rig und ani
 **Schnellere Sprachausgabe für Robby:** Auf einer NVIDIA Jetson Thor beginnt die Sprachsynthese jetzt 0,16 s nach Erhalt eines Satzes (vorher 2,3–2,9 s). Wie das geht, mit allen Messwerten und Code-Ausschnitten, steht in [INFERENCE_OPTIMIZATIONS.md](robby/voice-assistant/INFERENCE_OPTIMIZATIONS.md) (Englisch).
 
 **Robby mit Large 1.7:** Oben in der Demo zwischen Small und Large 1.7 wechseln; Small bleibt Standard. [Messungen auf RTX 3090, Einrichtung und reproduzierbare Tests](robby/voice-assistant/LARGE17.md).
+
+**Audio Decision Lab:** Neue separate Forschungsseite mit LiquidAI d1-Omni-2B, AudioSet-Strong/527-Klassen, Aufnahme, Upload, Live-Timeline und echten GPU-Messungen. [Einrichtung, Tests und zeitliche Grenzen](robby/voice-assistant/audio_decision/README.md).
 
 **Matched Small/Large performance (7 November 2026):** One GPU, BF16,
 CFG 2, temperature 0.8, one streaming candidate, the same structured German

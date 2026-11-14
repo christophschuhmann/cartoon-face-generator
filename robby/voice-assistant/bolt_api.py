@@ -205,6 +205,69 @@ async def lfm3_analyze_proxy(request:Request):
     return Response(content=r.content,status_code=r.status_code,
         headers={'Content-Type':r.headers.get('content-type','text/plain'),'Cache-Control':'no-store'})
 
+@app.get('/audio-decision')
+async def audio_decision_redirect():
+    from fastapi.responses import RedirectResponse
+    return RedirectResponse('/audio-decision/',status_code=307)
+
+@app.api_route('/audio-decision/{path:path}',methods=['GET','POST','DELETE','HEAD'])
+async def audio_decision_proxy(path:str,request:Request):
+    """Dedicated loopback research service; never expose model-management routes."""
+    if path.startswith('internal') or '..' in path or '\\' in path:raise HTTPException(404)
+    size=0;chunks=[]
+    async for chunk in request.stream():
+        size+=len(chunk)
+        if size>32*1024**2:raise HTTPException(413,'Maximum upload is 32 MB')
+        chunks.append(chunk)
+    allowed=('host','origin','cookie','content-type','range','if-range','x-audio-decision','x-filename','x-forwarded-proto')
+    headers={k:v for k,v in request.headers.items() if k.lower() in allowed}
+    url='http://127.0.0.1:8815/'+path
+    if request.url.query:url+='?'+request.url.query
+    try:
+        response=await request.app.state.http.send(request.app.state.http.build_request(request.method,url,content=b''.join(chunks),headers=headers),stream=True)
+    except httpx.HTTPError:raise HTTPException(503,'Audio decision lab is restarting; try again shortly.')
+    outgoing={k:v for k,v in response.headers.items() if k.lower() in ('content-type','content-length','cache-control','set-cookie','content-range','accept-ranges','content-disposition','location','x-content-type-options')}
+    async def stream():
+        try:
+            async for chunk in response.aiter_raw():yield chunk
+        finally:await response.aclose()
+    return StreamingResponse(stream(),status_code=response.status_code,headers=outgoing)
+
+@app.websocket('/audio-decision/ws')
+async def audio_decision_websocket(ws:WebSocket):
+    origin=ws.headers.get('origin','')
+    if origin.split('://',1)[-1]!=ws.headers.get('host'):
+        await ws.close(code=1008);return
+    await ws.accept()
+    try:
+        headers={k:v for k,v in ws.headers.items() if k.lower() in ('host','origin','cookie')}
+        async with aiohttp.ClientSession() as session,session.ws_connect('http://127.0.0.1:8815/ws',headers=headers,max_msg_size=2*1024**2,heartbeat=20) as upstream:
+            async def incoming():
+                while True:
+                    message=await ws.receive()
+                    if message['type']=='websocket.disconnect':return
+                    if message.get('bytes') is not None:
+                        if len(message['bytes'])>64008:return
+                        await upstream.send_bytes(message['bytes'])
+                    elif message.get('text') is not None:await upstream.send_str(message['text'])
+            async def outgoing():
+                async for message in upstream:
+                    if message.type==aiohttp.WSMsgType.TEXT:await ws.send_text(message.data)
+                    elif message.type in (aiohttp.WSMsgType.CLOSE,aiohttp.WSMsgType.ERROR):return
+            tasks=[asyncio.create_task(incoming()),asyncio.create_task(outgoing())]
+            try:await asyncio.wait(tasks,return_when=asyncio.FIRST_COMPLETED)
+            finally:
+                for task in tasks:task.cancel()
+                await asyncio.gather(*tasks,return_exceptions=True)
+    except (WebSocketDisconnect,ConnectionError,aiohttp.ClientError):pass
+    finally:
+        try:await ws.close()
+        except (RuntimeError,WebSocketDisconnect):pass
+
+# Separate durable Podcast API, served through this existing Cloudflare tunnel.
+from podcast_api_proxy import install as install_podcast_api
+install_podcast_api(app)
+
 @app.api_route('/{path:path}',methods=['GET','POST'])
 async def browser_proxy(path:str,request:Request):
     if path.startswith('internal/'):raise HTTPException(404)

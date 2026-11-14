@@ -1,0 +1,57 @@
+BATCHING STUDY UPDATE — 2026-11-09
+Read BATCH64.md and public /audio-decision/batch64.html.
+Isolated GPU 1 experiment only; live engine and services unchanged.
+Main 527-class study: batch 1 = 2.091 s, batch 8 = 1.676 s median (9 runs each).
+Separate 5-run beep follow-up: all 9 original groups = 1.572 s in one forward.
+Largest main score deviation 0.006158; no 0.5 threshold flips on the authored inputs.
+Scripts, complete real scores and timing results are stored beside this handoff.
+The test process exited and freed its GPU memory. No deployment change or GitHub push.
+
+AUDIO DECISION LAB — 2026-11-08
+
+Live URL: https://diane-asylum-understood-invoice.trycloudflare.com/audio-decision/
+Report: same prefix + report.html
+
+Live source: /mnt/nvme/moss-15-v2/robo-integration/audio_decision
+Canonical source checkout: /mnt/nvme/moss-15-v2/repository-update/cartoon-face-generator-robby/robby/voice-assistant/audio_decision
+The canonical GitHub repository for Robby is christophschuhmann/cartoon-face-generator.
+Do not send Robby updates to LAION-AI/Humaneness-Voice.
+
+Read README.md in this directory first. It includes current limitations, benchmarks,
+installation, operating controls, privacy, and tests. build_report.py regenerates
+static/report.html and its public JSON artifacts from actual authored-input tests.
+
+Checkpoint: LiquidAI/d1-Omni-2B at 81222dae8bf8bdd7f903643b5b2a8803bf2e3176.
+Assets: /mnt/nvme/robby-audio-decision (4.34 GB model, isolated env, private TTL cache).
+Service: loopback :8815. manage.py start/restart/stop/status; service.pid/log in assets.
+Original domain actually reaches aiohttp Robby :8793; do not assume :8798 is this domain.
+The FastAPI facade :8798 also forwards the new prefix for its own existing tunnel.
+No new Cloudflare tunnel was started. Original tunnel processes were not restarted.
+
+GPU 0 RTX 3090 24 GB hosts d1 BF16. Do not stop other users' processes or Robby ASR/TTS.
+optional_lab_gpu.py gives the two research labs an exclusive lease. They unload only
+idle optional lab models, then reload from local cache on demand. This is not CPU-RAM
+offloading. Existing MOSS/LFM video analysis was retested after the handoff (HTTP 200),
+then d1 reloaded. Original Robby readiness was checked. Existing TTS process untouched.
+
+Pinned new Transformers/HF/tokenizers live in assets/env via PYTHONPATH. Do not install
+them globally. Official compile() failed with InternalTorchDynamoError on Torch 2.6;
+production uses eager BF16 + official fused projections and exact audio-feature reuse.
+
+Important interpretation limits: these are text-queried 456/527 AudioSet event scores,
+not a trained AudioSet output head. Raw means unsmoothed native release-calibrated
+scores. No new empirical calibration. The early-beep/final-silence test demonstrates
+history leakage; repeated target did not fix it. Never advertise 100 ms resolution as
+100 ms localization accuracy or latency. All-class 527 fast inference is ~2.3–2.5 s.
+Live drops grid steps explicitly, with null values, rather than queueing indefinitely.
+
+Audio is captured only on a click. Private cookie ownership, one-hour cleanup, 1 GB
+cache, 32 MB / 120 s recordings, one GPU job, two decodes, no public private-file route.
+This public tunnel has no account auth. Do not publish cache, cookies, raw microphone
+recordings, source env files or credentials. Public tests contain authored beep input.
+
+Remaining research (not fake UI options): trained temporal localization, accuracy on
+labeled AudioSet recordings, empirical calibration, MIDI export, foreground/dominance/
+proximity questions, hardware microphone-latency validation and newer-Torch compilation
+in a separate environment. Initial microphone clock pauses are handled with per-packet
+AudioContext-to-monotonic-clock mapping, not a fixed startup offset.

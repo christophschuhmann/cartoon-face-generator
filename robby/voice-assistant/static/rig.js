@@ -52,6 +52,10 @@ export function geometry(p=pose(),controls={}){
 }
 export function createRobbyRig(svg){const n=Object.fromEntries(REQUIRED_IDS.map(id=>[id,svg.querySelector('#'+id)]));
  const missing=REQUIRED_IDS.filter(id=>!n[id]);if(missing.length)throw new Error('Missing robot anchors: '+missing.join(', '));
+ // Keep the original SVG page usable with the same whole-body tool values.
+ // Its fallback is a flat cartoon rotation; the desk page uses real 3-D axes.
+ const stunt=svg.querySelector('#whole-robot-stunt')||document.createElementNS('http://www.w3.org/2000/svg','g');
+ stunt.id='whole-robot-stunt';if(!stunt.parentNode){svg.append(stunt);stunt.append(n.body,n.head);}
  let smooth=pose(),controls=normalizeControls(),visiblePoints=false,last={};
  const dots=KEYPOINT_IDS.map((id,i)=>{const dot=document.createElementNS('http://www.w3.org/2000/svg','circle');dot.setAttribute('r','2.2');dot.setAttribute('data-anchor',id);(i<89?n.keypoints:n['body-keypoints']).append(dot);return dot;});
  return {showKeypoints(on){visiblePoints=on;for(const id of ['keypoints','body-keypoints'])n[id].setAttribute('opacity',on?'1':'0');},
@@ -73,6 +77,8 @@ export function createRobbyRig(svg){const n=Object.fromEntries(REQUIRED_IDS.map(
    n.nose.setAttribute('d',curve(g.nose));n.nose.setAttribute('opacity',String(clamp(a.nose_lift*.9,0,.75)));
    const v=smooth.gesture,beat=Math.sin(timeMs/600*v[7]),breath=Math.sin(timeMs/2100);
    const motion=input.actionMotion||{},yaw=clamp(motion.pan,-20,20),nod=clamp(motion.tilt,-12,12),spin=Number.isFinite(motion.spin)?motion.spin:0;
+   const bodySpin=clamp(motion.bodySpin,-1080,1080),bodyFlip=clamp(motion.bodyFlip,-360,360),lift=clamp(motion.bodyLift,0,150),framing=clamp(motion.framing,0,1),squash=Number.isFinite(motion.bodySquash)?clamp(motion.bodySquash,.85,1.05):1;
+   stunt.setAttribute('transform',`translate(400 ${450-lift*.7}) scale(${1-.3*framing}) rotate(${bodySpin+bodyFlip}) translate(-400 -450) translate(0 850) scale(1 ${squash}) translate(0 -850)`);
    // SVG fallback: a flat cartoon turn; the desk renderer supplies true 3-D yaw.
    n.head.setAttribute('transform',`translate(${controls.x*7+v[2]+yaw*.5} ${breath+v[1]+controls.y*3+nod}) rotate(${v[0]+controls.roll*.3+v[6]*beat*4+spin} 400 440)`);
    n.body.setAttribute('transform',`translate(${v[2]*.4} ${breath*.6}) rotate(${v[2]*.3} 400 800)`);
@@ -85,7 +91,7 @@ export function createRobbyRig(svg){const n=Object.fromEntries(REQUIRED_IDS.map(
       r=degrees*Math.PI/180,dx=x-pivot,dy=y-550;x=pivot+dx*Math.cos(r)-dy*Math.sin(r);y=550+dx*Math.sin(r)+dy*Math.cos(r)-v[5];}
     dots[i].setAttribute('cx',x);dots[i].setAttribute('cy',y);
    });
-   last={pose:smooth,geometry:g};return last;
+   last={pose:smooth,geometry:g,bodySpin,bodyFlip,bodyLift:lift,bodySquash:squash};return last;
   },snapshot(){return last;},reset(){smooth=pose();controls=normalizeControls();this.update({},1000,0);}
  };
 }
