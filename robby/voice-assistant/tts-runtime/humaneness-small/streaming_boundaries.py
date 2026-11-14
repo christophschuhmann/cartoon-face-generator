@@ -6,6 +6,8 @@ actually be decoded. Missing evidence never releases the buffered raw audio.
 import difflib
 import os
 import time
+import re
+import unicodedata
 import numpy as np
 from metrics import tokens
 from functools import lru_cache
@@ -40,6 +42,7 @@ class UnverifiedSpeechError(RuntimeError):
 
 class SpeechBoundaryGate:
     def __init__(self, text, enabled=True, *, preserve_lead=False, tail_allow=0.):
+        self.target_text = str(text)
         self.words = boundary_tokens(text)
         self.enabled = bool(enabled and self.words)
         self.preserve_lead = preserve_lead
@@ -223,6 +226,19 @@ class SpeechBoundaryGate:
             self.report['note']='Incomplete ASR target; faded at last verified target word'
         self.report.update(cut_s=self.end/RATE,stopped=True)
         out=self._release(self.end)
+        # A verified prefix is not a complete sentence. Export an exact suffix
+        # only at an original written-word boundary; never split contractions
+        # or infer progress from an approximate/fuzzy alignment.
+        if self.strict_order and not self.report['end_verified']:
+            count=len(self.confirmed_spans)
+            text=unicodedata.normalize('NFKC',self.target_text).replace('’',"'")
+            used=0
+            for match in re.finditer(r"[^\W_]+(?:'[^\W_]+)*",text):
+                if used==count and count>0:
+                    self.report.update(resume_safe=True,remaining_text=text[match.start():],
+                                       confirmed_prefix_words=count)
+                    break
+                used+=len(boundary_tokens(match.group()))
         self.done=True
         return out
 

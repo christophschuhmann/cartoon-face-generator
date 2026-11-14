@@ -50,14 +50,58 @@ class Recovery(unittest.IsolatedAsyncioTestCase):
             _=[e async for e in speech_events(c,{},AsyncMock())]
         self.assertEqual(caught.exception.attempts,3)
         self.assertEqual(len(c.bodies),3)
-    async def test_clean_empty_result_retries_but_ambiguous_disconnect_does_not(self):
+    async def test_clean_empty_result_and_unheard_disconnect_retry(self):
         c=Client([[DONE],[PCM,DONE]])
         _=[e async for e in speech_events(c,{},AsyncMock())]
         self.assertEqual(len(c.bodies),2)
         c=Client([[ConnectionError('disconnected')],[PCM,DONE]])
-        with self.assertRaises(ConnectionError):
+        _=[e async for e in speech_events(c,{},AsyncMock())]
+        self.assertEqual(len(c.bodies),2)
+
+    async def test_disconnect_after_audio_is_never_automatically_replayed(self):
+        c=Client([[PCM,ConnectionError('disconnected')],[PCM,DONE]])
+        with self.assertRaises(SpeechGenerationError) as caught:
             _=[e async for e in speech_events(c,{},AsyncMock())]
         self.assertEqual(len(c.bodies),1)
+        self.assertTrue(caught.exception.audio_published)
+
+    async def test_verified_prefix_resumes_only_the_exact_suffix(self):
+        partial={**DONE,'live_stream':{'enabled':True,'start_verified':True,'end_verified':False,
+            'resume_safe':True,'remaining_text':'nicht öffnen.'}}
+        c=Client([[PCM,partial],[PCM,DONE]])
+        result=[e async for e in speech_events(c,{'message':'GENERAL: Clear.\nSCRIPT:\nBitte die Tür nicht öffnen.'},AsyncMock())]
+        self.assertIn('nicht öffnen.',c.bodies[1]['message'])
+        self.assertNotIn('Bitte die Tür',c.bodies[1]['message'])
+        self.assertTrue(next(e for e in result if e['event']=='speech_retry')['continuation'])
+
+    async def test_unpositioned_partial_result_is_not_reported_as_success(self):
+        partial={**DONE,'live_stream':{'enabled':True,'start_verified':True,'end_verified':False}}
+        c=Client([[PCM,partial]])
+        with self.assertRaises(SpeechGenerationError) as caught:
+            _=[e async for e in speech_events(c,{},AsyncMock())]
+        self.assertEqual(caught.exception.code,'incomplete_verified_speech')
+        self.assertEqual(len(c.bodies),1)
+
+    async def test_last_unheard_retry_changes_to_candidate_search(self):
+        c=Client([[BAD],[BAD],[PCM,DONE]])
+        _=[e async for e in speech_events(c,{'model':'small_rl','align':True},AsyncMock())]
+        self.assertEqual(c.bodies[2]['generation'],'search_asr')
+        self.assertEqual(c.bodies[2]['search_n'],3)
+
+    async def test_failed_audio_keeps_entire_long_reply_and_exact_retry_queue(self):
+        from bolt_pipeline import pipeline
+        from bolt_text import Sentence
+        # More than the producer queue's capacity: must not cancel or deadlock
+        # the LLM producer merely because the first sentence lost audio.
+        sentences=[Sentence(f'Dies ist Testsatz Nummer {n}.',language='de') for n in range(7)]
+        c=Client([[BAD]]*3)
+        rows=[r async for r in pipeline(c,'Test.',{},[],preset=sentences)]
+        replies=[v for k,v in rows if k=='sentence']
+        self.assertEqual(len(replies),7)
+        self.assertIn('Nummer 6',replies[-1]['text'])
+        self.assertFalse(rows[-1][1]['speech_complete'])
+        self.assertEqual(len(rows[-1][1]['_retry_sentences']),7)
+        self.assertEqual(len(c.bodies),3)
     async def test_cancel_during_retry_does_not_start_another_take(self):
         c=Client([[BAD],[PCM,DONE]])
         async def run():

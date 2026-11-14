@@ -22,6 +22,7 @@ export class LLMControls{
    if(!this.catalog.models.some(m=>m.id===this.desired.model))this.desired=this.catalog.default;
    if(this.desired.model==='qwen'&&!this.catalog.providers.some(p=>p.id===this.desired.provider))this.desired.provider='cerebras/fp16';
    this.render();if(this.connected)this.client.send('llm:select:'+JSON.stringify(this.desired));
+   if(this.catalog.provider_recovery){const note=document.createElement('p');note.className='help';note.textContent='If the selected Qwen endpoint is rate-limited twice, Robby can retry the same Qwen model at another available OpenRouter endpoint. The actual provider appears in Response timing.';this.status.after(note);}
    this.status.textContent=this.catalog.server_key_available?'The server key is configured and hidden. Choose a model and endpoint.':'OpenRouter needs a personal key or an administrator-configured server key. Local Nemotron needs no API key.';
   }catch(e){this.status.textContent=e.message;}
  }

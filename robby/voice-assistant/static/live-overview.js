@@ -15,6 +15,8 @@ export class LiveOverview{
   recent.innerHTML='<h2>With Robby, right now</h2><article class="recent-card asr"><h3>ASR · live preview</h3><p id="recent-asr" class="recent-copy">Waiting for speech…</p></article><article class="recent-card user"><h3 id="recent-user-label">You · last turn</h3><p id="recent-user" class="recent-copy">Say something or type a message.</p></article><article class="recent-card robot"><h3>Robby · latest reply</h3><p id="recent-robby" class="recent-copy">I’m ready to chat with you.</p></article>';
   const playbackStatus=document.createElement('p');playbackStatus.id='recent-playback-status';playbackStatus.setAttribute('role','status');
   playbackStatus.textContent='No spoken reply yet.';recent.querySelector('.robot').append(playbackStatus);
+  const retry=document.createElement('button');retry.id='retry-speech';retry.hidden=true;retry.textContent='Read remaining reply';
+  retry.onclick=()=>{window.robo?.send('retry:speech');};recent.querySelector('.robot').append(retry);
   const modelLabel=document.createElement('p');modelLabel.id='recent-reply-model';modelLabel.textContent='Reply model: waiting for an actual response.';recent.querySelector('.robot').append(modelLabel);
   const history=document.createElement('details');history.className='settings chat-history';history.id='chat-history';
   const title=document.createElement('summary');title.textContent='Full conversation history';history.append(title,document.querySelector('.chat-heading'),document.getElementById('chat'));
@@ -33,11 +35,18 @@ export class LiveOverview{
  }
  copy(id,text){const p=document.getElementById(id);p.textContent=text;p.scrollTop=p.scrollHeight;}
  clear(){this.values={};this.turn=null;this.pending=false;this.hasInput=false;this.kind=null;this.copy('recent-asr','Waiting for speech…');this.copy('recent-user','Say something or type a message.');this.copy('recent-robby','I’m ready to chat with you.');document.getElementById('recent-user-label').textContent='You · last turn';this.paint();}
- begin(kind){this.values={};this.turn=null;this.pending=true;this.hasInput=true;this.kind=kind;this.audioReceived=false;this.paint();}
+ begin(kind){this.values={};this.turn=null;this.pending=true;this.failed=false;this.hasInput=true;this.kind=kind;this.audioReceived=false;this.paint();}
  typed(text){this.copy('recent-user',text);this.copy('recent-asr','Typed input · no ASR needed.');this.copy('recent-robby','Preparing a reply…');document.getElementById('recent-user-label').textContent='You · typed';}
  audio(m){if(m.first){this.audioReceived=true;this.copy('recent-playback-status','Audio received · playback scheduled.');this.values.buffer=m.playback_lead_ms;this.paint();}}
- playbackEnded(){if(this.audioReceived)this.copy('recent-playback-status','Current audio buffer played.');}
+ playbackEnded(){if(this.audioReceived&&!this.failed)this.copy('recent-playback-status','Current audio buffer played.');}
  message(m){
+  if(m.type==='speech_recovery'){
+   const b=document.getElementById('retry-speech');b.hidden=!m.available;
+   b.textContent=m.may_repeat_sentence?'Retry speech · may repeat the interrupted sentence':'Read remaining reply';
+   if(m.available){this.failed=true;this.copy('recent-playback-status','Speech incomplete · full generated text retained. '+(m.may_repeat_sentence?'The interrupted sentence may repeat if you retry.':'Only the remaining speech will be retried.'));}
+  }
+  if(['barge','reply_cancelled','stop_command'].includes(m.type))document.getElementById('retry-speech').hidden=true;
+  if(m.type==='service_status'&&['speech_retry','speech_unavailable'].includes(m.stage))this.copy('recent-playback-status',m.text);
   if(m.type==='sound_caption'){this.lastSound=m;this.values.sound=m.status==='available'?m.request_ms:null;this.values.events=m.sound_events?.status==='available'?m.sound_events.request_ms:null;this.paint();}
 
   if(['asr_preview','partial'].includes(m.type)&&m.text?.trim())this.copy('recent-asr',m.text);
@@ -65,9 +74,9 @@ export class LiveOverview{
    if(this.turn&&m.reply_id&&this.turn!==m.reply_id)return;
    this.consume(m.metrics||{});
   }
-  if(m.type==='turn_done'){this.pending=false;document.getElementById('latency-status').textContent='Latest response · generation complete';}
+  if(m.type==='turn_done'){this.pending=false;document.getElementById('latency-status').textContent=this.failed?'Speech incomplete · text retained':'Latest response · generation complete';}
   if(['barge','reply_cancelled','stop_command'].includes(m.type)){this.copy('recent-playback-status',this.audioReceived?'Speech interrupted · some text may not have been heard.':'Reply cancelled before speech playback.');this.audioReceived=false;this.pending=false;document.getElementById('latency-status').textContent='Interrupted · last measured timings retained';}
-  if(m.type==='error'){this.copy('recent-playback-status','Speech failed · this text may not have been played.');this.audioReceived=false;this.pending=false;document.getElementById('latency-status').textContent='Reply error · available timings retained';}
+  if(m.type==='error'){this.failed=true;this.copy('recent-playback-status',m.stage==='planning'?'Language model unavailable'+(m.http_status?' · HTTP '+m.http_status:'')+'. Your request remains in the conversation.':'Speech failed · generated text remains visible.');this.audioReceived=false;this.pending=false;document.getElementById('latency-status').textContent='Reply error · available timings retained';}
  }
  consume(metrics){
   if(metrics.quick_reply_status){this.values.reaction_status=metrics.quick_reply_status;document.getElementById('quick-reply-status').textContent=metrics.quick_reply_status.replaceAll('_',' ')+(metrics.quick_reply_words?` · ${metrics.quick_reply_words} words`:'');}

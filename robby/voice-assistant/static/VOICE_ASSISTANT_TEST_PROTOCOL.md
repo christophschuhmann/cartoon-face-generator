@@ -1062,3 +1062,144 @@ enrollment/return/unknown-TV checks, using real models and synthetic microphone
 audio. No browser or server error was reported in these final runs. 141 targeted
 unit regressions passed. This does not replace the separate failed echo/Stop
 stress test or establish robustness in physical overlapping conversations.
+
+
+## Parallel streamed TTS verification (2026-11-13)
+
+See [PARALLEL_TTS_VERIFICATION.md](PARALLEL_TTS_VERIFICATION.md) for exact commands,
+flags, timing definitions, rollback and experimental outcomes. This path uses
+actual generated PCM and ASR, never forced-alignment-derived opening evidence.
+Run `parallel_verification_benchmark.py` with fixed prompts/seeds and all three
+modes (off diagnostic, serial, parallel). Compare first PCM, complete request,
+ASR call/wait time, output seconds and simulated playback gaps. A pass requires
+real chunks and a confirmed complete target, not merely HTTP success. Keep cold,
+failed and partial-verification receipts. Repeat with `--first-scan 0.6` to
+isolate the first-check scheduling effect from codec-reset acceleration.
+
+`verify_parallel_boundary_audio.py` injects unrelated lead/tail speech into an
+authored target clip; require both target boundaries, removed lead/tail, and
+zero released audio for wrong-only or silent input. This is real ASR but a
+simulated producer cadence, so do not report its timings as TTS throughput.
+Unit tests cover asynchronous cancellation, failure recovery without added PCM,
+ordered words/negations, repeated phrases, 12-s overlapping analysis windows,
+and the 70-s bounded queue. Verify codec reset with real CUDA/PCM equality and
+check authored German/English speech when arithmetic-changing optimizations are
+considered. Padded prefill graphs remain OFF after the initial pilot.
+
+After restart and warmup, run the public HTTPS browser isolation latency test
+with VoxLock, then the complete two-person enrollment regression. Only one real
+browser microphone session may run at a time. Distinguish API/ASR/TTS latency
+from scheduled playback time; no physical microphone-to-loudspeaker measurement
+is implied. Retain unknown-speaker/TV failures and provider failures separately.
+
+A long real-synthesis check is now available via
+`parallel_verification_benchmark.py --label long --prompts long --modes parallel --seeds 777`.
+Require `complete_target_verified=true` for all 45 words. The original negative
+receipt showed that timestamp-only window concatenation lost an already heard
+boundary word; unit tests now remove one/two such boundary words and require a
+time-consistent exact word overlap inside the confirmed prefix. The separate
+2026-11-13 two-person browser test failed unknown-TV rejection (false Selma
+match), despite successful enrollment and known return; retain that open issue.
+
+Final deployment receipts on 2026-11-13: `parallel-deployed.json` passed all six
+short cases with complete ordered-target verification;
+`parallel-long-fixed.json` passed all 45 words (15.6-s output, 744-ms first PCM,
+2,911-ms request wall time). `parallel-cancellation.json` passed at 271 ms to
+idle. `browser-deployed-final-voxlock.json` passed the public two-turn latency
+probe (694/909-ms TTS first PCM). That probe stops after first follow-up audio;
+do not call it a full long-conversation completion test. Its introduction's
+fixture-end delta is not a valid speech-end anchor. `report-browser.json` passed
+desktop/mobile layout and measured-JSON retrieval over the existing HTTPS tunnel.
+44 focused tests passed. The prior background-TV admission failure remains open.
+
+## Whole-body tricks and spoken-response regression (13 November 2026)
+
+Run `browser_whole_body_stunts.py` against the public desk-robot URL, then
+`browser_whole_body_spoken.py` sequentially. The latter generates its two
+authored microphone fixtures once and caches them under
+`.runtime/body-stunts-mic`; these are not user recordings. Both use the real
+ASR/LLM/TTS services where applicable. Browser rendering is CPU-only.
+
+The typed suite requests a body spin in each direction, a forward/backward
+somersault, anger and a grimace. A pass requires one validated action ID, actual
+speech packets, visible movement while audio plays, a full rotation and no
+pipeline/page error. Renderer assertions use actual platform geometry for the
+crouch/airborne/landing checks. Test playback anchoring, four-second fallback,
+duplicate metadata, Stop and reduced-motion/disabled controls independently.
+The spoken suite requires ASR-produced spin/flip requests to reach that same
+action path. It is not a room-noise or physical-microphone accuracy evaluation.
+
+Preserve the negative before/initial/nonverbal/untyped-error/tiny-fragment
+receipts under `logs/stunts-*`. Regie-only and laughter-only completions must
+not start an empty or one-word TTS job. Tests cover streamed token boundaries,
+ordinary emphasis/narrative preservation, bounded LLM repair and a transparent
+last-resort acknowledgment. HTTP status must survive provider failures so
+transient retries apply without leaking provider bodies or credentials.
+Implementation and output summaries: `WHOLE_BODY_STUNTS.md`,
+`static/whole-body-stunts.html`, `static/whole-body-stunts.json`.
+
+
+## 2026-11-14: capability, contextual lookup and verification regression suite
+
+See [TOOLS_AND_LATENCY_GUIDE.md](TOOLS_AND_LATENCY_GUIDE.md) for exact commands,
+architecture and the public HTML report. Run API tiers sequentially to avoid
+conflating service rate limits with model/routing failures.
+
+1. **Contract tests:** `test_tool_capabilities.py` plus the existing avatar,
+   director, knowledge, speech retry and pause-endpoint suites. Check wake-name
+   variants, negative/quoted requests, serious-face alias, indirect desires,
+   context lookup and fresh-topic reset, exact tool schemas and boolean toggles.
+2. **Real text models/tools:** `validate_tools_live.py` (18 cases) and
+   `validate_tool_followups_live.py` (5 focused cases). Assertions inspect actual
+   validated actions, source annotations and isolated rule-book changes, not
+   verbal promises. Record failure type, arguments and timings. Empty results,
+   wrong gestures and HTTP 429 remain failures; preserve the first receipts and
+   distinguish successful later checks. Never replace missing sources with mocks.
+3. **HTTPS browser:** `browser_tools_audit.py`. Ten authored requests go through
+   Qwen and actual TTS. Assert PCM chunks, visible pose/body movement, source
+   links, no JS errors. Render all 40 distinct authored facial control patterns
+   and eight grimaces. Exercise raw, parallel-verified and serial-verified output
+   through the real controls, inspect backend metrics, restore parallel mode.
+   Reload to test preference persistence. At 390px check all three SVGs load and
+   that the whole page does not overflow horizontally (diagrams may scroll).
+4. **Synthetic microphone:** `browser_tools_microphone.py`. Generate two Idris
+   requests in `.runtime/tools-microphone`, play them as Chrome's fake microphone,
+   and require real ASR → action → PCM. The German grimace uses the chosen Parakeet recognizer;
+   the English somersault disables the second recognizer and must report native Nemotron.
+   Preserve the negative German native-ASR wake test (“Hey Hobby”) separately;
+   changing the test language is not evidence that German wake recognition was fixed.
+   Test the completed flip angle as well as action metadata. This is not a
+   physical-room noise, overlapping-speaker or authentication test.
+5. **Service isolation:** the TTS/podcast/tunnel PIDs are not restarted. Check
+   Robby `/api/state`, podcast `/health`, the public page, report and SVG routes.
+   Publish only authored test receipts; never copy actual user-session audio,
+   private transcripts, voiceprints, provider headers or credentials.
+
+The measurements in the toggle smoke test are individual observations, not a
+matched-seed distribution or an end-to-end guarantee. Suggested next extensions:
+repeat each switch condition across at least ten matched prompts/seeds, record
+provider rate-limit status separately, add accented spoken paraphrases and
+multi-clause commands, and score whether human observers actually recognize
+requested facial emotions rather than only checking distinct control vectors.
+
+## Bounded speech recovery and speech/action synchronization (2026-11-14)
+
+Run the procedure in [SPEECH_RECOVERY.md](SPEECH_RECOVERY.md). Add these cases to every voice-worker or streaming-transport change:
+
+| Case | Required outcome | Evidence |
+|---|---|---|
+| Unverified opening, then a successful take | New seed / bounded strategy recovery; exact words preserved | Transport unit + real TTS |
+| Connection failure before any PCM | Retry only after old worker cleanup / idle admission | Explicit test-client fault, then real TTS |
+| Connection failure after PCM | No automatic full-sentence replay | Transport unit |
+| Verified prefix missing a negation in its suffix | Resume exact remaining words, including the negation | Timestamp unit + continuation transport test |
+| Boundary inside a contraction | Refuse automatic suffix resume | Timestamp unit |
+| Seven-sentence answer, first TTS sentence fails three times | Keep all seven generated sentences; no producer queue deadlock | Pipeline unit |
+| Read remaining reply | Saved text only, no new LLM, no repeated tools or user-history turn | Bridge wire test |
+| Two provider 429s | Same Qwen model on a registered backup endpoint, actual provider identified | Transport unit; real provider metadata if encountered |
+| Authentication failure | Explicit error; no failover loop | Transport unit |
+| TTS delayed twelve seconds before a spin | No early animation; start at matching playback position | Browser controller contract |
+| Spoken spin and somersault | Actual 3-D body motion overlaps actual reply audio | Real HTTPS browser test |
+| Four-sentence explanation | Full text and audible completion; speech_complete true | Real HTTPS browser test |
+| Raw, serial, single verified, Best-of-3 | Do not label an unchecked result as verified or compare unequal cold/warm timings | Configuration and metrics review |
+
+Do not mistake synthetic fault injection or mocked word timestamps for acoustic accuracy measurements. Retain failed runs. Distinguish LLM HTTP errors, TTS verification failures and microphone backlog closures. Never publish visitor conversations, biometric templates or credentials with test receipts.

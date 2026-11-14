@@ -1181,3 +1181,25 @@ repeat each switch condition across at least ten matched prompts/seeds, record
 provider rate-limit status separately, add accented spoken paraphrases and
 multi-clause commands, and score whether human observers actually recognize
 requested facial emotions rather than only checking distinct control vectors.
+
+## Bounded speech recovery and speech/action synchronization (2026-11-14)
+
+Run the procedure in [SPEECH_RECOVERY.md](SPEECH_RECOVERY.md). Add these cases to every voice-worker or streaming-transport change:
+
+| Case | Required outcome | Evidence |
+|---|---|---|
+| Unverified opening, then a successful take | New seed / bounded strategy recovery; exact words preserved | Transport unit + real TTS |
+| Connection failure before any PCM | Retry only after old worker cleanup / idle admission | Explicit test-client fault, then real TTS |
+| Connection failure after PCM | No automatic full-sentence replay | Transport unit |
+| Verified prefix missing a negation in its suffix | Resume exact remaining words, including the negation | Timestamp unit + continuation transport test |
+| Boundary inside a contraction | Refuse automatic suffix resume | Timestamp unit |
+| Seven-sentence answer, first TTS sentence fails three times | Keep all seven generated sentences; no producer queue deadlock | Pipeline unit |
+| Read remaining reply | Saved text only, no new LLM, no repeated tools or user-history turn | Bridge wire test |
+| Two provider 429s | Same Qwen model on a registered backup endpoint, actual provider identified | Transport unit; real provider metadata if encountered |
+| Authentication failure | Explicit error; no failover loop | Transport unit |
+| TTS delayed twelve seconds before a spin | No early animation; start at matching playback position | Browser controller contract |
+| Spoken spin and somersault | Actual 3-D body motion overlaps actual reply audio | Real HTTPS browser test |
+| Four-sentence explanation | Full text and audible completion; speech_complete true | Real HTTPS browser test |
+| Raw, serial, single verified, Best-of-3 | Do not label an unchecked result as verified or compare unequal cold/warm timings | Configuration and metrics review |
+
+Do not mistake synthetic fault injection or mocked word timestamps for acoustic accuracy measurements. Retain failed runs. Distinguish LLM HTTP errors, TTS verification failures and microphone backlog closures. Never publish visitor conversations, biometric templates or credentials with test receipts.

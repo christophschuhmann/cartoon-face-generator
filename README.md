@@ -1,6 +1,8 @@
 # Cartoon Face Generator · 101 Keypoints
 
 
+**Robby speech recovery and simultaneous stunts (14 November):** [Bounded retries, retained answers, playback-timed spins/somersaults and measured tests](robby/voice-assistant/SPEECH_RECOVERY.md).
+
 **Robby restore point (14 November):** [Current source, tests, diagrams and known limitations before candidate streaming](robby/voice-assistant/RESTORE_2026-11-14.md).
 
 **Optional Best-of-3 streaming:** [Causal 960-ms candidate selection, ASR scoring,
