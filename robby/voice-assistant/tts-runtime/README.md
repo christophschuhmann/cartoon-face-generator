@@ -22,3 +22,13 @@ No weights, private settings, runtime state, recordings or credentials are
 included. Historical experiment scripts may need separately documented datasets.
 This is a source snapshot, not a claim that every historical experiment or
 optional model is currently deployed or reproduced from a clean machine.
+
+## Causal candidate streaming
+
+The matching `search_asr` endpoint, batched codec graph implementation, test code
+and benchmark guide are included in this snapshot. See
+[ASR_CANDIDATE_STREAMING.md](../ASR_CANDIDATE_STREAMING.md) for exact flags, model
+revision, metrics and limitations. `SMALL_WARM_CONTINUOUS=1` opts into eagerly
+warming the optional quick-reaction batcher; otherwise it initializes on use.
+Normal streaming still warms before readiness. Candidate GPU shapes need an
+additional prewarm request before a live demonstration.

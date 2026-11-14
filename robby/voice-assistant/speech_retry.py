@@ -38,8 +38,10 @@ async def speech_events(client,body,on_wait,*,timeout=45.,attempts=3):
     """
     attempts=max(1,min(3,attempts))
     prompt_level=0
+    oom_fallback=False
     for attempt in range(attempts):
         request={**body,'seed':(int(body.get('seed',777))+104729*attempt)%2147483647}
+        if oom_fallback:request.update(generation='single',batch_size=1)
         if 'message' in body:request['message']=recovery_prompt(body,prompt_level)
         emitted=False;completed=False;failure=None
         async with admitted_turn(client,request,on_wait,timeout=timeout) as response:
@@ -67,6 +69,7 @@ async def speech_events(client,body,on_wait,*,timeout=45.,attempts=3):
         if emitted or not recoverable or attempt+1>=attempts:
             raise SpeechGenerationError(failure,attempt+1)
         if failure in ('unverified_speech','empty_audio'):prompt_level+=1
-        strategy='compact_direction' if prompt_level==1 else 'natural_delivery' if prompt_level>=2 else 'new_seed'
+        if failure=='cuda_oom' and body.get('generation')=='search_asr':oom_fallback=True
+        strategy='single_stream_after_oom' if oom_fallback else 'compact_direction' if prompt_level==1 else 'natural_delivery' if prompt_level>=2 else 'new_seed'
         yield {'event':'speech_retry','attempt':attempt+2,'max_attempts':attempts,'code':failure,'strategy':strategy}
         await asyncio.sleep(.15 if failure!='cuda_oom' else .5)

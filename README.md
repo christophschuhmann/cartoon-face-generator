@@ -2,6 +2,9 @@
 
 
 **Robby restore point (14 November):** [Current source, tests, diagrams and known limitations before candidate streaming](robby/voice-assistant/RESTORE_2026-11-14.md).
+
+**Optional Best-of-3 streaming:** [Causal 960-ms candidate selection, ASR scoring,
+winner-state cloning, bounded retries and reproducible tests](robby/voice-assistant/ASR_CANDIDATE_STREAMING.md).
 Dieses Projekt erzeugt ein wiedererkennbares Cartoon-Gesicht vollständig als **parametrisches SVG**. Augen, Brauen, Pupillen, Mund und die geschwungenen Wangenlinien lassen sich unabhängig verformen. Alle Ausdrücke behalten dieselben **101 semantischen Keypoints**. Eine gespeicherte Pose enthält die vollständige Geometrie und lässt sich ohne Referenzbild erneut rendern.
 
 Vorhanden sind **40 EmoNet-Face-Ausdrücke**, **60 zusätzliche soziale und verspielte Ausdrücke**, ein Browser-Editor, Werkzeuge für synthetische Trainingsdaten, ein trainierter Cartoon-Keypoint-Detector und eine **CPU-Webcam- und Audio-Demo**.

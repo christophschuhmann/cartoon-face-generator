@@ -92,8 +92,10 @@ def check_response(response):
                                     request=response.request,response=response)
 
 def retry_delay(response):
-    try:return min(2.,max(.5,float(response.headers.get('retry-after','.5'))))
-    except (ValueError,AttributeError):return .5
+    # Respect a bounded provider cooldown instead of immediately repeating a
+    # rate-limited call. A prolonged outage remains an explicit error.
+    try:return min(8.,max(1.,float(response.headers.get('retry-after','1'))))
+    except (ValueError,AttributeError):return 1.
 
 @asynccontextmanager
 async def completion_stream(client,cfg,body,metrics):

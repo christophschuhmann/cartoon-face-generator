@@ -70,6 +70,12 @@ class Recovery(unittest.IsolatedAsyncioTestCase):
         with self.assertRaises(SpeechGenerationError):
             _=[e async for e in speech_events(c,{},AsyncMock())]
         self.assertEqual(len(c.bodies),2)
+    async def test_candidate_search_oom_recovers_with_smaller_single_stream(self):
+        c=Client([[{'event':'error','code':'cuda_oom'}],[PCM,DONE]])
+        events=[e async for e in speech_events(c,{'generation':'search_asr','batch_size':3},AsyncMock())]
+        self.assertEqual(c.bodies[1]['generation'],'single')
+        self.assertEqual(c.bodies[1]['batch_size'],1)
+        self.assertEqual(events[0]['strategy'],'single_stream_after_oom')
     async def test_later_sentence_retry_preserves_order_without_replaying_first(self):
         import base64,numpy as np
         from bolt_text import Sentence

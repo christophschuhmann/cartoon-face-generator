@@ -19,7 +19,7 @@ async def pipeline(client,text,identity,history,voice='emolia_c1699',avatar_cont
                    interaction_state=None,chunk_frames=None,tts=True,preset=None,reply_words=None,llm_selection=None,credential=None,quick_replies=False,memory=None,tts_model='small_rl',verification_settings=None):
     from app.runtime.audio import StreamingAudioResampler
     from tts_bridge import decode_mp3
-    from verification_settings import tts_options
+    from verification_settings import tts_options,search_options
     verify=tts_options(verification_settings)
     start=time.perf_counter();metrics={'tts_model':tts_model,'verification':verify};queue=asyncio.Queue(maxsize=4)
     chunk_frames=chunk_frames or int(os.environ.get('ROBO_BOLT_CHUNK_FRAMES','20'))
@@ -226,6 +226,8 @@ async def pipeline(client,text,identity,history,voice='emolia_c1699',avatar_cont
                 'temperature':.8,'guidance':2.,'voice_mode':'profile','voice_profile':voice,
                 'voice_conversion':False,'speaker_steering':False,'dynamic_reference':False,
                 **verify,'seed':int(os.environ.get('ROBO_BOLT_SEED','777'))+index}
+            body.update(search_options(verification_settings,tts_model,role=='answer' and not context.get('event')))
+            metrics['tts_generation_mode']=body['generation']
             if role=='reaction':
                 # This is the model's duration CONDITION, not a hard ceiling.
                 # A 6.4-second condition stretched four words over seven seconds.

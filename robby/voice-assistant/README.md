@@ -1,5 +1,11 @@
 # Robby voice chat and TYGER speaker predictor
 
+**2026-11-14 causal candidate streaming:** Optional batched Best-of-3 for Small
+RL selects a continuation every 960 ms using ASR word accuracy and progress,
+then copies the winning autoregressive and codec state. It reuses selection
+timestamps for edge fades instead of running a second output checker.
+[Algorithm, retries, limitations and reproducible tests](ASR_CANDIDATE_STREAMING.md).
+
 **2026-11-13 whole-body tricks:** “Dreh dich im Kreis” turns the complete desk
 robot; “Mach einen Salto” crouches, jumps, flips and lands with the platform.
 Both directions are available. Markdown stage directions are separated from

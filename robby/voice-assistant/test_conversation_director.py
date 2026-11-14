@@ -20,10 +20,19 @@ class DirectorTests(unittest.IsolatedAsyncioTestCase):
         self.assertIs(response,success);self.assertEqual(retries,1);self.assertEqual(client.post.await_count,2)
         client.post=AsyncMock(return_value=transient)
         self.assertEqual((await provider_post(client,'https://example.invalid'))[1],1);self.assertEqual(client.post.await_count,2)
-        for status in (400,401,403,429,500):
+        for status in (400,401,403,429):
             response=SimpleNamespace(status_code=status,json=lambda:{'error':{'code':'invalid_schema','type':'invalid_request_error'}})
             client.post=AsyncMock(return_value=response)
             self.assertEqual((await provider_post(client,'https://example.invalid'))[1],0);self.assertEqual(client.post.await_count,1)
+        with patch('conversation_director.asyncio.sleep',new=AsyncMock()):
+            for status in (408,500,502,503,504):
+                client.post=AsyncMock(return_value=SimpleNamespace(status_code=status))
+                self.assertEqual((await provider_post(client,'https://example.invalid'))[1],1)
+                self.assertEqual(client.post.await_count,2)
+            import httpx
+            client.post=AsyncMock(side_effect=[httpx.ConnectError('test'),success])
+            self.assertIs((await provider_post(client,'https://example.invalid'))[0],success)
+            self.assertEqual(client.post.await_count,2)
     def test_local_addressee_preserves_acting_exact_words_and_numeric_formats(self):
         identity={'enrolled':True,'named':True,'display_name':'Selma'}
         data={'general':'Natural.','script':'(amusement) Ein Roboter fand einen Schlüssel.','language':'de'}

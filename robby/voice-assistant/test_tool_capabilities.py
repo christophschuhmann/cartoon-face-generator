@@ -7,7 +7,7 @@ from avatar_actions import EMOTIONS,validate
 from bolt_director import needs_tools,SYSTEM
 from conversation_prompt import POLICY
 from knowledge_tools import required_lookup,relevant,arguments
-from verification_settings import validated,tts_options,final_model
+from verification_settings import validated,tts_options,final_model,search_options
 from web_lookup import public_link
 
 class Capabilities(unittest.TestCase):
@@ -43,6 +43,12 @@ class Capabilities(unittest.TestCase):
    with self.assertRaises(ValueError):validated(raw)
   c=SimpleNamespace(verification_settings=validated({'verify_input':False}));s=SimpleNamespace(c=c,asr=SimpleNamespace(selected='parakeet_ultra'))
   self.assertEqual(final_model(s),'nemotron');c.verification_settings['verify_input']=True;self.assertEqual(final_model(s),'parakeet_ultra')
+ def test_search_settings_are_explicit_and_model_specific(self):
+  self.assertEqual(search_options({}),{})
+  self.assertEqual(search_options({'candidate_search':True})['search_n'],3)
+  self.assertEqual(search_options({'candidate_search':True})['search_chunk_frames'],12)
+  self.assertEqual(search_options({'candidate_search':True},'large'),{})
+  self.assertEqual(search_options({'candidate_search':True},eligible=False),{})
  def test_search_links_and_args(self):
   for url in ('file:///etc/passwd','http://example.org','https://localhost','https://127.0.0.1','https://192.168.1.1','https://169.254.169.254/a','https://a.local/a','javascript:alert(1)','https://u:p@example.org'):self.assertFalse(public_link(url),url)
   self.assertTrue(public_link('https://www.nasa.gov/a'))
@@ -73,3 +79,15 @@ class Pipeline(unittest.IsolatedAsyncioTestCase):
    except Exception:pass
   self.assertEqual(len(bodies),1)
   self.assertFalse(bodies[0]['align']);self.assertEqual(bodies[0]['speech_verification'],'parallel')
+ async def test_candidate_search_reaches_actual_sentence_request(self):
+  from bolt_pipeline import pipeline
+  from bolt_text import Sentence
+  bodies=[]
+  async def events(client,body,*a,**kw):
+   bodies.append(body);yield {'event':'result','candidates':[]}
+  with patch('bolt_pipeline.speech_events',events):
+   try:[x async for x in pipeline(None,'Hallo',{},[],preset=[Sentence('Hallo zusammen.','interest')],verification_settings={'candidate_search':True})]
+   except Exception:pass
+  self.assertEqual(len(bodies),1)
+  self.assertEqual(bodies[0]['generation'],'search_asr')
+  self.assertEqual(bodies[0]['search_n'],3)
