@@ -54,8 +54,9 @@ class RoboConversation(Conversation):
             await self.ws.send_json({'type':'pipeline_metrics','reply_id':self.playback.rid,'metrics':data['pipeline_metrics']});return
         if data.get('component_metrics'):
             await self.ws.send_json({'type':'latency_update','reply_id':self.playback.rid,'metrics':data['component_metrics']});return
-        if data.get('text') and not data.get('status_only'):self.open_agent_text=data['text']
-        if data.get('text') and not data.get('status_only') and getattr(self,'sentence_stream',None):self.sentence_stream.permissions.note_reply(data['text'])
+        if data.get('speech_recovery') is not None:
+            self.speech_retry_available=bool(data['speech_recovery'].get('available'))
+            await self.ws.send_json({'type':'speech_recovery',**data['speech_recovery']});return
         if data.get('error_type'):
             await self.ws.send_json({'type':'error','error':data['text'],'stage':data.get('error_stage'),
                 'error_type':data['error_type'],'http_status':data.get('http_status')})
@@ -63,6 +64,8 @@ class RoboConversation(Conversation):
         if data.get('status_only'):
             await self.ws.send_json({'type':'service_status','text':str(data.get('text',''))[:300],'stage':data.get('stage')})
             return
+        if data.get('text'):self.open_agent_text=data['text']
+        if data.get('text') and getattr(self,'sentence_stream',None):self.sentence_stream.permissions.note_reply(data['text'])
         if getattr(self,'decisions',None):
             try:await self.decisions.note_agent(data)
             except (ValueError,TypeError,KeyError):await self.decisions.notice(warning='A conversational rule was invalid and was not installed.')
@@ -152,6 +155,8 @@ class RoboConversation(Conversation):
             'speaker_instruction':('Say Hey Robby or Hi Robbie, then speak. The same voice can continue for ten seconds after playback.' if self.sentence_stream.wake.enabled else 'Speak normally. All audible speakers can join; unknown voices receive session labels and can introduce themselves.') if self.sentence_stream else 'Say: Hey Robbie, I am Christoph. Only enrolled voices keep their turn open.'}
 
     async def _send_turn(self,transcript):
+        self.speech_retry_available=False
+        await self.ws.send_json({'type':'speech_recovery','available':False})
         self.avatar_optional=False;self.avatar_personality.user()
         environment_epoch=self.environment.epoch if getattr(self,'environment',None) else None
         observation=await self.environment.context_for_turn(transcript) if getattr(self,'environment',None) else None
@@ -449,6 +454,16 @@ class RoboConversation(Conversation):
         await super()._on_browser(WSMessage(WSMsgType.BINARY,data,None))
 
     async def _on_command(self,data):
+        if data=='retry:speech':
+            if self.speaking or self.halting:
+                await self.ws.send_json({'type':'busy','text':'Wait until playback ends, then retry the remaining speech.'})
+            elif getattr(self,'speech_retry_available',False):
+                self.speech_retry_available=False
+                self._start_speaking()
+                await self.ws.send_json({'type':'speech_recovery','available':False})
+                await self.ws.send_json({'type':'latency_start','reply_id':self.playback.rid,'input':{'kind':'speech_retry'}})
+                await self.to_mouth(b'R',{})
+            return
         if data.startswith('verification:'):
             from verification_settings import validated
             try:

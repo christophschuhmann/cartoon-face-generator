@@ -167,11 +167,17 @@ class MouthBridge:
                     identity=record.get('speaker') or {};speaker_update=validated_speaker_update(text,identity)
                     if self.director_mode=='bolt' and not record.get('interaction_reply'):
                         from bolt_pipeline import pipeline
+                        from bolt_text import Sentence
+                        resume=record.pop('speech_resume',None)
+                        full_reply=record.get('reply','') if resume else ''
                         async for event,value in pipeline(client,text,identity,history,voice=turn_voice,tts_model=turn_model,
                                 avatar_context=record.get('avatar_context'),verification_settings=record.get('verification_settings'),interaction_state=record.get('interaction_state'),
-                                llm_selection=record.get('llm_selection'),credential=record.get('llm_credential'),quick_replies=record.get('quick_replies',False),memory=memory):
+                                llm_selection=record.get('llm_selection'),credential=record.get('llm_credential'),quick_replies=False if resume else record.get('quick_replies',False),memory=None if resume else memory,
+                                preset=[Sentence(**s) for s in resume] if resume else None,
+                                seed_offset=65537*record.get('speech_retry_round',0)):
                             if event=='sentence':
                                 stage='speech'
+                                if resume:value={**value,'text':full_reply,'avatar_actions':[],'interaction_actions':[]}
                                 reply=value['text'];record['reply']=reply
                                 await send(b'X',{**value,'speaker_update':speaker_update})
                             elif event=='status':await send(b'X',{'status_only':True,**value})
@@ -179,9 +185,15 @@ class MouthBridge:
                             elif event=='avatar_action':await send(b'X',{'avatar_action':value})
                             elif event=='latency':await send(b'X',{'component_metrics':value})
                             elif event=='done':
+                                record['retry_sentences']=value.pop('_retry_sentences',[])
+                                record['retry_may_repeat']=value.pop('_retry_may_repeat',False)
                                 record['bolt_metrics']=value
                                 await send(b'X',{'pipeline_metrics':value})
-                        remember(record);await send(b'D',{});return
+                        incomplete=bool(record.get('retry_sentences'))
+                        remember(record,interrupted=incomplete)
+                        await send(b'X',{'speech_recovery':{'available':incomplete,'may_repeat_sentence':record.get('retry_may_repeat',False),
+                            'sentence_count':len(record.get('retry_sentences',[]))}})
+                        await send(b'D',{});return
                     from conversation_tasks import history_for_model
                     shared_history,playback_note=history_for_model(history[-16:])
                     from voice_captioning import prompt_hint
@@ -273,7 +285,8 @@ class MouthBridge:
                     log.warning('Shared service error: stage=%s type=%s status=%s code=%s attempts=%s',stage,type(exc).__name__,status,getattr(exc,'code',None),getattr(exc,'attempts',None))
                     if record.get('avatar_context',{}).get('event'):
                         await send(b'D',{});return  # optional comments fail quietly, never a canned emotional fallback
-                    await send(b'X',{'text':'The '+stage+' service could not complete this reply. Please try again.',
+                    if reply:remember(record,interrupted=True)
+                    await send(b'X',{'text':'The '+stage+' service could not complete this reply. '+('The generated answer is kept in the conversation.' if reply else 'Please retry your request.'),
                         'error_type':type(exc).__name__,'error_stage':stage,'http_status':status})
                     await send(b'D',{})
                 finally:self.active-=1
@@ -300,6 +313,17 @@ class MouthBridge:
                             'interaction_language':payload.get('interaction_language','de'),'stop_feedback':payload.get('stop_feedback',False),
                             'avatar_context':payload.get('avatar_context') or {}}
                         task=asyncio.create_task(turn(latest))
+                    elif kind==b'R':
+                        # This socket owns its own latest reply. No user text,
+                        # model call, lookup or action is replayed on audio retry.
+                        if task and not task.done():
+                            await send(b'X',{'status_only':True,'stage':'waiting','text':'The current reply is still active.'})
+                            continue
+                        if latest and latest.get('retry_sentences'):
+                            latest['speech_retry_round']=latest.get('speech_retry_round',0)+1
+                            latest['speech_resume']=latest.pop('retry_sentences')
+                            task=asyncio.create_task(turn(latest))
+                        else:await send(b'D',{})
                     elif kind==b'W':
                         if warm_task and not warm_task.done():warm_task.cancel();await asyncio.gather(warm_task,return_exceptions=True)
                         warm_task=asyncio.create_task(warm_literals(payload.get('replies',[]),payload.get('language','de'),task))

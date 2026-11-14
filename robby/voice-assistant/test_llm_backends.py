@@ -46,6 +46,33 @@ class VaultTests(unittest.TestCase):
         with self.assertRaises(ValueError):selection({'model':'gemma12','provider':'cerebras/fp16'})
 
 class TransportTests(unittest.IsolatedAsyncioTestCase):
+    async def test_two_429s_recover_same_model_on_alternative_provider(self):
+        from llm_backends import completion_stream
+        bodies=[]
+        def handle(req):
+            bodies.append(json.loads(req.content))
+            return httpx.Response(429 if len(bodies)<3 else 200,headers={'retry-after':'0'},content=b'')
+        cfg={'remote':True,'url':'https://example.invalid','model':'test-qwen','headers':{},
+             'selection':{'model':'qwen','provider':'primary'},'parameters':[]}
+        metrics={}
+        with patch('llm_backends._providers',{'primary':{},'backup':{}}),patch('llm_backends.asyncio.sleep',AsyncMock()):
+            async with httpx.AsyncClient(transport=httpx.MockTransport(handle)) as client:
+                async with completion_stream(client,cfg,{},metrics) as r:self.assertEqual(r.status_code,200)
+        self.assertEqual(len(bodies),3)
+        self.assertEqual(bodies[-1]['provider']['only'],['backup'])
+        self.assertTrue(all(b['model']=='test-qwen' for b in bodies))
+        self.assertTrue(metrics['llm_provider_recovery'])
+
+    async def test_authentication_error_never_switches_provider(self):
+        from llm_backends import completion_stream
+        count=[]
+        def handle(req):count.append(1);return httpx.Response(401)
+        cfg={'remote':True,'url':'https://example.invalid','model':'test-qwen','headers':{},
+             'selection':{'model':'qwen','provider':'primary'},'parameters':[]}
+        async with httpx.AsyncClient(transport=httpx.MockTransport(handle)) as client:
+            with self.assertRaises(httpx.HTTPStatusError):
+                async with completion_stream(client,cfg,{},{}):pass
+        self.assertEqual(len(count),1)
     def test_http_failure_retains_status_for_retry_without_provider_details(self):
         from llm_backends import check_response
         request=httpx.Request('POST','https://example.invalid')

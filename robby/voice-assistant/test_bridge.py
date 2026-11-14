@@ -30,6 +30,34 @@ def frame(kind,payload):
 
 
 class BridgeTests(unittest.IsolatedAsyncioTestCase):
+    async def test_manual_speech_resume_uses_saved_sentences_without_llm_or_tool_replay(self):
+        import numpy as np
+        calls=[]
+        async def pipeline(client,text,identity,history,**kw):
+            calls.append(kw)
+            yield 'sentence',{'text':'Die vollständige Antwort bleibt sichtbar. Noch ein Satz.','sentence_index':0}
+            if len(calls)==1:
+                yield 'done',{'speech_complete':False,'_retry_sentences':[{'text':'Noch ein Satz.','direction':'natural','language':'de'}],'_retry_may_repeat':False}
+            else:
+                yield 'audio',np.ones(2400,np.float32)*.1
+                yield 'done',{'speech_complete':True}
+        with patch('tts_bridge.httpx.AsyncClient',FakeClient),patch.dict('os.environ',{'ROBO_DIRECTOR_MODE':'bolt'}),patch('bolt_pipeline.pipeline',pipeline):
+            bridge=MouthBridge();server=await asyncio.start_server(bridge.accept,'127.0.0.1',0)
+            reader,writer=await asyncio.open_connection('127.0.0.1',server.sockets[0].getsockname()[1])
+            try:
+                rows=[]
+                for kind,payload in [(b'T',{'transcript':'Antworte bitte.'}),(b'R',{})]:
+                    writer.write(frame(kind,payload));await writer.drain()
+                    while True:
+                        k,raw=await asyncio.wait_for(async_recv_msg(reader),2)
+                        if k==b'D':break
+                        if k==b'X':rows.append(json.loads(raw))
+                self.assertEqual(calls[1]['preset'][0].text,'Noch ein Satz.')
+                self.assertIsNone(calls[1]['memory']);self.assertFalse(calls[1]['quick_replies'])
+                self.assertEqual([r['speech_recovery']['available'] for r in rows if 'speech_recovery' in r],[True,False])
+                self.assertFalse(any('_retry_sentences' in json.dumps(r) for r in rows))
+                self.assertIn('Die vollständige Antwort', [r for r in rows if 'text' in r][-1]['text'])
+            finally:writer.close();await writer.wait_closed();server.close();await server.wait_closed();await asyncio.sleep(.01)
     async def test_interrupted_reply_keeps_task_context_for_next_real_bridge_turn(self):
         from copy import deepcopy
         snapshots=[]
@@ -86,8 +114,12 @@ class BridgeTests(unittest.IsolatedAsyncioTestCase):
                 self.assertGreater(audio,0);self.assertEqual(len(calls),1);self.assertTrue(metadata['timing']['interjection_cache_hit'])
             finally:writer.close();await writer.wait_closed();server.close();await server.wait_closed();await asyncio.sleep(.01)
     async def test_compact_reply_uses_manual_tts_without_second_director(self):
+        import numpy as np
+        from unittest.mock import AsyncMock
         calls=[]
         class Client(FakeClient):
+            async def get(self,url,**kwargs):
+                return SimpleNamespace(status_code=200,content=b'test-audio',json=lambda:{'ready':True,'busy':False},raise_for_status=lambda:None)
             async def post(self,*args,**kwargs):
                 calls.append(('director',kwargs['json']))
                 class Response:
@@ -103,9 +135,11 @@ class BridgeTests(unittest.IsolatedAsyncioTestCase):
                     def raise_for_status(self):pass
                     async def aiter_lines(self):
                         yield 'data: '+json.dumps({'event':'direction','text':'Test answer.'})
+                        yield 'data: '+json.dumps({'event':'audio_chunk','url':'/test.mp3'})
+                        yield 'data: '+json.dumps({'event':'result','candidates':[]})
                 return Response()
         settings=SimpleNamespace(LUNA_MODEL='configured-test',LUNA_BASE='https://example.invalid',luna_key=lambda:'test')
-        with patch('tts_bridge.httpx.AsyncClient',Client),patch('conversation_director.shared_settings',return_value=settings):
+        with patch('tts_bridge.httpx.AsyncClient',Client),patch('tts_bridge.decode_mp3',AsyncMock(return_value=np.full(4800,.1,np.float32))),patch('conversation_director.shared_settings',return_value=settings):
             bridge=MouthBridge();server=await asyncio.start_server(bridge.accept,'127.0.0.1',0)
             reader,writer=await asyncio.open_connection('127.0.0.1',server.sockets[0].getsockname()[1])
             try:

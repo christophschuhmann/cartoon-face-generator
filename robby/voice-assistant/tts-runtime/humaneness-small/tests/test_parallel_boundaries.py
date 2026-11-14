@@ -56,7 +56,20 @@ def test_missing_middle_word_cannot_release_the_later_suffix():
         p.feed(pcm(2));p.finish()
         assert not g.report['end_verified'] and g.report['ordered_target_words']==2
         assert len(np.concatenate(out))/RATE<=.66
+        assert g.report['resume_safe'] and g.report['remaining_text']=='not open the door'
     finally:p.close()
+
+def test_resume_does_not_split_an_original_contraction():
+    g=SpeechBoundaryGate("Hello friend, don't open the door.");g.strict_order=True
+    g.feed(pcm(2),{'timestamps':words(('Hello',.1,.3),('friend',.3,.5),('do',.5,.7),('open',.7,.9))})
+    g.finish()
+    assert not g.report.get('resume_safe')  # "do" is inside don't: ambiguous boundary
+
+def test_resume_preserves_unheard_negation_and_written_punctuation():
+    g=SpeechBoundaryGate('Bitte die Tür nicht öffnen!');g.strict_order=True
+    g.feed(pcm(2),{'timestamps':words(('Bitte',.1,.3),('die',.3,.5),('Tür',.5,.7),('öffnen',.7,.9))})
+    g.finish()
+    assert g.report['remaining_text']=='nicht öffnen!'
 
 def test_final_fallback_is_only_allowed_after_producer_completion():
     entered=threading.Event();release=threading.Event()

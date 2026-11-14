@@ -1,0 +1,157 @@
+{
+  "date_utc": "2026-11-14",
+  "hardware": "Two RTX 3090 24 GiB: TTS GPU 0, Photon/Parakeet ASR GPU 1",
+  "passed": true,
+  "physical_microphone_test": false,
+  "unit_tests": {
+    "robby_passed": 52,
+    "tts_passed": 48
+  },
+  "browser_turns": [
+    {
+      "request": "Mach eine Drehung und sprich dabei einen fröhlichen Satz.",
+      "speech_complete": true,
+      "sentences": 1,
+      "request_to_first_pcm_ms": 1651.35,
+      "tts_first_pcm_ms": 731.34,
+      "audio_motion_overlap_ms": 2692,
+      "retries": [],
+      "model": "small_rl",
+      "revision": "182bc700cac29b2d69295a33398b13e1ca7fba69",
+      "provider": "Cerebras"
+    },
+    {
+      "request": "Mach einen Salto und rede dabei weiter.",
+      "speech_complete": true,
+      "sentences": 1,
+      "request_to_first_pcm_ms": 1284.14,
+      "tts_first_pcm_ms": 756.41,
+      "audio_motion_overlap_ms": 3931,
+      "retries": [],
+      "model": "small_rl",
+      "revision": "182bc700cac29b2d69295a33398b13e1ca7fba69",
+      "provider": "Cerebras"
+    },
+    {
+      "request": "Antworte bitte mit vier vollständigen Sätzen über Regenbogen.",
+      "speech_complete": true,
+      "sentences": 4,
+      "request_to_first_pcm_ms": 4018.03,
+      "tts_first_pcm_ms": 2571.34,
+      "audio_motion_overlap_ms": null,
+      "retries": [
+        {
+          "event": "speech_retry",
+          "attempt": 2,
+          "max_attempts": 3,
+          "code": "unverified_speech",
+          "strategy": "compact_direction",
+          "continuation": false,
+          "sentence": 0
+        }
+      ],
+      "model": "small_rl",
+      "revision": "182bc700cac29b2d69295a33398b13e1ca7fba69",
+      "provider": "Cerebras"
+    }
+  ],
+  "real_tts": [
+    {
+      "text": "Hallo!",
+      "passed": true,
+      "injected_pre_audio_fault": false,
+      "first_pcm_ms": 861.92,
+      "audio_s": 1.4600208333333333,
+      "wall_ms": 871.08
+    },
+    {
+      "text": "Bitte öffne die Tür nicht. Warte hier, bis ich wieder zurück bin.",
+      "passed": true,
+      "injected_pre_audio_fault": false,
+      "first_pcm_ms": 672.87,
+      "audio_s": 5.46,
+      "wall_ms": 1306.01
+    },
+    {
+      "text": "Hello, it is lovely to see you. We can discover something new together today.",
+      "passed": true,
+      "injected_pre_audio_fault": true,
+      "first_pcm_ms": 1385.68,
+      "audio_s": 4.980020833333334,
+      "wall_ms": 1700.2
+    },
+    {
+      "text": "Ich hole kurz Schwung, und dann geht es kopfüber!",
+      "passed": true,
+      "injected_pre_audio_fault": false,
+      "first_pcm_ms": 1901.8,
+      "audio_s": 3.36,
+      "wall_ms": 2301.17
+    }
+  ],
+  "isolated_browser_contracts": {
+    "waits_for_delayed_playback": true,
+    "cancellation": true,
+    "silent_actions": true,
+    "no_duplicate": true,
+    "text_retained": true,
+    "retry_control": true,
+    "stage_specific_error": true
+  },
+  "diagrams": [
+    {
+      "src": "/static/system-conversation.svg",
+      "loaded": true
+    },
+    {
+      "src": "/static/system-tools.svg",
+      "loaded": true
+    },
+    {
+      "src": "/static/system-latency.svg",
+      "loaded": true
+    },
+    {
+      "src": "/static/system-recovery.svg",
+      "loaded": true
+    }
+  ],
+  "mobile_overflow": false,
+  "page_errors": [],
+  "real_suffix_recovery": {
+    "passed": true,
+    "target": "Hello, it is lovely to see you. We can discover something new together today.",
+    "seed": 778,
+    "synthetic_evidence": false,
+    "first_pcm_ms": 1031.29,
+    "audio_s": 5.3,
+    "suffix_recovery_observed": true,
+    "recognized_words": [
+      "Hello.",
+      "It",
+      "is",
+      "lovely",
+      "to",
+      "see",
+      "you",
+      "and",
+      "we",
+      "can",
+      "discover",
+      "something",
+      "new",
+      "together",
+      "today."
+    ],
+    "wall_ms": 6992.21
+  },
+  "limitations": [
+    "Small authored regression suite, not a measured deployment failure rate.",
+    "Manual retry and terminal-failure text retention tested in isolated contracts.",
+    "No physical microphone, noisy-room or acoustic playback validation in this run.",
+    "ASR verification is fallible; suffix evaluation uses the same ASR family.",
+    "The suffix test includes an extra recognized \"and\", not perfect WER.",
+    "Rate limits, cold starts, GPU contention and retries can still add seconds.",
+    "The separate five-second microphone backlog failure is not claimed fixed here."
+  ]
+}

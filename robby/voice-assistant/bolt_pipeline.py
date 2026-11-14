@@ -13,10 +13,10 @@ from avatar_actions import explicit_spin
 from tool_capabilities import ToolRouteRequest
 from performance import plan
 from shared_turn import admitted_turn
-from speech_retry import speech_events
+from speech_retry import retained_speech_events
 
 async def pipeline(client,text,identity,history,voice='emolia_c1699',avatar_context=None,
-                   interaction_state=None,chunk_frames=None,tts=True,preset=None,reply_words=None,llm_selection=None,credential=None,quick_replies=False,memory=None,tts_model='small_rl',verification_settings=None):
+                   interaction_state=None,chunk_frames=None,tts=True,preset=None,reply_words=None,llm_selection=None,credential=None,quick_replies=False,memory=None,tts_model='small_rl',verification_settings=None,seed_offset=0):
     from app.runtime.audio import StreamingAudioResampler
     from tts_bridge import decode_mp3
     from verification_settings import tts_options,search_options
@@ -131,7 +131,7 @@ async def pipeline(client,text,identity,history,voice='emolia_c1699',avatar_cont
                             metrics['visual_acknowledgment_provider_failure']=type(exc).__name__
                             if isinstance(exc,httpx.HTTPStatusError):metrics['visual_acknowledgment_http_status']=exc.response.status_code
                             break
-                        if count or attempt or not retryable:raise
+                        if count or attempt or not retryable or metrics.get('llm_recovery_exhausted'):raise
                         metrics['unspoken_provider_retries']=attempt+1
                         await asyncio.sleep(.3)
                         continue
@@ -159,6 +159,7 @@ async def pipeline(client,text,identity,history,voice='emolia_c1699',avatar_cont
         await queue.put(None)
 
     producer=asyncio.create_task(produce());spoken=[];scripts=[];cues=[];total_samples=0;index=0
+    text_only=False;retry_sentences=[];retry_may_repeat=False
     first_main=asyncio.create_task(queue.get());intro=None;initial=True;main_started=False;actions_sent=False
     try:
         if reaction_enabled and tts_model=='small_rl':
@@ -217,6 +218,9 @@ async def pipeline(client,text,identity,history,voice='emolia_c1699',avatar_cont
             yield 'sentence',metadata
             if actions:actions_sent=True
             if not tts:index+=1;continue
+            if text_only:
+                retry_sentences.append({'text':sentence.text,'direction':sentence.direction,'language':spec['language']})
+                index+=1;continue
             # Each completed sentence is admitted immediately; LLM generation
             # continues while this consumer performs the first TTS inference.
             body={'model':tts_model,'input_mode':'manual','format':'structured',
@@ -225,7 +229,7 @@ async def pipeline(client,text,identity,history,voice='emolia_c1699',avatar_cont
                 'chunk_frames':5 if role=='reaction' else chunk_frames,'cancel_on_disconnect':True,
                 'temperature':.8,'guidance':2.,'voice_mode':'profile','voice_profile':voice,
                 'voice_conversion':False,'speaker_steering':False,'dynamic_reference':False,
-                **verify,'seed':int(os.environ.get('ROBO_BOLT_SEED','777'))+index}
+                **verify,'seed':int(os.environ.get('ROBO_BOLT_SEED','777'))+index+seed_offset}
             body.update(search_options(verification_settings,tts_model,role=='answer' and not context.get('event')))
             metrics['tts_generation_mode']=body['generation']
             if role=='reaction':
@@ -238,11 +242,19 @@ async def pipeline(client,text,identity,history,voice='emolia_c1699',avatar_cont
             envelope=AudioEnvelope() if role=='reaction' else None
             tts_start=time.perf_counter();resampler=StreamingAudioResampler(48000,24000);played=False
             async def wait_notice(text,stage):pass
-            async for event in speech_events(client,body,wait_notice,timeout=.25 if context.get('event') else 45.,attempts=1 if context.get('event') else 3):
+            async for event in retained_speech_events(client,body,wait_notice,timeout=.25 if context.get('event') else 45.,attempts=1 if context.get('event') else 3):
                 kind=event.get('event')
+                if kind=='speech_unavailable':
+                    text_only=True
+                    retry_may_repeat=bool(event['audio_published'] and not event.get('remaining_text'))
+                    retry_sentences.append({'text':event.get('remaining_text') or sentence.text,
+                                            'direction':sentence.direction,'language':spec['language']})
+                    metrics.setdefault('speech_failures',[]).append({'sentence':index,'code':event['code'],'attempts':event['attempts']})
+                    yield 'status',{'stage':'speech_unavailable','text':'Speech recovery exhausted. Keeping the complete answer as text; you can retry its remaining speech.'}
+                    continue
                 if kind=='speech_retry':
                     metrics.setdefault('tts_retries',[]).append({**event,'sentence':index})
-                    yield 'status',{'stage':'speech_retry','text':'Preparing this sentence again; no audio from it has been played.',
+                    yield 'status',{'stage':'speech_retry','text':'Continuing from the last verified word.' if event.get('continuation') else 'Preparing the unheard sentence again.',
                         'attempt':event['attempt'],'max_attempts':event['max_attempts']}
                     continue
                 if kind=='model':
@@ -280,7 +292,7 @@ async def pipeline(client,text,identity,history,voice='emolia_c1699',avatar_cont
             tail=resampler.process(np.zeros(0,np.float32),final=True)
             if envelope is not None:tail=np.concatenate((envelope.feed(tail),envelope.finish()))
             if len(tail):total_samples+=len(tail);yield 'audio',tail
-            if not played:raise RuntimeError('TTS produced no audio')
+            if not played and not text_only:raise RuntimeError('TTS produced no audio')
             # Replace the estimated duration before appending the next cue.
             if cues:cues[-1]['end_s']=total_samples/24000
             if role=='reaction':metrics.update(quick_reply_audio_s=round(total_samples/24000-at,3),quick_reply_tts_ms=round((time.perf_counter()-tts_start)*1000,2))
@@ -290,6 +302,8 @@ async def pipeline(client,text,identity,history,voice='emolia_c1699',avatar_cont
         await producer
         metrics.update(total_ms=round((time.perf_counter()-start)*1000,2),audio_s=round(total_samples/24000,3),sentences=index)
         if total_samples:metrics['generation_rtf']=round(metrics['total_ms']/1000/(total_samples/24000),4)
+        metrics['speech_complete']=not text_only
+        if retry_sentences:metrics.update(_retry_sentences=retry_sentences,_retry_may_repeat=retry_may_repeat)
         yield 'done',metrics
     finally:
         tasks=[t for t in (producer,first_main,reaction_task) if t is not None]

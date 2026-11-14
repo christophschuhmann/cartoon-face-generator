@@ -32,3 +32,12 @@ revision, metrics and limitations. `SMALL_WARM_CONTINUOUS=1` opts into eagerly
 warming the optional quick-reaction batcher; otherwise it initializes on use.
 Normal streaming still warms before readiness. Candidate GPU shapes need an
 additional prewarm request before a live demonstration.
+
+## Verified speech continuation
+
+The checker now exports an exact remaining suffix at original written-word
+boundaries when a strictly verified prefix stops early. Robby can resume that
+suffix without replaying already published audio. See
+[SPEECH_RECOVERY.md](../SPEECH_RECOVERY.md) for bounded retries, the manual
+speech-only fallback and the real regression measurements. The matching
+`tests/test_parallel_boundaries.py` covers negations and ambiguous contractions.

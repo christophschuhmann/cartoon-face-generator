@@ -49,6 +49,7 @@ def catalog():
     return {'models':[{'id':key,**spec} for key,spec in MODELS.items()],
         'providers':[{'id':r['id'],'label':r['label']} for r in providers],
         'default':default_selection(),'server_key_available':store().configured(),
+        'provider_recovery':os.environ.get('ROBO_LLM_PROVIDER_RECOVERY','1')=='1',
         'privacy':'OpenRouter mode sends conversation text to OpenRouter and the selected provider. The server key is never sent to your browser.'}
 
 def config(value=None,credential=None):
@@ -97,12 +98,31 @@ def retry_delay(response):
     try:return min(8.,max(1.,float(response.headers.get('retry-after','1'))))
     except (ValueError,AttributeError):return 1.
 
+def recovery_body(cfg,body):
+    """Same Qwen model on another registered OpenRouter endpoint after 429.
+
+    Never applied to authentication errors or a local model. The operator may
+    pin a provider strictly with ROBO_LLM_PROVIDER_RECOVERY=0.
+    """
+    if not cfg.get('remote') or os.environ.get('ROBO_LLM_PROVIDER_RECOVERY','1')!='1':return None
+    alternatives=[p for p in _providers if p!=cfg['selection']['provider']]
+    if not alternatives:return None
+    request=request_body(cfg,body)
+    request['provider']={'only':alternatives,'allow_fallbacks':True,'sort':'latency'}
+    return request
+
 @asynccontextmanager
 async def completion_stream(client,cfg,body,metrics):
-    for attempt in range(2):
-        async with client.stream('POST',cfg['url'],json=request_body(cfg,body),headers=cfg['headers'],timeout=30.) as response:
+    request=request_body(cfg,body)
+    for attempt in range(3):
+        async with client.stream('POST',cfg['url'],json=request,headers=cfg['headers'],timeout=30.) as response:
             if cfg['remote'] and getattr(response,'status_code',200)==429 and not attempt:
                 delay=retry_delay(response);metrics['llm_rate_limit_retries']=1
+            elif cfg['remote'] and getattr(response,'status_code',200)==429 and attempt==1 and (fallback:=recovery_body(cfg,body)):
+                request=fallback;delay=retry_delay(response)
+                metrics.update(llm_rate_limit_retries=2,llm_provider_recovery=True,
+                    llm_preferred_provider=cfg['selection']['provider'])
             else:
+                if getattr(response,'status_code',200)==429:metrics['llm_recovery_exhausted']=True
                 check_response(response);yield response;return
         await asyncio.sleep(delay)

@@ -67,11 +67,19 @@ class AudioInputTests(unittest.IsolatedAsyncioTestCase):
         c=self.conversation();pcm=np.full(320,3277,'<i2')
         message=SimpleNamespace(type=WSMsgType.BINARY,data=struct.pack('<ii',0,-1)+pcm.tobytes())
         with patch.object(Conversation,'_on_browser',new_callable=AsyncMock) as parent:
-            await c._on_browser(message);parent.assert_awaited_once_with(message)
+            await c._deliver_microphone(message.data)
+            self.assertEqual(parent.call_args.args[0].data,message.data)
         packet=c.ws.send_json.call_args.args[0]
         self.assertEqual(packet['type'],'input_status');self.assertEqual(packet['seconds'],.02)
         self.assertAlmostEqual(packet['rms_dbfs'],-20.,places=1)
         self.assertEqual(set(packet),{'type','blocks','seconds','rms_dbfs'})
+    async def test_service_error_does_not_replace_reply_or_enter_identity_memory(self):
+        c=self.conversation();c.open_agent_text='The real answer.'
+        c.sentence_stream=SimpleNamespace(permissions=SimpleNamespace(note_reply=Mock()))
+        await c._on_text(json.dumps({'text':'Service failed','error_type':'SpeechGenerationError','error_stage':'speech'}))
+        self.assertEqual(c.open_agent_text,'The real answer.')
+        c.sentence_stream.permissions.note_reply.assert_not_called()
+        self.assertEqual(c.ws.send_json.call_args.args[0]['type'],'error')
     async def test_shared_service_status_is_not_a_spoken_reply_or_identity_update(self):
         c=self.conversation();c.speaker_ext=SimpleNamespace(metadata=AsyncMock())
         await c._on_text(json.dumps({'status_only':True,'stage':'waiting','text':'Waiting for shared voice model.'}))

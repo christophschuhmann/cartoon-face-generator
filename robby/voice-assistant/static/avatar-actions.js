@@ -160,10 +160,17 @@ export class AvatarActions{
   if(!this.enabled){this.warning='Requested action is disabled. Turn on Allow expressive actions.';return false;}
   this.warning=matchMedia('(prefers-reduced-motion: reduce)').matches&&safe.some(s=>['spin','carousel','somersault'].includes(s.kind))?'Rotation suppressed by your browser’s reduced-motion preference.':'';
   this.clear();
-  if(waitForAudio){this.pendingRequest={id,steps:safe,replyIds:new Set(),deadline:now+4000};return true;}
+  // Start at DAC playback, never after an arbitrary 4 s preparation timeout.
+  // A slow provider or TTS retry must not finish the stunt before speech starts.
+  if(waitForAudio){this.pendingRequest={id,steps:safe,replyIds:new Set()};return true;}
   return this.play(safe,'requested',now);
  }
- bindRequested(replyId,actionId){if(this.pendingRequest?.id===actionId)this.pendingRequest.replyIds.add(replyId);}
+ bindRequested(replyId,actionId){if(this.pendingRequest&&this.pendingRequest.id===actionId)this.pendingRequest.replyIds.add(replyId);}
+ finishSpeech(now=performance.now()){
+  if(!this.pendingRequest)return;
+  const pending=this.pendingRequest;this.pendingRequest=null;
+  this.play(pending.steps,'requested',now);
+ }
  touch(now=performance.now(),keepOptional=false){this.lastActivity=now;this.nextIdle=now+this.idleDelayMs;if(this.queue[0]?.source==='idle'||(!keepOptional&&this.queue[0]?.source==='optional')){this.queue=[];this.lastIdleEnd=now;}}
  set(id,steps,plan,source='reply'){const safe=validateSteps(steps);if(!safe.length||!id)return;
   this.warning=!this.enabled?'Requested action is disabled. Turn on Allow expressive actions.':matchMedia('(prefers-reduced-motion: reduce)').matches&&safe.some(s=>['spin','carousel','somersault'].includes(s.kind))?'Rotation suppressed by your browser’s reduced-motion preference.':'';
@@ -183,7 +190,7 @@ export class AvatarActions{
  frame(now,base,{position=null,busy=false,reduced=false,hidden=false,calibrating=false}={}){
   if(!this.enabled||hidden||calibrating){this.clear();return {pose:base,controls:{},motion:{},eyes:false};}
   if(busy)this.touch(now,true);
-  if(this.pendingRequest&&(now>=this.pendingRequest.deadline||position&&this.pendingRequest.replyIds.has(position.id))){
+  if(this.pendingRequest&&position&&position.sample>=0&&this.pendingRequest.replyIds.has(position.id)){
    const pending=this.pendingRequest;this.pendingRequest=null;this.play(pending.steps,'requested',now);
   }
   if(position&&this.plans.has(position.id)){
