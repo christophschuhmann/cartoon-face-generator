@@ -10,6 +10,7 @@ import asyncio,gc,json,logging,re,tarfile,threading,time
 import numpy as np
 from aiohttp import web
 from asr_catalog import MODELS,cache_root
+MODELS={k:v for k,v in MODELS.items() if v['kind']!='photon'}
 
 log=logging.getLogger('asr.models')
 

@@ -13,5 +13,5 @@ def prepare(key):
 if __name__=='__main__':
     root=cache_root();root.mkdir(parents=True,exist_ok=True)
     with concurrent.futures.ThreadPoolExecutor(3) as pool:
-        result=dict(pool.map(prepare,[k for k,s in MODELS.items() if s['kind']!='native']))
+        result=dict(pool.map(prepare,[k for k,s in MODELS.items() if s['kind'] not in ('native','photon')]))
     (root/'assets.json').write_text(json.dumps(result,indent=2))

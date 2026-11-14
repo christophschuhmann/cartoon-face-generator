@@ -5,7 +5,7 @@ import re
 from pathlib import Path
 
 EMOTIONS = tuple(p['slug'] for p in json.loads((Path(__file__).parent/'static/emotion-catalog.json').read_text())['profiles'])
-KINDS = ('emotion', 'nod', 'shake', 'spin', 'carousel', 'afterglow', 'puppy', 'pet', 'eye_roll', 'grimace', 'wink', 'curious')
+KINDS = ('emotion', 'nod', 'shake', 'spin', 'somersault', 'carousel', 'afterglow', 'puppy', 'pet', 'eye_roll', 'grimace', 'wink', 'curious')
 VARIANTS = ('crossed', 'opposite', 'wiggle', 'cheeky', 'goofy', 'squishy', 'fish', 'peekaboo')
 TOOL_NAME = 'perform_avatar'
 
@@ -31,7 +31,8 @@ def explicit_spin(text):
         direct=re.search(r'\b(?:(?:kannst|könntest|würdest)\s+du|ich\s+(?:möchte|moechte|will)\s*,?\s*dass\s+du)\b',t)
     if not direct:return []
     direction='counterclockwise' if re.search(r'gegen\s+den\s+uhrzeigersinn|counter[- ]?clockwise|anti[- ]?clockwise',t) else 'clockwise'
-    return [{'kind':'spin','duration_s':6.,'sentence':0,'direction':direction}]
+    scope='head' if re.search(r'\b(?:kopf|head)\b',t) else 'body'
+    return [{'kind':'spin','duration_s':6.,'sentence':0,'direction':direction,'scope':scope}]
 
 TOOL = {'type':'function','function':{'name':TOOL_NAME,
     'description':'Perform a gentle visual-only robot action sequence, optionally at a spoken sentence. No hardware movement.',
@@ -41,7 +42,8 @@ TOOL = {'type':'function','function':{'name':TOOL_NAME,
                 'kind':{'type':'string','enum':list(KINDS)},
                 'emotion':{'type':'string','enum':list(EMOTIONS)},
                 'variant':{'type':'string','enum':list(VARIANTS)},
-                'direction':{'type':'string','enum':['clockwise','counterclockwise']},
+                'direction':{'type':'string','enum':['clockwise','counterclockwise','forward','backward']},
+                'scope':{'type':'string','enum':['head','body']},
                 'duration_s':{'type':'number','minimum':1,'maximum':6},
                 'sentence':{'type':'integer','minimum':0,'maximum':11}}}}}}}}
 NOTE = '''The perform_avatar tool is available for facial/head actions. Fulfil explicit
@@ -50,7 +52,13 @@ grimace, wink or show any of the 40 authored facial emotions. Match German and
 English requests to the English tool values. For example wütend=anger,
 bitter=bitterness, traurig=sadness. Use ordered steps for "first angry, then a
 funny face". emotion steps are full archetypical poses with no random variation.
-spin is exactly one virtual yaw turn; carousel is three accelerating playful turns,
+eye_roll moves the eyes in circles without spinning the head. wink blinks one eye.
+spin is exactly one virtual yaw turn: scope=body turns the entire robot including
+its platform, scope=head turns only the head. Use body for "dreh dich im Kreis".
+somersault is one whole-robot crouch, jump, 360-degree forward/backward flip and
+soft landing, including the platform. Use kind=somersault, direction=forward
+(or backward if requested), duration_s=4.8 for "Salto" / "Überschlag" / "backflip".
+carousel is three accelerating playful turns,
 prefer duration_s=6, only on request or during permitted idle play. Always follow
 carousel with afterglow (duration_s=6), a lingering euphoric smile that settles
 into contentment. Puppy is a soft, upward-looking, affectionate big-eyed pose
@@ -68,7 +76,7 @@ and 24 seconds total, no loops. Do not call the tool for negated requests or
 quoted examples. A disabled client may suppress visuals; don't claim you saw them.
 The tool schedules a performance; it has NOT finished when you receive its result.
 Say "Schau mal" / "Watch this" rather than "Erledigt" / "Done". Answer in the
-language of the user's current request unless they explicitly choose another.
+configured reply language (German by default unless explicitly changed).
 Even for a visual request, put a brief acknowledgment OUTSIDE parentheses in
 SCRIPT (e.g. "(amusement) Schau mal!"). A cue-only SCRIPT is not playable speech.
 After tool execution return the usual three-field speech JSON; tool arguments
@@ -81,22 +89,26 @@ def validate(raw):
     if not isinstance(steps,list) or not 1<=len(steps)<=6:raise ValueError('Avatar step count')
     result=[];total=0.;last_sentence=0
     for item in steps:
-        if not isinstance(item,dict) or set(item)-{'kind','emotion','variant','direction','duration_s','sentence'}:raise ValueError('Avatar fields')
+        if not isinstance(item,dict) or set(item)-{'kind','emotion','variant','direction','scope','duration_s','sentence'}:raise ValueError('Avatar fields')
         kind=item.get('kind')
         if kind not in KINDS:raise ValueError('Avatar kind')
-        duration=item.get('duration_s',4. if kind=='spin' else 2.)
+        duration=item.get('duration_s',4.8 if kind=='somersault' else 4. if kind=='spin' else 2.)
         sentence=item.get('sentence',last_sentence)
         if isinstance(duration,bool) or not isinstance(duration,(float,int)) or not math.isfinite(duration) or not 1<=duration<=6:raise ValueError('Avatar duration')
         if type(sentence) is not int or not last_sentence<=sentence<=11:raise ValueError('Avatar sentence order')
-        if kind=='spin':duration=max(3.,duration)
+        if kind in ('spin','somersault'):duration=max(3.,duration)
         if kind=='carousel':duration=6.
         step={'kind':kind,'duration_s':duration,'sentence':sentence}
-        for key,allowed,default in (('emotion',EMOTIONS,None),('variant',VARIANTS,'cheeky'),('direction',('clockwise','counterclockwise'),'clockwise')):
+        directions=('forward','backward') if kind=='somersault' else ('clockwise','counterclockwise')
+        for key,allowed,default in (('emotion',EMOTIONS,None),('variant',VARIANTS,'cheeky'),('direction',directions,'forward' if kind=='somersault' else 'clockwise')):
             value=item.get(key,default)
             if key in item and value not in allowed:raise ValueError('Avatar '+key)
-            if (key=='emotion' and kind=='emotion') or (key=='variant' and kind=='grimace') or (key=='direction' and kind in ('spin','carousel')):
+            if (key=='emotion' and kind=='emotion') or (key=='variant' and kind=='grimace') or (key=='direction' and kind in ('spin','carousel','somersault')):
                 if value not in allowed:raise ValueError('Missing avatar '+key)
                 step[key]=value
+        if 'scope' in item:
+            if kind not in ('spin','carousel') or item['scope'] not in ('head','body'):raise ValueError('Avatar scope')
+            step['scope']=item['scope']
         total+=duration;last_sentence=sentence;result.append(step)
     if total>24:raise ValueError('Avatar duration budget')
     return result

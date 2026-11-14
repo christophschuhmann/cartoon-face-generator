@@ -1,0 +1,1513 @@
+{
+  "runs": [
+    {
+      "classes": 527,
+      "ages": [
+        2442.4745985969676,
+        2572.6653000189326,
+        2829.5281118103157,
+        2800.860544217685,
+        2861.497957657797
+      ],
+      "rows": [
+        {
+          "start": 0,
+          "end": 0.1,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 0.1,
+          "end": 0.2,
+          "status": "evaluated",
+          "inference_ms": 2332.7628523111343,
+          "finite_scores": 527
+        },
+        {
+          "start": 0.2,
+          "end": 0.3,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 0.3,
+          "end": 0.4,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 0.4,
+          "end": 0.5,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 0.5,
+          "end": 0.6,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 0.6,
+          "end": 0.7,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 0.7,
+          "end": 0.8,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 0.8,
+          "end": 0.9,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 0.9,
+          "end": 1,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 1,
+          "end": 1.1,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 1.1,
+          "end": 1.2,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 1.2,
+          "end": 1.3,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 1.3,
+          "end": 1.4,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 1.4,
+          "end": 1.5,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 1.5,
+          "end": 1.6,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 1.6,
+          "end": 1.7,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 1.7,
+          "end": 1.8,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 1.8,
+          "end": 1.9,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 1.9,
+          "end": 2,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 2,
+          "end": 2.1,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 2.1,
+          "end": 2.2,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 2.2,
+          "end": 2.3,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 2.3,
+          "end": 2.4,
+          "status": "evaluated",
+          "inference_ms": 2304.9861937761307,
+          "finite_scores": 527
+        },
+        {
+          "start": 2.4,
+          "end": 2.5,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 2.5,
+          "end": 2.6,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 2.6,
+          "end": 2.7,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 2.7,
+          "end": 2.8,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 2.8,
+          "end": 2.9,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 2.9,
+          "end": 3,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 3,
+          "end": 3.1,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 3.1,
+          "end": 3.2,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 3.2,
+          "end": 3.3,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 3.3,
+          "end": 3.4,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 3.4,
+          "end": 3.5,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 3.5,
+          "end": 3.6,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 3.6,
+          "end": 3.7,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 3.7,
+          "end": 3.8,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 3.8,
+          "end": 3.9,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 3.9,
+          "end": 4,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 4,
+          "end": 4.1,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 4.1,
+          "end": 4.2,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 4.2,
+          "end": 4.3,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 4.3,
+          "end": 4.4,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 4.4,
+          "end": 4.5,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 4.5,
+          "end": 4.6,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 4.6,
+          "end": 4.7,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 4.7,
+          "end": 4.8,
+          "status": "evaluated",
+          "inference_ms": 2628.2203793525696,
+          "finite_scores": 527
+        },
+        {
+          "start": 4.8,
+          "end": 4.9,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 4.9,
+          "end": 5,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 5,
+          "end": 5.1,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 5.1,
+          "end": 5.2,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 5.2,
+          "end": 5.3,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 5.3,
+          "end": 5.4,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 5.4,
+          "end": 5.5,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 5.5,
+          "end": 5.6,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 5.6,
+          "end": 5.7,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 5.7,
+          "end": 5.8,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 5.8,
+          "end": 5.9,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 5.9,
+          "end": 6,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 6,
+          "end": 6.1,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 6.1,
+          "end": 6.2,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 6.2,
+          "end": 6.3,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 6.3,
+          "end": 6.4,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 6.4,
+          "end": 6.5,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 6.5,
+          "end": 6.6,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 6.6,
+          "end": 6.7,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 6.7,
+          "end": 6.8,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 6.8,
+          "end": 6.9,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 6.9,
+          "end": 7,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 7,
+          "end": 7.1,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 7.1,
+          "end": 7.2,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 7.2,
+          "end": 7.3,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 7.3,
+          "end": 7.4,
+          "status": "evaluated",
+          "inference_ms": 2564.549520611763,
+          "finite_scores": 527
+        },
+        {
+          "start": 7.4,
+          "end": 7.5,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 7.5,
+          "end": 7.6,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 7.6,
+          "end": 7.7,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 7.7,
+          "end": 7.8,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 7.8,
+          "end": 7.9,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 7.9,
+          "end": 8,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 8,
+          "end": 8.1,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 8.1,
+          "end": 8.2,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 8.2,
+          "end": 8.3,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 8.3,
+          "end": 8.4,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 8.4,
+          "end": 8.5,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 8.5,
+          "end": 8.6,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 8.6,
+          "end": 8.7,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 8.7,
+          "end": 8.8,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 8.8,
+          "end": 8.9,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 8.9,
+          "end": 9,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 9,
+          "end": 9.1,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 9.1,
+          "end": 9.2,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 9.2,
+          "end": 9.3,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 9.3,
+          "end": 9.4,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 9.4,
+          "end": 9.5,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 9.5,
+          "end": 9.6,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 9.6,
+          "end": 9.7,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 9.7,
+          "end": 9.8,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 9.8,
+          "end": 9.9,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 9.9,
+          "end": 10,
+          "status": "evaluated",
+          "inference_ms": 2447.710692882538,
+          "finite_scores": 527
+        },
+        {
+          "start": 10,
+          "end": 10.1,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 10.1,
+          "end": 10.2,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        }
+      ],
+      "settings": {
+        "taxonomy": "classic",
+        "selected_ids": null,
+        "hop_ms": 100,
+        "window_s": 10,
+        "context": "",
+        "use_context": true,
+        "repeat_target": false,
+        "method": "multilabel",
+        "group_size": 64,
+        "feedback": false,
+        "ema_ms": 200,
+        "on_threshold": 0.6,
+        "off_threshold": 0.4,
+        "gap_ms": 0
+      },
+      "duration": 10.2,
+      "wire": [
+        {
+          "received": 31573.799995422363,
+          "capture": 29160.825396825396,
+          "targetEnd": 0.2,
+          "bytes": 18106,
+          "capturedUntil": 2.4
+        },
+        {
+          "received": 33890.69999694824,
+          "capture": 31354.23469387755,
+          "targetEnd": 2.4,
+          "bytes": 18117,
+          "capturedUntil": 4.8
+        },
+        {
+          "received": 36530.29999542236,
+          "capture": 33756.87188208617,
+          "targetEnd": 4.8,
+          "bytes": 18038,
+          "capturedUntil": 7.4
+        },
+        {
+          "received": 39108.899993896484,
+          "capture": 36359.83945273056,
+          "targetEnd": 7.4,
+          "bytes": 18009,
+          "capturedUntil": 10
+        },
+        {
+          "received": 41773.399993896484,
+          "capture": 38956.302037764566,
+          "targetEnd": 10,
+          "bytes": 18033,
+          "capturedUntil": 10.2
+        }
+      ]
+    },
+    {
+      "classes": 527,
+      "ages": [
+        2507.4721134211723,
+        2619.334917583161,
+        2651.2977354780596,
+        2819.0605487953217,
+        3199.5954633267247
+      ],
+      "rows": [
+        {
+          "start": 0,
+          "end": 0.2,
+          "status": "evaluated",
+          "inference_ms": 2395.4804092645645,
+          "finite_scores": 527
+        },
+        {
+          "start": 0.2,
+          "end": 0.4,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 0.4,
+          "end": 0.6,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 0.6,
+          "end": 0.8,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 0.8,
+          "end": 1,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 1,
+          "end": 1.2,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 1.2,
+          "end": 1.4,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 1.4,
+          "end": 1.6,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 1.6,
+          "end": 1.8,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 1.8,
+          "end": 2,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 2,
+          "end": 2.2,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 2.2,
+          "end": 2.4,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 2.4,
+          "end": 2.6,
+          "status": "evaluated",
+          "inference_ms": 2494.3002834916115,
+          "finite_scores": 527
+        },
+        {
+          "start": 2.6,
+          "end": 2.8,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 2.8,
+          "end": 3,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 3,
+          "end": 3.2,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 3.2,
+          "end": 3.4,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 3.4,
+          "end": 3.6,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 3.6,
+          "end": 3.8,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 3.8,
+          "end": 4,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 4,
+          "end": 4.2,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 4.2,
+          "end": 4.4,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 4.4,
+          "end": 4.6,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 4.6,
+          "end": 4.8,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 4.8,
+          "end": 5,
+          "status": "evaluated",
+          "inference_ms": 2420.908510684967,
+          "finite_scores": 527
+        },
+        {
+          "start": 5,
+          "end": 5.2,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 5.2,
+          "end": 5.4,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 5.4,
+          "end": 5.6,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 5.6,
+          "end": 5.8,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 5.8,
+          "end": 6,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 6,
+          "end": 6.2,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 6.2,
+          "end": 6.4,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 6.4,
+          "end": 6.6,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 6.6,
+          "end": 6.8,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 6.8,
+          "end": 7,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 7,
+          "end": 7.2,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 7.2,
+          "end": 7.4,
+          "status": "evaluated",
+          "inference_ms": 2545.4327538609505,
+          "finite_scores": 527
+        },
+        {
+          "start": 7.4,
+          "end": 7.6,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 7.6,
+          "end": 7.8,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 7.8,
+          "end": 8,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 8,
+          "end": 8.2,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 8.2,
+          "end": 8.4,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 8.4,
+          "end": 8.6,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 8.6,
+          "end": 8.8,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 8.8,
+          "end": 9,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 9,
+          "end": 9.2,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 9.2,
+          "end": 9.4,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 9.4,
+          "end": 9.6,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 9.6,
+          "end": 9.8,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 9.8,
+          "end": 10,
+          "status": "evaluated",
+          "inference_ms": 2470.648303627968,
+          "finite_scores": 527
+        },
+        {
+          "start": 10,
+          "end": 10.2,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        }
+      ],
+      "settings": {
+        "taxonomy": "classic",
+        "selected_ids": null,
+        "hop_ms": 200,
+        "window_s": 10,
+        "context": "",
+        "use_context": true,
+        "repeat_target": false,
+        "method": "multilabel",
+        "group_size": 64,
+        "feedback": false,
+        "ema_ms": 200,
+        "on_threshold": 0.6,
+        "off_threshold": 0.4,
+        "gap_ms": 0
+      },
+      "duration": 10.2,
+      "wire": [
+        {
+          "received": 45845.399993896484,
+          "capture": 43360.12788505295,
+          "targetEnd": 0.2,
+          "bytes": 18145,
+          "capturedUntil": 2.6
+        },
+        {
+          "received": 48347.69999694824,
+          "capture": 45752.06507631332,
+          "targetEnd": 2.6,
+          "bytes": 18061,
+          "capturedUntil": 5
+        },
+        {
+          "received": 50780.5,
+          "capture": 48154.20226452194,
+          "targetEnd": 5,
+          "bytes": 18062,
+          "capturedUntil": 7.4
+        },
+        {
+          "received": 53334.399993896484,
+          "capture": 50556.5394496788,
+          "targetEnd": 7.4,
+          "bytes": 18018,
+          "capturedUntil": 10
+        },
+        {
+          "received": 56315.399993896484,
+          "capture": 53156.30453056976,
+          "targetEnd": 10,
+          "bytes": 18068,
+          "capturedUntil": 10.2
+        }
+      ]
+    },
+    {
+      "classes": 527,
+      "ages": [
+        2753.0442176870783,
+        2665.607034056098,
+        2774.1698427957235,
+        2635.6326530612278,
+        2733.1954694302403
+      ],
+      "rows": [
+        {
+          "start": 0,
+          "end": 0.3,
+          "status": "evaluated",
+          "inference_ms": 2541.1523208022118,
+          "finite_scores": 527
+        },
+        {
+          "start": 0.3,
+          "end": 0.6,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 0.6,
+          "end": 0.9,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 0.9,
+          "end": 1.2,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 1.2,
+          "end": 1.5,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 1.5,
+          "end": 1.8,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 1.8,
+          "end": 2.1,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 2.1,
+          "end": 2.4,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 2.4,
+          "end": 2.7,
+          "status": "evaluated",
+          "inference_ms": 2311.215676367283,
+          "finite_scores": 527
+        },
+        {
+          "start": 2.7,
+          "end": 3,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 3,
+          "end": 3.3,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 3.3,
+          "end": 3.6,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 3.6,
+          "end": 3.9,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 3.9,
+          "end": 4.2,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 4.2,
+          "end": 4.5,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 4.5,
+          "end": 4.8,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 4.8,
+          "end": 5.1,
+          "status": "evaluated",
+          "inference_ms": 2485.251136124134,
+          "finite_scores": 527
+        },
+        {
+          "start": 5.1,
+          "end": 5.4,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 5.4,
+          "end": 5.7,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 5.7,
+          "end": 6,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 6,
+          "end": 6.3,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 6.3,
+          "end": 6.6,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 6.6,
+          "end": 6.9,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 6.9,
+          "end": 7.2,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 7.2,
+          "end": 7.5,
+          "status": "evaluated",
+          "inference_ms": 2259.540483355522,
+          "finite_scores": 527
+        },
+        {
+          "start": 7.5,
+          "end": 7.8,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 7.8,
+          "end": 8.1,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 8.1,
+          "end": 8.4,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 8.4,
+          "end": 8.7,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 8.7,
+          "end": 9,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 9,
+          "end": 9.3,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 9.3,
+          "end": 9.6,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        },
+        {
+          "start": 9.6,
+          "end": 9.9,
+          "status": "evaluated",
+          "inference_ms": 2321.026623249054,
+          "finite_scores": 527
+        },
+        {
+          "start": 9.9,
+          "end": 10,
+          "status": "skipped",
+          "inference_ms": null,
+          "finite_scores": 0
+        }
+      ],
+      "settings": {
+        "taxonomy": "classic",
+        "selected_ids": null,
+        "hop_ms": 300,
+        "window_s": 10,
+        "context": "",
+        "use_context": true,
+        "repeat_target": false,
+        "method": "multilabel",
+        "group_size": 64,
+        "feedback": false,
+        "ema_ms": 200,
+        "on_threshold": 0.6,
+        "off_threshold": 0.4,
+        "gap_ms": 0
+      },
+      "duration": 10,
+      "wire": [
+        {
+          "received": 60375,
+          "capture": 57649.755777735285,
+          "targetEnd": 0.3,
+          "bytes": 18146,
+          "capturedUntil": 2.8
+        },
+        {
+          "received": 62690.09999847412,
+          "capture": 60052.3929659439,
+          "targetEnd": 2.7,
+          "bytes": 18043,
+          "capturedUntil": 5.2
+        },
+        {
+          "received": 65181.399993896484,
+          "capture": 62443.9301556784,
+          "targetEnd": 5.1,
+          "bytes": 18054,
+          "capturedUntil": 7.6
+        },
+        {
+          "received": 67450.29999542236,
+          "capture": 64846.567343887014,
+          "targetEnd": 7.5,
+          "bytes": 18024,
+          "capturedUntil": 10
+        },
+        {
+          "received": 69945.5,
+          "capture": 67248.90452904388,
+          "targetEnd": 9.9,
+          "bytes": 18029,
+          "capturedUntil": 10
+        }
+      ]
+    }
+  ],
+  "warm_file_wall_ms": 22901,
+  "completed": true
+}

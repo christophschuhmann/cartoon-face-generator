@@ -56,13 +56,15 @@ class SentenceDecisionIdentity:
         epoch=s.admission_epoch
         if self.cached and self.cached[0]==owner and self.cached[1]==epoch and 0<=at-self.cached[2]<=.48:
             return self.cached[3]
-        wave=s.audio(max(s.segment_floor,s.begin if s.begin is not None else at-3.04,at-3.04),at)
+        wave=s.identity_audio(max(s.segment_floor,s.begin if s.begin is not None else at-3.04,at-3.04),at)
         if len(wave)<10240:return None
         cached=s.prefetched
         vector=(cached.get('embedding') if cached and cached['epoch']==s.epoch and 0<=at-cached['at']<=.96 else None)
         try:
             if vector is None:vector=await asyncio.to_thread(get_cached_teacher().embed,enrollment_reference(wave))
         except Exception:return None
+        isolation=getattr(s.c,'input_isolation',None)
+        if isolation and not isolation.admit(s.preview,vector):return None
         if epoch!=s.admission_epoch or owner!=s.focus.active(s.memory.users,s.c.speaking):return None
         fast=s.fast_vector(max(s.segment_floor,at-3.04),at)
         from sentence_session import voice_level

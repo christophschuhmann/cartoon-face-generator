@@ -7,6 +7,11 @@ export function playbackStart(context,next,firstReply,reserve=.45){
  // This is a real scheduling reserve, NOT a fabricated Second Ear offset.
  return Math.max(next,context.currentTime+deviceLead+(firstReply ? reserve : 0));
 }
+export function initialReserve(seconds,adaptive=.18,quick=false){
+ // A verified >=800-ms first block already contains ample runway. A past
+ // inter-sentence generation gap must not permanently delay every new reply.
+ return seconds>=.8 ? .18 : Math.max(quick?.22:.3,Math.min(.35,adaptive));
+}
 const WORKLET=`
 class Mic16k extends AudioWorkletProcessor {
  constructor(){super();this.step=sampleRate/16000;this.pos=-1;this.prev=0;this.out=new Float32Array(320);this.n=0;this.t0=0;}
@@ -99,19 +104,14 @@ export class RoboClient {
   for(let i=0;i<pcm.length;i++)ch[i]=pcm[i]/32768;
   const source=this.ctx.createBufferSource();source.roboId=id;source.buffer=b;source.connect(this.output);
   const firstReply=!!id&&!this.queued[id];
-  // Optional override for latency experiments (robby.startReserveMs). Measured:
-  // 160 ms saved ~120 ms but caused 0.2-0.35 s gaps in 5 of 12 browser runs,
-  // so the default keeps the original 0.3 s / 0.18 s cushion.
-  if(this.startupReserve===undefined){let ms=NaN;try{ms=Number(localStorage.getItem('robby.startReserveMs'));}catch{}this.fixedReserve=Number.isFinite(ms)&&ms>0?ms/1000:null;this.startupReserve=this.fixedReserve??.18;}
+  this.startupReserve??=.18;
   if(id&&!firstReply&&this.next>0){const gap=Math.max(0,this.ctx.currentTime-this.next);
-   if(gap>.02){this.startupReserve=Math.min(.65,Math.max(this.startupReserve,gap+.12));this.metrics.underflows=(this.metrics.underflows||0)+1;this.metrics.max_gap_ms=Math.max(this.metrics.max_gap_ms||0,gap*1000);}}
+   if(gap>.02){this.startupReserve=Math.min(.35,Math.max(this.startupReserve,gap+.12));this.metrics.underflows=(this.metrics.underflows||0)+1;this.metrics.max_gap_ms=Math.max(this.metrics.max_gap_ms||0,gap*1000);}}
   // The short optional reaction has 160-ms TTS chunks. Keep adaptive recovery
   // after an underrun. A 220-ms reserve covers admission of the second TTS
   // prefix while keeping warm first playback below the old 300-ms floor.
-  const reserve=id===this.quickReplyId
-   ? Math.max(.22,this.startupReserve)
-   : this.fixedReserve!==null?this.startupReserve:Math.max(this.startupReserve,b.duration<.8?.3:.18);
-  if(firstReply)this.metrics.startup_buffer_ms=reserve*1000;
+  const reserve=initialReserve(b.duration,this.startupReserve,id===this.quickReplyId);
+  if(firstReply){this.metrics.startup_buffer_ms=reserve*1000;this.startupReserve=.18+(this.startupReserve-.18)*.5;}
   const start=playbackStart(this.ctx,this.next,firstReply,reserve),end=start+b.duration;
   const first=this.queued[id]||0;this.queued[id]=first+pcm.length;
   if(id)this.clock.add(id,start,pcm.length,first);

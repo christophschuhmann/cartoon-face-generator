@@ -69,6 +69,11 @@ async def render(client,live,*,text,identity,history,queue,first_main,reaction_t
             if role=='answer' and actions:actions_sent=True
             resampler=StreamingAudioResampler(48000,24000);envelope=AudioEnvelope() if role!='answer' else None;played=False
             async for event in live.events(job):
+                if event['event']=='speech_retry':
+                    metrics.setdefault('tts_retries',[]).append({'sentence':index,**event})
+                    yield 'status',{'stage':'speech_retry','text':'Preparing this sentence again; no audio from it has been played.',
+                        'attempt':event['attempt'],'max_attempts':event['max_attempts']}
+                    continue
                 if event['event']=='job_done':
                     metrics.setdefault('tts_server_stages',[]).append({k:event.get(k) for k in ['generation_ms','alignment_ms','alignment','frames','live_alignment']})
                     continue

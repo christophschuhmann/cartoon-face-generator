@@ -149,6 +149,8 @@ export function createDeskRobotRig(container){
   return Math.hypot(...n)>1e-5?[{indices,normal:unit(n)}]:[];
  });
  let cp=1,sp=0,ct=1,st=0,cv=1,sv=0,ce=1,se=0,bodyCache=null,actionPan=0,actionTilt=0;
+ let bodySpin=0,bodyFlip=0,bodyLift=0,bodySquash=1,framing=0;
+ let cb=1,sb=0,cf=1,sf=0;
  let smooth=pose(),controls=normalizeControls(),last={},showPoints=false,lastRender=-1,renderCount=0,totalRenderMs=0,durations=[],disposed=false;
  let width=500,height=490,drag=null;
  const ro=new ResizeObserver(()=>{const rect=container.getBoundingClientRect();width=Math.max(1,rect.width);height=Math.max(1,rect.height);
@@ -159,7 +161,10 @@ export function createDeskRobotRig(container){
   canvas.style.width=width+'px';canvas.style.height=height+'px';surface.resize(w,h);});ro.observe(container);
  function rotateNormal(p,group){let q=p;
   if(['head','trim','display','mount'].includes(group))q=[p[0],p[1]*ct+p[2]*st,-p[1]*st+p[2]*ct];
-  return group==='base'?q:[q[0]*cp+q[2]*sp,q[1],-q[0]*sp+q[2]*cp];
+  if(group!=='base')q=[q[0]*cp+q[2]*sp,q[1],-q[0]*sp+q[2]*cp];
+  if(bodySquash!==1)q=unit([q[0],q[1]/bodySquash,q[2]]);
+  q=[q[0],q[1]*cf-q[2]*sf,q[1]*sf+q[2]*cf];
+  return [q[0]*cb+q[2]*sb,q[1],-q[0]*sb+q[2]*cb];
  }
  function transform(p,group){
   let q=p;
@@ -169,24 +174,36 @@ export function createDeskRobotRig(container){
   }
   if(group!=='base')q=[q[0]*cp+q[2]*sp,q[1],-q[0]*sp+q[2]*cp];
   if(group==='base'&&state.exploded)q=[q[0],q[1]-state.exploded*(q[1]<13?22:0),q[2]];
-  return q;
+  // Apply the stunt after head articulation, to EVERY mesh and the display.
+  // Squat is floor-anchored; flight rotates around the robot's shared centre.
+  q=[q[0],q[1]*bodySquash-155,q[2]];
+  q=[q[0],q[1]*cf-q[2]*sf+155+bodyLift,q[1]*sf+q[2]*cf];
+  return [q[0]*cb+q[2]*sb,q[1],-q[0]*sb+q[2]*cb];
  }
  function viewVector(p){const x=p[0]*cv-p[2]*sv,z=p[0]*sv+p[2]*cv;return [x,p[1]*ce-z*se,p[1]*se+z*ce];}
- function view(p){return viewVector([p[0],p[1]-220,p[2]]);}
- function project(p){const q=view(p),depth=Math.max(100,state.distance-q[2]),s=Math.min(width/360,height/380)*650/depth;
+ function view(p){return viewVector([p[0],p[1]-(220+110*framing),p[2]]);}
+ function project(p){const q=view(p),depth=Math.max(100,state.distance+300*framing-q[2]),s=Math.min(width/360,height/380)*650/depth;
   return [width*.5+q[0]*s,height*.28-q[1]*s,depth];}
- function facing(world,normal){const p=view(world),n=viewVector(normal);return dot(n,[-p[0],-p[1],state.distance-p[2]])>0;}
+ function facing(world,normal){const p=view(world),n=viewVector(normal);return dot(n,[-p[0],-p[1],state.distance+300*framing-p[2]])>0;}
  const light=unit([-.5,.8,.75]),halfLight=unit([-.25,.4,1]);
  function render(time){
   const pan=rad(Math.round((state.pan+actionPan)*50)/50),tilt=rad(Math.round(clamp(state.tilt+actionTilt,-15,15)*50)/50);
   cp=Math.cos(pan);sp=Math.sin(pan);ct=Math.cos(tilt);st=Math.sin(tilt);
+  cb=Math.cos(rad(bodySpin));sb=Math.sin(rad(bodySpin));cf=Math.cos(rad(bodyFlip));sf=Math.sin(rad(bodyFlip));
   cv=Math.cos(state.view);sv=Math.sin(state.view);ce=Math.cos(state.elevation);se=Math.sin(state.elevation);
-  const started=performance.now(),ratio=canvas.width/width;ctx.setTransform(ratio,0,0,ratio,0,0);ctx.clearRect(0,0,width,height);
+  const started=performance.now();
+  // A moving whole body invalidates the static raster cache. Bound its pixel
+  // workload on CPU during the trick, then restore normal resolution at rest.
+  const movingBody=!!(bodySpin||bodyFlip||framing);
+  const targetRatio=movingBody?Math.min(devicePixelRatio||1,1.5,360/Math.max(width,height)):Math.min(devicePixelRatio||1,1.5);
+  const rw=Math.max(1,Math.round(width*targetRatio)),rh=Math.max(1,Math.round(height*targetRatio));
+  if(canvas.width!==rw)canvas.width=rw;if(canvas.height!==rh)canvas.height=rh;
+  const ratio=canvas.width/width;ctx.setTransform(ratio,0,0,ratio,0,0);ctx.clearRect(0,0,width,height);
   const foot=project([0,0,0]);ctx.save();ctx.translate(foot[0],foot[1]);ctx.scale(1,.18);
   const shadow=ctx.createRadialGradient(0,0,5,0,0,width*.29);shadow.addColorStop(0,'#41516b30');shadow.addColorStop(1,'#41516b00');ctx.fillStyle=shadow;ctx.beginPath();ctx.arc(0,0,width*.29,0,2*PI);ctx.fill();ctx.restore();
   if(state.blueprint){ctx.strokeStyle='#93a8b72b';ctx.lineWidth=.7;for(let i=-150;i<=150;i+=50){for(const line of [[[i,0,-150],[i,0,150]],[[-150,0,i],[150,0,i]]]){ctx.beginPath();ctx.moveTo(...project(line[0]).slice(0,2));ctx.lineTo(...project(line[1]).slice(0,2));ctx.stroke();}}}
   surface.resize(canvas.width,canvas.height);surface.begin();let visibleFaces=0;
-  const cacheKey=[pan,tilt,state.view,state.elevation,state.distance,state.exploded,canvas.width,canvas.height].join('/');
+  const cacheKey=[pan,tilt,bodySpin,bodyFlip,bodyLift,bodySquash,framing,state.view,state.elevation,state.distance,state.exploded,canvas.width,canvas.height].join('/');
   const lighting=n=>{const diffuse=Math.max(0,dot(n,light)),shine=Math.pow(Math.max(0,dot(n,halfLight)),20);return .62+.32*diffuse+.06*shine;};
   if(bodyCache?.key===cacheKey){surface.bytes.set(bodyCache.pixels);surface.depth.set(bodyCache.depth);visibleFaces=bodyCache.visibleFaces;}
   else {for(const mesh of meshes){
@@ -219,7 +236,10 @@ export function createDeskRobotRig(container){
   }
   const ms=performance.now()-started;renderCount++;totalRenderMs+=ms;durations.push(ms);if(durations.length>120)durations.shift();
   const sorted=[...durations].sort((a,b)=>a-b);
-   last={...last,pan:state.pan,tilt:state.tilt,visualPan:state.pan+actionPan,visualTilt:clamp(state.tilt+actionTilt,-15,15),roll:0,dimensions:DIMENSIONS,renderer:'CPU z-buffer · smooth vertex normals · no WebGL',
+   last={...last,pan:state.pan,tilt:state.tilt,visualPan:state.pan+actionPan+bodySpin,visualTilt:clamp(state.tilt+actionTilt,-15,15),roll:0,
+   bodySpin,bodyFlip,bodyLift,bodySquash,stuntFraming:framing,rasterWidth:canvas.width,rasterHeight:canvas.height,
+   baseCenter:transform([0,35,0],'base'),baseFront:transform([0,35,110],'base'),
+   dimensions:DIMENSIONS,renderer:'CPU z-buffer · smooth vertex normals · no WebGL',
    meshFaces:meshes.reduce((n,m)=>n+m.polys.length,0),visibleFaces,renderCount,triangles:surface.triangles,
    smoothShading:true,depthBuffer:true,controls:{...controls},
    renderMs:ms,renderP50Ms:sorted[Math.floor(sorted.length*.5)],renderP95Ms:sorted[Math.floor(sorted.length*.95)],
@@ -242,6 +262,9 @@ export function createDeskRobotRig(container){
   center(){state.view=0;state.elevation=0;state.distance=650;state.manual=false;state.tour=false;},
   update(input={},dtMs=16.7,timeMs=0){if(disposed)return last;
    const motion=input.actionMotion||{};actionPan=clamp(motion.pan,-20,20)+clamp(motion.spin,-1080,1080);actionTilt=clamp(motion.tilt,-12,12);
+   bodySpin=clamp(motion.bodySpin,-1080,1080);bodyFlip=clamp(motion.bodyFlip,-360,360);
+   bodyLift=clamp(motion.bodyLift,0,150);bodySquash=Number.isFinite(motion.bodySquash)?clamp(motion.bodySquash,.85,1.05):1;
+   framing=clamp(motion.framing,0,1);
    const dt=clamp(dtMs,0,100),alpha=1-Math.exp(-dt/160),target=input.pose||pose();smooth=input.freezeExpression?target:{...mix(smooth,target,alpha),slug:target.slug};
    const c=normalizeControls(input);for(const key in controls)controls[key]+=alpha*(c[key]-controls[key]);
    const gesture=smooth.gesture;

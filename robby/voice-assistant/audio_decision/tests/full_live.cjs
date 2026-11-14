@@ -1,0 +1,17 @@
+const{chromium}=require(process.env.PLAYWRIGHT_MODULE||'/tmp/small-browser.aCvxhY/node_modules/playwright');const fs=require('fs'),path=require('path'),assert=require('assert');
+const report={runs:[]},save=()=>fs.writeFileSync(path.resolve(__dirname,'full-live-result.json'),JSON.stringify(report,null,2));
+(async()=>{const b=await chromium.launch({executablePath:'/usr/bin/google-chrome',headless:true,args:['--no-sandbox','--use-fake-device-for-media-stream','--use-fake-ui-for-media-stream','--use-file-for-fake-audio-capture='+path.resolve(__dirname,'fixtures/beeps.wav')]});try{const c=await b.newContext({permissions:['microphone']}),p=await c.newPage();
+await p.addInitScript(()=>{window.__wire=[];const Native=WebSocket;window.WebSocket=class extends Native{constructor(...args){super(...args);this.addEventListener('message',e=>{try{const m=JSON.parse(e.data);if(m.type==='result')window.__wire.push({received:performance.now(),capture:m.capture_end_client_ms,targetEnd:m.row.end_s,bytes:e.data.length,capturedUntil:m.captured_until_s});}catch{}});}};});
+await p.goto(process.env.AUDIO_DECISION_URL||'https://diane-asylum-understood-invoice.trycloudflare.com/audio-decision/',{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>audioDecisionState.taxonomy);await p.locator('#taxonomy').selectOption('classic');await p.locator('summary').filter({hasText:'Class selection'}).click();await p.locator('#fastPreset').click();
+// Warm the actual full-class path through a real file job before timing live sessions.
+await p.locator('#file').setInputFiles(path.resolve(__dirname,'fixtures/beeps.wav'));await p.waitForFunction(()=>audioDecisionState.asset);
+await p.locator('#hop').evaluate(e=>{e.value='1000';e.dispatchEvent(new Event('input'));});
+const warmStart=Date.now();await p.locator('#analyze').click();await p.waitForFunction(()=>audioDecisionState.rows.length>=4&&!audioDecisionState.busy,{},{timeout:180000});report.warm_file_wall_ms=Date.now()-warmStart;
+assert(await p.evaluate(()=>audioDecisionState.rows.every(r=>r.status==='evaluated'&&r.raw.length===527)));save();
+await p.locator('[data-mode="live"]').click();
+for(const hop of [100,200,300]){
+ await p.locator('#hop').evaluate((e,v)=>{e.value=String(v);e.dispatchEvent(new Event('input'));},hop);await p.evaluate(()=>window.__wire=[]);
+ const previousJob=await p.evaluate(()=>audioDecisionState.job);await p.locator('#live').click();await p.waitForFunction(old=>audioDecisionState.job!==old,previousJob,{timeout:30000});await p.waitForFunction(()=>audioDecisionState.liveAges.length>=4,{},{timeout:120000});await p.locator('#stopLive').click();await p.waitForFunction(()=>!audioDecisionState.busy,{},{timeout:60000});
+ const r=await p.evaluate(()=>({classes:audioDecisionState.classes.length,ages:audioDecisionState.liveAges,rows:audioDecisionState.rows.map(r=>({start:r.start_s,end:r.end_s,status:r.status,inference_ms:r.inference_ms,finite_scores:r.raw.filter(x=>Number.isFinite(x)).length})),settings:audioDecisionState.used,duration:audioDecisionState.duration,wire:window.__wire}));assert.equal(r.classes,527);assert(r.rows.filter(r=>r.status==='evaluated').every(r=>r.finite_scores===527));report.runs.push(r);save();console.log(JSON.stringify({hop,classes:r.classes,ages:r.ages,rows:r.rows.length,evaluated:r.rows.filter(r=>r.status==='evaluated').length}));
+}
+report.completed=true;save();}finally{await b.close()}})().catch(e=>{report.error=e.message;save();console.error(e);process.exit(1)});

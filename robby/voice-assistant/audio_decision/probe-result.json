@@ -1,0 +1,121 @@
+{
+  "model_load_ms": 19620.549380779266,
+  "outputs": [
+    {
+      "repeat_target": false,
+      "method": "binary",
+      "scores": {
+        "beep": 0.604660157290854,
+        "speech": 0.2621952392303268,
+        "music": 0.37348499102372823
+      },
+      "failures": [],
+      "inference_ms": 11893.124736845493,
+      "groups": [
+        {
+          "ids": [
+            "beep",
+            "speech",
+            "music"
+          ],
+          "ms": 11892.866656184196
+        }
+      ],
+      "input_tokens": 340,
+      "reuse": {
+        "audio_encoder_calls": 1,
+        "audio_feature_cache_hits": 0,
+        "prefix_cache_hits": 0
+      },
+      "allocated_mb": 4157.224609375,
+      "reserved_mb": 5612.0
+    },
+    {
+      "repeat_target": false,
+      "method": "multilabel",
+      "scores": {
+        "beep": 0.21342586363137536,
+        "speech": 0.0006627057972057422,
+        "music": 0.009619277872048596
+      },
+      "failures": [],
+      "inference_ms": 283.8888540863991,
+      "groups": [
+        {
+          "ids": [
+            "beep",
+            "speech",
+            "music"
+          ],
+          "ms": 283.5068106651306
+        }
+      ],
+      "input_tokens": 252,
+      "reuse": {
+        "audio_encoder_calls": 1,
+        "audio_feature_cache_hits": 0,
+        "prefix_cache_hits": 0
+      },
+      "allocated_mb": 4157.224609375,
+      "reserved_mb": 5612.0
+    },
+    {
+      "repeat_target": true,
+      "method": "binary",
+      "scores": {
+        "beep": 0.7518473250823531,
+        "speech": 0.19281862473853137,
+        "music": 0.35636089976261454
+      },
+      "failures": [],
+      "inference_ms": 388.4238824248314,
+      "groups": [
+        {
+          "ids": [
+            "beep",
+            "speech",
+            "music"
+          ],
+          "ms": 388.1262466311455
+        }
+      ],
+      "input_tokens": 387,
+      "reuse": {
+        "audio_encoder_calls": 1,
+        "audio_feature_cache_hits": 0,
+        "prefix_cache_hits": 0
+      },
+      "allocated_mb": 4157.224609375,
+      "reserved_mb": 5612.0
+    },
+    {
+      "repeat_target": true,
+      "method": "multilabel",
+      "scores": {
+        "beep": 0.3127552089057899,
+        "speech": 0.00038279684685479275,
+        "music": 0.0020096265610395282
+      },
+      "failures": [],
+      "inference_ms": 301.24884843826294,
+      "groups": [
+        {
+          "ids": [
+            "beep",
+            "speech",
+            "music"
+          ],
+          "ms": 301.0449782013893
+        }
+      ],
+      "input_tokens": 299,
+      "reuse": {
+        "audio_encoder_calls": 1,
+        "audio_feature_cache_hits": 0,
+        "prefix_cache_hits": 0
+      },
+      "allocated_mb": 4157.224609375,
+      "reserved_mb": 5612.0
+    }
+  ]
+}

@@ -1,4 +1,4 @@
-"""Optional CPU ECAPA teacher baseline; no training, GPU or network access.
+"""Pinned ECAPA teacher: CPU baseline or optional private loopback GPU worker.
 
 This is NOT the Nemotron-feature TYGER V2 student. All audio/embeddings remain
 in memory, and speaker identity is an approximate cue, never authentication.
@@ -7,7 +7,8 @@ an already populated HF_HUB_CACHE. Importing this module loads no model.
 """
 from __future__ import annotations
 
-from collections import deque
+from collections import deque, OrderedDict
+import hashlib
 import os
 from pathlib import Path
 import threading
@@ -71,6 +72,11 @@ def enrollment_reference(audio16,seconds=3.04):
     return x[at:at+n].copy()
 
 
+def reference_key(audio16):
+    """Exact PCM identity only; never match different utterances approximately."""
+    return hashlib.sha256(_audio(audio16).tobytes()).digest()
+
+
 class EcapaTeacher:
     """Thread-safe lazy model; embed() returns a unit-length float32 [192].
 
@@ -79,14 +85,16 @@ class EcapaTeacher:
     Calls are serialized to avoid competing CPU inference on the shared model.
     No torch thread setting or other process-global runtime option is changed.
     """
-    def __init__(self, model_root=None, min_seconds=.64, min_rms=1e-5):
+    def __init__(self, model_root=None, min_seconds=.64, min_rms=1e-5,device='cpu'):
         if min_seconds < .64 or min_rms < 0:
             raise ValueError("Need at least 640 ms and a nonnegative silence threshold")
         self.model_root = model_root
+        self.device=device
         self.min_samples = int(np.ceil(min_seconds * SAMPLE_RATE))
         self.min_rms = min_rms
         self._model = None
         self._lock = threading.RLock()
+        self._recent = OrderedDict()
 
     @property
     def loaded(self):
@@ -104,7 +112,7 @@ class EcapaTeacher:
                 source=str(root), overrides={"pretrained_path": str(root)},
                 savedir=None, local_strategy=LocalStrategy.NO_LINK,
                 fetch_config=FetchConfig(allow_network=False, allow_updates=False),
-                run_opts={"device": "cpu"})
+                run_opts={"device": self.device})
             self._model.eval()
         return self._model
 
@@ -115,27 +123,65 @@ class EcapaTeacher:
         if float(np.sqrt(np.mean(x.astype(np.float64)**2))) < self.min_rms:
             raise ValueError("Silent/near-silent audio has no reliable speaker embedding")
         import torch
+        key=reference_key(x)
         with self._lock, torch.inference_mode():
+            now=time.monotonic()
+            for old in list(self._recent):
+                if now-self._recent[old][0]>20:self._recent.pop(old)
+            if key in self._recent:
+                self._recent.move_to_end(key)
+                return self._recent[key][1].copy()
             model = self._load()
-            result = model.encode_batch(torch.from_numpy(x.copy())[None]).reshape(-1)
+            result = model.encode_batch(torch.from_numpy(x.copy())[None].to(self.device)).reshape(-1)
             vector = result.detach().cpu().float().numpy().copy()
-        norm = float(np.linalg.norm(vector))
-        if vector.shape != (EMBEDDING_DIM,) or not np.isfinite(vector).all() or norm < 1e-8:
-            raise ValueError("Teacher returned an invalid speaker embedding")
-        return (vector / norm).astype(np.float32, copy=False)
+            norm = float(np.linalg.norm(vector))
+            if vector.shape != (EMBEDDING_DIM,) or not np.isfinite(vector).all() or norm < 1e-8:
+                raise ValueError("Teacher returned an invalid speaker embedding")
+            vector=(vector/norm).astype(np.float32,copy=False)
+            self._recent[key]=(time.monotonic(),vector.copy())
+            while len(self._recent)>32:self._recent.popitem(last=False)
+            return vector
 
 
 _shared = {}
 _shared_lock = threading.Lock()
 
 
+class RemoteTeacher:
+    """Same pinned FP32 teacher in a bounded loopback GPU worker; CPU fallback."""
+    def __init__(self,root,url):
+        from urllib.parse import urlparse
+        if urlparse(url).hostname not in ('127.0.0.1','localhost','::1'):raise ValueError('Speaker worker must be loopback-only')
+        import httpx
+        self.client=httpx.Client(base_url=url.rstrip('/'),timeout=.8,trust_env=False)
+        self.fallback=EcapaTeacher(root);self.retry_at=0.
+    @property
+    def loaded(self):return True
+    def embed(self,audio16):
+        x=_audio(audio16)
+        if len(x)<10240 or np.mean(x.astype(np.float64)**2)<1e-10:raise ValueError('Need >=640 ms of audible speech')
+        if time.monotonic()>=self.retry_at:
+            try:
+                response=self.client.post('/embed',content=x.astype('<f4').tobytes())
+                response.raise_for_status();row=response.json()
+                v=np.asarray(row['embedding'],np.float32)
+                if row['revision']!=TEACHER_REVISION or v.shape!=(192,) or not np.isfinite(v).all() or abs(float(np.linalg.norm(v))-1)>.001:
+                    raise ValueError('Invalid speaker embedding response')
+                return v
+            except Exception:
+                self.retry_at=time.monotonic()+15
+        return self.fallback.embed(x)
+
+
 def get_cached_teacher(model_root=None):
-    """Share one lazy CPU model per local snapshot in this process."""
+    """Share a pinned teacher or private worker client per snapshot and URL."""
     root = resolve_model_root(model_root)
+    url=os.environ.get('ROBO_SPEAKER_GPU_URL','')
+    key=(str(root),url)
     with _shared_lock:
-        if str(root) not in _shared:
-            _shared[str(root)] = EcapaTeacher(root)
-        return _shared[str(root)]
+        if key not in _shared:
+            _shared[key] = RemoteTeacher(root,url) if url else EcapaTeacher(root)
+        return _shared[key]
 
 
 class StreamingTeacher:

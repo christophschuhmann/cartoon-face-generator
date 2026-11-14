@@ -2,12 +2,12 @@
 export class ASRControls{
  constructor(client){
   this.client=client;this.select=document.getElementById('asr-model');this.status=document.getElementById('asr-model-status');this.cache=document.getElementById('asr-cache-status');
-  this.desired='parakeet_v3';this.active='nemotron';this.connected=false;
+  this.desired='parakeet_ultra';this.active='nemotron';this.connected=false;
   try{
    let saved=localStorage.getItem('robby.asrModel');
-   if(localStorage.getItem('robby.asrDefaultVersion')!=='2'){
-    if(!saved||saved==='nemotron'){saved='parakeet_v3';localStorage.setItem('robby.asrModel',saved);}
-    localStorage.setItem('robby.asrDefaultVersion','2');
+   if(localStorage.getItem('robby.asrDefaultVersion')!=='3'){
+    if(!saved||saved==='parakeet_v3'){saved='parakeet_ultra';localStorage.setItem('robby.asrModel',saved);}
+    localStorage.setItem('robby.asrDefaultVersion','3');
    }
    if([...this.select.options].some(o=>o.value===saved))this.desired=saved;
   }catch{}
@@ -37,9 +37,10 @@ export class ASRControls{
   }
   if(m.type==='asr_settings'){
    this.active=m.selected_model||'nemotron';
-   const name=[...this.select.options].find(o=>o.value===this.active)?.textContent||this.active;
+   const effective=m.effective_final_model||this.active;
+   const name=[...this.select.options].find(o=>o.value===effective)?.textContent||effective;
    this.status.textContent=m.loading_model?'Loading '+this.select.selectedOptions[0].textContent+' in the background… Current recognizer: '+name:
-    `Final transcript: ${name}. Live preview and interruptions: Nemotron. Replies: German by default.`+(m.switch_ms==null?'':` Model switch: ${Math.round(m.switch_ms)} ms.`);
+    `Final transcript: ${name}${m.second_recognizer_enabled===false?' (second recognizer off)':''}. Live preview and interruptions: Nemotron. Replies: German by default.`+(m.switch_ms==null?'':` Model switch: ${Math.round(m.switch_ms)} ms.`);
    if(!m.loading_model&&this.active===this.desired)this.select.value=this.active;
    this.refresh();
   }

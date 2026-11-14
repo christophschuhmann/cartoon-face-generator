@@ -1,0 +1,17 @@
+{
+  "packages": {
+    "torch": "2.6.0+cu124",
+    "transformers": "5.19.0",
+    "huggingface-hub": "2.4.0",
+    "tokenizers": "0.23.3",
+    "fastapi": "0.141.1",
+    "uvicorn": "0.52.1",
+    "numpy": "1.26.4",
+    "soundfile": "0.14.0",
+    "pydantic": "2.13.4"
+  },
+  "gpus": [
+    "0, NVIDIA GeForce RTX 3090, 550.54.15, 24576 MiB",
+    "1, NVIDIA GeForce RTX 3090, 550.54.15, 24576 MiB"
+  ]
+}

@@ -32,3 +32,6 @@ speaker_v5/STOP
 
 .memory/
 memory-data/
+
+# Generated synthetic fixtures are reproducible from test scripts.
+audio_decision/tests/fixtures/

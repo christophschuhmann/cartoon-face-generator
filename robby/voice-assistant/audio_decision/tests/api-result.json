@@ -1,0 +1,16 @@
+{
+  "checks": [
+    "wav upload and HTTP Range playback",
+    "mp3 upload and HTTP Range playback",
+    "m4a upload and HTTP Range playback",
+    "ogg upload and HTTP Range playback",
+    "Cross-session recording isolation",
+    "Invalid media rejected",
+    "Cross-origin writes rejected",
+    "Private model controls not exposed",
+    "Exact analysis cache hit",
+    "Context change starts an independent analysis",
+    "Private cache reset deletes audio and results"
+  ],
+  "completed": true
+}

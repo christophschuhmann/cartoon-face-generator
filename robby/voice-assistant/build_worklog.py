@@ -96,6 +96,8 @@ def main():
     tasks.append(('verification',verification_ok,'Final targeted verification and handoff','Run offline contracts, actual Chromium UI/microphone checks, public-synthetic streamed-echo/stop scenarios and Luna tool checks. Keep failures and limits visible; publish an audited source ZIP. No physical camera/microphone or held-out human speaker accuracy is claimed. Generic semantic-rule accuracy and short-word identity reliability remain separate from local worker availability.'))
     e=lambda x:html.escape(str(x))
     out='''<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Robby worklog and verification</title><style>body{font:16px/1.6 system-ui;max-width:1100px;margin:24px auto;padding:20px;background:#f8f7f3;color:#26343c}article{background:white;border:1px solid #d8dfdc;border-left:5px solid #c89b44;border-radius:14px;padding:16px 20px;margin:14px 0}article.done{border-left-color:#4e8b6c}h1,h2{line-height:1.3}h2{font-size:20px}input{accent-color:#4e8b6c}a{color:#356b79}td,th{padding:9px;border:1px solid #ddd;text-align:left}table{border-collapse:collapse;background:white}pre{white-space:pre-wrap;font-size:12px}.scroll{overflow:auto}</style><nav><a href="/desk-robot/">Open 3D Robby</a> · <a href="/static/threshold-replay.html">Speaker sensitivity</a> · <a href="/downloads/robby-source.zip">Audited source ZIP</a></nav><h1>Robby: tasks, solutions and verification</h1>'''
+    from render_stunt_report import worklog_entry
+    out+=worklog_entry()
     out+='<p>Updated '+e(datetime.datetime.now(datetime.timezone.utc).isoformat())+'. Scope: the active eye-contact, surface, guided calibration, interruption and naming requests of October 21, 2026—not a claim that every historical research task is finished.</p>'
     for ident,done,title,body in tasks:
         out+=f'<article id="{ident}" class="'+('done' if done else 'working')+'"><h2><input type="checkbox" disabled '+('checked' if done else '')+'>'+e(title)+'</h2><p>'+e('Verified in targeted synthetic tests' if done else 'In progress / final verification still pending')+'</p><p>'+e(body)+'</p></article>'
@@ -149,6 +151,8 @@ def main():
     (ROOT/'logs/worklog-verification.json').write_text(json.dumps(receipt,indent=2))
     out+='<p><a href="/static/speed-and-tools.html">Latest speed, public tools and flexible speaker update</a> · <a href="/static/visual-onboarding-update.html">Visible-speaker onboarding fix and recovery tests</a> · <a href="/static/live-follow-update.html">Continuous-interruption and real camera-to-head test results</a>. Earlier experimental failures above remain historical evidence, not claims that every old variant is deployed.</p>'
     out+='<details><summary>Machine-readable verification</summary><pre>'+e(json.dumps(receipt,indent=2))+'</pre></details></html>'
+    from tool_audit_worklog import entry as tool_audit_entry
+    out=out.replace('</html>',tool_audit_entry()+'</html>')
     (ROOT/'static/worklog.html').write_text(out)
     print(json.dumps({'complete':complete,'tasks_done':sum(t[1] for t in tasks),'tasks':len(tasks)}))
 

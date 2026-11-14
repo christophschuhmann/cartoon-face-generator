@@ -1,0 +1,5 @@
+# Install in a separate target directory, NEVER over Robby's existing environment.
+# The measured host provides torch 2.6.0+cu124 and soundfile/numpy/FastAPI/uvicorn.
+transformers==5.19.0
+huggingface-hub==2.4.0
+tokenizers==0.23.3

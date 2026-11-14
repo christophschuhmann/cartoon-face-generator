@@ -10,6 +10,24 @@ import numpy as np
 from aiohttp import web
 
 
+def external_final_results(result):
+    """Do not block an encoder hop on a second final transcript.
+
+    Only Robby's sentence-mode sessions with a ready independent final ASR opt
+    in. Their selected recognizer transcribes the retained complete waveform.
+    Native partial previews, TYGER state/transitions and all audio are unchanged.
+    The ordinary Nemotron-only plugin keeps its original final decoder path.
+    """
+    for session,(events,finals) in list(result.items()):
+        if not getattr(session,'robo_external_final',False):continue
+        for event,_audio in finals:
+            event.pop('seg_texts',None)
+            event['transcript']=''
+            event['final_asr_deferred_to_sentence']=True
+        result[session]=(events,[])
+    return result
+
+
 class ResearchLocked(web.HTTPClientError):
     status_code=423
 
@@ -84,7 +102,7 @@ def attach_feature_tap(ears):
                 result[session][0].append({'kind':'SPEAKER_FEATURES','features':h,'energy_db':energy,'audio16':user.copy(),
                     'layer_features':layers,'context_features':context,'context_energy_db':context_db,
                     'playback_rms':float(np.sqrt(np.mean(agent**2))),'playback_audio16':agent.copy()})
-        return result
+        return external_final_results(result)
     engine.asr.encode=encode
     engine.process=process
     from gpu_guard import serialize_audio_gpu

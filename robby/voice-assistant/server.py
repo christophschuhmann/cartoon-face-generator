@@ -4,13 +4,12 @@ import json
 import logging
 import math
 import os
-MOUTH_PORT=int(os.environ.get('ROBO_MOUTH_PORT','8795'))
 from pathlib import Path
 import time
 import hashlib
 import numpy as np
 
-from aiohttp import web, WSMsgType
+from aiohttp import web, WSMsgType, WSMessage
 import httpx
 
 import paths
@@ -26,16 +25,25 @@ from identity import IdentityManager
 from speaker_teacher import preserve_encoder_precision
 
 preserve_encoder_precision()
+# Optional loopback accelerator has a bounded CPU fallback when unavailable.
+# An explicitly empty setting keeps the original CPU-only implementation.
+os.environ.setdefault('ROBO_SPEAKER_GPU_URL','http://127.0.0.1:8823')
 
 ROOT=paths.ROOT
 log=logging.getLogger('robo')
 _signature=hashlib.sha256()
-for _name in ('server.py','lfm3_jobs.py','lfm3_worker.py','lfm3_audio_output.py','lfm3_timeline.py','lfm3_context.py','lfm3_omni.py','lfm3_service.py','static/lfm3-lab.js','wake_mode.py','social_profiles.py','voice_caption_worker.py','visual_identity.py','static/social-profiles.js','static/multimodal-ui.js','addressed_speech.py','sound_events.py','sound_event_worker.py','bootstrap_sound_events.py','ambient_audio.py','environment_session.py','sound_caption_worker.py','bootstrap_sound_caption.py','static/environment-controls.js','llm_backends.py','llm_session.py','credential_store.py','conversation_focus.py','sentence_session.py','sentence_decisions.py','speaker_management.py','live_decisions.py','laya_policy.py','stop_commands.py','voice_captioning.py','quick_reaction.py','informed_bridge.py','live_speech.py','two_stage_pipeline.py','knowledge_memory.py','memory_session.py','static/memory-controls.js','interaction_policy.py','conversation_prompt.py','knowledge_tools.py','conversation_director.py','asr_choice.py','asr_catalog.py','speech_language.py','pause_vad.py','emotion_recipes.py','avatar_commands.py','avatar_actions.py','bolt_text.py','bolt_director.py','conversation_tasks.py','bolt_pipeline.py','tts_bridge.py','static/client.js','static/live-overview.js','static/ui.js','static/avatar-actions.js'):
+for _name in ('tool_capabilities.py','verification_settings.py','web_lookup.py','static/verification-controls.js','static/system-guide.js','input_isolation_wake.py','input_isolation_union.py','input_isolation.py','input_isolation_process.py','input_isolation_worker.py','input_isolation_models.py','static/input-isolation-controls.js','server.py','lfm3_jobs.py','lfm3_worker.py','lfm3_audio_output.py','lfm3_timeline.py','lfm3_context.py','lfm3_omni.py','lfm3_service.py','static/lfm3-lab.js','wake_mode.py','social_profiles.py','voice_caption_worker.py','visual_identity.py','static/social-profiles.js','static/multimodal-ui.js','addressed_speech.py','sound_events.py','sound_event_worker.py','bootstrap_sound_events.py','ambient_audio.py','environment_session.py','sound_caption_worker.py','bootstrap_sound_caption.py','static/environment-controls.js','llm_backends.py','llm_session.py','credential_store.py','conversation_focus.py','sentence_session.py','sentence_decisions.py','speaker_management.py','live_decisions.py','laya_policy.py','stop_commands.py','voice_captioning.py','quick_reaction.py','informed_bridge.py','live_speech.py','speech_retry.py','two_stage_pipeline.py','knowledge_memory.py','memory_session.py','static/memory-controls.js','interaction_policy.py','conversation_prompt.py','knowledge_tools.py','conversation_director.py','asr_choice.py','asr_catalog.py','speech_language.py','pause_vad.py','emotion_recipes.py','avatar_commands.py','avatar_actions.py','bolt_text.py','bolt_director.py','conversation_tasks.py','bolt_pipeline.py','tts_bridge.py','static/client.js','static/live-overview.js','static/ui.js','static/avatar-actions.js'):
     _signature.update(_name.encode());_signature.update((ROOT/_name).read_bytes())
 STATE={'ready':False,'error':None,'phase':'Starting Nemotron / TYGER','ears':None,'source_sha256':_signature.hexdigest()}
 
 
 class RoboConversation(Conversation):
+    async def to_mouth(self,kind,payload):
+        if kind==b'T' and isinstance(payload,dict):
+            from verification_settings import DEFAULTS
+            payload={**payload,'verification_settings':dict(getattr(self,'verification_settings',DEFAULTS))}
+        return await super().to_mouth(kind,payload)
+
     async def _on_text(self,payload):
         data=json.loads(payload)
         if data.get('memory_event'):
@@ -123,6 +131,8 @@ class RoboConversation(Conversation):
             from sentence_session import SentenceSession
             self.sentence_stream=SentenceSession(self)
             self._speaker_barge_sensitivity(False)
+        from input_isolation import InputIsolation
+        self.input_isolation=InputIsolation(self)
 
     def _speaker_barge_sensitivity(self,enabled):
         # The frozen GRU is unchanged. With full acoustic confirmation we can
@@ -134,8 +144,8 @@ class RoboConversation(Conversation):
 
     def _ready_message(self):
         return {**super()._ready_message(),'identity_enabled':self.identity_enabled,'identity_mode':self.identity_mode,
-            'llm_settings':self.llm.settings(),'quick_replies_enabled':self.quick_replies,'environment':self.environment.state(),
-            'interaction':self.decisions.state(),
+            'verification_settings':getattr(self,'verification_settings',__import__('verification_settings').DEFAULTS),'llm_settings':self.llm.settings(),'quick_replies_enabled':self.quick_replies,'environment':self.environment.state(),
+            'interaction':self.decisions.state(),'input_isolation':self.input_isolation.state(),
             'visual_identity':self.visual.state(),
             'sentence_stream':self.sentence_stream is not None,
             'asr_settings':self.sentence_stream.settings() if self.sentence_stream else None,
@@ -229,6 +239,7 @@ class RoboConversation(Conversation):
             typed_task=getattr(self,'typed_turn_task',None)
             if typed_task:
                 typed_task.cancel();await asyncio.gather(typed_task,return_exceptions=True)
+            await self.input_isolation.close()
             await self.environment.close()
             if self.sentence_stream:await self.sentence_stream.close()
             self.stop_feedback.cancel()
@@ -257,6 +268,7 @@ class RoboConversation(Conversation):
         if foreground and getattr(self,'avatar_personality',None) and any(e.get('kind')=='PARTIAL' and e.get('text','').strip() for e in events):
             self.avatar_personality.last_asr=time.monotonic()
         if getattr(self,'sentence_stream',None):
+            self.session.robo_external_final=self.sentence_stream.asr.selected!='nemotron'
             # Ingest waveform/activity first, then newest decoder words, then
             # commit. Neither stale text nor an old quiet clock may win a hop.
             for event in events:
@@ -402,24 +414,6 @@ class RoboConversation(Conversation):
         self.stop_feedback.schedule(event)
 
     async def _on_browser(self,msg):
-        if msg.type==WSMsgType.BINARY:
-            block=mic_block(msg.data)
-            if block is not None:
-                pcm=block[2];self.input_samples+=len(pcm);self.input_blocks+=1
-                if getattr(self,'sentence_stream',None):
-                    rid,at24,_=block;reference=None
-                    if rid==self.playback.rid and at24>=0:
-                        at=round(at24*16000/24000);reference=np.zeros(len(pcm),np.float32)
-                        count=max(0,min(len(pcm),self.playback.n16-at))
-                        if count:reference[:count]=self.playback.audio[at:at+count]
-                    await self.sentence_stream.microphone(pcm,self.input_samples/16000,reference)
-                if getattr(self,'environment',None):self.environment.feed(pcm,self.input_samples/16000,playback=block[1]>=0)
-                now=time.monotonic()
-                if now-self.last_input_notice>.5:
-                    self.last_input_notice=now
-                    await self.ws.send_json({'type':'input_status','blocks':self.input_blocks,
-                        'seconds':round(self.input_samples/16000,2),
-                        'rms_dbfs':round(20*np.log10(max(1e-7,float(np.sqrt(np.mean(pcm**2))))),1)})
         if getattr(self,'calibrating',False) and msg.type==WSMsgType.BINARY:
             block=mic_block(msg.data)
             if block is not None:
@@ -428,9 +422,60 @@ class RoboConversation(Conversation):
                     at=round(at24*16000/24000);length=max(0,min(len(pcm),self.playback.n16-at))
                     ref[:length]=self.playback.audio[at:at+length]
                 self.cal_mic.append(pcm);self.cal_ref.append(ref)
+        if msg.type==WSMsgType.BINARY:
+            await self.input_isolation.receive(msg.data)
+            return
         await super()._on_browser(msg)
 
+    async def _deliver_microphone(self,data):
+        # The filter returns original sample positions and playback tags, even
+        # when its causal overlap/add retains the last few milliseconds.
+        block=mic_block(data)
+        if block is not None:
+            pcm=block[2];self.input_samples+=len(pcm);self.input_blocks+=1
+            if getattr(self,'sentence_stream',None):
+                rid,at24,_=block;reference=None
+                if rid==self.playback.rid and at24>=0:
+                    at=round(at24*16000/24000);reference=np.zeros(len(pcm),np.float32)
+                    count=max(0,min(len(pcm),self.playback.n16-at))
+                    if count:reference[:count]=self.playback.audio[at:at+count]
+                await self.sentence_stream.microphone(pcm,self.input_samples/16000,reference)
+            now=time.monotonic()
+            if now-self.last_input_notice>.5:
+                self.last_input_notice=now
+                await self.ws.send_json({'type':'input_status','blocks':self.input_blocks,
+                    'seconds':round(self.input_samples/16000,2),
+                    'rms_dbfs':round(20*np.log10(max(1e-7,float(np.sqrt(np.mean(pcm**2))))),1)})
+        await super()._on_browser(WSMessage(WSMsgType.BINARY,data,None))
+
     async def _on_command(self,data):
+        if data.startswith('verification:'):
+            from verification_settings import validated
+            try:
+                updated=validated(json.loads(data.split(':',1)[1]))
+                self.verification_settings=updated
+                ss=self.sentence_stream
+                if ss is not None:
+                    # A pending old recognizer must not submit after a settings change.
+                    ss.epoch+=1
+                    for task in (ss.probe,ss.early_task):
+                        if task and not task.done():task.cancel()
+                    ss.early_final=None;ss.pause_checked=False;ss.last_probe=-100.
+                await self.ws.send_json({'type':'verification_settings',**updated})
+                if ss is not None:await self.ws.send_json(ss.settings())
+            except (ValueError,TypeError):
+                await self.ws.send_json({'type':'warning','text':'Invalid verification settings'})
+            return
+
+        if data.startswith('isolation:'):
+            try:
+                command=json.loads(data.split(':',1)[1])
+                if command.get('action')=='learn':await self.input_isolation.relearn(manual=True)
+                elif command.get('action')=='clear':await self.input_isolation.relearn()
+                else:await self.input_isolation.configure(command.get('model','off'))
+            except (ValueError,TypeError,AttributeError):
+                await self.ws.send_json({'type':'warning','text':'Choose Off, VoxLock or Scicom for microphone filtering.'})
+            return
         if data in ('wake:on','wake:off') and self.sentence_stream:
             self.sentence_stream.admission_epoch+=1
             self.sentence_stream.wake.configure(data.endswith(':on'))
@@ -745,8 +790,8 @@ async def startup(app):
     import torch
     torch.set_num_threads(4)
     bridge=MouthBridge();app['bridge']=bridge;app['tasks']=[]
-    app['mouth_server']=await asyncio.start_server(bridge.accept,'127.0.0.1',MOUTH_PORT)
-    cfg={'server':{'max_sessions':1,'max_session_s':int(os.environ.get('ROBO_MAX_SESSION_S','1800')),'mouth_host':'127.0.0.1','mouth_port':MOUTH_PORT},'mouth':{}}
+    app['mouth_server']=await asyncio.start_server(bridge.accept,'127.0.0.1',8795)
+    cfg={'server':{'max_sessions':1,'max_session_s':int(os.environ.get('ROBO_MAX_SESSION_S','1800')),'mouth_host':'127.0.0.1','mouth_port':8795},'mouth':{}}
     app['cfg']=cfg
     from llm_backends import refresh_providers
     async def providers():
@@ -796,6 +841,7 @@ async def state(request):
         'llm':MODELS[chosen['model']]['model'],
         'llm_default':chosen,
         'sentence_stream':os.environ.get('ROBO_SENTENCE_STREAM','0')=='1',
+        'input_isolation':{'default':'off','models':['off','voxlock','scicom'],'chunk_ms':40,'gpu':os.environ.get('ROBO_ISOLATION_GPU','1')},
         'llm_selection_available':True,
         'reply_language_default':'de','asr_model_selection':True,
         'asr_default_model':__import__('asr_catalog').default_model(),'camera_auto_default':True,'voice_caption_default':True,'auto_start_default':True,'environment_default':False,'wake_default':True,
@@ -815,13 +861,18 @@ async def state(request):
 
 async def asr_models(request):
     from asr_catalog import MODELS,worker_url
-    try:
-        async with httpx.AsyncClient(timeout=2) as client:
-            response=await client.get(worker_url()+'/models');response.raise_for_status()
-            return web.json_response(response.json())
-    except Exception:
-        return web.json_response({'active_gpu_model':None,'models':[{'id':key,'label':s['label'],'repo':s['repo'],
-            'ready':key=='nemotron','phase':'resident' if key=='nemotron' else 'worker_unavailable'} for key,s in MODELS.items()]})
+    data={'active_gpu_model':None,'models':[{'id':key,'label':s['label'],'repo':s['repo'],
+        'ready':key=='nemotron','phase':'resident' if key=='nemotron' else 'worker_unavailable'} for key,s in MODELS.items()]}
+    async with httpx.AsyncClient(timeout=2) as client:
+        replies=await asyncio.gather(*(client.get(url+'/models') for url in (worker_url(),worker_url('parakeet_ultra'))),return_exceptions=True)
+    for reply in replies:
+        if isinstance(reply,Exception) or reply.status_code!=200:continue
+        try:
+            update=reply.json();by_id={row['id']:row for row in update['models']}
+            data['models']=[by_id.get(row['id'],row) for row in data['models']]
+            if 'active_gpu_model' in update:data['active_gpu_model']=update['active_gpu_model']
+        except (ValueError,KeyError,TypeError):pass
+    return web.json_response(data)
 
 
 async def llm_models(request):
@@ -977,6 +1028,8 @@ async def source_download(request):
 
 def main():
     app=web.Application(client_max_size=25*1024*1024)
+    from audio_decision_proxy import install as install_audio_decision
+    install_audio_decision(app)
     app.router.add_get('/',index);app.router.add_get('/robo/',index)
     app.router.add_get('/desk-robot/',desk_robot)
     app.router.add_get('/desk-robot',lambda request:web.HTTPFound('/desk-robot/'))
@@ -1011,7 +1064,7 @@ def main():
     app.on_startup.append(startup);app.on_cleanup.append(cleanup)
     logging.basicConfig(level=logging.INFO,format='%(asctime)s %(name)s %(message)s')
     logging.getLogger('httpx').setLevel(logging.WARNING)
-    web.run_app(app,host='127.0.0.1',port=int(os.environ.get('ROBO_PORT','8793')),access_log=None)
+    web.run_app(app,host='127.0.0.1',port=8793,access_log=None)
 
 
 if __name__=='__main__':main()

@@ -1,0 +1,2022 @@
+{
+  "passed": true,
+  "physical_microphone": false,
+  "turns": [
+    {
+      "events": [
+        {
+          "type": "asr_settings",
+          "effective_final_model": "nemotron",
+          "second_recognizer_enabled": true,
+          "background_speech_filter": true,
+          "voice_captions_enabled": true,
+          "selected_model": "nemotron",
+          "loading_model": "parakeet_ultra",
+          "switch_ms": null,
+          "models": [
+            {
+              "id": "parakeet_ultra",
+              "label": "Parakeet Ultra · fast GPU"
+            },
+            {
+              "id": "parakeet_redux",
+              "label": "Parakeet Redux · CPU comparison"
+            },
+            {
+              "id": "nemotron",
+              "label": "Nemotron 3.5 · original"
+            },
+            {
+              "id": "moonshine_de",
+              "label": "Moonshine Streaming Small · German"
+            },
+            {
+              "id": "nemotron_de",
+              "label": "Nemotron 3.5 · German telephony"
+            },
+            {
+              "id": "parakeet_v3",
+              "label": "Parakeet TDT v3 · multilingual"
+            },
+            {
+              "id": "whisper_turbo",
+              "label": "Whisper Large v3 Turbo · German"
+            }
+          ],
+          "preview_model": "nemotron",
+          "final_model": "nemotron",
+          "reply_language": "de",
+          "speech_pause_ms": 300,
+          "min_ms": 200,
+          "max_ms": 2000,
+          "conversation_focus": {
+            "enabled": false,
+            "threshold": 0.28,
+            "timeout_s": 180,
+            "speaker_id": null,
+            "name": null,
+            "primary_id": null,
+            "participants": []
+          },
+          "wake_mode": {
+            "enabled": true,
+            "active": false,
+            "window_s": 10,
+            "remaining_s": 0
+          },
+          "vad": "Silero ONNX CPU · neural speech activity",
+          "submission": "All pending sentences after a speech pause"
+        },
+        {
+          "type": "verification_settings",
+          "verify_tts": true,
+          "verify_input": true,
+          "serial_tts": false
+        },
+        {
+          "type": "asr_settings",
+          "effective_final_model": "nemotron",
+          "second_recognizer_enabled": true,
+          "background_speech_filter": true,
+          "voice_captions_enabled": true,
+          "selected_model": "nemotron",
+          "loading_model": "parakeet_ultra",
+          "switch_ms": null,
+          "models": [
+            {
+              "id": "parakeet_ultra",
+              "label": "Parakeet Ultra · fast GPU"
+            },
+            {
+              "id": "parakeet_redux",
+              "label": "Parakeet Redux · CPU comparison"
+            },
+            {
+              "id": "nemotron",
+              "label": "Nemotron 3.5 · original"
+            },
+            {
+              "id": "moonshine_de",
+              "label": "Moonshine Streaming Small · German"
+            },
+            {
+              "id": "nemotron_de",
+              "label": "Nemotron 3.5 · German telephony"
+            },
+            {
+              "id": "parakeet_v3",
+              "label": "Parakeet TDT v3 · multilingual"
+            },
+            {
+              "id": "whisper_turbo",
+              "label": "Whisper Large v3 Turbo · German"
+            }
+          ],
+          "preview_model": "nemotron",
+          "final_model": "nemotron",
+          "reply_language": "de",
+          "speech_pause_ms": 300,
+          "min_ms": 200,
+          "max_ms": 2000,
+          "conversation_focus": {
+            "enabled": false,
+            "threshold": 0.28,
+            "timeout_s": 180,
+            "speaker_id": null,
+            "name": null,
+            "primary_id": null,
+            "participants": []
+          },
+          "wake_mode": {
+            "enabled": true,
+            "active": false,
+            "window_s": 10,
+            "remaining_s": 0
+          },
+          "vad": "Silero ONNX CPU · neural speech activity",
+          "submission": "All pending sentences after a speech pause"
+        },
+        {
+          "type": "asr_settings",
+          "effective_final_model": "nemotron",
+          "second_recognizer_enabled": true,
+          "background_speech_filter": true,
+          "voice_captions_enabled": true,
+          "selected_model": "nemotron",
+          "loading_model": "parakeet_ultra",
+          "switch_ms": null,
+          "models": [
+            {
+              "id": "parakeet_ultra",
+              "label": "Parakeet Ultra · fast GPU"
+            },
+            {
+              "id": "parakeet_redux",
+              "label": "Parakeet Redux · CPU comparison"
+            },
+            {
+              "id": "nemotron",
+              "label": "Nemotron 3.5 · original"
+            },
+            {
+              "id": "moonshine_de",
+              "label": "Moonshine Streaming Small · German"
+            },
+            {
+              "id": "nemotron_de",
+              "label": "Nemotron 3.5 · German telephony"
+            },
+            {
+              "id": "parakeet_v3",
+              "label": "Parakeet TDT v3 · multilingual"
+            },
+            {
+              "id": "whisper_turbo",
+              "label": "Whisper Large v3 Turbo · German"
+            }
+          ],
+          "preview_model": "nemotron",
+          "final_model": "nemotron",
+          "reply_language": "de",
+          "speech_pause_ms": 300,
+          "min_ms": 200,
+          "max_ms": 2000,
+          "conversation_focus": {
+            "enabled": false,
+            "threshold": 0.28,
+            "timeout_s": 180,
+            "speaker_id": null,
+            "name": null,
+            "primary_id": null,
+            "participants": []
+          },
+          "wake_mode": {
+            "enabled": true,
+            "active": false,
+            "window_s": 10,
+            "remaining_s": 0
+          },
+          "vad": "Silero ONNX CPU · neural speech activity",
+          "submission": "All pending sentences after a speech pause"
+        },
+        {
+          "type": "asr_settings",
+          "effective_final_model": "nemotron",
+          "second_recognizer_enabled": true,
+          "background_speech_filter": true,
+          "voice_captions_enabled": true,
+          "selected_model": "nemotron",
+          "loading_model": "parakeet_ultra",
+          "switch_ms": null,
+          "models": [
+            {
+              "id": "parakeet_ultra",
+              "label": "Parakeet Ultra · fast GPU"
+            },
+            {
+              "id": "parakeet_redux",
+              "label": "Parakeet Redux · CPU comparison"
+            },
+            {
+              "id": "nemotron",
+              "label": "Nemotron 3.5 · original"
+            },
+            {
+              "id": "moonshine_de",
+              "label": "Moonshine Streaming Small · German"
+            },
+            {
+              "id": "nemotron_de",
+              "label": "Nemotron 3.5 · German telephony"
+            },
+            {
+              "id": "parakeet_v3",
+              "label": "Parakeet TDT v3 · multilingual"
+            },
+            {
+              "id": "whisper_turbo",
+              "label": "Whisper Large v3 Turbo · German"
+            }
+          ],
+          "preview_model": "nemotron",
+          "final_model": "nemotron",
+          "reply_language": "de",
+          "speech_pause_ms": 300,
+          "min_ms": 200,
+          "max_ms": 2000,
+          "conversation_focus": {
+            "enabled": false,
+            "threshold": 0.28,
+            "timeout_s": 180,
+            "speaker_id": null,
+            "name": null,
+            "primary_id": null,
+            "participants": []
+          },
+          "wake_mode": {
+            "enabled": true,
+            "active": false,
+            "window_s": 10,
+            "remaining_s": 0
+          },
+          "vad": "Silero ONNX CPU · neural speech activity",
+          "submission": "All pending sentences after a speech pause"
+        },
+        {
+          "type": "asr_settings",
+          "effective_final_model": "nemotron",
+          "second_recognizer_enabled": true,
+          "background_speech_filter": true,
+          "voice_captions_enabled": true,
+          "selected_model": "nemotron",
+          "loading_model": "parakeet_ultra",
+          "switch_ms": null,
+          "models": [
+            {
+              "id": "parakeet_ultra",
+              "label": "Parakeet Ultra · fast GPU"
+            },
+            {
+              "id": "parakeet_redux",
+              "label": "Parakeet Redux · CPU comparison"
+            },
+            {
+              "id": "nemotron",
+              "label": "Nemotron 3.5 · original"
+            },
+            {
+              "id": "moonshine_de",
+              "label": "Moonshine Streaming Small · German"
+            },
+            {
+              "id": "nemotron_de",
+              "label": "Nemotron 3.5 · German telephony"
+            },
+            {
+              "id": "parakeet_v3",
+              "label": "Parakeet TDT v3 · multilingual"
+            },
+            {
+              "id": "whisper_turbo",
+              "label": "Whisper Large v3 Turbo · German"
+            }
+          ],
+          "preview_model": "nemotron",
+          "final_model": "nemotron",
+          "reply_language": "de",
+          "speech_pause_ms": 300,
+          "min_ms": 200,
+          "max_ms": 2000,
+          "conversation_focus": {
+            "enabled": false,
+            "threshold": 0.28,
+            "timeout_s": 180,
+            "speaker_id": null,
+            "name": null,
+            "primary_id": null,
+            "participants": []
+          },
+          "wake_mode": {
+            "enabled": true,
+            "active": false,
+            "window_s": 10,
+            "remaining_s": 0
+          },
+          "vad": "Silero ONNX CPU · neural speech activity",
+          "submission": "All pending sentences after a speech pause"
+        },
+        {
+          "type": "asr_settings",
+          "effective_final_model": "nemotron",
+          "second_recognizer_enabled": true,
+          "background_speech_filter": true,
+          "voice_captions_enabled": true,
+          "selected_model": "nemotron",
+          "loading_model": "parakeet_ultra",
+          "switch_ms": null,
+          "models": [
+            {
+              "id": "parakeet_ultra",
+              "label": "Parakeet Ultra · fast GPU"
+            },
+            {
+              "id": "parakeet_redux",
+              "label": "Parakeet Redux · CPU comparison"
+            },
+            {
+              "id": "nemotron",
+              "label": "Nemotron 3.5 · original"
+            },
+            {
+              "id": "moonshine_de",
+              "label": "Moonshine Streaming Small · German"
+            },
+            {
+              "id": "nemotron_de",
+              "label": "Nemotron 3.5 · German telephony"
+            },
+            {
+              "id": "parakeet_v3",
+              "label": "Parakeet TDT v3 · multilingual"
+            },
+            {
+              "id": "whisper_turbo",
+              "label": "Whisper Large v3 Turbo · German"
+            }
+          ],
+          "preview_model": "nemotron",
+          "final_model": "nemotron",
+          "reply_language": "de",
+          "speech_pause_ms": 300,
+          "min_ms": 200,
+          "max_ms": 2000,
+          "conversation_focus": {
+            "enabled": false,
+            "threshold": 0.28,
+            "timeout_s": 180,
+            "speaker_id": null,
+            "name": null,
+            "primary_id": null,
+            "participants": []
+          },
+          "wake_mode": {
+            "enabled": true,
+            "active": false,
+            "window_s": 10,
+            "remaining_s": 0
+          },
+          "vad": "Silero ONNX CPU · neural speech activity",
+          "submission": "All pending sentences after a speech pause"
+        },
+        {
+          "type": "asr_settings",
+          "effective_final_model": "parakeet_ultra",
+          "second_recognizer_enabled": true,
+          "background_speech_filter": true,
+          "voice_captions_enabled": true,
+          "selected_model": "parakeet_ultra",
+          "loading_model": null,
+          "switch_ms": 0,
+          "models": [
+            {
+              "id": "parakeet_ultra",
+              "label": "Parakeet Ultra · fast GPU"
+            },
+            {
+              "id": "parakeet_redux",
+              "label": "Parakeet Redux · CPU comparison"
+            },
+            {
+              "id": "nemotron",
+              "label": "Nemotron 3.5 · original"
+            },
+            {
+              "id": "moonshine_de",
+              "label": "Moonshine Streaming Small · German"
+            },
+            {
+              "id": "nemotron_de",
+              "label": "Nemotron 3.5 · German telephony"
+            },
+            {
+              "id": "parakeet_v3",
+              "label": "Parakeet TDT v3 · multilingual"
+            },
+            {
+              "id": "whisper_turbo",
+              "label": "Whisper Large v3 Turbo · German"
+            }
+          ],
+          "preview_model": "nemotron",
+          "final_model": "parakeet_ultra",
+          "reply_language": "de",
+          "speech_pause_ms": 300,
+          "min_ms": 200,
+          "max_ms": 2000,
+          "conversation_focus": {
+            "enabled": false,
+            "threshold": 0.28,
+            "timeout_s": 180,
+            "speaker_id": null,
+            "name": null,
+            "primary_id": null,
+            "participants": []
+          },
+          "wake_mode": {
+            "enabled": true,
+            "active": false,
+            "window_s": 10,
+            "remaining_s": 0
+          },
+          "vad": "Silero ONNX CPU · neural speech activity",
+          "submission": "All pending sentences after a speech pause"
+        },
+        {
+          "type": "asr_sentence",
+          "text": "Hey Robbie, schneid bitte eine Grimasse.",
+          "audio_s": 6.76,
+          "queued": false,
+          "asr": {
+            "text": "Hey Robbie, schneid bitte eine Grimasse.",
+            "model": "parakeet_ultra",
+            "chunks": 1,
+            "transcribe_ms": 217.95,
+            "speculative": true,
+            "speech_pause_ms": 300,
+            "observed_quiet_ms": 1352,
+            "endpoint_reason": "neural_speech_pause",
+            "input_start_s": 1.7919999999999998,
+            "input_end_s": 5.5280000000000005,
+            "audio_backlog_ms": 0
+          },
+          "reason": "neural speech pause",
+          "speech_pause_ms": 300,
+          "observed_quiet_ms": 1352
+        },
+        {
+          "type": "asr_settings",
+          "effective_final_model": "parakeet_ultra",
+          "second_recognizer_enabled": true,
+          "background_speech_filter": true,
+          "voice_captions_enabled": true,
+          "selected_model": "parakeet_ultra",
+          "loading_model": null,
+          "switch_ms": 0,
+          "models": [
+            {
+              "id": "parakeet_ultra",
+              "label": "Parakeet Ultra · fast GPU"
+            },
+            {
+              "id": "parakeet_redux",
+              "label": "Parakeet Redux · CPU comparison"
+            },
+            {
+              "id": "nemotron",
+              "label": "Nemotron 3.5 · original"
+            },
+            {
+              "id": "moonshine_de",
+              "label": "Moonshine Streaming Small · German"
+            },
+            {
+              "id": "nemotron_de",
+              "label": "Nemotron 3.5 · German telephony"
+            },
+            {
+              "id": "parakeet_v3",
+              "label": "Parakeet TDT v3 · multilingual"
+            },
+            {
+              "id": "whisper_turbo",
+              "label": "Whisper Large v3 Turbo · German"
+            }
+          ],
+          "preview_model": "nemotron",
+          "final_model": "parakeet_ultra",
+          "reply_language": "de",
+          "speech_pause_ms": 300,
+          "min_ms": 200,
+          "max_ms": 2000,
+          "conversation_focus": {
+            "enabled": false,
+            "threshold": 0.28,
+            "timeout_s": 180,
+            "speaker_id": null,
+            "name": null,
+            "primary_id": null,
+            "participants": []
+          },
+          "wake_mode": {
+            "enabled": true,
+            "active": true,
+            "window_s": 10,
+            "remaining_s": 9.9
+          },
+          "vad": "Silero ONNX CPU · neural speech activity",
+          "submission": "All pending sentences after a speech pause"
+        },
+        {
+          "type": "avatar_action",
+          "action_id": "9950cd77c1ee48a994a9e8f77929f8c2",
+          "steps": [
+            {
+              "kind": "grimace",
+              "duration_s": 3,
+              "sentence": 0,
+              "variant": "crossed"
+            }
+          ],
+          "source": "validated_direct_request",
+          "wait_for_audio": true
+        },
+        {
+          "type": "reply",
+          "text": "Hey, mein kleines Zuckergesicht!",
+          "reply_id": 1,
+          "performance": {
+            "sentences": [
+              {
+                "emotion": "amusement",
+                "secondary": null,
+                "blend": 0,
+                "intensity": 0.72,
+                "direction": "amusement, playful",
+                "text": "Hey, mein kleines Zuckergesicht!",
+                "start_s": 0,
+                "end_s": 1.36
+              }
+            ],
+            "source": "qwen/qwen3.8-27b sentence cues + fixed GENERAL catalogue",
+            "timing": "Sentence starts anchored to actual preceding PCM duration; within-sentence estimates"
+          },
+          "avatar_actions": [
+            {
+              "kind": "grimace",
+              "duration_s": 3,
+              "sentence": 0,
+              "variant": "crossed"
+            }
+          ],
+          "avatar_action_id": "9950cd77c1ee48a994a9e8f77929f8c2",
+          "avatar_event": null,
+          "sentence_index": 0,
+          "sentence_text": "Hey, mein kleines Zuckergesicht!",
+          "sentence_role": "answer",
+          "speaker_id": "speaker-1",
+          "speaker_name": "Speaker 1",
+          "speaker_update": null,
+          "timing": {
+            "tts_model": "small_rl",
+            "verification": {
+              "align": true,
+              "speech_verification": "parallel"
+            },
+            "quick_reply_status": "disabled_or_ineligible",
+            "llm_model": "qwen/qwen3.8-27b",
+            "llm_provider": "cerebras/fp16",
+            "llm_backend": "OpenRouter",
+            "llm_actual_provider": "Cerebras",
+            "llm_ttft_ms": 622.39,
+            "llm_first_sentence_ms": 656.85,
+            "sentence_ready_ms": 818.08,
+            "director_mode": "bolt",
+            "director_model": "qwen/qwen3.8-27b",
+            "template_id": "amusement.soft"
+          },
+          "sources": [],
+          "lookups": []
+        },
+        {
+          "type": "reply",
+          "text": "Hey, mein kleines Zuckergesicht!\nSchon fast so weit, aber ich habe hier eine kleine Grimasse aufgesetzt.",
+          "reply_id": 1,
+          "performance": {
+            "sentences": [
+              {
+                "emotion": "amusement",
+                "secondary": null,
+                "blend": 0,
+                "intensity": 0.72,
+                "direction": "amusement, playful",
+                "text": "Hey, mein kleines Zuckergesicht!",
+                "start_s": 0,
+                "end_s": 1.76
+              },
+              {
+                "emotion": "teasing",
+                "secondary": "amusement",
+                "blend": 0.25,
+                "intensity": 0.72,
+                "direction": "teasing, playful",
+                "text": "Schon fast so weit, aber ich habe hier eine kleine Grimasse aufgesetzt.",
+                "start_s": 1.76,
+                "end_s": 5.84
+              }
+            ],
+            "source": "qwen/qwen3.8-27b sentence cues + fixed GENERAL catalogue",
+            "timing": "Sentence starts anchored to actual preceding PCM duration; within-sentence estimates"
+          },
+          "avatar_actions": [
+            {
+              "kind": "grimace",
+              "duration_s": 3,
+              "sentence": 0,
+              "variant": "crossed"
+            }
+          ],
+          "avatar_action_id": "9950cd77c1ee48a994a9e8f77929f8c2",
+          "avatar_event": null,
+          "sentence_index": 1,
+          "sentence_text": "Schon fast so weit, aber ich habe hier eine kleine Grimasse aufgesetzt.",
+          "sentence_role": "answer",
+          "speaker_id": "speaker-1",
+          "speaker_name": "Speaker 1",
+          "speaker_update": null,
+          "timing": {
+            "tts_model": "small_rl",
+            "verification": {
+              "align": true,
+              "speech_verification": "parallel"
+            },
+            "quick_reply_status": "disabled_or_ineligible",
+            "llm_model": "qwen/qwen3.8-27b",
+            "llm_provider": "cerebras/fp16",
+            "llm_backend": "OpenRouter",
+            "llm_actual_provider": "Cerebras",
+            "llm_ttft_ms": 622.39,
+            "llm_first_sentence_ms": 656.85,
+            "finish_reason": "stop",
+            "usage": {
+              "prompt_tokens": 3275,
+              "completion_tokens": 38,
+              "total_tokens": 3313,
+              "cost": 0.0032658813,
+              "is_byok": false,
+              "prompt_tokens_details": {
+                "cached_tokens": 3072,
+                "cache_write_tokens": 0,
+                "audio_tokens": 0,
+                "video_tokens": 0
+              },
+              "cost_details": {
+                "upstream_inference_cost": 0.00329887,
+                "upstream_inference_prompt_cost": 0.00324225,
+                "upstream_inference_completions_cost": 5.662e-05
+              },
+              "completion_tokens_details": {
+                "reasoning_tokens": 0,
+                "image_tokens": 0,
+                "audio_tokens": 0
+              }
+            },
+            "generation_calls": 1,
+            "llm_total_ms": 690.73,
+            "response_complete": true,
+            "tts_actual_model": "small_rl",
+            "tts_revision": "182bc700cac29b2d69295a33398b13e1ca7fba69",
+            "tts_retries": [
+              {
+                "event": "speech_retry",
+                "attempt": 2,
+                "max_attempts": 3,
+                "code": "unverified_speech",
+                "strategy": "compact_direction",
+                "sentence": 0
+              }
+            ],
+            "answer_first_audio_ms": 2610.4,
+            "tts_first_audio_ms": 1791.88,
+            "first_audio_ms": 2610.43,
+            "tts_server_stages": [
+              {
+                "generation_ms": 646,
+                "alignment_ms": 1,
+                "scoring_ms": 0,
+                "speaker_preparation_ms": 0,
+                "total_ms": 658,
+                "performance": {
+                  "device_seconds": 0.4981574010848999,
+                  "raw_audio_seconds": 2.32,
+                  "aggregate_rtf": 0.2147230177090086,
+                  "audio_seconds_per_second": 4.657162565380831,
+                  "batches": [
+                    {
+                      "batch_size": 1,
+                      "device_seconds": 0.4981574010848999,
+                      "audio_seconds": [
+                        2.32
+                      ],
+                      "model_wall_seconds": 0.5025352761149406,
+                      "first_audio_seconds": 0.24354611206054688,
+                      "graph_capture_seconds": 0,
+                      "live_callback_seconds": 0.002792172133922577,
+                      "first_chunk_components_ms": {
+                        "codec_stream_setup": 5.322751998901367,
+                        "semantic_prefill": 207.01593017578125,
+                        "semantic_decode_first_steps": 8.282080173492432,
+                        "acoustic_tokens_first_steps": 7.261375665664673,
+                        "codec_first_chunk": 11.094880104064941,
+                        "profiled_frames": 3
+                      }
+                    }
+                  ],
+                  "streaming": true,
+                  "chunk_frames": 20,
+                  "backend": "fused CFG + local CUDA graphs + compiled global",
+                  "includes": "TTS prefill, autoregressive decode and PCM codec; GPU event span including launch gaps",
+                  "excludes": "reference encoding, prompt packing, Luna, alignment, scoring, voice conversion, CPU audio copy, MP3, network",
+                  "graph_capture_seconds": 0,
+                  "oom_batch_retries": []
+                }
+              }
+            ],
+            "sentence_tts": [
+              {
+                "sentence": 0,
+                "total_ms": 1804.9,
+                "audio_s": 1.76
+              }
+            ],
+            "sentence_ready_ms": 2627.03,
+            "director_mode": "bolt",
+            "director_model": "qwen/qwen3.8-27b",
+            "template_id": "teasing.soft"
+          },
+          "sources": [],
+          "lookups": []
+        },
+        {
+          "type": "turn_done",
+          "barged": false
+        },
+        {
+          "type": "asr_settings",
+          "effective_final_model": "parakeet_ultra",
+          "second_recognizer_enabled": true,
+          "background_speech_filter": true,
+          "voice_captions_enabled": true,
+          "selected_model": "parakeet_ultra",
+          "loading_model": null,
+          "switch_ms": 0,
+          "models": [
+            {
+              "id": "parakeet_ultra",
+              "label": "Parakeet Ultra · fast GPU"
+            },
+            {
+              "id": "parakeet_redux",
+              "label": "Parakeet Redux · CPU comparison"
+            },
+            {
+              "id": "nemotron",
+              "label": "Nemotron 3.5 · original"
+            },
+            {
+              "id": "moonshine_de",
+              "label": "Moonshine Streaming Small · German"
+            },
+            {
+              "id": "nemotron_de",
+              "label": "Nemotron 3.5 · German telephony"
+            },
+            {
+              "id": "parakeet_v3",
+              "label": "Parakeet TDT v3 · multilingual"
+            },
+            {
+              "id": "whisper_turbo",
+              "label": "Whisper Large v3 Turbo · German"
+            }
+          ],
+          "preview_model": "nemotron",
+          "final_model": "parakeet_ultra",
+          "reply_language": "de",
+          "speech_pause_ms": 300,
+          "min_ms": 200,
+          "max_ms": 2000,
+          "conversation_focus": {
+            "enabled": false,
+            "threshold": 0.28,
+            "timeout_s": 180,
+            "speaker_id": null,
+            "name": null,
+            "primary_id": "speaker-1",
+            "participants": [
+              {
+                "id": "speaker-1",
+                "name": "Speaker 1"
+              }
+            ]
+          },
+          "wake_mode": {
+            "enabled": true,
+            "active": true,
+            "window_s": 10,
+            "remaining_s": 10
+          },
+          "vad": "Silero ONNX CPU · neural speech activity",
+          "submission": "All pending sentences after a speech pause"
+        }
+      ],
+      "frames": [
+        {
+          "kind": "grimace",
+          "flip": 0,
+          "heard": true
+        },
+        {
+          "kind": "grimace",
+          "flip": 0,
+          "heard": true
+        },
+        {
+          "kind": "grimace",
+          "flip": 0,
+          "heard": true
+        },
+        {
+          "kind": "grimace",
+          "flip": 0,
+          "heard": true
+        },
+        {
+          "kind": "grimace",
+          "flip": 0,
+          "heard": true
+        },
+        {
+          "kind": "grimace",
+          "flip": 0,
+          "heard": true
+        },
+        {
+          "kind": "grimace",
+          "flip": 0,
+          "heard": true
+        },
+        {
+          "kind": "grimace",
+          "flip": 0,
+          "heard": true
+        }
+      ],
+      "audio_chunks": 8,
+      "request": "Hey Robbie, schneid bitte eine Grimasse.",
+      "asr_model": "parakeet_ultra",
+      "passed": true
+    },
+    {
+      "events": [
+        {
+          "type": "asr_settings",
+          "effective_final_model": "nemotron",
+          "second_recognizer_enabled": true,
+          "background_speech_filter": true,
+          "voice_captions_enabled": true,
+          "selected_model": "nemotron",
+          "loading_model": "parakeet_ultra",
+          "switch_ms": null,
+          "models": [
+            {
+              "id": "parakeet_ultra",
+              "label": "Parakeet Ultra · fast GPU"
+            },
+            {
+              "id": "parakeet_redux",
+              "label": "Parakeet Redux · CPU comparison"
+            },
+            {
+              "id": "nemotron",
+              "label": "Nemotron 3.5 · original"
+            },
+            {
+              "id": "moonshine_de",
+              "label": "Moonshine Streaming Small · German"
+            },
+            {
+              "id": "nemotron_de",
+              "label": "Nemotron 3.5 · German telephony"
+            },
+            {
+              "id": "parakeet_v3",
+              "label": "Parakeet TDT v3 · multilingual"
+            },
+            {
+              "id": "whisper_turbo",
+              "label": "Whisper Large v3 Turbo · German"
+            }
+          ],
+          "preview_model": "nemotron",
+          "final_model": "nemotron",
+          "reply_language": "de",
+          "speech_pause_ms": 300,
+          "min_ms": 200,
+          "max_ms": 2000,
+          "conversation_focus": {
+            "enabled": false,
+            "threshold": 0.28,
+            "timeout_s": 180,
+            "speaker_id": null,
+            "name": null,
+            "primary_id": null,
+            "participants": []
+          },
+          "wake_mode": {
+            "enabled": true,
+            "active": false,
+            "window_s": 10,
+            "remaining_s": 0
+          },
+          "vad": "Silero ONNX CPU · neural speech activity",
+          "submission": "All pending sentences after a speech pause"
+        },
+        {
+          "type": "asr_settings",
+          "effective_final_model": "parakeet_ultra",
+          "second_recognizer_enabled": true,
+          "background_speech_filter": true,
+          "voice_captions_enabled": true,
+          "selected_model": "parakeet_ultra",
+          "loading_model": null,
+          "switch_ms": 0,
+          "models": [
+            {
+              "id": "parakeet_ultra",
+              "label": "Parakeet Ultra · fast GPU"
+            },
+            {
+              "id": "parakeet_redux",
+              "label": "Parakeet Redux · CPU comparison"
+            },
+            {
+              "id": "nemotron",
+              "label": "Nemotron 3.5 · original"
+            },
+            {
+              "id": "moonshine_de",
+              "label": "Moonshine Streaming Small · German"
+            },
+            {
+              "id": "nemotron_de",
+              "label": "Nemotron 3.5 · German telephony"
+            },
+            {
+              "id": "parakeet_v3",
+              "label": "Parakeet TDT v3 · multilingual"
+            },
+            {
+              "id": "whisper_turbo",
+              "label": "Whisper Large v3 Turbo · German"
+            }
+          ],
+          "preview_model": "nemotron",
+          "final_model": "parakeet_ultra",
+          "reply_language": "de",
+          "speech_pause_ms": 300,
+          "min_ms": 200,
+          "max_ms": 2000,
+          "conversation_focus": {
+            "enabled": false,
+            "threshold": 0.28,
+            "timeout_s": 180,
+            "speaker_id": null,
+            "name": null,
+            "primary_id": null,
+            "participants": []
+          },
+          "wake_mode": {
+            "enabled": true,
+            "active": false,
+            "window_s": 10,
+            "remaining_s": 0
+          },
+          "vad": "Silero ONNX CPU · neural speech activity",
+          "submission": "All pending sentences after a speech pause"
+        },
+        {
+          "type": "verification_settings",
+          "verify_tts": true,
+          "verify_input": false,
+          "serial_tts": false
+        },
+        {
+          "type": "asr_settings",
+          "effective_final_model": "nemotron",
+          "second_recognizer_enabled": false,
+          "background_speech_filter": true,
+          "voice_captions_enabled": true,
+          "selected_model": "parakeet_ultra",
+          "loading_model": null,
+          "switch_ms": 0,
+          "models": [
+            {
+              "id": "parakeet_ultra",
+              "label": "Parakeet Ultra · fast GPU"
+            },
+            {
+              "id": "parakeet_redux",
+              "label": "Parakeet Redux · CPU comparison"
+            },
+            {
+              "id": "nemotron",
+              "label": "Nemotron 3.5 · original"
+            },
+            {
+              "id": "moonshine_de",
+              "label": "Moonshine Streaming Small · German"
+            },
+            {
+              "id": "nemotron_de",
+              "label": "Nemotron 3.5 · German telephony"
+            },
+            {
+              "id": "parakeet_v3",
+              "label": "Parakeet TDT v3 · multilingual"
+            },
+            {
+              "id": "whisper_turbo",
+              "label": "Whisper Large v3 Turbo · German"
+            }
+          ],
+          "preview_model": "nemotron",
+          "final_model": "parakeet_ultra",
+          "reply_language": "de",
+          "speech_pause_ms": 300,
+          "min_ms": 200,
+          "max_ms": 2000,
+          "conversation_focus": {
+            "enabled": false,
+            "threshold": 0.28,
+            "timeout_s": 180,
+            "speaker_id": null,
+            "name": null,
+            "primary_id": null,
+            "participants": []
+          },
+          "wake_mode": {
+            "enabled": true,
+            "active": false,
+            "window_s": 10,
+            "remaining_s": 0
+          },
+          "vad": "Silero ONNX CPU · neural speech activity",
+          "submission": "All pending sentences after a speech pause"
+        },
+        {
+          "type": "asr_settings",
+          "effective_final_model": "nemotron",
+          "second_recognizer_enabled": false,
+          "background_speech_filter": true,
+          "voice_captions_enabled": true,
+          "selected_model": "parakeet_ultra",
+          "loading_model": null,
+          "switch_ms": 0,
+          "models": [
+            {
+              "id": "parakeet_ultra",
+              "label": "Parakeet Ultra · fast GPU"
+            },
+            {
+              "id": "parakeet_redux",
+              "label": "Parakeet Redux · CPU comparison"
+            },
+            {
+              "id": "nemotron",
+              "label": "Nemotron 3.5 · original"
+            },
+            {
+              "id": "moonshine_de",
+              "label": "Moonshine Streaming Small · German"
+            },
+            {
+              "id": "nemotron_de",
+              "label": "Nemotron 3.5 · German telephony"
+            },
+            {
+              "id": "parakeet_v3",
+              "label": "Parakeet TDT v3 · multilingual"
+            },
+            {
+              "id": "whisper_turbo",
+              "label": "Whisper Large v3 Turbo · German"
+            }
+          ],
+          "preview_model": "nemotron",
+          "final_model": "parakeet_ultra",
+          "reply_language": "de",
+          "speech_pause_ms": 300,
+          "min_ms": 200,
+          "max_ms": 2000,
+          "conversation_focus": {
+            "enabled": false,
+            "threshold": 0.28,
+            "timeout_s": 180,
+            "speaker_id": null,
+            "name": null,
+            "primary_id": null,
+            "participants": []
+          },
+          "wake_mode": {
+            "enabled": true,
+            "active": false,
+            "window_s": 10,
+            "remaining_s": 0
+          },
+          "vad": "Silero ONNX CPU · neural speech activity",
+          "submission": "All pending sentences after a speech pause"
+        },
+        {
+          "type": "asr_settings",
+          "effective_final_model": "nemotron",
+          "second_recognizer_enabled": false,
+          "background_speech_filter": true,
+          "voice_captions_enabled": true,
+          "selected_model": "parakeet_ultra",
+          "loading_model": null,
+          "switch_ms": 0,
+          "models": [
+            {
+              "id": "parakeet_ultra",
+              "label": "Parakeet Ultra · fast GPU"
+            },
+            {
+              "id": "parakeet_redux",
+              "label": "Parakeet Redux · CPU comparison"
+            },
+            {
+              "id": "nemotron",
+              "label": "Nemotron 3.5 · original"
+            },
+            {
+              "id": "moonshine_de",
+              "label": "Moonshine Streaming Small · German"
+            },
+            {
+              "id": "nemotron_de",
+              "label": "Nemotron 3.5 · German telephony"
+            },
+            {
+              "id": "parakeet_v3",
+              "label": "Parakeet TDT v3 · multilingual"
+            },
+            {
+              "id": "whisper_turbo",
+              "label": "Whisper Large v3 Turbo · German"
+            }
+          ],
+          "preview_model": "nemotron",
+          "final_model": "parakeet_ultra",
+          "reply_language": "de",
+          "speech_pause_ms": 300,
+          "min_ms": 200,
+          "max_ms": 2000,
+          "conversation_focus": {
+            "enabled": false,
+            "threshold": 0.28,
+            "timeout_s": 180,
+            "speaker_id": null,
+            "name": null,
+            "primary_id": null,
+            "participants": []
+          },
+          "wake_mode": {
+            "enabled": true,
+            "active": false,
+            "window_s": 10,
+            "remaining_s": 0
+          },
+          "vad": "Silero ONNX CPU · neural speech activity",
+          "submission": "All pending sentences after a speech pause"
+        },
+        {
+          "type": "asr_settings",
+          "effective_final_model": "nemotron",
+          "second_recognizer_enabled": false,
+          "background_speech_filter": true,
+          "voice_captions_enabled": true,
+          "selected_model": "parakeet_ultra",
+          "loading_model": null,
+          "switch_ms": 0,
+          "models": [
+            {
+              "id": "parakeet_ultra",
+              "label": "Parakeet Ultra · fast GPU"
+            },
+            {
+              "id": "parakeet_redux",
+              "label": "Parakeet Redux · CPU comparison"
+            },
+            {
+              "id": "nemotron",
+              "label": "Nemotron 3.5 · original"
+            },
+            {
+              "id": "moonshine_de",
+              "label": "Moonshine Streaming Small · German"
+            },
+            {
+              "id": "nemotron_de",
+              "label": "Nemotron 3.5 · German telephony"
+            },
+            {
+              "id": "parakeet_v3",
+              "label": "Parakeet TDT v3 · multilingual"
+            },
+            {
+              "id": "whisper_turbo",
+              "label": "Whisper Large v3 Turbo · German"
+            }
+          ],
+          "preview_model": "nemotron",
+          "final_model": "parakeet_ultra",
+          "reply_language": "de",
+          "speech_pause_ms": 300,
+          "min_ms": 200,
+          "max_ms": 2000,
+          "conversation_focus": {
+            "enabled": false,
+            "threshold": 0.28,
+            "timeout_s": 180,
+            "speaker_id": null,
+            "name": null,
+            "primary_id": null,
+            "participants": []
+          },
+          "wake_mode": {
+            "enabled": true,
+            "active": false,
+            "window_s": 10,
+            "remaining_s": 0
+          },
+          "vad": "Silero ONNX CPU · neural speech activity",
+          "submission": "All pending sentences after a speech pause"
+        },
+        {
+          "type": "asr_settings",
+          "effective_final_model": "nemotron",
+          "second_recognizer_enabled": false,
+          "background_speech_filter": true,
+          "voice_captions_enabled": true,
+          "selected_model": "parakeet_ultra",
+          "loading_model": null,
+          "switch_ms": 0,
+          "models": [
+            {
+              "id": "parakeet_ultra",
+              "label": "Parakeet Ultra · fast GPU"
+            },
+            {
+              "id": "parakeet_redux",
+              "label": "Parakeet Redux · CPU comparison"
+            },
+            {
+              "id": "nemotron",
+              "label": "Nemotron 3.5 · original"
+            },
+            {
+              "id": "moonshine_de",
+              "label": "Moonshine Streaming Small · German"
+            },
+            {
+              "id": "nemotron_de",
+              "label": "Nemotron 3.5 · German telephony"
+            },
+            {
+              "id": "parakeet_v3",
+              "label": "Parakeet TDT v3 · multilingual"
+            },
+            {
+              "id": "whisper_turbo",
+              "label": "Whisper Large v3 Turbo · German"
+            }
+          ],
+          "preview_model": "nemotron",
+          "final_model": "parakeet_ultra",
+          "reply_language": "de",
+          "speech_pause_ms": 300,
+          "min_ms": 200,
+          "max_ms": 2000,
+          "conversation_focus": {
+            "enabled": false,
+            "threshold": 0.28,
+            "timeout_s": 180,
+            "speaker_id": null,
+            "name": null,
+            "primary_id": null,
+            "participants": []
+          },
+          "wake_mode": {
+            "enabled": true,
+            "active": false,
+            "window_s": 10,
+            "remaining_s": 0
+          },
+          "vad": "Silero ONNX CPU · neural speech activity",
+          "submission": "All pending sentences after a speech pause"
+        },
+        {
+          "type": "asr_sentence",
+          "text": "Hi Robbie, please do a summer salt.",
+          "audio_s": 5.12,
+          "queued": false,
+          "asr": {
+            "model": "nemotron",
+            "second_recognizer_enabled": false,
+            "transcribe_ms": 735.14,
+            "speech_pause_ms": 300,
+            "observed_quiet_ms": 2280,
+            "endpoint_reason": "neural_speech_pause",
+            "input_start_s": 1.6639999999999997,
+            "input_end_s": 5.08,
+            "audio_backlog_ms": 2120
+          },
+          "reason": "neural speech pause",
+          "speech_pause_ms": 300,
+          "observed_quiet_ms": 2280
+        },
+        {
+          "type": "asr_settings",
+          "effective_final_model": "nemotron",
+          "second_recognizer_enabled": false,
+          "background_speech_filter": true,
+          "voice_captions_enabled": true,
+          "selected_model": "parakeet_ultra",
+          "loading_model": null,
+          "switch_ms": 0,
+          "models": [
+            {
+              "id": "parakeet_ultra",
+              "label": "Parakeet Ultra · fast GPU"
+            },
+            {
+              "id": "parakeet_redux",
+              "label": "Parakeet Redux · CPU comparison"
+            },
+            {
+              "id": "nemotron",
+              "label": "Nemotron 3.5 · original"
+            },
+            {
+              "id": "moonshine_de",
+              "label": "Moonshine Streaming Small · German"
+            },
+            {
+              "id": "nemotron_de",
+              "label": "Nemotron 3.5 · German telephony"
+            },
+            {
+              "id": "parakeet_v3",
+              "label": "Parakeet TDT v3 · multilingual"
+            },
+            {
+              "id": "whisper_turbo",
+              "label": "Whisper Large v3 Turbo · German"
+            }
+          ],
+          "preview_model": "nemotron",
+          "final_model": "parakeet_ultra",
+          "reply_language": "de",
+          "speech_pause_ms": 300,
+          "min_ms": 200,
+          "max_ms": 2000,
+          "conversation_focus": {
+            "enabled": false,
+            "threshold": 0.28,
+            "timeout_s": 180,
+            "speaker_id": null,
+            "name": null,
+            "primary_id": null,
+            "participants": []
+          },
+          "wake_mode": {
+            "enabled": true,
+            "active": true,
+            "window_s": 10,
+            "remaining_s": 10
+          },
+          "vad": "Silero ONNX CPU · neural speech activity",
+          "submission": "All pending sentences after a speech pause"
+        },
+        {
+          "type": "avatar_action",
+          "action_id": "121a6021b29f47d3b6d6859d96088f2d",
+          "steps": [
+            {
+              "kind": "somersault",
+              "duration_s": 4.8,
+              "sentence": 0,
+              "direction": "forward"
+            }
+          ],
+          "source": "validated_direct_request",
+          "wait_for_audio": true
+        },
+        {
+          "type": "reply",
+          "text": "Oh, ein Sommer-Salt?",
+          "reply_id": 1,
+          "performance": {
+            "sentences": [
+              {
+                "emotion": "interest",
+                "secondary": "amusement",
+                "blend": 0.25,
+                "intensity": 0.72,
+                "direction": "interest, playful",
+                "text": "Oh, ein Sommer-Salt?",
+                "start_s": 0,
+                "end_s": 1.02
+              }
+            ],
+            "source": "qwen/qwen3.8-27b sentence cues + fixed GENERAL catalogue",
+            "timing": "Sentence starts anchored to actual preceding PCM duration; within-sentence estimates"
+          },
+          "avatar_actions": [
+            {
+              "kind": "somersault",
+              "duration_s": 4.8,
+              "sentence": 0,
+              "direction": "forward"
+            }
+          ],
+          "avatar_action_id": "121a6021b29f47d3b6d6859d96088f2d",
+          "avatar_event": null,
+          "sentence_index": 0,
+          "sentence_text": "Oh, ein Sommer-Salt?",
+          "sentence_role": "answer",
+          "speaker_id": "speaker-1",
+          "speaker_name": "Speaker 1",
+          "speaker_update": null,
+          "timing": {
+            "tts_model": "small_rl",
+            "verification": {
+              "align": true,
+              "speech_verification": "parallel"
+            },
+            "quick_reply_status": "disabled_or_ineligible",
+            "llm_model": "qwen/qwen3.8-27b",
+            "llm_provider": "cerebras/fp16",
+            "llm_backend": "OpenRouter",
+            "llm_actual_provider": "Cerebras",
+            "llm_ttft_ms": 595.58,
+            "llm_first_sentence_ms": 627.75,
+            "sentence_ready_ms": 637.03,
+            "director_mode": "bolt",
+            "director_model": "qwen/qwen3.8-27b",
+            "template_id": "interest.soft"
+          },
+          "sources": [],
+          "lookups": []
+        },
+        {
+          "type": "reply",
+          "text": "Oh, ein Sommer-Salt? Klar, ich mache das!",
+          "reply_id": 1,
+          "performance": {
+            "sentences": [
+              {
+                "emotion": "interest",
+                "secondary": "amusement",
+                "blend": 0.25,
+                "intensity": 0.72,
+                "direction": "interest, playful",
+                "text": "Oh, ein Sommer-Salt?",
+                "start_s": 0,
+                "end_s": 0.9800416666666667
+              },
+              {
+                "emotion": "interest",
+                "secondary": "amusement",
+                "blend": 0.25,
+                "intensity": 0.72,
+                "direction": "interest, playful",
+                "text": "Klar, ich mache das!",
+                "start_s": 0.9800416666666667,
+                "end_s": 2.340041666666667
+              }
+            ],
+            "source": "qwen/qwen3.8-27b sentence cues + fixed GENERAL catalogue",
+            "timing": "Sentence starts anchored to actual preceding PCM duration; within-sentence estimates"
+          },
+          "avatar_actions": [
+            {
+              "kind": "somersault",
+              "duration_s": 4.8,
+              "sentence": 0,
+              "direction": "forward"
+            }
+          ],
+          "avatar_action_id": "121a6021b29f47d3b6d6859d96088f2d",
+          "avatar_event": null,
+          "sentence_index": 1,
+          "sentence_text": "Klar, ich mache das!",
+          "sentence_role": "answer",
+          "speaker_id": "speaker-1",
+          "speaker_name": "Speaker 1",
+          "speaker_update": null,
+          "timing": {
+            "tts_model": "small_rl",
+            "verification": {
+              "align": true,
+              "speech_verification": "parallel"
+            },
+            "quick_reply_status": "disabled_or_ineligible",
+            "llm_model": "qwen/qwen3.8-27b",
+            "llm_provider": "cerebras/fp16",
+            "llm_backend": "OpenRouter",
+            "llm_actual_provider": "Cerebras",
+            "llm_ttft_ms": 595.58,
+            "llm_first_sentence_ms": 627.75,
+            "finish_reason": "stop",
+            "usage": {
+              "prompt_tokens": 4355,
+              "completion_tokens": 35,
+              "total_tokens": 4390,
+              "cost": 0.004319964,
+              "is_byok": false,
+              "prompt_tokens_details": {
+                "cached_tokens": 2048,
+                "cache_write_tokens": 0,
+                "audio_tokens": 0,
+                "video_tokens": 0
+              },
+              "cost_details": {
+                "upstream_inference_cost": 0.0043636,
+                "upstream_inference_prompt_cost": 0.00431145,
+                "upstream_inference_completions_cost": 5.215e-05
+              },
+              "completion_tokens_details": {
+                "reasoning_tokens": 0,
+                "image_tokens": 0,
+                "audio_tokens": 0
+              }
+            },
+            "generation_calls": 1,
+            "llm_total_ms": 654.57,
+            "response_complete": true,
+            "tts_actual_model": "small_rl",
+            "tts_revision": "182bc700cac29b2d69295a33398b13e1ca7fba69",
+            "answer_first_audio_ms": 1343.87,
+            "tts_first_audio_ms": 706.08,
+            "first_audio_ms": 1343.91,
+            "tts_server_stages": [
+              {
+                "generation_ms": 817,
+                "alignment_ms": 1,
+                "scoring_ms": 0,
+                "speaker_preparation_ms": 0,
+                "total_ms": 831,
+                "performance": {
+                  "device_seconds": 0.5298491747379303,
+                  "raw_audio_seconds": 2.88,
+                  "aggregate_rtf": 0.18397540789511468,
+                  "audio_seconds_per_second": 5.435509079398836,
+                  "batches": [
+                    {
+                      "batch_size": 1,
+                      "device_seconds": 0.5298491747379303,
+                      "audio_seconds": [
+                        2.88
+                      ],
+                      "model_wall_seconds": 0.5341230183839798,
+                      "first_audio_seconds": 0.23045120239257813,
+                      "graph_capture_seconds": 0,
+                      "live_callback_seconds": 0.0027192384004592896,
+                      "first_chunk_components_ms": {
+                        "codec_stream_setup": 5.036032199859619,
+                        "semantic_prefill": 195.58399963378906,
+                        "semantic_decode_first_steps": 8.151039600372314,
+                        "acoustic_tokens_first_steps": 6.719488143920898,
+                        "codec_first_chunk": 10.499072074890137,
+                        "profiled_frames": 3
+                      }
+                    }
+                  ],
+                  "streaming": true,
+                  "chunk_frames": 20,
+                  "backend": "fused CFG + local CUDA graphs + compiled global",
+                  "includes": "TTS prefill, autoregressive decode and PCM codec; GPU event span including launch gaps",
+                  "excludes": "reference encoding, prompt packing, Luna, alignment, scoring, voice conversion, CPU audio copy, MP3, network",
+                  "graph_capture_seconds": 0,
+                  "oom_batch_retries": []
+                }
+              }
+            ],
+            "sentence_tts": [
+              {
+                "sentence": 0,
+                "total_ms": 888.67,
+                "audio_s": 0.98
+              }
+            ],
+            "sentence_ready_ms": 1530.09,
+            "director_mode": "bolt",
+            "director_model": "qwen/qwen3.8-27b",
+            "template_id": "interest.soft"
+          },
+          "sources": [],
+          "lookups": []
+        },
+        {
+          "type": "reply",
+          "text": "Oh, ein Sommer-Salt? Klar, ich mache das!\nSchau mal, ich dreh mich gleich einmal!",
+          "reply_id": 1,
+          "performance": {
+            "sentences": [
+              {
+                "emotion": "interest",
+                "secondary": "amusement",
+                "blend": 0.25,
+                "intensity": 0.72,
+                "direction": "interest, playful",
+                "text": "Oh, ein Sommer-Salt?",
+                "start_s": 0,
+                "end_s": 0.9800416666666667
+              },
+              {
+                "emotion": "interest",
+                "secondary": "amusement",
+                "blend": 0.25,
+                "intensity": 0.72,
+                "direction": "interest, playful",
+                "text": "Klar, ich mache das!",
+                "start_s": 0.9800416666666667,
+                "end_s": 2.7400416666666665
+              },
+              {
+                "emotion": "amusement",
+                "secondary": null,
+                "blend": 0,
+                "intensity": 0.72,
+                "direction": "amusement, rapid",
+                "text": "Schau mal, ich dreh mich gleich einmal!",
+                "start_s": 2.7400416666666665,
+                "end_s": 5.120041666666666
+              }
+            ],
+            "source": "qwen/qwen3.8-27b sentence cues + fixed GENERAL catalogue",
+            "timing": "Sentence starts anchored to actual preceding PCM duration; within-sentence estimates"
+          },
+          "avatar_actions": [
+            {
+              "kind": "somersault",
+              "duration_s": 4.8,
+              "sentence": 0,
+              "direction": "forward"
+            }
+          ],
+          "avatar_action_id": "121a6021b29f47d3b6d6859d96088f2d",
+          "avatar_event": null,
+          "sentence_index": 2,
+          "sentence_text": "Schau mal, ich dreh mich gleich einmal!",
+          "sentence_role": "answer",
+          "speaker_id": "speaker-1",
+          "speaker_name": "Speaker 1",
+          "speaker_update": null,
+          "timing": {
+            "tts_model": "small_rl",
+            "verification": {
+              "align": true,
+              "speech_verification": "parallel"
+            },
+            "quick_reply_status": "disabled_or_ineligible",
+            "llm_model": "qwen/qwen3.8-27b",
+            "llm_provider": "cerebras/fp16",
+            "llm_backend": "OpenRouter",
+            "llm_actual_provider": "Cerebras",
+            "llm_ttft_ms": 595.58,
+            "llm_first_sentence_ms": 627.75,
+            "finish_reason": "stop",
+            "usage": {
+              "prompt_tokens": 4355,
+              "completion_tokens": 35,
+              "total_tokens": 4390,
+              "cost": 0.004319964,
+              "is_byok": false,
+              "prompt_tokens_details": {
+                "cached_tokens": 2048,
+                "cache_write_tokens": 0,
+                "audio_tokens": 0,
+                "video_tokens": 0
+              },
+              "cost_details": {
+                "upstream_inference_cost": 0.0043636,
+                "upstream_inference_prompt_cost": 0.00431145,
+                "upstream_inference_completions_cost": 5.215e-05
+              },
+              "completion_tokens_details": {
+                "reasoning_tokens": 0,
+                "image_tokens": 0,
+                "audio_tokens": 0
+              }
+            },
+            "generation_calls": 1,
+            "llm_total_ms": 654.57,
+            "response_complete": true,
+            "tts_actual_model": "small_rl",
+            "tts_revision": "182bc700cac29b2d69295a33398b13e1ca7fba69",
+            "answer_first_audio_ms": 1343.87,
+            "tts_first_audio_ms": 706.08,
+            "first_audio_ms": 1343.91,
+            "tts_server_stages": [
+              {
+                "generation_ms": 817,
+                "alignment_ms": 1,
+                "scoring_ms": 0,
+                "speaker_preparation_ms": 0,
+                "total_ms": 831,
+                "performance": {
+                  "device_seconds": 0.5298491747379303,
+                  "raw_audio_seconds": 2.88,
+                  "aggregate_rtf": 0.18397540789511468,
+                  "audio_seconds_per_second": 5.435509079398836,
+                  "batches": [
+                    {
+                      "batch_size": 1,
+                      "device_seconds": 0.5298491747379303,
+                      "audio_seconds": [
+                        2.88
+                      ],
+                      "model_wall_seconds": 0.5341230183839798,
+                      "first_audio_seconds": 0.23045120239257813,
+                      "graph_capture_seconds": 0,
+                      "live_callback_seconds": 0.0027192384004592896,
+                      "first_chunk_components_ms": {
+                        "codec_stream_setup": 5.036032199859619,
+                        "semantic_prefill": 195.58399963378906,
+                        "semantic_decode_first_steps": 8.151039600372314,
+                        "acoustic_tokens_first_steps": 6.719488143920898,
+                        "codec_first_chunk": 10.499072074890137,
+                        "profiled_frames": 3
+                      }
+                    }
+                  ],
+                  "streaming": true,
+                  "chunk_frames": 20,
+                  "backend": "fused CFG + local CUDA graphs + compiled global",
+                  "includes": "TTS prefill, autoregressive decode and PCM codec; GPU event span including launch gaps",
+                  "excludes": "reference encoding, prompt packing, Luna, alignment, scoring, voice conversion, CPU audio copy, MP3, network",
+                  "graph_capture_seconds": 0,
+                  "oom_batch_retries": []
+                }
+              },
+              {
+                "generation_ms": 623,
+                "alignment_ms": 1,
+                "scoring_ms": 0,
+                "speaker_preparation_ms": 0,
+                "total_ms": 638,
+                "performance": {
+                  "device_seconds": 0.47702130913734436,
+                  "raw_audio_seconds": 2.24,
+                  "aggregate_rtf": 0.21295594157917158,
+                  "audio_seconds_per_second": 4.6958069945572545,
+                  "batches": [
+                    {
+                      "batch_size": 1,
+                      "device_seconds": 0.47702130913734436,
+                      "audio_seconds": [
+                        2.24
+                      ],
+                      "model_wall_seconds": 0.48108943551778793,
+                      "first_audio_seconds": 0.23650816345214845,
+                      "graph_capture_seconds": 0,
+                      "live_callback_seconds": 0.0027887746691703796,
+                      "first_chunk_components_ms": {
+                        "codec_stream_setup": 4.990975856781006,
+                        "semantic_prefill": 200.1766357421875,
+                        "semantic_decode_first_steps": 8.422368049621582,
+                        "acoustic_tokens_first_steps": 7.743488073348999,
+                        "codec_first_chunk": 10.760191917419434,
+                        "profiled_frames": 3
+                      }
+                    }
+                  ],
+                  "streaming": true,
+                  "chunk_frames": 20,
+                  "backend": "fused CFG + local CUDA graphs + compiled global",
+                  "includes": "TTS prefill, autoregressive decode and PCM codec; GPU event span including launch gaps",
+                  "excludes": "reference encoding, prompt packing, Luna, alignment, scoring, voice conversion, CPU audio copy, MP3, network",
+                  "graph_capture_seconds": 0,
+                  "oom_batch_retries": []
+                }
+              }
+            ],
+            "sentence_tts": [
+              {
+                "sentence": 0,
+                "total_ms": 888.67,
+                "audio_s": 0.98
+              },
+              {
+                "sentence": 1,
+                "total_ms": 1916.02,
+                "audio_s": 1.76
+              }
+            ],
+            "tts_retries": [
+              {
+                "event": "speech_retry",
+                "attempt": 2,
+                "max_attempts": 3,
+                "code": "unverified_speech",
+                "strategy": "compact_direction",
+                "sentence": 1
+              }
+            ],
+            "sentence_ready_ms": 3450.64,
+            "director_mode": "bolt",
+            "director_model": "qwen/qwen3.8-27b",
+            "template_id": "amusement.intense"
+          },
+          "sources": [],
+          "lookups": []
+        },
+        {
+          "type": "turn_done",
+          "barged": false
+        },
+        {
+          "type": "asr_settings",
+          "effective_final_model": "nemotron",
+          "second_recognizer_enabled": false,
+          "background_speech_filter": true,
+          "voice_captions_enabled": true,
+          "selected_model": "parakeet_ultra",
+          "loading_model": null,
+          "switch_ms": 0,
+          "models": [
+            {
+              "id": "parakeet_ultra",
+              "label": "Parakeet Ultra · fast GPU"
+            },
+            {
+              "id": "parakeet_redux",
+              "label": "Parakeet Redux · CPU comparison"
+            },
+            {
+              "id": "nemotron",
+              "label": "Nemotron 3.5 · original"
+            },
+            {
+              "id": "moonshine_de",
+              "label": "Moonshine Streaming Small · German"
+            },
+            {
+              "id": "nemotron_de",
+              "label": "Nemotron 3.5 · German telephony"
+            },
+            {
+              "id": "parakeet_v3",
+              "label": "Parakeet TDT v3 · multilingual"
+            },
+            {
+              "id": "whisper_turbo",
+              "label": "Whisper Large v3 Turbo · German"
+            }
+          ],
+          "preview_model": "nemotron",
+          "final_model": "parakeet_ultra",
+          "reply_language": "de",
+          "speech_pause_ms": 300,
+          "min_ms": 200,
+          "max_ms": 2000,
+          "conversation_focus": {
+            "enabled": false,
+            "threshold": 0.28,
+            "timeout_s": 180,
+            "speaker_id": null,
+            "name": null,
+            "primary_id": "speaker-1",
+            "participants": [
+              {
+                "id": "speaker-1",
+                "name": "Speaker 1"
+              }
+            ]
+          },
+          "wake_mode": {
+            "enabled": true,
+            "active": true,
+            "window_s": 10,
+            "remaining_s": 10
+          },
+          "vad": "Silero ONNX CPU · neural speech activity",
+          "submission": "All pending sentences after a speech pause"
+        }
+      ],
+      "frames": [
+        {
+          "kind": "somersault",
+          "flip": 0,
+          "heard": true
+        },
+        {
+          "kind": "somersault",
+          "flip": 0,
+          "heard": true
+        },
+        {
+          "kind": "somersault",
+          "flip": 0,
+          "heard": true
+        },
+        {
+          "kind": "somersault",
+          "flip": 1.4481315740888017,
+          "heard": false
+        },
+        {
+          "kind": "somersault",
+          "flip": 5.859056154018997,
+          "heard": false
+        },
+        {
+          "kind": "somersault",
+          "flip": 27.848728109747437,
+          "heard": false
+        },
+        {
+          "kind": "somersault",
+          "flip": 69.06627275115147,
+          "heard": false
+        },
+        {
+          "kind": "somersault",
+          "flip": 119.12827506370745,
+          "heard": true
+        },
+        {
+          "kind": "somersault",
+          "flip": 176.28692077061234,
+          "heard": true
+        },
+        {
+          "kind": "somersault",
+          "flip": 233.94839844916032,
+          "heard": true
+        },
+        {
+          "kind": "somersault",
+          "flip": 293.6315379160168,
+          "heard": true
+        },
+        {
+          "kind": "somersault",
+          "flip": 332.11954166413676,
+          "heard": true
+        },
+        {
+          "kind": "somersault",
+          "flip": 352.60801976599515,
+          "heard": true
+        },
+        {
+          "kind": "somersault",
+          "flip": 359.7067547082753,
+          "heard": true
+        },
+        {
+          "kind": "somersault",
+          "flip": 360,
+          "heard": true
+        },
+        {
+          "kind": "somersault",
+          "flip": 360,
+          "heard": true
+        },
+        {
+          "kind": "somersault",
+          "flip": 360,
+          "heard": true
+        }
+      ],
+      "audio_chunks": 9,
+      "request": "Hi Robby, please do a somersault.",
+      "asr_model": "nemotron",
+      "passed": true
+    }
+  ]
+}

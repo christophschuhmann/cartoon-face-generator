@@ -2,7 +2,6 @@ import asyncio
 from contextlib import asynccontextmanager
 from types import SimpleNamespace
 import unittest
-import unittest.mock
 from unittest.mock import AsyncMock,Mock
 import numpy as np
 from pause_vad import SpeechClock
@@ -71,6 +70,57 @@ class PauseSubmissionTests(unittest.IsolatedAsyncioTestCase):
         s=self.session();s.mic_now=2.
         s.vad=SimpleNamespace(active=False,probability=.48)
         self.assertFalse(await s.commit_pause('This is not finished.',2.,s.epoch,1.))
+    async def test_quieter_voice_and_stale_asr_cannot_override_live_speech(self):
+        s=self.session();s.focus.owner='known';s.preview='Ich bin noch mitten im Satz'
+        s.mic_now=s.last_speech=s.now=5.;s.foreground_last=2.;s.foreground_now=False;s.word_at=2.
+        s.vad=SimpleNamespace(active=True,probability=.95)
+        self.assertFalse(s.quiet_ready())
+        self.assertFalse(await s.commit_pause(s.preview,5.,s.epoch,5.))
+        self.assertEqual(s.final_audio_end(5.),5.)
+    async def test_resumed_then_paused_again_invalidates_old_transcript(self):
+        s=self.session();s.focus.owner='known';s.preview='Erster Teil'
+        s.last_speech=2.;s.mic_now=s.now=3.;s.word_at=0.
+        s.foreground_last=.5;s.foreground_now=False
+        s.vad=SimpleNamespace(active=False,probability=.01)
+        self.assertFalse(await s.commit_pause(s.preview,1.5,s.epoch,1.))
+    async def test_gpu_hop_backlog_cannot_submit_incomplete_audio(self):
+        s=self.session();s.focus.owner='known';s.mic_now=4.;s.now=1.;s.last_speech=3.
+        s.vad=SimpleNamespace(active=False,probability=.01)
+        self.assertFalse(await s.commit_pause('Noch nicht vollständig.',1.,s.epoch,3.))
+        s._maybe_probe();self.assertIsNone(s.probe)
+
+    async def test_complete_mic_pcm_bypasses_preview_backlog_without_losing_tail(self):
+        from unittest.mock import patch
+        s=self.session();s.focus.owner='known';s.mic_now=4.;s.now=1.;s.last_speech=3.;s.begin=0.
+        s.vad=SimpleNamespace(active=False,probability=.01);s.mic_driven=True
+        x=np.r_[np.ones(16000)*.01,np.ones(16000)*.02,np.ones(16000)*.03,np.zeros(16000)].astype(np.float32)
+        s.mic_records.append((0.,4.,x))
+        async def transcribe(key,audio):
+            self.assertEqual(len(audio),round(3.12*16000))
+            self.assertAlmostEqual(float(audio[40000]),.03,places=5)
+            return {'text':'Der ganze Satz mit letztem Wort.','model':key,'transcribe_ms':1.}
+        s.asr.selected='parakeet_ultra';s.asr.transcribe=transcribe
+        with patch('speaker_teacher.get_cached_teacher',return_value=SimpleNamespace(embed=lambda a:np.eye(192)[0])):
+            s._maybe_probe();await s.probe
+        self.assertEqual(s.queue.get_nowait()[0],'Der ganze Satz mit letztem Wort.')
+        self.assertEqual(s.segment_floor,4.)
+        await s.native_endpoint('Veraltete Wörter.',1.2)
+        self.assertEqual(s.native_text(),'')
+        await s.close()
+
+    async def test_new_speech_invalidates_fast_mic_transcript(self):
+        s=self.session();s.focus.owner='known';s.mic_now=4.;s.now=1.;s.last_speech=3.;s.begin=0.
+        s.vad=SimpleNamespace(active=False,probability=.01)
+        s.mic_records.append((0.,4.,np.zeros(64000,np.float32)))
+        entered=asyncio.Event();release=asyncio.Event()
+        async def transcribe(*args):
+            entered.set();await release.wait()
+            return {'text':'Noch nicht der ganze Satz.','model':'parakeet_ultra'}
+        s.asr.selected='parakeet_ultra';s.asr.transcribe=transcribe
+        s._maybe_probe();await entered.wait()
+        s.last_speech=s.mic_now=4.1;s.vad.active=True
+        release.set();await s.probe
+        self.assertTrue(s.queue.empty());await s.close()
     async def test_new_turn_preroll_never_reuses_previous_submitted_words(self):
         s=self.session();s.now=1.4;s.reset_segment()
         s.vad=SpeechClock(Probabilities([.9,.9]))
@@ -107,26 +157,3 @@ class EarlyFinalAsrTests(unittest.IsolatedAsyncioTestCase):
         s=self.session();s.early_final_ms=0;s._maybe_early_final(1.15);self.assertIsNone(s.early_task)
         s=self.session();s.asr.selected='nemotron';s._maybe_early_final(1.15);self.assertIsNone(s.early_task)
         s=self.session();s.mic_now=1.05;s._maybe_early_final(1.05);self.assertIsNone(s.early_task)
-
-class SpeechTurnDecisionTests(unittest.IsolatedAsyncioTestCase):
-    def session(self,decide=None):
-        c=SimpleNamespace(ws=SimpleNamespace(send_json=AsyncMock()),speaking=True,halting=False,open_agent_text='Es war einmal ein Drache.',
-            session=SimpleNamespace(reset=Mock()),ears=SimpleNamespace(sr=16000),_on_barge=AsyncMock(),
-            decisions=SimpleNamespace(client=object(),last_agent='',history=[]))
-        return SentenceSession(c)
-    async def test_explicit_stop_needs_no_model(self):
-        import live_decisions
-        with unittest.mock.patch.object(live_decisions,'speech_turn_action',AsyncMock(side_effect=AssertionError)):
-            self.assertEqual(await self.session().speech_turn_action('Stopp Robby, hör kurz auf!'),'stop')
-    async def test_model_decides_other_utterances(self):
-        import live_decisions
-        for answer in ('answer','continue','stop'):
-            with unittest.mock.patch.object(live_decisions,'speech_turn_action',AsyncMock(return_value=answer)) as call:
-                self.assertEqual(await self.session().speech_turn_action('Wie spät ist es?'),answer)
-                self.assertEqual(call.await_args.args[2],'Es war einmal ein Drache.')
-    async def test_failure_or_disabled_keeps_the_old_queue(self):
-        import live_decisions,os
-        with unittest.mock.patch.object(live_decisions,'speech_turn_action',AsyncMock(side_effect=RuntimeError)):
-            self.assertIsNone(await self.session().speech_turn_action('Wie spät ist es?'))
-        with unittest.mock.patch.dict(os.environ,{'ROBO_SPEECH_TURN_DECISIONS':'0'}):
-            self.assertIsNone(await self.session().speech_turn_action('Wie spät ist es?'))

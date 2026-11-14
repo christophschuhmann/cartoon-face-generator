@@ -1,3 +1,5 @@
+import {attachSystemGuide} from './system-guide.js';
+import {VerificationControls} from './verification-controls.js';
 import {RoboClient} from './client.js';
 import {createRobbyRig,controlsFromFace} from './rig.js';
 import {profiles,pose,mix,ActingTimeline} from './emotions.js';
@@ -8,6 +10,7 @@ import {AvatarActions} from './avatar-actions.js';
 import {attachActionControls} from './avatar-action-controls.js';
 import {attachPetting} from './avatar-petting.js';
 import {ASRControls} from './asr-controls.js';
+import {InputIsolationControls} from './input-isolation-controls.js';
 import {LLMControls} from './llm-controls.js';
 import {LiveOverview} from './live-overview.js';
 import {MemoryControls} from './memory-controls.js';
@@ -18,7 +21,8 @@ let socialProfiles=null;
 let ready=false,connected=false,mic=false,speaking=false,replyPending=false,partial=null,answer=null;
 let sentenceMode=false;
 let foregroundInputUntil=0;
-let asrControls=null;
+let asrControls=null;let verificationControls=null;
+let inputIsolationControls=null;
 let llmControls=null;
 let memoryControls=null;
 let environmentControls=null;
@@ -115,7 +119,7 @@ const client=window.robo=new RoboClient({
   // Compatibility guard for an older server/history echo. The actual server
   // also removes this obsolete note before sentence framing and synthesis.
   if(m.type==='reply'&&typeof m.text==='string')m={...m,text:m.text.replace(/\[My preceding reply was interrupted\.[^\]]*(?:\]|$)/gi,'').trim()};
-  asrControls?.message(m);memoryControls?.message(m);socialProfiles?.message(m);
+  verificationControls?.message(m);asrControls?.message(m);inputIsolationControls?.message(m);memoryControls?.message(m);socialProfiles?.message(m);
   if(m.type==='quick_reply_settings')$('quick-reply-status').textContent=m.enabled?'Optional reaction enabled: Qwen receives the exact reaction and continues while TTS prepares both streams.':'Quick reactions disabled; play the main answer directly.';
   if(m.type==='voice_caption')$('voice-caption-status').textContent=m.status==='available'?`${m.caption} · uncertain estimate · ${Math.round(m.request_ms)} ms · ${m.window_s} s audio`:`Tone hint: ${m.status.replaceAll('_',' ')} · transcript-only response.`;
   llmControls?.message(m);overview.message(m);environmentControls?.message(m);
@@ -132,8 +136,9 @@ const client=window.robo=new RoboClient({
   if(['barge','stop_command','error','reply_cancelled'].includes(m.type))pendingPlayFallback=null;
   if(['turn_done','stop_command','error','reply_cancelled'].includes(m.type)){optionalAvatarReply=optionalEnvironmentReply=avatarCancelPending=false;}
   if(['endpoint','reply','backchannel'].includes(m.type)||(foregroundMessage&&['asr_preview','partial'].includes(m.type)))avatarActions.touch();
-  if(['barge','stop_command','reply_cancelled'].includes(m.type)||m.type==='error'&&!avatarActions.queue.some(q=>q.source==='requested'))avatarActions.clear();
-  if(m.type==='avatar_action')avatarActions.request(m.action_id,m.steps);
+  if(['barge','stop_command','reply_cancelled'].includes(m.type)||m.type==='error'&&!avatarActions.pendingRequest&&!avatarActions.queue.some(q=>q.source==='requested'))avatarActions.clear();
+  if(m.type==='avatar_action')avatarActions.request(m.action_id,m.steps,performance.now(),{waitForAudio:m.wait_for_audio===true});
+  if(m.type==='reply')avatarActions.bindRequested(m.reply_id,m.avatar_action_id);
   if(m.type==='avatar_gesture'&&!speaking&&!replyPending)avatarActions.listen(m.kind);
   if(m.type==='reply'&&!avatarActions.hasRequested(m.avatar_action_id))avatarActions.set(m.reply_id,m.avatar_actions,m.performance,m.avatar_event?'optional':'reply');
   multimodal?.message(m);
@@ -185,6 +190,7 @@ const client=window.robo=new RoboClient({
  }
 });
 asrControls=new ASRControls(client);window.robotFace.asrControls=asrControls;
+inputIsolationControls=new InputIsolationControls(client);window.robotFace.inputIsolationControls=inputIsolationControls;
 llmControls=new LLMControls(client);window.robotFace.llmControls=llmControls;window.robotFace.overview=overview;
 multimodal=new MultimodalUI(client,$('speaker-controls'));window.robotFace.multimodal=multimodal;
 const canPersonalitySpeak=()=>connected&&ready&&!speaking&&!replyPending&&!$('message').value.trim()&&!document.hidden&&!eyeContact?.state.active;
@@ -215,7 +221,7 @@ for(const id of ['avatar-play-intensity','avatar-cuddle-intensity'])$(id).addEve
 document.addEventListener('visibilitychange',()=>{if(document.hidden)cancelOptionalAvatar();});
 for(const id of ['avatar-actions-enabled','avatar-listening-enabled'])$(id).addEventListener('change',()=>client.send('interaction:gestures:'+(avatarActions.enabled&&avatarActions.listeningEnabled?'on':'off')));
 $('call').onclick=async()=>{try{if(mic)environmentControls?environmentControls.off():client.stop();else await client.start(true);}catch(e){$('subtitle').textContent=e.message;phase('Microphone unavailable — try typing');}};
-$('unfiltered-talk').onclick=async()=>{desiredGate=false;try{const wake=$('wake-mode');if(wake?.checked){wake.checked=false;wake.onchange();}await client.start(true);client.send('identity:off');if(sentenceMode){desiredFocus=false;focusToggle.checked=false;saveThreshold('robby.conversationFocus',false);client.send('identity:focus:enabled:off');}gate.checked=false;$('asr-status').textContent='Speaker filter OFF. Speak normally; background voices may also be transcribed.';phase('Listening to you','ready');}catch(e){$('mic-status').textContent='Microphone unavailable: '+e.message;}};
+$('unfiltered-talk').onclick=async()=>{await inputIsolationControls.choose('off');desiredGate=false;try{const wake=$('wake-mode');if(wake?.checked){wake.checked=false;wake.onchange();}await client.start(true);client.send('identity:off');if(sentenceMode){desiredFocus=false;focusToggle.checked=false;saveThreshold('robby.conversationFocus',false);client.send('identity:focus:enabled:off');}gate.checked=false;$('asr-status').textContent='Speaker filter OFF. Speak normally; background voices may also be transcribed.';phase('Listening to you','ready');}catch(e){$('mic-status').textContent='Microphone unavailable: '+e.message;}};
 setInterval(()=>{if(!mic)return;const now=performance.now();if(now-micStarted<2500)return;
  if(!lastCapture||now-lastCapture>2500)$('mic-status').textContent=`No audio frames from the microphone (${client.ctx?.state||'no audio context'}). Check browser permission/input device, then End conversation and Start talking.`;
  else if(!lastServerAudio||now-lastServerAudio>4000)$('mic-status').textContent='Microphone captures audio, but the server has not acknowledged recent packets. Reconnect the conversation.';
@@ -371,13 +377,15 @@ function animate(t){
  const automaticBlink=Math.pow(Math.max(0,Math.cos(t/900)),160)*.85;
  const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
  let action=avatarActions.frame(t,chosen,{position:client.ctx?.state==='running'?client.clock?.position():null,busy:speaking||replyPending,reduced,hidden:document.hidden,calibrating:!!eyeContact?.state.active});
- const pet=petting?.frame(t,action.pose,reduced);if(pet)action=pet;
+ const pet=petting?.frame(t,action.pose,reduced);if(pet)action={...pet,motion:{...pet.motion,...action.motion,tilt:(action.motion.tilt||0)+(pet.motion.tilt||0)}};
  rig.update({...controls,...action.controls,gazeTarget:deskView?gazeTarget:null,pose:action.pose,actionMotion:action.motion,actionEyes:action.eyes,
   blinkLeft:Math.max(action.controls.blinkLeft||0,controls.blinkLeft||0,automaticBlink),blinkRight:Math.max(action.controls.blinkRight||0,controls.blinkRight||0,automaticBlink),audioLevel:Math.min(1,client.level()*7)},lastAnimation?t-lastAnimation:16.7,reduced?0:t);lastAnimation=t;
  requestAnimationFrame(animate);
 }
 requestAnimationFrame(animate);
 organisePlayground();
+verificationControls=new VerificationControls(client);
+attachSystemGuide();
 environmentControls=new EnvironmentControls(client);window.robotFace.environmentControls=environmentControls;environmentControls.poll(ready);
 const wakePanel=document.createElement('section');wakePanel.className='wake-controls';wakePanel.innerHTML='<label><input type="checkbox" id="wake-mode"> Hey Robby mode · only the addressed speaker</label><p id="wake-mode-status" role="status"></p>';
 document.querySelector('.under-avatar').append(wakePanel);const wakeBox=$('wake-mode');wakeBox.checked=desiredWake;

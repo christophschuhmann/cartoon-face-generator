@@ -1,0 +1,8 @@
+{
+  "request": "Sag genau: Ich warte auf die Freigabe.",
+  "scope": "real configured LLM and pipeline, TTS disabled; does not occupy live conversation slot",
+  "sentences": [
+    "Ich warte auf die Freigabe."
+  ],
+  "passed": true
+}

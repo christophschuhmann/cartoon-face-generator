@@ -1,0 +1,421 @@
+{
+  "updated": "2026-11-14",
+  "animation_kinds": [
+    "emotion",
+    "nod",
+    "shake",
+    "spin",
+    "somersault",
+    "carousel",
+    "afterglow",
+    "puppy",
+    "pet",
+    "eye_roll",
+    "grimace",
+    "wink",
+    "curious"
+  ],
+  "grimaces": [
+    "crossed",
+    "opposite",
+    "wiggle",
+    "cheeky",
+    "goofy",
+    "squishy",
+    "fish",
+    "peekaboo"
+  ],
+  "emotions": [
+    "amusement",
+    "elation",
+    "pleasure_ecstasy",
+    "contentment",
+    "gratitude",
+    "affection",
+    "infatuation",
+    "hope",
+    "triumph",
+    "pride",
+    "interest",
+    "awe",
+    "surprise",
+    "concentration",
+    "contemplation",
+    "relief",
+    "longing",
+    "teasing",
+    "impatience",
+    "lust",
+    "doubt",
+    "fear",
+    "distress",
+    "confusion",
+    "embarrassment",
+    "shame",
+    "disappointment",
+    "sadness",
+    "bitterness",
+    "contempt",
+    "disgust",
+    "anger",
+    "malice",
+    "sourness",
+    "pain",
+    "helplessness",
+    "fatigue",
+    "numbness",
+    "intoxication",
+    "envy"
+  ],
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "perform_avatar",
+        "description": "Perform a gentle visual-only robot action sequence, optionally at a spoken sentence. No hardware movement.",
+        "parameters": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "steps"
+          ],
+          "properties": {
+            "steps": {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 6,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "kind"
+                ],
+                "properties": {
+                  "kind": {
+                    "type": "string",
+                    "enum": [
+                      "emotion",
+                      "nod",
+                      "shake",
+                      "spin",
+                      "somersault",
+                      "carousel",
+                      "afterglow",
+                      "puppy",
+                      "pet",
+                      "eye_roll",
+                      "grimace",
+                      "wink",
+                      "curious"
+                    ]
+                  },
+                  "emotion": {
+                    "type": "string",
+                    "enum": [
+                      "amusement",
+                      "elation",
+                      "pleasure_ecstasy",
+                      "contentment",
+                      "gratitude",
+                      "affection",
+                      "infatuation",
+                      "hope",
+                      "triumph",
+                      "pride",
+                      "interest",
+                      "awe",
+                      "surprise",
+                      "concentration",
+                      "contemplation",
+                      "relief",
+                      "longing",
+                      "teasing",
+                      "impatience",
+                      "lust",
+                      "doubt",
+                      "fear",
+                      "distress",
+                      "confusion",
+                      "embarrassment",
+                      "shame",
+                      "disappointment",
+                      "sadness",
+                      "bitterness",
+                      "contempt",
+                      "disgust",
+                      "anger",
+                      "malice",
+                      "sourness",
+                      "pain",
+                      "helplessness",
+                      "fatigue",
+                      "numbness",
+                      "intoxication",
+                      "envy"
+                    ]
+                  },
+                  "variant": {
+                    "type": "string",
+                    "enum": [
+                      "crossed",
+                      "opposite",
+                      "wiggle",
+                      "cheeky",
+                      "goofy",
+                      "squishy",
+                      "fish",
+                      "peekaboo"
+                    ]
+                  },
+                  "direction": {
+                    "type": "string",
+                    "enum": [
+                      "clockwise",
+                      "counterclockwise",
+                      "forward",
+                      "backward"
+                    ]
+                  },
+                  "scope": {
+                    "type": "string",
+                    "enum": [
+                      "head",
+                      "body"
+                    ]
+                  },
+                  "duration_s": {
+                    "type": "number",
+                    "minimum": 1,
+                    "maximum": 6
+                  },
+                  "sentence": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 11
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "search_web",
+        "description": "Search the public web for a short topical query. Use for implicit look-it-up requests and topics outside encyclopedia/news/weather; infer the topic from recent dialogue. Returns real source annotations. Billed through OpenRouter.",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "query": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "query"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "search_news",
+        "description": "Find latest headlines, optionally filter recent feeds by topic. For latest/current headlines without a specific TOPIC use an empty query, never generic headline words.",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "query": {
+              "type": "string"
+            },
+            "source": {
+              "type": "string",
+              "enum": [
+                "all",
+                "Tagesschau",
+                "BBC News",
+                "Deutsche Welle",
+                "Deutschlandfunk",
+                "The Guardian"
+              ]
+            }
+          },
+          "required": [
+            "query",
+            "source"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_weather",
+        "description": "Get a current weather model estimate and 3-day forecast for a named city. Ask the user if no city is known.",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "location": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "location"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "search_wikipedia",
+        "description": "Search Wikipedia for a concise encyclopedia extract, with source links.",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "query": {
+              "type": "string"
+            },
+            "language": {
+              "type": "string",
+              "enum": [
+                "de",
+                "en"
+              ]
+            }
+          },
+          "required": [
+            "query",
+            "language"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "set_interruption_rule",
+        "description": "Register an explicitly requested live condition for interrupting the current user BEFORE their turn ends.",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "condition": {
+              "type": "string",
+              "description": "The agreed condition, e.g. user talks about bananas."
+            },
+            "trigger_terms": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Literal words/inflections, e.g. Banane, Bananen, banana, bananas."
+            },
+            "match_mode": {
+              "type": "string",
+              "enum": [
+                "any_term"
+              ]
+            },
+            "reply": {
+              "type": "string",
+              "description": "Exact brief spoken interruption, e.g. Stopp, stopp!"
+            }
+          },
+          "required": [
+            "condition",
+            "trigger_terms",
+            "match_mode",
+            "reply"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "set_semantic_interruption_rule",
+        "description": "Register an explicitly requested meaning-dependent condition, ONLY when literal named topic/word triggers are insufficient. Requires the decision API during live speech.",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "condition": {
+              "type": "string"
+            },
+            "reply": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "condition",
+            "reply"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "clear_interruption_rules",
+        "description": "Cancel the current user’s explicitly cancelled interruption game/rules.",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": [],
+          "additionalProperties": false
+        }
+      }
+    }
+  ],
+  "internal_routing_tool": {
+    "type": "function",
+    "function": {
+      "name": "use_tools",
+      "description": "Use real capabilities to fulfil the current request: avatar choreography or public information lookup. Resolve implicit requests from conversation. Call BEFORE speaking; do not use for mere quotes, negated requests, stories or capability questions.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "avatar",
+              "lookup"
+            ]
+          }
+        },
+        "required": [
+          "kind"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "examples": {
+    "emotion": "Mach ein ernstes Gesicht. / Sei wütend. / Show awe.",
+    "nod": "Nicke bitte. / Nod your head.",
+    "shake": "Schüttle den Kopf. / Shake your head.",
+    "spin": "Dreh dich im Kreis, gegen den Uhrzeigersinn. / Spin around.",
+    "somersault": "Mach einen Salto rückwärts. / Do a forward somersault.",
+    "carousel": "Spiel Karussell. / Do an accelerating carousel.",
+    "afterglow": "Smile euphorically after the carousel.",
+    "puppy": "Mach einen Hundeblick. / Give me puppy eyes.",
+    "pet": "Mouse-drag the head, or ask for a contented petting expression.",
+    "eye_roll": "Rolle mit den Augen. / Roll your eyes.",
+    "grimace": "Schneid eine Grimasse. / Make a silly face.",
+    "wink": "Zwinkere bitte. / Wink.",
+    "curious": "Schau neugierig. / Give a curious look."
+  }
+}

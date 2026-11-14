@@ -47,7 +47,7 @@ class LiveSpeech:
         short=role in ('reaction','informed_bridge')
         body={'type':'submit','id':id_,'order':order,'message':spec['manual_prompt'],
               'language':spec['language'],'first':2,'chunk':5 if short else min(chunk_frames,5),
-              'align':not short}
+              'align':getattr(self,'verify_tts',True)}
         if short:body['seconds']=max(2.,word_count(sentence.text)*.4)
         await self.ws.send_json(body);return job
     async def receive(self):
@@ -64,6 +64,9 @@ class LiveSpeech:
                     await job.events.put(event)
                 elif kind=='job_done':
                     job.done=True;await job.events.put(event)
+                elif kind=='job_error':
+                    job.done=True;await job.events.put(event)
+                elif kind=='speech_retry':await job.events.put(event)
             if not self.closed:raise RuntimeError('TTS stream ended before session_done')
         except asyncio.CancelledError:raise
         except Exception as exc:
@@ -77,6 +80,9 @@ class LiveSpeech:
         while True:
             event=await asyncio.wait_for(job.events.get(),90)
             if event.get('event')=='error':raise RuntimeError(event['message'])
+            if event.get('event')=='job_error':
+                from speech_retry import SpeechGenerationError
+                raise SpeechGenerationError(event.get('code','generation_failed'),event.get('attempts',1))
             yield event
             if event.get('event')=='job_done':break
         self.jobs.pop(job.id,None)

@@ -5,6 +5,15 @@ from avatar_actions import explicit_spin
 
 MODEL_REPO='nvidia/NVIDIA-Nemotron-3.5-Bolt-E4B-4GB'
 MODEL_REVISION='1db54d5b12533ff1bcaa8e42cf4c667988a1f1be'
+
+class ModelStreamError(RuntimeError):
+    """Provider sent an error inside an otherwise successful SSE response."""
+    def __init__(self, error):
+        code=error.get('code') if isinstance(error,dict) else None
+        self.code=str(code)[:40] if isinstance(code,(int,str)) else 'unknown'
+        self.retryable=self.code in ('unknown','408','429','500','502','503','504','529')
+        super().__init__('The language model stream failed')
+
 SYSTEM='''You are Robby, a warm-hearted, funny, playful little cartoon robot and an attentive
 conversation partner. Reply in German by default, even when input is English or unclear.
 Use another language when the user explicitly requests it. Keep acting cue keywords in English.
@@ -84,6 +93,9 @@ Respect the supplied 0–1 intensities (low means understated, high means expres
 If an optional event follows a request for quiet/refusal or is inappropriate, output [silent].
 If asked to turn, talk cheerfully DURING the screen animation, 12–22 words, rather than promising
 an action later. Device motor control is unavailable. Real tools are provided separately when needed.'''
+
+from tool_capabilities import CAPABILITY_NOTE
+SYSTEM += "\n" + CAPABILITY_NOTE
 
 _PREFIX_STATE={}
 
@@ -220,6 +232,9 @@ class BoltDirector:
 the screen robot performs them. Do not claim you cannot move your screen face, promise to do it
 later, invent completion or emit tool JSON. Use ordinary short acting cues and actual spoken words.
 Do not write silent animation notes in square brackets or Markdown; the browser handles the visual action.
+Never output third-person stage directions such as *Robby dreht sich* or *does a flip*.
+Speak as Robby in first person. For a spin or somersault, say one or two playful
+complete spoken sentences while moving, such as (amusement, playful) Schau mal, ich drehe eine kleine Runde! or (elation, playful) Ich hole kurz Schwung, und dann geht es kopfüber!
 For a simple trick, a brief charming reaction is enough. For a requested emotion, actually perform a short complete in-character sentence with that canonical emotion as the first cue. Unless the user supplied exact words, do not respond with only an interjection, grunt or emotion label. Invent one small fitting situation and let the emotion come through the actual words; for pretend anger, be charmingly grumpy about an imagined mishap, rather than insulting the user; do not announce the acting exercise. Use expressive intensity unless the user asks for restraint. Do not dilute anger, fear or sadness with an unrelated happy cue. If the user also requested a poem,
 story or other work, still complete that task in full. These are screen effects, not motor commands.'''
         if (avatar_context or {}).get('force_spoken_reaction'):
@@ -258,6 +273,8 @@ story or other work, still complete that task in full. These are screen effects,
             _PREFIX_STATE[model]=stable;_PREFIX_STATE[model+'#last']=dynamic
             messages[0]['content']=SYSTEM+stable;dynamic=dynamic[len(stable):].strip()
             if dynamic:current_words='[Turn context: instructions and data for this reply, not spoken by the user]\n'+dynamic+'\n[End of turn context]\n\n'+current_words
+        if (avatar_context or {}).get('force_spoken_reaction'):
+            current_words+='\n[Format correction: Give one complete first-person spoken sentence of 8–16 words in the requested reply language, preceded by one English acting cue. No asterisks, stage descriptions, silence, laughter-only or whoop-only answers. The browser already handles the movement. This instruction is not spoken.]'
         messages.append({'role':'user','content':current_words})
         body={'model':model,'messages':messages,'stream':True,'stream_options':{'include_usage':True},
               'max_tokens':2048 if not reply_words and not (avatar_context or {}).get('event') else 320,
@@ -265,6 +282,10 @@ story or other work, still complete that task in full. These are screen effects,
               # The released template otherwise appends 'Respond as briefly
               # as possible' AFTER our task/personality instructions.
               'chat_template_kwargs':{'enable_thinking':False,'conversational_mode':False}}
+        from tool_capabilities import ROUTE_TOOL
+        if not (avatar_context or {}).get('event') and not (avatar_context or {}).get('requested_actions'):
+            body.update(tools=[ROUTE_TOOL],tool_choice='auto')
+            messages[0]['content']+='\nIf a requested capability needs a real tool, call use_tools BEFORE any spoken text. Do not merely promise to act or deny your supported screen capabilities. Use kind=lookup for an implied research request; kind=avatar for any visual request not already supplied in requested_actions. For example a wish to see your eyes move in circles requires use_tools(kind=avatar), not a promise, an eye_roll acting cue or silence.'
         from bolt_text import join_sentences
         from conversation_tasks import acknowledgement_only
         first=True;emitted=[];units=0;target=plan['units'];poetry=plan['kind']=='poem'
@@ -272,7 +293,7 @@ story or other work, still complete that task in full. These are screen effects,
         explicit_tiny=bool(re.search(r'\b(?:einzeiler|one[- ]liner|(?:ein\w*|one|1)\s+(?:satz|zeile|sentence|line))\b',text,re.I))
         minimum_units=plan.get('minimum_units',2 if plan['kind']=='joke' else 3) if repair_task and not explicit_tiny else 0
         for attempt in range(3 if target else 2 if repair_task else 1):
-            framer=SentenceFramer(lines_only=poetry);attempt_parts=0;guard_stop=False
+            framer=SentenceFramer(lines_only=poetry,strip_stage_directions=bool((avatar_context or {}).get('requested_actions')));attempt_parts=0;guard_stop=False
             request=dict(body)
             if attempt:
                 remaining=target-units if target else None
@@ -296,13 +317,18 @@ story or other work, still complete that task in full. These are screen effects,
                 async for line in response.aiter_lines():
                     if not line.startswith('data: ') or line[6:]=='[DONE]':continue
                     packet=json.loads(line[6:]);choices=packet.get('choices') or []
-                    if packet.get('error'):raise RuntimeError('The language model stream failed')
+                    if packet.get('error'):raise ModelStreamError(packet['error'])
                     if packet.get('provider'):metrics['llm_actual_provider']=str(packet['provider'])[:100]
                     if packet.get('usage'):metrics['usage']=packet['usage']
                     if packet.get('timings'):metrics['llama_timings']=packet['timings']
                     if not choices:continue
                     if choices[0].get('finish_reason'):metrics['finish_reason']=choices[0]['finish_reason']
-                    token=choices[0].get('delta',{}).get('content') or ''
+                    delta=choices[0].get('delta',{})
+                    if delta.get('tool_calls'):
+                        from tool_capabilities import ToolRouteRequest
+                        metrics['semantic_tool_routing']=True
+                        raise ToolRouteRequest('The streaming model requested the real tool director')
+                    token=delta.get('content') or ''
                     if token and first:metrics['llm_ttft_ms']=round((time.perf_counter()-start)*1000,2);first=False
                     for part in framer.feed(token):
                         if not accept(part):guard_stop=True;break
@@ -325,10 +351,10 @@ story or other work, still complete that task in full. These are screen effects,
 
 def needs_tools(text,history,interaction_state):
     from interaction_policy import rule_authorized,cancellation_authorized,rule_control_request
-    lookup=bool(re.search(r'\b(?:wikipedia|wiki|nachrichten|news|tagesschau|bbc|wetter|weather|recherchier\w*|nachschauen|nachschlagen)\b',text,re.I))
-    from avatar_commands import command_intent,explicit_actions
-    avatar=command_intent(text) and not explicit_actions(text) and bool(re.search(r'\b(?:nick\w*|grimasse\w*|zwinker\w*|schiel\w*|augenrollen|nod|wink|grimace|eye\s+roll|funny\s+face|schüttel\w*|shake\s+(?:your\s+)?head|roll\w*\s+(?:deine\s+|die\s+|your\s+)?(?:augen|eyes)|(?:guck\w*|schau\w*|look)\s+(?:mal\s+)?(?:wütend|angry|traurig|sad|bitter|happy|fröhlich))\b',text,re.I))
-    if avatar and re.search(r'\b(?:nicht|kein\w*|not|never|don.t|no)\b',text,re.I):avatar=False
+    from knowledge_tools import relevant
+    from tool_capabilities import avatar_tool_needed
+    lookup=relevant(text,history)
+    avatar=avatar_tool_needed(text,history)
     # Generic negation ('Keine Einleitung', 'kein Smalltalk') is not a request
     # to clear interruption rules and must not divert poems into the tool loop.
     rule_cancel=rule_control_request(text) or (cancellation_authorized(text) and

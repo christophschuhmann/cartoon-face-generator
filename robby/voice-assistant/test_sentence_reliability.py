@@ -97,16 +97,16 @@ class ReliabilityTests(unittest.IsolatedAsyncioTestCase):
         s,c,v=self.session()
         self.assertTrue(s.turn_decision(v[0],v[2])['accepted'])
 
-    async def test_neural_tv_activity_can_finish_only_after_stable_recognized_words(self):
+    async def test_stable_words_cannot_label_ongoing_speech_as_tv(self):
         s,c,v=self.session();s.vad=SimpleNamespace(active=True,probability=.95)
         s.preview='Kannst du bitte eine lustige Grimasse machen?'
         s.note_words(s.preview,3.);s.mic_now=3.7;self.assertFalse(s.quiet_ready())
-        s.mic_now=4.7;self.assertTrue(s.quiet_ready())
+        s.mic_now=4.7;self.assertFalse(s.quiet_ready())
         # A new word from the independent full-utterance pass postpones submit.
         s.note_words(s.preview+' Jetzt.',4.7);self.assertFalse(s.quiet_ready())
-        # Decoder spelling differences alone do not keep the TV pause open.
+        # Word-count stability must never override actual speech evidence.
         s.mic_now=6.4;s.note_words('Kannst du eine lustige Grimasse machen jetzt?',6.4)
-        self.assertTrue(s.quiet_ready())
+        self.assertFalse(s.quiet_ready())
 
     async def test_quiet_tv_does_not_extend_foreground_clock_or_crop_ongoing_speech(self):
         s,c,v=self.session();s.memory.users['speaker-1']['level']=.08
@@ -114,7 +114,7 @@ class ReliabilityTests(unittest.IsolatedAsyncioTestCase):
         await s._speech_audio(np.full(320,.05,np.float32),3.)
         self.assertTrue(s.foreground_now)
         await s._speech_audio(np.full(320,.004,np.float32),3.8)
-        self.assertTrue(s.quiet_ready());self.assertAlmostEqual(s.final_audio_end(3.8),3.32)
+        self.assertFalse(s.quiet_ready());self.assertAlmostEqual(s.final_audio_end(3.8),3.8)
         await s._speech_audio(np.full(320,.05,np.float32),4.)
         self.assertFalse(s.quiet_ready())
 

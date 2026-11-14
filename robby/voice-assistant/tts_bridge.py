@@ -168,12 +168,13 @@ class MouthBridge:
                     if self.director_mode=='bolt' and not record.get('interaction_reply'):
                         from bolt_pipeline import pipeline
                         async for event,value in pipeline(client,text,identity,history,voice=turn_voice,tts_model=turn_model,
-                                avatar_context=record.get('avatar_context'),interaction_state=record.get('interaction_state'),
+                                avatar_context=record.get('avatar_context'),verification_settings=record.get('verification_settings'),interaction_state=record.get('interaction_state'),
                                 llm_selection=record.get('llm_selection'),credential=record.get('llm_credential'),quick_replies=record.get('quick_replies',False),memory=memory):
                             if event=='sentence':
                                 stage='speech'
                                 reply=value['text'];record['reply']=reply
                                 await send(b'X',{**value,'speaker_update':speaker_update})
+                            elif event=='status':await send(b'X',{'status_only':True,**value})
                             elif event=='audio':await send(b'A',value.astype(np.float32).tobytes());played=True
                             elif event=='avatar_action':await send(b'X',{'avatar_action':value})
                             elif event=='latency':await send(b'X',{'component_metrics':value})
@@ -188,7 +189,7 @@ class MouthBridge:
                         'generation':'single','n':1,'streaming':True,'chunk_frames':TTS_CHUNK_FRAMES,
                         'cancel_on_disconnect':True,
                         'temperature':.7,'guidance':2.,'voice_mode':'profile','voice_profile':turn_voice,
-                        'voice_conversion':False,'history':shared_history}
+                        'voice_conversion':False,'history':shared_history,**__import__('verification_settings').tts_options(record.get('verification_settings'))}
                     async def waiting(text,stage):await send(b'X',{'text':text,'status_only':True,'stage':stage})
                     director_ms=None
                     if self.director_mode in ('compact','bolt'):
@@ -228,34 +229,37 @@ class MouthBridge:
                             for at in range(0,len(cached),9600):await send(b'A',cached[at:at+9600].astype(np.float32).tobytes())
                             remember(record);await send(b'D',{});return
                     stage='speech'
-                    async with admitted_turn(client,body,waiting,timeout=.25 if record.get('avatar_context',{}).get('event') else 45.) as response:
-                        async for line in response.aiter_lines():
-                            if not line.startswith('data: '):continue
-                            event=json.loads(line[6:]);kind=event.get('event')
-                            if kind=='error':raise RuntimeError('Shared speech service generation failed')
-                            if kind in ('llm','spec','prompt','direction'):
-                                candidate=event.get('spec') or event.get('result') or event
-                                value=candidate.get('text')
-                                if value and value!=reply:
-                                    reply=value;record['reply']=reply;await send(b'X',{'text':reply,'performance':plan(candidate),'speaker_update':speaker_update,'speaker':identity,
-                                        'timing':{'director_mode':'shared','director_ms':event.get('llm_ms')}})
-                            if kind=='audio_chunk':
-                                url=event.get('url')
-                                if url:
-                                    audio=await client.get(url);audio.raise_for_status()
-                                    pcm=resampler.process(await decode_mp3(audio.content))
-                                    if len(pcm):await send(b'A',pcm.astype(np.float32).tobytes());played=True
-                            if kind=='result':
-                                # Some backend versions expose text only with the final result.
-                                if not reply:
-                                    value=(event.get('spec') or {}).get('text')
-                                    if value:reply=value;record['reply']=reply;await send(b'X',{'text':reply,'speaker_update':speaker_update,'speaker':identity})
-                                if not played:
-                                    candidates=event['candidates'];winner=event.get('winner',0)
-                                    candidate=next((c for c in candidates if c.get('index')==winner),candidates[0])
-                                    audio=await client.get(candidate['url']);audio.raise_for_status()
-                                    pcm=resampler.process(await decode_mp3(audio.content))
-                                    if len(pcm):await send(b'A',pcm.astype(np.float32).tobytes())
+                    from speech_retry import speech_events
+                    async for event in speech_events(client,body,waiting,timeout=.25 if record.get('avatar_context',{}).get('event') else 45.,
+                            attempts=1 if record.get('avatar_context',{}).get('event') else 3):
+                        kind=event.get('event')
+                        if kind=='speech_retry':
+                            await send(b'X',{'status_only':True,'stage':'speech_retry',
+                                'text':'Preparing your spoken reply again; no audio has been played.'})
+                            continue
+                        if kind in ('llm','spec','prompt','direction'):
+                            candidate=event.get('spec') or event.get('result') or event
+                            value=candidate.get('text')
+                            if value and value!=reply:
+                                reply=value;record['reply']=reply;await send(b'X',{'text':reply,'performance':plan(candidate),'speaker_update':speaker_update,'speaker':identity,
+                                    'timing':{'director_mode':'shared','director_ms':event.get('llm_ms')}})
+                        if kind=='audio_chunk':
+                            url=event.get('url')
+                            if url:
+                                audio=await client.get(url);audio.raise_for_status()
+                                pcm=resampler.process(await decode_mp3(audio.content))
+                                if len(pcm):await send(b'A',pcm.astype(np.float32).tobytes());played=True
+                        if kind=='result':
+                            # Some backend versions expose text only with the final result.
+                            if not reply:
+                                value=(event.get('spec') or {}).get('text')
+                                if value:reply=value;record['reply']=reply;await send(b'X',{'text':reply,'speaker_update':speaker_update,'speaker':identity})
+                            if not played:
+                                candidates=event['candidates'];winner=event.get('winner',0)
+                                candidate=next((c for c in candidates if c.get('index')==winner),candidates[0])
+                                audio=await client.get(candidate['url']);audio.raise_for_status()
+                                pcm=resampler.process(await decode_mp3(audio.content))
+                                if len(pcm):await send(b'A',pcm.astype(np.float32).tobytes())
                     tail=resampler.process(np.zeros(0,np.float32),final=True)
                     if len(tail):await send(b'A',tail.astype(np.float32).tobytes())
                     remember(record)
@@ -266,7 +270,7 @@ class MouthBridge:
                     raise
                 except Exception as exc:
                     status=getattr(getattr(exc,'response',None),'status_code',None)
-                    log.warning('Shared service error: stage=%s type=%s status=%s',stage,type(exc).__name__,status)
+                    log.warning('Shared service error: stage=%s type=%s status=%s code=%s attempts=%s',stage,type(exc).__name__,status,getattr(exc,'code',None),getattr(exc,'attempts',None))
                     if record.get('avatar_context',{}).get('event'):
                         await send(b'D',{});return  # optional comments fail quietly, never a canned emotional fallback
                     await send(b'X',{'text':'The '+stage+' service could not complete this reply. Please try again.',
@@ -291,7 +295,7 @@ class MouthBridge:
                         if warm_task and not warm_task.done():warm_task.cancel();await asyncio.gather(warm_task,return_exceptions=True)
                         if task and not task.done():task.cancel();await asyncio.gather(task,return_exceptions=True)
                         latest={'text':payload['transcript'],'speaker':payload.get('speaker'),'reply':'','index':None,
-                            'llm_selection':payload.get('llm_selection'),'llm_credential':payload.get('llm_credential'),'quick_replies':payload.get('quick_replies',False),
+                            'verification_settings':payload.get('verification_settings') or {},'llm_selection':payload.get('llm_selection'),'llm_credential':payload.get('llm_credential'),'quick_replies':payload.get('quick_replies',False),
                             'interaction_state':payload.get('interaction_state'),'interaction_reply':payload.get('interaction_reply'),
                             'interaction_language':payload.get('interaction_language','de'),'stop_feedback':payload.get('stop_feedback',False),
                             'avatar_context':payload.get('avatar_context') or {}}

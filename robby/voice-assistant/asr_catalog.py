@@ -3,6 +3,12 @@ import os
 from pathlib import Path
 
 MODELS={
+    'parakeet_ultra':{'label':'Parakeet Ultra · fast GPU','repo':'moondream/parakeet-ultra',
+        'revision':'73175eb7aeb0d82f1e2a6b53b3aabc10a90bcd0b','kind':'photon',
+        'mode':'Nemotron preview + GPU Ultra final; separate warm worker'},
+    'parakeet_redux':{'label':'Parakeet Redux · CPU comparison','repo':'moondream/parakeet-redux',
+        'revision':'2bf128600aac4b16946f7ed8372e56117fe5e23b','kind':'photon',
+        'mode':'Nemotron preview + ternary CPU Redux final'},
     'nemotron':{'label':'Nemotron 3.5 · original','repo':'nvidia/nemotron-3.5-asr-streaming-0.6b',
         'revision':'bundled-with-tyger','kind':'native','mode':'Live Nemotron preview + neural speech-pause final check'},
     'moonshine_de':{'label':'Moonshine Streaming Small · German','repo':'moonshine-ai/moonshine-streaming-small-de',
@@ -23,11 +29,12 @@ MODELS={
 def cache_root():return Path(os.environ.get('ROBO_ASR_CACHE',str(Path.home()/'.cache/robby-asr')))
 
 def default_model():
-    key=os.environ.get('ROBO_ASR_MODEL','parakeet_v3')
+    key=os.environ.get('ROBO_ASR_MODEL','parakeet_ultra')
     return key if key in MODELS else 'parakeet_v3'
 
-def worker_url():
+def worker_url(key=None):
     from urllib.parse import urlparse
-    value=os.environ.get('ROBO_ASR_MODELS_BASE','http://127.0.0.1:8801').rstrip('/')
+    value=(os.environ.get('ROBO_PHOTON_BASE','http://127.0.0.1:8822') if MODELS.get(key,{}).get('kind')=='photon'
+           else os.environ.get('ROBO_ASR_MODELS_BASE','http://127.0.0.1:8801')).rstrip('/')
     if urlparse(value).hostname not in ('127.0.0.1','localhost','::1'):raise ValueError('ASR model worker must be local')
     return value
