@@ -92,15 +92,17 @@ class Race(unittest.IsolatedAsyncioTestCase):
                     import base64
                     yield 'data: '+json.dumps({'event':'audio_chunk','pcm_f32':base64.b64encode(np.ones(48000,dtype='<f4').tobytes()).decode(),'sample_rate':48000,'channels':1})
                 else:yield 'data: '+json.dumps({'event':'audio_chunk','url':'/synthetic.mp3'})
+                yield 'data: '+json.dumps({'event':'result','candidates':[],'live_only':True})
         @asynccontextmanager
         async def admission(*args,**kwargs):
             await asyncio.sleep(.001)  # actual HTTP always yields to producer
+            if kwargs.get('on_admitted'):kwargs['on_admitted'](1.)
             yield Response()
         class Client:
             async def get(self,*args,**kwargs):return SimpleNamespace(content=b'synthetic',raise_for_status=lambda:None)
         output=[]
         with patch('bolt_pipeline.BoltDirector.stream',stream),patch('quick_reaction.generate',lead),\
-             patch('bolt_pipeline.admitted_turn',admission),patch('tts_bridge.decode_mp3',AsyncMock(return_value=np.ones(48000,np.float32)*.01)),\
+             patch('speech_retry.admitted_turn',admission),patch('tts_bridge.decode_mp3',AsyncMock(return_value=np.ones(48000,np.float32)*.01)),\
              patch('bolt_pipeline.needs_tools',return_value=tool),patch('conversation_director.CompactDirector.generate',directed):
             it=pipeline(Client(),'Heute war mein Tag anstrengend.',{},[],llm_selection={'model':'qwen','provider':'cerebras/fp16'},quick_replies=enabled)
             async for kind,value in it:

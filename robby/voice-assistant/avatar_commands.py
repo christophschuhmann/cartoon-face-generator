@@ -46,8 +46,15 @@ def command_intent(text):
         return any(_REQUEST.search(clause.strip()) for clause in later)
     ellipse=bool(re.fullmatch(r'(?:(?:bitte|nochmal|noch mal|sich|dich)\s+)*(?:im\s+kreis|rundherum|einmal\s+herum|360\s*(?:grad|degrees|°))\s+(?:drehen|rotieren)(?:\s+bitte)?[.!?]*',text.strip(),re.I))
     direct_emotion=bool(re.search(r'\b(?:du\s+sollst|ich\s+(?:möchte|moechte|will)\s*[,]?\s*dass\s+du|(?:i\s+want\s+you\s+to)|tu\s+so\s+als\s+(?:wärst|waerst|ob\s+du)|pretend\s+(?:to\s+be|you\s+are))\b',text,re.I) and (any(pattern.search(text) for pattern in _EMOTIONS.values()) or bool(explicit_spin(text))))
+    # Accept indirect but explicit stunt requests without detaching a negation
+    # from the action when the later parser splits on a comma.
+    stunt=r'(?:salto(?:s)?|überschlag|ueberschlag|somersault(?:s)?|backflip|frontflip|back\s+flip|front\s+flip)'
+    stunt_request=bool(re.search(r'\b(?:du\s+sollst|ich\s+(?:möchte|moechte|will)\s*[,]?\s*dass\s+du|i\s+want\s+you\s+to)\b',text,re.I)
+                       and re.search(r'\b'+stunt+r'\b',text,re.I)
+                       and not re.search(r'\b(?:nicht|kein\w*|never|not|don.t|no)\b',text,re.I))
+    stunt_ellipse=bool(re.fullmatch(r'(?:bitte\s+)?'+stunt+r'(?:\s+bitte)?[.!?]*',text.strip(),re.I))
     desire=bool(re.search(r'\b(?:ich\s+(?:möchte|will|würde\s+gerne)|i(?:.d|\s+would)\s+like|i\s+want)\b',text,re.I) and re.search(r'\b(?:sehen|vorführen|see|watch|show)\b',text,re.I) and re.search(r'\b(?:du|dich|dein\w*|you|your)\b',text,re.I))
-    return bool(desire or _REQUEST.search(text) or _FACE.fullmatch(text.strip(' .!?')) or ellipse or direct_emotion)
+    return bool(desire or _REQUEST.search(text) or _FACE.fullmatch(text.strip(' .!?')) or ellipse or direct_emotion or stunt_request or stunt_ellipse)
 
 def explicit_actions(text,variant_index=0,history=()):
     text=normalize_command(text)

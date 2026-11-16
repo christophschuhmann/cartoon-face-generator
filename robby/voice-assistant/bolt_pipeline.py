@@ -3,7 +3,7 @@
 No generated waveform needs to finish before the first PCM chunk is sent.
 Cancellation closes both upstream streams and drops their bounded queues.
 """
-import asyncio,os,time,json,uuid
+import asyncio,os,time,json,uuid,logging
 import httpx
 import paths
 import numpy as np
@@ -15,13 +15,15 @@ from performance import plan
 from shared_turn import admitted_turn
 from speech_retry import retained_speech_events
 
+log=logging.getLogger('robo.avatar')
+
 async def pipeline(client,text,identity,history,voice='emolia_c1699',avatar_context=None,
                    interaction_state=None,chunk_frames=None,tts=True,preset=None,reply_words=None,llm_selection=None,credential=None,quick_replies=False,memory=None,tts_model='small_rl',verification_settings=None,seed_offset=0):
     from app.runtime.audio import StreamingAudioResampler
     from tts_bridge import decode_mp3
     from verification_settings import tts_options,search_options
     verify=tts_options(verification_settings)
-    start=time.perf_counter();metrics={'tts_model':tts_model,'verification':verify};queue=asyncio.Queue(maxsize=4)
+    start=time.perf_counter();metrics={'latency_trace_id':uuid.uuid4().hex,'tts_model':tts_model,'verification':verify};queue=asyncio.Queue(maxsize=4)
     chunk_frames=chunk_frames or int(os.environ.get('ROBO_BOLT_CHUNK_FRAMES','20'))
     if chunk_frames not in (2,5,10,20):raise ValueError('Unsupported TTS chunk size')
     from avatar_commands import explicit_actions,silent_requested,interjection_only
@@ -50,6 +52,7 @@ async def pipeline(client,text,identity,history,voice='emolia_c1699',avatar_cont
         if state.json().get('busy'):
             yield 'done',{'silent':True,'reason':'optional event skipped while TTS is busy'};return
     if immediate:
+        log.info('avatar_action route=direct kinds=%s wait_for_audio=%s',','.join(step['kind'] for step in requested),not silent)
         yield 'avatar_action',{'action_id':action_id,'steps':requested,'source':'validated_direct_request','wait_for_audio':not silent}
     if silent:
         yield 'done',{'silent':True,'reason':'User explicitly requested a silent visual action'};return
@@ -72,6 +75,7 @@ async def pipeline(client,text,identity,history,voice='emolia_c1699',avatar_cont
             interaction_state=interaction_state,avatar_context=context,
             provider=config(llm_selection,credential) if llm_selection is not None else local_config())
         avatar_steps[:]=requested or result.get('avatar_actions',[]);actions[:]=result.get('interaction_actions',[])
+        if not requested and avatar_steps:log.info('avatar_action route=tool kinds=%s',','.join(step['kind'] for step in avatar_steps))
         sources[:]=result.get('sources',[])
         lookups[:]=result.get('lookups',[])
         framer=SentenceFramer(lines_only=response_plan(text,history)['kind']=='poem')
@@ -81,6 +85,10 @@ async def pipeline(client,text,identity,history,voice='emolia_c1699',avatar_cont
         metrics.update({k:v for k,v in result.items() if k.startswith('llm_') or k=='director_model'})
 
     async def produce():
+        from llm_backends import rate_limit_notice
+        async def notice(value):
+            if not reaction_enabled:await queue.put({'_status':value})
+        notice_token=rate_limit_notice.set(notice)
         try:
             # The main model must see the EXACT validated phrase queued before
             # its answer. Only the tiny text generation precedes the API call;
@@ -156,6 +164,7 @@ async def pipeline(client,text,identity,history,voice='emolia_c1699',avatar_cont
                     metrics['visual_acknowledgment_fallback']=True
         except asyncio.CancelledError:raise
         except Exception as exc:await queue.put(exc)
+        finally:rate_limit_notice.reset(notice_token)
         await queue.put(None)
 
     producer=asyncio.create_task(produce());spoken=[];scripts=[];cues=[];total_samples=0;index=0
@@ -188,6 +197,8 @@ async def pipeline(client,text,identity,history,voice='emolia_c1699',avatar_cont
             else:sentence=await queue.get()
             if sentence is None:break
             if isinstance(sentence,Exception):raise sentence
+            if isinstance(sentence,dict) and '_status' in sentence:
+                yield 'status',sentence['_status'];continue
             if role=='answer' and not main_started:
                 main_started=True
                 if intro and duplicate_acknowledgment(intro.text,sentence.text):
@@ -241,8 +252,14 @@ async def pipeline(client,text,identity,history,voice='emolia_c1699',avatar_cont
             from quick_reaction import AudioEnvelope
             envelope=AudioEnvelope() if role=='reaction' else None
             tts_start=time.perf_counter();resampler=StreamingAudioResampler(48000,24000);played=False
+            admitted_at=None
+            def note_admission(row):
+                nonlocal admitted_at
+                admitted_at=time.perf_counter()
+                metrics.setdefault('tts_admissions',[]).append({'sentence':index,**row})
+                if index==0:metrics.setdefault('tts_first_admission_ms',row['admission_ms'])
             async def wait_notice(text,stage):pass
-            async for event in retained_speech_events(client,body,wait_notice,timeout=.25 if context.get('event') else 45.,attempts=1 if context.get('event') else 3):
+            async for event in retained_speech_events(client,body,wait_notice,timeout=.25 if context.get('event') else 45.,attempts=1 if context.get('event') else 3,telemetry=note_admission):
                 kind=event.get('event')
                 if kind=='speech_unavailable':
                     text_only=True
@@ -264,6 +281,9 @@ async def pipeline(client,text,identity,history,voice='emolia_c1699',avatar_cont
                 if kind=='result':
                     metrics.setdefault('tts_server_stages',[]).append({k:event.get(k) for k in
                         ('generation_ms','alignment_ms','scoring_ms','speaker_preparation_ms','total_ms','performance')})
+                    live=event.get('live_stream') or {}
+                    metrics.setdefault('tts_verification',[]).append({k:live[k] for k in
+                        ('asr_ms','asr_calls','verification_wait_ms','verification_mode','first_playable_seconds','start_verified','end_verified') if k in live})
                 url=event.get('url') if kind=='audio_chunk' else None
                 if kind=='result' and not played:
                     candidates=event.get('candidates') or []
@@ -286,6 +306,7 @@ async def pipeline(client,text,identity,history,voice='emolia_c1699',avatar_cont
                     if role=='answer':metrics.setdefault('answer_first_audio_ms',round((time.perf_counter()-start)*1000,2))
                     else:metrics['quick_reply_status']='played'
                     metrics.setdefault('tts_first_audio_ms',round((time.perf_counter()-tts_start)*1000,2))
+                    if admitted_at is not None:metrics.setdefault('tts_after_admission_first_pcm_ms',round((time.perf_counter()-admitted_at)*1000,2))
                     metrics.setdefault('first_audio_ms',round((time.perf_counter()-start)*1000,2))
                     yield 'latency',dict(metrics)
                 played=True;total_samples+=len(pcm);yield 'audio',pcm

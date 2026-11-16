@@ -17,6 +17,14 @@ class CommandTests(unittest.TestCase):
                      'Wenn ich klatsche, mach einen Salto.','Alice macht einen Salto.']:
             self.assertEqual(explicit_actions(text),[],text)
 
+    def test_indirect_and_short_salto_requests_do_not_invert_negation(self):
+        for text in ['Ich will, dass du einen Salto machst.','Ich möchte, dass du einen Salto machst.',
+                     'Du sollst einen Salto machen.','Salto!','I want you to do a somersault.']:
+            self.assertEqual(explicit_actions(text)[0]['kind'],'somersault',text)
+        for text in ['Ich will nicht, dass du einen Salto machst.','Du sollst keinen Salto machen.',
+                     'Wenn du einen Salto machst, lache ich.','Sag "Salto!".']:
+            self.assertEqual(explicit_actions(text),[],text)
+
     def test_token_split_stage_directions_cannot_become_speech(self):
         from bolt_text import SentenceFramer
         texts=[('(amusement) *Robby dreht sich kreisrund im Bildschirm!*',[]),

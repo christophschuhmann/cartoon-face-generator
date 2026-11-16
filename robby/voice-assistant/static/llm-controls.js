@@ -3,8 +3,8 @@ export class LLMControls{
  constructor(client){
   this.client=client;this.model=document.getElementById('llm-model');this.provider=document.getElementById('llm-provider');this.status=document.getElementById('llm-status');
   this.desired={model:'local',provider:'local'};this.current=null;this.connected=false;this.hasSaved=false;
-  try{const saved=JSON.parse(localStorage.getItem('robby.llmSelection'));if(saved&&['qwen','local','gemma12'].includes(saved.model)){this.desired=saved;this.hasSaved=true;}}catch{}
-  this.model.onchange=()=>{this.desired={model:this.model.value,provider:this.model.value==='qwen'?'cerebras/fp16':'local'};this.render();this.apply();};
+  try{const saved=JSON.parse(localStorage.getItem('robby.llmSelection'));if(saved&&['qwen','local','gemma12'].includes(saved.model)){this.desired=saved;this.hasSaved=true;}if(!localStorage.getItem('robby.nebiusDefault20261116')){if(this.desired.model==='qwen'&&this.desired.provider==='cerebras/fp16'){this.desired.provider='nebius/fp4';localStorage.setItem('robby.llmSelection',JSON.stringify(this.desired));}localStorage.setItem('robby.nebiusDefault20261116','1');}}catch{}
+  this.model.onchange=()=>{this.desired={model:this.model.value,provider:this.model.value==='qwen'?(this.catalog?.default?.model==='qwen'?this.catalog.default.provider:'nebius/fp4'):'local'};this.render();this.apply();};
   this.provider.onchange=()=>{this.desired.provider=this.provider.value;this.apply();};
   document.getElementById('llm-key-use').onclick=async()=>{
    const input=document.getElementById('llm-personal-key'),value=input.value.trim();input.value='';
@@ -20,7 +20,7 @@ export class LLMControls{
    this.model.replaceChildren(...this.catalog.models.map(m=>new Option(m.label,m.id)));
    if(!this.hasSaved)this.desired=this.catalog.default;
    if(!this.catalog.models.some(m=>m.id===this.desired.model))this.desired=this.catalog.default;
-   if(this.desired.model==='qwen'&&!this.catalog.providers.some(p=>p.id===this.desired.provider))this.desired.provider='cerebras/fp16';
+   if(this.desired.model==='qwen'&&!this.catalog.providers.some(p=>p.id===this.desired.provider))this.desired.provider=this.catalog.default.model==='qwen'?this.catalog.default.provider:'nebius/fp4';
    this.render();if(this.connected)this.client.send('llm:select:'+JSON.stringify(this.desired));
    if(this.catalog.provider_recovery){const note=document.createElement('p');note.className='help';note.textContent='If the selected Qwen endpoint is rate-limited twice, Robby can retry the same Qwen model at another available OpenRouter endpoint. The actual provider appears in Response timing.';this.status.after(note);}
    this.status.textContent=this.catalog.server_key_available?'The server key is configured and hidden. Choose a model and endpoint.':'OpenRouter needs a personal key or an administrator-configured server key. Local Nemotron needs no API key.';
@@ -28,7 +28,7 @@ export class LLMControls{
  }
  render(){
   this.model.value=this.desired.model;
-  const rows=this.desired.model!=='qwen'?[{id:'local',label:'Local GPU'}]:this.catalog?.providers||[{id:'cerebras/fp16',label:'Cerebras · FP16'}];
+  const rows=this.desired.model!=='qwen'?[{id:'local',label:'Local GPU'}]:this.catalog?.providers||[{id:'nebius/fp4',label:'Nebius · FP4'}];
   this.provider.replaceChildren(...rows.map(p=>new Option(p.label,p.id)));this.provider.value=this.desired.provider;this.provider.disabled=this.desired.model!=='qwen';
  }
  async apply(){

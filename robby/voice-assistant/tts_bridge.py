@@ -179,15 +179,33 @@ class MouthBridge:
                                 stage='speech'
                                 if resume:value={**value,'text':full_reply,'avatar_actions':[],'interaction_actions':[]}
                                 reply=value['text'];record['reply']=reply
+                                timing=value.get('timing') or {}
+                                keys=('latency_trace_id','llm_model','llm_provider','llm_actual_provider','llm_ttft_ms','llm_first_sentence_ms','llm_rate_limit_retries','llm_rate_limit_wait_ms',
+                                      'tool_director_ms','memory_retrieval_ms','sentence_ready_ms')
+                                log.info('latency_sentence %s',json.dumps({k:timing[k] for k in keys if k in timing}))
                                 await send(b'X',{**value,'speaker_update':speaker_update})
                             elif event=='status':await send(b'X',{'status_only':True,**value})
                             elif event=='audio':await send(b'A',value.astype(np.float32).tobytes());played=True
                             elif event=='avatar_action':await send(b'X',{'avatar_action':value})
-                            elif event=='latency':await send(b'X',{'component_metrics':value})
+                            elif event=='latency':
+                                # Only stage timings and bounded, generated control metadata;
+                                # never log script, transcript, audio, speaker identity or keys.
+                                keys=('latency_trace_id','llm_model','llm_provider','llm_actual_provider','llm_ttft_ms','llm_first_sentence_ms','llm_rate_limit_retries','llm_rate_limit_wait_ms',
+                                      'tool_director_ms','memory_retrieval_ms','tts_first_admission_ms',
+                                      'tts_after_admission_first_pcm_ms','tts_first_audio_ms','first_audio_ms',
+                                      'tts_generation_mode','tts_admissions','tts_retries')
+                                log.info('latency_first_pcm %s',json.dumps({k:value[k] for k in keys if k in value}))
+                                await send(b'X',{'component_metrics':value})
                             elif event=='done':
                                 record['retry_sentences']=value.pop('_retry_sentences',[])
                                 record['retry_may_repeat']=value.pop('_retry_may_repeat',False)
                                 record['bolt_metrics']=value
+                                keys=('latency_trace_id','llm_model','llm_provider','llm_actual_provider','llm_ttft_ms','llm_first_sentence_ms','llm_rate_limit_retries','llm_rate_limit_wait_ms',
+                                      'tool_director_ms','memory_retrieval_ms','tts_first_admission_ms',
+                                      'tts_after_admission_first_pcm_ms','tts_first_audio_ms','first_audio_ms',
+                                      'tts_generation_mode','tts_admissions','tts_retries','tts_verification',
+                                      'speech_complete','total_ms')
+                                log.info('latency_complete %s',json.dumps({k:value[k] for k in keys if k in value}))
                                 await send(b'X',{'pipeline_metrics':value})
                         incomplete=bool(record.get('retry_sentences'))
                         remember(record,interrupted=incomplete)

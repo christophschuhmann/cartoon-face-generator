@@ -2,6 +2,7 @@
 import asyncio
 import json
 import logging
+import os
 import re
 import httpx
 from shared_turn import admitted_turn
@@ -31,7 +32,7 @@ def recovery_prompt(body, level):
     language={'de':'German','en':'English','fr':'French','es':'Spanish','nl':'Dutch'}.get(body.get('language'),'')
     return f'GENERAL: Natural, clear {language} speech in the voice of the reference speaker.\nSCRIPT:\n{script}'
 
-async def speech_events(client,body,on_wait,*,timeout=45.,attempts=3):
+async def speech_events(client,body,on_wait,*,timeout=45.,attempts=3,telemetry=None):
     """Only explicit recoverable server failures, or clean empty completion.
 
     Network failures before any PCM can retry after worker-idle admission.
@@ -47,12 +48,15 @@ async def speech_events(client,body,on_wait,*,timeout=45.,attempts=3):
         if oom_fallback:request.update(generation='single',batch_size=1)
         # The last unheard retry changes the generation strategy, not just its
         # seed. Use the already available Small RL candidate selector.
-        if attempt==2 and not oom_fallback and request.get('model')=='small_rl' and request.get('align',True):
+        if (attempt==2 and os.environ.get('ROBO_TTS_RETRY_SEARCH','0')=='1' and not oom_fallback
+                and request.get('model')=='small_rl' and request.get('align',True)):
             request.update(generation='search_asr',n=3,batch_size=3,search_n=3,search_chunk_frames=12,search_seconds=30.)
         if 'message' in current:request['message']=recovery_prompt(current,prompt_level)
         emitted=False;completed=False;failure=None;resume=None
         try:
-            async with admitted_turn(client,request,on_wait,timeout=timeout) as response:
+            def admitted(ms):
+                if telemetry:telemetry({'attempt':attempt+1,'admission_ms':ms,'generation':request.get('generation','single')})
+            async with admitted_turn(client,request,on_wait,timeout=timeout,on_admitted=admitted) as response:
                 async for line in response.aiter_lines():
                     if not line.startswith('data: '):continue
                     event=json.loads(line[6:]);kind=event.get('event')

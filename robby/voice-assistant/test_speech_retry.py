@@ -33,6 +33,12 @@ class Recovery(unittest.IsolatedAsyncioTestCase):
         result=[e async for e in speech_events(c,{'seed':777},AsyncMock())]
         self.assertEqual([e['event'] for e in result],['speech_retry','audio_chunk','result'])
         self.assertNotEqual(c.bodies[0]['seed'],c.bodies[1]['seed'])
+    async def test_each_attempt_reports_admission_without_script_or_audio(self):
+        c=Client([[BAD],[PCM,DONE]]);times=[]
+        _=[e async for e in speech_events(c,{'seed':777,'message':'private speech'},AsyncMock(),telemetry=times.append)]
+        self.assertEqual([v['attempt'] for v in times],[1,2])
+        self.assertTrue(all(set(v)=={'attempt','admission_ms','generation'} for v in times))
+        self.assertTrue(all(v['admission_ms']>=0 for v in times))
     async def test_no_retry_after_any_published_audio(self):
         c=Client([[PCM,BAD],[PCM,DONE]])
         with self.assertRaises(SpeechGenerationError):
@@ -83,10 +89,34 @@ class Recovery(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(len(c.bodies),1)
 
     async def test_last_unheard_retry_changes_to_candidate_search(self):
+        from unittest.mock import patch
         c=Client([[BAD],[BAD],[PCM,DONE]])
-        _=[e async for e in speech_events(c,{'model':'small_rl','align':True},AsyncMock())]
+        with patch.dict('os.environ',{'ROBO_TTS_RETRY_SEARCH':'1'}):
+            _=[e async for e in speech_events(c,{'model':'small_rl','align':True},AsyncMock())]
         self.assertEqual(c.bodies[2]['generation'],'search_asr')
         self.assertEqual(c.bodies[2]['search_n'],3)
+
+    async def test_default_unheard_retry_avoids_cold_candidate_search(self):
+        from unittest.mock import patch
+        c=Client([[BAD],[BAD],[PCM,DONE]])
+        with patch.dict('os.environ',{},clear=True):
+            _=[e async for e in speech_events(c,{'model':'small_rl','align':True,'generation':'single'},AsyncMock())]
+        self.assertTrue(all(x['generation']=='single' for x in c.bodies))
+
+    async def test_llm_rate_notice_does_not_become_spoken_text(self):
+        import httpx
+        from unittest.mock import patch
+        from bolt_pipeline import pipeline
+        from bolt_text import Sentence
+        from llm_backends import rate_limited
+        async def director(*args,**kwargs):
+            await rate_limited(httpx.Response(429,json={'error':{'metadata':{'limit_source':'upstream_provider_shared_pool'}}}),1,1.)
+            yield Sentence('Hier ist deine Antwort.',language='de')
+        with patch('bolt_pipeline.BoltDirector.stream',director):
+            rows=[e async for e in pipeline(None,'Hallo.',{},[],tts=False)]
+        statuses=[v for k,v in rows if k=='status'];sentences=[v for k,v in rows if k=='sentence']
+        self.assertEqual(len(statuses),1);self.assertEqual(statuses[0]['stage'],'llm_rate_limit')
+        self.assertEqual(len(sentences),1);self.assertNotIn('429',sentences[0]['text'])
 
     async def test_failed_audio_keeps_entire_long_reply_and_exact_retry_queue(self):
         from bolt_pipeline import pipeline

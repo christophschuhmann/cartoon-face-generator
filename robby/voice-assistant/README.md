@@ -2803,3 +2803,5 @@ The live screen demo now shares a capability catalogue across its streaming and 
 [Implementation, measurements, privacy and restart instructions](audio_decision/README.md) for the additive `/audio-decision/` page using pinned LiquidAI d1-Omni-2B. Upload, recording, real live scheduling, class-score roll and JSON/CSV exports are implemented. Temporal localization remains an explicit model limitation; see the measured counterexample.
 
 See [Speech recovery and synchronized stunts](SPEECH_RECOVERY.md) for bounded retries, retained answers, exact suffix continuation, same-model provider recovery and reproducible tests.
+
+Latency diagnosis and live stage metrics: [LATENCY_DIAGNOSIS_2026-11-16.md](LATENCY_DIAGNOSIS_2026-11-16.md).
