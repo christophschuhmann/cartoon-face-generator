@@ -2,6 +2,10 @@
 
 Robby keeps generated answers when voice synthesis cannot finish. The normal path still streams audio. Recovery is bounded and does not disable word verification.
 
+## Somersault request audit, November 16, 2026
+
+Robby's logs do not retain user transcripts or browser-rendered motion; they cannot prove what happened in a particular private request. An authored HTTPS browser test of “Mach bitte einen Salto” did dispatch a validated `somersault` and measured a 360-degree body flip, although a later sentence failed TTS verification. A separate parser audit found that “Ich will, dass du einen Salto machst”, “Du sollst einen Salto machen” and “Salto!” were not recognized as direct actions, leaving execution to the language model. These explicit variants are now recognized without allowing negated, quoted or conditional requests. After deployment, an HTTPS browser test of “Ich will, dass du einen Salto machst” observed the validated action, 360-degree body flip and five audio chunks with complete speech. This uses typed test input, not a physical microphone. Validated action types and direct/tool route are logged without text or speaker data; this reports server scheduling, not proof of browser rendering. Browser reduced-motion and the expressive-actions setting can still suppress movement. TTS verification may separately fail.
+
 ## What failed on November 14, 2026
 
 The private operational logs distinguished three failures that previously looked alike in the interface:
@@ -16,7 +20,7 @@ The old action scheduler had a four-second fallback: if audio was delayed by ret
 
 ## Current recovery policy
 
-1. Each sentence has at most three automatic speech attempts. New attempts use different seeds, with progressively simpler delivery instructions while preserving the spoken words. The final eligible Small RL attempt uses ASR-guided Best-of-3 with 960 ms chunks. An OOM uses the smaller single-stream fallback, not a larger batch.
+1. Each sentence has at most three automatic speech attempts. New attempts use different seeds, with progressively simpler delivery instructions while preserving the spoken words. As of November 16, automatic retries remain single-stream by default to avoid a cold Best-of-3 graph capture taking over a minute. Set `ROBO_TTS_RETRY_SEARCH=1` to use ASR-guided Best-of-3 on the final eligible Small RL retry. The independently selectable Best-of-3 UI mode is unchanged. An OOM uses the smaller single-stream fallback, not a larger batch.
 2. A transient transport failure can retry only if that attempt published no audio. Closing the old stream requests cancellation; admission waits until the shared worker is ready and idle. No other session is cancelled to make space.
 3. A clean terminal result containing an incomplete, strictly verified prefix is not treated as complete. If the checker supplies an exact remaining suffix at an original written-word boundary, only that suffix is synthesized again. Negations remain in the suffix. A boundary inside a contraction is ambiguous and cannot authorize automatic continuation. The overall three-attempt limit still applies.
 4. If audio was published but its continuation point is unknown, automatic replay stops. A disconnect or explicit user cancellation never triggers a replay of already published audio.
@@ -27,7 +31,7 @@ The retry path does not guarantee correct pronunciation, perfect transcription o
 
 ## Provider recovery
 
-The selected OpenRouter endpoint is used first and retried after a bounded `Retry-After`. After a second HTTP 429, the same Qwen model may be retried through other endpoints in the fetched model catalogue. There is no automatic switch to a different language model. Actual provider metadata remains visible. Authentication failures do not trigger failover. Set `ROBO_LLM_PROVIDER_RECOVERY=0` to strictly pin the selected endpoint.
+The selected OpenRouter endpoint is used first and retried up to twice after a bounded `Retry-After` (1–8 seconds per wait). Progress is visible in the UI. By default the selected provider is pinned, including on rate limiting; Nebius FP4 is the selected Qwen default. An operator can explicitly set `ROBO_LLM_PROVIDER_RECOVERY=1` to retry the same Qwen model through another registered endpoint after a second HTTP 429. There is no automatic switch to a different language model. Actual provider metadata remains visible. Authentication failures do not trigger failover. Retrying cannot guarantee provider availability.
 
 This uses the official [OpenRouter provider-routing interface](https://openrouter.ai/docs/guides/routing/provider-selection), restricted to known endpoint tags. Backup providers may have different latency and pricing. Local LLM requests do not use this route.
 

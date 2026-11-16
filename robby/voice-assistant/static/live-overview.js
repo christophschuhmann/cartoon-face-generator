@@ -46,12 +46,16 @@ export class LiveOverview{
    if(m.available){this.failed=true;this.copy('recent-playback-status','Speech incomplete · full generated text retained. '+(m.may_repeat_sentence?'The interrupted sentence may repeat if you retry.':'Only the remaining speech will be retried.'));}
   }
   if(['barge','reply_cancelled','stop_command'].includes(m.type))document.getElementById('retry-speech').hidden=true;
-  if(m.type==='service_status'&&['speech_retry','speech_unavailable'].includes(m.stage))this.copy('recent-playback-status',m.text);
+  if(m.type==='service_status'&&['speech_retry','speech_unavailable','llm_rate_limit'].includes(m.stage))this.copy('recent-playback-status',m.text);
   if(m.type==='sound_caption'){this.lastSound=m;this.values.sound=m.status==='available'?m.request_ms:null;this.values.events=m.sound_events?.status==='available'?m.sound_events.request_ms:null;this.paint();}
 
   if(['asr_preview','partial'].includes(m.type)&&m.text?.trim())this.copy('recent-asr',m.text);
   if(m.type==='latency_start'){
    this.begin(m.input?.kind||'unknown');this.turn=m.reply_id;const p=m.input||{};
+   if(p.kind!=='speech_retry'){
+    this.copy('recent-robby','Preparing a new reply…');this.copy('recent-playback-status','Waiting for the language model.');
+    document.getElementById('recent-reply-model').textContent='Main reply: waiting for model metadata';
+   }
    this.values.asr=p.asr?.transcribe_ms;this.values.pause=p.asr?.observed_quiet_ms;this.values.asr_model=p.asr?.model;
    this.values.events=this.lastSound?.sound_events?.status==='available'?this.lastSound.sound_events.request_ms:null;this.values.sound=p.sound_caption_ms??(this.lastSound?.status==='available'?this.lastSound.request_ms:null);this.values.caption=p.voice_caption_ms;this.values.caption_status=p.voice_caption_status;this.values.speaker=p.speaker_assignment_ms;this.values.speaker_background=p.speaker_prefetch_compute_ms;
    this.values.speaker_cached=p.speaker_prefetch_used;this.values.queue=p.sentence_queue_ms;this.paint();
@@ -76,13 +80,13 @@ export class LiveOverview{
   }
   if(m.type==='turn_done'){this.pending=false;document.getElementById('latency-status').textContent=this.failed?'Speech incomplete · text retained':'Latest response · generation complete';}
   if(['barge','reply_cancelled','stop_command'].includes(m.type)){this.copy('recent-playback-status',this.audioReceived?'Speech interrupted · some text may not have been heard.':'Reply cancelled before speech playback.');this.audioReceived=false;this.pending=false;document.getElementById('latency-status').textContent='Interrupted · last measured timings retained';}
-  if(m.type==='error'){this.failed=true;this.copy('recent-playback-status',m.stage==='planning'?'Language model unavailable'+(m.http_status?' · HTTP '+m.http_status:'')+'. Your request remains in the conversation.':'Speech failed · generated text remains visible.');this.audioReceived=false;this.pending=false;document.getElementById('latency-status').textContent='Reply error · available timings retained';}
+  if(m.type==='error'){this.failed=true;this.copy('recent-playback-status',m.stage==='planning'?(m.http_status===402?'Language model rejected the request (HTTP 402). Check the OpenRouter key’s usage limit or account credits. Your request remains in the conversation.':m.http_status===429?'The selected language-model endpoint is rate-limited (HTTP 429), even after retries. Please try again shortly.':'Language model unavailable'+(m.http_status?' · HTTP '+m.http_status:'')+'. Your request remains in the conversation.'):'Speech failed · generated text remains visible.');this.audioReceived=false;this.pending=false;document.getElementById('latency-status').textContent='Reply error · available timings retained';}
  }
  consume(metrics){
   if(metrics.quick_reply_status){this.values.reaction_status=metrics.quick_reply_status;document.getElementById('quick-reply-status').textContent=metrics.quick_reply_status.replaceAll('_',' ')+(metrics.quick_reply_words?` · ${metrics.quick_reply_words} words`:'');}
   if(metrics.informed_bridge_status)this.values.bridge_status=metrics.informed_bridge_status;
   if(finite(metrics.answer_audio_ready_ms))this.values.answer_ready=metrics.answer_audio_ready_ms;
-  const fields={reaction:'quick_reply_generation_ms',bridge:'informed_bridge_generation_ms',answer:'answer_first_audio_ms',llm:'llm_first_sentence_ms',ttft:'llm_ttft_ms',tts:'tts_first_audio_ms',reply:'first_audio_ms',llm_wall:'llm_total_ms',rtf:'generation_rtf'};
+  const fields={reaction:'quick_reply_generation_ms',bridge:'informed_bridge_generation_ms',answer:'answer_first_audio_ms',llm:'llm_first_sentence_ms',ttft:'llm_ttft_ms',llm_rate_wait:'llm_rate_limit_wait_ms',llm_rate_retries:'llm_rate_limit_retries',tts:'tts_first_audio_ms',tts_wait:'tts_first_admission_ms',tts_admitted:'tts_after_admission_first_pcm_ms',reply:'first_audio_ms',llm_wall:'llm_total_ms',rtf:'generation_rtf'};
   for(const [key,name] of Object.entries(fields))if(finite(metrics[name]))this.values[key]=metrics[name];
   if(finite(metrics.tool_director_ms)&&!finite(this.values.llm))this.values.llm=metrics.tool_director_ms;
   if(metrics.llm_model)this.values.model=metrics.llm_model;
@@ -98,6 +102,8 @@ export class LiveOverview{
   document.getElementById('latency-details').textContent=[
    `Model: ${v.model||'waiting'}${v.provider?' · '+v.provider:''}`,
    `LLM first token: ${ms(v.ttft)}; LLM stream wall time: ${ms(v.llm_wall)}`,
+   `LLM rate-limit retries: ${finite(v.llm_rate_retries)?v.llm_rate_retries:'—'}; recorded wait: ${ms(v.llm_rate_wait)}`,
+   `TTS admission wait: ${ms(v.tts_wait)}; first PCM after admission: ${ms(v.tts_admitted)} (includes generation and verification; retries may occur)` ,
    `TTS job wall time (overlapping; completed sentences): ${ms(v.tts_gpu)}; generation RTF: ${finite(v.rtf)?v.rtf.toFixed(2):'—'}`,
    `Local reaction: ${v.reaction_status||'not measured'}; first useful answer PCM: ${ms(v.answer)}`,
    `Informed bridge: ${v.bridge_status||'not measured'}; main PCM ready in buffer: ${ms(v.answer_ready)}`,

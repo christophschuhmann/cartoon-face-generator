@@ -9,6 +9,14 @@ from llm_backends import config,request_body,catalog,metrics,selection
 def test_key():return 'sk-or-v1-'+'unit-test-private-'*4
 
 class VaultTests(unittest.TestCase):
+    def test_qwen_default_uses_nebius_and_remains_explicitly_pinned(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            vault=CredentialStore(tmp);vault.store_owner(test_key())
+            with patch('llm_backends.store',return_value=vault):
+                cfg=config()
+                self.assertEqual(cfg['selection'],{'model':'qwen','provider':'nebius/fp4'})
+                self.assertEqual(request_body(cfg,{})['provider'],{'only':['nebius/fp4'],'allow_fallbacks':False})
+
     def test_authenticated_encryption_permissions_and_tamper_detection(self):
         from cryptography.fernet import InvalidToken
         with tempfile.TemporaryDirectory() as tmp:
@@ -55,13 +63,52 @@ class TransportTests(unittest.IsolatedAsyncioTestCase):
         cfg={'remote':True,'url':'https://example.invalid','model':'test-qwen','headers':{},
              'selection':{'model':'qwen','provider':'primary'},'parameters':[]}
         metrics={}
-        with patch('llm_backends._providers',{'primary':{},'backup':{}}),patch('llm_backends.asyncio.sleep',AsyncMock()):
+        with patch.dict('os.environ',{'ROBO_LLM_PROVIDER_RECOVERY':'1'}),patch('llm_backends._providers',{'primary':{},'backup':{}}),patch('llm_backends.asyncio.sleep',AsyncMock()):
             async with httpx.AsyncClient(transport=httpx.MockTransport(handle)) as client:
                 async with completion_stream(client,cfg,{},metrics) as r:self.assertEqual(r.status_code,200)
         self.assertEqual(len(bodies),3)
         self.assertEqual(bodies[-1]['provider']['only'],['backup'])
         self.assertTrue(all(b['model']=='test-qwen' for b in bodies))
         self.assertTrue(metrics['llm_provider_recovery'])
+        self.assertEqual(metrics['llm_rate_limit_wait_ms'],2000.)
+
+    async def test_rate_limit_stays_on_selected_provider_by_default(self):
+        from llm_backends import completion_stream
+        bodies=[]
+        def handle(req):
+            bodies.append(json.loads(req.content));return httpx.Response(429,headers={'retry-after':'0'})
+        cfg={'remote':True,'url':'https://example.invalid','model':'test-qwen','headers':{},
+             'selection':{'model':'qwen','provider':'primary'},'parameters':[]}
+        with patch.dict('os.environ',{},clear=True),patch('llm_backends._providers',{'primary':{},'backup':{}}),patch('llm_backends.asyncio.sleep',AsyncMock()):
+            async with httpx.AsyncClient(transport=httpx.MockTransport(handle)) as client:
+                with self.assertRaises(httpx.HTTPStatusError):
+                    async with completion_stream(client,cfg,{},{}):pass
+        self.assertEqual(len(bodies),3)
+        self.assertTrue(all(b['provider']['only']==['primary'] for b in bodies))
+
+    async def test_two_rate_limits_then_success_with_status_and_safe_metadata(self):
+        from llm_backends import completion_stream,rate_limit_notice
+        bodies=[];notices=[];observed={}
+        def handle(req):
+            bodies.append(json.loads(req.content))
+            if len(bodies)<3:
+                return httpx.Response(429,headers={'retry-after':'0'},json={'error':{'metadata':{'limit_source':'upstream_provider_shared_pool'},'message':'private provider details'}})
+            return httpx.Response(200,content=b'')
+        cfg={'remote':True,'url':'https://example.invalid','model':'test-qwen','headers':{},
+             'selection':{'model':'qwen','provider':'primary'},'parameters':[]}
+        async def notify(value):notices.append(value)
+        token=rate_limit_notice.set(notify)
+        try:
+            with patch.dict('os.environ',{},clear=True),patch('llm_backends.asyncio.sleep',AsyncMock()):
+                async with httpx.AsyncClient(transport=httpx.MockTransport(handle)) as client:
+                    async with completion_stream(client,cfg,{},observed) as response:self.assertEqual(response.status_code,200)
+        finally:rate_limit_notice.reset(token)
+        self.assertEqual(len(bodies),3)
+        self.assertTrue(all(b['provider']['only']==['primary'] for b in bodies))
+        self.assertEqual(observed['llm_rate_limit_retries'],2)
+        self.assertEqual(observed['llm_rate_limit_wait_ms'],2000.)
+        self.assertEqual([n['limit_source'] for n in notices],['upstream_provider_shared_pool']*2)
+        self.assertNotIn('private provider details',json.dumps(notices))
 
     async def test_authentication_error_never_switches_provider(self):
         from llm_backends import completion_stream

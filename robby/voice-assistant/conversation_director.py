@@ -211,23 +211,23 @@ class CompactDirector:
         elif transport and transport.get('remote') and action_tools_enabled:
             from interaction_policy import rule_control_request
             if rule_control_request(text):body['tool_choice']={'type':'function','function':{'name':'clear_interruption_rules'}}
-        start=time.perf_counter();provider_recovery=False
+        start=time.perf_counter();provider_recovery=False;rate_retries=0;rate_wait_ms=0.
         async def post():
-            nonlocal provider_recovery
+            nonlocal provider_recovery,rate_retries,rate_wait_ms
             if transport:
-                from llm_backends import request_body,check_response,retry_delay,recovery_body
-                response,retries=await provider_post(client,transport['url'],json=request_body(transport,body),headers=transport['headers'],timeout=25.)
-                if transport.get('remote') and response.status_code==429:
-                    import asyncio
-                    await asyncio.sleep(retry_delay(response))
-                    response,extra=await provider_post(client,transport['url'],json=request_body(transport,body),headers=transport['headers'],timeout=25.)
-                    retries+=extra+1
-                    fallback=recovery_body(transport,body)
-                    if response.status_code==429 and fallback:
-                        await asyncio.sleep(retry_delay(response))
-                        response,extra=await provider_post(client,transport['url'],json=fallback,headers=transport['headers'],timeout=25.)
-                        retries+=extra+1;provider_recovery=True
-                check_response(response);return response,retries
+                from llm_backends import request_body,check_response,retry_delay,recovery_body,rate_limited
+                import asyncio
+                request=request_body(transport,body);retries=0
+                for attempt in range(3):
+                    response,extra=await provider_post(client,transport['url'],json=request,headers=transport['headers'],timeout=25.)
+                    retries+=extra
+                    if not transport.get('remote') or response.status_code!=429 or attempt==2:
+                        check_response(response);return response,retries
+                    delay=retry_delay(response);rate_retries+=1;retries+=1;rate_wait_ms+=round(delay*1000,2)
+                    if attempt==1 and (fallback:=recovery_body(transport,body)):
+                        request=fallback;provider_recovery=True
+                    await rate_limited(response,attempt+1,delay)
+                    await asyncio.sleep(delay)
             response,retries=await provider_post(client,base+'/v1/chat/completions',json=body,headers={'Authorization':'Bearer '+key},timeout=25.)
             response.raise_for_status();return response,retries
         response,retries=await post()
@@ -337,6 +337,8 @@ class CompactDirector:
         result['completion_tokens']=usage.get('completion_tokens')
         result['provider_retries']=retries
         result['llm_provider_recovery']=provider_recovery
+        result['llm_rate_limit_retries']=rate_retries
+        result['llm_rate_limit_wait_ms']=rate_wait_ms
         result['director_model']=model
         if transport:
             from llm_backends import metrics as backend_metrics

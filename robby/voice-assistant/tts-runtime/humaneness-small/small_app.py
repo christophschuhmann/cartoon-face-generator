@@ -116,7 +116,7 @@ async def lifespan(app):
 app = FastAPI(title="Humaneness Voice Small", lifespan=lifespan)
 
 
-def switch_acting_model(model_id):
+def _switch_acting_model(model_id):
     """Caller holds STATE.busy across both model switching and generation."""
     from large17_engine import load_engine
     old=STATE['engine']
@@ -128,8 +128,8 @@ def switch_acting_model(model_id):
         with torch.cuda.device(settings.ACTING_DEVICE):
             torch.cuda.empty_cache()
             free,_=torch.cuda.mem_get_info()
-        if free < 8*1024**3:
-            raise HTTPException(409, 'Large needs at least 8 GiB free alongside the loaded Small model on this shared GPU. Small remains available.')
+        if free < 12*1024**3:
+            raise HTTPException(409, 'Large needs at least 12 GiB free alongside the loaded Small model on this shared GPU. Small remains available.')
     STATE['phase']='loading '+model_id
     # Finish verification / CPU prefetch before releasing the current GPU
     # model. A failed download must not evict the working default.
@@ -151,6 +151,23 @@ def switch_acting_model(model_id):
         STATE['error']=None;STATE['phase']='ready'
     except Exception as exc:
         STATE['error']=f'{type(exc).__name__}: {exc}';STATE['phase']='error'
+        raise
+
+
+def switch_acting_model(model_id):
+    """Restore the default after a failed switch from any request path."""
+    try:
+        return _switch_acting_model(model_id)
+    except Exception as exc:
+        if model_id!='small_rl' and STATE.get('phase')=='error':
+            log.error('Model switch failed (%s); restoring Small RL',type(exc).__name__)
+            exc.__traceback__=None
+            try:
+                _switch_acting_model('small_rl')
+            except Exception:
+                log.exception('Automatic Small RL recovery failed')
+                raise HTTPException(503,'Model switch failed and Small could not be restored. Check GPU availability.') from None
+            raise HTTPException(503,'The selected model failed to load. Small RL was restored; please retry your request.') from None
         raise
 
 

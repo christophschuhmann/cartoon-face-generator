@@ -43,3 +43,10 @@ class AdmissionTests(unittest.IsolatedAsyncioTestCase):
         task=asyncio.create_task(wait());await asyncio.sleep(.005);task.cancel()
         with self.assertRaises(asyncio.CancelledError):await task
         self.assertEqual(c.posts,0)
+
+    async def test_admission_timing_reports_only_after_accepted_request(self):
+        c=Client(busy=2,statuses=(409,200));measurements=[]
+        async with admitted_turn(c,{},AsyncMock(),timeout=.2,poll=.001,on_admitted=measurements.append):pass
+        self.assertEqual(len(measurements),1)
+        self.assertGreaterEqual(measurements[0],2.)
+        self.assertEqual(c.posts,2)

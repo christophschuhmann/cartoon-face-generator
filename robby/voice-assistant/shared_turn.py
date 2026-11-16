@@ -7,7 +7,7 @@ import asyncio,time
 from contextlib import asynccontextmanager
 
 @asynccontextmanager
-async def admitted_turn(client,body,on_wait,timeout=45.,poll=.2):
+async def admitted_turn(client,body,on_wait,timeout=45.,poll=.2,on_admitted=None):
     started=time.monotonic();last_notice=-100.
     while time.monotonic()-started<timeout:
         state=await client.get('/api/state',timeout=3.)
@@ -16,6 +16,8 @@ async def admitted_turn(client,body,on_wait,timeout=45.,poll=.2):
             async with client.stream('POST','/api/turn',json=body) as response:
                 if response.status_code not in (409,503):
                     response.raise_for_status()
+                    if on_admitted is not None:
+                        on_admitted(round((time.monotonic()-started)*1000,2))
                     await on_wait('Voice model available. Preparing your spoken reply…','preparing')
                     yield response
                     return
