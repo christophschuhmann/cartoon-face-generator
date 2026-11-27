@@ -2,11 +2,18 @@ import asyncio,unittest
 from types import SimpleNamespace
 from unittest.mock import AsyncMock,Mock,patch
 import httpx,numpy as np
-from asr_choice import ASRChoice
+from asr_choice import ASRChoice, overlapped_words
 from sentence_session import SentenceSession
 from speech_language import reply_language
 
 class LanguageTests(unittest.TestCase):
+    def test_repeated_words_across_a_long_recording_are_retained(self):
+        left={'text':'Ja, genau.','timestamps':[{'word':'genau.','start':26.78,'end':26.98}]}
+        right={'text':'Genau! Weiter.','timestamps':[{'word':'Genau!','start':.35,'end':.70}]}
+        self.assertEqual(overlapped_words(left,right,26.75),0)
+        right['timestamps'][0].update(start=.04,end=.23)
+        self.assertEqual(overlapped_words(left,right,26.75),1)
+
     def test_default_final_model_and_explicit_override(self):
         from asr_catalog import default_model
         with patch.dict('os.environ',{},clear=True):self.assertEqual(default_model(),'parakeet_ultra')
@@ -63,6 +70,22 @@ class ChoiceTests(unittest.IsolatedAsyncioTestCase):
         result=await s.asr.transcribe('whisper_turbo',np.zeros(35*16000,np.float32))
         self.assertEqual(result['text'],'Das ist ein Satz. Noch ein Wort. Und weiter.')
         self.assertEqual(result['chunks'],2);await s.close()
+    async def test_timed_overlap_keeps_second_phrase_and_no_extra_final_window(self):
+        s=self.session()
+        windows=[]
+        async def post(url,content,headers):
+            windows.append(len(content)//4//16000)
+            row=({'text':'Ja, genau.','timestamps':[{'word':'genau.','start':25.4,'end':25.7}]}
+                 if len(windows)==1 else
+                 {'text':'Genau. Genau!','timestamps':[{'word':'Genau.','start':.41,'end':.72},
+                                                          {'word':'Genau!','start':2.1,'end':2.4}]})
+            return httpx.Response(200,json={**row,'transcribe_ms':1},request=httpx.Request('POST','http://localhost'))
+        s.asr.http=SimpleNamespace(post=post,aclose=AsyncMock())
+        result=await s.asr.transcribe('parakeet_ultra',np.zeros(52*16000,np.float32))
+        self.assertEqual(windows,[27,27])
+        self.assertEqual(result['text'],'Ja, genau. Genau!')
+        await s.close()
+
     async def test_unknown_model_never_contacts_worker(self):
         s=self.session();s.asr.http=SimpleNamespace(post=AsyncMock(),aclose=AsyncMock())
         await s.asr.select('../../arbitrary');s.asr.http.post.assert_not_called()

@@ -6,7 +6,7 @@ surrogates, not a guarantee of word correctness. Original samples stay in RAM.
 import time
 from types import SimpleNamespace
 import numpy as np
-from streaming_boundaries import BoundaryASR, boundary_tokens, RATE, UnverifiedSpeechError
+from streaming_boundaries import BoundaryASR, boundary_tokens, RATE, UnverifiedSpeechError, SpeechBoundaryGate, written_suffixes
 
 
 def align_prefix(reference, hypothesis, final=False):
@@ -76,18 +76,42 @@ class ASRSearchScorer:
             # Reward actual progress as well as low errors. Pure inverse WER
             # would prefer repeatedly saying one easy word or stopping early.
             reward=(matched-2*result['errors'])/max(1,len(ref))
-            self.rows.append({**result,'reward':reward,'ranking_available':True,'matched_words':matched,
+            row_score={**result,'reward':reward,'ranking_available':True,'matched_words':matched,
                 'hyp':' '.join(w['word'] for w in stable),'timestamps':spans,'sec':len(wave)/RATE,
                 'start_s':stable[early[0][1]]['start'] if opening else None,
                 'end_s':stable[pairs[-1][1]]['end'] if ending else None,
                 'complete':ending,'asr_backend':g.report.get('backend'),'asr_batch_size':g.report.get('asr_batch_size',0),
-                'asr_window_start_s':offset,'history_anchor':anchored,'asr_retries':attempt})
+                'asr_window_start_s':offset,'history_anchor':anchored,'asr_retries':attempt}
+            if getattr(self,'ordered_search',False):
+                row_score.update(self.ordered_score(text,stable,len(wave),is_final))
+            self.rows.append(row_score)
         elapsed=time.perf_counter()-start
         self.last_timing={'asr_seconds':elapsed,'quality_seconds':0.,'total_seconds':elapsed}
         return self.rows
 
+    def ordered_score(self,text,stable,samples,is_final):
+        gate=SpeechBoundaryGate(text)
+        gate.strict_order=True
+        gate.total=samples
+        lead=getattr(self,'selected_lead',None)
+        if lead is not None:
+            gate.start=max(0,int((lead-gate.fade)*RATE))
+            gate.report['lead_s']=lead
+        gate._observe({'timestamps':stable})
+        spans=gate.confirmed_spans
+        # A contraction can expand to several ASR tokens. Publish only up to
+        # original written-word boundaries, so every retry has an exact suffix.
+        count=len(spans)
+        while count and count not in self.suffixes:
+            count-=1
+        return {'ordered_words':count,'ordered_start_s':gate.report.get('lead_s') if count else None,
+                'ordered_end_s':spans[count-1]['end'] if count else None,
+                'complete':bool(count and count==len(gate.words)),'terminal':bool(is_final)}
+
     def select(self,index):
         self.history=list(self.rows[index]['timestamps'])
+        if self.rows[index].get('ordered_start_s') is not None:
+            self.selected_lead=self.rows[index]['ordered_start_s']
 
 
 def merge_history(history,recent,offset,fallback_prefix):
@@ -141,3 +165,56 @@ class SearchCommitter:
     def finish(self):
         if self.start is None:raise UnverifiedSpeechError('No candidate established a recognizable opening')
         if not self.done:self._release(len(self.buffer),{'step':-1,'retained_rows':[0]},True)
+
+class OrderedSearchCommitter:
+    """Publish only winner PCM supported by ordered ASR evidence; preserve the natural EOS."""
+    def __init__(self,emit,text,check_cancel=lambda:None):
+        self.emit=emit
+        self.check_cancel=check_cancel
+        self.suffixes=written_suffixes(text)
+        self.pending=np.empty(0,np.float32)
+        self.cursor=0
+        self.start=None
+        self.confirmed=0
+        self.report={'verification_mode':'candidate_search','candidate_selection_only':True,
+                     'asr_postcheck':False,'start_verified':False,'end_verified':False,
+                     'emitted_seconds':0.,'ordered_target_words':0,'tail_cutoff':False}
+
+    def release(self,score,detail,final=False):
+        self.check_cancel()
+        count=score.get('ordered_words',0)
+        stop=self.cursor
+        if count and count>=self.confirmed:
+            if self.start is None:
+                self.start=max(0,int((score['ordered_start_s']-.10)*RATE))
+                self.report['start_verified']=True
+            self.confirmed=count
+            self.report['ordered_target_words']=count
+            self.report['end_verified'] |= score['complete']
+            stop=int(score['ordered_end_s']*RATE)
+        if final and self.report['end_verified']:
+            stop=self.cursor+len(self.pending)
+        end=min(len(self.pending),max(0,stop-self.cursor))
+        begin=max(0,(self.start or 0)-self.cursor)
+        if end>begin:
+            audio=self.pending[begin:end].copy()
+            if self.cursor+begin<self.start+int(.10*RATE):
+                audio*=np.clip((np.arange(begin,end)+self.cursor-self.start)/(.10*RATE),0,1)
+            self.report['emitted_seconds']+=len(audio)/RATE
+            self.emit(audio,{**detail,'live_alignment':dict(self.report)})
+        self.pending=self.pending[end:]
+        self.cursor+=end
+
+    def feed(self,wave,detail):
+        self.pending=np.concatenate((self.pending,wave))
+        self.release(detail['scores'][detail['retained_rows'][0]],detail)
+        return False
+
+    def finish(self,score):
+        # The EOS iteration may contain updated ASR evidence but zero new PCM.
+        self.release(score,{'step':-1,'retained_rows':[0]},final=True)
+        if self.start is None:
+            raise UnverifiedSpeechError('No candidate established a recognizable opening')
+        if not self.report['end_verified']:
+            self.report.update(resume_safe=True,remaining_text=self.suffixes[self.confirmed],
+                               confirmed_prefix_words=self.confirmed)

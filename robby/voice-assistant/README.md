@@ -1,13 +1,14 @@
 # Robby voice chat and TYGER speaker predictor
 
 [Open the live Robby demo](https://motorola-discussions-biography-daughter.trycloudflare.com/desk-robot/).
-Allow the microphone, say **“Hey Buddy”**, and wait for the red recording indicator.
+Allow the microphone, say **“Hey Buddy”**, and wait for the red recording indicator above the live transcript.
 Speak your request, then say **“Go Buddy”** to send it. **“Stop Buddy”** discards
 a recording or interrupts playback. The public Quick Tunnel address can change
 after a restart. Local installations serve the same page at `/desk-robot/`.
 
 **Buddy command mode and causal quality search:** [Wake controls](BUDDY_WAKE.md)
 and [Best-of-N streaming implementation and reward](STREAMING_BEST_OF_N.md).
+Small RL releases confirmed words in order and plays verified sentences to their natural ending.
 
 **2026-11-20 remote API:** An authenticated TLS gateway exposes the running
 local Gemma and Humaneness Voice models with OpenAI-compatible chat and speech

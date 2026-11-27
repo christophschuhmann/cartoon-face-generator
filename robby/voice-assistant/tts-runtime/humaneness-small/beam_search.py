@@ -157,7 +157,10 @@ class ChunkSearch:
                     # tower/head precision remains unchanged.
                     with torch.autocast('cuda', enabled=False):
                         scores = self.scorer.score(pcm,spec['text'],[endpoint or bool(x) for x in finished.cpu()])
-                    order = sorted(range(n),key=lambda i:(not scores[i].get('ranking_available',True),-scores[i]['reward'],scores[i]['prefix_wer'],i))
+                    if hasattr(self.scorer,'selection_key'):
+                        order=sorted(range(n),key=lambda i:self.scorer.selection_key(scores[i]))
+                    else:
+                        order=sorted(range(n),key=lambda i:(not scores[i].get('ranking_available',True),-scores[i]['reward'],scores[i]['prefix_wer'],i))
                     winners = order[:beam_width] if not endpoint else order[:1]
                     if hasattr(self.scorer,'select'):self.scorer.select(winners[0])
                     safe = common_prefix(codes,winners)

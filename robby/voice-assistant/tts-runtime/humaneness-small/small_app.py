@@ -965,7 +965,7 @@ async def turn(body: Turn, request: Request):
             converted_chunks=[]
             if body.generation in ('search_asr','search_quality'):
                 from beam_search import ChunkSearch
-                from asr_chunk_search import ASRSearchScorer, SearchCommitter
+                from asr_chunk_search import ASRSearchScorer, SearchCommitter, OrderedSearchCommitter
                 if body.generation=='search_quality':
                     from quality_chunk_search import QualitySearchScorer
                     scorer=await asyncio.to_thread(QualitySearchScorer,STATE['scorers'],spec,reference.path if reference else None,cancellation.check)
@@ -976,7 +976,10 @@ async def turn(body: Turn, request: Request):
                         'step':detail['step'],'seconds':len(wave)/48000,
                         'search_selection':{k:detail[k] for k in ('retained_rows','generation_wall_seconds','asr_seconds') if k in detail},
                         'live_alignment':detail['live_alignment']})
-                committer=SearchCommitter(emit_selected,cancellation.check,trim=body.align)
+                if body.generation=='search_quality':
+                    committer=OrderedSearchCommitter(emit_selected,spec['text'],cancellation.check)
+                else:
+                    committer=SearchCommitter(emit_selected,cancellation.check,trim=body.align)
                 # Keep the warmed single-stream banks alongside new batch shapes.
                 if STATE['engine'].fast.semantic:STATE['engine'].fast.semantic.limit=max(4,STATE['engine'].fast.semantic.limit)
                 try:
@@ -987,7 +990,10 @@ async def turn(body: Turn, request: Request):
                         on_commit=committer.feed,check_cancel=cancellation.check,semantic_graph=True,codec_graph=True)
                 finally:
                     if hasattr(scorer,'close'):scorer.close()
-                committer.finish()
+                if body.generation=='search_quality':
+                    committer.finish(search_performance['final_search_score'])
+                else:
+                    committer.finish()
                 search_performance.update(mode=body.generation,quality_models=body.generation=='search_quality',
                     includes='reference packing, batched TTS, codec, ASR candidate ranking and winner-state cloning; no second ASR pass',
                     live_alignment=committer.report)

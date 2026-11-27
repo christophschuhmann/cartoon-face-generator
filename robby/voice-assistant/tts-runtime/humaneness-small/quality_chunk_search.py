@@ -7,6 +7,7 @@ import torch
 import torch.nn.functional as F
 import torchaudio
 from asr_chunk_search import ASRSearchScorer
+from streaming_boundaries import written_suffixes
 from search_scoring import style_query
 
 ECAPA_URL='http://127.0.0.1:8823/embed'
@@ -20,8 +21,18 @@ def combine(row,clap,speaker,weight=.6):
             'reward':gate*((1.-weight)*a+weight*b),'reward_model':'clap_plus_speaker'}
 
 class QualitySearchScorer(ASRSearchScorer):
+    ordered_search=True
+
+    @staticmethod
+    def selection_key(row):
+        # An incomplete EOS cannot grow after cloning. Give a live branch the
+        # opportunity to say the missing words before comparing style/identity.
+        return (not row['complete'] and row['terminal'], -row['ordered_words'],
+                -row['reward'], row['prefix_wer'])
+
     def __init__(self,scorers,spec,reference_path,check_cancel=lambda:None):
         super().__init__(scorers.asr,check_cancel)
+        self.suffixes=written_suffixes(spec['text'])
         if reference_path is None:raise ValueError('Quality candidate search requires a reference voice')
         self.scorers=scorers;self.retriever=scorers.retriever;self.device=self.retriever.device
         self.want=scorers.judge.want_vector(style_query(spec),'')

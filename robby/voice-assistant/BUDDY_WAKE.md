@@ -98,6 +98,17 @@ origin with `/desk-robot/` appended. Restarting a Quick Tunnel assigns a new
 hostname. Microphone permission belongs to that hostname, so the browser may
 ask again. Use the live URL in the voice-assistant README for this deployment.
 
+## Finding the recording indicator
+
+The Buddy microphone indicator sits above the live transcript beside the avatar
+on desktop. On narrow screens the avatar, indicator and transcript appear
+before model settings. The dot and text change together when “Hey Buddy”
+opens recording. Expand **Command guide** for the full instructions. Voice
+isolation is suspended for the entire Buddy session. Returning to ordinary
+voice control restores the saved filter preference. Longer Buddy requests use
+27-second Photon ASR windows with a two-second overlap. Parakeet uses word times
+to distinguish genuine repetitions from duplicated audio in long recordings.
+
 ## Browser verification
 
 On November 27, 2026, a fresh Chromium session on the public HTTPS tunnel

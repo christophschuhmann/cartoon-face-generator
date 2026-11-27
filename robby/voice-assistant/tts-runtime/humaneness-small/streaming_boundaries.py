@@ -37,6 +37,18 @@ def boundary_tokens(text):
             for part in _EXPAND.get(word,word).split()]
 
 
+def written_suffixes(text):
+    """Map normalized prefix lengths to the exact remaining script at word boundaries."""
+    text=unicodedata.normalize('NFKC',text).replace('’',"'")
+    count=0
+    result={}
+    for match in re.finditer(r"[^\W_]+(?:'[^\W_]+)*",text):
+        result[count]=text[match.start():]
+        count+=len(boundary_tokens(match.group()))
+    result[count]=''
+    return result
+
+
 class UnverifiedSpeechError(RuntimeError):
     pass
 
@@ -240,14 +252,9 @@ class SpeechBoundaryGate:
         # or infer progress from an approximate/fuzzy alignment.
         if self.strict_order and not self.report['end_verified']:
             count=len(self.confirmed_spans)
-            text=unicodedata.normalize('NFKC',self.target_text).replace('’',"'")
-            used=0
-            for match in re.finditer(r"[^\W_]+(?:'[^\W_]+)*",text):
-                if used==count and count>0:
-                    self.report.update(resume_safe=True,remaining_text=text[match.start():],
-                                       confirmed_prefix_words=count)
-                    break
-                used+=len(boundary_tokens(match.group()))
+            suffix=written_suffixes(self.target_text).get(count)
+            if count and suffix:
+                self.report.update(resume_safe=True,remaining_text=suffix,confirmed_prefix_words=count)
         self.done=True
         return out
 

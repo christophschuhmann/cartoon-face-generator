@@ -48,6 +48,7 @@ async def main():
    await page.wait_for_function('window.robo && !document.querySelector("#call").disabled',timeout=150000)
    guide=page.locator('#buddy-guide')
    assert await guide.is_visible()
+   assert await page.locator('#live-conversation #buddy-status').count()==1
    assert await guide.locator('dt').all_text_contents()==['“Hey Buddy”','“Go Buddy”','“Stop Buddy”']
    out['buddy_default_checked']=await page.locator('#buddy-mode').is_checked()
    await page.click('#call');await page.wait_for_function('window.testMic && robo.captureBlocks>30',timeout=30000)
@@ -63,6 +64,14 @@ async def main():
    await page.wait_for_timeout(1100);out['asr_in_standby']=any(e['type']=='asr_preview' for e in events)
    out['standby_packets_sent']=await page.evaluate('robo.metrics.mic_blocks')
    await page.evaluate('x=>testSpeak(x)',audio('hey'));await page.wait_for_function("document.querySelector('#buddy-status')?.dataset.state==='recording'",timeout=20000)
+   # The live lamp and the transcript must be visible together without scrolling
+   # after tapping the conversation start control on a phone or desktop.
+   out['wake_and_transcript_visible']=await page.evaluate("""() =>
+    ['#buddy-status','#recent-asr'].every(selector => {
+     const r=document.querySelector(selector).getBoundingClientRect();
+     return r.width>0 && r.height>0 && r.top>=0 && r.bottom<=innerHeight;
+    })""")
+   assert out['wake_and_transcript_visible']
    await page.evaluate('x=>testSpeak(x)',audio('request'));await page.evaluate('x=>testSpeak(x)',audio('stop'))
    await page.wait_for_function("document.querySelector('#buddy-status')?.textContent.includes('Stopped.')",timeout=25000)
    out['stop_discarded']=not any(e['type']=='asr_sentence' for e in events)

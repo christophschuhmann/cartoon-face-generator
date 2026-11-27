@@ -14,11 +14,10 @@ best-of-N. Once sent, audio cannot be revised.
    edit distance compares against the best target prefix, without counting the
    as-yet-unspoken suffix as deletion; the terminal chunk uses full-target WER.
    Ignore the unstable last 100–120 ms when selecting partial words.
-4. Score, select the best row, stream its newly committed audio, and clone its
+4. Select the winning row, release its eligible audio, and clone its
    conditional/unconditional semantic KV cache, masks, acoustic tokens and
    streaming decoder state to N rows. Continue sampling independent children.
-5. Reuse selection word timestamps to cut/fade boundaries, if enabled. Do not
-   run a second, independent ASR output-verification pass.
+5. In Robby’s default quality search, release audio through the latest contiguous, recognized script word. Once the entire target is verified, flush through natural EOS, including the final syllable and trailing PCM. The legacy ASR search retains its optional edge trimming.
 
 The rolling ASR implementation keeps up to 12 s of recent speech, with a
 three-word overlap and at most 27 s per decode, and retains older selected word
@@ -53,14 +52,28 @@ presented as measurements of the new quality-aware path.
 
 ## New Robby mode and rollback
 
-`search_quality` applies the 40/60 Studio formula to the existing batched
-`ASRSearchScorer`, reuses its timestamps for the edge fades and makes no extra
-ASR verification pass. VoiceCLAP encodes candidate audio as a batch; the
+`search_quality` checks each batch using the existing ASR word timestamps.
+Candidate ordering first avoids terminated branches with missing words when
+a branch can continue. It then prefers the longest recognized script prefix.
+The historical 40/60 reward ranks candidates tied on that evidence. A later
+match cannot skip a missing middle word, including a negation. Audio waits
+while the model looks ahead. A final model step with zero new PCM still
+contributes its ASR evidence. There is no second ASR call for these checks.
+
+When the full target is recognized, generation continues to model EOS or
+the generation budget. There is no last-word cutoff or fade-out. A natural
+tail can include extra sounds. If a take ends early, Robby retries the exact
+unheard suffix, when available, at an original written-word boundary. These
+retries use the existing limit of three attempts. Exhausted retries leave the
+remaining text available for manual playback. An opening never recognized
+by ASR is an unheard retry. ASR mistakes can still delay or block speech.
+
+VoiceCLAP encodes candidate audio as a batch; the
 already-running private ECAPA worker computes reference and candidate vectors.
 To bound repeated work, VoiceCLAP and ECAPA inspect at most the most recent
 15 s; ASR maintains its own rolling history. Reference identity uses the
 actual selected TTS reference. N=4, 10 frames, Small RL are the requested
-defaults. A score of zero on all candidates is possible, including silence;
+defaults. A quality gate of zero on all candidates is possible, including silence;
 prefix WER is not an independent assessment of speech quality.
 
 In **Speed & verification**, unchecking Best-of-4 restores single-candidate
@@ -105,3 +118,19 @@ restarts, and do not represent a cold service as ready for low-latency use.
 See `logs/candidate-search/quality-n4-{cold,warm}/results.json` for local
 per-step timing. Neither WER nor subjective voice quality was independently
 evaluated here.
+
+### Ordered streaming check, November 27, 2026
+
+On the two-RTX-3090 workstation, three scripted Small RL turns (N=4, 800 ms,
+seed 777) reached natural EOS with ordered ASR confirmation and no ASR
+post-check. The first cold German turn required 73.0 s to first PCM, including
+graph warmup. The two warm turns reached first PCM in 2.14 s and 2.10 s.
+These are TTS timings from the local streaming request. Independent
+faster-whisper-large-v3-turbo (CPU INT8) transcribed the saved, actually
+emitted PCM in German and English. It retained all three endings and the
+German negation, and transcribed one initial “Bitte” as “Mitte”.
+
+Run the TTS tests with `python -m unittest test_asr_chunk_search test_quality_chunk_search`.
+For the real GPU cases run `candidate_search_benchmark.py --label ordered-end --modes search_quality --prompts de negation en --seeds 777`.
+Inspect the terminal `live_stream` fields `end_verified`, `ordered_target_words`
+and `tail_cutoff`, plus `performance.stopped_by_alignment`.
