@@ -68,7 +68,7 @@ class ASRChoice:
                 self.loading=None
                 if not self.session.closed:await self.session.c.ws.send_json(self.session.settings())
         self.task=asyncio.create_task(load())
-    async def transcribe(self,key,audio):
+    async def transcribe(self,key,audio,*,word_times=False):
         """At most 28 s per inference; short overlap protects boundary words.
 
         This is pause-final buffered recognition, not native Whisper streaming.
@@ -95,4 +95,5 @@ class ASRChoice:
             parts.append(text)
             if end>=len(audio):break
         return {'text':' '.join(filter(None,parts)),'model':key,'chunks':len(receipts),
+            **({'timestamps':receipts[0]['timestamps']} if word_times and timed and len(receipts)==1 and receipts[0].get('timestamps') else {}),
             'transcribe_ms':round(sum(r['transcribe_ms'] for r in receipts),2)}

@@ -1,12 +1,12 @@
-"""Real HTTPS typed requests -> Qwen -> verified streamed TTS -> CPU 3D animation.
+"""Typed requests through the deployed default LLM, streamed TTS and CPU 3D animation.
 
 Only authored test requests; no private recordings. Separate deterministic
 renderer checks prove platform motion, reduced-motion behaviour and cancellation.
 """
-import asyncio,json,base64
+import asyncio,json,base64,os
 from pathlib import Path
 from playwright.async_api import async_playwright
-from browser_stunts_emotions_check import INIT,URL
+from browser_stunts_emotions_check import INIT
 
 ROOT=Path(__file__).resolve().parent
 async def main():
@@ -14,9 +14,9 @@ async def main():
  async with async_playwright() as p:
   b=await p.chromium.launch(executable_path='/usr/bin/google-chrome',headless=True,args=['--no-sandbox','--disable-gpu','--autoplay-policy=no-user-gesture-required'])
   page=await b.new_page(viewport={'width':1280,'height':1000});page.on('pageerror',lambda e:errors.append(str(e)))
-  await page.add_init_script(INIT)
+  await page.add_init_script(INIT+"localStorage.removeItem('robby.llmSelection');localStorage.setItem('robby.browserBuddyVersion','1');")
   try:
-   response=await page.goto(URL+'/desk-robot/');assert response.status==200
+   response=await page.goto(os.getenv('ROBBY_DEMO_URL','http://127.0.0.1:8793/desk-robot/'));assert response.status==200
    await page.wait_for_function('window.robo&&window.robotFace&&!document.querySelector("#call").disabled',timeout=150000)
    report['renderer']=await page.evaluate('''async()=>{
     const {sampleAction,validateSteps,AvatarActions}=await import('/static/avatar-actions.js');
@@ -42,7 +42,7 @@ async def main():
     ok(!robotFace.actions.queue.length,'cancel clears requested trick');
     robotFace.actions.request('pending-error',[{...flip,duration_s:4.8}],performance.now(),{waitForAudio:true});
     robo.on.message({type:'error',error:'Synthetic UI contract probe',stage:'planning'});
-    ok(!!robotFace.actions.pendingRequest,'a planning failure must not cancel a valid requested visual');robotFace.actions.clear();
+    ok(robotFace.actions.queue.some(q=>q.source==='requested'),'planning failure starts the pending visual');robotFace.actions.clear();
     const r={base_rest:rest.baseCenter,base_spin:body.baseFront,base_head_only:head.baseFront,base_air:air.baseCenter,base_landed:end.baseCenter};draw({kind:'nod'},0);return r;
    }''')
    await page.evaluate('''()=>{window.stuntEvents=[];window.stuntFrames=[];window.stuntAudio=0;
@@ -51,8 +51,8 @@ async def main():
     robo.play=b=>{stuntAudio++;play(b);};
     setInterval(()=>{const r=robotFace.rig.snapshot();if(robotFace.actions.active)stuntFrames.push({kind:robotFace.actions.active.kind,bodySpin:r.bodySpin,bodyFlip:r.bodyFlip,bodySquash:r.bodySquash,bodyLift:r.bodyLift,pose:r.pose.slug,base:r.baseCenter,render_ms:r.renderMs,audio:!!robo.clock?.position()&&robo.sources.length>0})},30);
    }''')
-   cases=[('Dreh dich mal im Kreis.','spin',-1),('Dreh dich gegen den Uhrzeigersinn.','spin',1),
-          ('Mach mal einen Salto.','somersault',1),('Mach einen Salto rückwärts.','somersault',-1),
+   cases=[('Hey Buddy, eine Drehung, bitte.','spin',-1),('Dreh dich gegen den Uhrzeigersinn.','spin',1),
+          ('Buddy, schlag mal einen Salto.','somersault',1),('Mach einen Salto rückwärts.','somersault',-1),
           ('Sei mal wütend.','emotion',0),('Mach eine lustige Grimasse.','grimace',0)]
    for text,kind,sign in cases:
     await page.wait_for_function('robo.sources.length===0',timeout=45000)
@@ -78,14 +78,14 @@ async def main():
    # Capture the actual software-rendered frame synchronously; Playwright's
    # scrolling/screenshot wait can otherwise miss a brief airborne pose.
    png=await page.evaluate('''async()=>{const {sampleAction}=await import('/static/avatar-actions.js');const a=sampleAction({kind:'somersault',direction:'forward'},.5);robotFace.rig.update({pose:a.pose,actionMotion:a.motion,actionEyes:true,freezeExpression:true},1000,0);return document.querySelector('#avatar canvas').toDataURL();}''')
-   (ROOT/'logs/stunts-somersault-20261113.png').write_bytes(base64.b64decode(png.split(',')[1]))
+   (ROOT/'logs/stunts-somersault-latest.png').write_bytes(base64.b64decode(png.split(',')[1]))
   except Exception as exc:report['error']=repr(exc)
   finally:
    report['page_errors']=errors
    try:await page.evaluate('robo.stop()')
    except Exception:pass
    await b.close()
- (ROOT/'logs/stunts-body-browser-20261113.json').write_text(json.dumps(report,indent=2,ensure_ascii=False))
+ (ROOT/'logs/stunts-body-browser-latest.json').write_text(json.dumps(report,indent=2,ensure_ascii=False))
  print({'passed':report['passed'],'turns':len(report['turns']),'error':report.get('error')},flush=True)
  if not report['passed']:raise SystemExit(1)
 if __name__=='__main__':asyncio.run(main())

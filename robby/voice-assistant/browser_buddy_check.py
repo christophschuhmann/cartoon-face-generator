@@ -9,10 +9,13 @@ def audio(name):
  import subprocess
  voice=os.environ.get('BUDDY_TEST_VOICE','')
  path=FIX/'variants'/(voice+'_'+name+'.wav') if voice and name in ('hey','go','stop') else FIX/(name+'.wav')
+ if name=='request' and os.getenv('BUDDY_REQUEST_WAV'):path=Path(os.environ['BUDDY_REQUEST_WAV'])
  return base64.b64encode(subprocess.run(['ffmpeg','-nostdin','-v','error','-i',str(path),'-ar','16000','-ac','1','-f','f32le','pipe:1'],capture_output=True,check=True).stdout).decode()
 
 async def main():
  events=[]; errors=[];out={'physical_microphone_test':False,'synthetic_fixture':True,'fixture_voice':os.environ.get('BUDDY_TEST_VOICE','default'),'mobile_emulation':os.environ.get('BUDDY_TEST_MOBILE')=='1'}
+ stunt=os.getenv('BUDDY_EXPECT_STUNT')
+ if stunt and stunt not in ('spin','somersault'):raise ValueError('Expected stunt must be spin or somersault')
  async with async_playwright() as p:
   browser=await p.chromium.launch(executable_path='/usr/bin/google-chrome',headless=True,args=['--no-sandbox','--autoplay-policy=no-user-gesture-required'])
   page=await browser.new_page(**(p.devices['Pixel 5'] if out['mobile_emulation'] else {'viewport':{'width':1280,'height':900}}))
@@ -27,7 +30,7 @@ async def main():
    if isinstance(raw,str):
     try:
      e=json.loads(raw)
-     if e.get('type') in ('ready','buddy_wake','asr_settings','asr_sentence','asr_preview','error','reply','turn_done','input_isolation','endpoint','ignored'):events.append({'t':time.monotonic(),**e})
+     if e.get('type') in ('ready','buddy_wake','asr_settings','asr_sentence','asr_preview','error','reply','turn_done','avatar_action','input_isolation','endpoint','ignored'):events.append({'t':time.monotonic(),**e})
     except ValueError:pass
   page.on('websocket',lambda ws:ws.on('framereceived',receive));page.on('pageerror',lambda e:errors.append(str(e)))
   async def wait(pred,seconds):
@@ -76,6 +79,13 @@ async def main():
    await page.wait_for_function("document.querySelector('#buddy-status')?.textContent.includes('Stopped.')",timeout=25000)
    out['stop_discarded']=not any(e['type']=='asr_sentence' for e in events)
    if '--controls-only' not in sys.argv:
+    if stunt:
+     await page.evaluate("""kind=>{window.stuntProbe={angle:0,overlap:false};setInterval(()=>{
+      if(robotFace.actions.active?.kind!==kind)return;
+      const rig=robotFace.rig.snapshot(),angle=kind==='spin'?rig.bodySpin:rig.bodyFlip;
+      stuntProbe.angle=Math.max(stuntProbe.angle,Math.abs(angle));
+      if(robo.sources.length&&robo.clock?.position())stuntProbe.overlap=true;
+     },35)}""",stunt)
     await page.evaluate('x=>testSpeak(x)',audio('hey'));await page.wait_for_function("document.querySelector('#buddy-status')?.dataset.state==='recording'",timeout=20000)
     await page.evaluate('x=>testSpeak(x)',audio('request'));await page.evaluate('x=>testSpeak(x)',audio('go'))
     await wait(lambda:any(e['type']=='asr_sentence' and e.get('reason')=='Go Buddy' for e in events),20)
@@ -86,6 +96,11 @@ async def main():
     assert any(e['type']=='endpoint' and e.get('asr',{}).get('buddy_control') for e in events)
     assert not any(e['type']=='ignored' and e.get('source')=='input_isolation' for e in events)
     out['spoken_audio_scheduled']=True
+    if stunt:
+     await page.wait_for_function('stuntProbe.angle>345 && stuntProbe.overlap',timeout=25000)
+     await wait(lambda:any(e['type']=='turn_done' for e in events),90)
+     assert [s['kind'] for e in events if e['type']=='avatar_action' for s in e['steps']]==[stunt]
+     out['stunt']={'kind':stunt,**await page.evaluate('stuntProbe')}
     await page.locator('#buddy-mode').uncheck()
     await page.wait_for_function('robo.metrics.mic_blocks>0',timeout=10000)
     await wait(lambda:any(e['type']=='input_isolation' and not e.get('paused_for_buddy') and e.get('selected')==isolation for e in events),12)
@@ -101,6 +116,6 @@ async def main():
    try:await page.evaluate('window.robo?.stop()')
    except Exception:pass
    await browser.close()
- (ROOT/'logs'/('browser-buddy-smoke-'+out['fixture_voice']+('-'+isolation if isolation!='off' else '')+('-mobile' if out['mobile_emulation'] else '')+'.json')).write_text(json.dumps(out,indent=2));print(json.dumps(out),flush=True)
+ (ROOT/'logs'/('browser-buddy-smoke-'+out['fixture_voice']+('-'+isolation if isolation!='off' else '')+('-mobile' if out['mobile_emulation'] else '')+('-'+stunt if stunt else '')+'.json')).write_text(json.dumps(out,indent=2));print(json.dumps(out),flush=True)
  if not out.get('passed'):raise SystemExit(1)
 if __name__=='__main__':asyncio.run(main())

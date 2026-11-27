@@ -5,6 +5,24 @@ from avatar_actions import EMOTIONS
 from avatar_commands import explicit_actions
 
 class CommandTests(unittest.TestCase):
+    def test_buddy_address_short_requests_and_repeat_from_named_speaker(self):
+        cases={
+            'Hey Buddy, mach mal einen Salto und dreh dich im Kreis.':['somersault','spin'],
+            'BUDDY! Schlag mal einen Salto.':['somersault'],
+            'Hi, Robbie! Eine Drehung, bitte.':['spin'],
+            'Jetzt bitte einmal drehen!':['spin'],
+            'Buddy, schneid eine Grimasse.':['grimace'],
+            'Hey Buddy, dreh die Musik auf.':[],
+            'Buddy, mach keinen Salto.':[],
+            'Bitte sag "Hey Buddy, mach einen Salto".':[],
+            'Wie macht man einen Salto?':[],
+        }
+        for text,kinds in cases.items():
+            with self.subTest(text=text):
+                self.assertEqual([s['kind'] for s in explicit_actions(text)],kinds)
+        history=[{'role':'user','content':'Current session speaker: {"speaker_id":"1"}\nMach einen Salto.'}]
+        self.assertEqual(explicit_actions('Buddy, noch mal!',history=history)[0]['kind'],'somersault')
+
     def test_whole_body_spin_head_scope_and_flips(self):
         self.assertEqual(explicit_actions('Hey Robby, dreh dich mal im Kreis.')[0]['scope'],'body')
         self.assertEqual(explicit_actions('Dreh deinen Kopf gegen den Uhrzeigersinn.')[0]['scope'],'head')

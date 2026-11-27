@@ -23,11 +23,14 @@ async def main():
     const assert=(v,m)=>{if(!v)throw Error(m)},a=new AvatarActions(),base=pose();a.idleEnabled=false;
     const step={kind:'spin',scope:'body',direction:'clockwise',duration_s:3};
     a.request('late',[step],0,{waitForAudio:true});a.bindRequested(91,'late');
-    a.frame(12000,base,{busy:true});assert(!a.queue.length&&a.pendingRequest,'must wait through 12 second TTS retry');
-    a.frame(12001,base,{position:{id:90,sample:0},busy:true});assert(!a.queue.length,'wrong reply must not start action');
-    a.frame(12002,base,{position:{id:91,sample:0},busy:true});assert(a.active?.kind==='spin','start at actual playback');
-    a.frame(13502,base,{position:{id:91,sample:36000},busy:true});assert(a.active?.kind==='spin','motion overlaps speech');
+    a.frame(500,base,{busy:true});assert(!a.queue.length&&a.pendingRequest,'wait for speech');
+    a.frame(600,base,{position:{id:90,sample:0},busy:true});assert(!a.queue.length,'wrong reply must not start action');
+    a.frame(1200,base,{position:{id:91,sample:0},busy:true});assert(a.active?.kind==='spin','start at actual playback');
+    a.frame(2700,base,{position:{id:91,sample:36000},busy:true});assert(a.active?.kind==='spin','motion overlaps speech');
     assert(!a.request('late',[step]),'no duplicate action');a.clear();
+    a.request('timeout',[step],0,{waitForAudio:true});a.bindRequested(92,'timeout');
+    a.frame(4000,base,{busy:true});assert(a.active?.kind==='spin','visual deadline while audio stalls');
+    a.frame(12000,base,{position:{id:92,sample:0},busy:true});assert(!a.active&&!a.queue.length,'late playback cannot replay a completed action');
     a.request('stop',[step],0,{waitForAudio:true});a.clear();a.frame(14000,base);assert(!a.queue.length,'cancel waits');
     a.request('silent',[step],15000);assert(a.queue.length===1,'explicit silent action immediate');
     a.clear();a.request('failed',[step],0,{waitForAudio:true});a.finishSpeech(100);assert(a.queue.length===1,'terminal no-audio visual fallback');

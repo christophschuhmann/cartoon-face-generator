@@ -46,6 +46,14 @@ The page keeps standby audio and the current recording in browser memory only.
 When Go is detected, the bounded (maximum 60-second) recording is transferred
 for server ASR, speaker handling and response generation. A short ASR hint, if
 confirmation is uncertain, is returned only to that browser session. An
+uploaded German request can omit the English control in its full transcript.
+When the browser detects Go and the full transcript lacks a matching suffix,
+the timed Parakeet models check the last 2.4 seconds separately. If that pass
+identifies the control, its word onset marks the end of the request. The
+server reuses available word times or decodes the confirmed prefix of a
+long recording. An uncertain result keeps the recording open. The usual
+single-pass path also accepts observed German spellings such as “Go, Madi”
+and “Gaumadi” after a keyword detection. The
 800-ms pre-roll reduces clipping after Hey. On a failed or uncertain Go check,
 the local recording stays available so Go can be repeated. No ASR runs during
 standby. Closing the page, disabling Buddy, or stopping the microphone discards

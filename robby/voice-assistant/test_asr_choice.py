@@ -102,4 +102,16 @@ class ChoiceTests(unittest.IsolatedAsyncioTestCase):
             with self.assertRaises(ValueError):worker_url('parakeet_ultra')
         await s.close()
 
+    async def test_word_times_are_opt_in_and_local_to_a_single_window(self):
+        s=self.session()
+        words=[{'word':'Hallo','start':0.1,'end':0.4}]
+        row={'text':'Hallo','timestamps':words,'transcribe_ms':12}
+        s.asr.http=SimpleNamespace(post=AsyncMock(return_value=httpx.Response(200,
+            json=row,request=httpx.Request('POST','http://localhost'))),aclose=AsyncMock())
+        audio=np.zeros(32000,np.float32)
+        self.assertNotIn('timestamps',await s.asr.transcribe('parakeet_ultra',audio))
+        self.assertEqual((await s.asr.transcribe('parakeet_ultra',audio,word_times=True))['timestamps'],words)
+        self.assertNotIn('timestamps',await s.asr.transcribe('parakeet_ultra',np.zeros(30*16000),word_times=True))
+        await s.close()
+
 if __name__=='__main__':unittest.main()

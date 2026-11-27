@@ -13,6 +13,8 @@ pan/tilt limits, and no hardware commands are sent.
 | Dreh deinen Kopf. | `spin`, `scope: head` |
 | Mach mal einen Salto. | `somersault`, `direction: forward` |
 | Mach einen Salto rückwärts. / Do a backflip. | `somersault`, `direction: backward` |
+| Hey Buddy, mach mal einen Salto und dreh dich im Kreis. | `somersault` followed by a full-body `spin` |
+| Eine Drehung, bitte. / Schlag mal einen Salto. | One turn / one flip |
 
 `perform_avatar` exposes the same allowlisted actions to the LLM. Direct commands
 are also recognized deterministically and dispatched once before LLM generation.
@@ -24,8 +26,24 @@ with a four-second maximum wait if speech is unavailable. Silent requests and
 UI previews start immediately. A planning/speech error does not cancel a valid
 pending trick; explicit Stop, interruption and reduced-motion settings still do.
 Sequences remain bounded to six actions and 24 seconds. Normal full-body turns
-last six seconds; a somersault lasts 4.8 seconds. Explicit head-only requests and
-existing unscoped/idle head motions retain their prior behaviour.
+last six seconds and a somersault lasts 4.8 seconds. An unscoped `spin` from
+the model turns the whole robot. The model can select `scope: head` explicitly.
+
+The parser accepts both Robby and Buddy as forms of address. In microphone
+Buddy mode, say **Hey Buddy**, wait for the listening light, speak the request,
+then say **Go Buddy**. In the text box you can send the request directly.
+An opening tool-generated sequence gets its own action ID on the WebSocket.
+Subsequent sentences reuse this ID. Gestures targeted at a later sentence
+still follow that sentence's playback clock.
+
+To test a deployment, set `ROBBY_DEMO_URL` to its full desk-robot URL and
+run `python browser_whole_body_stunts.py` with Playwright and Chrome installed.
+The test checks rotation of the rendered platform and overlap with audio playback.
+For the microphone path, run `browser_buddy_check.py` with the same URL,
+`BUDDY_EXPECT_STUNT=spin` or `somersault`, and `BUDDY_REQUEST_WAV` pointing
+to an authored spoken request. The runner injects the local Hey and Go audio
+fixtures through the browser microphone, checks the single dispatched action
+and measures the platform angle while streamed speech plays.
 
 ## Rendering
 
