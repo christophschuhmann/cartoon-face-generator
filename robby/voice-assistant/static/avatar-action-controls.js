@@ -1,5 +1,15 @@
 import {profiles} from './emotions.js';
 import {GRIMACES} from './avatar-actions.js';
+
+export function showRequestedTrick(){
+ const avatar=document.getElementById('avatar'),view=window.visualViewport;
+ const rect=avatar.getBoundingClientRect(),top=view?.offsetTop??0,height=view?.height??innerHeight;
+ const visible=Math.max(0,Math.min(rect.bottom,top+height)-Math.max(rect.top,top));
+ if(visible>=.9*Math.min(rect.height,height))return;
+ const message=document.getElementById('message');
+ if(document.activeElement===message&&!message.value&&matchMedia('(pointer: coarse)').matches)message.blur();
+ avatar.scrollIntoView({block:'center',inline:'nearest',behavior:'instant'});
+}
 export function attachActionControls(actions){
  const panel=document.createElement('details');panel.className='desk-controls';panel.id='avatar-action-controls';
  panel.innerHTML=`<summary>Personality &amp; little tricks</summary>
@@ -23,7 +33,7 @@ export function attachActionControls(actions){
  <label><input id="avatar-pet-invites-enabled" type="checkbox" checked> Rare, optional invitations to stroke his head</label>
  <label><input id="avatar-listening-enabled" type="checkbox" checked> Quiet listening nods / head shakes chosen by the decision model</label>
  <label for="avatar-trick">Try a silent action</label><select id="avatar-trick"></select>
- <div class="desk-buttons"><button type="button" id="avatar-perform">Perform</button><button type="button" id="avatar-stop">Stop animation</button></div>
+ <div class="desk-buttons"><button type="button" id="avatar-perform" disabled>Perform</button><button type="button" id="avatar-stop">Stop animation</button></div>
  <p id="avatar-action-status" aria-live="polite">Camera tracking resumes automatically after each trick.</p>
  <p>Hold left-click and move gently across the head; a hand cursor shows where. Alt-drag or drag the base to orbit. Clicks or holding still do not count as strokes. Robby is a playful AI character, not a creature with physical touch sensations. Spoken reactions need a connected conversation. Invitations never repeat in an unanswered quiet spell; reduced motion disables carousel play.</p>
  <p>Listening cues reuse enabled live usefulness/rule decisions and require a recognized speaker.</p>
@@ -53,7 +63,7 @@ export function attachActionControls(actions){
   const box=document.getElementById(id);try{box.checked=localStorage.getItem('robby.'+id)!=='false';}catch{}actions[key]=box.checked;
   box.onchange=()=>{actions[key]=box.checked;actions.warning='';actions.clear();try{localStorage.setItem('robby.'+id,String(box.checked));}catch{}};
  }
- document.getElementById('avatar-perform').onclick=()=>{const value=items[+select.value][1];actions.play((Array.isArray(value)?value:[value]).map(s=>({duration_s:2,...s})));};
+ document.getElementById('avatar-perform').onclick=()=>{const value=items[+select.value][1];if(actions.play((Array.isArray(value)?value:[value]).map(s=>({duration_s:2,...s}))))showRequestedTrick();};
  document.getElementById('avatar-stop').onclick=()=>actions.clear();
  let last='';const timer=setInterval(()=>{const text=actions.warning|| (actions.pendingRequest?'Trick ready · starting with speech, or within four seconds.':actions.active?`Performing ${actions.active.kind.replaceAll('_',' ')} · ${actions.active.source}`:!actions.enabled?'Expressive actions disabled.':'Camera tracking resumes automatically after each trick.');if(text!==last){document.getElementById('avatar-action-status').textContent=text;last=text;}const notice=document.getElementById('action-notice');if(notice){notice.hidden=!actions.warning;notice.textContent=actions.warning||'';}},250);
  addEventListener('pagehide',()=>clearInterval(timer),{once:true});

@@ -18,6 +18,14 @@ async def main():
   try:
    response=await page.goto(os.getenv('ROBBY_DEMO_URL','http://127.0.0.1:8793/desk-robot/'));assert response.status==200
    await page.wait_for_function('window.robo&&window.robotFace&&!document.querySelector("#call").disabled',timeout=150000)
+   preview=page.locator('#avatar-action-controls')
+   await preview.locator('summary').click()
+   await preview.locator('select').select_option(label='Forward somersault · whole robot')
+   await preview.locator('#avatar-perform').click()
+   await page.wait_for_function("""()=>{const c=document.querySelector('#avatar canvas'),r=c.getBoundingClientRect();
+    return document.elementFromPoint(r.left+r.width/2,r.top+r.height/2)===c && robotFace.rig.snapshot().bodyFlip>160}""",timeout=8000)
+   await page.wait_for_function('!robotFace.actions.queue.length',timeout=8000)
+   await preview.locator('summary').click()
    report['renderer']=await page.evaluate('''async()=>{
     const {sampleAction,validateSteps,AvatarActions}=await import('/static/avatar-actions.js');
     const {pose}=await import('/static/emotions.js');const rig=robotFace.rig,base=pose();
@@ -49,7 +57,8 @@ async def main():
     const old=robo.on.message,play=robo.play.bind(robo);
     robo.on.message=m=>{if(['reply','avatar_action','turn_done','error','barge','busy'].includes(m.type))stuntEvents.push(m);old(m);};
     robo.play=b=>{stuntAudio++;play(b);};
-    setInterval(()=>{const r=robotFace.rig.snapshot();if(robotFace.actions.active)stuntFrames.push({kind:robotFace.actions.active.kind,bodySpin:r.bodySpin,bodyFlip:r.bodyFlip,bodySquash:r.bodySquash,bodyLift:r.bodyLift,pose:r.pose.slug,base:r.baseCenter,render_ms:r.renderMs,audio:!!robo.clock?.position()&&robo.sources.length>0})},30);
+    setInterval(()=>{const r=robotFace.rig.snapshot(),c=document.querySelector('#avatar canvas'),box=c.getBoundingClientRect();
+     if(robotFace.actions.active)stuntFrames.push({kind:robotFace.actions.active.kind,bodySpin:r.bodySpin,bodyFlip:r.bodyFlip,bodySquash:r.bodySquash,bodyLift:r.bodyLift,pose:r.pose.slug,base:r.baseCenter,render_ms:r.renderMs,visible:document.elementFromPoint(box.left+box.width/2,box.top+box.height/2)===c,audio:!!robo.clock?.position()&&robo.sources.length>0})},30);
    }''')
    cases=[('Hey Buddy, eine Drehung, bitte.','spin',-1),('Dreh dich gegen den Uhrzeigersinn.','spin',1),
           ('Buddy, schlag mal einen Salto.','somersault',1),('Mach einen Salto rückwärts.','somersault',-1),
@@ -57,7 +66,7 @@ async def main():
    for text,kind,sign in cases:
     await page.wait_for_function('robo.sources.length===0',timeout=45000)
     await page.evaluate('stuntEvents=[];stuntFrames=[];stuntAudio=0')
-    await page.fill('#message',text);await page.locator('#form').evaluate('f=>f.requestSubmit()')
+    await page.fill('#message',text);await page.press('#message','Enter')
     await page.wait_for_function('stuntEvents.some(e=>e.type==="turn_done"||e.type==="error")',timeout=120000)
     await page.wait_for_function('robotFace.actions.queue.length===0',timeout=20000)
     data=await page.evaluate('({events:stuntEvents,frames:stuntFrames,audio:stuntAudio})')
@@ -65,7 +74,7 @@ async def main():
     assert not [e for e in data['events'] if e['type'] in ('error','barge','busy')],data['events']
     actions=[e for e in data['events'] if e['type']=='avatar_action'];assert len(actions)==1 and actions[0]['steps'][0]['kind']==kind,actions
     assert data['audio']>0,'No real TTS audio'
-    assert any(f['audio'] and f['kind']==kind for f in data['frames']),'No speech during requested animation'
+    assert any(f['audio'] and f['visible'] and f['kind']==kind for f in data['frames']),'No visible animation during speech'
     if kind in ('spin','somersault'):
      key='bodySpin' if kind=='spin' else 'bodyFlip'
      assert max(sign*f[key] for f in data['frames'])>345,'Incomplete whole-body turn'

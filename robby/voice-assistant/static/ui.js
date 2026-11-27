@@ -8,7 +8,7 @@ import {GazeTracker} from './gaze.js';
 import {MultimodalUI} from './multimodal-ui.js';
 import {organisePlayground} from './playground-layout.js?v=buddy-transcript-1';
 import {AvatarActions} from './avatar-actions.js?v=stunt-delivery-2';
-import {attachActionControls} from './avatar-action-controls.js';
+import {attachActionControls,showRequestedTrick} from './avatar-action-controls.js?v=visible-tricks-2';
 import {attachPetting} from './avatar-petting.js';
 import {ASRControls} from './asr-controls.js';
 import {InputIsolationControls} from './input-isolation-controls.js?v=buddy-admit-1';
@@ -113,7 +113,10 @@ function showInteraction(m){
 }
 const client=window.robo=new RoboClient({
  localMic(x){return buddyBrowser?.audio(x)||false;},
- connection(on){connected=on;if(!on&&$('retry-speech'))$('retry-speech').hidden=true;if(on)verificationControls?.send();if(!on){llmControls?.disconnected();if($('conversation-focus-status'))$('conversation-focus-status').textContent='Waiting for the first conversation partner.';avatarActions.clear();petting?.reset();optionalAvatarReply=optionalEnvironmentReply=avatarCancelPending=false;replyPending=false;mic=false;gate.checked=desiredGate;identityModel.value='v4-long3';timeout.value=900;$('speaker-chips').replaceChildren();$('call').textContent='◉ Start talking';$('call').classList.remove('active');phase(ready?'Ready when you are':'Connecting…','ready');}},
+ connection(on){const wasConnected=connected;connected=on;if(!on&&$('retry-speech'))$('retry-speech').hidden=true;if(on)verificationControls?.send();if(!on){llmControls?.disconnected();if($('conversation-focus-status'))$('conversation-focus-status').textContent='Waiting for the first conversation partner.';
+  // A failed microphone autostart can arrive while a local preview is playing.
+  if(wasConnected||!avatarActions.queue.some(q=>q.source==='preview'))avatarActions.clear();
+  petting?.reset();optionalAvatarReply=optionalEnvironmentReply=avatarCancelPending=false;replyPending=false;mic=false;gate.checked=desiredGate;identityModel.value='v4-long3';timeout.value=900;$('speaker-chips').replaceChildren();$('call').textContent='◉ Start talking';$('call').classList.remove('active');phase(ready?'Ready when you are':'Connecting…','ready');}},
  microphone(on){mic=on;micStarted=on?performance.now():0;lastCapture=lastServerAudio=0;serverAudioSeconds=0;$('mic-level').value=0;$('mic-status').textContent=on?'Microphone started. Waiting for audio frames…':'Microphone off. Click Start talking and allow microphone access.';$('call').textContent=on?'■ End conversation':'◉ Start talking';$('call').classList.toggle('active',on);if(buddyBrowser?.enabled){if(!on)buddyBrowser.reset();buddyBrowser.onStatus(on?(buddyBrowser.ready?'Listening locally: say “Hey Buddy”.':'Loading local wakeword models…'):'Microphone off. Click Start talking and allow microphone and sound.',on&&buddyBrowser.ready?'waiting':'off');}phase(on?'Listening to you':'Ready when you are',on?'ready':'');},
  input(s){lastCapture=performance.now();if(s.rms>.003&&(!sentenceMode||performance.now()<foregroundInputUntil)){avatarActions.touch();cancelOptionalAvatar('acoustic_activity');} $('mic-level').value=Math.min(1,(s.rms||0)*12);$('mic-status').textContent=s.state==='ended'?'The microphone was disconnected. Start talking again.':desiredBuddy?`${s.rms>.001?'Audio detected':'Microphone active · quiet input'} · wakewords processed locally in your browser.`:`${s.rms>.001?'Audio detected':'Microphone active · quiet input'} · ${s.sent} packets sent · ${serverAudioSeconds.toFixed(1)} s received by server.`;},
  playing(on){speaking=on;if(!on)overview.playbackEnded();phase(on?'Robby is speaking':mic?'Listening to you':'Ready when you are',on?'speaking':'ready');},
@@ -143,7 +146,7 @@ const client=window.robo=new RoboClient({
   if(['turn_done','stop_command','error','reply_cancelled'].includes(m.type)){optionalAvatarReply=optionalEnvironmentReply=avatarCancelPending=false;}
   if(['endpoint','reply','backchannel'].includes(m.type)||(foregroundMessage&&['asr_preview','partial'].includes(m.type)))avatarActions.touch();
   if(['barge','stop_command','reply_cancelled'].includes(m.type)||m.type==='error'&&!avatarActions.pendingRequest&&!avatarActions.queue.some(q=>q.source==='requested'))avatarActions.clear();
-  if(m.type==='avatar_action')avatarActions.request(m.action_id,m.steps,performance.now(),{waitForAudio:m.wait_for_audio===true});
+  if(m.type==='avatar_action'&&avatarActions.request(m.action_id,m.steps,performance.now(),{waitForAudio:m.wait_for_audio===true}))showRequestedTrick();
   if(m.type==='reply')avatarActions.bindRequested(m.reply_id,m.avatar_action_id);
   if(m.type==='avatar_gesture'&&!speaking&&!replyPending)avatarActions.listen(m.kind);
   if(m.type==='reply'&&!avatarActions.hasRequested(m.avatar_action_id))avatarActions.set(m.reply_id,m.avatar_actions,m.performance,m.avatar_event?'optional':'reply');
@@ -391,6 +394,7 @@ function animate(t){
 }
 requestAnimationFrame(animate);
 organisePlayground();
+$('avatar-perform').disabled=false;
 verificationControls=new VerificationControls(client);
 attachSystemGuide();
 environmentControls=new EnvironmentControls(client);window.robotFace.environmentControls=environmentControls;environmentControls.poll(ready);
