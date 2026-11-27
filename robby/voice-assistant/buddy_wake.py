@@ -19,6 +19,34 @@ MODEL_FILES={'hey':'hey_buddy_en_large_v3.onnx','go':'go_buddy_en_large_v3.onnx'
 # Model-card v3 operating points; application-level evaluation is still needed.
 THRESHOLDS={'hey':.02,'go':.02,'stop':.02}
 
+# These spellings only confirm a control already proposed by a wakeword head.
+# German Parakeet can join both words of the English command into “Gaumadi”.
+_BUDDY_NAME=r'(?:buddy|body|bobby|budi|burdy|murdy|maddie|maddy|madi|maggie|bird\s*ie|hobby|wobby)'
+_BREAK=r'[\s,.:;!?-]*'
+_GO_END=re.compile(r'(?<!\w)(?:(?:go[\s,.:;!?-]+'+_BUDDY_NAME+r'|(?:go|gau)(?:madi|mardi|buddy))'+_BREAK+r')+$',re.I)
+_STOP_END=re.compile(r'(?<!\w)stop+p?[\s,.:;!?-]+'+_BUDDY_NAME+_BREAK+r'$',re.I)
+_WAKE_START=re.compile(r'^\s*(?:(?:hey|hi)[\s,.:;!?-]+)?(?:buddy|body|bobby|bird\s*ie|burdy|murdy)\b'+_BREAK+
+                       r'|^\s*(?:hey|hi)[\s,.:;!?-]+'+_BUDDY_NAME+r'\b'+_BREAK,re.I)
+
+async def confirm_go_tail(asr,model,audio,full):
+    """Verify an independently detected Go and recover just the preceding request."""
+    tail_size=38400  # 2.4 s at 16 kHz, including the browser's post-roll
+    if model not in ('parakeet_ultra','parakeet_redux') or len(audio)<=tail_size:return None
+    tail=await asr.transcribe(model,audio[-tail_size:],word_times=True)
+    rows=tail.get('timestamps') or []
+    words=' '.join(row['word'] for row in rows)
+    match=_GO_END.search(words)
+    if not match or len(words.split())!=len(rows):return None
+    first=len(words[:match.start()].split())
+    onset=rows[first]['start']
+    if not 0<=onset<tail_size/SAMPLE_RATE:return None
+    cut=len(audio)-tail_size+round(onset*SAMPLE_RATE)
+    if full.get('timestamps'):
+        return ' '.join(row['word'] for row in full['timestamps'] if row['start']*SAMPLE_RATE<cut)
+    # Long recordings are transcribed in overlapping chunks. Their reported
+    # token times are not globally aligned, so decode the confirmed prefix.
+    return (await asr.transcribe(model,audio[:cut]))['text']
+
 class BuddyDetector:
     def __init__(self,root=ROOT):
         options=ort.SessionOptions();options.intra_op_num_threads=1;options.inter_op_num_threads=1
@@ -178,17 +206,20 @@ class BuddySession:
                 async with self.c.speaker_ext.asr_slot(0):
                     result=await asyncio.to_thread(self.c.ears.service.engine.asr.transcribe,[audio])
                 text=result[0] if result else ''
-            else:text=(await ss.asr.transcribe(model,audio))['text']
-            text=re.sub(r'(?i)^\s*(?:(?:hey|hi)\s+)?(?:buddy|body|bobby|bird\s*ie|burdy|murdy)\b[\s,.!?-]*','',text).strip()
-            command=r'go' if action=='go' else r'stop+p?'
-            suffix=r'(?i)[\s,.!?-]*'+command+r'[\s,.:;!?-]+(?:buddy|body|bobby|budi|burdy|murdy|maddie|maddy|maggie|bird\s*ie|hobby|wobby)[\s,.!?-]*$'
-            if not re.search(suffix,text):
+            else:
+                full=await ss.asr.transcribe(model,audio,word_times=self.browser_mode and action=='go')
+                text=full['text']
+            suffix=_GO_END if action=='go' else _STOP_END
+            confirmed_prefix=None
+            if self.browser_mode and action=='go' and model!='nemotron' and not suffix.search(text):
+                confirmed_prefix=await confirm_go_tail(ss.asr,model,audio,full)
+            if confirmed_prefix is None and not suffix.search(text):
                 self.state='recording';await self.notice('Command was uncertain; still recording',' '.join(text.split()[-3:]))
                 return
             if action=='stop':
                 self.capture=[];self.state='waiting';ss.admission_epoch+=1
                 await self.notice('Stop Buddy confirmed — recording discarded');return
-            text=re.sub(suffix,'',text).strip()
+            text=_WAKE_START.sub('',suffix.sub('',confirmed_prefix if confirmed_prefix is not None else text)).strip().rstrip(' ,.:;!?-')
             if not text:raise ValueError('No spoken request recognized')
             if epoch!=ss.admission_epoch or not self.enabled:return
             asr={'model':model,'endpoint_reason':'buddy_go','buddy_control':True,'transcribe_ms':round((time.perf_counter()-tick)*1000,2)}

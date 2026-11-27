@@ -51,7 +51,7 @@ This uses the official [OpenRouter provider-routing interface](https://openroute
 
 ## Speech and motion
 
-Spins, somersaults and other spoken direct actions now wait for their reply's actual browser playback position. Network arrival and a four-second wall-clock deadline do not start the animation. TTS retries therefore do not consume the animation before audio starts. A terminal no-audio result can still perform the requested visual action silently; explicitly silent requests start immediately. Cancellation, reduced motion and the expressive-actions switch retain their behavior.
+The browser starts a requested trick when the matching reply reaches audio playback. If speech stalls, it starts the trick on the first visible animation frame after four seconds. A terminal speech failure releases a pending trick immediately. Late audio cannot replay a completed stunt. Stop cancels a pending or running action, and the browser respects reduced motion and the expressive-actions switch.
 
 ## Reproduction
 
@@ -80,7 +80,7 @@ Test layers are intentionally distinct:
 
 - Unit tests inject synthetic SSE, timestamps and failures to check bounded retries, cancellation, exact negation-preserving suffixes, unknown-position refusal, seven-sentence text retention, error separation and saved-speech replay.
 - A test-only client injects one connection failure *before* admission, then forwards subsequent requests to the real live TTS and ASR. No fault endpoint is installed in production and no synthetic waveform is presented as model audio.
-- The browser test checks a twelve-second delayed-playback contract, then sends real Qwen/TTS requests for a spin, a somersault, and a four-sentence explanation. It records actual playback/motion overlap and checks the four diagrams on desktop and mobile.
+- The browser test checks matching and unrelated playback IDs, a four-second audio stall, late audio and cancellation. It also sends real LLM/TTS requests for a spin, a somersault and a four-sentence explanation, and records playback and motion overlap.
 
 Live test receipts are in `logs/speech-recovery-live.json` and `logs/speech-recovery-browser.json`; these are authored tests, not visitor recordings. The public report summarizes results without uploading private session logs. This is not a physical microphone/room test.
 

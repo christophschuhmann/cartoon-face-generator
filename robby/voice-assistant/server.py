@@ -7,6 +7,7 @@ import os
 from pathlib import Path
 import time
 import hashlib
+import uuid
 import numpy as np
 
 from aiohttp import web, WSMsgType, WSMessage
@@ -74,6 +75,18 @@ class RoboConversation(Conversation):
                 await self.to_mouth(b'W',{'replies':[r.reply for r in self.decisions.book.rules.values()][:4],
                     'language':self.decisions.language})
         if self.speaker_ext is not None:await self.speaker_ext.metadata(data)
+        # Tool-directed gestures normally arrive in sentence metadata. Deliver
+        # an opening sequence as an independent action, just like a direct command.
+        # Later sentence cues and autonomous play keep their playback timestamps.
+        steps=data.get('avatar_actions')
+        if (steps and not data.get('avatar_action_id') and not data.get('avatar_event')
+                and not data.get('bc') and all(step.get('sentence',0)==0 for step in steps)):
+            if self.tool_action_reply!=self.playback.rid:
+                self.tool_action_id=uuid.uuid4().hex
+                self.tool_action_reply=self.playback.rid
+                await self.ws.send_json({'type':'avatar_action','action_id':self.tool_action_id,
+                    'steps':steps,'source':'validated_tool','wait_for_audio':True})
+            data['avatar_action_id']=self.tool_action_id
         await self.ws.send_json({'type':'backchannel' if data.get('bc') else 'reply','text':data['text'],
             'reply_id':self.playback.rid,'performance':data.get('performance'),
             'avatar_actions':data.get('avatar_actions',[]),
@@ -86,6 +99,7 @@ class RoboConversation(Conversation):
 
     def __init__(self,*args,**kwargs):
         super().__init__(*args,**kwargs)
+        self.tool_action_reply=None
         from llm_session import LLMSession
         self.llm=LLMSession(self)
         self.quick_replies=os.environ.get('ROBO_QUICK_REPLIES','0')=='1'

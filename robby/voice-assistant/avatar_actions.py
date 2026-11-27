@@ -8,6 +8,7 @@ EMOTIONS = tuple(p['slug'] for p in json.loads((Path(__file__).parent/'static/em
 KINDS = ('emotion', 'nod', 'shake', 'spin', 'somersault', 'carousel', 'afterglow', 'puppy', 'pet', 'eye_roll', 'grimace', 'wink', 'curious')
 VARIANTS = ('crossed', 'opposite', 'wiggle', 'cheeky', 'goofy', 'squishy', 'fish', 'peekaboo')
 TOOL_NAME = 'perform_avatar'
+SHORT_SPIN = re.compile(r'(?:(?:jetzt|nochmal|noch mal|eine?|einmal|mal|bitte)\s+)*(?:drehung|umdrehung|drehen|rotieren)(?:,?\s*bitte)?[.!?]*', re.I)
 
 def explicit_spin(text):
     """Conservative direct-command fallback, never matches quotes or conditions.
@@ -22,13 +23,15 @@ def explicit_spin(text):
     if not direct:
         # Colloquial/elliptical requests often survive ASR without 'du/dich'.
         # The caller's command-intent gate still excludes statements/quotes.
-        direct=re.search(r'^(?:(?:ja|okay|also|bitte|nochmal|noch mal|jetzt|mal|robb[yi]|hey)\s*[,!:]?\s*)*(?:(?:kannst|könntest|würdest|willst)\s+du\s+)?(?:dreh(?:e|en)?|rotier(?:e|en)?|spin|rotate)\b',t)
+        direct=re.fullmatch(r'(?:(?:ja|okay|also|bitte|nochmal|noch mal|jetzt|mal|robb[yi]|hey)\s*[,!:]?\s*)*(?:(?:kannst|könntest|würdest|willst)\s+du\s+)?(?:dreh(?:e|en)?|rotier(?:e|en)?|spin|rotate)(?:\s+(?:bitte|mal|einmal|nochmal|im kreis|herum|rundherum|around|clockwise|counterclockwise|gegen den uhrzeigersinn|im uhrzeigersinn|um 360 grad))*[.!?]*',t)
         if not direct:
             direct=re.fullmatch(r'(?:(?:bitte|please|nochmal|noch mal|sich|dich)\s+)*(?:im\s+kreis|rundherum|einmal\s+herum|360\s*(?:grad|degrees|°))\s+(?:drehen|rotieren)(?:\s+bitte)?[.!?]*',t)
     if not direct:
         direct=re.search(r'\b(?:mach\w*|zeig\w*|führe?|fuehre?|vollführ\w*|vollfuehr\w*|mache?|do|make|perform)\b.{0,65}\b(?:drehung|umdrehung|rotation|360\s*(?:grad|degrees|°)|(?:full|complete)\s+(?:turn|rotation))\b',t)
     if not direct and re.search(r'\b(?:drehung|umdrehung|rotation)\b',t):
         direct=re.search(r'\b(?:(?:kannst|könntest|würdest)\s+du|ich\s+(?:möchte|moechte|will)\s*,?\s*dass\s+du)\b',t)
+    if not direct:
+        direct=SHORT_SPIN.fullmatch(t)
     if not direct:return []
     direction='counterclockwise' if re.search(r'gegen\s+den\s+uhrzeigersinn|counter[- ]?clockwise|anti[- ]?clockwise',t) else 'clockwise'
     scope='head' if re.search(r'\b(?:kopf|head)\b',t) else 'body'
@@ -109,6 +112,8 @@ def validate(raw):
         if 'scope' in item:
             if kind not in ('spin','carousel') or item['scope'] not in ('head','body'):raise ValueError('Avatar scope')
             step['scope']=item['scope']
+        elif kind=='spin':
+            step['scope']='body'
         total+=duration;last_sentence=sentence;result.append(step)
     if total>24:raise ValueError('Avatar duration budget')
     return result

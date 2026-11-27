@@ -160,9 +160,8 @@ export class AvatarActions{
   if(!this.enabled){this.warning='Requested action is disabled. Turn on Allow expressive actions.';return false;}
   this.warning=matchMedia('(prefers-reduced-motion: reduce)').matches&&safe.some(s=>['spin','carousel','somersault'].includes(s.kind))?'Rotation suppressed by your browser’s reduced-motion preference.':'';
   this.clear();
-  // Start at DAC playback, never after an arbitrary 4 s preparation timeout.
-  // A slow provider or TTS retry must not finish the stunt before speech starts.
-  if(waitForAudio){this.pendingRequest={id,steps:safe,replyIds:new Set()};return true;}
+  // Prefer the matching audio clock; a stalled or muted reply still gets its visual.
+  if(waitForAudio){this.pendingRequest={id,steps:safe,replyIds:new Set(),deadline:now+4000};return true;}
   return this.play(safe,'requested',now);
  }
  bindRequested(replyId,actionId){if(this.pendingRequest&&this.pendingRequest.id===actionId)this.pendingRequest.replyIds.add(replyId);}
@@ -190,8 +189,9 @@ export class AvatarActions{
  frame(now,base,{position=null,busy=false,reduced=false,hidden=false,calibrating=false}={}){
   if(!this.enabled||hidden||calibrating){this.clear();return {pose:base,controls:{},motion:{},eyes:false};}
   if(busy)this.touch(now,true);
-  if(this.pendingRequest&&position&&position.sample>=0&&this.pendingRequest.replyIds.has(position.id)){
-   const pending=this.pendingRequest;this.pendingRequest=null;this.play(pending.steps,'requested',now);
+  const pending=this.pendingRequest;
+  if(pending&&(now>=pending.deadline||(position&&position.sample>=0&&pending.replyIds.has(position.id)))){
+   this.finishSpeech(now);
   }
   if(position&&this.plans.has(position.id)){
    const {steps,plan,source}=this.plans.get(position.id),seconds=position.sample/24000;

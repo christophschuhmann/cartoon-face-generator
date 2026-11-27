@@ -4,7 +4,7 @@ Only direct requests use this path. Quotes, conditions and explanations stay
 with normal conversation/tools. No motor/device commands are ever produced.
 """
 import re
-from avatar_actions import VARIANTS,explicit_spin,validate
+from avatar_actions import SHORT_SPIN,VARIANTS,explicit_spin,validate
 from performance import ALIASES
 from emotion_recipes import GERMAN
 
@@ -33,7 +33,7 @@ def interjection_only(text):
 
 def normalize_command(text):
     if not isinstance(text,str):return ""
-    return re.sub(r"^\s*(?:(?:hey|hi|hallo|hello|du)\s+)?robb(?:y|ie|i)\b[,!: ]*", "",text,flags=re.I).strip()
+    return re.sub(r"^\s*(?:(?:hey|hi|hallo|hello|du)[\s,]+)?(?:rob{1,2}(?:y|ie|i)|buddy)\b[\s,!:.-]*", "",text,flags=re.I).strip()
 
 def command_intent(text):
     if not isinstance(text,str) or not 1<=len(text)<=1200:return False
@@ -52,16 +52,20 @@ def command_intent(text):
     stunt_request=bool(re.search(r'\b(?:du\s+sollst|ich\s+(?:möchte|moechte|will)\s*[,]?\s*dass\s+du|i\s+want\s+you\s+to)\b',text,re.I)
                        and re.search(r'\b'+stunt+r'\b',text,re.I)
                        and not re.search(r'\b(?:nicht|kein\w*|never|not|don.t|no)\b',text,re.I))
-    stunt_ellipse=bool(re.fullmatch(r'(?:bitte\s+)?'+stunt+r'(?:\s+bitte)?[.!?]*',text.strip(),re.I))
+    stunt_ellipse=bool(re.fullmatch(r'(?:(?:bitte|nochmal|noch mal|einen?|einen? weiteren)\s+)*'+stunt+r'(?:\s+(?:rückwärts|vorwärts))?(?:,?\s*bitte)?[.!?]*',text.strip(),re.I))
+    stunt_imperative=bool(re.match(r'^(?:schlag(?:e)?|spring(?:e)?)\b',text,re.I) and re.search(r'\b'+stunt+r'\b',text,re.I))
     desire=bool(re.search(r'\b(?:ich\s+(?:möchte|will|würde\s+gerne)|i(?:.d|\s+would)\s+like|i\s+want)\b',text,re.I) and re.search(r'\b(?:sehen|vorführen|see|watch|show)\b',text,re.I) and re.search(r'\b(?:du|dich|dein\w*|you|your)\b',text,re.I))
-    return bool(desire or _REQUEST.search(text) or _FACE.fullmatch(text.strip(' .!?')) or ellipse or direct_emotion or stunt_request or stunt_ellipse)
+    return bool(desire or _REQUEST.search(text) or _FACE.fullmatch(text.strip(' .!?')) or ellipse or direct_emotion or stunt_request or stunt_ellipse or stunt_imperative or SHORT_SPIN.fullmatch(text))
 
 def explicit_actions(text,variant_index=0,history=()):
     text=normalize_command(text)
     if re.fullmatch(r"(?:noch\s*mal|noch\s+einmal|again|do\s+that\s+again)(?:\s+bitte)?[.!?]*",text.strip(),re.I):
         for h in reversed(history[-8:]):
             if h.get("role")=="user":
-                previous=explicit_actions(str(h.get("content","")),variant_index)
+                content=str(h.get("content",""))
+                if content.startswith("Current session speaker: ") and "\n" in content:
+                    content=content.split("\n",1)[1]
+                previous=explicit_actions(content,variant_index)
                 if previous:return previous
                 break
     if not command_intent(text):return []

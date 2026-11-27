@@ -7,6 +7,24 @@ from aiohttp import WSMsgType
 from server import RoboConversation,Conversation
 
 class AudioInputTests(unittest.IsolatedAsyncioTestCase):
+    async def test_semantic_opening_action_precedes_speech_and_is_sent_once_per_reply(self):
+        c=self.conversation();c.speaker_ext=None;c.decisions=None;c.tool_action_reply=None
+        step={'kind':'somersault','duration_s':4.8,'direction':'forward','sentence':0}
+        packet={'text':'Schau mal!','avatar_actions':[step]}
+        async def send(**changes):
+            await c._on_text(json.dumps({**packet,**changes}))
+        await send();await send(text='Schau mal! Und los!')
+        c.playback.rid+=1;await send()
+        c.playback.rid+=1;await send(avatar_event='play_vocal')
+        await send(avatar_actions=[{**step,'sentence':2}])
+        await send(avatar_action_id='already-dispatched')
+        events=[call.args[0] for call in c.ws.send_json.await_args_list]
+        self.assertEqual([e['type'] for e in events],['avatar_action','reply','reply','avatar_action','reply','reply','reply','reply'])
+        self.assertEqual(events[0]['action_id'],events[1]['avatar_action_id'])
+        self.assertEqual(events[1]['avatar_action_id'],events[2]['avatar_action_id'])
+        self.assertNotEqual(events[0]['action_id'],events[3]['action_id'])
+        self.assertTrue(events[0]['wait_for_audio'])
+
     async def test_simultaneous_stop_paths_commit_cancellation_once(self):
         c=RoboConversation.__new__(RoboConversation)
         c.speaking=True;c.halting=False;c.speaker_ext=None;c.playback=SimpleNamespace(rid=9)
