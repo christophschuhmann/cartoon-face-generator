@@ -45,6 +45,14 @@ to an authored spoken request. The runner injects the local Hey and Go audio
 fixtures through the browser microphone, checks the single dispatched action
 and measures the platform angle while streamed speech plays.
 
+On 27 November 2026, the typed compound request in the table initially
+produced three reply messages and zero action messages on the public demo.
+After the fix, the same request dispatched one ordered sequence. Chromium
+measured a 360° flip followed by a 360° turn. Separate synthetic microphone
+turns went through the browser wakeword worker, Parakeet and local Gemma.
+Both the spin and the flip overlapped streamed TTS. The six typed regression
+cases included both directions, anger and a grimace, with no browser errors.
+
 ## Rendering
 
 The existing CPU software renderer receives a shared outer transform after head

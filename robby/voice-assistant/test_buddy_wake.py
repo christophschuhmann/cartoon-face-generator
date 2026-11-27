@@ -56,6 +56,13 @@ class BuddyTests(unittest.IsolatedAsyncioTestCase):
         await b.submit(np.ones(32000,np.float32),action='stop')
         self.assertTrue(s.queue.empty());self.assertEqual(b.state,'waiting')
 
+    async def test_browser_go_proposal_with_explicit_stop_discards_the_stunt(self):
+        b,c,s=self.make('Mach bitte einen Salto. Stop, Murdy.');b.state='processing';b.browser_mode=True
+        b.capture=[np.ones(64000,np.float32)]
+        await b.submit(b.capture[0])
+        self.assertTrue(s.queue.empty());self.assertFalse(b.capture);self.assertEqual(b.state,'waiting')
+        self.assertIn('recording discarded',c.ws.send_json.await_args.args[0]['reason'])
+
     async def test_wake_preroll_and_go_asr_variations(self):
         b,c,s=self.make('Birdie. Hallo Robby. Go Murdy.');b.state='processing'
         await b.submit(np.ones(32000,np.float32))

@@ -74,6 +74,7 @@ export class BrowserBuddy {
   if(!this.enabled||m.type!=='buddy_wake')return;
   if(m.state==='recording'&&m.command_hint){this.state='recording';this.onStatus('🔴 Still recording. Heard “'+m.command_hint+'”. Please say “Go Buddy” again.','recording');}
   else if(m.state==='recording'&&m.reason?.startsWith('Could not')){this.state='recording';this.onStatus(m.reason+'; repeat Go Buddy.','recording');}
+  else if(m.state==='waiting'&&m.reason?.startsWith('Stop Buddy confirmed')){this.blocks=[];this.state='waiting';this.onStatus('Stopped. Say “Hey Buddy” to begin again.','waiting');}
   else if(m.state==='waiting'&&m.reason?.startsWith('Request submitted')){this.blocks=[];this.state='waiting';this.onStatus('Request transcribed. Say “Hey Buddy” for another request.','waiting');}
  }
 }

@@ -57,7 +57,14 @@ async def main():
    await page.click('#call');await page.wait_for_function('window.testMic && robo.captureBlocks>30',timeout=30000)
    await wait(lambda:any(e['type']=='asr_settings' and e.get('selected_model')=='parakeet_ultra' for e in events),30)
    await page.wait_for_function("document.querySelector('#buddy-status')?.dataset.state==='waiting'",timeout=120000)
-   await wait(lambda:any(e['type']=='input_isolation' and e.get('paused_for_buddy') and e.get('selected')=='off' and e.get('preferred')==isolation for e in events),12)
+   def isolation_ready():
+    # With the default filter already off, its state arrives inside ready.
+    # A subsequent standalone update is only required after a change.
+    for event in reversed(events):
+     state=event if event['type']=='input_isolation' else event.get('input_isolation')
+     if state:return state.get('paused_for_buddy') and state.get('selected')=='off' and state.get('preferred')==isolation
+    return False
+   await wait(isolation_ready,12)
    assert await page.locator('#input-isolation-model').is_disabled()
    assert await page.locator('#input-isolation-model').input_value()=='off'
    assert await page.locator('#wake-mode').is_disabled()

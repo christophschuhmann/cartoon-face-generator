@@ -209,6 +209,10 @@ class BuddySession:
             else:
                 full=await ss.asr.transcribe(model,audio,word_times=self.browser_mode and action=='go')
                 text=full['text']
+            # The small browser Go head can also fire on an actual Stop Buddy.
+            # A transcribed terminal Stop discards this take before any submission.
+            if self.browser_mode and action=='go' and _STOP_END.search(text):
+                action='stop'
             suffix=_GO_END if action=='go' else _STOP_END
             confirmed_prefix=None
             if self.browser_mode and action=='go' and model!='nemotron' and not suffix.search(text):
