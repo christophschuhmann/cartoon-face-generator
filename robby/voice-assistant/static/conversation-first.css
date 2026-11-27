@@ -6,3 +6,14 @@ aside{max-width:1248px;margin-top:24px;padding-top:22px;gap:12px;grid-template-c
 @media(max-width:1000px){.latency-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.avatar{height:360px}.conversation-row{gap:18px}}
 @media(max-width:800px){header{height:58px}.stage{padding:15px 16px 0}.stage>h1{text-align:center;font-size:24px}.conversation-row{grid-template-columns:1fr;gap:8px}.avatar{height:290px}.under-avatar #subtitle{font-size:11px;margin:6px 0}.conversation-context{padding:8px 0}.conversation-context #live-conversation h2{font-size:18px}.recent-card{padding:10px 12px}.recent-copy{font-size:14px;max-height:140px}#latency-dashboard{padding:12px}.latency-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.latency-cell strong{font-size:18px}aside{grid-template-columns:1fr;margin-top:18px;padding:16px}.brand-note{display:none}}
 #memory-settings>label{display:block;margin:12px 0 6px}#memory-settings input[type=range]{width:100%}#memory-settings output{font-weight:600;margin-left:8px}#memory-settings button{margin:6px 8px 6px 0;padding:8px 12px;border:1px solid var(--line);border-radius:8px;background:#fffdf7;color:var(--ink);cursor:pointer}#memory-settings input[type=search]{width:100%;box-sizing:border-box;padding:10px;border:1px solid var(--line);border-radius:8px}#memory-entry{white-space:pre-wrap;overflow-wrap:anywhere;font-size:11px;max-height:420px;overflow:auto;background:#f0eee6;padding:12px}#memory-entries article{border-top:1px solid var(--line);padding:10px 0}#memory-entries p{margin:4px 0}
+
+#buddy-panel{box-sizing:border-box;width:100%;max-width:34rem;margin:12px auto;padding:12px 16px;background:#fbfaf6;border:1px solid var(--line);border-radius:12px;text-align:left;font-size:14px;line-height:1.45}
+#buddy-panel .buddy-toggle{font-weight:650;display:flex;gap:.55rem;align-items:center}
+#buddy-status{padding:.45rem .65rem;border-inline-start:3px solid #788b88;background:#edf2ef;margin:.55rem 0;font-weight:600}
+#buddy-status[data-state="recording"]{border-color:#ae394c;background:#fff0f2}
+#buddy-guide p{margin:.55rem 0}
+.buddy-commands{margin:.7rem 0}
+.buddy-commands>div{display:grid;grid-template-columns:minmax(6.4rem,auto) 1fr;align-items:baseline;gap:.65rem;margin:.4rem 0}
+.buddy-commands dt{font-weight:650}
+.buddy-commands dd{margin:0}
+#buddy-guide summary{cursor:pointer;text-decoration:underline}

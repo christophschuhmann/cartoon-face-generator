@@ -36,13 +36,14 @@ export class EnvironmentControls{
   }
   $('sound-prominence').oninput=()=>{$('sound-prominence-value').textContent=$('sound-prominence').value;};
   $('sound-prominence').onchange=()=>{this.prominence=Number($('sound-prominence').value);save('robby.soundProminence',this.prominence);this.configure();};
-  this.status.textContent=this.auto?'Starts listening for “Hey Robby” when the server and browser permissions are ready.':'Automatic start is off.';
+  this.status.textContent=this.auto?'Starts listening for “Hey Buddy” when the server and browser permissions are ready.':'Automatic start is off. Use Start talking or re-enable automatic start.';
  }
  configure(){this.client.send('environment:'+JSON.stringify({enabled:this.enabled,voices:this.voices,impressions:this.impressions,events:this.events,prominence_db:this.prominence}));}
  poll(ready){this.ready=ready;if(ready&&this.auto&&!this.attempted)void this.start();}
+ showMicrophoneMode(){this.status.textContent='Microphone active. '+(document.getElementById('buddy-mode')?.checked?'Say “Hey Buddy”; wait for the recording indicator, then say “Go Buddy” to send.':document.getElementById('wake-mode')?.checked===false?'Speak normally.':'Say “Hey Robby” to begin.')+' Turn Robby off to stop listening and playback.';}
  async start(){
   if(!this.ready)return;this.attempted=true;this.enable.hidden=true;this.status.textContent='Starting microphone & sound…';
-  try{await this.client.start(true);this.status.textContent='Microphone active. '+(document.getElementById('wake-mode')?.checked===false?'Speak normally.':'Say “Hey Robby” to begin.')+' Turn Robby off to stop listening and playback.';}
+  try{await this.client.start(true);this.showMicrophoneMode();}
   catch(e){this.status.textContent='Browser permission needed: '+e.message;this.enable.hidden=false;}
  }
  off(){

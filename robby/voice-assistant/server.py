@@ -34,6 +34,7 @@ log=logging.getLogger('robo')
 _signature=hashlib.sha256()
 for _name in ('tool_capabilities.py','verification_settings.py','web_lookup.py','static/verification-controls.js','static/system-guide.js','input_isolation_wake.py','input_isolation_union.py','input_isolation.py','input_isolation_process.py','input_isolation_worker.py','input_isolation_models.py','static/input-isolation-controls.js','server.py','lfm3_jobs.py','lfm3_worker.py','lfm3_audio_output.py','lfm3_timeline.py','lfm3_context.py','lfm3_omni.py','lfm3_service.py','static/lfm3-lab.js','wake_mode.py','social_profiles.py','voice_caption_worker.py','visual_identity.py','static/social-profiles.js','static/multimodal-ui.js','addressed_speech.py','sound_events.py','sound_event_worker.py','bootstrap_sound_events.py','ambient_audio.py','environment_session.py','sound_caption_worker.py','bootstrap_sound_caption.py','static/environment-controls.js','llm_backends.py','llm_session.py','credential_store.py','conversation_focus.py','sentence_session.py','sentence_decisions.py','speaker_management.py','live_decisions.py','laya_policy.py','stop_commands.py','voice_captioning.py','quick_reaction.py','informed_bridge.py','live_speech.py','speech_retry.py','two_stage_pipeline.py','knowledge_memory.py','memory_session.py','static/memory-controls.js','interaction_policy.py','conversation_prompt.py','knowledge_tools.py','conversation_director.py','asr_choice.py','asr_catalog.py','speech_language.py','pause_vad.py','emotion_recipes.py','avatar_commands.py','avatar_actions.py','bolt_text.py','bolt_director.py','conversation_tasks.py','bolt_pipeline.py','tts_bridge.py','static/client.js','static/live-overview.js','static/ui.js','static/avatar-actions.js'):
     _signature.update(_name.encode());_signature.update((ROOT/_name).read_bytes())
+_signature.update(b'buddy_wake.py');_signature.update((ROOT/'buddy_wake.py').read_bytes())
 STATE={'ready':False,'error':None,'phase':'Starting Nemotron / TYGER','ears':None,'source_sha256':_signature.hexdigest()}
 
 
@@ -136,6 +137,9 @@ class RoboConversation(Conversation):
             self._speaker_barge_sensitivity(False)
         from input_isolation import InputIsolation
         self.input_isolation=InputIsolation(self)
+        from buddy_wake import BuddySession
+        self.buddy=BuddySession(self) if self.sentence_stream else None
+        self.input_isolation.buddy_mode=bool(self.buddy and self.buddy.enabled)
 
     def _speaker_barge_sensitivity(self,enabled):
         # The frozen GRU is unchanged. With full acoustic confirmation we can
@@ -150,7 +154,7 @@ class RoboConversation(Conversation):
             'verification_settings':getattr(self,'verification_settings',__import__('verification_settings').DEFAULTS),'llm_settings':self.llm.settings(),'quick_replies_enabled':self.quick_replies,'environment':self.environment.state(),
             'interaction':self.decisions.state(),'input_isolation':self.input_isolation.state(),
             'visual_identity':self.visual.state(),
-            'sentence_stream':self.sentence_stream is not None,
+            'sentence_stream':self.sentence_stream is not None,'buddy_mode':bool(self.buddy and self.buddy.enabled),
             'asr_settings':self.sentence_stream.settings() if self.sentence_stream else None,
             'speaker_instruction':('Say Hey Robby or Hi Robbie, then speak. The same voice can continue for ten seconds after playback.' if self.sentence_stream.wake.enabled else 'Speak normally. All audible speakers can join; unknown voices receive session labels and can introduce themselves.') if self.sentence_stream else 'Say: Hey Robbie, I am Christoph. Only enrolled voices keep their turn open.'}
 
@@ -241,6 +245,7 @@ class RoboConversation(Conversation):
         try:await super().run()
         finally:
             self.llm.credential=None
+            if self.buddy:await self.buddy.close()
             typed_task=getattr(self,'typed_turn_task',None)
             if typed_task:
                 typed_task.cancel();await asyncio.gather(typed_task,return_exceptions=True)
@@ -428,6 +433,21 @@ class RoboConversation(Conversation):
                     ref[:length]=self.playback.audio[at:at+length]
                 self.cal_mic.append(pcm);self.cal_ref.append(ref)
         if msg.type==WSMsgType.BINARY:
+            if self.buddy and self.buddy.enabled:
+                block=mic_block(msg.data)
+                if block is not None:
+                    pcm=block[2];self.input_samples+=len(pcm);self.input_blocks+=1
+                    # Keep the shared sample clock moving without sending any
+                    # standby/recording frames through TYGER or ASR.
+                    self.mic_pos=self.hop_pos=self.input_samples
+                    await self.buddy.receive(pcm)
+                    now=time.monotonic()
+                    if now-self.last_input_notice>.5:
+                        self.last_input_notice=now
+                        await self.ws.send_json({'type':'input_status','blocks':self.input_blocks,
+                            'seconds':round(self.input_samples/16000,2),
+                            'rms_dbfs':round(20*np.log10(max(1e-7,float(np.sqrt(np.mean(pcm**2))))),1)})
+                return
             await self.input_isolation.receive(msg.data)
             return
         await super()._on_browser(msg)
@@ -454,6 +474,12 @@ class RoboConversation(Conversation):
         await super()._on_browser(WSMessage(WSMsgType.BINARY,data,None))
 
     async def _on_command(self,data):
+        if data in ('buddy:on','buddy:off') and self.buddy:
+            enabled=data.endswith(':on')
+            await self.input_isolation.set_buddy_mode(enabled)
+            await self.buddy.configure(enabled);return
+        if data in ('buddy:browser:ready','buddy:browser:begin','buddy:browser:go','buddy:browser:stop','buddy:browser:cancel') and self.buddy:
+            await self.buddy.browser_command(data.rsplit(':',1)[-1]);return
         if data=='retry:speech':
             if self.speaking or self.halting:
                 await self.ws.send_json({'type':'busy','text':'Wait until playback ends, then retry the remaining speech.'})

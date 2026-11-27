@@ -2,8 +2,8 @@
 export class LLMControls{
  constructor(client){
   this.client=client;this.model=document.getElementById('llm-model');this.provider=document.getElementById('llm-provider');this.status=document.getElementById('llm-status');
-  this.desired={model:'local',provider:'local'};this.current=null;this.connected=false;this.hasSaved=false;
-  try{const saved=JSON.parse(localStorage.getItem('robby.llmSelection'));if(saved&&['qwen','local','gemma12'].includes(saved.model)){this.desired=saved;this.hasSaved=true;}if(!localStorage.getItem('robby.nebiusDefault20261116')){if(this.desired.model==='qwen'&&this.desired.provider==='cerebras/fp16'){this.desired.provider='nebius/fp4';localStorage.setItem('robby.llmSelection',JSON.stringify(this.desired));}localStorage.setItem('robby.nebiusDefault20261116','1');}}catch{}
+  this.desired={model:'gemma26',provider:'local'};this.current=null;this.connected=false;this.hasSaved=false;
+  try{const saved=JSON.parse(localStorage.getItem('robby.llmSelection'));if(saved&&['qwen','local','gemma12','gemma26'].includes(saved.model)){this.desired=saved;this.hasSaved=true;}if(!localStorage.getItem('robby.gemma26Default20261120')){this.desired={model:'gemma26',provider:'local'};this.hasSaved=true;localStorage.setItem('robby.llmSelection',JSON.stringify(this.desired));localStorage.setItem('robby.gemma26Default20261120','1');}}catch{}
   this.model.onchange=()=>{this.desired={model:this.model.value,provider:this.model.value==='qwen'?(this.catalog?.default?.model==='qwen'?this.catalog.default.provider:'nebius/fp4'):'local'};this.render();this.apply();};
   this.provider.onchange=()=>{this.desired.provider=this.provider.value;this.apply();};
   document.getElementById('llm-key-use').onclick=async()=>{
@@ -23,7 +23,7 @@ export class LLMControls{
    if(this.desired.model==='qwen'&&!this.catalog.providers.some(p=>p.id===this.desired.provider))this.desired.provider=this.catalog.default.model==='qwen'?this.catalog.default.provider:'nebius/fp4';
    this.render();if(this.connected)this.client.send('llm:select:'+JSON.stringify(this.desired));
    if(this.catalog.provider_recovery){const note=document.createElement('p');note.className='help';note.textContent='If the selected Qwen endpoint is rate-limited twice, Robby can retry the same Qwen model at another available OpenRouter endpoint. The actual provider appears in Response timing.';this.status.after(note);}
-   this.status.textContent=this.catalog.server_key_available?'The server key is configured and hidden. Choose a model and endpoint.':'OpenRouter needs a personal key or an administrator-configured server key. Local Nemotron needs no API key.';
+   this.status.textContent=this.catalog.server_key_available?'The server key is configured and hidden. Choose a model and endpoint.':'OpenRouter needs a personal key or an administrator-configured server key. Local models need no API key.';
   }catch(e){this.status.textContent=e.message;}
  }
  render(){
@@ -46,7 +46,7 @@ export class LLMControls{
   if(m.type==='llm_settings'){
    this.current={model:m.model,provider:m.provider};
    const local=m.model!=='qwen';
-   this.status.textContent=(local?(m.model==='gemma12'?'Gemma 4 12B Q4 on this GPU':'Local Nemotron on this GPU'):`Qwen 3.8 27B · ${m.provider}`)+' · '+(local?'no API key needed':m.key_mode==='personal_session'?'personal key for this connection':m.key_available?'hidden server key':'API key missing')+'. Changes apply to the next response.';
+   this.status.textContent=(local?(m.model==='gemma26'?'Gemma 4 26B-A4B Q4 on this GPU':m.model==='gemma12'?'Gemma 4 12B Q4 on this GPU':'Local Nemotron on this GPU'):`Qwen 3.8 27B · ${m.provider}`)+' · '+(local?'no API key needed':m.key_mode==='personal_session'?'personal key for this connection':m.key_available?'hidden server key':'API key missing')+'. Changes apply to the next response.';
    document.querySelector('.privacy').textContent=local?'Camera tracking stays in this browser. Speech recognition, voice matching, local LLM and TTS run on this server. No microphone recordings are saved.':'Camera tracking stays in this browser. Audio is processed on this server; conversation text is sent to OpenRouter and the selected provider. The server API key stays hidden.';
   }
  }

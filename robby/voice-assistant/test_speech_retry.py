@@ -88,6 +88,14 @@ class Recovery(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(caught.exception.code,'incomplete_verified_speech')
         self.assertEqual(len(c.bodies),1)
 
+    async def test_final_search_score_can_confirm_last_word_without_another_pcm_chunk(self):
+        done={**DONE,'live_stream':{'verification_mode':'candidate_search','candidate_selection_only':True,
+              'start_verified':True,'end_verified':False},
+              'performance':{'final_search_score':{'complete':True}}}
+        c=Client([[PCM,done]])
+        out=[e async for e in speech_events(c,{},AsyncMock())]
+        self.assertEqual(out[-1]['event'],'result');self.assertEqual(len(c.bodies),1)
+
     async def test_last_unheard_retry_changes_to_candidate_search(self):
         from unittest.mock import patch
         c=Client([[BAD],[BAD],[PCM,DONE]])
@@ -188,6 +196,18 @@ class Recovery(unittest.IsolatedAsyncioTestCase):
         self.assertTrue(c.bodies[1]['message'].endswith('(anger, intense) Nein! (pause) Nicht jetzt.'))
         self.assertTrue(c.bodies[2]['message'].endswith('(natural, relaxed) Nein! (pause) Nicht jetzt.'))
         self.assertEqual(recovery_prompt({**body,'model':'large'},2),body['message'])
+
+    async def test_unheard_retry_drops_only_leading_nonlexical_hesitation(self):
+        body={'model':'small_rl','input_mode':'manual','format':'structured','language':'de',
+              'message':'GENERAL: Calm.\nSCRIPT:\n(contentment, soft) Hm, das ist eine gute Frage.'}
+        c=Client([[BAD],[BAD],[PCM,DONE]])
+        _=[e async for e in speech_events(c,body,AsyncMock())]
+        self.assertIn('Hm, das',c.bodies[0]['message'])
+        self.assertNotIn('Hm,',c.bodies[1]['message'])
+        self.assertIn('das ist eine gute Frage.',c.bodies[2]['message'])
+        self.assertNotIn('Hm,',c.bodies[2]['message'])
+        body['message']=body['message'].replace('Hm,','Nein,')
+        self.assertIn('Nein,',recovery_prompt(body,2))
 
     async def test_provider_failure_only_retried_before_any_sentence(self):
         from unittest.mock import patch

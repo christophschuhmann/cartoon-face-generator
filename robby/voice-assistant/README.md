@@ -1,5 +1,27 @@
 # Robby voice chat and TYGER speaker predictor
 
+[Open the live Robby demo](https://geology-ohio-gmbh-samples.trycloudflare.com/desk-robot/).
+Allow the microphone, say **“Hey Buddy”**, and wait for the red recording indicator.
+Speak your request, then say **“Go Buddy”** to send it. **“Stop Buddy”** discards
+a recording or interrupts playback. The public Quick Tunnel address can change
+after a restart. Local installations serve the same page at `/desk-robot/`.
+
+**Buddy command mode and causal quality search:** [Wake controls](BUDDY_WAKE.md)
+and [Best-of-N streaming implementation and reward](STREAMING_BEST_OF_N.md).
+
+**2026-11-20 remote API:** An authenticated TLS gateway exposes the running
+local Gemma and Humaneness Voice models with OpenAI-compatible chat and speech
+requests. [Remote setup, streaming formats and limits](REMOTE_OPENAI_API.md).
+
+**2026-11-20 live stop phrases:** Explicit recognized stop commands can stop
+speech without a speaker-embedding or semantic-model wait. This trades speaker
+ownership protection for responsiveness. [Details and tests](INSTANT_STOP_PHRASES.md).
+
+**2026-11-20 local Gemma 4 26B-A4B:** Robby's default language model is the
+local QAT Q4 model on GPU 1; Qwen remains selectable. ASR, speaker recognition
+and TTS run on GPU 0. The text-only service, pinned model, measured timings,
+restart instructions and limitations are documented in [GEMMA26_LOCAL.md](GEMMA26_LOCAL.md).
+
 **2026-11-14 causal candidate streaming:** Optional batched Best-of-3 for Small
 RL selects a continuation every 960 ms using ASR word accuracy and progress,
 then copies the winning autoregressive and codec state. It reuses selection

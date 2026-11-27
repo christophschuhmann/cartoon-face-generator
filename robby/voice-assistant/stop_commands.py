@@ -2,6 +2,33 @@
 import re
 from speaker_turns import words
 
+# Small, explicit ASR spellings. Avoid fuzzy matching ordinary names or words.
+ROBBY_NAMES=frozenset(('robby','robbie','robbi','robi','robie','roby','robb','rabi','rabbi','robo','robot','robbey','hobby','hoppy','wobby','wobbly'))
+INSTANT_WORDS=frozenset(('stop','stopp','halt','halte','leise','still','quiet','silence','pause','warte','wait'))
+
+def is_instant_stop(text):
+    """Recognize explicit short controls in live ASR, without an LLM call.
+
+    Phrases can occur in a longer partial, but common quoted, negated and
+    definition contexts are excluded. An early partial can still be revised.
+    """
+    # The recognizer sometimes renders the same spoken word in Cyrillic.
+    aliases={'стоп':'stop','стопп':'stop','робби':'robby','роби':'robi'}
+    tokens=[aliases.get(w,w) for w in words(text)]
+    value=' '.join(tokens)
+    if not tokens:return False
+    if re.search(r'\b(?:nicht|kein|keine|do not|dont|don t|never)\s+(?:stop|stopp|halt|leise|quiet|robby|robbie)\b',value):return False
+    if re.search(r'\b(?:stop|stopp|halt|leise|quiet)\s+(?:nicht|not)\b',value):return False
+    if re.match(r'^(?:was (?:heißt|bedeutet|ist)|what (?:does|is)|erkläre|erklaere|erzähl|erzaehl|sage?|say|das wort|the word)\b',value):return False
+    if is_stop_command(value):return True
+    for i,(a,b) in enumerate(zip(tokens,tokens[1:])):
+        if ((a in ('stop','stopp') and b in ('stop','stopp')) or
+            (a in ROBBY_NAMES and b in INSTANT_WORDS) or
+            (a in INSTANT_WORDS and b in ROBBY_NAMES)):
+            if i+2<len(tokens) and tokens[i+2] in ('nicht','not'):continue
+            return True
+    return False
+
 def has_stop_cue(text):
     """Admission to a semantic check, NOT permission to stop playback.
 

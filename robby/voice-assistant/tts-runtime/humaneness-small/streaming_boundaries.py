@@ -11,6 +11,7 @@ import unicodedata
 import numpy as np
 from metrics import tokens
 from functools import lru_cache
+from robby_speech_numbers import canonical_german_number
 
 RATE = 48000
 
@@ -32,7 +33,7 @@ _NUMBERS = dict(zip('zero one two three four five six seven eight nine ten eleve
 _NUMBERS.update(zip('null eins zwei drei vier fünf sechs sieben acht neun zehn elf zwölf'.split(),map(str,range(13))))
 
 def boundary_tokens(text):
-    return [_NUMBERS.get(part,part) for word in tokens(text)
+    return [_NUMBERS.get(part,canonical_german_number(part)) for word in tokens(text)
             for part in _EXPAND.get(word,word).split()]
 
 
@@ -134,6 +135,14 @@ class SpeechBoundaryGate:
                         and len(self.words[at+1:at+3])==2
                         and self.words[at+1:at+3]==heard[at+1:at+3]
                         and expected not in {'keinen','niemanden','ohne','nein','nicht','nichts'})
+                    # Weak indefinite-article endings are hard for ASR to
+                    # distinguish. Require three exact surrounding words;
+                    # never cover negations, missing words, or a final word.
+                    article=(variants==0 and {expected,actual}=={'ein','einen'} and at>=2
+                        and self.words[at-2:at]==heard[at-2:at]
+                        and at+1<len(self.words) and at+1<len(heard)
+                        and self.words[at+1]==heard[at+1])
+                    variant=variant or article
                     if not variant:break
                     variants+=1
                 prefix+=1

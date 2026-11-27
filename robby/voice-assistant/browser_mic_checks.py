@@ -1,4 +1,4 @@
-"""Real browser capture/worklet/WebSocket/ASR/Luna/TTS with public synthetic speech.
+"""Real browser capture/worklet/WebSocket/ASR/LLM/TTS with public synthetic speech.
 
 No physical microphone or private recording is used. Unlike a typed-message
 smoke test, this exercises getUserMedia and the browser's 48-kHz -> 16-kHz path.
@@ -29,7 +29,7 @@ async def run(args):
                 for filtered in (False,True):
                     context=await browser.new_context(viewport={'width':1280,'height':900})
                     page=await context.new_page();errors=[];events=[];identities=[]
-                    await page.add_init_script("localStorage.setItem('robby.cameraAuto','false')")
+                    await page.add_init_script("localStorage.setItem('robby.cameraAutoVersion','3');localStorage.setItem('robby.cameraAuto','false');localStorage.setItem('robby.autoStartDefaultVersion','1');localStorage.setItem('robby.autoStart','false')")
                     page.on('pageerror',lambda e:errors.append(str(e)))
                     def frame(payload):
                         if isinstance(payload,str):
@@ -46,6 +46,15 @@ async def run(args):
                         # Reproduce the reported upgrade from a typed-capable
                         # connection, including a suspended existing context.
                         await page.evaluate('async()=>{await window.robo.start(false);await window.robo.ctx.suspend();}')
+                        if filtered and await page.locator('#identity-gate').is_disabled():
+                            # Sentence mode uses ECAPA voice labels and wake/focus
+                            # settings rather than the legacy enrolled-only gate.
+                            results.append({'requested_filter':True,'skipped':True,'reason':'Legacy identity gate is unavailable in sentence mode'})
+                            payload={'synthetic_only':True,'url':args.url,'results':results,'passed':all(r.get('passed') or r.get('skipped') for r in results)}
+                            for target in ('browser-capture-checks.json',f'browser-capture-{suffix}.json'):
+                                (ROOT/'logs'/target).write_text(json.dumps(payload,indent=2))
+                            print(json.dumps(results[-1]),flush=True)
+                            continue
                         await page.click('#call' if filtered else '#unfiltered-talk')
                         deadline=time.monotonic()+90
                         while time.monotonic()<deadline:
@@ -60,7 +69,6 @@ async def run(args):
                             mobile_no_overflow:document.documentElement.scrollWidth<=innerWidth})''')
                         report.update(requested_filter=filtered,events=events,page_errors=errors)
                         if await page.evaluate('document.body.dataset.robotView==="desk3d"'):
-                            await page.wait_for_function('document.querySelector("#acting-status").textContent.includes("Luna SCRIPT")',timeout=15000)
                             report['desk_robot_playback']=await page.evaluate('({expression:robotFace.rig.snapshot().expression,plans:robotFace.timeline.plans.size,cue:document.querySelector("#acting-status").textContent})')
                         results.append(report)
                         (ROOT/'logs/browser-capture-checks.json').write_text(json.dumps({'synthetic_only':True,'results':results},indent=2))
@@ -106,7 +114,7 @@ async def run(args):
                             assert await page.evaluate('window.robo.ctx.state==="running"&&window.robo.stream.getAudioTracks()[0].readyState==="live"')
                             report['speaker_ui_checks']=checked
                         report['passed']=True
-                        payload={'synthetic_only':True,'url':args.url,'results':results,'passed':len(results)==2 and all(r.get('passed') for r in results)}
+                        payload={'synthetic_only':True,'url':args.url,'results':results,'passed':all(r.get('passed') or r.get('skipped') for r in results)}
                         (ROOT/'logs/browser-capture-checks.json').write_text(json.dumps(payload,indent=2))
                         suffix='desk' if '/desk-robot' in args.url else 'original'
                         (ROOT/'logs'/f'browser-capture-{suffix}.json').write_text(json.dumps(payload,indent=2))
@@ -116,7 +124,7 @@ async def run(args):
                         await page.evaluate('window.robo?.stop()');await context.close()
                         await asyncio.sleep(1)
             finally:await browser.close()
-    print('Both actual browser voice-input modes passed.',flush=True)
+    print('Supported browser voice-input modes passed; skipped modes are reported above.',flush=True)
 
 if __name__=='__main__':
     p=argparse.ArgumentParser();p.add_argument('--url',default='https://diane-asylum-understood-invoice.trycloudflare.com/')

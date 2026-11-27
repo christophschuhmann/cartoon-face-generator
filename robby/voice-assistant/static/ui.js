@@ -1,6 +1,7 @@
 import {attachSystemGuide} from './system-guide.js';
 import {VerificationControls} from './verification-controls.js';
-import {RoboClient} from './client.js';
+import {RoboClient} from './client.js?v=buddy-admit-1';
+import {BrowserBuddy} from './buddy-browser.js?v=buddy-admit-1';
 import {createRobbyRig,controlsFromFace} from './rig.js';
 import {profiles,pose,mix,ActingTimeline} from './emotions.js';
 import {GazeTracker} from './gaze.js';
@@ -10,11 +11,11 @@ import {AvatarActions} from './avatar-actions.js';
 import {attachActionControls} from './avatar-action-controls.js';
 import {attachPetting} from './avatar-petting.js';
 import {ASRControls} from './asr-controls.js';
-import {InputIsolationControls} from './input-isolation-controls.js';
+import {InputIsolationControls} from './input-isolation-controls.js?v=buddy-admit-1';
 import {LLMControls} from './llm-controls.js';
 import {LiveOverview} from './live-overview.js';
 import {MemoryControls} from './memory-controls.js';
-import {EnvironmentControls} from './environment-controls.js';
+import {EnvironmentControls} from './environment-controls.js?v=buddy-admit-1';
 import {SocialProfiles} from './social-profiles.js';
 const $=id=>document.getElementById(id);
 let socialProfiles=null;
@@ -26,6 +27,7 @@ let inputIsolationControls=null;
 let llmControls=null;
 let memoryControls=null;
 let environmentControls=null;
+let buddyBrowser=null;
 const overview=new LiveOverview();
 let petting=null,optionalAvatarReply=false,optionalEnvironmentReply=false,avatarCancelPending=false,lastPetSpeech=-Infinity,lastPetInvite=-Infinity,lastPlaySpeech=-Infinity,petInvites=0,invitedQuiet=false,lastIdleEvent=null,pendingPlayFallback=null;
 const personalityStarted=performance.now();
@@ -49,6 +51,7 @@ try{if(localStorage.getItem('robby.openVoiceBalanceVersion')!=='4'){if(desiredOp
 let desiredFocus=false;try{if(localStorage.getItem('robby.speakerModeVersion')!=='3'){localStorage.setItem('robby.conversationFocus','false');localStorage.setItem('robby.speakerModeVersion','3');}desiredFocus=localStorage.getItem('robby.conversationFocus')==='true';}catch{}
 let desiredBackgroundFilter=true;try{desiredBackgroundFilter=localStorage.getItem('robby.backgroundSpeechFilter')!=='false';}catch{}
 let desiredWake=true;try{desiredWake=localStorage.getItem('robby.wakeMode')!=='false';}catch{}
+let desiredBuddy=true;try{if(localStorage.getItem('robby.browserBuddyVersion')!=='1'){localStorage.setItem('robby.buddyMode','true');localStorage.setItem('robby.autoStart','true');localStorage.setItem('robby.browserBuddyVersion','1');}desiredBuddy=localStorage.getItem('robby.buddyMode')!=='false';}catch{}
 let wakeStatusTimer=null;
 let desiredFocusThreshold=savedThreshold('robby.focusThreshold',.28,.20,.65);
 try{if(localStorage.getItem('robby.focusBalanceVersion')!=='2'){if(Math.abs(desiredFocusThreshold-.32)<.001)desiredFocusThreshold=.28;saveThreshold('robby.focusThreshold',desiredFocusThreshold);localStorage.setItem('robby.focusBalanceVersion','2');}}catch{}
@@ -109,13 +112,15 @@ function showInteraction(m){
   d?.action==='interrupt_user'?`Rule triggered · decision ${d.decision_ms} ms. Microphone remains active.`:'Agreed rules armed · listening continuously.';
 }
 const client=window.robo=new RoboClient({
+ localMic(x){return buddyBrowser?.audio(x)||false;},
  connection(on){connected=on;if(!on&&$('retry-speech'))$('retry-speech').hidden=true;if(on)verificationControls?.send();if(!on){llmControls?.disconnected();if($('conversation-focus-status'))$('conversation-focus-status').textContent='Waiting for the first conversation partner.';avatarActions.clear();petting?.reset();optionalAvatarReply=optionalEnvironmentReply=avatarCancelPending=false;replyPending=false;mic=false;gate.checked=desiredGate;identityModel.value='v4-long3';timeout.value=900;$('speaker-chips').replaceChildren();$('call').textContent='◉ Start talking';$('call').classList.remove('active');phase(ready?'Ready when you are':'Connecting…','ready');}},
- microphone(on){mic=on;micStarted=on?performance.now():0;lastCapture=lastServerAudio=0;serverAudioSeconds=0;$('mic-level').value=0;$('mic-status').textContent=on?'Microphone started. Waiting for audio frames…':'Microphone off. Click Start talking and allow microphone access.';$('call').textContent=on?'■ End conversation':'◉ Start talking';$('call').classList.toggle('active',on);phase(on?'Listening to you':'Ready when you are',on?'ready':'');},
- input(s){lastCapture=performance.now();if(s.rms>.003&&(!sentenceMode||performance.now()<foregroundInputUntil)){avatarActions.touch();cancelOptionalAvatar('acoustic_activity');} $('mic-level').value=Math.min(1,(s.rms||0)*12);$('mic-status').textContent=s.state==='ended'?'The microphone was disconnected. Start talking again.':`${s.rms>.001?'Audio detected':'Microphone active · quiet input'} · ${s.sent} packets sent · ${serverAudioSeconds.toFixed(1)} s received by server.`;},
+ microphone(on){mic=on;micStarted=on?performance.now():0;lastCapture=lastServerAudio=0;serverAudioSeconds=0;$('mic-level').value=0;$('mic-status').textContent=on?'Microphone started. Waiting for audio frames…':'Microphone off. Click Start talking and allow microphone access.';$('call').textContent=on?'■ End conversation':'◉ Start talking';$('call').classList.toggle('active',on);if(buddyBrowser?.enabled){if(!on)buddyBrowser.reset();buddyBrowser.onStatus(on?(buddyBrowser.ready?'Listening locally: say “Hey Buddy”.':'Loading local wakeword models…'):'Microphone off. Click Start talking and allow microphone and sound.',on&&buddyBrowser.ready?'waiting':'off');}phase(on?'Listening to you':'Ready when you are',on?'ready':'');},
+ input(s){lastCapture=performance.now();if(s.rms>.003&&(!sentenceMode||performance.now()<foregroundInputUntil)){avatarActions.touch();cancelOptionalAvatar('acoustic_activity');} $('mic-level').value=Math.min(1,(s.rms||0)*12);$('mic-status').textContent=s.state==='ended'?'The microphone was disconnected. Start talking again.':desiredBuddy?`${s.rms>.001?'Audio detected':'Microphone active · quiet input'} · wakewords processed locally in your browser.`:`${s.rms>.001?'Audio detected':'Microphone active · quiet input'} · ${s.sent} packets sent · ${serverAudioSeconds.toFixed(1)} s received by server.`;},
  playing(on){speaking=on;if(!on)overview.playbackEnded();phase(on?'Robby is speaking':mic?'Listening to you':'Ready when you are',on?'speaking':'ready');},
  audio(m){overview.audio(m);},
  sync(r){$('sync-status').textContent=`Audio sync: ${r.method} · output ${Math.round(r.output_ms)} ms · input ${r.input_ms===null?'unknown':Math.round(r.input_ms)+' ms'}${r.uncertain?' · device estimate incomplete':''}. No fixed playback offset.`;},
  message(m){
+  if(desiredBuddy&&['asr_preview','partial'].includes(m.type))return;
   // Compatibility guard for an older server/history echo. The actual server
   // also removes this obsolete note before sentence framing and synthesis.
   if(m.type==='reply'&&typeof m.text==='string')m={...m,text:m.text.replace(/\[My preceding reply was interrupted\.[^\]]*(?:\]|$)/gi,'').trim()};
@@ -143,13 +148,14 @@ const client=window.robo=new RoboClient({
   if(m.type==='avatar_gesture'&&!speaking&&!replyPending)avatarActions.listen(m.kind);
   if(m.type==='reply'&&!avatarActions.hasRequested(m.avatar_action_id))avatarActions.set(m.reply_id,m.avatar_actions,m.performance,m.avatar_event?'optional':'reply');
   multimodal?.message(m);
-  if(m.type==='ready'){client.send('identity:background-filter:'+(desiredBackgroundFilter?'on':'off'));sendRecentIdle();multimodal?.ready();client.send('interaction:gestures:'+(avatarActions.enabled&&avatarActions.listeningEnabled?'on':'off'));client.send('interaction:stop-feedback:'+(desiredStopFeedback?'on':'off'));}
+  if(m.type==='ready'){client.send('buddy:'+(desiredBuddy?'on':'off'));buddyBrowser?.sync();client.send('identity:background-filter:'+(desiredBackgroundFilter?'on':'off'));sendRecentIdle();multimodal?.ready();client.send('interaction:gestures:'+(avatarActions.enabled&&avatarActions.listeningEnabled?'on':'off'));client.send('interaction:stop-feedback:'+(desiredStopFeedback?'on':'off'));}
+  if(m.type==='buddy_wake'&&desiredBuddy)buddyBrowser?.message(m);
   if(m.type==='ready'&&m.sentence_stream)setSentenceMode(true);
-  if(m.type==='asr_settings'){$('speech-pause-status').textContent=`Wait for ${m.speech_pause_ms} ms without speech before sending · background sounds are ignored.`;if(m.wake_mode){const w=$('wake-mode-status');clearTimeout(wakeStatusTimer);if(w){w.textContent=!m.wake_mode.enabled?'Open conversation: no wake phrase required.':m.wake_mode.active?'Listening to the current speaker. The window renews when Robby finishes speaking.':'Say “Hey Robby”, then speak. The same speaker can continue for 10 seconds.';if(m.wake_mode.enabled&&m.wake_mode.active)wakeStatusTimer=setTimeout(()=>{if(desiredWake&&!speaking)w.textContent='Say “Hey Robby” to begin a new turn.';},Math.max(0,m.wake_mode.remaining_s*1000));}}}
+  if(m.type==='asr_settings'){$('speech-pause-status').textContent=`Wait for ${m.speech_pause_ms} ms without speech before sending · background sounds are ignored.`;if(m.wake_mode&&!desiredBuddy){const w=$('wake-mode-status');clearTimeout(wakeStatusTimer);if(w){w.textContent=!m.wake_mode.enabled?'Open conversation: no wake phrase required.':m.wake_mode.active?'Listening to the current speaker. The window renews when Robby finishes speaking.':'Say “Hey Robby”, then speak. The same speaker can continue for 10 seconds.';if(m.wake_mode.enabled&&m.wake_mode.active)wakeStatusTimer=setTimeout(()=>{if(!desiredBuddy&&desiredWake&&!speaking)w.textContent='Say “Hey Robby” to begin a new turn.';},Math.max(0,m.wake_mode.remaining_s*1000));}}}
   if(m.type==='speech_activity'){$('speech-pause-status').textContent=m.speech?'Speech detected · collecting your words.':m.pending?`Speech pause · ${Math.min(m.quiet_ms,2000)} / ${m.speech_pause_ms} ms`:'Listening · background sounds do not reset the speech timer.';}
   if(m.type==='stop_feedback_setting')$('stop-feedback').checked=!!m.enabled;
   if(m.type==='stop_feedback')$('asr-status').textContent='Stop accepted. A brief acknowledgment follows; you can interrupt it too.';
-  if(m.type==='ready'){phase(mic?(desiredWake?'Say Hey Robby to begin':'Listening to you'):'Ready when you are','ready');if(m.identity_mode)identityModel.value=m.identity_mode;if(m.identity_enabled!==desiredGate)client.send('identity:'+(desiredGate?'on':'off'));applySpeakerSettings();gate.checked=desiredGate;$('asr-status').textContent=desiredWake?'Say “Hey Robby” to begin; the same voice can continue for 10 seconds.':'Open conversation: speak normally after a speech pause.';}
+  if(m.type==='ready'){phase(mic?(desiredBuddy?'Say Hey Buddy to begin':desiredWake?'Say Hey Robby to begin':'Listening to you'):'Ready when you are','ready');if(m.identity_mode)identityModel.value=m.identity_mode;if(m.identity_enabled!==desiredGate)client.send('identity:'+(desiredGate?'on':'off'));applySpeakerSettings();gate.checked=desiredGate;$('asr-status').textContent=desiredBuddy?'Say “Hey Buddy”, speak, then say “Go Buddy” to send.':desiredWake?'Say “Hey Robby” to begin; the same voice can continue for 10 seconds.':'Open conversation: speak normally after a speech pause.';}
   if(m.type==='ready'&&m.interaction){showInteraction(m.interaction);if(m.interaction.enabled!==desiredProactive)client.send('interaction:'+(desiredProactive?'on':'off'));client.send('interaction:helpful:'+(desiredHelpful?'on':'off'));}
   if(m.type==='interaction')showInteraction(m);
   if(m.type==='input_status'){lastServerAudio=performance.now();serverAudioSeconds=m.seconds;}
@@ -179,7 +185,7 @@ const client=window.robo=new RoboClient({
    $('identity-status').textContent=`Speaker cue: ${p.name||p.kind||'waiting'}${p.similarity==null?'':' · cosine '+p.similarity.toFixed(2)}. Enrolled: ${(m.users||[]).join(', ')||'none — say Hey Robbie, I’m …'}. ${m.enabled?'Filter ON · '+(m.diarization_active?'Nemotron diarization + V4 · ':'embedding-only · ')+'submit after ~1 s without this speaker.':'Filter off: original TYGER endpointing.'} RAM only; not authentication.`;
   }
   if(m.type==='warning'){$('identity-status').textContent=m.text;$('asr-status').textContent=m.text;}
-  if(m.type==='identity'&&m.sentence_mode){setSentenceMode(true);const f=m.conversation_focus;focusStatus.textContent=desiredWake?'Hey Robby mode controls who can speak; another person can say “Hey Robby” to take a turn.':m.handover_pending?'Ready for the next person. Speak a complete sentence now; no introduction is required.':f?.enabled?`Conversation partner: ${f.name||'waiting for the first voice'} · match threshold ${Number(f.threshold).toFixed(2)} · focus expires after 3 minutes of inactivity.`:'Focus disabled: intelligible foreground voices can join.';$('identity-status').textContent=`Session speakers: ${(m.speakers||[]).map(s=>s.name+' · '+s.voice_variants+' voice reference(s)').join(', ')||'none yet'}. Names are optional; say “I am also Christoph” to link a voice variant.`;}
+  if(m.type==='identity'&&m.sentence_mode){setSentenceMode(true);const f=m.conversation_focus;focusStatus.textContent=desiredBuddy?'Buddy accepts explicitly sent requests. Speaker recognition can label the speaker.':desiredWake?'Hey Robby mode controls who can speak; another person can say “Hey Robby” to take a turn.':m.handover_pending?'Ready for the next person. Speak a complete sentence now; no introduction is required.':f?.enabled?`Conversation partner: ${f.name||'waiting for the first voice'} · match threshold ${Number(f.threshold).toFixed(2)} · focus expires after 3 minutes of inactivity.`:'Focus disabled: intelligible foreground voices can join.';$('identity-status').textContent=`Session speakers: ${(m.speakers||[]).map(s=>s.name+' · '+s.voice_variants+' voice reference(s)').join(', ')||'none yet'}. Names are optional; say “I am also Christoph” to link a voice variant.`;}
   if(m.type==='speaker_focus'){focusStatus.textContent=(m.accepted?'Current partner confirmed':'Background or uncertain voice ignored')+(m.similarity==null?'':` · voice cosine ${m.similarity.toFixed(2)}`)+'.';}
   if(m.type==='speaker_permission'){focusStatus.textContent=m.action==='invite'?(m.waiting_for_next_voice?`${m.name||'Your guest'} can speak next. The current person remains in the conversation.`:`${m.name||'Your guest'} is included in this conversation.`):'Background voices stay outside this conversation. Robby will not keep asking about them.';}
   if(m.type==='busy'){$('subtitle').textContent=m.text;}
@@ -222,10 +228,10 @@ for(const id of ['avatar-play-intensity','avatar-cuddle-intensity'])$(id).addEve
 document.addEventListener('visibilitychange',()=>{if(document.hidden)cancelOptionalAvatar();});
 for(const id of ['avatar-actions-enabled','avatar-listening-enabled'])$(id).addEventListener('change',()=>client.send('interaction:gestures:'+(avatarActions.enabled&&avatarActions.listeningEnabled?'on':'off')));
 $('call').onclick=async()=>{try{if(mic)environmentControls?environmentControls.off():client.stop();else await client.start(true);}catch(e){$('subtitle').textContent=e.message;phase('Microphone unavailable — try typing');}};
-$('unfiltered-talk').onclick=async()=>{await inputIsolationControls.choose('off');desiredGate=false;try{const wake=$('wake-mode');if(wake?.checked){wake.checked=false;wake.onchange();}await client.start(true);client.send('identity:off');if(sentenceMode){desiredFocus=false;focusToggle.checked=false;saveThreshold('robby.conversationFocus',false);client.send('identity:focus:enabled:off');}gate.checked=false;$('asr-status').textContent='Speaker filter OFF. Speak normally; background voices may also be transcribed.';phase('Listening to you','ready');}catch(e){$('mic-status').textContent='Microphone unavailable: '+e.message;}};
+$('unfiltered-talk').onclick=async()=>{await inputIsolationControls.choose('off');desiredGate=false;try{const buddy=$('buddy-mode');if(buddy?.checked){buddy.checked=false;buddy.onchange();}const wake=$('wake-mode');if(wake?.checked){wake.checked=false;wake.onchange();}await client.start(true);client.send('identity:off');if(sentenceMode){desiredFocus=false;focusToggle.checked=false;saveThreshold('robby.conversationFocus',false);client.send('identity:focus:enabled:off');}gate.checked=false;$('asr-status').textContent='Speaker filter OFF. Speak normally; background voices may also be transcribed.';phase('Listening to you','ready');}catch(e){$('mic-status').textContent='Microphone unavailable: '+e.message;}};
 setInterval(()=>{if(!mic)return;const now=performance.now();if(now-micStarted<2500)return;
  if(!lastCapture||now-lastCapture>2500)$('mic-status').textContent=`No audio frames from the microphone (${client.ctx?.state||'no audio context'}). Check browser permission/input device, then End conversation and Start talking.`;
- else if(!lastServerAudio||now-lastServerAudio>4000)$('mic-status').textContent='Microphone captures audio, but the server has not acknowledged recent packets. Reconnect the conversation.';
+ else if(!desiredBuddy&&(!lastServerAudio||now-lastServerAudio>4000))$('mic-status').textContent='Microphone captures audio, but the server has not acknowledged recent packets. Reconnect the conversation.';
 },1000);
 $('interrupt').onclick=()=>{avatarActions.clear();timeline.clear();client.stopAudio();client.send('interrupt');};
 $('allow-proactive').onchange=()=>{desiredProactive=$('allow-proactive').checked;client.send('interaction:'+(desiredProactive?'on':'off'));if(!connected)$('interaction-status').textContent=desiredProactive?'Enabled for your next conversation. Agree a rule with Robby first.':'Paused for your next conversation. You can still interrupt Robby.';};
@@ -233,7 +239,7 @@ $('allow-helpful').checked=desiredHelpful;$('allow-helpful').onchange=()=>{desir
 $('clear-interaction-rules').onclick=()=>{client.send('interaction:clear');if(!connected){$('interaction-rules').replaceChildren();$('interaction-status').textContent='Rules are session-only. No active conversation.';}};
 const calibrate=document.createElement('button');calibrate.className='text-button';calibrate.textContent='Calibrate acoustic echo';calibrate.onclick=async()=>{try{await client.start(true);client.clock.acousticLatency=0;client.send('calibrate');$('sync-status').textContent='Listening for a short, quiet calibration tone…';}catch(e){$('sync-status').textContent=e.message;}};$('sync-status').after(calibrate);
 const stopLabel=document.createElement('label'),stopFeedback=document.createElement('input');stopFeedback.type='checkbox';stopFeedback.id='stop-feedback';stopFeedback.checked=desiredStopFeedback;stopLabel.append(stopFeedback,' Brief spoken acknowledgment after I stop Robby (otherwise stay silent)');$('allow-helpful').parentElement.after(stopLabel);
-const stopHelp=document.createElement('p');stopHelp.textContent='Keep your microphone on. Say “Stopp”, “Hör bitte auf” or “Warte bitte” while Robby speaks. The current speaker is checked continuously, independently of proactive-interruption settings. Wait/quiet commands always stay silent. Acknowledgments yield to continuing speech.';stopLabel.after(stopHelp);
+const stopHelp=document.createElement('p');stopHelp.textContent='Keep your microphone on. Explicit phrases such as “Stopp Robby”, “Robby halt” or “Robbie quiet” stop speech as soon as ASR recognizes them, without waiting for speaker verification or a language model. A background voice or playback echo may therefore also trigger a stop. ASR itself can take time. These direct stops stay silent; other interruption paths keep their existing checks.';stopLabel.after(stopHelp);
 stopFeedback.onchange=()=>{desiredStopFeedback=stopFeedback.checked;saveThreshold('robby.stopFeedback',desiredStopFeedback);client.send('interaction:stop-feedback:'+(desiredStopFeedback?'on':'off'));};
 async function submit(text){if(!ready)return;lastPersonalityUser=performance.now();avatarActions.touch();invitedQuiet=false;try{
  overview.typed(text);
@@ -288,7 +294,7 @@ const resetThresholds=document.createElement('button');resetThresholds.className
 utteranceStrictness.oninput=()=>utteranceValue.value=(+utteranceStrictness.value).toFixed(2);utteranceStrictness.onchange=()=>{if(sentenceMode){desiredOpenVoiceThreshold=+utteranceStrictness.value;saveThreshold('robby.openVoiceThreshold',desiredOpenVoiceThreshold);client.send('identity:utterance_threshold:'+desiredOpenVoiceThreshold);}else{desiredUtteranceThreshold=+utteranceStrictness.value;saveThreshold('robby.voiceThreshold',desiredUtteranceThreshold);client.send('identity:utterance_threshold:'+desiredUtteranceThreshold);}};
 const advanced=document.createElement('details');advanced.className='speaker-advanced';advanced.innerHTML='<summary>Advanced · fast speaker cue</summary>';timeoutLabel.after(advanced);
 const strictLabel=document.createElement('label');strictLabel.textContent='Fast cue strictness ';const strictness=document.createElement('input');strictness.id='speaker-strictness';strictness.type='range';strictness.min=.1;strictness.max=.95;strictness.step=.01;strictness.value=desiredFastThreshold??.62;const strictValue=document.createElement('output');strictValue.value=Number(strictness.value).toFixed(2);strictness.oninput=()=>strictValue.value=(+strictness.value).toFixed(2);strictness.onchange=()=>{desiredFastThreshold=+strictness.value;saveThreshold('robby.fastThreshold',desiredFastThreshold);client.send('identity:threshold:'+desiredFastThreshold);};strictLabel.append(strictValue,strictness);advanced.append(strictLabel);
-const advancedHelp=document.createElement('p');advancedHelp.textContent='Only lower this if the fast cue keeps losing you. Full-sentence ECAPA, overlap, word-origin and playback-echo checks remain active. Voice interruptions additionally verify the current addressee against other users and Robby; short stop commands need both fast and teacher evidence.';advanced.append(advancedHelp);
+const advancedHelp=document.createElement('p');advancedHelp.textContent='Only lower this if the fast cue keeps losing you. Full-sentence ECAPA, overlap, word-origin and playback-echo checks remain active. General interruptions verify the current addressee; explicit recognized stop phrases bypass speaker verification for speed.';advanced.append(advancedHelp);
 resetThresholds.onclick=()=>{desiredUtteranceThreshold=DEFAULT_VOICE_THRESHOLD;desiredFastThreshold=null;try{localStorage.removeItem('robby.voiceThreshold');localStorage.removeItem('robby.fastThreshold');}catch{}utteranceStrictness.value=DEFAULT_VOICE_THRESHOLD;utteranceValue.value=DEFAULT_VOICE_THRESHOLD.toFixed(2);strictness.value=.62;strictValue.value='0.62';applySpeakerSettings();client.send('identity:threshold:0.619811549782753');};
 const forget=document.createElement('button');forget.className='text-button';forget.textContent='Forget enrolled users';forget.onclick=()=>client.send('identity:clear');timeoutLabel.after(forget);
 const studyLink=document.createElement('a');studyLink.href='/speaker-study/';studyLink.target='_blank';studyLink.rel='noopener';studyLink.textContent='Speaker predictor study ↗';$('identity-status').after(studyLink);
@@ -390,8 +396,24 @@ attachSystemGuide();
 environmentControls=new EnvironmentControls(client);window.robotFace.environmentControls=environmentControls;environmentControls.poll(ready);
 const wakePanel=document.createElement('section');wakePanel.className='wake-controls';wakePanel.innerHTML='<label><input type="checkbox" id="wake-mode"> Hey Robby mode · only the addressed speaker</label><p id="wake-mode-status" role="status"></p>';
 document.querySelector('.under-avatar').append(wakePanel);const wakeBox=$('wake-mode');wakeBox.checked=desiredWake;
-wakeBox.onchange=()=>{desiredWake=wakeBox.checked;saveThreshold('robby.wakeMode',desiredWake);client.send('wake:'+(desiredWake?'on':'off'));$('open-speakers').disabled=desiredWake;$('wake-mode-status').textContent=desiredWake?'Say “Hey Robby”, then speak. The same speaker can continue for 10 seconds.':'Open conversation: no wake phrase required.';};
-$('open-speakers').disabled=desiredWake;$('wake-mode-status').textContent=desiredWake?'Say “Hey Robby”, then speak. The same speaker can continue for 10 seconds.':'Open conversation: no wake phrase required.';
+const buddyPanel=$('buddy-panel'),buddyBox=$('buddy-mode');
+document.querySelector('.call-controls').after(buddyPanel);
+buddyBox.checked=desiredBuddy;
+buddyBrowser=new BrowserBuddy(client,(text,state)=>{const el=$('buddy-status');if(state==='waiting'&&!mic){text='Wakeword models ready. Click Start talking and allow microphone and sound.';state='off';}el.textContent=text;el.dataset.state=state;});
+window.buddyWakeDiagnostics=()=>buddyBrowser.history.slice();
+buddyBrowser.setEnabled(desiredBuddy);
+buddyBox.onchange=()=>{desiredBuddy=buddyBox.checked;renderWakeMode();try{localStorage.setItem('robby.buddyMode',String(desiredBuddy));}catch{}client.send('buddy:'+(desiredBuddy?'on':'off'));buddyBrowser.setEnabled(desiredBuddy);if(desiredBuddy){$('asr-preview').textContent='Buddy mode: ASR starts after Go Buddy.';const recent=$('recent-asr');if(recent)recent.textContent='Buddy mode: ASR starts after Go Buddy.';void client.start(true).catch(e=>{$('buddy-status').textContent='Allow microphone and sound: '+e.message;});}else $('buddy-status').textContent='Buddy mode off. Normal voice recognition is active.';};
+if(desiredBuddy){$('asr-preview').textContent='Buddy mode: ASR starts after Go Buddy.';const recent=$('recent-asr');if(recent)recent.textContent='Buddy mode: ASR starts after Go Buddy.';}
+function renderWakeMode(){
+ $('buddy-guide').hidden=!desiredBuddy;
+ clearTimeout(wakeStatusTimer);wakeBox.disabled=desiredBuddy;wakeBox.checked=desiredWake&&!desiredBuddy;
+ inputIsolationControls.setBuddyMode(desiredBuddy);
+ $('open-speakers').disabled=desiredWake;
+ $('wake-mode-status').textContent=desiredBuddy?'Paused while Buddy wakewords are on.':desiredWake?'Say “Hey Robby”, then speak. The same speaker can continue for 10 seconds.':'Open conversation: no wake phrase required.';
+ if(mic)environmentControls.showMicrophoneMode();
+}
+wakeBox.onchange=()=>{desiredWake=wakeBox.checked;saveThreshold('robby.wakeMode',desiredWake);client.send('wake:'+(desiredWake?'on':'off'));renderWakeMode();};
+renderWakeMode();
 const soundSwitch=$('environment-enabled').parentElement;wakePanel.append(soundSwitch);
 memoryControls=new MemoryControls(client);window.robotFace.memoryControls=memoryControls;
 $('mirror').onchange=()=>{try{localStorage.setItem('robby.followPosition',String($('mirror').checked));}catch{}if($('mirror').checked){rig.center?.();void startCamera();}};

@@ -78,6 +78,9 @@ export class RoboClient {
    }this.mic(e.data.t,x);};this.on.microphone?.(true);
  }
  mic(t,x){
+  // When Buddy mode is active the browser owns the wakeword gate. No
+  // standby or ongoing recording audio is sent until its explicit Go event.
+  if(this.on.localMic?.(x))return;
   if(this.ws?.readyState!==1)return;
   // Map video performance timestamps onto the same received-sample timeline.
   // Input-device latency is independent of the agent playback/echo clock.

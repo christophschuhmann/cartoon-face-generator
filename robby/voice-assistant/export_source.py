@@ -13,7 +13,7 @@ def main():
     files += [ROOT/name for name in ['README.md','STUNTS_AND_EMOTIONS.md','RTX3090_OPTIMIZATIONS.md','WAKE_MODE.md','SOCIAL_IDENTITY.md','PROACTIVE_ENVIRONMENT.md','RESTORE_BEFORE_PROACTIVE.md','restore-before-proactive-2026-10-27.json','TWO_STAGE_SPEECH.md','QUICK_REACTIONS.md','PERSISTENT_MEMORY.md','LFM3_LAB.md','STEM_LAB.md','minicpm-linux-fnocache.patch','VOICE_CAPTIONS.md','BRIDGE_PHRASES_PLAN.md','VOICE_ASSISTANT_TEST_PROTOCOL.md','voice_assistant_test_matrix.json','LICENSE','NOTICE','requirements.txt','requirements-asr.txt','config.example.json','.gitignore']]
     files.append(ROOT/'static/VOICE_ASSISTANT_TEST_PROTOCOL.md')
     files += [ROOT/name for name in (
-        'LATENCY_DIAGNOSIS_2026-11-16.md','WHOLE_BODY_STUNTS.md','PARALLEL_TTS_VERIFICATION.md','TOOLS_AND_LATENCY_GUIDE.md','ASR_CANDIDATE_STREAMING.md','SPEECH_RECOVERY.md',
+        'BUDDY_WAKE.md','STREAMING_BEST_OF_N.md','REMOTE_OPENAI_API.md','INSTANT_STOP_PHRASES.md','GEMMA26_LOCAL.md','LATENCY_DIAGNOSIS_2026-11-16.md','WHOLE_BODY_STUNTS.md','PARALLEL_TTS_VERIFICATION.md','TOOLS_AND_LATENCY_GUIDE.md','ASR_CANDIDATE_STREAMING.md','SPEECH_RECOVERY.md',
         'INPUT_ISOLATION_REVIEW.md','INPUT_ISOLATION_GPU.md','INPUT_ISOLATION_UI.md',
         'ISOLATION_AUTO_ENROLLMENT.md','ISOLATION_LATENCY.md','PHOTON_ASR.md',
         'TURN_RELIABILITY.md','GPU_LAYOUT_2026-11-09.md','VOICE_ATTRIBUTE_DISPLAY_NOTES.md',
@@ -53,6 +53,7 @@ def main():
         files+=list((ROOT/'static').glob(prefix+'*.json'))
     # Reviewed synthetic experiment implementations and original prompt only.
     files += [ROOT/'experiments/quick-reaction-v1.json']
+    files += [ROOT/'experiments/tts_boundary_reliability.py']
     files += list((ROOT/'experiments').glob('quick-reaction-candidate[1-7].py'))
     files+=list((ROOT/'ci').glob('*.yml'))
     for pattern in ['*.py','*.md']:files+=list((ROOT/'speaker_v2').glob(pattern))

@@ -183,7 +183,7 @@ class ModelChoice(BaseModel):
 
 def candidate_batch_size(body):
     from acting_models import MODELS
-    if body.generation=='search_asr':return body.search_n
+    if body.generation in ('search_asr','search_quality'):return body.search_n
     return (min(body.n,MODELS[body.model]['max_batch_size'])
             if body.generation in ('best','all') else body.batch_size)
 
@@ -667,7 +667,7 @@ class Turn(BaseModel):
     format: Literal["structured", "caption", "tags", "transcript"] = settings.DEFAULT_FORMAT
     language: Literal["en", "de", "auto"] = "auto"
     input_mode: Literal["chat", "perform", "manual"] = "chat"
-    generation: Literal["single", "best", "all", "search_winner", "search_beam", "search_asr"] = settings.DEFAULT_GENERATION
+    generation: Literal["single", "best", "all", "search_winner", "search_beam", "search_asr", "search_quality"] = settings.DEFAULT_GENERATION
     search_n: int = Field(default=4, ge=1, le=16)
     reward_mode: Literal['clap','adaptive_auto','adaptive_manual'] = 'clap'
     ranking: RankingOptions = Field(default_factory=RankingOptions)
@@ -712,9 +712,9 @@ class Turn(BaseModel):
 
     @model_validator(mode='after')
     def validate_reward(self):
-        if self.live_only and (self.generation not in ('single','search_asr') or not self.streaming or self.stream_transport!='pcm_f32'):
+        if self.live_only and (self.generation not in ('single','search_asr','search_quality') or not self.streaming or self.stream_transport!='pcm_f32'):
             raise ValueError('live_only requires single/search_asr streaming PCM')
-        if self.generation=='search_asr' and (not self.live_only or self.voice_conversion or self.model!='small_rl' or self.search_n not in (1,3,4)):
+        if self.generation in ('search_asr','search_quality') and (not self.live_only or self.voice_conversion or self.model!='small_rl' or self.search_n not in (1,3,4)):
             raise ValueError('ASR candidate search requires Small RL, live-only PCM, N=1/3/4 and no voice conversion')
         from acting_models import MODELS
         release=MODELS[self.model]
@@ -801,7 +801,7 @@ async def turn(body: Turn, request: Request):
                 STATE['engine'].batch_size=effective_batch
             await queue.put({'event':'model','model_id':body.model,
                 'checkpoint':getattr(STATE['engine'],'checkpoint_info',None),'batch_size':effective_batch,
-                'requested_batch_size':body.batch_size,'parallel_candidates':body.generation in ('best','all','search_asr')})
+                'requested_batch_size':body.batch_size,'parallel_candidates':body.generation in ('best','all','search_asr','search_quality')})
             await clear_speaker_steering(STATE['engine'], 'request_start')
             await queue.put({"event": "status", "phase": "Acting directions" if body.input_mode != "manual" else "Preparing prompt"})
             if body.input_mode == "manual":
@@ -963,10 +963,13 @@ async def turn(body: Turn, request: Request):
             live_detail=None
             live_event='search_chunk' if body.generation.startswith('search_') else 'audio_chunk'
             converted_chunks=[]
-            if body.generation=='search_asr':
+            if body.generation in ('search_asr','search_quality'):
                 from beam_search import ChunkSearch
                 from asr_chunk_search import ASRSearchScorer, SearchCommitter
-                scorer=ASRSearchScorer(STATE['scorers'].asr,cancellation.check)
+                if body.generation=='search_quality':
+                    from quality_chunk_search import QualitySearchScorer
+                    scorer=await asyncio.to_thread(QualitySearchScorer,STATE['scorers'],spec,reference.path if reference else None,cancellation.check)
+                else:scorer=ASRSearchScorer(STATE['scorers'].asr,cancellation.check)
                 def emit_selected(wave,detail):
                     cancellation.check()
                     loop.call_soon_threadsafe(queue.put_nowait,{'event':'audio_chunk','_wave':wave,
@@ -976,13 +979,16 @@ async def turn(body: Turn, request: Request):
                 committer=SearchCommitter(emit_selected,cancellation.check,trim=body.align)
                 # Keep the warmed single-stream banks alongside new batch shapes.
                 if STATE['engine'].fast.semantic:STATE['engine'].fast.semantic.limit=max(4,STATE['engine'].fast.semantic.limit)
-                wave,search_performance=await asyncio.to_thread(ChunkSearch(STATE['engine'],scorer).generate,
-                    spec,n=body.search_n,beam_width=1,chunk_frames=body.search_chunk_frames,
-                    max_seconds=body.search_seconds,guidance=body.guidance,temperature=body.temperature,
-                    seed=body.seed,reference_path=reference.path if reference else None,
-                    on_commit=committer.feed,check_cancel=cancellation.check,semantic_graph=True,codec_graph=True)
+                try:
+                    wave,search_performance=await asyncio.to_thread(ChunkSearch(STATE['engine'],scorer).generate,
+                        spec,n=body.search_n,beam_width=1,chunk_frames=body.search_chunk_frames,
+                        max_seconds=body.search_seconds,guidance=body.guidance,temperature=body.temperature,
+                        seed=body.seed,reference_path=reference.path if reference else None,
+                        on_commit=committer.feed,check_cancel=cancellation.check,semantic_graph=True,codec_graph=True)
+                finally:
+                    if hasattr(scorer,'close'):scorer.close()
                 committer.finish()
-                search_performance.update(mode='asr_candidate_search',quality_models=False,
+                search_performance.update(mode=body.generation,quality_models=body.generation=='search_quality',
                     includes='reference packing, batched TTS, codec, ASR candidate ranking and winner-state cloning; no second ASR pass',
                     live_alignment=committer.report)
                 await queue.put({'event':'result','candidates':[],'winner':0,'live_only':True,

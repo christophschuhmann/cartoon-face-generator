@@ -10,7 +10,7 @@ MODELS=[{'id':'small_rl','label':'Humaneness Small · 1.1 Alpha RL'},
 
 def snapshot(bridge):
     return {'models':MODELS,'selected':bridge.tts_model,'loading':bridge.tts_loading,
-            'error':bridge.tts_error,'switch_seconds':getattr(bridge,'tts_switch_seconds',None)}
+            'error':bridge.tts_error,'failed_model':getattr(bridge,'tts_failed_model',None),'switch_seconds':getattr(bridge,'tts_switch_seconds',None)}
 
 
 async def status(request):
@@ -24,7 +24,7 @@ async def select(request):
     if choice not in {m['id'] for m in MODELS}:raise web.HTTPBadRequest(text='Unknown TTS model')
     if bridge.active or bridge.tts_loading:raise web.HTTPConflict(text='Wait for the current reply or model swap.')
     if choice==bridge.tts_model and not bridge.tts_error:return await status(request)
-    bridge.tts_loading=choice;bridge.tts_error=None;bridge.tts_ready.clear()
+    bridge.tts_loading=choice;bridge.tts_error=None;bridge.tts_failed_model=None;bridge.tts_ready.clear()
     async def swap():
         started=time.perf_counter()
         try:
@@ -34,8 +34,17 @@ async def select(request):
             bridge.tts_model=choice
             bridge.ack=None  # Do not replay an acknowledgment from the previous checkpoint.
             bridge.tts_switch_seconds=round(time.perf_counter()-started,2)
+        except httpx.HTTPStatusError as exc:
+            bridge.tts_failed_model=choice
+            detail=f'The voice service returned HTTP {exc.response.status_code}.'
+            if exc.response.status_code==409:
+                try: reason=exc.response.json().get('detail')
+                except (AttributeError,ValueError): reason=None
+                if isinstance(reason,str) and reason: detail=reason[:240]
+            bridge.tts_error=detail
         except Exception as exc:
-            bridge.tts_error='Model switch failed: '+type(exc).__name__+'. Retry or select Small.'
+            bridge.tts_failed_model=choice
+            bridge.tts_error='Voice switch could not finish ('+type(exc).__name__+').'
         finally:bridge.tts_loading=None;bridge.tts_ready.set()
     task=asyncio.create_task(swap());request.app['tasks'].append(task)
     return web.json_response(snapshot(bridge),status=202)

@@ -1,7 +1,7 @@
 // Optional microphone preprocessing. Selection persists; voice audio never does.
 export class InputIsolationControls {
  constructor(client) {
-  this.client=client;this.select=document.getElementById('input-isolation-model');
+  this.client=client;this.buddy=false;this.select=document.getElementById('input-isolation-model');
   this.status=document.getElementById('input-isolation-status');this.last=null;
   this.desired='off';try {const v=localStorage.getItem('robby.inputIsolation');if(['off','voxlock','scicom'].includes(v))this.desired=v;}catch{}
   this.select.value=this.desired;
@@ -14,6 +14,15 @@ export class InputIsolationControls {
   document.getElementById('input-isolation-clear').onclick=async()=>{
    try {await client.start(false);client.send('isolation:'+JSON.stringify({action:'clear'}));}catch(e){this.status.textContent=e.message;}
   };
+ }
+ setBuddyMode(enabled){
+  this.buddy=enabled;
+  this.select.disabled=enabled;
+  this.select.value=enabled?'off':this.desired;
+  document.getElementById('input-isolation-learn').disabled=enabled;
+  if(enabled)this.status.textContent='OFF in Buddy mode. Go Buddy sends the original microphone recording. Your normal-mode filter is saved.';
+  else if(this.last&&!this.last.paused_for_buddy)this.message(this.last);
+  else this.status.textContent='Normal microphone mode · '+this.desired;
  }
  async choose(model) {
   this.desired=model;this.select.value=model;
@@ -28,13 +37,14 @@ export class InputIsolationControls {
    socket?.addEventListener('close',()=>{
     if(this.client.ws && this.client.ws!==socket)return;
     this.last=null;this.status.textContent='DISCONNECTED · filter released. Your voice reference is cleared; the selected option applies on reconnect.';
-    document.getElementById('input-isolation-learn').disabled=false;
+    document.getElementById('input-isolation-learn').disabled=this.buddy;
    },{once:true});
    if(m.input_isolation)this.message(m.input_isolation);
-   if(this.desired!==(m.input_isolation?.selected||'off'))this.client.send('isolation:'+JSON.stringify({model:this.desired}));
+   if(this.desired!==(m.input_isolation?.preferred||'off'))this.client.send('isolation:'+JSON.stringify({model:this.desired}));
   }
   if(m.type!=='input_isolation')return;
   this.last=m;
+  if(this.buddy){this.setBuddyMode(true);return;}
   const mode=m.active?`ACTIVE · ${m.selected==='voxlock'?'VoxLock':'Scicom Agent'} · CUDA ${m.gpu} · 40-ms chunks`:
    m.phase==='off'?'OFF · original microphone':`${m.phase.replaceAll('_',' ').toUpperCase()} · original microphone`;
   const ref=m.reference_s?` · reference ${m.reference_s.toFixed(1)} s (${m.reference_name||'current voice'})`:'';

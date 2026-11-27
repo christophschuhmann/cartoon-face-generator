@@ -70,12 +70,17 @@ class Sentence:
     language:str|None=None
     def spec(self):
         template=select_template(self.direction)
-        script=f'({self.direction}) {self.text}'
+        language=self.language or ('de' if re.search(r'\b(ich|du|wir|ist|das|die|und|ein|eine|nicht|bitte)\b',self.text,re.I) else 'en')
+        # Expand unambiguous German cardinals and the common z. B. abbreviation
+        # only in the TTS script. The original displayed answer stays intact.
+        from robby_speech_numbers import normalize_spoken_german
+        spoken=normalize_spoken_german(self.text) if language=='de' else self.text
+        script=f'({self.direction}) {spoken}'
         return {'text':self.text,'script':script,'general':template['general'],
                 'manual_prompt':'GENERAL: '+template['general']+'\nSCRIPT:\n'+script,
                 'template_id':template['id'],'template_score':template['score'],
                 'separator_before':self.separator_before,
-                'language':self.language or ('de' if re.search(r'\b(ich|du|wir|ist|das|die|und|ein|eine|nicht|bitte)\b',self.text,re.I) else 'en')}
+                'language':language}
 
 class SentenceFramer:
     """Stream sentences, verse lines and bounded phrases without losing text.

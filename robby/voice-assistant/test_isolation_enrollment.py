@@ -14,6 +14,23 @@ class Enrollment(unittest.IsolatedAsyncioTestCase):
         for _ in range(round(seconds*25)):await self.f.receive(packet(np.full(640,2000)))
     def remember(self,sid,a,b,text):
         self.f.remember({'speaker_id':sid,'display_name':sid,'enrolled':True},a,b,text)
+    async def test_buddy_releases_and_restores_normal_filter(self):
+        self.c.input_samples=16000
+        await self.f.configure('voxlock')
+        await until(lambda:self.f.worker_loaded)
+        old=self.f.worker
+        await self.f.set_buddy_mode(True)
+        self.assertEqual(self.f.selected,'off');self.assertIsNone(self.f.worker)
+        self.assertEqual(self.f.preferred,'voxlock')
+        await self.f.configure('scicom')
+        await self.f.relearn(manual=True)
+        self.assertIsNone(self.f.capture);self.assertFalse(self.f.worker_loaded)
+        self.c.input_samples+=48000
+        await self.f.set_buddy_mode(False)
+        await until(lambda:self.f.worker_loaded)
+        self.assertEqual(self.f.selected,'scicom');self.assertIsNot(self.f.worker,old)
+        self.assertEqual(self.f.raw_samples,64000)
+
     async def test_short_wake_accumulates_only_same_voice_and_nonoverlapping_audio(self):
         await self.feed(8)
         self.remember('A',0,2,'Hey Robbie');self.remember('B',2,4,'Hallo Robby')

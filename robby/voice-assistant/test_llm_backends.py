@@ -9,11 +9,11 @@ from llm_backends import config,request_body,catalog,metrics,selection
 def test_key():return 'sk-or-v1-'+'unit-test-private-'*4
 
 class VaultTests(unittest.TestCase):
-    def test_qwen_default_uses_nebius_and_remains_explicitly_pinned(self):
+    def test_qwen_nebius_remains_explicitly_pinned(self):
         with tempfile.TemporaryDirectory() as tmp:
             vault=CredentialStore(tmp);vault.store_owner(test_key())
             with patch('llm_backends.store',return_value=vault):
-                cfg=config()
+                cfg=config({'model':'qwen','provider':'nebius/fp4'})
                 self.assertEqual(cfg['selection'],{'model':'qwen','provider':'nebius/fp4'})
                 self.assertEqual(request_body(cfg,{})['provider'],{'only':['nebius/fp4'],'allow_fallbacks':False})
 
@@ -44,6 +44,9 @@ class VaultTests(unittest.TestCase):
         with patch('llm_backends.store',side_effect=AssertionError('No cloud key in local mode')):
             cfg=config({'model':'local','provider':'local'})
             gemma=config({'model':'gemma12','provider':'local'})
+            gemma26=config()
+            self.assertEqual(gemma26['selection'],{'model':'gemma26','provider':'local'})
+            self.assertEqual(gemma26['url'],'http://127.0.0.1:18826/v1/chat/completions')
         self.assertEqual(cfg['headers'],{});self.assertFalse(cfg['remote'])
         self.assertEqual(gemma['url'],'http://127.0.0.1:18812/v1/chat/completions')
         self.assertEqual(gemma['model'],'gemma-4-12b-q4');self.assertFalse(gemma['remote'])

@@ -46,6 +46,7 @@ class TaggedAudio:
 class InputIsolation:
     def __init__(self,conversation,worker_factory=GPUWorker):
         self.c=conversation;self.factory=worker_factory;self.worker=None
+        self.preferred='off';self.buddy_mode=False
         self.selected='off';self.phase='off';self.reason='Original microphone audio'
         self.reference=None;self.reference_speaker=None;self.reference_name=None
         self.ring=deque();self.raw_samples=0;self.pending=TaggedAudio();self.partial=np.zeros(0,np.float32)
@@ -61,7 +62,7 @@ class InputIsolation:
         self.wake_recovery=RawWakeRecovery(self)
 
     def state(self):
-        return {'type':'input_isolation','selected':self.selected,'phase':self.phase,'reason':self.reason,
+        return {'type':'input_isolation','selected':self.selected,'preferred':self.preferred,'paused_for_buddy':self.buddy_mode,'phase':self.phase,'reason':self.reason,
             'active':self.phase=='active','chunk_ms':40,'gpu':self.gpu,'cuda_graphs':True,
             'reference_s':round(len(self.reference)/SR,2) if self.reference is not None else 0,
             'reference_name':self.reference_name,'capture_s':round(self.capture_size/SR,1),
@@ -104,7 +105,22 @@ class InputIsolation:
 
     async def configure(self,model):
         if model not in MODELS:raise ValueError('Choose off, voxlock or scicom')
+        self.preferred=model
+        await self._apply_selection()
+
+    async def set_buddy_mode(self,enabled):
+        if enabled==self.buddy_mode:return
+        self.buddy_mode=enabled
+        self.wake_recovery.reset()
+        await self._apply_selection()
+        # Buddy uploads bypass these rings. Start a new continuous interval
+        # at the common input clock when the normal microphone path resumes.
+        self.ring.clear();self.output_ring.clear()
+        self.raw_samples=self.output_samples=self.c.input_samples
+
+    async def _apply_selection(self):
         async with self.lock:
+            model='off' if self.buddy_mode else self.preferred
             if model==self.selected and self.phase in ('off','loading','waiting_reference','preparing_reference','active'):
                 await self.notice(True);return
             self.epoch+=1;epoch=self.epoch
@@ -258,6 +274,8 @@ class InputIsolation:
         await self.notice(True)
 
     async def relearn(self,manual=False):
+        if manual and self.buddy_mode:
+            await self.notice(True);return
         async with self.lock:
             self.epoch+=1
             await self._drain()
