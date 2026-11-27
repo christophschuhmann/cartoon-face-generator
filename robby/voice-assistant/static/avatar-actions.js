@@ -138,6 +138,11 @@ export function sampleAction(s,progress,base=pose(),reduced=false,settings={}){
  blend*=intensity;
  return {pose:mix(base,target,blend),controls,motion,eyes:eyes&&intensity>0,weight:blend,kind:s.kind,progress:p};
 }
+function motionWarning(steps){
+ const suppress=globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+ return suppress&&steps.some(s=>['spin','carousel','somersault'].includes(s.kind))
+  ? 'Rotation suppressed by your browser’s reduced-motion preference.' : '';
+}
 export class AvatarActions{
  constructor(){this.enabled=true;this.idleEnabled=true;this.playVoiceEnabled=true;this.pettingEnabled=true;this.petSpeechEnabled=true;this.petInvitesEnabled=true;this.listeningEnabled=true;this.queue=[];this.plans=new Map();this.started=new Set();this.idleDelayMs=20000;this.lastIdleEnd=-Infinity;this.lastActivity=performance.now();this.nextIdle=this.lastActivity+this.idleDelayMs;this.lastListening=-Infinity;this.active=null;this.idleIndex=0;this.onIdle=null;}
  setIdleDelay(seconds){if(!Number.isFinite(seconds))return false;
@@ -158,7 +163,7 @@ export class AvatarActions{
   this.requestIds??=new Set();this.requestIds.add(id);
   while(this.requestIds.size>32)this.requestIds.delete(this.requestIds.values().next().value);
   if(!this.enabled){this.warning='Requested action is disabled. Turn on Allow expressive actions.';return false;}
-  this.warning=matchMedia('(prefers-reduced-motion: reduce)').matches&&safe.some(s=>['spin','carousel','somersault'].includes(s.kind))?'Rotation suppressed by your browser’s reduced-motion preference.':'';
+  this.warning=motionWarning(safe);
   this.clear();
   // Prefer the matching audio clock; a stalled or muted reply still gets its visual.
   if(waitForAudio){this.pendingRequest={id,steps:safe,replyIds:new Set(),deadline:now+4000};return true;}
@@ -172,11 +177,11 @@ export class AvatarActions{
  }
  touch(now=performance.now(),keepOptional=false){this.lastActivity=now;this.nextIdle=now+this.idleDelayMs;if(this.queue[0]?.source==='idle'||(!keepOptional&&this.queue[0]?.source==='optional')){this.queue=[];this.lastIdleEnd=now;}}
  set(id,steps,plan,source='reply'){const safe=validateSteps(steps);if(!safe.length||!id)return;
-  this.warning=!this.enabled?'Requested action is disabled. Turn on Allow expressive actions.':matchMedia('(prefers-reduced-motion: reduce)').matches&&safe.some(s=>['spin','carousel','somersault'].includes(s.kind))?'Rotation suppressed by your browser’s reduced-motion preference.':'';
+  this.warning=!this.enabled?'Requested action is disabled. Turn on Allow expressive actions.':motionWarning(safe);
   this.plans.set(id,{steps:safe,plan,source});while(this.plans.size>20)this.plans.delete(this.plans.keys().next().value);}
  play(steps,source='preview',now=performance.now()){
   if(!this.enabled)return false;const safe=validateSteps(steps);if(!safe.length)return false;
-  if(source==='preview'){this.clear();this.touch(now);}
+  if(source==='preview'){this.clear();this.touch(now);this.warning=motionWarning(safe);}
   if(this.queue.length+safe.length>6)return false;
   let at=Math.max(now,this.queue.at(-1)?.end??now);
   for(const step of safe){this.queue.push({step,start:at,end:at+step.duration_s*1000,source});at+=step.duration_s*1000;}
