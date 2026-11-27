@@ -89,6 +89,15 @@ are pinned to the LiveKit revision in `download_buddy_models.py`.
 `prepare_browser_buddy.py` provisions just the browser models and ONNX
 Runtime Web 1.20.1 (MIT). The server's legacy detector has a separate setup.
 
+## Serving the microphone page over HTTPS
+
+The local route is `http://127.0.0.1:8793/desk-robot/`. To expose an already
+running Robby instance with a temporary Cloudflare tunnel, run
+`cloudflared tunnel --url http://127.0.0.1:8793`. Open the printed HTTPS
+origin with `/desk-robot/` appended. Restarting a Quick Tunnel assigns a new
+hostname. Microphone permission belongs to that hostname, so the browser may
+ask again. Use the live URL in the voice-assistant README for this deployment.
+
 ## Browser verification
 
 On 2026-11-25 Chromium ran the real compact ONNX models against synthetic
