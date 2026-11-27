@@ -23,6 +23,26 @@ included. Historical experiment scripts may need separately documented datasets.
 This is a source snapshot, not a claim that every historical experiment or
 optional model is currently deployed or reproduced from a clean machine.
 
+## Restoring speech after a reboot
+
+Check `http://127.0.0.1:8792/api/state` before a voice test. Wait for
+`"ready": true`. The web page and language model can already respond while
+the speech server is warming or has reported a startup error.
+
+If the reported error is `Burst detector heads are unavailable`, restore the
+five small VoiceCLAP scoring heads to a persistent Hugging Face cache. Run
+this in the speech environment and export the path for the speech service:
+
+```sh
+export HF_HOME="${HF_HOME:-$HOME/.cache/huggingface}"
+hf download laion/vocal-burst-detector-x2 --revision eee775ffd2056eab7ca09116195ea09e9c6180f4 --include 'commercial/vocal_burst_mlp_prod_s*.pt'
+export MOSS_BURST_DETECTOR_PATH="$HF_HOME/hub/models--laion--vocal-burst-detector-x2/snapshots/*"
+```
+
+Restart the TTS service with that environment. The restored heads share the
+existing VoiceCLAP encoder. A successful voice check includes receiving and
+playing audio after “Go Buddy”.
+
 ## Causal candidate streaming
 
 The matching `search_asr` endpoint, batched codec graph implementation, test code

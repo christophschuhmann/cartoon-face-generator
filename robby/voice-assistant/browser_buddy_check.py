@@ -57,6 +57,7 @@ async def main():
    assert await page.locator('#input-isolation-model').is_disabled()
    assert await page.locator('#input-isolation-model').input_value()=='off'
    assert await page.locator('#wake-mode').is_disabled()
+   assert await page.locator('#speech-pause-controls').is_hidden()
    assert await page.evaluate("localStorage.getItem('robby.inputIsolation')") == isolation
    out['buddy_isolation_off']=True
    await page.wait_for_timeout(1100);out['asr_in_standby']=any(e['type']=='asr_preview' for e in events)
@@ -80,6 +81,7 @@ async def main():
     await page.wait_for_function('robo.metrics.mic_blocks>0',timeout=10000)
     await wait(lambda:any(e['type']=='input_isolation' and not e.get('paused_for_buddy') and e.get('selected')==isolation for e in events),12)
     assert not await guide.is_visible()
+    assert not await page.locator('#speech-pause-controls').evaluate('(panel) => panel.hidden')
     assert await page.locator('#input-isolation-model').is_enabled()
     assert await page.locator('#input-isolation-model').input_value()==isolation
     out['normal_mode_restored']=True

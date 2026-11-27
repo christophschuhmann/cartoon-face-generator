@@ -272,7 +272,7 @@ focusRange.onchange=()=>{desiredFocusThreshold=Number(focusRange.value);saveThre
 releaseFocus.onclick=async()=>{try{await client.start(false);client.stopAudio();client.send('identity:focus:release');focusStatus.textContent='Ready for the next person. Speak a complete sentence now; no wake phrase is required.';}catch(e){focusStatus.textContent=e.message;}};
 function setSentenceMode(on){sentenceMode=on;if(!on)return;
  focusBox.hidden=false;
- $('speech-pause-controls').hidden=false;
+ $('speech-pause-controls').hidden=desiredBuddy;
  if(!identityModel.querySelector('[value="open-sentences"]'))identityModel.add(new Option('ECAPA voice profiles · open sentence streaming','open-sentences'));identityModel.value='open-sentences';
  gate.checked=false;gate.disabled=true;gateLabel.lastChild.textContent=' Voice labels use full-utterance ECAPA; conversation focus is controlled above';
  openSpeakers.checked=true;openSpeakers.disabled=true;identityModel.disabled=true;modelLabel.title='Open sentence mode uses full-utterance ECAPA reference embeddings.';
@@ -406,6 +406,7 @@ buddyBox.onchange=()=>{desiredBuddy=buddyBox.checked;renderWakeMode();try{localS
 if(desiredBuddy){$('asr-preview').textContent='Buddy mode: ASR starts after Go Buddy.';const recent=$('recent-asr');if(recent)recent.textContent='Buddy mode: ASR starts after Go Buddy.';}
 function renderWakeMode(){
  $('buddy-guide').hidden=!desiredBuddy;
+ $('speech-pause-controls').hidden=desiredBuddy||!sentenceMode;
  clearTimeout(wakeStatusTimer);wakeBox.disabled=desiredBuddy;wakeBox.checked=desiredWake&&!desiredBuddy;
  inputIsolationControls.setBuddyMode(desiredBuddy);
  $('open-speakers').disabled=desiredWake;
