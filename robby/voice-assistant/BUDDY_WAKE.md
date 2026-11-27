@@ -100,6 +100,16 @@ ask again. Use the live URL in the voice-assistant README for this deployment.
 
 ## Browser verification
 
+On November 27, 2026, a fresh Chromium session on the public HTTPS tunnel
+ran the default voice path after a host reboot. Synthetic microphone audio
+triggered Hey → request → Go. Parakeet submitted the request, local Gemma
+26B-A4B answered, and the browser scheduled the Humaneness Small audio for
+playback. The run observed zero standby microphone packets and no page errors.
+Stop discarded a separate recording. A Pixel 5 emulation also passed the
+Hey → record → Stop flow. Both used a saved VoxLock preference and confirmed
+that isolation was off in Buddy mode. The desktop test verified restoration
+of that preference when returning to ordinary voice control.
+
 On 2026-11-25 Chromium ran the real compact ONNX models against synthetic
 Hey, Go and Stop audio. On a single 160-ms advance, the incremental worker
 returned the same three scores as recomputing the complete window (maximum
