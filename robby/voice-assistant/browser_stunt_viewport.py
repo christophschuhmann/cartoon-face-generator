@@ -53,7 +53,8 @@ async def check(browser, options, url, *, deny_microphone=False):
             }, 40);
         }""")
         result = {}
-        for label, axis, direction in (TRICKS[:1] if deny_microphone else TRICKS):
+        reduced = options.get("reduced_motion") == "reduce"
+        for label, axis, direction in (TRICKS[:1] if deny_microphone or reduced else TRICKS):
             await page.select_option("#avatar-trick", label=label)
             await page.evaluate("trickSamples.length = 0")
             await page.click("#avatar-perform")
@@ -65,7 +66,13 @@ async def check(browser, options, url, *, deny_microphone=False):
             samples = await page.evaluate("trickSamples")
             degrees = max(direction * s[axis] for s in samples)
             visible = sum(s["visible"] for s in samples)
-            assert degrees > 345 and visible == len(samples), (label, degrees, visible, len(samples))
+            assert visible == len(samples), (label, visible, len(samples))
+            if reduced:
+                assert max(abs(s[axis]) for s in samples) < 1
+                notice = page.locator("#action-notice")
+                assert await notice.is_visible() and "reduced-motion" in await notice.inner_text()
+            else:
+                assert degrees > 345, (label, degrees)
             # A last rendered angle of 359.99° is already facing forward.
             await page.wait_for_function("""() => {
                 const s = robotFace.rig.snapshot();
@@ -88,6 +95,7 @@ async def main():
             for name, options in (("desktop", {"viewport": {"width": 1400, "height": 1024}}),
                                   ("Pixel 5 emulation", p.devices["Pixel 5"])):
                 print(name, json.dumps(await check(browser, options, url), ensure_ascii=False), flush=True)
+            print("Reduced motion", await check(browser, {"reduced_motion":"reduce"}, url), flush=True)
             print("Microphone permission denied during preview",
                   await check(browser, {"viewport":{"width":1400,"height":1024}}, url, deny_microphone=True),
                   flush=True)

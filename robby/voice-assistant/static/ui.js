@@ -7,7 +7,7 @@ import {profiles,pose,mix,ActingTimeline} from './emotions.js';
 import {GazeTracker} from './gaze.js';
 import {MultimodalUI} from './multimodal-ui.js';
 import {organisePlayground} from './playground-layout.js?v=buddy-transcript-1';
-import {AvatarActions} from './avatar-actions.js?v=stunt-delivery-2';
+import {AvatarActions} from './avatar-actions.js?v=stunt-reduced-preview-1';
 import {attachActionControls,showRequestedTrick} from './avatar-action-controls.js?v=visible-tricks-2';
 import {attachPetting} from './avatar-petting.js';
 import {ASRControls} from './asr-controls.js';

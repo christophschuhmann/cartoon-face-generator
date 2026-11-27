@@ -157,7 +157,7 @@ Run the following check with the same Playwright environment as the conversation
 python browser_stunt_viewport.py
 ```
 
-The check operates the settings menu in desktop Chrome and a Pixel 5 viewport. It clicks **Perform** for clockwise and counterclockwise spins and forward and backward flips. Every 40 ms it checks that the center of the canvas is visible and records the signed angle of the body. It also checks that the robot lands facing forward. A separate desktop case rejects a microphone request during the preview to exercise the permission-failure path. The typed end-to-end test checks that the same visible canvas animates during spoken playback.
+The check operates the settings menu in desktop Chrome and a Pixel 5 viewport. It clicks **Perform** for clockwise and counterclockwise spins and forward and backward flips. Every 40 ms it checks that the center of the canvas is visible and records the signed angle of the body. It also checks that the robot lands facing forward. A separate desktop case rejects a microphone request during the preview to exercise the permission-failure path. Another enables the browser’s reduced-motion preference and checks for the on-screen explanation and a stationary body. The typed end-to-end test checks that the same visible canvas animates during spoken playback.
 
 Files: `avatar_actions.py`, `avatar_commands.py`, `bolt_text.py`,
 `bolt_director.py`, `bolt_pipeline.py`, `llm_backends.py`,
