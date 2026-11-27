@@ -147,6 +147,18 @@ assertions verify that the platform rotates, the body crouches and lands, and
 reduced-motion/cancellation controls work. It uses authored requests, not private
 microphone recordings. Only one browser conversation test may run at a time.
 
+### Verify that visitors can see the motion
+
+A turn can send the correct tool call and rotate the entire rig while the visitor is looking at the composer or the settings far below it. A requested action or a click on **Perform** now brings the avatar into view when less than 90% of it fits in the viewport. On touch devices an empty, focused composer releases the keyboard. A failed microphone autostart leaves a local preview running. Explicit cancellation and the browser’s reduced-motion preference still apply.
+
+Run the following check with the same Playwright environment as the conversation tests. Set `ROBBY_DEMO_URL` to the public desk-robot page to include the tunnel in the test.
+
+```bash
+python browser_stunt_viewport.py
+```
+
+The check operates the settings menu in desktop Chrome and a Pixel 5 viewport. It clicks **Perform** for clockwise and counterclockwise spins and forward and backward flips. Every 40 ms it checks that the center of the canvas is visible and records the signed angle of the body. It also checks that the robot lands facing forward. A separate desktop case rejects a microphone request during the preview to exercise the permission-failure path. The typed end-to-end test checks that the same visible canvas animates during spoken playback.
+
 Files: `avatar_actions.py`, `avatar_commands.py`, `bolt_text.py`,
 `bolt_director.py`, `bolt_pipeline.py`, `llm_backends.py`,
 `static/avatar-actions.js`, `static/desk-robot3d.js`, `static/rig.js`,
