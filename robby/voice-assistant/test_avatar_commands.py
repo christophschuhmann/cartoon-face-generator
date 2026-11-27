@@ -43,6 +43,17 @@ class CommandTests(unittest.TestCase):
                      'Wenn du einen Salto machst, lache ich.','Sag "Salto!".']:
             self.assertEqual(explicit_actions(text),[],text)
 
+    def test_directional_compounds_and_short_followups(self):
+        for text,direction in [('Und jetzt einen Rückwärtssalto!', 'backward'),
+                               ('Und dann einen Rueckwaertssalto.', 'backward'),
+                               ('Mach einen Vorwärts-Salto.', 'forward'),
+                               ('Kannst du einen Purzelbaum machen?', 'forward')]:
+            self.assertEqual([(x['kind'],x['direction']) for x in explicit_actions(text)],
+                             [('somersault',direction)],text)
+        for text in ('Er hat einen Rückwärtssalto gemacht.', 'Und jetzt keinen Rückwärtssalto!',
+                     'Sag „Und jetzt einen Rückwärtssalto!“', 'Erklär mir den Purzelbaum.'):
+            self.assertEqual(explicit_actions(text),[],text)
+
     def test_token_split_stage_directions_cannot_become_speech(self):
         from bolt_text import SentenceFramer
         texts=[('(amusement) *Robby dreht sich kreisrund im Bildschirm!*',[]),

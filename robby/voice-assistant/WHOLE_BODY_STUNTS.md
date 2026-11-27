@@ -151,6 +151,8 @@ microphone recordings. Only one browser conversation test may run at a time.
 
 A turn can send the correct tool call and rotate the entire rig while the visitor is looking at the composer or the settings far below it. A requested action or a click on **Perform** now brings the avatar into view when less than 90% of it fits in the viewport. On touch devices an empty, focused composer releases the keyboard. A failed microphone autostart leaves a local preview running. Explicit cancellation and the browser’s reduced-motion preference still apply.
 
+German follow-ups such as “Und jetzt einen Rückwärtssalto!” and requests for a “Purzelbaum” use the direct somersault command. The matcher accepts a compound, hyphenated or separated direction and ignores quoted commands, descriptions and negations. This keeps the animation independent of whether the selected language model emits an action while announcing the stunt.
+
 Run the following check with the same Playwright environment as the conversation tests. Set `ROBBY_DEMO_URL` to the public desk-robot page to include the tunnel in the test.
 
 ```bash
