@@ -33,6 +33,9 @@ def interjection_only(text):
 
 def normalize_command(text):
     if not isinstance(text,str):return ""
+    # Normalize the compound and ASR's separated spelling to the existing directional command.
+    text=re.sub(r'\b(rückwärts|rueckwaerts|vorwärts|vorwaerts)[ -]?saltos?\b',r'Salto \1',text,flags=re.I)
+    text=re.sub(r'\bpurzelbaum\b','Salto',text,flags=re.I)
     return re.sub(r"^\s*(?:(?:hey|hi|hallo|hello|du)[\s,]+)?(?:rob{1,2}(?:y|ie|i)|buddy)\b[\s,!:.-]*", "",text,flags=re.I).strip()
 
 def command_intent(text):
@@ -52,7 +55,7 @@ def command_intent(text):
     stunt_request=bool(re.search(r'\b(?:du\s+sollst|ich\s+(?:möchte|moechte|will)\s*[,]?\s*dass\s+du|i\s+want\s+you\s+to)\b',text,re.I)
                        and re.search(r'\b'+stunt+r'\b',text,re.I)
                        and not re.search(r'\b(?:nicht|kein\w*|never|not|don.t|no)\b',text,re.I))
-    stunt_ellipse=bool(re.fullmatch(r'(?:(?:bitte|nochmal|noch mal|einen?|einen? weiteren)\s+)*'+stunt+r'(?:\s+(?:rückwärts|vorwärts))?(?:,?\s*bitte)?[.!?]*',text.strip(),re.I))
+    stunt_ellipse=bool(re.fullmatch(r'(?:(?:und\s+)?(?:jetzt|dann|danach)\s+)?(?:(?:bitte|nochmal|noch mal|einen?|einen? weiteren)\s+)*'+stunt+r'(?:\s+(?:rückwärts|rueckwaerts|vorwärts|vorwaerts))?(?:,?\s*bitte)?[.!?]*',text.strip(),re.I))
     stunt_imperative=bool(re.match(r'^(?:schlag(?:e)?|spring(?:e)?)\b',text,re.I) and re.search(r'\b'+stunt+r'\b',text,re.I))
     desire=bool(re.search(r'\b(?:ich\s+(?:möchte|will|würde\s+gerne)|i(?:.d|\s+would)\s+like|i\s+want)\b',text,re.I) and re.search(r'\b(?:sehen|vorführen|see|watch|show)\b',text,re.I) and re.search(r'\b(?:du|dich|dein\w*|you|your)\b',text,re.I))
     return bool(desire or _REQUEST.search(text) or _FACE.fullmatch(text.strip(' .!?')) or ellipse or direct_emotion or stunt_request or stunt_ellipse or stunt_imperative or SHORT_SPIN.fullmatch(text))

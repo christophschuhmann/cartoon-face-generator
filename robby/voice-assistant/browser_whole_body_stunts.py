@@ -61,7 +61,7 @@ async def main():
      if(robotFace.actions.active)stuntFrames.push({kind:robotFace.actions.active.kind,bodySpin:r.bodySpin,bodyFlip:r.bodyFlip,bodySquash:r.bodySquash,bodyLift:r.bodyLift,pose:r.pose.slug,base:r.baseCenter,render_ms:r.renderMs,visible:document.elementFromPoint(box.left+box.width/2,box.top+box.height/2)===c,audio:!!robo.clock?.position()&&robo.sources.length>0})},30);
    }''')
    cases=[('Hey Buddy, eine Drehung, bitte.','spin',-1),('Dreh dich gegen den Uhrzeigersinn.','spin',1),
-          ('Buddy, schlag mal einen Salto.','somersault',1),('Mach einen Salto rückwärts.','somersault',-1),
+          ('Buddy, schlag mal einen Salto.','somersault',1),('Und jetzt einen Rückwärtssalto!','somersault',-1),
           ('Sei mal wütend.','emotion',0),('Mach eine lustige Grimasse.','grimace',0)]
    for text,kind,sign in cases:
     await page.wait_for_function('robo.sources.length===0',timeout=45000)
