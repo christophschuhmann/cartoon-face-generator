@@ -44,9 +44,10 @@ class Capabilities(unittest.TestCase):
   c=SimpleNamespace(verification_settings=validated({'verify_input':False}));s=SimpleNamespace(c=c,asr=SimpleNamespace(selected='parakeet_ultra'))
   self.assertEqual(final_model(s),'nemotron');c.verification_settings['verify_input']=True;self.assertEqual(final_model(s),'parakeet_ultra')
  def test_search_settings_are_explicit_and_model_specific(self):
-  self.assertEqual(search_options({}),{})
-  self.assertEqual(search_options({'candidate_search':True})['search_n'],3)
-  self.assertEqual(search_options({'candidate_search':True})['search_chunk_frames'],12)
+  self.assertEqual(search_options({'candidate_search':False}),{})
+  self.assertEqual(search_options({})['generation'],'search_quality')
+  self.assertEqual(search_options({'candidate_search':True})['search_n'],4)
+  self.assertEqual(search_options({'candidate_search':True})['search_chunk_frames'],10)
   self.assertEqual(search_options({'candidate_search':True},'large'),{})
   self.assertEqual(search_options({'candidate_search':True},eligible=False),{})
  def test_search_links_and_args(self):
@@ -73,9 +74,9 @@ class Pipeline(unittest.IsolatedAsyncioTestCase):
   bodies=[]
   async def events(client,body,*a,**kw):
    bodies.append(body);yield {'event':'done'}
-  with patch('bolt_pipeline.speech_events',events):
+  with patch('bolt_pipeline.retained_speech_events',events):
    # No PCM is expected in this transport contract; producer still sends body.
-   try:[x async for x in pipeline(None,'Hallo',{},[],preset=[Sentence('Hallo zusammen.','interest')],verification_settings={'verify_tts':False})]
+   try:[x async for x in pipeline(None,'Hallo',{},[],preset=[Sentence('Hallo zusammen.','interest')],verification_settings={'verify_tts':False,'candidate_search':False})]
    except Exception:pass
   self.assertEqual(len(bodies),1)
   self.assertFalse(bodies[0]['align']);self.assertEqual(bodies[0]['speech_verification'],'parallel')
@@ -85,9 +86,9 @@ class Pipeline(unittest.IsolatedAsyncioTestCase):
   bodies=[]
   async def events(client,body,*a,**kw):
    bodies.append(body);yield {'event':'result','candidates':[]}
-  with patch('bolt_pipeline.speech_events',events):
+  with patch('bolt_pipeline.retained_speech_events',events):
    try:[x async for x in pipeline(None,'Hallo',{},[],preset=[Sentence('Hallo zusammen.','interest')],verification_settings={'candidate_search':True})]
    except Exception:pass
   self.assertEqual(len(bodies),1)
-  self.assertEqual(bodies[0]['generation'],'search_asr')
-  self.assertEqual(bodies[0]['search_n'],3)
+  self.assertEqual(bodies[0]['generation'],'search_quality')
+  self.assertEqual(bodies[0]['search_n'],4)

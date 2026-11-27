@@ -357,7 +357,19 @@ class SentenceSession:
             hop=round(at*self.c.ears.sr)
             if self.c.speaking:decisions.offer_agent([text],hop)
             elif not self.wake.enabled or (self.wake.active() and (self.fast_match(at,self.wake.owner) or -1)>=.45):decisions.offer(self.preview,hop)
-        from stop_commands import is_stop_command
+        from stop_commands import is_stop_command,is_instant_stop
+        if (self.c.speaking and fresh and at>=self.reply_started
+            and max(self.now,self.mic_now)-at<=2.5 and is_instant_stop(text)):
+            # Explicit live controls take priority over a slow speaker-embedding
+            # or decision-model request. Never learn an identity from them.
+            # This can also stop on another person's matching ASR phrase.
+            pending=self.barge_task
+            if pending and not pending.done():pending.cancel()
+            await self.c._on_barge({'kind':'BARGE','yield_prob':1.,'onset_s':0.,
+                'source':'instant_stop_phrase','stop_text':text},round(at*self.c.ears.sr))
+            self.reset_segment();self.c.session.reset()
+            await self.c.ws.send_json({'type':'stop_command','speaker_name':None,'source':'instant_stop_phrase'})
+            return
         if self.c.speaking and is_stop_command(text):
             rid=getattr(getattr(self.c,'playback',None),'rid',None)
             old=self.stop_candidate
@@ -669,6 +681,12 @@ class SentenceSession:
         self.early_task=asyncio.create_task(run());self.tasks.add(self.early_task);self.early_task.add_done_callback(self.tasks.discard)
     def _maybe_probe(self):
         due=self.quiet_ready();at=self.final_clock() if due else self.now
+        # During playback, use the already received microphone clock and the
+        # loaded fast ASR for short live-control probes. TYGER hops may lag the
+        # microphone by several seconds under concurrent TTS load.
+        fast_stop_probe=bool(self.c.speaking and not due and self.effective_final_model()=='parakeet_ultra'
+            and self.begin is not None and self.mic_covers(max(self.begin,self.mic_now-3.),self.mic_now))
+        if fast_stop_probe:at=self.mic_now
         # Mic VAD runs ahead of the GPU hop loop. Do not finalize an old ASR
         # buffer while the already-heard final syllables are still queued.
         if due and at+1e-5<self.last_speech+.08:return
@@ -682,7 +700,7 @@ class SentenceSession:
             self.last_probe=self.mic_now
             audio_end=self.final_audio_end(at) if due else at
             audio_start=self.final_audio_start(self.begin) if due else self.begin
-            audio=self.audio(max(audio_start,audio_end-28),audio_end)
+            audio=self.audio(max(audio_start,audio_end-(3 if fast_stop_probe else 28)),audio_end)
             epoch=self.epoch;speech_end=self.last_speech;words_at=self.word_at
             if len(audio)<3200:return
             async def recognize():
@@ -706,6 +724,9 @@ class SentenceSession:
                         if early:receipt={**early['receipt'],'speculative':True}
                         else:receipt=await self.asr.transcribe(model,self.audio(audio_start,audio_end))
                         result=[receipt['text']]
+                    elif fast_stop_probe:
+                        receipt=await self.asr.transcribe(model,audio)
+                        result=[receipt['text']]
                     else:
                         async with self.c.speaker_ext.asr_slot(5):
                             began=time.perf_counter()
@@ -728,8 +749,8 @@ class SentenceSession:
                             hop=round(at*self.c.ears.sr)
                             if self.c.speaking:decisions.offer_agent([result[0]],hop)
                             elif not self.wake.enabled or (self.wake.active() and (self.fast_match(at,self.wake.owner) or -1)>=.45):decisions.offer(complete,hop)
-                        from stop_commands import is_stop_command
-                        if self.c.speaking and is_stop_command(result[0]):
+                        from stop_commands import is_stop_command,is_instant_stop
+                        if self.c.speaking and (is_stop_command(result[0]) or is_instant_stop(result[0])):
                             await self.preview_text(result[0],at,source='probe');return
                         # No dispatch based on the captured quiet value: the
                         # user may have resumed while the GPU probe was running.
@@ -830,7 +851,11 @@ class SentenceSession:
                 embedding_wait_ms=(time.perf_counter()-start)*1000
                 if admission!=self.admission_epoch:continue
                 lookup_start=time.perf_counter()
-                if isolation and not isolation.admit(text,embedding):
+                # Go Buddy was acoustically recognized and its suffix was
+                # confirmed by server ASR, then stripped from this transcript.
+                # Passive speaker admission would discard that explicit request.
+                buddy_control=asr.get('buddy_control') is True
+                if isolation and not buddy_control and not isolation.admit(text,embedding):
                     if 'input_start_s' in asr:
                         self.rejected_identity_span=(asr['input_start_s'],asr['input_end_s'],self.admission_epoch)
                     await self.c.ws.send_json({'type':'ignored','source':'input_isolation','reason':'Unknown or uncertain voice. Say Hey Robby to join; registered voices remain available.'})
@@ -843,8 +868,9 @@ class SentenceSession:
                 started=queued_at-len(audio)/16000 if queued_at>0 else None
                 reply_owner=(self.c.current_speaker or {}).get('speaker_id') if self.c.speaking else None
                 wake_decision=self.wake.evaluate(text,embedding,self.memory.users,self.memory.threshold,at=started,reply_active=bool(reply_owner and reply_owner==self.wake.owner))
+                if buddy_control:wake_decision={'accepted':True,'wake':True,'reason':'Explicit Go Buddy request'}
                 known=isolation.match_known(embedding) if isolation and isolation.selected!='off' else None
-                if known and not self.wake.is_wake(text):
+                if known and not buddy_control and not self.wake.is_wake(text):
                     wake_decision={'accepted':True,'wake':False,'speaker_id':known,'reason':'Registered isolation voice; wake phrase not required again in this session'}
                 fast=item[6] if len(item)>6 else None
                 if (self.wake.enabled and not wake_decision['accepted'] and embedding is not None and len(audio)>=40000
@@ -890,13 +916,13 @@ class SentenceSession:
                 level=voice_level(enrollment_reference(identity_audio))
                 detector=getattr(getattr(self.c,'environment',None),'detector',None)
                 addressed=self.addressed.evaluate(text,embedding,self.memory.users,level,getattr(detector,'floor',None))
-                if not addressed['accepted'] and not (self.wake.enabled and wake_decision['accepted']):
+                if not addressed['accepted'] and not ((self.wake.enabled or buddy_control) and wake_decision['accepted']):
                     await self.c.ws.send_json({'type':'speaker_focus','operation':'turn',**addressed})
                     await self.c.ws.send_json({'type':'ignored',**addressed})
                     if getattr(self.c,'environment',None):self.c.environment.notice_background(audio,addressed,level)
                     continue
                 decision=self.turn_decision(embedding,fast,level)
-                if self.wake.enabled:
+                if self.wake.enabled or buddy_control:
                     decision={**wake_decision,'accepted':True,'speaker_id':None if wake_decision['wake'] else wake_decision.get('speaker_id',self.wake.owner)}
                 guest=None
                 if self.permissions.candidate(embedding,fast,level,text):

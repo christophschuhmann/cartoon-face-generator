@@ -11,6 +11,7 @@ from credential_store import store
 OPENROUTER='https://openrouter.ai/api/v1'
 QWEN='qwen/qwen3.8-27b'
 MODELS={'qwen':{'label':'Qwen 3.8 27B · OpenRouter','model':QWEN},
+        'gemma26':{'label':'Gemma 4 26B-A4B Q4 · local GPU','model':'gemma-4-26b-a4b-q4'},
         'gemma12':{'label':'Gemma 4 12B Q4 · local GPU','model':'gemma-4-12b-q4'},
         'local':{'label':'Nemotron Bolt E4B · local GPU','model':'nemotron-bolt'}}
 DEFAULT_QWEN_PROVIDER='nebius/fp4'
@@ -55,7 +56,7 @@ async def refresh_providers(client=None):
     if result:_providers=result;_updated=time.monotonic()
 
 def default_selection():
-    return {'model':'qwen','provider':DEFAULT_QWEN_PROVIDER} if store().configured() else {'model':'local','provider':'local'}
+    return {'model':'gemma26','provider':'local'}
 
 def selection(value=None):
     value=value if value is not None else default_selection()
@@ -75,6 +76,9 @@ def catalog():
 
 def config(value=None,credential=None):
     chosen=selection(value)
+    if chosen['model']=='gemma26':
+        return {'selection':chosen,'url':'http://127.0.0.1:18826/v1/chat/completions',
+            'model':MODELS['gemma26']['model'],'headers':{},'remote':False}
     if chosen['model']=='gemma12':
         return {'selection':chosen,'url':'http://127.0.0.1:18812/v1/chat/completions',
             'model':MODELS['gemma12']['model'],'headers':{},'remote':False}
@@ -91,7 +95,7 @@ def request_body(config,body):
     body=dict(body);body['model']=config['model']
     # llama.cpp's JSON grammar suppresses tool-call tokens for Gemma. Let the
     # chat template emit real tool calls; the director validates its result.
-    if config['selection']['model']=='gemma12' and body.get('tools') and body.get('tool_choice')!='none':
+    if config['selection']['model'] in ('gemma12','gemma26') and body.get('tools') and body.get('tool_choice')!='none':
         body.pop('response_format',None)
     if not config['remote']:return body
     body.pop('chat_template_kwargs',None);body.pop('reasoning_effort',None);body.pop('parallel_tool_calls',None)

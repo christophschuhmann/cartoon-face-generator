@@ -125,6 +125,31 @@ class ReliabilityTests(unittest.IsolatedAsyncioTestCase):
                          'Kannst du dich bitte einmal im Kreis drehen und dazu lachen?')
         self.assertEqual(s.complete_text('Das ist eine andere Frage.'),'Das ist eine andere Frage.')
 
+    async def test_explicit_buddy_turn_with_isolation_and_no_enrollment(self):
+        from input_isolation import InputIsolation
+        s,c,voices=self.session()
+        s.clear_identity()
+        s.wake.configure(True)
+        c.input_isolation=InputIsolation(c)
+        c.input_isolation.selected='voxlock'
+        self.addAsyncCleanup(c.input_isolation.close)
+        heard='Sag mir etwas Lustiges.'
+        worker=asyncio.create_task(s.deliver())
+        try:
+            with patch('speaker_teacher.get_cached_teacher',return_value=SimpleNamespace(embed=lambda x:voices[0])):
+                for explicit in (False,True):
+                    await s.queue.put((heard,np.full(32000,.05,np.float32),2.,0.,None,{'buddy_control':explicit},None,s.admission_epoch))
+                for _ in range(100):
+                    if c._send_turn.await_count or worker.done():break
+                    await asyncio.sleep(.005)
+        finally:
+            worker.cancel()
+            await worker
+        ignored=[m.args[0] for m in c.ws.send_json.await_args_list if m.args[0].get('source')=='input_isolation']
+        self.assertEqual(len(ignored),1)
+        c._send_turn.assert_awaited_once_with(heard)
+        self.assertEqual(c.input_isolation.authorized,set())
+
     async def test_handover_discards_old_queued_turns_and_accepts_new_voice_without_wake(self):
         s,c,v=self.session()
         await s.queue.put(('Alter Satz',np.ones(16000),3.,0.,None,{},None,0))
@@ -232,10 +257,40 @@ class ReliabilityTests(unittest.IsolatedAsyncioTestCase):
         s,c,v=self.session();c.speaking=True;s.last_speech=-100.;s.raw_loud_at=2.9
         s.reply_seen=1;s.reply_started=0.
         with patch('speaker_teacher.get_cached_teacher',return_value=SimpleNamespace(embed=Mock(return_value=v[0]))):
-            await s.preview_text('Stopp!',3.);await s.barge_task
+            await s.preview_text('Stopp!',3.)
         c._on_barge.assert_awaited_once()
-        receipt=next(call.args[0] for call in c.ws.send_json.await_args_list if call.args[0]['type']=='speaker_focus')
-        self.assertTrue(receipt['lexical_audio_evidence'])
+        self.assertEqual(c._on_barge.await_args.args[0]['source'],'instant_stop_phrase')
+        self.assertIsNone(s.barge_task,'The direct stop must not wait for speaker verification')
+
+    async def test_live_stop_variants_are_silent_and_only_cancel_during_reply(self):
+        for text in ('Stopp Robby','Robby halt','leise Robby','Robbie quiet','Stopp, Stopp Robby, hey halt'):
+            s,c,v=self.session();c.speaking=True
+            s.assess_interrupt=AsyncMock(side_effect=AssertionError('no decision or embedding wait'))
+            c.decisions.client.choose=AsyncMock(side_effect=AssertionError('no LLM wait'))
+            await s.preview_text(text,3.)
+            c._on_barge.assert_awaited_once()
+            self.assertEqual(c._on_barge.await_args.args[0]['source'],'instant_stop_phrase')
+            c.decisions.client.choose.assert_not_awaited();s.assess_interrupt.assert_not_awaited()
+            self.assertEqual(s.preview,'')
+            self.assertEqual(c.ws.send_json.await_args_list[-1].args[0]['type'],'stop_command')
+        s,c,v=self.session();await s.preview_text('Stopp Robby',3.)
+        c._on_barge.assert_not_awaited()
+        s,c,v=self.session();c.speaking=True;s.reply_started=2.5;s.now=s.mic_now=3.
+        await s.preview_text('Stopp Robby',2.)
+        c._on_barge.assert_not_awaited()
+
+    async def test_live_stop_probe_uses_fresh_microphone_not_delayed_gpu_hops(self):
+        s,c,v=self.session();c.speaking=True;s.begin=1.;s.now=1.5;s.mic_now=3.
+        s.last_speech=3.;s.quiet_ready=Mock(return_value=False)
+        s.mic_records.append((1.,3.,np.full(32000,.05,np.float32)))
+        s.asr.selected='parakeet_ultra'
+        s.asr.transcribe=AsyncMock(return_value={'text':'Stopp Robby'})
+        s.effective_final_model=Mock(return_value='parakeet_ultra')
+        s._maybe_probe();self.assertIsNotNone(s.probe);await s.probe
+        s.asr.transcribe.assert_awaited_once()
+        self.assertEqual(s.asr.transcribe.await_args.args[0],'parakeet_ultra')
+        self.assertEqual(len(s.asr.transcribe.await_args.args[1]),32000)
+        c._on_barge.assert_awaited_once()
 
     async def test_stale_or_previous_reply_stop_cannot_bypass_speech_freshness(self):
         s,c,v=self.session();c.speaking=True;s.last_speech=-100.;s.raw_loud_at=1.

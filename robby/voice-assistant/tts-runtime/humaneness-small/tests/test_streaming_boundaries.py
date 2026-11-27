@@ -57,6 +57,26 @@ def test_contractions_numbers_and_punctuation_are_normalized():
     g=SpeechBoundaryGate("Mir geht's gut.")
     out=g.feed(pcm(2),score([('Mir',.1,.3),('geht',.3,.5),('es',.5,.7),('gut',.7,1.)]))
     assert len(out) and g.report['end_verified']
+
+def test_german_number_spellings_remain_exact_and_cannot_hide_wrong_year():
+    g=SpeechBoundaryGate('zweitausendsechsundzwanzig ist ein spannendes Jahr')
+    g.strict_order=True
+    words=[('2026',.1,.4),('ist',.4,.6),('ein',.6,.8),('spannendes',.8,1.1),('Jahr',1.1,1.4)]
+    assert len(g.feed(pcm(2),score(words))) and g.report['end_verified']
+    wrong=SpeechBoundaryGate('zweitausendsechsundzwanzig ist ein spannendes Jahr')
+    wrong.strict_order=True
+    words[0]=('2020',.1,.4)
+    assert not len(wrong.feed(pcm(2),score(words)))
+    with pytest.raises(UnverifiedSpeechError):wrong.finish()
+
+def test_indefinite_article_variant_requires_exact_context_and_does_not_hide_negation():
+    g=SpeechBoundaryGate('ich mache jetzt einen Salto')
+    g.strict_order=True
+    words=[('ich',.1,.2),('mache',.2,.4),('jetzt',.4,.6),('ein',.6,.8),('Salto',.8,1.)]
+    assert len(g.feed(pcm(2),score(words))) and g.report['end_verified']
+    neg=SpeechBoundaryGate('ich mache jetzt keinen Salto');neg.strict_order=True
+    neg.feed(pcm(2),score(words))
+    assert not neg.report['end_verified'] and neg.report['ordered_target_words']==3
     g=SpeechBoundaryGate('Zwei kleine Roboter')
     out=g.feed(pcm(2),score([('2',.1,.3),('kleine',.3,.6),('Roboter',.6,1.)]))
     assert len(out) and g.report['end_verified']

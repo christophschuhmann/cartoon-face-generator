@@ -1,5 +1,28 @@
 # Robby voice chat and TYGER speaker predictor
 
+[Open the live Robby demo](https://motorola-discussions-biography-daughter.trycloudflare.com/desk-robot/).
+Allow the microphone, say **“Hey Buddy”**, and wait for the red recording indicator above the live transcript.
+Speak your request, then say **“Go Buddy”** to send it. **“Stop Buddy”** discards
+a recording or interrupts playback. The public Quick Tunnel address can change
+after a restart. Local installations serve the same page at `/desk-robot/`.
+
+**Buddy command mode and causal quality search:** [Wake controls](BUDDY_WAKE.md)
+and [Best-of-N streaming implementation and reward](STREAMING_BEST_OF_N.md).
+Small RL releases confirmed words in order and plays verified sentences to their natural ending.
+
+**2026-11-20 remote API:** An authenticated TLS gateway exposes the running
+local Gemma and Humaneness Voice models with OpenAI-compatible chat and speech
+requests. [Remote setup, streaming formats and limits](REMOTE_OPENAI_API.md).
+
+**2026-11-20 live stop phrases:** Explicit recognized stop commands can stop
+speech without a speaker-embedding or semantic-model wait. This trades speaker
+ownership protection for responsiveness. [Details and tests](INSTANT_STOP_PHRASES.md).
+
+**2026-11-20 local Gemma 4 26B-A4B:** Robby's default language model is the
+local QAT Q4 model on GPU 1; Qwen remains selectable. ASR, speaker recognition
+and TTS run on GPU 0. The text-only service, pinned model, measured timings,
+restart instructions and limitations are documented in [GEMMA26_LOCAL.md](GEMMA26_LOCAL.md).
+
 **2026-11-14 causal candidate streaming:** Optional batched Best-of-3 for Small
 RL selects a continuation every 960 ms using ASR word accuracy and progress,
 then copies the winning autoregressive and codec state. It reuses selection
@@ -56,9 +79,9 @@ The canonical repository for this conversational demo is [cartoon-face-generator
 
 **Current conversation fix:** The streaming and tool directors no longer forcibly append a name question to a provisional voice track. A new track is not proof of a new person. The system prompts instruct Robby to use relevant remembered information, avoid asking what is already known, and avoid guessing an uncertain acoustic identity. Test with `python check_name_continuity.py` and `python run_unit_checks.py`.
 
-**Current auto-start update:** The microphone, camera and gaze following now start automatically when server readiness and browser permissions allow. Robby waits for “Hey Robby”, “Hi Robbie” and equivalent spellings. The same speaker's 10-second follow-up window is renewed after playback finishes. Face ID and camera-based speech gating remain off. Users can explicitly turn Robby or the camera off, and those choices persist. Persistent text memory is on by default, can be disabled or reset, and is not encrypted at rest. [Behavior and reproduction](WAKE_MODE.md) · [Memory and privacy](PERSISTENT_MEMORY.md).
+**Current auto-start update:** The microphone, camera and gaze following now start automatically when server readiness and browser permissions allow. In the default Buddy mode, say “Hey Buddy” to record and “Go Buddy” to send. Turning Buddy off makes ordinary voice control available, including the optional “Hey Robby” mode. Face ID and camera-based speech gating remain off. Users can explicitly turn Robby or the camera off, and those choices persist. Persistent text memory is on by default, can be disabled or reset, and is not encrypted at rest. [Behavior and reproduction](WAKE_MODE.md) · [Memory and privacy](PERSISTENT_MEMORY.md).
 
-**Current wake-mode update:** “Hey Robby” is required by default, followed by a 10-second window for the same voice. Speech-pause default: 300 ms. Automatic environmental reactions are off by default and can be enabled beside the avatar; explicit questions about recent/following sounds still work. [Wake mode, limits and reproducible tests](WAKE_MODE.md). Older defaults described below are historical.
+**Ordinary voice control with Buddy turned off:** When “Hey Robby” mode is enabled, the same voice can continue for ten seconds after playback finishes. Speech-pause default: 300 ms. Automatic environmental reactions are off by default and can be enabled beside the avatar; explicit questions about recent/following sounds still work. [Wake mode, limits and reproducible tests](WAKE_MODE.md). Older defaults described below are historical.
 
 **Current identity update:** explicit user/robot role grounding; direct registered-name lookup; open-speaker threshold **0.32** with cautious temporal continuity; multiple acoustic prototypes; and **default-on uncertain vocal age/gender/timbre impressions**. A lower profile panel provides separate, consented, default-off browser persistence. Repeated audible background voices can invite a tentative question without taking over the conversation. Camera now starts automatically if permitted; Face ID remains opt-in, with the missing sentence-pipeline connection repaired. [Implementation and reproducible checks](SOCIAL_IDENTITY.md) · [English results](static/social-identity-report.html).
 

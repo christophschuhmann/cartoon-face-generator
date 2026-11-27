@@ -8,7 +8,7 @@ export function organisePlayground(){
  const input=document.querySelector('.input-health');const health=document.createElement('details');health.className='input-details settings';const title=document.createElement('summary');title.textContent='Microphone & speech recognition';health.append(title,input);aside.append(health);
  // Keep the conversation first. Existing controls/listeners are moved intact.
  const section=(id,label,nodes)=>{const d=document.createElement('details');d.id=id;d.className='settings option-menu';const s=document.createElement('summary');s.textContent=label;d.append(s,...nodes.filter(Boolean));aside.append(d);return d;};
- // Keep the language-model switch visible near the top of the page.
+ // Keep model selection together below the live conversation and timing.
  document.querySelector('.stage h1').insertAdjacentElement('afterend',$('llm-model-controls'));
  if($('tts-model-controls'))$('llm-model-controls').insertAdjacentElement('afterend',$('tts-model-controls'));
  section('model-settings','Speech recognition & quick replies',[$('asr-model-controls'),$('quick-reply-controls')]);
@@ -16,8 +16,9 @@ export function organisePlayground(){
  const conversation=$('conversation-options');conversation.classList.add('settings','option-menu');
  const proactive=document.querySelector('.quick-interrupt-switch');if(proactive)conversation.append(proactive);
  aside.append(conversation);
- document.querySelector('.under-avatar').append(document.querySelector('.call-controls'));
- document.querySelector('.conversation-row').after($('latency-dashboard'));
+ const row=document.querySelector('.conversation-row');
+ document.querySelector('.stage h1').after(row,$('latency-dashboard'));
+ document.querySelector('#live-conversation h2').after($('buddy-panel'),document.querySelector('.call-controls'));
  document.querySelector('.under-avatar').append($('action-notice'));
  // The focus/handover block may be added dynamically; preserve every option.
  const quick=$('quick-controls');

@@ -1,5 +1,7 @@
 # Cartoon Face Generator · 101 Keypoints
 
+[Talk to Robby](https://motorola-discussions-biography-daughter.trycloudflare.com/desk-robot/) · [How to use Hey Buddy, Go Buddy and Stop Buddy](robby/voice-assistant/BUDDY_WAKE.md)
+
 
 **Robby speech recovery and simultaneous stunts (14 November):** [Bounded retries, retained answers, playback-timed spins/somersaults and measured tests](robby/voice-assistant/SPEECH_RECOVERY.md).
 

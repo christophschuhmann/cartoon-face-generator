@@ -32,8 +32,8 @@ def main():
     for seed in a.seeds:
      body={'model':'small_rl','input_mode':'manual','format':'structured',
       'message':'GENERAL: Very genuine, very authentic, gentle, natural and spontaneous conversation.\nSCRIPT:\n(gentle, natural) '+text,
-      'language':language,'generation':mode,'n':1,'batch_size':3 if mode=='search_asr' else 1,
-      'search_n':3,'search_chunk_frames':12,'search_seconds':30.,
+      'language':language,'generation':mode,'n':1,'batch_size':4 if mode=='search_quality' else 3 if mode=='search_asr' else 1,
+      'search_n':4 if mode=='search_quality' else 3,'search_chunk_frames':10 if mode=='search_quality' else 12,'search_seconds':30.,
       'streaming':True,'stream_transport':'pcm_f32','live_only':True,'chunk_frames':20,
       'temperature':.8,'guidance':2.,'voice_mode':'profile','voice_profile':'emolia_c1699',
       'voice_conversion':False,'speaker_steering':False,'dynamic_reference':False,

@@ -18,8 +18,9 @@ class SpeechGenerationError(RuntimeError):
 def recovery_prompt(body, level):
     """Shorten failed Small RL acting instructions, never the spoken script.
 
-    First retry preserves all inline acting cues. The final retry replaces
-    only the initial cue with natural delivery; internal cues/pauses survive.
+    First retry preserves inline acting cues and can omit an unvoiced opening
+    hesitation. The final retry replaces only the initial cue with natural
+    delivery; internal cues/pauses survive.
     Other input formats/checkpoints remain untouched.
     """
     message=body.get('message','')
@@ -29,6 +30,9 @@ def recovery_prompt(body, level):
     if len(parts)!=2 or not parts[0].startswith('GENERAL:'):return message
     script=parts[1]
     if level>=2:script=re.sub(r'^\([A-Za-z_ ,\-]{1,100}\)', '(natural, relaxed)',script,count=1)
+    # Only after an unheard failed take: these nonlexical hesitations are
+    # often omitted by ASR. Never remove a lexical word or a negation.
+    script=re.sub(r'^(\([A-Za-z_ ,\-]{1,100}\)\s*)?(?:hm+|mhm+|äh+|ehm+)\s*[,;:]\s*',r'\1',script,count=1,flags=re.I)
     language={'de':'German','en':'English','fr':'French','es':'Spanish','nl':'Dutch'}.get(body.get('language'),'')
     return f'GENERAL: Natural, clear {language} speech in the voice of the reference speaker.\nSCRIPT:\n{script}'
 
@@ -71,7 +75,12 @@ async def speech_events(client,body,on_wait,*,timeout=45.,attempts=3,telemetry=N
                         completed=True
                         if event.get('candidates'):emitted=True;any_emitted=True
                         report=event.get('live_stream') or {}
-                        if (report.get('enabled') or report.get('verification_mode')=='candidate_search') and report.get('start_verified') and not report.get('end_verified'):
+                        # The final search step can contain no *new* PCM. Its
+                        # ASR score then establishes the last word even though
+                        # the streaming boundary callback was not called again.
+                        search_score=(event.get('performance') or {}).get('final_search_score') or {}
+                        search_complete=report.get('candidate_selection_only') and search_score.get('complete') is True
+                        if (report.get('enabled') or report.get('verification_mode')=='candidate_search') and report.get('start_verified') and not report.get('end_verified') and not search_complete:
                             failure='incomplete_verified_speech'
                             if report.get('resume_safe') and isinstance(report.get('remaining_text'),str):
                                 resume=report['remaining_text'].strip()
@@ -96,7 +105,7 @@ async def speech_events(client,body,on_wait,*,timeout=45.,attempts=3,telemetry=N
         if not can_retry:
             raise SpeechGenerationError(failure,attempt+1,remaining_text=remaining_text,audio_published=any_emitted)
         if failure in ('unverified_speech','empty_audio'):prompt_level+=1
-        if failure=='cuda_oom' and body.get('generation')=='search_asr':oom_fallback=True
+        if failure=='cuda_oom' and body.get('generation') in ('search_asr','search_quality'):oom_fallback=True
         strategy='verified_suffix' if resume else 'single_stream_after_oom' if oom_fallback else 'compact_direction' if prompt_level==1 else 'natural_delivery' if prompt_level>=2 else 'new_seed'
         yield {'event':'speech_retry','attempt':attempt+2,'max_attempts':attempts,'code':failure,'strategy':strategy,'continuation':bool(resume)}
         await asyncio.sleep(.15 if failure!='cuda_oom' else .5)

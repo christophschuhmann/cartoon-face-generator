@@ -1,18 +1,19 @@
 // Persist only quality/latency choices, never keys, microphone data or identities.
 export class VerificationControls {
  constructor(client){
-  this.client=client;this.values={verify_tts:true,verify_input:true,serial_tts:false,candidate_search:false};
+  this.client=client;this.values={verify_tts:true,verify_input:true,serial_tts:false,candidate_search:true};
   try{const s=JSON.parse(localStorage.getItem('robby.verification')||'{}');for(const k of Object.keys(this.values))if(typeof s[k]==='boolean')this.values[k]=s[k];}catch{}
+  try{if(!localStorage.getItem('robby.qualitySearch20261125')){this.values.candidate_search=true;localStorage.setItem('robby.verification',JSON.stringify(this.values));localStorage.setItem('robby.qualitySearch20261125','1');}}catch{}
   this.panel=document.createElement('details');this.panel.id='verification-controls';this.panel.className='settings option-menu';
   this.panel.innerHTML=`<summary>Speed &amp; verification · choose which checks run</summary>
-   <p>These choices apply to your next turn. Defaults keep both checks on. Input isolation, speaker admission, the speech-pause timer and Stop handling remain separate.</p>
-   <label><input type="checkbox" id="candidate-search"> Best-of-3 streaming · select every 960 ms (experimental, Small RL)</label>
-   <p>The 960 ms is generated audio duration, not a latency promise. First use after a service restart can need several minutes to compile a new GPU batch shape. Warm timings and reproduction are in the <a href="/static/candidate-search.html" target="_blank" rel="noopener">candidate-streaming report</a>.</p>
-   <p>Generate three continuations together, rank actual ASR word accuracy and progress, then copy the winner's model and codec state to all three lanes. The next chunk continues that same voice history. No extra output ASR check runs in this mode; the existing check checkbox controls edge trimming using the selection timestamps. Search can still choose incorrect speech and adds selection latency. Large, optional idle speech and quick reactions keep their existing single-stream path.</p>
+   <p>These choices apply to your next turn. Best-of-4 is the default; uncheck it to restore the single-take parallel ASR check. Input isolation, speaker admission, the speech-pause timer and Stop handling remain separate.</p>
+   <label><input type="checkbox" id="candidate-search"> Best-of-4 streaming · select every 800 ms (Small RL)</label>
+   <p>Every 800 ms Robby compares four candidates with the script. Only words confirmed in order are released. A complete sentence plays to its natural ending. If a candidate misses words, Robby can retry the remaining text.</p>
+   <p>Generate four continuations together and rank the audible prefix using word error, VoiceCLAP prompt similarity and ECAPA similarity to the reference voice. Copy the winner's model and codec state to all four lanes. The same ASR timestamps verify word order and the opening. Search can still choose incorrect speech and may increase latency. Large, optional idle speech and quick reactions keep their existing single-stream path.</p>
    <label><input type="checkbox" id="verify-input"> Use the selected second ASR recognizer after a speech pause</label>
    <p>On: Parakeet/your selected ASR refines the full utterance; speculative work is reused. Off: use the existing Nemotron transcript pass only. This can save recognizer work but may reduce German transcription quality, including recognition of “Hey Robby”. It does not submit mid-sentence or bypass speaker matching.</p>
-   <label><input type="checkbox" id="verify-tts"> Check generated speech before playback (recommended)</label>
-   <p>On: a parallel ASR worker waits for the opening target words and cuts/fades the ending. Off: stream raw TTS earlier; unwanted lead-in, wrong words or trailing mumbling can be heard. This changes audio quality, not the LLM's factual accuracy.</p>
+   <label><input type="checkbox" id="verify-tts"> Check single-stream speech before playback</label>
+   <p>For single-stream speech, a parallel ASR worker waits for the opening target words and cuts/fades the ending. Off: stream raw TTS earlier; unwanted lead-in, wrong words or trailing mumbling can be heard. This changes audio quality, not the LLM's factual accuracy.</p>
    <label><input type="checkbox" id="verify-serial"> Use the older serial TTS check (comparison only)</label>
    <p>Unchecked uses the faster parallel checker. Serial checks pause generation and usually add latency. The optional quick-reply batch engine uses its own checker; this comparison only affects the normal sentence stream. Pre-generated interruption acknowledgments are reused.</p>
    <p>Other costs: Voice tone hints run Humaneness Ears; Voice isolation filters microphone audio; quick reactions add a small LLM/TTS stage. Their existing switches are in the menus above. The timing cards show actual per-turn measurements, not fixed estimates.</p>

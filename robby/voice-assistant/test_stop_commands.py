@@ -1,7 +1,19 @@
 import unittest
-from stop_commands import is_stop_command,is_brief_stop_command,has_stop_intent,has_stop_cue
+from stop_commands import is_stop_command,is_brief_stop_command,is_instant_stop,has_stop_intent,has_stop_cue
 
 class StopCommandTests(unittest.TestCase):
+    def test_live_stop_pairs_and_variants(self):
+        for name in ('Robby','ROBBIE','Robbi','Robi','Robie','roby','Rabi','Rabbi','Robo','Hobby','Hoppy','Wobby','Wobbly'):
+            for cue in ('stopp','halt','leise','quiet','stop'):
+                for text in (f'{cue}, {name}!',f'{name}, {cue}!'):
+                    with self.subTest(text=text):self.assertTrue(is_instant_stop(text))
+        for text in ('Stopp, Stopp Robby, hey halt!','Hör zu, stopp stopp, ich möchte fragen.',
+                     'Stopp!','Стоп.','СТОП Робби!','Hey Robby, warte bitte.','Please be quiet.'):
+            self.assertTrue(is_instant_stop(text),text)
+        for text in ('Erzähl mir bitte was Stopp Stopp bedeutet.','Was bedeutet Robby stopp?',
+                     'Sag bitte Robby leise.','Robby, stopp nicht.','Nicht stopp Robby.',
+                     'Die Roboter sind leise.','Das ist halt so.'):
+            self.assertFalse(is_instant_stop(text),text)
     def test_polite_completion_and_blunt_silence_requests(self):
         for text in ('Danke, das reicht.','Danke, cas reicht.','Das reicht mir jetzt.','Vielen Dank, das genügt.','Halt die Klappe!','Halte bitte die Klappe.','Halt deine Schnauze, bitte.'):
             self.assertTrue(has_stop_cue(text),text);self.assertTrue(is_stop_command(text),text);self.assertTrue(has_stop_intent(text),text)
